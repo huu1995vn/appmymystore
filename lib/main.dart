@@ -1,5 +1,3 @@
-import 'package:raoxe/flavour_config.dart';
-import 'package:raoxe/flavour_type_extension.dart';
 import 'package:flutter/material.dart';
 
 Future initializeApp() async {
@@ -7,66 +5,52 @@ Future initializeApp() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final flavour = Constants.whereAmI;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: flavour.getFlavourColor(),
-        title: Text(
-          'You are running ${flavour.getFlavourName()} App',
+      home: Scaffold(
+        appBar: AppBar(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.home),
+                color: Colors.grey,
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.newspaper),
+                color: Colors.grey,
+                onPressed: () {},
+              ),
+              const SizedBox(
+                width: 40,
+              ),
+              IconButton(
+                icon: const Icon(Icons.notifications),
+                color: Colors.grey,
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.person),
+                color: Colors.grey,
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

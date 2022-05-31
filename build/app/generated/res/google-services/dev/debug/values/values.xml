@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">3702342930-pf2loqekffm1s38vrk2s2f2tbsp92jjb.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://dailyxe-ionic-raovat.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">3702342930</string>
+    <string name="google_api_key" translatable="false">AIzaSyAdAHmFDGwp8KD4G9PsM_2aw0K32nSa72U</string>
+    <string name="google_app_id" translatable="false">1:3702342930:android:b35aa88c0db809e4f05fcb</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAdAHmFDGwp8KD4G9PsM_2aw0K32nSa72U</string>
+    <string name="google_storage_bucket" translatable="false">dailyxe-ionic-raovat.appspot.com</string>
+    <string name="project_id" translatable="false">dailyxe-ionic-raovat</string>
+</resources>

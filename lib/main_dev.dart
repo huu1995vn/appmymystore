@@ -1,7 +1,7 @@
-import 'package:raoxe/flavour_config.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/main.dart';
 
 void main() async {
-  Constants.setEnvironment(Environment.dev);
+  CommonConfig.setEnvironment(Environment.dev);
   await initializeApp();
 }

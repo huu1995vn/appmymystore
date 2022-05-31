@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>170518340284-0mgeobcqu03112hnasad7j3te0eu0dri.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.170518340284-0mgeobcqu03112hnasad7j3te0eu0dri</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBmgZnKssyenyrBvjatyuaj9IIPYr7hSiE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>170518340284</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>vn.com.raoxe</string>
+	<key>PROJECT_ID</key>
+	<string>raovat-257509</string>
+	<key>STORAGE_BUCKET</key>
+	<string>raovat-257509.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:170518340284:ios:46c84cc9a4c7fde09b66b9</string>
+	<key>DATABASE_URL</key>
+	<string>https://raovat-257509.firebaseio.com</string>
+</dict>
+</plist>

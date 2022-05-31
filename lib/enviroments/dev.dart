@@ -1,4 +1,5 @@
-const configDev = {
+
+const CONFIGDEV = {
   "env": 'Dev',
   "apiDaiLyXe": "http://api.dailyxe.info",
   "apiDaiLyXeSufix": "/raoxe/api/dailyxe/",

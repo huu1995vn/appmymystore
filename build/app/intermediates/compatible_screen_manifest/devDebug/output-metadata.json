@@ -4,7 +4,7 @@
     "type": "COMPATIBLE_SCREEN_MANIFEST",
     "kind": "Directory"
   },
-  "applicationId": "vn.com.raoxe.raoxe",
+  "applicationId": "vn.com.raoxe",
   "variantName": "devDebug",
   "elements": []
 }

@@ -1,30 +1,73 @@
-import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/pages/home/home_screen.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
+import 'package:raoxe/flavour_config.dart';
+import 'package:raoxe/flavour_type_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(MyApp());
+Future initializeApp() async {
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      // We are using layout builder to get the screen max width, height constraints
-      SizeConfig().init(constraints);
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
 
-      return MaterialApp(
-        title: 'Flutter Ecommerce App',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: kPrimaryColor,
-          textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
-        ),
-        home: HomeScreen(),
-      );
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final flavour = Constants.whereAmI;
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: flavour.getFlavourColor(),
+        title: Text(
+          'You are running ${flavour.getFlavourName()} App',
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }

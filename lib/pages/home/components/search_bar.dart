@@ -11,19 +11,19 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: Row(
         children: [
           Expanded(
-            child: Container(
+            child: SizedBox(
               height: 40.0,
               child: TextField(
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                 ),
                 decoration: InputDecoration(
                   hintText: 'search',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     color: kTextLightColor,
                     fontSize: 12,
                   ),
@@ -33,7 +33,7 @@ class SearchBar extends StatelessWidget {
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     horizontal: 13,
                     vertical: 8,
                   ),
@@ -46,7 +46,7 @@ class SearchBar extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: kDefaultPadding / 2,
           ),
           RxRoundedButton(

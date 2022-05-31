@@ -37,6 +37,7 @@ dependencies:
   flutter_svg: ^0.22.0 # Used to render svg images
   google_fonts: ^2.1.0 # Used to include google fonts
   flutter_rating_bar: ^4.0.0 # Used for show product star ratings
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:

@@ -26,7 +26,7 @@ class RxCartButton extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: EdgeInsets.only(
@@ -58,7 +58,7 @@ class RxCartButton extends StatelessWidget {
                     )
                   ],
                 ),
-                child: Text(
+                child: const Text(
                   '+',
                   style: TextStyle(
                     // color: kPrimaryColor,

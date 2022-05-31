@@ -24,7 +24,7 @@ class RxPrimaryButton extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             // color: kWhite,
             fontSize: 16,
           ),

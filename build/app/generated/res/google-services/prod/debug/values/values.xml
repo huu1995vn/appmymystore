@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">170518340284-doedpm72o3tb9l4vc3j255dvhccmb3h9.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://raovat-257509.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">170518340284</string>
+    <string name="google_api_key" translatable="false">AIzaSyBFTdg8Qb51Vsz7Gf3WekCYO3d0tLBaLuA</string>
+    <string name="google_app_id" translatable="false">1:170518340284:android:c9e7b4c404098e0c9b66b9</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBFTdg8Qb51Vsz7Gf3WekCYO3d0tLBaLuA</string>
+    <string name="google_storage_bucket" translatable="false">raovat-257509.appspot.com</string>
+    <string name="project_id" translatable="false">raovat-257509</string>
+</resources>

@@ -5,3 +5,4 @@ const kWhite = Colors.white;
 const kTextColor = Color(0xFF707070);
 const kTextLightColor = Color(0xFF949098);
 const kDefaultPadding = 25.0;
+const kDefaultPaddingTop = 79.0;

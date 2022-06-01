@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static Paint backgroundColor =  Paint()
+       ..strokeWidth = 12
+       ..color = primary
+       ..style = PaintingStyle.stroke
+       ..strokeJoin = StrokeJoin.round;
   static const Color primary = Color(0xFFB71C1C);
   static const Color primary50 = Color(0xFFFFEBEE);
   static const Color primary100 = Color(0xFFFFCDD2);
@@ -12,6 +17,8 @@ class AppColors {
   static const Color primary700 = Color(0xFFD32F2F);
   static const Color primary800 = Color(0xFFC62828);
   static const Color primary900 = Color(0xFFB71C1C);
+  static const Color yellow = Colors.yellow;
+  static const Color blue = Colors.blue;
 
   static const MaterialColor red = MaterialColor(
     _redPrimaryValue,

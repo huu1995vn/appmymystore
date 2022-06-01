@@ -3,6 +3,7 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/pages/home/components/search_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,16 +21,16 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 35,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-              child: Text(
-                'Explore your\nfavourite products',
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              child: const Text(
+                'hello',
                 style: TextStyle(
                   color: kWhite,
                   fontSize: 23,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
+              ).tr(),
             ),
             const SizedBox(
               height: 7,

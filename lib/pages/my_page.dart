@@ -3,7 +3,7 @@
 import 'package:raoxe/core/components/index.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
-import 'package:raoxe/pages/home/home_screen.dart';
+import 'package:raoxe/pages/home/home_page.dart';
 import 'package:raoxe/pages/setting/settings_page.dart';
 
 class MyPage extends StatefulWidget {

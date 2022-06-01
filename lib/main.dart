@@ -1,5 +1,6 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: import_of_legacy_library_into_null_safe
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -11,15 +12,19 @@ import 'package:raoxe/pages/my_page.dart';
 
 initializeApp() async {
   await StorageService.init();
-  return runApp(MyApp());
+  return runApp(
+    EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('vi')],
+        path:
+            'assets/translations', // <-- change the path of the translation files
+        child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    
     //#to prevent my application from changing its orientation and force the layout
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -34,14 +39,16 @@ class MyApp extends StatelessWidget {
       child: Consumer<ThemeProvider>(
         child: const MyPage(),
         builder: (c, themeProvider, home) => MaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
           color: Colors.transparent,
           debugShowCheckedModeBanner: false,
-          theme: ThemeService.main(
-          ),
+          theme: ThemeService.main(),
           darkTheme: ThemeService.main(
             isDark: true,
           ).copyWith(
-             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
                 .copyWith(
                     secondary: AppColors.primary, brightness: Brightness.dark),
           ),

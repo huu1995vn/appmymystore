@@ -33,15 +33,16 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  flutter_svg: ^0.22.0 # Used to render svg images
-  google_fonts: ^2.1.0 # Used to include google fonts
-  flutter_rating_bar: ^4.0.0 # Used for show product star ratings
-  dio: ^4.0.6 # Used for call api
-  provider: ^4.0.2 # Used for custome theme
+  cupertino_icons: 
+  flutter_svg:  # Used to render svg images
+  google_fonts:  # Used to include google fonts
+  flutter_rating_bar:  # Used for show product star ratings
+  dio:  # Used for call api
+  provider:  # Used for custome theme
   localstorage: # Used for save local data
   fluttertoast: # Used for toast
-  
+  easy_localization: # Used for language
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

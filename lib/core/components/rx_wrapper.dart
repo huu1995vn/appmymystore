@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PageWrapper extends StatelessWidget {
-  const PageWrapper({
+class RxWrapper extends StatelessWidget {
+  const RxWrapper({
     Key? key,
     required this.body,
   }) : super(key: key);
@@ -16,8 +16,9 @@ class PageWrapper extends StatelessWidget {
         topLeft: Radius.circular(20),
       ),
       child: Container(
+        width: double.infinity,
         color: Theme.of(context).scaffoldBackgroundColor,
-        alignment: Alignment.topCenter,
+        // alignment: Alignment.topCenter,
         child: body,
       ),
     );

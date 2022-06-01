@@ -4,8 +4,7 @@ class SizeConfig {
   static double screenWidth = 0;
   static double screenHeight = 0;
 
-  void init(BoxConstraints constraints) {
-    Size size = WidgetsBinding.instance.window.physicalSize;
+  static init(Size size) {
     screenWidth = size.width;
     screenHeight = size.height;
   }

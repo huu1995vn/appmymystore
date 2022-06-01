@@ -2,10 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:provider/provider.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/core/models/app_theme.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme_service.dart';
@@ -22,6 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     //#to prevent my application from changing its orientation and force the layout
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

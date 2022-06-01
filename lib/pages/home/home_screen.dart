@@ -4,13 +4,13 @@ import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/pages/home/components/search_bar.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
+      backgroundColor: Theme.of(context).primaryColor,
       body: SizedBox(
         width: double.infinity,
         height: SizeConfig.screenHeight,
@@ -39,8 +39,8 @@ class HomeScreen extends StatelessWidget {
               height: 28,
             ),
             Expanded(
-              child: RxMainBody(
-                child: SingleChildScrollView(
+              child: RxWrapper(
+                body: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
@@ -54,7 +54,6 @@ class HomeScreen extends StatelessWidget {
                         child: Text(
                           'Best Selling',
                           style: TextStyle(
-                            color: kPrimaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),

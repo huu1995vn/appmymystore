@@ -2,7 +2,7 @@
 
 import 'package:raoxe/core/components/index.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:raoxe/pages/home/home_screen.dart';
 import 'package:raoxe/pages/setting/settings_page.dart';
 
@@ -24,11 +24,13 @@ class _MyPageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    SizeConfig.init(size);
     return Scaffold(
         body: PageView(
           controller: _pageController,
           children: <Widget>[
-            const HomeScreen(),
+            HomePage(),
             Container(),
             Container(),
             SettingsPage(),

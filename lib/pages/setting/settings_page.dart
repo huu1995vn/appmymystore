@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/components/page_wrapper.dart';
+import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/pages/setting/components/theme_switcher.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -12,7 +12,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: PageWrapper(
+      body: RxWrapper(
         body: Column(
           children: const [
             SizedBox(height: 30),

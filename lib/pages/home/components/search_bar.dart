@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/components/rx_rounded_button.dart';
 import '../../../core/utilities/constants.dart';
 
 class SearchBar extends StatelessWidget {
@@ -41,13 +40,7 @@ class SearchBar extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            width: kDefaultPadding / 2,
-          ),
-          RxRoundedButton(
-            onTap: () {},
-            icon: const Icon(Icons.search),
-          )
+         
         ],
       ),
     );

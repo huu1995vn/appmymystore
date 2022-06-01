@@ -41,11 +41,11 @@ class ThemeService {
       title: 'Dark',
       icon: Icons.brightness_2_rounded,
     ),
-    AppTheme(
-      mode: ThemeMode.system,
-      title: 'System',
-      icon: Icons.brightness_4_rounded,
-    ),
+    // AppTheme(
+    //   mode: ThemeMode.system,
+    //   title: 'System',
+    //   icon: Icons.brightness_4_rounded,
+    // ),
   ];
   static Color getShade(Color color, {bool darker = false, double value = .1}) {
     assert(value >= 0 && value <= 1);

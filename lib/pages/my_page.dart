@@ -4,6 +4,8 @@ import 'package:raoxe/core/components/index.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:raoxe/pages/home/home_page.dart';
+import 'package:raoxe/pages/news/news_page.dart';
+import 'package:raoxe/pages/notifycation/notifycation_page.dart';
 import 'package:raoxe/pages/setting/settings_page.dart';
 
 class MyPage extends StatefulWidget {
@@ -29,10 +31,10 @@ class _MyPageState extends State<MyPage> {
     return Scaffold(
         body: PageView(
           controller: _pageController,
-          children: <Widget>[
+          children: const <Widget>[
             HomePage(),
-            Container(),
-            Container(),
+            NewsPage(),
+            NotifycationPage(),
             SettingsPage(),
           ],
           

@@ -22,9 +22,8 @@ class SettingsPage extends StatelessWidget {
               backgroundColor: Colors.transparent,
               elevation: 0.0,
             ),
-            child: Padding(
-              padding: EdgeInsets.only(top: kDefaultPaddingTop),
-              child: RxWrapper(
+            child: 
+              RxWrapper(
                   body: Column(
                     children: [
                       RxBuildItem(
@@ -62,6 +61,6 @@ class SettingsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-            ));
+            );
   }
 }

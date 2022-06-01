@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
 Scaffold RxScaffold({PreferredSizeWidget? appBar, Widget? child}) {
@@ -17,7 +18,8 @@ Scaffold RxScaffold({PreferredSizeWidget? appBar, Widget? child}) {
       ])),
       width: double.infinity,
       height: SizeConfig.screenHeight,
-      child: child,
+      child: Padding(
+          padding: EdgeInsets.only(top: appBar!=null? kDefaultPaddingTop: 0), child: child),
     ),
   );
 }

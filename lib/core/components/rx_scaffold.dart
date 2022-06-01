@@ -5,7 +5,7 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
-Scaffold RxScaffold({PreferredSizeWidget? appBar, Widget? child}) {
+Scaffold RxScaffold({PreferredSizeWidget? appBar, Widget? child, double? top}) {
   return Scaffold(
     appBar: appBar,
     extendBodyBehindAppBar: true,
@@ -19,7 +19,7 @@ Scaffold RxScaffold({PreferredSizeWidget? appBar, Widget? child}) {
       width: double.infinity,
       height: SizeConfig.screenHeight,
       child: Padding(
-          padding: EdgeInsets.only(top: appBar!=null? kDefaultPaddingTop: 0), child: child),
+          padding: EdgeInsets.only(top: top ?? (appBar!=null ?kDefaultPaddingTop: 0)), child: child),
     ),
   );
 }

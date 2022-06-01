@@ -10,32 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: RxAppBar(
-      //   title: Row(
-      //     children: [
-      //       Padding(
-      //         padding: const EdgeInsets.symmetric(
-      //           horizontal: kDefaultPadding,
-      //         ),
-      //         child: RxRoundedButton(
-      //           onTap: () {},
-      //           icon: 'assets/icon.png',
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      //   actions: [
-      //     InkWell(
-      //       onTap: () {},
-      //       child: Container(
-      //         padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-      //         child: SvgPicture.asset(
-      //           'assets/icon.png',
-      //         ),
-      //       ),
-      //     )
-      //   ],
-      // ),
+     
       body: SizedBox(
         width: double.infinity,
         height: SizeConfig.screenHeight,

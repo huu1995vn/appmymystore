@@ -1,3 +1,4 @@
+import 'package:raoxe/core/models/app_theme.dart';
 import 'package:raoxe/enviroments/prod.dart';
 import 'package:raoxe/enviroments/dev.dart';
 
@@ -14,10 +15,10 @@ class CommonConfig {
   static void setEnvironment(Environment env) {
     switch (env) {
       case Environment.dev:
-        _config = CONFIGDEV;
+        _config = configDev;
         break;
       case Environment.prod:
-        _config = CONFIGPROD;
+        _config = configProd;
         break;
     }
     CommonConfig.env = _config["env"] ?? CommonConfig.apiHost;

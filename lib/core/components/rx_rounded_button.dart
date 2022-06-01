@@ -9,8 +9,8 @@ class RxRoundedButton extends StatelessWidget {
   }) : super(key: key);
 
   final GestureTapCallback onTap;
-  final String icon;
-
+  final Icon icon;
+  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,9 +29,7 @@ class RxRoundedButton extends StatelessWidget {
           ],
         ),
         alignment: Alignment.center,
-        child: SvgPicture.asset(
-          icon,
-        ),
+        child:  this.icon,
       ),
     );
   }

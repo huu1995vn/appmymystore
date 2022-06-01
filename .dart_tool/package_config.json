@@ -98,6 +98,18 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///C:/src/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "fluttertoast",
+      "rootUri": "file:///C:/Users/trong/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/fluttertoast-8.0.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "google_fonts",
       "rootUri": "file:///C:/Users/trong/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/google_fonts-2.3.3",
       "packageUri": "lib/",
@@ -116,10 +128,22 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "js",
+      "rootUri": "file:///C:/Users/trong/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/js-0.6.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "lints",
       "rootUri": "file:///C:/Users/trong/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/lints-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "localstorage",
+      "rootUri": "file:///C:/Users/trong/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/localstorage-4.0.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "matcher",
@@ -136,6 +160,12 @@
     {
       "name": "meta",
       "rootUri": "file:///C:/Users/trong/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/meta-1.8.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "nested",
+      "rootUri": "file:///C:/Users/trong/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/nested-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -224,6 +254,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "provider",
+      "rootUri": "file:///C:/Users/trong/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/provider-4.3.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///C:/src/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -302,7 +338,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-05-31T07:26:44.647982Z",
+  "generated": "2022-06-01T03:30:00.258136Z",
   "generator": "pub",
   "generatorVersion": "2.18.0-149.0.dev"
 }

@@ -1,55 +1,54 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: must_be_immutable
 
-Future initializeApp() async {
-  runApp(const MyApp());
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:provider/provider.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
+import 'package:raoxe/core/models/app_theme.dart';
+import 'package:raoxe/core/providers/theme_provider.dart';
+import 'package:raoxe/core/services/storage/storage_service.dart';
+import 'package:raoxe/core/services/theme_service.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/pages/my_page.dart';
+
+initializeApp() async {
+  await StorageService.init();
+  return runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
+    //#to prevent my application from changing its orientation and force the layout
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ThemeProvider(),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.home),
-                color: Colors.grey,
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(Icons.newspaper),
-                color: Colors.grey,
-                onPressed: () {},
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              IconButton(
-                icon: const Icon(Icons.notifications),
-                color: Colors.grey,
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(Icons.person),
-                color: Colors.grey,
-                onPressed: () {},
-              ),
-            ],
+      ],
+      child: Consumer<ThemeProvider>(
+        child: const MyPage(),
+        builder: (c, themeProvider, home) => MaterialApp(
+          color: Colors.transparent,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeService.main(
           ),
+          darkTheme: ThemeService.main(
+            isDark: true,
+          ).copyWith(
+             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
+                .copyWith(
+                    secondary: AppColors.primary, brightness: Brightness.dark),
+          ),
+          themeMode: themeProvider.selectedThemeMode,
+          home: home,
         ),
       ),
     );

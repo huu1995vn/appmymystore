@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raoxe/core/components/rx_rounded_button.dart';
 import '../../../core/utilities/constants.dart';
 
@@ -37,11 +36,7 @@ class SearchBar extends StatelessWidget {
                     horizontal: 13,
                     vertical: 8,
                   ),
-                  suffixIcon: SvgPicture.asset(
-                    'assets/icon.png',
-                    color: kPrimaryColor,
-                    fit: BoxFit.scaleDown,
-                  ),
+                  suffixIcon: const Icon(Icons.search),
                 ),
               ),
             ),
@@ -51,7 +46,7 @@ class SearchBar extends StatelessWidget {
           ),
           RxRoundedButton(
             onTap: () {},
-            icon: 'assets/icon.png',
+            icon: const Icon(Icons.search),
           )
         ],
       ),

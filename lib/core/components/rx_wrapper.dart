@@ -18,8 +18,11 @@ class RxWrapper extends StatelessWidget {
       child: Container(
         width: double.infinity,
         color: Theme.of(context).scaffoldBackgroundColor,
-        // alignment: Alignment.topCenter,
-        child: body,
+        alignment: Alignment.topLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: body,
+        ),
       ),
     );
   }

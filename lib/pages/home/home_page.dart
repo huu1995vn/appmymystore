@@ -46,14 +46,11 @@ class HomePage extends StatelessWidget {
                       height: 30,
                     ),
                     // ProductSlider(),
-                    Padding(
-                      padding: EdgeInsets.only(left: 42),
-                      child: Text(
-                        'Best Selling',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      'Best Selling',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(

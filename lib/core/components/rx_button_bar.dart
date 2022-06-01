@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 
 class RxButtonBar extends StatelessWidget {
   RxButtonBar(
@@ -17,7 +16,7 @@ class RxButtonBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: icon,
-      color: isEnable ? AppColors.primary : null,
+      color: isEnable ? Theme.of(context).primaryColor : Theme.of(context).hintColor,
       onPressed: onPressed,
     );
   }

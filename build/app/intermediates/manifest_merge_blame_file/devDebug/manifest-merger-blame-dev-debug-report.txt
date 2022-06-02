@@ -22,7 +22,7 @@
 19-->[androidx.core:core:1.6.0] C:\Users\TRONG-HUU\.gradle\caches\transforms-3\c7b7ab7bdf67267dcc0cba1dbef340e2\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
 20        android:debuggable="true"
 21        android:icon="@mipmap/ic_launcher"
-22        android:label="raoxe" >
+22        android:label="RaoXe" >
 23        <activity
 24            android:name="vn.com.raoxe.raoxe.MainActivity"
 25            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

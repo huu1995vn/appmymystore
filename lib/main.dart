@@ -9,6 +9,7 @@ import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/pages/my_page.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 //#test
 initializeApp() async {
@@ -54,7 +55,30 @@ class MyApp extends StatelessWidget {
                     secondary: AppColors.primary, brightness: Brightness.dark),
           ),
           themeMode: themeProvider.selectedThemeMode,
-          home: home,
+          home: SplashScreen(
+            seconds: 3,
+            navigateAfterSeconds: home,
+            imageBackground: const AssetImage('assets/splash.png'),
+            loaderColor: Colors.red,
+          ),
+          // routes: CommonNavigates.defaulRoutes,
+        ),
+      ),
+    );
+  }
+}
+
+class AfterSplash extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: const Text("Welcome In SplashScreen Package"),
+          automaticallyImplyLeading: false),
+      body: const Center(
+        child: Text(
+          "Done!",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
         ),
       ),
     );

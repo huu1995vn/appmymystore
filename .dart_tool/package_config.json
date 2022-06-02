@@ -356,6 +356,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "simple_animations",
+      "rootUri": "file:///C:/Users/TRONG-HUU/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/simple_animations-1.3.12",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///C:/src/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -366,6 +372,12 @@
       "rootUri": "file:///C:/Users/TRONG-HUU/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/source_span-1.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "splashscreen",
+      "rootUri": "file:///C:/Users/TRONG-HUU/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/splashscreen-1.3.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
     },
     {
       "name": "stack_trace",
@@ -440,7 +452,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-06-02T03:59:32.219585Z",
+  "generated": "2022-06-02T09:48:57.540711Z",
   "generator": "pub",
   "generatorVersion": "2.18.0-161.0.dev"
 }

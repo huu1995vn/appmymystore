@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Sources\\001_Main\\02_RaoXe\\v2\\RaoXe\\build\\app\\intermediates\\incremental\\mergeDevDebugResources\\merged.dir\\values-lo\\values-lo.xml",
+            "outputFile": "D:\\01_MyWork\\01_Sources\\02_RaoXe\\v2\\RaoXe\\build\\app\\intermediates\\incremental\\mergeDevDebugResources\\merged.dir\\values-lo\\values-lo.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\trong\\.gradle\\caches\\transforms-3\\c7b7ab7bdf67267dcc0cba1dbef340e2\\transformed\\core-1.6.0\\res\\values-lo\\values-lo.xml",
+                    "source": "C:\\Users\\TRONG-HUU\\.gradle\\caches\\transforms-3\\c7b7ab7bdf67267dcc0cba1dbef340e2\\transformed\\core-1.6.0\\res\\values-lo\\values-lo.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

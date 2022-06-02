@@ -42,7 +42,7 @@ dependencies:
   localstorage: # Used for save local data
   fluttertoast: # Used for toast
   easy_localization: # Used for language
-
+  flutter_launcher_icons: # Used for build icon
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -74,7 +74,10 @@ flutter:
     - assets/images/intro/
     - assets/css/dailyxe.css
     - assets/translations/
-  
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png"
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

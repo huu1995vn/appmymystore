@@ -10,6 +10,7 @@ import 'package:raoxe/core/services/theme_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/pages/my_page.dart';
 
+//#test
 initializeApp() async {
   await StorageService.init();
   return runApp(

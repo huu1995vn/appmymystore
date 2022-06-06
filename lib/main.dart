@@ -9,6 +9,8 @@ import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/pages/my_page.dart';
+import 'package:raoxe/pages/register/register_page.dart';
+import 'package:raoxe/routers.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -65,6 +67,7 @@ class MyApp extends StatelessWidget {
             imageBackground: const AssetImage('assets/splash.png'),
             loaderColor: Colors.red,
           ),
+           routes: myRouters,
           // routes: CommonNavigates.defaulRoutes,
         ),
       ),

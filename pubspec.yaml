@@ -45,8 +45,9 @@ dependencies:
   flutter_launcher_icons: # Used for build icon
   splashscreen: # Used for splashscreen
   wc_form_validators: # Used for form validators
-  firebase_core : # Used for firebase
-
+  firebase_core: # Used for firebase
+  firebase_messaging: # Used for fcm message
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

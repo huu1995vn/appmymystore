@@ -23,11 +23,12 @@ class _MyPageState extends State<MyPage> {
   @override
   void initState() {
     _totalNotifications = 0;
+    initApp();
     super.initState();
   }
 
-  initApp() async {
-    (await FirebaseMessagingService.registerNotification())
+  initApp() {
+    FirebaseMessagingService.streamMessage
         .stream
         .listen((notification) {
       if (notification != null) {
@@ -62,6 +63,10 @@ class _MyPageState extends State<MyPage> {
   }
 
   onPressedTab(int index) {
+    if (CommonMethods.isLogin && index == 3) {
+      CommonNavigates.toLoginPage(context, isReplace: false);
+      return;
+    }
     setState(() {
       _selectedIndex = index;
     });
@@ -81,6 +86,7 @@ class _MyPageState extends State<MyPage> {
           NotifycationPage(),
           DashboardPage(),
         ],
+        onPageChanged: (value) => {onPressedTab(value)},
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -149,11 +155,7 @@ class _MyPageState extends State<MyPage> {
               icon: const Icon(Icons.person),
               isEnable: _selectedIndex == 3,
               onPressed: () {
-                if (CommonMethods.isLogin) {
-                  onPressedTab(3);
-                } else {
-                  CommonNavigates.toLoginPage(context);
-                }
+                onPressedTab(3);
               },
             ),
           ],

@@ -1,4 +1,4 @@
-package vn.com.raoxe.raoxe
+package vn.com.raoxe
 
 import io.flutter.embedding.android.FlutterActivity
 

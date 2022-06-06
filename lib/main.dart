@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
+import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -15,10 +16,11 @@ import 'package:firebase_core/firebase_core.dart';
 
 //#test
 initializeApp() async {
-  await StorageService.init();
   WidgetsFlutterBinding.ensureInitialized();
+  await StorageService.init();
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
+  await FirebaseMessagingService.init();
   return runApp(
     EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('vi')],

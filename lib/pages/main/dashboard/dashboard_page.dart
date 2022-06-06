@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/components/rx_wrapper.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -15,10 +15,15 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   @override
+  void initState() {
+    super.initState();
+    
+  }
+  @override
   Widget build(BuildContext context) {
     return RxScaffold(
       appBar: AppBar(
-        title: Text('login'.tr(),
+        title: Text('dashboard_page',
             style: TextStyle(
               color: kWhite,
               fontSize: 19,
@@ -28,7 +33,7 @@ class _DashboardPageState extends State<DashboardPage> {
         elevation: 0.0,
       ),
       child: RxWrapper(
-        body: Text("login"),
+        body: Text(FirebaseMessagingService.token??""),
       ),
     );
   }

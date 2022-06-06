@@ -23,11 +23,12 @@ Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class FirebaseMessagingService {
+  static StreamController<PushNotification> streamMessage = StreamController<
+      PushNotification>.broadcast(); // 2. Instantiate Firebase Messaging
   static String? token;
   static FirebaseMessaging? _messaging;
-
   // For handling notification when the app is in terminated state
-  static toNotification(RemoteMessage initialMessage) async {
+  static toNotification(RemoteMessage initialMessage) {
     return PushNotification(
       title: initialMessage.notification?.title,
       body: initialMessage.notification?.body,
@@ -35,12 +36,14 @@ class FirebaseMessagingService {
     );
   }
 
-  static Future<StreamController<PushNotification>>
-      registerNotification() async {
-    // GetToken
+  static init() async {
     token = await FirebaseMessaging.instance.getToken();
-    StreamController<PushNotification> streamMessage = StreamController<
-        PushNotification>.broadcast(); // 2. Instantiate Firebase Messaging
+    registerNotification();
+  }
+
+  static registerNotification() async {
+    // GetToken
+
     _messaging = FirebaseMessaging.instance;
     // 3. On iOS, this helps to take the user permissions
     NotificationSettings settings = await _messaging!.requestPermission(
@@ -71,8 +74,6 @@ class FirebaseMessagingService {
         print('User declined or has not accepted permission');
       }
     }
-
-    return streamMessage;
   }
 
   static processLinkToPage(pathRedirect, BuildContext context) async {

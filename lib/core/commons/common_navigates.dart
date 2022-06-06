@@ -15,10 +15,13 @@ class CommonNavigates {
     '/user': (context) => const UserPage(),
     '/setting': (context) => const SettingsPage(),
   };
-  static Future toLoginPage(
-    BuildContext context,
-  ) async {
-    return await Navigator.pushReplacementNamed(context, "/login");
+  static Future toLoginPage(BuildContext context,
+      {bool isReplace = true}) async {
+    if (isReplace) {
+      return await Navigator.pushReplacementNamed(context, "/login");
+    }
+
+    return await Navigator.pushNamed(context, "/login");
   }
 
   static Future toRegisterPage(BuildContext context) async {
@@ -29,9 +32,7 @@ class CommonNavigates {
     return await Navigator.pushReplacementNamed(context, "/forgot-password");
   }
 
- static pop(BuildContext context, Object? value) {
+  static pop(BuildContext context, Object? value) {
     return Navigator.of(context).pop(value);
-
   }
-
 }

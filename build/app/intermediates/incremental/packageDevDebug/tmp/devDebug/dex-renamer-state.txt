@@ -1,4 +1,4 @@
-#Fri Jun 03 10:33:29 ICT 2022
-base.0=D\:\\01_MyWork\\01_Sources\\02_RaoXe\\v2\\RaoXe\\build\\app\\intermediates\\dex\\devDebug\\mergeDexDevDebug\\classes.dex
+#Mon Jun 06 08:50:55 ICT 2022
+base.0=D\:\\Sources\\001_Main\\02_RaoXe\\v2\\RaoXe\\build\\app\\intermediates\\dex\\devDebug\\mergeDexDevDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

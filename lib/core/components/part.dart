@@ -28,21 +28,17 @@ Widget RxBuildItem(
 
 class RxDisabled extends StatelessWidget {
   final Widget child;
-  final bool? lock;
   final bool disabled;
 
   const RxDisabled(
-      {Key? key, this.disabled = false, required this.child, this.lock})
+      {Key? key, this.disabled = false, required this.child})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    bool? _lock = lock;
-    if (disabled && lock == null) {
-      _lock = true;
-    }
+  
     return AbsorbPointer(
-        absorbing: _lock ?? false,
+        absorbing: disabled,
         child: AnimatedOpacity(
             opacity: disabled ? 0.5 : 1,
             duration: const Duration(milliseconds: 500),

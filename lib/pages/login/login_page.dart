@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -18,11 +19,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> keyLogin = GlobalKey<FormState>();
-
-  bool _hidePassword = true;
-  late final TextEditingController ctrUserName = TextEditingController();
-  late final TextEditingController ctrPassword = TextEditingController();
-
+  String username = "";
+  String password = "";
   @override
   Widget build(BuildContext context) {
     return RxScaffold(
@@ -60,46 +58,24 @@ class _LoginPageState extends State<LoginPage> {
                               border: Border(
                                   bottom:
                                       BorderSide(color: Colors.grey.shade200))),
-                          child: TextField(
-                              controller: ctrUserName,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.only(top: 14.0),
-                                prefixIcon: const Icon(
-                                  Icons.phone,
-                                ),
-                                hintText: "enter.phone".tr(),
-                              )),
+                          child: RxInput(
+                            password,
+                            labelText: "phone".tr(),
+                            icon: const Icon(Icons.phone),
+                          ),
                         ),
                         Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom:
-                                      BorderSide(color: Colors.grey.shade200))),
-                          child: TextField(
-                              controller: ctrPassword,
-                              obscureText: _hidePassword,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  contentPadding:
-                                      const EdgeInsets.only(top: 14.0),
-                                  prefixIcon: const Icon(
-                                    Icons.lock,
-                                  ),
-                                  hintText: "enter.password.text".tr(),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(_hidePassword == true
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
-                                    onPressed: () {
-                                      setState(() {
-                                        _hidePassword = !_hidePassword;
-                                      });
-                                    },
-                                  ))),
-                        ),
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color: Colors.grey.shade200))),
+                            child: RxInput(
+                              password,
+                              isPassword: true,
+                              labelText: "password.text".tr(),
+                              icon: const Icon(Icons.lock),
+                            )),
                       ],
                     ),
                   ),
@@ -136,12 +112,9 @@ Widget _forgotPasswordLabel(context) {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
-            onTap: () => {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ForgotPasswordPage()))
-                },
+            onTap: () {
+              CommonNavigates.toForgotPasswordPage(context);
+            },
             child: RichText(
               text: TextSpan(
                 children: [
@@ -161,8 +134,7 @@ Widget _forgotPasswordLabel(context) {
 Widget _createAccountLabel(context) {
   return InkWell(
     onTap: () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => RegisterPage()));
+      CommonNavigates.toRegisterPage(context);
     },
     child: Container(
       alignment: Alignment.bottomCenter,

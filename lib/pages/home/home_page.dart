@@ -1,5 +1,4 @@
 import 'package:raoxe/core/components/index.dart';
-import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/pages/home/components/search_bar.dart';

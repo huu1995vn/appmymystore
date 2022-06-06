@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/rx_scaffold.dart';
@@ -5,19 +7,20 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/pages/login/login_page.dart';
-import 'package:wc_form_validators/wc_form_validators.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
-  TextEditingController _textEditConName = TextEditingController();
-  TextEditingController _textEditConEmail = TextEditingController();
-  TextEditingController _textEditConPassword = TextEditingController();
-  TextEditingController _textEditConConfirmPassword = TextEditingController();
+  final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
+  final TextEditingController _textEditConName = TextEditingController();
+  final TextEditingController _textEditConEmail = TextEditingController();
+  final TextEditingController _textEditConPassword = TextEditingController();
+  final TextEditingController _textEditConConfirmPassword = TextEditingController();
   bool isPasswordVisible = false;
   bool isConfirmPasswordVisible = false;
 
@@ -38,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       child: SingleChildScrollView(
         child: Padding(
-            padding: EdgeInsets.only(top: 32.0),
+            padding: const EdgeInsets.only(top: 32.0),
             child: Column(
               children: <Widget>[
                 getWidgetImageLogo(),
@@ -93,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   // onFieldSubmitted: (String value) {
                   //   FocusScope.of(context).requestFocus(_passwordEmail);
                   // },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Full name',
                       //prefixIcon: Icon(Icons.email),
                       icon: Icon(Icons.perm_identity)),
@@ -104,7 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   validator: _validateEmail,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Phone', icon: Icon(Icons.phone)),
                 ),
                 TextFormField(
@@ -125,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           });
                         },
                       ),
-                      icon: Icon(Icons.lock)),
+                      icon: const Icon(Icons.lock)),
                 ), //text field: password
                 TextFormField(
                     controller: _textEditConConfirmPassword,
@@ -147,12 +150,12 @@ class _RegisterPageState extends State<RegisterPage> {
                             });
                           },
                         ),
-                        icon: Icon(Icons.lock))),
+                        icon: const Icon(Icons.lock))),
                 Container(
-                  margin: EdgeInsets.only(top: 32.0),
+                  margin: const EdgeInsets.only(top: 32.0),
                   width: double.infinity,
                   child: ElevatedButton(
-                    child: Text(
+                    child: const Text(
                       'Register',
                       style: TextStyle(fontSize: 16.0),
                     ),
@@ -204,16 +207,16 @@ Widget _loginLabel(context) {
   return InkWell(
     onTap: () {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
+          context, MaterialPageRoute(builder: (context) => const LoginPage()));
     },
     child: Container(
       alignment: Alignment.bottomCenter,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
+          const Text(
             'Already Register? ',
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
           Text(
             "login".tr(),

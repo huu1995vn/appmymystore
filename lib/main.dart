@@ -69,6 +69,8 @@ class MyApp extends StatelessWidget {
 }
 
 class AfterSplash extends StatelessWidget {
+  const AfterSplash({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -20,9 +20,9 @@ class CircularBackgroundPainter extends CustomPainter {
   final Paint lowerPaint;
 
   CircularBackgroundPainter()
-      : mainPaint = new Paint(),
-        middlePaint = new Paint(),
-        lowerPaint = new Paint() {
+      : mainPaint = Paint(),
+        middlePaint = Paint(),
+        lowerPaint = Paint() {
     mainPaint.color = AppColors.primary;
     mainPaint.isAntiAlias = true;
     mainPaint.style = PaintingStyle.fill;
@@ -49,17 +49,17 @@ class CircularBackgroundPainter extends CustomPainter {
   }
 
   void drawBellAndLeg(radius, canvas, Size size) {  
-    Path upperPath = new Path();
+    Path upperPath = Path();
     upperPath.addRect(Rect.fromLTRB(0, 0, size.width, size.height / 4));
     upperPath.addArc(
         Rect.fromLTRB(-140, 40, size.width + 50, size.height / 1.95), 0.1, 30);
 
-    Path middlePath = new Path();
+    Path middlePath = Path();
     middlePath.addRect(Rect.fromLTRB(0, 0, size.width, size.height / 4));
     middlePath.addArc(
         Rect.fromLTRB(-135, 0, size.width + 50, size.height / 2.2), 0.1, 30);
 
-    Path lowerPath = new Path();
+    Path lowerPath = Path();
     //path1.lineTo(size.width, 0);
     //path1.lineTo(size.width, size.height / 3);
     //path1.addOval(Rect.fromLTRB(-150, 100, size.width + 50, size.height / 2));

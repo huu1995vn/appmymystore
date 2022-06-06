@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 
 class ThemeProvider with ChangeNotifier {
   ThemeProvider() {
@@ -13,9 +12,9 @@ class ThemeProvider with ChangeNotifier {
   }
   late ThemeMode selectedThemeMode;
 
-  setSelectedThemeMode(ThemeMode _mode) {
-    selectedThemeMode = _mode;
-    StorageService.set(StorageKeys.themeMode, _mode.name);
+  setSelectedThemeMode(ThemeMode mode) {
+    selectedThemeMode = mode;
+    StorageService.set(StorageKeys.themeMode, mode.name);
     notifyListeners();
   }
 

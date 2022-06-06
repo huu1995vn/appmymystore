@@ -1,10 +1,12 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 Widget RxDivider({double indent = 20}) {
   return Divider(
       thickness: 1, // thickness of the line
-      indent: indent ?? 20,
-      endIndent: indent ?? 20,
+      indent: indent,
+      endIndent: indent,
       height: 1);
 }
 
@@ -42,9 +44,8 @@ class RxDisabled extends StatelessWidget {
     return AbsorbPointer(
         absorbing: _lock ?? false,
         child: AnimatedOpacity(
-          opacity: disabled ? 0.5 : 1,
-          child: child,
-          duration: const Duration(milliseconds: 500),
-        ));
+            opacity: disabled ? 0.5 : 1,
+            duration: const Duration(milliseconds: 500),
+            child: child));
   }
 }

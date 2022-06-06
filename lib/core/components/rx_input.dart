@@ -1,9 +1,8 @@
-// ignore_for_file: curly_braces_in_flow_control_structures, must_call_super, empty_catches
+// ignore_for_file: curly_braces_in_flow_control_structures, must_call_super, empty_catches, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
 
 class RxInput extends StatefulWidget {
   final dynamic value;

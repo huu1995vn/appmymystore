@@ -1,12 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/pages/login/login_page.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);

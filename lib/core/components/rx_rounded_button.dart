@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class RxRoundedButton extends StatelessWidget {
   const RxRoundedButton({
@@ -29,7 +28,7 @@ class RxRoundedButton extends StatelessWidget {
           ],
         ),
         alignment: Alignment.center,
-        child:  this.icon,
+        child:  icon,
       ),
     );
   }

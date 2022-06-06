@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches
+// ignore_for_file: empty_catches, unnecessary_null_comparison, depend_on_referenced_packages, unnecessary_type_check
 
 library extension_rao;
 
@@ -59,8 +59,8 @@ extension StringExtension on String {
     var str = this;
     if (str == null || (str.isEmpty)) return "";
     try {
-      String _vietnamese = "aAeEoOuUiIdDyY";
-      List<RegExp> _vietnameseRegex = <RegExp>[
+      String vietnamese = "aAeEoOuUiIdDyY";
+      List<RegExp> vietnameseRegex = <RegExp>[
         RegExp(r'à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ'),
         RegExp(r'À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ'),
         RegExp(r'è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ'),
@@ -78,8 +78,8 @@ extension StringExtension on String {
       ];
       String result = str;
       if (result is String) {
-        for (int i = 0; i < _vietnamese.length; ++i) {
-          result = result.replaceAll(_vietnameseRegex[i], _vietnamese[i]);
+        for (int i = 0; i < vietnamese.length; ++i) {
+          result = result.replaceAll(vietnameseRegex[i], vietnamese[i]);
         }
       }
       return result;

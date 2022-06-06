@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 
@@ -8,7 +10,7 @@ const kTextLightColor = Color(0xFF949098);
 const kDefaultPadding = 25.0;
 const kDefaultPaddingTop = 79.0;
 
-final kBoxDecorationStyle = BoxDecoration(
+const kBoxDecorationStyle = BoxDecoration(
     gradient: LinearGradient(colors: [
   AppColors.primary,
   AppColors.primary700,

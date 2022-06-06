@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
             imageBackground: const AssetImage('assets/splash.png'),
             loaderColor: Colors.red,
           ),
-           routes: CommonNavigates.routers,
+          routes: CommonNavigates.routers,
           // routes: CommonNavigates.defaulRoutes,
         ),
       ),

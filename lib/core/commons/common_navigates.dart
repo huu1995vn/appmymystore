@@ -28,4 +28,10 @@ class CommonNavigates {
   static Future toForgotPasswordPage(BuildContext context) async {
     return await Navigator.pushReplacementNamed(context, "/forgot-password");
   }
+
+ static pop(BuildContext context, Object? value) {
+    return Navigator.of(context).pop(value);
+
+  }
+
 }

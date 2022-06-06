@@ -13,6 +13,7 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 //#test
 initializeApp() async {
@@ -21,6 +22,7 @@ initializeApp() async {
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   await FirebaseMessagingService.init();
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   return runApp(
     EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('vi')],

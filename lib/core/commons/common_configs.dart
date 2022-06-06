@@ -7,9 +7,14 @@ enum Environment {
 }
 
 class CommonConfig {
+  //system
+  static Map deviceInfo = Map();
   static String env = "dev";
   static String apiHost = "https://docker.dailyxe.com.vn";
   static String apiHostSufix = "/raoxe/api/dailyxe/";
+  static String uriPrefixDynamicLink = "https://raoxe.page.link";
+  static String appStoreID = "1486119532";
+
   static late Map<String, dynamic> _config;
   static void setEnvironment(Environment env) {
     switch (env) {

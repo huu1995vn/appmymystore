@@ -6,9 +6,7 @@ import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:raoxe/pages/forgot_password/forgot_password_page.dart';
 import 'package:raoxe/pages/login/components/header_bar.dart';
-import 'package:raoxe/pages/register/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

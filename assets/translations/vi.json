@@ -309,7 +309,7 @@
   "continue": "Tiếp tục",
   "forgot": {
     "text": "Quên",
-    "password": "@:forgot.text @.lower:password.text",
+    "password": "@:forgot.text @.lower:password.text?",
     "other": "@:forgot.text {}"
   },
   "change": {
@@ -478,7 +478,7 @@
     "str033": "Đại lý hiển thị tin rao",
     "str034": "Chọn riêng showroom bạn muốn hiển thị tin rao. Mặc định sẽ hiển thị lên tất cả showroom.",
     "str035": "Tài khoản đã đăng nhập",
-    "str036": "Bạn chưa có tài khoản?",
+    "str036": "Bạn chưa có tài khoản? ",
     "str037": "Welcome to RaoXe. Each time you buy points, you will accumulate a corresponding number of points. The higher the number of points, the more you will have the opportunity to rank up and enjoy many attractive incentives.",
     "str038": "Chia sẽ mã giới thiệu cho bạn bè để nhận được nhiều ưu đãi hấp dẫn.",
     "str039": "Thời gian bắt đầu phải nhỏ hơn kết thúc dự kiến",

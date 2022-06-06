@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
-Scaffold RxScaffold({PreferredSizeWidget? appBar, Widget? child, double? top}) {
+Scaffold RxScaffold(
+    {Key? key, PreferredSizeWidget? appBar, Widget? child, double? top}) {
   return Scaffold(
+    key: key,
     appBar: appBar,
     extendBodyBehindAppBar: true,
     body: Container(

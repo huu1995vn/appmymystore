@@ -4,3 +4,4 @@ export 'card/index.dart';
 export 'rx_button_bar.dart';
 export 'rx_wrapper.dart';
 export 'rx_scaffold.dart';
+export 'rx_input.dart';

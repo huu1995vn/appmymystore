@@ -32,7 +32,7 @@ class _MyPageState extends State<MyPage> {
     return Scaffold(
       body: PageView(
         controller: _pageController,
-        children: <Widget>[
+        children: const <Widget>[
           HomePage(),
           NewsPage(),
           NotifycationPage(),

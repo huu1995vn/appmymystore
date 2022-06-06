@@ -4,6 +4,9 @@ import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/pages/forgot_password/forgot_password_page.dart';
+import 'package:raoxe/pages/login/components/header_bar.dart';
+import 'package:raoxe/pages/register/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -11,6 +14,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  GlobalKey<FormState> keyLogin = GlobalKey<FormState>();
+
   bool _hidePassword = true;
   late final TextEditingController ctrUserName = TextEditingController();
   late final TextEditingController ctrPassword = TextEditingController();
@@ -18,42 +23,21 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return RxScaffold(
+        key: keyLogin,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            child: Text(
-              'Login',
-              style: TextStyle(
-                color: kWhite,
-                fontSize: 45,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            child: Text(
-              'Welcome to back',
-              style: TextStyle(
-                color: kWhite,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 29,
-          ),
+          const HeaderBar(),
           Expanded(
               child: RxWrapper(
                   body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(30),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
@@ -75,13 +59,14 @@ class _LoginPageState extends State<LoginPage> {
                                       BorderSide(color: Colors.grey.shade200))),
                           child: TextField(
                               controller: ctrUserName,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 14.0),
-                                prefixIcon: Icon(
+                                contentPadding:
+                                    const EdgeInsets.only(top: 14.0),
+                                prefixIcon: const Icon(
                                   Icons.phone,
                                 ),
-                                hintText: 'Enter your Phone',
+                                hintText: "enter.phone".tr(),
                               )),
                         ),
                         Container(
@@ -98,9 +83,9 @@ class _LoginPageState extends State<LoginPage> {
                                   contentPadding:
                                       const EdgeInsets.only(top: 14.0),
                                   prefixIcon: const Icon(
-                                    Icons.password,
+                                    Icons.lock,
                                   ),
-                                  hintText: 'Enter your Password',
+                                  hintText: "enter.password.text".tr(),
                                   suffixIcon: IconButton(
                                     icon: Icon(_hidePassword == true
                                         ? Icons.visibility_off
@@ -115,79 +100,88 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
+                  _forgotPasswordLabel(context),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(kDefaultPadding),
                     child: Container(
                       height: 50,
                       margin: const EdgeInsets.symmetric(horizontal: 50),
                       decoration: kBoxDecorationStyle.copyWith(
                           borderRadius: BorderRadius.circular(50)),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          "Login",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                          "continue".tr().toUpperCase(),
+                          style: const TextStyle(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                        onTap: () => print('Sign Up Button Pressed'),
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'forgot.password'.tr(),
-                                style: TextStyle(
-                                  color: Theme.of(context).hintColor,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              // TextSpan(
-                              //   text: 'Sign Up',
-                              //   style: TextStyle(
-                              //     color: Theme.of(context).hintColor,
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                        )),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: GestureDetector(
-                          onTap: () => print('Sign Up Button Pressed'),
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'Don\'t have an Account? ',
-                                  style: TextStyle(
-                                    color: Theme.of(context).hintColor,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: 'Sign Up',
-                                  style: TextStyle(
-                                    color: Theme.of(context).hintColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )),
-                    ),
-                  ),
+                  _createAccountLabel(context)
                 ],
               ),
             ),
           )))
         ]));
   }
+}
+
+Widget _forgotPasswordLabel(context) {
+  return Align(
+      alignment: Alignment.bottomRight,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GestureDetector(
+            onTap: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordPage()))
+                },
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'forgot.password'.tr(),
+                    style: TextStyle(
+                      color: Theme.of(context).hintColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            )),
+      ));
+}
+
+Widget _createAccountLabel(context) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => RegisterPage()));
+    },
+    child: Container(
+      alignment: Alignment.bottomCenter,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            "message.str036".tr(),
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+          ),
+          // const SizedBox(
+          //   width: 10,
+          // ),
+          Text(
+            "registnow".tr(),
+            style: const TextStyle(
+                color: AppColors.primary500,
+                fontSize: 13,
+                fontWeight: FontWeight.w600),
+          ),
+        ],
+      ),
+    ),
+  );
 }

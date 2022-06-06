@@ -64,8 +64,8 @@
   "year": "Year",
   "image": "Image",
   "address": "Address",
-  "lastname": "LastName",
-  "fullname": "FullName",
+  "lastname": "Last Name",
+  "fullname": "Full Name",
   "name": "Name",
   "setting": "Setting",
   "no": "No",
@@ -313,7 +313,7 @@
   "continue": "Continue",
   "forgot": {
     "text": "Forgot",
-    "password": "@:forgot.text @.lower:password.text",
+    "password": "@:forgot.text @.lower:password.text?",
     "other": "@:forgot.text {}"
   },
   "change": {
@@ -483,7 +483,7 @@
     "str033": "Dealer show rao",
     "str034": "Select the showroom you want to display the ad. By default, it will be displayed on all showrooms.",
     "str035": "Tài khoản đã đăng nhập",
-    "str036": "Do not have an account?",
+    "str036": "Don't have an account? ",
     "str037": "Welcome to RaoXe. Each time you buy points, you will accumulate a corresponding number of points. The higher the number of points, the more you will have the opportunity to rank up and enjoy many attractive incentives.",
     "str038": "Share the referral code with your friends to receive many attractive offers.",
     "str039": "Start time must be less than expected end time",

@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "3702342930",
+    "firebase_url": "https://dailyxe-ionic-raovat.firebaseio.com",
+    "project_id": "dailyxe-ionic-raovat",
+    "storage_bucket": "dailyxe-ionic-raovat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3702342930:android:b35aa88c0db809e4f05fcb",
+        "android_client_info": {
+          "package_name": "vn.com.raoxe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3702342930-2qfmn9kaqbdg60fh7fvb2p9m2tb5d92a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.com.raoxe",
+            "certificate_hash": "2e9ecbd941e898c68e745e7f1f032cb0178c23ee"
+          }
+        },
+        {
+          "client_id": "3702342930-ei0c8h3ca5okdp986f4f57j8bjve9fbq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.com.raoxe",
+            "certificate_hash": "185ad5dfb82d03a1991fe0da70a4201bc68b10c6"
+          }
+        },
+        {
+          "client_id": "3702342930-pf2loqekffm1s38vrk2s2f2tbsp92jjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdAHmFDGwp8KD4G9PsM_2aw0K32nSa72U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3702342930-pf2loqekffm1s38vrk2s2f2tbsp92jjb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "3702342930-alhvchul9a14ikr5vbvseohusp260f6o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dailyxe.raovat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3702342930:android:c5703d54f1004feaf05fcb",
+        "android_client_info": {
+          "package_name": "vn.com.raoxe.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3702342930-pf2loqekffm1s38vrk2s2f2tbsp92jjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdAHmFDGwp8KD4G9PsM_2aw0K32nSa72U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3702342930-pf2loqekffm1s38vrk2s2f2tbsp92jjb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "3702342930-alhvchul9a14ikr5vbvseohusp260f6o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dailyxe.raovat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

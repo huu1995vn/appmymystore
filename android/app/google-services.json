@@ -1,0 +1,55 @@
+{
+    "project_info": {
+      "project_number": "170518340284",
+      "firebase_url": "https://raovat-257509.firebaseio.com",
+      "project_id": "raovat-257509",
+      "storage_bucket": "raovat-257509.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:170518340284:android:c9e7b4c404098e0c9b66b9",
+          "android_client_info": {
+            "package_name": "vn.com.raoxe"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "170518340284-i5oo2bsdnpa81bq4sjmr3q95i1fvrs58.apps.googleusercontent.com",
+            "client_type": 1,
+            "android_info": {
+              "package_name": "vn.com.raoxe",
+              "certificate_hash": "e5f15f102c0a884328f5d9ebeea287fd58f70830"
+            }
+          },
+          {
+            "client_id": "170518340284-doedpm72o3tb9l4vc3j255dvhccmb3h9.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyBFTdg8Qb51Vsz7Gf3WekCYO3d0tLBaLuA"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "170518340284-doedpm72o3tb9l4vc3j255dvhccmb3h9.apps.googleusercontent.com",
+                "client_type": 3
+              },
+              {
+                "client_id": "170518340284-qv5qu17i4fr2sr4p2rhqvlahn4drh2p9.apps.googleusercontent.com",
+                "client_type": 2,
+                "ios_info": {
+                  "bundle_id": "vn.com.raoxe.admin"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

@@ -1,0 +1,34 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Flutter_Dev",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev",
+                "--no-sound-null-safety"
+            ]
+		},
+        {
+			"name": "Flutter_Dev_Web",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "args":["-d", "chrome", "--no-sound-null-safety", "--web-port=5000", "--web-renderer html"],
+            
+		},
+		{
+			"name": "Flutter_Prod",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_prod.dart",
+            "args": [
+                "--flavor",
+                "prod",
+            ]
+		},
+	]
+}

@@ -7,7 +7,6 @@ import 'package:raoxe/core/models/user_model.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:raoxe/pages/login/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

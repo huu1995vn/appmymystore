@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({

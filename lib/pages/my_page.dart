@@ -1,13 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
-import 'package:raoxe/pages/dashboard/dashboard_page.dart';
-import 'package:raoxe/pages/home/home_page.dart';
-import 'package:raoxe/pages/login/login_page.dart';
-import 'package:raoxe/pages/news/news_page.dart';
-import 'package:raoxe/pages/notifycation/notifycation_page.dart';
+import 'main/index.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -81,10 +78,7 @@ class _MyPageState extends State<MyPage> {
               isEnable: _selectedIndex == 3,
               onPressed: () {
                 if (true) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
+                  CommonNavigates.toLoginPage(context);
                 } else {
                   onPressedTab(3);
                 }

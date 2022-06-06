@@ -1,8 +1,8 @@
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/pages/home/components/search_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/pages/main/home/components/search_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

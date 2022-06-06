@@ -4,22 +4,21 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/pages/my_page.dart';
-import 'package:raoxe/pages/register/register_page.dart';
-import 'package:raoxe/routers.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 //#test
 initializeApp() async {
+  await StorageService.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
-  await StorageService.init();
   return runApp(
     EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('vi')],
@@ -67,7 +66,7 @@ class MyApp extends StatelessWidget {
             imageBackground: const AssetImage('assets/splash.png'),
             loaderColor: Colors.red,
           ),
-           routes: myRouters,
+           routes: CommonNavigates.routers,
           // routes: CommonNavigates.defaulRoutes,
         ),
       ),

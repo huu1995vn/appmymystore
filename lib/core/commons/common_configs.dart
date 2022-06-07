@@ -11,7 +11,7 @@ class CommonConfig {
   static Map deviceInfo = {};
   static String env = "dev";
   static String apiHost = "https://docker.dailyxe.com.vn";
-  static String apiHostSufix = "/raoxe/api/dailyxe/";
+  static String apiHostSufix = "/";
   static String uriPrefixDynamicLink = "https://raoxe.page.link";
   static String appStoreID = "1486119532";
 

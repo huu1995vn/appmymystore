@@ -53,7 +53,9 @@ dependencies:
   package_info_plus:  # Used for package info 
   geolocator: # Used for get geolocator
   upgrader: # a newer version of the app in the store
-
+  encrypt: # Used for encrypt ASE token
+  crypto: # Used for encrypt md5
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

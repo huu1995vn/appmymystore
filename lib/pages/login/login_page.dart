@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/api/api.bll.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -19,6 +20,14 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> keyLogin = GlobalKey<FormState>();
   String username = "";
   String password = "";
+  login(String username, String password) async {
+    var res = await DaiLyXeApiBLL_APIRaoXe().login(username, password);
+    if(res.status >0)
+    {
+      
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return RxScaffold(
@@ -78,23 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   _forgotPasswordLabel(context),
-                  Padding(
-                    padding: const EdgeInsets.all(kDefaultPadding),
-                    child: Container(
-                      height: 50,
-                      margin: const EdgeInsets.symmetric(horizontal: 50),
-                      decoration: kBoxDecorationStyle.copyWith(
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Center(
-                        child: Text(
-                          "continue".tr().toUpperCase(),
-                          style: const TextStyle(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buttonLogin(context),
                   _createAccountLabel(context)
                 ],
               ),
@@ -102,6 +95,29 @@ class _LoginPageState extends State<LoginPage> {
           )))
         ]));
   }
+}
+
+Widget _buttonLogin(context) {
+  return GestureDetector(
+      onTap: () {
+        CommonNavigates.toForgotPasswordPage(context);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(kDefaultPadding),
+        child: Container(
+          height: 50,
+          margin: const EdgeInsets.symmetric(horizontal: 50),
+          decoration: kBoxDecorationStyle.copyWith(
+              borderRadius: BorderRadius.circular(50)),
+          child: Center(
+            child: Text(
+              "continue".tr().toUpperCase(),
+              style: const TextStyle(
+                  color: AppColors.white, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ));
 }
 
 Widget _forgotPasswordLabel(context) {

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/components/rx_wrapper.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
@@ -14,13 +15,12 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  @override
-  void initState() {
-    super.initState();
-    
-  }
+  
+ 
   @override
   Widget build(BuildContext context) {
+        var res = APITokenService("XlmVzgN_52uEs5Lnq2MmJF1P_05cFTasy32kVuwZPWtT_mvmRbzhAJq_oWg-An8mFe63N2xXd63JFNojZf1iBg");
+
     return RxScaffold(
       appBar: AppBar(
         title: Text('dashboard_page',

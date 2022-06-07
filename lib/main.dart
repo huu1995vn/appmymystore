@@ -7,9 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
-import 'package:raoxe/core/services/info_device_service.dart';
+import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
-import 'package:raoxe/core/services/theme_service.dart';
+import 'package:raoxe/core/services/theme.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -58,7 +58,10 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: Consumer<ThemeProvider>(
-        child: const MyPage(),
+        child: UpgradeAlert(
+              upgrader: Upgrader(
+                  appcastConfig: cfg, showIgnore: false, showLater: false),
+              child: const MyPage()),
         builder: (c, themeProvider, home) => MaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
@@ -74,15 +77,12 @@ class MyApp extends StatelessWidget {
                     secondary: AppColors.primary, brightness: Brightness.dark),
           ),
           themeMode: themeProvider.selectedThemeMode,
-          home: UpgradeAlert(
-              upgrader: Upgrader(
-                  appcastConfig: cfg, showIgnore: false, showLater: false),
-              child: SplashScreen(
+          home:  SplashScreen(
                 seconds: 3,
                 navigateAfterSeconds: home,
                 imageBackground: const AssetImage('assets/splash.png'),
                 loaderColor: Colors.red,
-              )),
+              ),
           routes: CommonNavigates.routers,
           // routes: CommonNavigates.defaulRoutes,
         ),

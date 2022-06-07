@@ -23,4 +23,6 @@ class StorageService{
 class StorageKeys {
   static const String themeMode = 'theme_mode';
   static const String primaryColor = 'primary_color';
+  static const String token = 'tk';
+
 }

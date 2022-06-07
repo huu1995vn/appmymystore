@@ -33,8 +33,7 @@ class ApiBLL_Basic {
   }
 
   Future<ResponseModel> delete(
-      [
-      dynamic id,  
+      [dynamic id,
       Map<String, dynamic>? queryParameters,
       String? actionName,
       Map<String, dynamic>? headers]) async {
@@ -42,8 +41,27 @@ class ApiBLL_Basic {
         actionName: actionName, queryParameters: queryParameters);
     return ResponseModel.fromJson(res);
   }
-
-
-  
 }
 
+class DaiLyXeApiBLL_APIRaoXe extends ApiBLL_Basic {
+  DaiLyXeApiBLL_APIRaoXe() {
+    apiDAL = ApiDAL();
+    apiDAL.controllerName = "ApiRaoXe";
+  }
+  Future<ResponseModel> login(String username, String password) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = {"username": username, "password": password};
+    return post(body, queryParameters, "Login");
+  }
+
+  Future<ResponseModel> autologin(String username, String password) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = {};
+    return post(body, queryParameters, "AutoLogin");
+  }
+
+  Future<ResponseModel> user(String username, String password) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    return get(queryParameters, "Users");
+  }
+}

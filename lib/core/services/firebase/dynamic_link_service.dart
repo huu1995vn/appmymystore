@@ -3,7 +3,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/services/info_device_service.dart';
+import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 
 class DynamicLinkService {

@@ -8,7 +8,7 @@ enum Environment {
 
 class CommonConfig {
   //system
-  static Map deviceInfo = Map();
+  static Map deviceInfo = {};
   static String env = "dev";
   static String apiHost = "https://docker.dailyxe.com.vn";
   static String apiHostSufix = "/raoxe/api/dailyxe/";

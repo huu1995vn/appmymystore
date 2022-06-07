@@ -14,6 +14,7 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:upgrader/upgrader.dart';
 
 //#test
 init() async {
@@ -38,8 +39,13 @@ initializeApp() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
+    const appcastURL =
+        'https://raw.githubusercontent.com/larryaasen/upgrader/master/test/testappcast.xml';
+    final cfg = AppcastConfiguration(url: appcastURL, supportedOS: ['android']);
+
     //#to prevent my application from changing its orientation and force the layout
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -68,12 +74,15 @@ class MyApp extends StatelessWidget {
                     secondary: AppColors.primary, brightness: Brightness.dark),
           ),
           themeMode: themeProvider.selectedThemeMode,
-          home: SplashScreen(
-            seconds: 3,
-            navigateAfterSeconds: home,
-            imageBackground: const AssetImage('assets/splash.png'),
-            loaderColor: Colors.red,
-          ),
+          home: UpgradeAlert(
+              upgrader: Upgrader(
+                  appcastConfig: cfg, showIgnore: false, showLater: false),
+              child: SplashScreen(
+                seconds: 3,
+                navigateAfterSeconds: home,
+                imageBackground: const AssetImage('assets/splash.png'),
+                loaderColor: Colors.red,
+              )),
           routes: CommonNavigates.routers,
           // routes: CommonNavigates.defaulRoutes,
         ),

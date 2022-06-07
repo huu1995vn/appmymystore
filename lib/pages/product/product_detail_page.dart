@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 class ProductDetailPage extends StatefulWidget {

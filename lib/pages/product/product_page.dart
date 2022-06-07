@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +28,7 @@ class ProductPage extends StatelessWidget {
       ),
       child: RxWrapper(
         body: Column(
-          children: [
+          children: const [
             Text("products")
           ],
         ),

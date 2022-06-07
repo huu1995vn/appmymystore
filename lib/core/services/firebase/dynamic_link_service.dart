@@ -1,4 +1,4 @@
-import 'dart:js';
+// ignore_for_file: unused_element, empty_catches
 
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
@@ -30,7 +30,7 @@ class DynamicLinkService {
 
   static _deepLink(context, Uri uriLink) {
     String deepLink = '${uriLink.origin}${uriLink.path}';
-    if (uriLink.query != null && uriLink.query.isNotNullEmpty) {
+    if (uriLink.query.isNotNullEmpty) {
       deepLink += '?${uriLink.query}';
     }
    

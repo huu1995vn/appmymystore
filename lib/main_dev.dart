@@ -3,5 +3,5 @@ import 'package:raoxe/main.dart';
 
 void main() async {
   CommonConfig.setEnvironment(Environment.dev);
-  await initializeApp();
+  await init();
 }

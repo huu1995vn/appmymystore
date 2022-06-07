@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:raoxe/pages/forgot_password/forgot_password_page.dart';
 import 'package:raoxe/pages/login/login_page.dart';
+import 'package:raoxe/pages/main/index.dart';
+import 'package:raoxe/pages/main/news/news_detail_page.dart';
+import 'package:raoxe/pages/product/product_detail_page.dart';
+import 'package:raoxe/pages/product/product_page.dart';
 import 'package:raoxe/pages/register/register_page.dart';
 import 'package:raoxe/pages/setting/settings_page.dart';
 import 'package:raoxe/pages/user/user_page.dart';
@@ -14,7 +18,30 @@ class CommonNavigates {
     '/forgot-password': (context) => const ForgotPasswordPage(),
     '/user': (context) => const UserPage(),
     '/setting': (context) => const SettingsPage(),
+    '/product': (context) => const ProductPage(),
+    '/news': (context) => const NewsPage(),
   };
+
+  static Future toProductPage(BuildContext context, int parse,
+      {int? id}) async {
+    if (id != null && id > 0) {
+      return await Navigator.push(context,
+          CupertinoPageRoute(builder: (context) => ProductDetailPage(id: id)));
+    } else {
+      return await Navigator.pushReplacementNamed(context, "/product");
+    }
+  }
+
+   static Future toNewsPage(BuildContext context, int parse,
+      {int? id}) async {
+    if (id != null && id > 0) {
+      return await Navigator.push(context,
+          CupertinoPageRoute(builder: (context) => NewsDetailPage(id: id)));
+    } else {
+      return await Navigator.pushReplacementNamed(context, "/news");
+    }
+  }
+
   static Future toLoginPage(BuildContext context,
       {bool isReplace = true}) async {
     if (isReplace) {

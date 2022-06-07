@@ -1,6 +1,7 @@
-// ignore_for_file: non_constant_identifier_names, nullable_type_in_catch_clause
-
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class InfoDevice {
   String? DeviceName;
@@ -9,8 +10,8 @@ class InfoDevice {
   String? UniqueDeviceID;
   String? FullDeviceName;
   String? IpAddress;
-  dynamic Info;
   dynamic PackageInfo;
+  dynamic Position;
   Map<String, dynamic> toJson() => {
         'deviceName': DeviceName,
         'deviceVersion': DeviceVersion,
@@ -18,51 +19,47 @@ class InfoDevice {
         'uniqueDeviceID': UniqueDeviceID,
         'fullDeviceName': FullDeviceName,
         'ipAddress': IpAddress,
+        'latitude': Position?.latitude,
+        'longitude': Position?.longitude,
       };
 }
 
 class InfoDeviceService {
-  static Future<InfoDevice> getInfoDevice() async {
-    InfoDevice deviceDetail = InfoDevice();
+  static InfoDevice infoDevice = InfoDevice();
+  static Future<InfoDevice> init() async {
     final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     try {
-      deviceDetail.IpAddress = await CommonMethods.getIPv4();
-      deviceDetail.PackageInfo = await CommonMethods.getPackageInfo();
-
+      infoDevice.IpAddress = await CommonMethods.getIPv4();
+      infoDevice.PackageInfo = await CommonMethods.getPackageInfo();
+      infoDevice.Position = await CommonMethods.getPosition();
       dynamic info;
       if (UniversalPlatform.isAndroid) {
         info = await deviceInfoPlugin.androidInfo;
-        SystemVariables.androidInfo = info;
-        deviceDetail.DeviceName = info.model;
-        deviceDetail.DeviceVersion = info.version.toString();
-        deviceDetail.Identifier = info.androidId; //UUID for Android
-        deviceDetail.UniqueDeviceID = info.androidId; // uuid android
-        deviceDetail.FullDeviceName =
-            sprintf("%s - %s", [info.brand, info.model]);
+        infoDevice.DeviceName = info.model;
+        infoDevice.DeviceVersion = info.version.toString();
+        infoDevice.Identifier = info.androidId; //UUID for Android
+        infoDevice.UniqueDeviceID = info.androidId; // uuid android
+        infoDevice.FullDeviceName = "${info.brand} - ${info.model}";
       } else {
         if (UniversalPlatform.isIOS) {
           info = await deviceInfoPlugin.iosInfo;
-          SystemVariables.iosInfo = info;
-          deviceDetail.DeviceName = info.name;
-          deviceDetail.DeviceVersion = info.systemVersion;
-          deviceDetail.Identifier = info.identifierForVendor; //UUID for iOS
-          deviceDetail.UniqueDeviceID = info.identifierForVendor; // uuid ios
-          deviceDetail.FullDeviceName = sprintf("%s - %s - %s - %s",
-              [info.name, info.systemName, info.systemVersion, info.model]);
+          infoDevice.DeviceName = info.name;
+          infoDevice.DeviceVersion = info.systemVersion;
+          infoDevice.Identifier = info.identifierForVendor; //UUID for iOS
+          infoDevice.UniqueDeviceID = info.identifierForVendor; // uuid ios
+          infoDevice.FullDeviceName = "${info.name} - ${info.systemName} - ${info.systemVersion} - ${info.model}";
         } else {
           info = await deviceInfoPlugin.webBrowserInfo;
-          SystemVariables.webInfo = info;
-          deviceDetail.DeviceName = info.appName;
-          deviceDetail.DeviceVersion = info.appVersion;
-          deviceDetail.Identifier = info.vendor +
+          infoDevice.DeviceName = info.appName;
+          infoDevice.DeviceVersion = info.appVersion;
+          infoDevice.Identifier = info.vendor +
               info.userAgent +
               info.hardwareConcurrency.toString();
         }
       }
-      deviceDetail.Info = info;
     } on PlatformException {
       // CommonMethods.wirtePrint('Failed to get platform version');
     }
-    return deviceDetail;
+    return infoDevice;
   }
 }

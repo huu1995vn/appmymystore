@@ -48,8 +48,10 @@ dependencies:
   firebase_core: # Required to use any Firebase service with Flutter
   firebase_messaging: # Used for receiving notifications in the app
   firebase_dynamic_links: # use the Firebase Dynamic Links API. (ANDROID/IOS)
-  universal_platform: # Used for check platform
-  device_info_plus: # Used get info device
+  universal_platform: # Used for check platform  
+  device_info_plus: # Used for device info  
+  package_info_plus:  # Used for package info 
+  geolocator: # Used for get geolocator
 dev_dependencies:
   flutter_test:
     sdk: flutter

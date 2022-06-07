@@ -11,3 +11,6 @@ Run $ flutter run -t lib/main_[env].dart --flavor [env] --release
 
 ## Build icon
 $ flutter pub run flutter_launcher_icons:main
+
+## flutter clean for update AndroidManifest.xml
+flutter clean

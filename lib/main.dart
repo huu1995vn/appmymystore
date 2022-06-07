@@ -7,22 +7,17 @@ import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
+import 'package:raoxe/core/services/info_device_service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 
 //#test
-initializeApp() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await StorageService.init();
-  await Firebase.initializeApp();
-  await EasyLocalization.ensureInitialized();
-  await FirebaseMessagingService.init();
-  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+init() async {
+  await initializeApp();
   return runApp(
     EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('vi')],
@@ -30,6 +25,15 @@ initializeApp() async {
             'assets/translations', // <-- change the path of the translation files
         child: const MyApp()),
   );
+}
+
+initializeApp() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await InfoDeviceService.init();
+  await StorageService.init();
+  await Firebase.initializeApp();
+  await EasyLocalization.ensureInitialized();
+  await FirebaseMessagingService.init();
 }
 
 class MyApp extends StatelessWidget {

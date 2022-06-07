@@ -5,5 +5,5 @@ import 'package:raoxe/main.dart';
 void main() async {
   CommonConfig.setEnvironment(Environment.prod);
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeApp();
+  await init();
 }

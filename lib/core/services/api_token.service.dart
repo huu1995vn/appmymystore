@@ -5,11 +5,11 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 
 class APITokenService {
-  String _token = "";
-  dynamic adminId;
-  bool isExpired = false;
-  bool isValid = true;
-  String get _getTokenDefaultString {
+  static String _token = "";
+  static dynamic adminId;
+  static bool isExpired = false;
+  static bool isValid = true;
+  static String get _getTokenDefaultString {
     String token = "";
     try {
       int expired = DateTime.now().add(const Duration(days: 1)).ticks;
@@ -22,8 +22,7 @@ class APITokenService {
     }
     return token;
   }
-
-  String get token {
+  static String get token {
     if (_token.isNullEmpty) {
       _token = StorageService.get(StorageKeys.token);
     }
@@ -33,8 +32,7 @@ class APITokenService {
       return _getTokenDefaultString;
     }
   }
-
-  set token (String pToken) {
+  static set token (String pToken) {
     _token = pToken;
     StorageService.set(StorageKeys.token, pToken);
      isValid = false;

@@ -19,8 +19,6 @@ class _DashboardPageState extends State<DashboardPage> {
  
   @override
   Widget build(BuildContext context) {
-        var res = APITokenService("XlmVzgN_52uEs5Lnq2MmJF1P_05cFTasy32kVuwZPWtT_mvmRbzhAJq_oWg-An8mFe63N2xXd63JFNojZf1iBg");
-
     return RxScaffold(
       appBar: AppBar(
         title: Text('dashboard_page',

@@ -51,7 +51,6 @@ dependencies:
   device_info_plus: # Used for device info  
   package_info_plus:  # Used for package info 
   geolocator: # Used for get geolocator
-  upgrader: # a newer version of the app in the store
   encrypt: # Used for encrypt ASE token
   crypto: # Used for encrypt md5
   material_dialogs: # Used for show dialogs notifycation

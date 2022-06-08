@@ -13,11 +13,9 @@ import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/custom_animation.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:upgrader/upgrader.dart';
 
 //#test
 init() async {
@@ -47,8 +45,6 @@ void configLoading() {
     ..maskColor = Colors.black.withOpacity(0.5)
     ..userInteractions = true
     ..dismissOnTap = false;
-    // ..customAnimation = CustomAnimation();
-    
 }
 
 initializeApp() async {
@@ -66,10 +62,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const appcastURL =
-        'https://raw.githubusercontent.com/larryaasen/upgrader/master/test/testappcast.xml';
-    final cfg = AppcastConfiguration(url: appcastURL, supportedOS: ['android']);
-
     //#to prevent my application from changing its orientation and force the layout
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -82,10 +74,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: Consumer<ThemeProvider>(
-        child: UpgradeAlert(
-            upgrader: Upgrader(
-                appcastConfig: cfg, showIgnore: false, showLater: false),
-            child: const MyPage()),
+        child: const MyPage(),
         builder: (c, themeProvider, home) => MaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,

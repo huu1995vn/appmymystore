@@ -5,12 +5,8 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_primary_button.dart';
 import 'package:raoxe/core/components/rx_scaffold.dart';
-import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:raoxe/pages/user/widgets/item_child.dart';
 
@@ -26,7 +22,7 @@ class _UserPageState extends State<UserPage> {
     "fullname": "Nguyễn Trọng Hữu",
     "email": "tronghuu271095@gmail.com",
     "phone": "0379.787.904",
-    "fileid": 0,
+    "fileid": 51307,
     "phonenumber": "0379787904",
     "username": "0379787904",
     "gender": true,
@@ -107,7 +103,7 @@ class _UserPageState extends State<UserPage> {
                       Padding(
                         padding: EdgeInsets.all(kDefaultPadding),
                         child: SizedBox(
-                          width: SizeConfig.screenWidth/2,
+                          width: SizeConfig.screenWidth / 2,
                           child: RxPrimaryButton(
                             text: 'edit.text'.tr(),
                             onTap: () {},

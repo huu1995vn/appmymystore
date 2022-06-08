@@ -62,7 +62,7 @@ class _InputTextState extends State<RxInput> {
           inputFormatters: widget.keyboardType == TextInputType.number
               ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
               : null,
-          obscureText: showPassword,
+          obscureText: !showPassword && widget.isPassword,
           validator: widget.validator,
           onChanged: widget.onChanged,
            

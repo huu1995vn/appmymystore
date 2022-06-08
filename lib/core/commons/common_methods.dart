@@ -2,13 +2,17 @@
 
 import 'dart:io';
 import 'package:crypto/crypto.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:material_dialogs/material_dialogs.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
 import 'dart:convert' show base64, jsonDecode, utf8;
 
-import 'package:raoxe/core/services/aes.service.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 
 class CommonMethods {
   static wirtePrint(Object object) {
@@ -65,16 +69,108 @@ class CommonMethods {
     return md5.convert(utf8.encode(input)).toString().toUpperCase();
   }
 
-  static String convertBase64FromUrl(String pData) {
-    String res = pData.replaceAll('_', '+').replaceAll('-', '/');
-    switch (pData.length % 4) {
-      case 2:
-        res += "==";
-        break;
-      case 3:
-        res += "=";
-        break;
+  static String encodeBase64Utf8(String text) {
+    return utf8.fuse(base64).encode(text);
+  }
+
+  static String decodeBase64Utf8(String text) {
+    return utf8.fuse(base64).decode(text);
+  }
+
+  static showToast(String pmsg) {
+    EasyLoading.showToast(pmsg,
+        toastPosition: EasyLoadingToastPosition.bottom,
+        maskType: EasyLoadingMaskType.black);
+  }
+
+  static showDialog(BuildContext context, String pmsg,
+      {String? title, List<Widget>? actions, Color color = AppColors.white}) {
+    Dialogs.materialDialog(
+        msg: pmsg,
+        title: title ?? "notification".tr(),
+        color: color,
+        context: context,
+        actions: actions ??
+            [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.done, color: AppColors.white),
+                color: AppColors.primary,
+              )
+            ]);
+  }
+
+  static void showDialogInfo(BuildContext context, String pmsg,
+      {List<Widget>? actions}) {
+    showDialog(context, pmsg,
+        title: "notification.text".tr(),
+        actions: actions,
+        color: AppColors.info);
+  }
+
+  static void showDialogError(BuildContext context, String pmsg,
+      {String? title, List<Widget>? actions}) {
+    showDialog(context, pmsg,
+        title: "success.text".tr(), actions: actions, color: AppColors.error);
+  }
+
+  static void showDialogSuccess(BuildContext context, String pmsg,
+      {String? title, List<Widget>? actions}) {
+    showDialog(context, pmsg,
+        title: "success.text".tr(), actions: actions, color: AppColors.success);
+  }
+
+  static void showDialogWarning(BuildContext context, String pmsg,
+      {List<Widget>? actions}) {
+    showDialog(context, pmsg,
+        title: "warning".tr(), actions: actions, color: AppColors.warning);
+  }
+
+  static void showDialogCongratulations(BuildContext context, String pmsg,
+      {String? title, List<Widget>? actions}) {
+    Dialogs.materialDialog(
+        color: AppColors.white,
+        msg: pmsg,
+        title: "congratulations".tr(),
+        lottieBuilder: Lottie.asset(
+          'assets/congratulations.json',
+          fit: BoxFit.contain,
+        ),
+        context: context,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.done, color: AppColors.white),
+            color: AppColors.primary,
+          ),
+        ]);
+  }
+
+  static String buildUrlImage(int idHinh,
+      {String? rewriteUrl, prefixSize = 0}) {
+    prefixSize = prefixSize ?? "";
+    if (prefixSize is! String) {
+      prefixSize = prefixSize.toString();
     }
-    return res;
+    idHinh = idHinh > 0 ? idHinh : 0;
+    rewriteUrl = rewriteUrl!.isNotEmpty ? rewriteUrl : "image-dailyxe";
+    return '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j$prefixSize.jpg';
+  }
+
+  static String buildUrlHinhDaiDien(int idHinh,
+      {String? rewriteUrl, prefixSize = 0}) {
+    return buildUrlImage(idHinh,
+        rewriteUrl: rewriteUrl, prefixSize: prefixSize);
+  }
+
+  static lockScreen() {
+    EasyLoading.show(
+        status: "${"awaiting".tr()}...", maskType: EasyLoadingMaskType.custom);
+  }
+
+  static unlockScreen() {
+    if (EasyLoading.isShow) {
+      EasyLoading.dismiss();
+    }
   }
 }

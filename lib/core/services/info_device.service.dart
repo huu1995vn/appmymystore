@@ -9,17 +9,15 @@ class InfoDevice {
   String? DeviceName;
   String? DeviceVersion;
   String? Identifier;
-  String? UniqueDeviceID;
-  String? FullDeviceName;
   String? IpAddress;
+  String? OSName;
   dynamic PackageInfo;
   dynamic Position;
   Map<String, dynamic> toJson() => {
         'deviceName': DeviceName,
         'deviceVersion': DeviceVersion,
         'identifier': Identifier,
-        'uniqueDeviceID': UniqueDeviceID,
-        'fullDeviceName': FullDeviceName,
+        'oSName': OSName,
         'ipAddress': IpAddress,
         'latitude': Position?.latitude,
         'longitude': Position?.longitude,
@@ -35,28 +33,31 @@ class InfoDeviceService {
       infoDevice.PackageInfo = await CommonMethods.getPackageInfo();
       infoDevice.Position = await CommonMethods.getPosition();
       dynamic info;
+
       if (UniversalPlatform.isAndroid) {
         info = await deviceInfoPlugin.androidInfo;
         infoDevice.DeviceName = info.model;
         infoDevice.DeviceVersion = info.version.toString();
         infoDevice.Identifier = info.androidId; //UUID for Android
-        infoDevice.UniqueDeviceID = info.androidId; // uuid android
-        infoDevice.FullDeviceName = "${info.brand} - ${info.model}";
+        infoDevice.OSName = "${info.brand} - ${info.model}";
       } else {
         if (UniversalPlatform.isIOS) {
           info = await deviceInfoPlugin.iosInfo;
           infoDevice.DeviceName = info.name;
           infoDevice.DeviceVersion = info.systemVersion;
           infoDevice.Identifier = info.identifierForVendor; //UUID for iOS
-          infoDevice.UniqueDeviceID = info.identifierForVendor; // uuid ios
-          infoDevice.FullDeviceName = "${info.name} - ${info.systemName} - ${info.systemVersion} - ${info.model}";
+          infoDevice.OSName =
+              "${info.name} - ${info.systemName} - ${info.systemVersion} - ${info.model}";
         } else {
-          info = await deviceInfoPlugin.webBrowserInfo;
-          infoDevice.DeviceName = info.appName;
-          infoDevice.DeviceVersion = info.appVersion;
-          infoDevice.Identifier = info.vendor +
-              info.userAgent +
-              info.hardwareConcurrency.toString();
+          if (UniversalPlatform.isWeb) {
+            info = await deviceInfoPlugin.webBrowserInfo;
+            infoDevice.DeviceName = info.appName;
+            infoDevice.DeviceVersion = info.appVersion;
+            infoDevice.Identifier = info.vendor +
+                info.userAgent +
+                info.hardwareConcurrency.toString();
+            infoDevice.OSName = "${info.appName}";
+          }
         }
       }
     } on PlatformException {

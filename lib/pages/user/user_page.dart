@@ -18,7 +18,7 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return RxScaffold(
       appBar: AppBar(
-        title: Text('login'.tr(),
+        title: Text('personalinformation'.tr(),
             style: TextStyle(
               color: kWhite,
               fontSize: 19,
@@ -28,7 +28,7 @@ class _UserPageState extends State<UserPage> {
         elevation: 0.0,
       ),
       child: RxWrapper(
-        body: Text("login"),
+        body: Text("Thông tin cá nhân"),
       ),
     );
   }

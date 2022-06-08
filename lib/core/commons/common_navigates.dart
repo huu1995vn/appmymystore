@@ -17,7 +17,7 @@ class CommonNavigates {
     '/register': (context) => const RegisterPage(),
     '/forgot-password': (context) => const ForgotPasswordPage(),
     '/user': (context) => const UserPage(),
-    '/setting': (context) => const SettingsPage(),
+    '/settings': (context) => const SettingsPage(),
     '/product': (context) => const ProductPage(),
     '/news': (context) => const NewsPage(),
   };
@@ -32,8 +32,7 @@ class CommonNavigates {
     }
   }
 
-   static Future toNewsPage(BuildContext context, int parse,
-      {int? id}) async {
+  static Future toNewsPage(BuildContext context, int parse, {int? id}) async {
     if (id != null && id > 0) {
       return await Navigator.push(context,
           CupertinoPageRoute(builder: (context) => NewsDetailPage(id: id)));
@@ -61,5 +60,13 @@ class CommonNavigates {
 
   static pop(BuildContext context, Object? value) {
     return Navigator.of(context).pop(value);
+  }
+
+  static Future toSettingsPage(BuildContext context) async {
+    return await Navigator.pushNamed(context, "/settings");
+  }
+
+  static Future toUserPage(BuildContext context) async {
+    return await Navigator.pushNamed(context, "/user");
   }
 }

@@ -1,9 +1,9 @@
 // ignore_for_file: camel_case_types
-import 'package:raoxe/core/api/api.dal.dart';
+import 'package:raoxe/core/api/dailyxe/dailyxe_api.dal.dart';
 import 'package:raoxe/core/models/response_model.dart';
 
-class ApiBLL_Basic {
-  ApiDAL apiDAL = ApiDAL();
+class DaiLyXeApiBLL_Basic {
+  DaiLyXeApiDAL apiDAL = DaiLyXeApiDAL();
   // Use this function in custom-combo.basic1
   Future<ResponseModel> get(
       [Map<String, dynamic>? queryParameters,
@@ -43,9 +43,9 @@ class ApiBLL_Basic {
   }
 }
 
-class DaiLyXeApiBLL_APIRaoXe extends ApiBLL_Basic {
+class DaiLyXeApiBLL_APIRaoXe extends DaiLyXeApiBLL_Basic {
   DaiLyXeApiBLL_APIRaoXe() {
-    apiDAL = ApiDAL();
+    apiDAL = DaiLyXeApiDAL();
     apiDAL.controllerName = "ApiRaoXe";
   }
   Future<ResponseModel> login(String username, String password) async {
@@ -54,7 +54,7 @@ class DaiLyXeApiBLL_APIRaoXe extends ApiBLL_Basic {
     return post(body, queryParameters, "Login");
   }
 
-  Future<ResponseModel> autologin(String username, String password) async {
+  Future<ResponseModel> autologin() async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     Map<String, dynamic> body = {};
     return post(body, queryParameters, "AutoLogin");

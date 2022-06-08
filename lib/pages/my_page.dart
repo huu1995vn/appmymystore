@@ -1,17 +1,18 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_null_comparison
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'main/index.dart';
 
 class MyPage extends StatefulWidget {
-  const MyPage({Key? key}) : super(key: key);
+  const MyPage({super.key, this.indexTab});
+  final int? indexTab;
   @override
   State<MyPage> createState() => _MyPageState();
 }
@@ -23,14 +24,16 @@ class _MyPageState extends State<MyPage> {
   @override
   void initState() {
     _totalNotifications = 0;
+    if (widget.indexTab != null && _selectedIndex != widget.indexTab) {
+      _selectedIndex = widget.indexTab ?? 0;
+    }
     initApp();
+
     super.initState();
   }
 
   initApp() {
-    FirebaseMessagingService.streamMessage
-        .stream
-        .listen((notification) {
+    FirebaseMessagingService.streamMessage.stream.listen((notification) {
       if (notification != null) {
         setState(() {
           _totalNotifications++;
@@ -63,14 +66,14 @@ class _MyPageState extends State<MyPage> {
   }
 
   onPressedTab(int index) {
-    if (CommonMethods.isLogin && index == 3) {
+    if (!APITokenService.isValid && index == 3) {
       CommonNavigates.toLoginPage(context, isReplace: false);
       return;
     }
     setState(() {
       _selectedIndex = index;
     });
-    _pageController.jumpToPage(index);
+    if (_pageController.hasClients) _pageController.jumpToPage(index);
   }
 
   @override

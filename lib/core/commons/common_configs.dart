@@ -10,8 +10,12 @@ class CommonConfig {
   //system
   static Map deviceInfo = {};
   static String env = "dev";
-  static String apiHost = "https://docker.dailyxe.com.vn";
-  static String apiHostSufix = "/";
+  static String apiHostDaiLyXe = "http://api.dailyxe.info";
+  static String apiHostSufixDaiLyXe = "/";
+  static String apiHostRaoXe = "https://raoxe.dailyxe.info";
+  static String apiHostSufixRaoXe = "/";
+  static String apiDrive = "http://cdn.dailyxe.info";
+
   static String uriPrefixDynamicLink = "https://raoxe.page.link";
   static String appStoreID = "1486119532";
 
@@ -25,9 +29,15 @@ class CommonConfig {
         _config = configProd;
         break;
     }
-    CommonConfig.env = _config["env"] ?? CommonConfig.apiHost;
-    CommonConfig.apiHost = _config["apiHost"] ?? CommonConfig.apiHost;
-    CommonConfig.apiHostSufix =
-        _config["apiHostSufix"] ?? CommonConfig.apiHostSufix;
+    CommonConfig.env = _config["env"];
+    CommonConfig.apiHostDaiLyXe =
+        _config["apiHostDaiLyXe"] ?? CommonConfig.apiHostDaiLyXe;
+    CommonConfig.apiHostSufixDaiLyXe =
+        _config["apiHostSufixDaiLyXe"] ?? CommonConfig.apiHostSufixDaiLyXe;
+    CommonConfig.apiHostRaoXe =
+        _config["apiHostRaoXe"] ?? CommonConfig.apiHostRaoXe;
+    CommonConfig.apiHostSufixRaoXe =
+        _config["apiHostSufixRaoXe"] ?? CommonConfig.apiHostSufixRaoXe;
+    CommonConfig.apiDrive = _config["apiDrive"] ?? CommonConfig.apiDrive;
   }
 }

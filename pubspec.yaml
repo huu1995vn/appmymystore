@@ -40,7 +40,6 @@ dependencies:
   dio:  # Used for call api
   provider:  # Used for custome theme
   localstorage: # Used for save local data
-  fluttertoast: # Used for toast
   easy_localization: # Used for language
   flutter_launcher_icons: # Used for build icon
   splashscreen: # Used for splashscreen
@@ -55,7 +54,9 @@ dependencies:
   upgrader: # a newer version of the app in the store
   encrypt: # Used for encrypt ASE token
   crypto: # Used for encrypt md5
-  
+  material_dialogs: # Used for show dialogs notifycation
+  flutter_easyloading: # Used for show loading
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -3,14 +3,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/custom_animation.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,6 +22,8 @@ import 'package:upgrader/upgrader.dart';
 //#test
 init() async {
   await initializeApp();
+  configLoading();
+
   return runApp(
     EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('vi')],
@@ -28,6 +33,24 @@ init() async {
   );
 }
 
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    // ..loadingStyle = EasyLoadingStyle.light
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..backgroundColor = Colors.green
+    ..indicatorColor = Colors.yellow
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.black.withOpacity(0.5)
+    ..userInteractions = true
+    ..dismissOnTap = false;
+    // ..customAnimation = CustomAnimation();
+    
+}
+
 initializeApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await InfoDeviceService.init();
@@ -35,6 +58,7 @@ initializeApp() async {
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   await FirebaseMessagingService.init();
+  APITokenService.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -59,9 +83,9 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<ThemeProvider>(
         child: UpgradeAlert(
-              upgrader: Upgrader(
-                  appcastConfig: cfg, showIgnore: false, showLater: false),
-              child: const MyPage()),
+            upgrader: Upgrader(
+                appcastConfig: cfg, showIgnore: false, showLater: false),
+            child: const MyPage()),
         builder: (c, themeProvider, home) => MaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
@@ -77,14 +101,14 @@ class MyApp extends StatelessWidget {
                     secondary: AppColors.primary, brightness: Brightness.dark),
           ),
           themeMode: themeProvider.selectedThemeMode,
-          home:  SplashScreen(
-                seconds: 3,
-                navigateAfterSeconds: home,
-                imageBackground: const AssetImage('assets/splash.png'),
-                loaderColor: Colors.red,
-              ),
+          home: SplashScreen(
+            seconds: 3,
+            navigateAfterSeconds: home,
+            imageBackground: const AssetImage('assets/splash.png'),
+            loaderColor: Colors.red,
+          ),
           routes: CommonNavigates.routers,
-          // routes: CommonNavigates.defaulRoutes,
+          builder: EasyLoading.init(),
         ),
       ),
     );

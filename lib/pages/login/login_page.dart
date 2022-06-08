@@ -1,9 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/api/api.bll.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,12 +20,8 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> keyLogin = GlobalKey<FormState>();
   String username = "";
   String password = "";
-  login(String username, String password) async {
-    var res = await DaiLyXeApiBLL_APIRaoXe().login(username, password);
-    if(res.status >0)
-    {
-      
-    }
+  login(String username, String password){
+    AuthService.login(context, username, password);
   }
 
   @override
@@ -48,46 +44,52 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromRGBO(225, 95, 27, .3),
-                              blurRadius: 20,
-                              offset: Offset(0, 10))
-                        ]),
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom:
-                                      BorderSide(color: Colors.grey.shade200))),
-                          child: RxInput(
-                            password,
-                            labelText: "phone".tr(),
-                            icon: const Icon(Icons.phone),
-                          ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Color.fromRGBO(225, 95, 27, .3),
+                                blurRadius: 20,
+                                offset: Offset(0, 10))
+                          ]),
+                      child: Form(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom:
+                                          BorderSide(color: AppColors.gray))),
+                              child: RxInput(
+                                username,
+                                labelText: "phone".tr(),
+                                icon: const Icon(Icons.phone),
+                                keyboardType: TextInputType.number,
+                                onChanged: (v) => {username = v},
+                              ),
+                            ),
+                            Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
+                                    border: Border(
+                                        bottom:
+                                            BorderSide(color: AppColors.gray))),
+                                child: RxInput(
+                                  password,
+                                  isPassword: true,
+                                  labelText: "password.text".tr(),
+                                  icon: const Icon(Icons.lock),
+                                  onChanged: (v) => {password = v},
+                                )),
+                          ],
                         ),
-                        Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color: Colors.grey.shade200))),
-                            child: RxInput(
-                              password,
-                              isPassword: true,
-                              labelText: "password.text".tr(),
-                              icon: const Icon(Icons.lock),
-                            )),
-                      ],
-                    ),
-                  ),
+                      )),
                   _forgotPasswordLabel(context),
-                  _buttonLogin(context),
+                  _buttonLogin(context, onTap: () {
+                    login(username, password);
+                  }),
                   _createAccountLabel(context)
                 ],
               ),
@@ -97,11 +99,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-Widget _buttonLogin(context) {
+Widget _buttonLogin(context, {Function()? onTap}) {
   return GestureDetector(
-      onTap: () {
-        CommonNavigates.toForgotPasswordPage(context);
-      },
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(kDefaultPadding),
         child: Container(

@@ -20,6 +20,10 @@ class AppColors {
   static const Color yellow = Colors.yellow;
   static const Color blue = Colors.blue;
   static const Color danger = Color(0xFFB71C1C);
+  static const Color error = Color(0xFFB71C1C);
+  static const Color warning = Color.fromARGB(255, 216, 187, 19);
+  static const Color info = Color.fromARGB(255, 8, 171, 235);
+  static const Color success = Color.fromARGB(255, 250, 250, 250);
 
   static const MaterialColor red = MaterialColor(
     _redPrimaryValue,

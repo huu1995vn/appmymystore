@@ -1,5 +1,5 @@
 class ResponseModel {
-  final List data;
+  final dynamic data;
   final String message;
   final int status;
 

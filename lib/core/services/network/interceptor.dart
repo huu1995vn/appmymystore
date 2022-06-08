@@ -18,11 +18,11 @@ class DioInterceptors extends InterceptorsWrapper {
 
   _addHeaders(RequestOptions options) {
     options.headers.addAll({
-      'Authorization': APITokenService.getToken(),
+      'Authorization': APITokenService.token,
       'IPAddress': InfoDeviceService.infoDevice.IpAddress,
       'DeviceId': InfoDeviceService.infoDevice.Identifier,
       'DeviceName': InfoDeviceService.infoDevice.DeviceName,
-      'OSName': InfoDeviceService.infoDevice.FullDeviceName,
+      'OSName': InfoDeviceService.infoDevice.OSName,
       'Location':
           "${InfoDeviceService.infoDevice.Position?.latitude},${InfoDeviceService.infoDevice.Position?.longitude}"
     });

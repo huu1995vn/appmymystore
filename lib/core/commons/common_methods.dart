@@ -3,6 +3,7 @@
 import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -10,9 +11,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
+import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, jsonDecode, utf8;
 
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:universal_platform/universal_platform.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CommonMethods {
   static wirtePrint(Object object) {
@@ -51,7 +56,9 @@ class CommonMethods {
     try {
       LocationPermission permission;
       permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
+      if (permission == LocationPermission.denied &&
+          StorageService.get("isOpened") != null) {
+        StorageService.set("isOpened", true);
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.deniedForever) {
           Future.error('Location Not Available');
@@ -172,5 +179,53 @@ class CommonMethods {
     if (EasyLoading.isShow) {
       EasyLoading.dismiss();
     }
+  }
+
+  static bool isMobile() {
+    return UniversalPlatform.isAndroid || UniversalPlatform.isIOS;
+  }
+
+  static launchURL(String url) async {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
+  }
+
+  static String formatDate(date, [String pattern = 'dd/MM/yyyy HH:mm:ss']) {
+    DateTime d;
+    try {
+      d = date is DateTime ? date : DateTime.parse(date);
+      return DateFormat(pattern).format(d);
+    } catch (e) {}
+    return "not.update".tr();
+  }
+
+  static Future<T?> openWebView<T>(context, String url, {String? title}) async {
+    if (CommonMethods.isMobile()) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => RxWebView(url: url, title: title)));
+    } else {
+      return CommonMethods.launchURL(url);
+    }
+  }
+
+  static Future<T?> openWebViewTermsAndCondition<T>(context) async {
+    return openWebView(
+        context, CommonConfig.linkContent["dieuKhoan"].toString(),
+        title: "termsandcondition".tr());
+  }
+
+  static Future<T?> openWebViewPolicy<T>(context) async {
+    return openWebView(
+        context, CommonConfig.linkContent["chinhSach"].toString(),
+        title: "policy".tr());
+  }
+
+  static Future<T?> openWebViewFeedBack<T>(context) async {
+    return openWebView(context, CommonConfig.linkContent["feedBack"].toString(),
+        title: "feedback".tr());
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 
 class RxPrimaryButton extends StatelessWidget {
   const RxPrimaryButton({
@@ -17,15 +18,13 @@ class RxPrimaryButton extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 50.0,
-        decoration: BoxDecoration(
-          // color: kPrimaryColor,
-          borderRadius: BorderRadius.circular(25.0),
-        ),
+        decoration: kBoxDecorationStyle.copyWith(
+            borderRadius: BorderRadius.circular(50)),
         alignment: Alignment.center,
         child: Text(
           text,
           style: const TextStyle(
-            // color: kWhite,
+            color: kWhite,
             fontSize: 16,
           ),
         ),

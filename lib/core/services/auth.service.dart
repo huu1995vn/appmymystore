@@ -7,21 +7,26 @@ import 'package:raoxe/pages/my_page.dart';
 
 class AuthService {
   static login(context, String username, String password) async {
-    var res = await DaiLyXeApiBLL_APIRaoXe().login(username, password);
-    if (res.status > 0) {
-      APITokenService.loginByData(res.data);
-      if (APITokenService.isValid) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (BuildContext context) => const MyPage(indexTab: 3)),
-            (Route<dynamic> route) => route.isFirst);
+    CommonMethods.lockScreen();
+    try {
+      var res = await DaiLyXeApiBLL_APIRaoXe().login(username, password);
+      if (res.status > 0) {
+        APITokenService.loginByData(res.data);
+        if (APITokenService.isValid) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const MyPage(indexTab: 3)),
+              (Route<dynamic> route) => route.isFirst);
+        }
+      } else {
+        CommonMethods.showToast(res.message);
       }
-    } else {
-      CommonMethods.showToast(res.message);
-    }
+    } catch (e) {}
+    CommonMethods.unlockScreen();
   }
 
-  static autologin(context, String username, String password) async {
+  static autologin(context) async {
     var res = await DaiLyXeApiBLL_APIRaoXe().autologin();
     if (res.status > 0) {
       APITokenService.loginByData(res.data);
@@ -31,5 +36,14 @@ class AuthService {
     } else {
       CommonMethods.showToast(res.message);
     }
+  }
+
+  static logout(context) async {
+    APITokenService.logout();
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => const MyPage(indexTab: 3)),
+        (Route<dynamic> route) => route.isFirst);
   }
 }

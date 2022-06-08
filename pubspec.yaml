@@ -56,7 +56,9 @@ dependencies:
   crypto: # Used for encrypt md5
   material_dialogs: # Used for show dialogs notifycation
   flutter_easyloading: # Used for show loading
-
+  webview_flutter: # Used for show webviewx
+  url_launcher: # Used for open url
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

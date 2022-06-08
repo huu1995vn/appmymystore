@@ -39,18 +39,23 @@ class APITokenService {
   static set token(String pToken) {
     _token = pToken;
     isValid = false;
-    try {
-      dynamic tokenSplit =
-          AESService.decrypt(convertBase64FromUrl(pToken)).split('.');
-      if (CommonMethods.generateMd5(tokenSplit[0] + TOKEN_SECURITY_KEY) ==
-          tokenSplit[1]) {
-        dynamic values = tokenSplit[0].split('|');
-        userId = int.parse(values[0]);
-        isExpired = DateTime.now().ticks > int.parse(values[1]);
-        isValid = true;
+    isExpired = false;
+    userId = -1;
+
+    if (pToken.isNotNullEmpty) {
+      try {
+        dynamic tokenSplit =
+            AESService.decrypt(convertBase64FromUrl(pToken)).split('.');
+        if (CommonMethods.generateMd5(tokenSplit[0] + TOKEN_SECURITY_KEY) ==
+            tokenSplit[1]) {
+          dynamic values = tokenSplit[0].split('|');
+          userId = int.parse(values[0]);
+          isExpired = DateTime.now().ticks > int.parse(values[1]);
+          isValid = true;
+        }
+      } catch (ex) {
+        // throw new Exception(CommonConstants.MESSAGE_TOKEN_INVALID + string.Format(" ({0})", ex.Message));
       }
-    } catch (ex) {
-      // throw new Exception(CommonConstants.MESSAGE_TOKEN_INVALID + string.Format(" ({0})", ex.Message));
     }
   }
 
@@ -82,6 +87,19 @@ class APITokenService {
         fileId = int.parse(data["img"] ?? "0");
         return true;
       }
+      // ignore: empty_catches
+    } catch (e) {}
+
+    return false;
+  }
+
+  static bool logout() {
+    try {
+      StorageService.deleteItem(StorageKeys.dataLogin);
+      token = "";
+      fullname = "";
+      fileId = 0;
+      return true;
       // ignore: empty_catches
     } catch (e) {}
 

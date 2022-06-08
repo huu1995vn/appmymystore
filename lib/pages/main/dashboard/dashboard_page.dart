@@ -45,7 +45,7 @@ class _DashboardPageState extends State<DashboardPage> {
             trailing: GestureDetector(
                 onTap: () => CommonNavigates.toSettingsPage(context),
                 child: SizedBox(
-                  child: Icon(Icons.more_vert, color: AppColors.black50),
+                  child: Icon(Icons.settings, color: AppColors.white),
                 )),
             onTap: () {
               CommonNavigates.toUserPage(context);

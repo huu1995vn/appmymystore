@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_null_comparison
 
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -24,9 +26,13 @@ class _MyPageState extends State<MyPage> {
   @override
   void initState() {
     _totalNotifications = 0;
-    if (widget.indexTab != null && _selectedIndex != widget.indexTab) {
-      _selectedIndex = widget.indexTab ?? 0;
-    }
+    Timer(
+        Duration(seconds: 0),
+        () => {
+              if (widget.indexTab != null && _selectedIndex != widget.indexTab)
+                {onPressedTab(widget.indexTab ?? 0)}
+            });
+
     initApp();
 
     super.initState();

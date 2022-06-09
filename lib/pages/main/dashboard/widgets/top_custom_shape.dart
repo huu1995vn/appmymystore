@@ -3,6 +3,7 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
 class TopCustomShape extends StatefulWidget {
@@ -21,13 +22,13 @@ class _TopCustomShapeState extends State<TopCustomShape> {
       /// 240.0
       child: Stack(
         children: [
-          ClipPath(
-            clipper: CustomShape(),
-            child: Container(
-              height: SizeConfig.screenHeight! / 4.56,
-              decoration: kBoxDecorationStyle,
-            ),
-          ),
+          // ClipPath(
+          //   clipper: CustomShape(),
+          //   child: Container(
+          //     height: SizeConfig.screenHeight! / 4.56,
+          //     decoration: kBoxDecorationStyle,
+          //   ),
+          // ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -53,7 +54,8 @@ class _TopCustomShapeState extends State<TopCustomShape> {
                 ),
                 Text(
                   APITokenService.fullname,
-                  style: TextStyle(fontSize: 22),
+                  style: const TextStyle(fontSize: 22, color: AppColors.white)
+                      .bold,
                 ),
                 SizedBox(
                   height: SizeConfig.screenHeight! / 136.6,

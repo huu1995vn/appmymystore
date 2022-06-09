@@ -10,7 +10,6 @@ import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product_highlight.widget.dart';
@@ -79,67 +78,64 @@ class _HomePageState extends State<HomePage>
 
     return Scaffold(
       key: _homeKey,
-      body: RefreshIndicator(
-        key: _androidRefreshKey,
+      body: RxListView(
+        listData,
+        (BuildContext context, int index) {
+          return ItemProductWidget(listData![index]);
+        },
+        totalItems,
+        key: const Key("lHome"),
+        padding: const EdgeInsets.all(kDefaultPadding),
+        controller: scrollController,
+        onNextPage: onNextPage,
         onRefresh: onRefresh,
-        child: RxListView(
-          listData,
-          (BuildContext context, int index) {
-            return ItemProductWidget(listData![index]);
-          },
-          totalItems,
-          key: const Key("lHome"),
-          padding: const EdgeInsets.all(kDefaultPadding),
-          controller: scrollController,
-          onNextPage: onNextPage,
-          appBar: SliverAppBar(
-            floating: true,
-            automaticallyImplyLeading: false,
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            leading: Container(child: null),
-            title: Container(
+        appBar: SliverAppBar(
+          floating: true,
+          automaticallyImplyLeading: false,
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          leading: Container(child: null),
+          title: Container(
+            alignment: Alignment.center,
+            child: Image.asset(
+              theme.selectedThemeMode.name == "dark"
+                  ? LOGORAOXEWHITEIMAGE
+                  : LOGORAOXECOLORIMAGE,
+              fit: BoxFit.contain,
               alignment: Alignment.center,
-              child: Image.asset(
-                theme.selectedThemeMode.name == "dark"
-                    ? LOGORAOXEWHITEIMAGE
-                    : LOGORAOXECOLORIMAGE,
-                fit: BoxFit.contain,
-                alignment: Alignment.center,
-                height: 40,
-              ),
+              height: 40,
             ),
-            actions: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: kDefaultPadding),
-                child: Ink(
-                  decoration: const ShapeDecoration(
-                    color: AppColors.grayDark,
-                    shape: CircleBorder(),
-                  ),
-                  child: IconButton(
-                    iconSize: 25,
-                    icon: const Icon(Icons.search),
-                    color: AppColors.black,
-                    onPressed: () {},
-                  ),
-                ),
-              )
-            ],
           ),
-          slivers: <Widget>[
-            SliverToBoxAdapter(
-                child: Column(children: [
-              _buildHeader("Nổi bật", () {}),
-              SizedBox(
-                  height: (SizeConfig.screenHeight / 4) + 28,
-                  child: RxDataListView(listData, (context, index) {
-                    return ItemProductHighlightWidget(listData[index]);
-                  }, scrollDirection: Axis.horizontal)),
-              _buildHeader("Phổ biến", () {}),
-            ]))
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: kDefaultPadding),
+              child: Ink(
+                decoration: const ShapeDecoration(
+                  color: AppColors.grayDark,
+                  shape: CircleBorder(),
+                ),
+                child: IconButton(
+                  iconSize: 25,
+                  icon: const Icon(Icons.search),
+                  color: AppColors.black,
+                  onPressed: () {},
+                ),
+              ),
+            )
           ],
         ),
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+              child: Column(children: [
+            _buildHeader("Nổi bật", () {}),
+            SizedBox(
+                height: (SizeConfig.screenHeight / 4) + 28,
+                child: RxDataListView(listData, (context, index) {
+                  return ItemProductHighlightWidget(listData[index]);
+                }, scrollDirection: Axis.horizontal)),
+            _buildHeader("Phổ biến", () {}),
+          ]))
+        ],
       ),
     );
   }

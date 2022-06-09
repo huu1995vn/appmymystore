@@ -54,13 +54,13 @@ class ItemProductWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Text(
-                      itemProduct.webresourcename,
-                      style: const TextStyle(
-                        color: AppColors.yellow,
-                        // fontSize: 28,
-                      ),
-                    ),
+                    // Text(
+                    //   itemProduct.webresourcename,
+                    //   style: const TextStyle(
+                    //     color: AppColors.yellow,
+                    //     // fontSize: 28,
+                    //   ),
+                    // ),
                     Text.rich(
                       TextSpan(
                         children: <TextSpan>[

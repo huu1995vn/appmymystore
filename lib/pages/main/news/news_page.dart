@@ -81,14 +81,16 @@ class _NewsPageState extends State<NewsPage> {
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
                 )),
-            backgroundColor: Colors.transparent,
+            floating: true,
+            automaticallyImplyLeading: false,
             elevation: 0.0,
+            backgroundColor: Colors.transparent,
+            // leading: Container(child: null),
           ),
           key: const Key("LTinTuc"),
           controller: scrollController,
           onNextPage: onNextPage,
           onRefresh: onRefresh,
-          
         ));
   }
 }

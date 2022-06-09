@@ -24,46 +24,59 @@ class ItemProductWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child:
-                    RxImage(itemProduct.urlImg, width: SizeConfig.screenWidth / 4),
+                borderRadius: BorderRadius.circular(5),
+                child: RxImage(itemProduct.urlImg,
+                    width: SizeConfig.screenWidth / 4),
               ),
-              const SizedBox(width: 24),
+              const SizedBox(width: kDefaultPadding),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Expanded(
-                      child: Text(
-                        itemProduct.name,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            // fontSize: 36,
-                            ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            itemProduct.name,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                // fontSize: 36,
+                                ),
+                          ),
+                          Text(
+                            "4.000.000 đ",
+                            style: const TextStyle(
+                              color: AppColors.primary,
+                            ).bold,
+                          ),
+                        ],
                       ),
                     ),
                     Text(
                       itemProduct.webresourcename,
                       style: const TextStyle(
-                        color: AppColors.primary,
+                        color: AppColors.yellow,
                         // fontSize: 28,
-                      ).bold,
+                      ),
                     ),
                     Text.rich(
                       TextSpan(
                         children: <TextSpan>[
                           TextSpan(
                               text: "${itemProduct.publishdate} | ",
-                              style: const TextStyle(fontStyle: FontStyle.italic)),
+                              style:
+                                  const TextStyle(fontStyle: FontStyle.italic)),
                           TextSpan(
                               text: "${itemProduct.views} lượt xem",
-                              style: const TextStyle(fontWeight: FontWeight.bold)),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                         style: const TextStyle(
-                          color: AppColors.black50,
-                          fontSize: 13,
-                        ).italic.light,
+                          // color: AppColors.black50,
+                          fontSize: 10,
+                        ).textOpacity(0.5).italic.light,
                       ),
                     ),
                   ],

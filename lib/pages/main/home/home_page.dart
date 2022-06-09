@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/rx_data_listview.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +75,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       key: _homeKey,
       body: RefreshIndicator(
@@ -97,7 +101,9 @@ class _HomePageState extends State<HomePage>
             title: Container(
               alignment: Alignment.center,
               child: Image.asset(
-                LOGORAOXECOLORIMAGE,
+                theme.selectedThemeMode.name == "dark"
+                    ? LOGORAOXEWHITEIMAGE
+                    : LOGORAOXECOLORIMAGE,
                 fit: BoxFit.contain,
                 alignment: Alignment.center,
                 height: 40,

@@ -17,11 +17,11 @@ class AppColors {
   static const Color primary700 = Color(0xFFD32F2F);
   static const Color primary800 = Color(0xFFC62828);
   static const Color primary900 = Color(0xFFB71C1C);
-  static const Color yellow = Colors.yellow;
+  static const Color yellow = Color.fromARGB(255, 223, 174, 15);
   static const Color blue = Colors.blue;
   static const Color danger = Color(0xFFB71C1C);
   static const Color error = Color(0xFFB71C1C);
-  static const Color warning = Color.fromARGB(255, 216, 187, 19);
+  static const Color warning = Color.fromARGB(255, 223, 174, 15);
   static const Color info = Color.fromARGB(255, 8, 171, 235);
   static const Color success = Color.fromARGB(255, 250, 250, 250);
 

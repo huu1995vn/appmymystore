@@ -14,3 +14,6 @@ $ flutter pub run flutter_launcher_icons:main
 
 ## flutter clean for update AndroidManifest.xml
 flutter clean
+
+## code generation libraries
+flutter pub run build_runner watch

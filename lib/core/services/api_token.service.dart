@@ -14,7 +14,7 @@ class APITokenService {
   static String fullname = "";
   static int fileId = -1;
 
-  static String get _getTokenDefaultString {
+  static String get getTokenDefaultString {
     String token = "";
     try {
       int expired = DateTime.now().add(const Duration(days: 1)).ticks;
@@ -32,7 +32,7 @@ class APITokenService {
     if (_token.isNotNullEmpty) {
       return _token;
     } else {
-      return _getTokenDefaultString;
+      return getTokenDefaultString;
     }
   }
 

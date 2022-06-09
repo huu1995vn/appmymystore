@@ -37,7 +37,7 @@ class CommonNavigates {
     }
   }
 
-  static Future toNewsPage(BuildContext context, int parse, {int? id}) async {
+  static Future toNewsPage(BuildContext context,{int? id}) async {
     if (id != null && id > 0) {
       return await Navigator.push(context,
           CupertinoPageRoute(builder: (context) => NewsDetailPage(id: id)));

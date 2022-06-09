@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/rx_card.dart';
 import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
@@ -54,34 +55,7 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       Expanded(
           child:
-              RxWrapper(body: CardBorder(child: Column(children: <Widget>[])))),
+              RxWrapper(body: RxCard(child: Column(children: <Widget>[])))),
     ]));
-  }
-}
-
-class CardBorder extends StatelessWidget {
-  final Widget child;
-  final EdgeInsets? margin;
-  final RoundedRectangleBorder? shape;
-  final bool isBorder;
-  const CardBorder(
-      {key, required this.child, this.margin, this.shape, this.isBorder = true})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: isBorder
-          ? (shape ??
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ))
-          : RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0),
-            ),
-      // margin: margin ?? const EdgeInsets.only(bottom: 20),
-      child: child,
-      elevation: 0,
-    );
   }
 }

@@ -95,6 +95,7 @@ class _MyPageState extends State<MyPage> {
           NotifycationPage(),
           DashboardPage(),
         ],
+        physics: const NeverScrollableScrollPhysics(),
         onPageChanged: (value) => {onPressedTab(value)},
       ),
       floatingActionButton: FloatingActionButton(

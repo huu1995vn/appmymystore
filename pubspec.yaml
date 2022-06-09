@@ -57,8 +57,13 @@ dependencies:
   flutter_easyloading: # Used for show loading
   webview_flutter: # Used for show webviewx
   url_launcher: # Used for open url
-  
+  json_annotation: # Used for code generation libraries
+  scroll_to_index: #This package provides the scroll to index mechanism for fixed/variable row height for Flutter scrollable widget.
+  cached_network_image: # Used cache image
+
 dev_dependencies:
+  build_runner: # Used for code generation libraries
+  json_serializable: # Used for code generation libraries
   flutter_test:
     sdk: flutter
 

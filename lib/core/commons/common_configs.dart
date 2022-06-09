@@ -16,9 +16,9 @@ class CommonConfig {
   static String apiHostRaoXe = "https://raoxe.dailyxe.info";
   static String apiHostSufixRaoXe = "/";
   static String apiDrive = "http://cdn.dailyxe.info";
-
   static String uriPrefixDynamicLink = "https://raoxe.page.link";
   static String appStoreID = "1486119532";
+  static bool haveCacheImage = true;
 
   static late Map<String, dynamic> _config;
   static void setEnvironment(Environment env) {

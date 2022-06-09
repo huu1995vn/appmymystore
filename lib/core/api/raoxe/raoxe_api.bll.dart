@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types
 import 'package:raoxe/core/api/raoxe/raoxe_api.dal.dart';
-import 'package:raoxe/core/models/response_model.dart';
+import 'package:raoxe/core/entities.dart';
 
 class RaoXeApiBLL_Basic {
   RaoXeApiDAL apiDAL = RaoXeApiDAL();

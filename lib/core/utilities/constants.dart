@@ -1,4 +1,6 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -10,6 +12,7 @@ const kTextColor = Color(0xFF707070);
 const kTextLightColor = Color(0xFF949098);
 const kDefaultPadding = 10.0;
 const kDefaultPaddingTop = 79.0;
+const kItemOnPage = 10;
 
 const kBoxDecorationStyle = BoxDecoration(
     gradient: LinearGradient(colors: [
@@ -31,6 +34,7 @@ const BGLOGINMEMBERIMAGE = "assets/images/img-screen/bg-login-member.png";
 const LOGORAOXECOLORIMAGE = "assets/logo-raoxe-comau.png";
 const LOGORAOXEWHITEIMAGE = "assets/images/logo-raoxe-trang.png";
 const UUDAISVG = "assets/images/img-screen/uu-dai.svg";
+const BGBANNER = "assets/images/bg/bg-banner.png";
 
 abstract class FormStyle {
   // Màu nền form

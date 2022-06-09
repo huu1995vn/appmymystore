@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.dal.dart';
-import 'package:raoxe/core/models/response_model.dart';
+import 'package:raoxe/core/entities.dart';
 
 class DaiLyXeApiBLL_Basic {
   DaiLyXeApiDAL apiDAL = DaiLyXeApiDAL();
@@ -63,5 +63,16 @@ class DaiLyXeApiBLL_APIRaoXe extends DaiLyXeApiBLL_Basic {
   Future<ResponseModel> user(String username, String password) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     return get(queryParameters, "Users");
+  }
+}
+
+class DaiLyXeApiBLL_Page extends DaiLyXeApiBLL_Basic {
+  DaiLyXeApiBLL_Page() {
+    apiDAL = DaiLyXeApiDAL();
+    apiDAL.controllerName = "Page";
+  }
+
+  Future<ResponseModel> news(Map<String, dynamic> body) async {
+    return await post(body, null, "newslist");
   }
 }

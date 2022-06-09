@@ -18,7 +18,7 @@ class DioInterceptors extends InterceptorsWrapper {
 
   _addHeaders(RequestOptions options) {
     options.headers.addAll({
-      'Authorization': APITokenService.token,
+      'Authorization': _getToken(options),
       'IPAddress': InfoDeviceService.infoDevice.IpAddress,
       'DeviceId': InfoDeviceService.infoDevice.Identifier,
       'DeviceName': InfoDeviceService.infoDevice.DeviceName,
@@ -27,6 +27,13 @@ class DioInterceptors extends InterceptorsWrapper {
           "${InfoDeviceService.infoDevice.Position?.latitude},${InfoDeviceService.infoDevice.Position?.longitude}"
     });
     return options;
+  }
+
+  String _getToken(RequestOptions options) {
+    String path = options.path.toLowerCase();
+    return path.indexOf("/page/") > 0
+        ? APITokenService.getTokenDefaultString
+        : APITokenService.token;
   }
 
   @override

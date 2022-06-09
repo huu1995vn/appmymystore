@@ -14,12 +14,16 @@ import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, jsonDecode, utf8;
-
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../pipes/timeago/timeago.dart' as timeago;
 
 class CommonMethods {
+  static bool isURl(String str) {
+    return Uri.parse(str).isAbsolute;
+  }
+
   static wirtePrint(Object object) {
     if (kDebugMode) {
       if (object is StateError) {
@@ -192,6 +196,13 @@ class CommonMethods {
     }
   }
 
+  static int calculateDifference(DateTime date) {
+    DateTime now = DateTime.now();
+    return DateTime(date.year, date.month, date.day)
+        .difference(DateTime(now.year, now.month, now.day))
+        .inDays;
+  }
+
   static String formatDate(date, [String pattern = 'dd/MM/yyyy HH:mm:ss']) {
     DateTime d;
     try {
@@ -199,6 +210,28 @@ class CommonMethods {
       return DateFormat(pattern).format(d);
     } catch (e) {}
     return "not.update".tr();
+  }
+
+  static String timeagoFormat(DateTime time) {
+    var strTimeAgo = "updating".tr();
+    if (time == null || time.toString() == "") return strTimeAgo;
+    try {
+      var i = calculateDifference(time);
+      final outputFormat = DateFormat('hh:mm a');
+      var strTime = outputFormat.format(time).toLowerCase();
+      switch (i) {
+        case 0:
+          var _timeago = timeago.format(time, locale: 'vi');
+          strTimeAgo = _timeago == "mới đây" ? _timeago : "Hôm nay $strTime";
+          break;
+        case -1:
+          strTimeAgo = "Hôm qua $strTime";
+          break;
+        default:
+          strTimeAgo = timeago.format(time, locale: 'vi');
+      }
+    } catch (e) {}
+    return strTimeAgo;
   }
 
   static Future<T?> openWebView<T>(context, String url, {String? title}) async {

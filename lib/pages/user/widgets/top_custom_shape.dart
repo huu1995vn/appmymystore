@@ -17,15 +17,14 @@ class _TopCustomShapeState extends State<TopCustomShape> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: SizeConfig.screenHeight! / 2.5,
+      height: SizeConfig.screenHeight! / 2.78,
       child: Stack(
         children: [
           ClipPath(
             clipper: CustomShape(),
             child: Container(
-              height: SizeConfig.screenHeight! / 4,
-              decoration: kBoxDecorationStyle,
-              // color: AppColors.primary,
+              height: SizeConfig.screenHeight! / 4.78,
+              color: AppColors.primary800,
             ),
           ),
           Center(
@@ -81,24 +80,6 @@ class _TopCustomShapeState extends State<TopCustomShape> {
               ],
             ),
           ),
-          Positioned(
-            child: Ink(
-              decoration: const ShapeDecoration(
-                color: Color.fromARGB(255, 189, 179, 179),
-                shape: CircleBorder(),
-              ),
-              child: IconButton(
-                iconSize: 25,
-                icon: const Icon(Icons.turn_left),
-                color: AppColors.black,
-                onPressed: () {
-                  CommonNavigates.goBack(context);
-                },
-              ),
-            ),
-            top: 10,
-            left: 10,
-          )
         ],
       ),
     );

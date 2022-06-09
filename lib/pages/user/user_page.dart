@@ -7,6 +7,7 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_primary_button.dart';
 import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/components/rx_wrapper.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:raoxe/pages/user/widgets/item_child.dart';
@@ -37,46 +38,51 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      TopCustomShape(),
-      SizedBox(
-        height: SizeConfig.screenHeight / 34.15,
-      ),
-      Expanded(
-        child: Column(
-          children: [
-            SizedBox(
-              height: SizeConfig.screenHeight / 34.15,
-            ),
-            ItemChild("fullname".tr(), value: data["fullname"]),
-            RxDivider(),
-            ItemChild("address".tr(), value: data["address"]),
-            RxDivider(),
-            ItemChild(
-              "birthday".tr(),
-              value: CommonMethods.formatDate(data["birthdate"], "dd/MM/yyyy"),
-            ),
-            RxDivider(),
-            ItemChild(
-              "gender".tr(),
-              value: data["gender"] ? "male".tr() : "female".tr(),
-            ),
-          ],
+        appBar: AppBar(
+          backgroundColor: AppColors.primary800,
+          elevation: 0.0,
         ),
-      ),
-      Center(
-        child: Padding(
-          padding: EdgeInsets.all(kDefaultPadding),
-          child: SizedBox(
-            width: SizeConfig.screenWidth / 2,
-            child: RxPrimaryButton(
-              text: 'edit.text'.tr(),
-              onTap: () {},
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          TopCustomShape(),
+          // SizedBox(
+          //   height: SizeConfig.screenHeight / 34.15,
+          // ),
+          Expanded(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: SizeConfig.screenHeight / 34.15,
+                ),
+                ItemChild("fullname".tr(), value: data["fullname"]),
+                RxDivider(),
+                ItemChild("address".tr(), value: data["address"]),
+                RxDivider(),
+                ItemChild(
+                  "birthday".tr(),
+                  value:
+                      CommonMethods.formatDate(data["birthdate"], "dd/MM/yyyy"),
+                ),
+                RxDivider(),
+                ItemChild(
+                  "gender".tr(),
+                  value: data["gender"] ? "male".tr() : "female".tr(),
+                ),
+              ],
             ),
           ),
-        ),
-      )
-    ]));
+          Center(
+            child: Padding(
+              padding: EdgeInsets.all(kDefaultPadding),
+              child: SizedBox(
+                width: SizeConfig.screenWidth / 2,
+                child: RxPrimaryButton(
+                  text: 'edit.text'.tr(),
+                  onTap: () {},
+                ),
+              ),
+            ),
+          )
+        ]));
   }
 }
 

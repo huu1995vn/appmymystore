@@ -17,15 +17,12 @@ Widget RxBuildItem(
     Widget? icon,
     void Function()? onTap,
     Widget? trailing}) {
-  return Column(children: [
-    ListTile(
-      leading: icon,
-      title: Text(title),
-      trailing: trailing,
-      onTap: onTap,
-    ),
-    RxDivider(),
-  ]);
+  return ListTile(
+    leading: icon,
+    title: Text(title),
+    trailing: trailing,
+    onTap: onTap,
+  );
 }
 
 class RxDisabled extends StatelessWidget {

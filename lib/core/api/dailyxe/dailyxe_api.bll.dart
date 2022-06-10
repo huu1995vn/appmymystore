@@ -64,6 +64,12 @@ class DaiLyXeApiBLL_APIRaoXe extends DaiLyXeApiBLL_Basic {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     return get(queryParameters, "Users");
   }
+
+  Future<ResponseModel> getMasterData() async {
+        Map<String, dynamic> body = {};
+
+    return await post(body, null, "masterdata");
+  }
 }
 
 class DaiLyXeApiBLL_Page extends DaiLyXeApiBLL_Basic {
@@ -76,3 +82,4 @@ class DaiLyXeApiBLL_Page extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "newslist");
   }
 }
+

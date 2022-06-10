@@ -25,4 +25,8 @@ class StorageKeys {
   static const String themeMode = 'theme_mode';
   static const String primaryColor = 'primary_color';
   static const String dataLogin = 'dl';
+  static const String masterdata = 'msd';
+  static const String version_masterdata = 'vmsd';
+
+
 }

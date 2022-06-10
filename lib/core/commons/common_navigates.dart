@@ -1,9 +1,7 @@
 // ignore_for_file: null_check_always_fails
 
 import 'package:flutter/cupertino.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/components/part.dart';
+import 'package:flutter/services.dart';
 import 'package:raoxe/pages/forgot_password/forgot_password_page.dart';
 import 'package:raoxe/pages/login/login_page.dart';
 import 'package:raoxe/pages/main/index.dart';
@@ -77,5 +75,9 @@ class CommonNavigates {
 
   static goBack(BuildContext context) {
     return Navigator.pop(context);
+  }
+
+  static exit(BuildContext context) {
+    return SystemNavigator.pop();
   }
 }

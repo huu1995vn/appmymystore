@@ -19,7 +19,7 @@ class CommonConfig {
   static String uriPrefixDynamicLink = "https://raoxe.page.link";
   static String appStoreID = "1486119532";
   static bool haveCacheImage = true;
-
+  static int version_masterdata = 1;
   static late Map<String, dynamic> _config;
   static void setEnvironment(Environment env) {
     switch (env) {

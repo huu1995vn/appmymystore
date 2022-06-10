@@ -1,4 +1,4 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe
+// ignore_for_file: import_of_legacy_library_into_null_safe, empty_catches
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +10,11 @@ import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
+import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/pages/error/error_page.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -57,8 +59,27 @@ initializeApp() async {
   APITokenService.init();
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Future<Widget> loadFromFuture(Widget? main) async {
+    try {
+      bool res = await MasterDataService.init();
+      if(res)
+      {
+        return main!;
+      }
+    
+    } catch (e) {
+
+    }    
+    return const ErrorPage(message: "Vui lòng trở lại sau");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,8 +112,9 @@ class MyApp extends StatelessWidget {
           ),
           themeMode: themeProvider.selectedThemeMode,
           home: SplashScreen(
-            seconds: 3,
-            navigateAfterSeconds: home,
+            navigateAfterFuture: loadFromFuture(home),
+            // seconds: 3,
+            // navigateAfterSeconds: home,
             imageBackground: const AssetImage('assets/splash.png'),
             loaderColor: Colors.red,
           ),

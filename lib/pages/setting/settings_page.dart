@@ -35,54 +35,68 @@ class SettingsPage extends StatelessWidget {
       child: RxWrapper(
         body: Column(
           children: [
-            RxBuildItem(
-                icon: const Icon(Icons.screen_share_rounded),
-                title: "Dark mode",
-                trailing: Switch(
-                  value: theme.selectedThemeMode.name == "dark",
-                  onChanged: (value) {
-                    theme.enableDarkMode(value);
-                  },
-                  activeTrackColor: Colors.red[200],
-                  activeColor: Colors.red,
+            Expanded(
+                child: Column(
+              children: [
+                RxBuildItem(
+                    icon: const Icon(Icons.screen_share_rounded),
+                    title: "Dark mode",
+                    trailing: Switch(
+                      value: theme.selectedThemeMode.name == "dark",
+                      onChanged: (value) {
+                        theme.enableDarkMode(value);
+                      },
+                      activeTrackColor: Colors.red[200],
+                      activeColor: Colors.red,
+                    ),
+                    onTap: () {
+                      // _authenticateWithBiometrics();
+                    }),
+                RxBuildItem(
+                  icon: const Icon(Icons.language),
+                  title: context.locale.languageCode == "vi"
+                      ? "Việt Nam"
+                      : "English",
+                  trailing: Switch(
+                    value: context.locale.languageCode != "vi",
+                    onChanged: (value) {
+                      context.setLocale(
+                          value ? const Locale("en") : const Locale("vi"));
+                    },
+                    activeTrackColor: Colors.red[200],
+                    activeColor: Colors.red,
+                  ),
                 ),
-                onTap: () {
-                  // _authenticateWithBiometrics();
-                }),
-            RxBuildItem(
-              icon: const Icon(Icons.language),
-              title:
-                  context.locale.languageCode == "vi" ? "Việt Nam" : "English",
-              trailing: Switch(
-                value: context.locale.languageCode != "vi",
-                onChanged: (value) {
-                  context.setLocale(
-                      value ? const Locale("en") : const Locale("vi"));
-                },
-                activeTrackColor: Colors.red[200],
-                activeColor: Colors.red,
+                RxBuildItem(
+                    title: "termsandcondition".tr(),
+                    onTap: () {
+                      CommonMethods.openWebViewTermsAndCondition(context);
+                    }),
+                RxBuildItem(
+                    title: "policy".tr(),
+                    onTap: () {
+                      CommonMethods.openWebViewPolicy(context);
+                    }),
+                RxBuildItem(
+                    title: "feedback".tr(),
+                    onTap: () {
+                      CommonMethods.openWebViewFeedBack(context);
+                    }),
+              ],
+            )),
+            Center(
+              child: Padding(
+                padding: EdgeInsets.all(kDefaultPadding),
+                child: SizedBox(
+                  width: SizeConfig.screenWidth / 2,
+                  child: RxPrimaryButton(
+                    text: 'logout'.tr(),
+                    onTap: () {
+                      AuthService.logout(context);
+                    },
+                  ),
+                ),
               ),
-            ),
-            RxBuildItem(
-                title: "termsandcondition".tr(),
-                onTap: () {
-                  CommonMethods.openWebViewTermsAndCondition(context);
-                }),
-            RxBuildItem(
-                title: "policy".tr(),
-                onTap: () {
-                  CommonMethods.openWebViewPolicy(context);
-                }),
-            RxBuildItem(
-                title: "feedback".tr(),
-                onTap: () {
-                  CommonMethods.openWebViewFeedBack(context);
-                }),
-            RxPrimaryButton(
-              text: 'logout'.tr(),
-              onTap: () {
-                AuthService.logout(context);
-              },
             )
           ],
         ),

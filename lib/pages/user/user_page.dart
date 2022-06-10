@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_primary_button.dart';
-import 'package:raoxe/core/components/rx_scaffold.dart';
-import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';

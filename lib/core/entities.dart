@@ -32,9 +32,9 @@ class ResponseModel {
 
 @JsonSerializable()
 class NewsModel extends Entity {
-  late String id;
+  late int id;
   late String type;
-  late String img;
+  late int img;
   late String name;
   late String desc;
   late String views;
@@ -46,8 +46,8 @@ class NewsModel extends Entity {
   late String webresourceurl;
   String get urlImg {
     int fileId = 0;
-    if (img.isNotEmpty) {
-      fileId = int.parse(img);
+    if (img!=null) {
+      fileId = img;
     }
     return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: url);
   }
@@ -58,6 +58,7 @@ class NewsModel extends Entity {
 
   Map<String, dynamic> toJson() => _$NewsModelToJson(this);
 }
+
 @JsonSerializable()
 class ProductModel extends Entity {
   late String id;
@@ -86,16 +87,65 @@ class ProductModel extends Entity {
 
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 }
+
 @JsonSerializable()
 class UserModel {
-  late String username = "";
-  late String password = "";
-  late String phone = "";
+  late int id;
+  late int img;
+  late int cityid;
+  late int districtid;
+  late String username;
+  late String password;
+  late String identitynumber;
+  late String fullname;
+  late String jobtitle;
+  late int gender = 1;
+  late DateTime birthdate;
+  late String email;
+  late String phone;
+  late String phonenumber;
+  late String address;
+  late String note;
+  late int status = 1;
   UserModel();
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
+  Map<String, dynamic> toInsert() => <String, dynamic>{
+        'fields': <String>[
+          "FileId",
+          "CityId",
+          "DistrictId",
+          "UserName",
+          "Password",
+          "IdentityNumber",
+          "FullName",
+          "JobTitle",
+          "BirthDate",
+          "Gender",
+          "Email",
+          "Phone",
+          "PhoneNumber",
+          "Address"
+        ],
+        'datas': <dynamic>[
+          img,
+          cityid,
+          districtid,
+          username,
+          password,
+          identitynumber,
+          jobtitle,
+          birthdate,
+          gender,
+          email,
+          phone,
+          phonenumber,
+          address
+        ],
+      };
 }
 
 class AppTheme {

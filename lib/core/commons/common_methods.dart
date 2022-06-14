@@ -273,10 +273,7 @@ class CommonMethods {
         context: context,
         versionStatus: versionStatus,
         allowDismissal: false
-        // dismissAction: () {
-        //   CommonMethods.launchURL(versionStatus.appStoreLink);
-        //   CommonNavigates.exit(context);
-        // },
+      
       );
     }
   }

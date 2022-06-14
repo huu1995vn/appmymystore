@@ -60,13 +60,23 @@ class DaiLyXeApiBLL_APIRaoXe extends DaiLyXeApiBLL_Basic {
     return post(body, queryParameters, "AutoLogin");
   }
 
-  Future<ResponseModel> user(String username, String password) async {
+  Future<ResponseModel> user() async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
-    return get(queryParameters, "Users");
+    return get(queryParameters, "User");
+  }
+
+  Future<ResponseModel> insertuser() async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    return get(queryParameters, "User/insert");
+  }
+
+  Future<ResponseModel> updateuser() async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    return get(queryParameters, "User/update");
   }
 
   Future<ResponseModel> getMasterData() async {
-        Map<String, dynamic> body = {};
+    Map<String, dynamic> body = {};
 
     return await post(body, null, "masterdata");
   }
@@ -82,4 +92,3 @@ class DaiLyXeApiBLL_Page extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "newslist");
   }
 }
-

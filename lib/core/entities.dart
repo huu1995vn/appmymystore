@@ -102,7 +102,7 @@ class UserModel {
   late String identitynumber;
   late String fullname;
   late String jobtitle;
-  late int gender = 1;
+  late bool gender = true;
   late DateTime birthdate;
   late String email;
   late String phone;

@@ -265,17 +265,15 @@ class CommonMethods {
   }
 
   static versionCheck(context) async {
-    final NewVersion newVersion = NewVersion();
-    VersionStatus? versionStatus = await newVersion.getVersionStatus();
-    if (versionStatus != null && versionStatus.canUpdate) {
-      newVersion.showUpdateDialog(
-        context: context,
-        versionStatus: versionStatus,
-        allowDismissal: false
-      
-      );
+    if (CommonConfig.env == "prod") {
+      final NewVersion newVersion = NewVersion();
+      VersionStatus? versionStatus = await newVersion.getVersionStatus();
+      if (versionStatus != null && versionStatus.canUpdate) {
+        newVersion.showUpdateDialog(
+            context: context,
+            versionStatus: versionStatus,
+            allowDismissal: false);
+      }
     }
   }
-
- 
 }

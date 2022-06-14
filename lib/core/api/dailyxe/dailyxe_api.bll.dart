@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.dal.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 
 class DaiLyXeApiBLL_Basic {
   DaiLyXeApiDAL apiDAL = DaiLyXeApiDAL();
@@ -48,37 +49,44 @@ class DaiLyXeApiBLL_APIRaoXe extends DaiLyXeApiBLL_Basic {
     apiDAL = DaiLyXeApiDAL();
     apiDAL.controllerName = "ApiRaoXe";
   }
+  //login
   Future<ResponseModel> login(String username, String password) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     Map<String, dynamic> body = {"username": username, "password": password};
-    return post(body, queryParameters, "Login");
+    return await post(body, queryParameters, "Login");
   }
 
   Future<ResponseModel> autologin() async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     Map<String, dynamic> body = {};
-    return post(body, queryParameters, "AutoLogin");
+    return await post(body, queryParameters, "AutoLogin");
   }
-
-  Future<ResponseModel> user() async {
+  //User
+  Future<ResponseModel> getuser() async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
-    return get(queryParameters, "User");
-  }
+    Map<String, dynamic> body = {};
 
-  Future<ResponseModel> insertuser() async {
-    Map<String, dynamic> queryParameters = <String, dynamic>{};
-    return get(queryParameters, "User/insert");
+    return await post(body, queryParameters, "User/${APITokenService.userId}");
   }
 
   Future<ResponseModel> updateuser() async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
-    return get(queryParameters, "User/update");
+    Map<String, dynamic> body = {};
+    return await post(body, queryParameters, "User/update");
   }
 
+
+  //gets
   Future<ResponseModel> getMasterData() async {
     Map<String, dynamic> body = {};
-
     return await post(body, null, "masterdata");
+  }
+
+  //anonymous
+  Future<ResponseModel> insertuser() async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = {};
+    return await post(body, queryParameters, "anonymous/insertuser");
   }
 }
 

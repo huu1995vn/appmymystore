@@ -11,7 +11,7 @@ class AuthService {
   static login(context, String username, String password) async {
     CommonMethods.lockScreen();
     try {
-      var res = await DaiLyXeApiBLL_APIRaoXe().login(username, password);
+      var res = await DaiLyXeApiBLL_APIAuth().login(username, password);
       if (res.status > 0) {
         APITokenService.loginByData(res.data);
         if (APITokenService.isValid) {
@@ -29,7 +29,7 @@ class AuthService {
   }
 
   static autologin(context) async {
-    var res = await DaiLyXeApiBLL_APIRaoXe().autologin();
+    var res = await DaiLyXeApiBLL_APIAuth().autologin();
     if (res.status > 0) {
       APITokenService.loginByData(res.data);
       if (!APITokenService.isValid) {

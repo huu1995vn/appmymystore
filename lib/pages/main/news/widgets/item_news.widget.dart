@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -26,7 +27,7 @@ class ItemNewsWidget extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child:
-                    RxImage(itemNews.urlImg, width: SizeConfig.screenWidth / 4),
+                    RxImage(itemNews.URLIMG, width: SizeConfig.screenWidth / 4),
               ),
               const SizedBox(width: 24),
               Expanded(
@@ -54,7 +55,7 @@ class ItemNewsWidget extends StatelessWidget {
                       TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                              text: "${itemNews.publishdate} | ",
+                              text: "${itemNews.TIMEAGO} | ",
                               style: const TextStyle(fontStyle: FontStyle.italic)),
                           TextSpan(
                               text: "${itemNews.views} lượt xem",

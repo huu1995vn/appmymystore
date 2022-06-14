@@ -78,6 +78,22 @@ class CommonMethods {
     return null;
   }
 
+  static DateTime? convertToDateTime(String date, [String? newPattern]) {
+    try {
+      return DateFormat(newPattern ?? "MM/dd/yyyy").parse(date);
+    } catch (e) {}
+    return null;
+  }
+
+  static String formatDateTime(DateTime? date, [String? newPattern]) {
+    if (date != null) {
+      try {
+        return DateFormat(newPattern ?? "dd/MM/yyyy").format(date!);
+      } catch (e) {}
+    }
+    return "";
+  }
+
   static String generateMd5(String input) {
     return md5.convert(utf8.encode(input)).toString().toUpperCase();
   }
@@ -214,8 +230,9 @@ class CommonMethods {
     return "not.update".tr();
   }
 
-  static String timeagoFormat(DateTime time) {
+  static String timeagoFormat(DateTime? time) {
     var strTimeAgo = "updating".tr();
+    if(time==null) return strTimeAgo;
     if (time.toString() == "") return strTimeAgo;
     try {
       var i = calculateDifference(time);
@@ -235,6 +252,8 @@ class CommonMethods {
     } catch (e) {}
     return strTimeAgo;
   }
+
+ 
 
   static Future<T?> openWebView<T>(context, String url, {String? title}) async {
     if (CommonMethods.isMobile()) {

@@ -44,10 +44,10 @@ class DaiLyXeApiBLL_Basic {
   }
 }
 
-class DaiLyXeApiBLL_APIRaoXe extends DaiLyXeApiBLL_Basic {
-  DaiLyXeApiBLL_APIRaoXe() {
+class DaiLyXeApiBLL_APIAuth extends DaiLyXeApiBLL_Basic {
+  DaiLyXeApiBLL_APIAuth() {
     apiDAL = DaiLyXeApiDAL();
-    apiDAL.controllerName = "ApiRaoXe";
+    apiDAL.controllerName = "apiraoxe/auth";
   }
   //login
   Future<ResponseModel> login(String username, String password) async {
@@ -62,38 +62,62 @@ class DaiLyXeApiBLL_APIRaoXe extends DaiLyXeApiBLL_Basic {
     return await post(body, queryParameters, "AutoLogin");
   }
   //User
-  Future<ResponseModel> getuser() async {
-    Map<String, dynamic> queryParameters = <String, dynamic>{};
-    Map<String, dynamic> body = {};
 
-    return await post(body, queryParameters, "User/${APITokenService.userId}");
+}
+
+class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
+  DaiLyXeApiBLL_APIGets() {
+    apiDAL = DaiLyXeApiDAL();
+    apiDAL.controllerName = "apiraoxe/gets";
   }
-
-  Future<ResponseModel> updateuser() async {
-    Map<String, dynamic> queryParameters = <String, dynamic>{};
-    Map<String, dynamic> body = {};
-    return await post(body, queryParameters, "User/update");
-  }
-
-
   //gets
   Future<ResponseModel> getMasterData() async {
     Map<String, dynamic> body = {};
     return await post(body, null, "masterdata");
   }
 
+  Future<ResponseModel> getStatsUser() async {
+    Map<String, dynamic> body = {};
+    return await post(body, null, "statususer");
+  }
+}
+
+class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
+  DaiLyXeApiBLL_APIUser() {
+    apiDAL = DaiLyXeApiDAL();
+    apiDAL.controllerName = "apiraoxe/user";
+  }
+
+  Future<ResponseModel> getuser() async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = {};
+    return await post(body, queryParameters, "${APITokenService.userId}");
+  }
+
+  Future<ResponseModel> updateuser(Map<String, dynamic> body) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    return await post(body, queryParameters, "${APITokenService.userId}");
+  }
+}
+
+class DaiLyXeApiBLL_APIAnonymous extends DaiLyXeApiBLL_Basic {
+  DaiLyXeApiBLL_APIAnonymous() {
+    apiDAL = DaiLyXeApiDAL();
+    apiDAL.controllerName = "apiraoxe/anonymous";
+  }
+ 
   //anonymous
   Future<ResponseModel> insertuser() async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     Map<String, dynamic> body = {};
-    return await post(body, queryParameters, "anonymous/insertuser");
+    return await post(body, queryParameters, "insertuser");
   }
 }
 
 class DaiLyXeApiBLL_Page extends DaiLyXeApiBLL_Basic {
   DaiLyXeApiBLL_Page() {
     apiDAL = DaiLyXeApiDAL();
-    apiDAL.controllerName = "Page";
+    apiDAL.controllerName = "page";
   }
 
   Future<ResponseModel> news(Map<String, dynamic> body) async {

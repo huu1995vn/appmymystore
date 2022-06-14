@@ -35,9 +35,9 @@ class ResponseModel {
 
 @JsonSerializable()
 class NewsModel extends Entity {
-  late int id;
+  late String id;
   late String type;
-  late int img;
+  late String img;
   late String name;
   late String desc;
   late String views;
@@ -47,10 +47,13 @@ class NewsModel extends Entity {
   late String webresourceid;
   late String webresourcename;
   late String webresourceurl;
-  String get urlImg {
+  String get TIMEAGO{
+    return CommonMethods.timeagoFormat(CommonMethods.convertToDateTime(publishdate));
+  }
+  String get URLIMG {
     int fileId = 0;
     if (img != null) {
-      fileId = img;
+      fileId = int.parse(img);
     }
     return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: url);
   }
@@ -93,23 +96,23 @@ class ProductModel extends Entity {
 
 @JsonSerializable()
 class UserModel {
-  late int id;
-  late int img;
-  late int cityid;
-  late int districtid;
+  late String id;
+  late String img;
+  late String cityid;
+  late String districtid;
   late String username;
   late String password;
   late String identitynumber;
   late String fullname;
   late String jobtitle;
-  late bool gender = true;
-  late DateTime birthdate;
+  late String gender;
+  late String birthdate;
   late String email;
   late String phone;
   late String phonenumber;
   late String address;
   late String note;
-  late int status = 1;
+  late String status = "1";
   UserModel();
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

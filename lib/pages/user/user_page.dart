@@ -28,15 +28,16 @@ class _UserPageState extends State<UserPage> {
   @override
   void initState() {
     super.initState();
-    // Enable virtual display.
     loadData();
   }
 
   loadData() async {
     try {
-      ResponseModel res = await DaiLyXeApiBLL_APIRaoXe().get();
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().getuser();
       if (res.status > 0) {
-        data = UserModel.fromJson(jsonDecode(res.data));
+        setState(() {
+          data = UserModel.fromJson(jsonDecode(res.data));
+        });
       } else {
         CommonMethods.showToast(res.message);
       }
@@ -70,13 +71,14 @@ class _UserPageState extends State<UserPage> {
                       ItemChild("address".tr(), value: data!.address),
                       RxDivider(),
                       ItemChild("birthday".tr(),
-                          value: data!.birthdate.toString()
-                          // CommonMethods.formatDate(data.birthdate, "dd/MM/yyyy"),
+                          value:CommonMethods.formatDateTime(CommonMethods.convertToDateTime(data!.birthdate)),
                           ),
                       RxDivider(),
                       ItemChild(
                         "gender".tr(),
-                        value: data!.gender ? "male".tr() : "female".tr(),
+                        value: int.parse(data!.gender) == 1
+                            ? "male".tr()
+                            : "female".tr(),
                       ),
                     ],
                   ),

@@ -13,12 +13,12 @@ class MasterDataService {
       int versionMasterdata =
           StorageService.get(StorageKeys.version_masterdata);
       dynamic masterdata = StorageService.get(StorageKeys.masterdata);
-      if (CommonConfig.version_masterdata <= versionMasterdata &&
+      if (masterdata!=null && versionMasterdata!=null &&  CommonConfig.version_masterdata <= versionMasterdata &&
               masterdata != null) {
         data = json.decode(masterdata);
         return true;
       }
-      var res = await DaiLyXeApiBLL_APIRaoXe().getMasterData();
+      var res = await DaiLyXeApiBLL_APIGets().getMasterData();
       if (res.status > 0) {
         masterdata = json.decode(res.data)[0]["masterdata"];
         data = json.decode(masterdata);

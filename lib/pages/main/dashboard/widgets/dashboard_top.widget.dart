@@ -6,14 +6,14 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
-class TopCustomShape extends StatefulWidget {
-  const TopCustomShape({Key? key}) : super(key: key);
+class DashboardTopWidget extends StatefulWidget {
+  const DashboardTopWidget({Key? key}) : super(key: key);
 
   @override
-  TopCustomShapeState createState() => TopCustomShapeState();
+  DashboardTopWidgetState createState() => DashboardTopWidgetState();
 }
 
-class TopCustomShapeState extends State<TopCustomShape> {
+class DashboardTopWidgetState extends State<DashboardTopWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(

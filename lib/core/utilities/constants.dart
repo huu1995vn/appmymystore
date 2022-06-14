@@ -1,8 +1,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 
 const TOKEN_SECURITY_KEY = "SDGD\$E^&Ư#RBSDGFGJ*IY^&ÉDQQWRWF#\$%#SGSAS";
@@ -35,6 +34,13 @@ const LOGORAOXECOLORIMAGE = "assets/logo-raoxe-comau.png";
 const LOGORAOXEWHITEIMAGE = "assets/images/logo-raoxe-trang.png";
 const UUDAISVG = "assets/images/img-screen/uu-dai.svg";
 const BGBANNER = "assets/images/bg/bg-banner.png";
+List<Categorie> CATEGORIES = [
+  Categorie(id: 2, categoryname:"Tin tức mới"),
+  Categorie(id: 8, categoryname:"Nổi bật"),
+  Categorie(id: 3, categoryname:"Đánh giá xe"),
+  Categorie(id: 4, categoryname:"Tư vấn"),
+  Categorie(id: 5, categoryname:"Hình ảnh"),
+];
 
 abstract class FormStyle {
   // Màu nền form

@@ -12,6 +12,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -101,7 +102,7 @@ class SettingsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text(InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase())
+                Text("${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}", style: TextStyle().italic,)
               ],
             )
           ],

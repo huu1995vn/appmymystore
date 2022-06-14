@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches
+// ignore_for_file: empty_catches, no_leading_underscores_for_local_identifiers
 
 import 'dart:io';
 import 'package:crypto/crypto.dart';
@@ -89,7 +89,7 @@ class CommonMethods {
   static String formatDateTime(DateTime? date, [String? newPattern]) {
     if (date != null) {
       try {
-        return DateFormat(newPattern ?? "dd/MM/yyyy").format(date!);
+        return DateFormat(newPattern ?? "dd/MM/yyyy").format(date);
       } catch (e) {}
     }
     return "";

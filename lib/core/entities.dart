@@ -225,3 +225,14 @@ class AppTheme {
     required this.icon,
   });
 }
+
+class Categorie {
+  int id;
+  String categoryname;
+
+  Categorie({
+    required this.id,
+    required this.categoryname
+  });
+}
+

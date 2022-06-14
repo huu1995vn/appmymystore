@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/components/rx_data_listview.dart';
+import 'package:raoxe/core/components/rx_rounded_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:raoxe/pages/main/news/widgets/item_news.widget.dart';
+import 'package:raoxe/pages/main/news/widgets/types_news.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class NewsPage extends StatefulWidget {
@@ -26,6 +30,7 @@ class _NewsPageState extends State<NewsPage> {
     loadData(paging);
   }
 
+  int categorie = 2;
   int paging = 1;
   int totalItems = 0;
   List<NewsModel>? listData;
@@ -35,7 +40,7 @@ class _NewsPageState extends State<NewsPage> {
   loadData(nPaging) async {
     nPaging = nPaging ?? 1;
     Map<String, dynamic> params = {
-      "id": 2, // cái này là lại ParentIdList === tin tức mới
+      "id": categorie, // cái này là lại ParentIdList === tin tức mới
       "p": paging,
       "n": kItemOnPage
     };
@@ -67,7 +72,6 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _tinTucKey,
-        // backgroundColor: Colors.grey[200],
         body: RxListView(
           listData,
           (BuildContext context, int index) {
@@ -91,6 +95,18 @@ class _NewsPageState extends State<NewsPage> {
           controller: scrollController,
           onNextPage: onNextPage,
           onRefresh: onRefresh,
+          slivers: <Widget>[
+            SliverToBoxAdapter(
+                child: Column(children: [
+              TypesNewsWidget(
+                categorie,
+                onPressed: (v) {
+                  categorie = v;
+                  onRefresh();
+                },
+              )
+            ]))
+          ],
         ));
   }
 }

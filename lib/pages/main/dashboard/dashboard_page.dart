@@ -5,7 +5,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
-import 'package:raoxe/pages/main/dashboard/widgets/top_custom_shape.dart';
+import 'package:raoxe/pages/main/dashboard/widgets/dashboard_top.widget.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -25,8 +25,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return RxScaffold(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      TopCustomShape(),
-      
+      DashboardTopWidget(),
       Expanded(
           child: RxWrapper(
               body: Column(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -55,11 +54,12 @@ class ItemNewsWidget extends StatelessWidget {
                       TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                              text: "${itemNews.TIMEAGO} | ",
+                              text: "${itemNews.TIMEAGO} ",
                               style: const TextStyle(fontStyle: FontStyle.italic)),
-                          TextSpan(
-                              text: "${itemNews.views} lượt xem",
-                              style: const TextStyle(fontWeight: FontWeight.bold)),
+                          // TextSpan(
+                          //     text: "${itemNews.views} lượt xem",
+                          //     style: const TextStyle(fontWeight: FontWeight.bold),
+                          //     ),
                         ],
                         style: const TextStyle(
                           color: AppColors.black50,

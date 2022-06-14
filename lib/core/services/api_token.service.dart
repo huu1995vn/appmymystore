@@ -89,8 +89,9 @@ class APITokenService {
         fileId = int.parse(data["img"] ?? "0");
         return true;
       }
-      // ignore: empty_catches
-    } catch (e) {}
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+    }
 
     return false;
   }
@@ -102,8 +103,9 @@ class APITokenService {
       fullname = "";
       fileId = 0;
       return true;
-      // ignore: empty_catches
-    } catch (e) {}
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+    }
 
     return false;
   }

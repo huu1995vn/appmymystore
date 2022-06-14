@@ -1,7 +1,6 @@
-// ignore_for_file: empty_catches
+// ignore_for_file: empty_catches, unnecessary_null_comparison
 
 import 'dart:convert';
-
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';

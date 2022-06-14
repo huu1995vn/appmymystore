@@ -25,7 +25,7 @@ class ItemProductWidget extends StatelessWidget {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: RxImage(itemProduct.urlImg,
+                child: RxImage(itemProduct.URLIMG,
                     width: SizeConfig.screenWidth / 4),
               ),
               const SizedBox(width: kDefaultPadding),

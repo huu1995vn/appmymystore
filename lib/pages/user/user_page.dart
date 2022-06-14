@@ -12,9 +12,8 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
-import 'package:raoxe/pages/user/widgets/item_child.dart';
 
-import 'widgets/top_custom_shape.dart';
+import 'widgets/user_top.widget.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -56,30 +55,30 @@ class _UserPageState extends State<UserPage> {
         body: data == null
             ? Container()
             : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                TopCustomShape(),
-                // SizedBox(
-                //   height: SizeConfig.screenHeight / 34.15,
-                // ),
+                UserTopWidget(data),
                 Expanded(
                   child: Column(
                     children: [
                       SizedBox(
                         height: SizeConfig.screenHeight / 34.15,
                       ),
-                      ItemChild("fullname".tr(), value: data!.fullname),
-                      RxDivider(),
-                      ItemChild("address".tr(), value: data!.address),
-                      RxDivider(),
-                      ItemChild("birthday".tr(),
-                          value:CommonMethods.formatDateTime(CommonMethods.convertToDateTime(data!.birthdate)),
-                          ),
-                      RxDivider(),
-                      ItemChild(
-                        "gender".tr(),
-                        value: int.parse(data!.gender) == 1
-                            ? "male".tr()
-                            : "female".tr(),
-                      ),
+                      RxBuildItem(
+                          title: "fullname".tr(),
+                          trailing: Text(data!.fullname)),
+                      RxBuildItem(
+                          title: "address".tr(), trailing: Text(data!.address)),
+                      RxBuildItem(
+                          title: "birthday".tr(),
+                          trailing: Text(CommonMethods.formatDateTime(
+                              CommonMethods.convertToDateTime(
+                                  data!.birthdate)))),
+                      RxBuildItem(
+                          title: "gender".tr(),
+                          trailing: Text(
+                            int.parse(data!.gender) == 1
+                                ? "male".tr()
+                                : "female".tr(),
+                          )),
                     ],
                   ),
                 ),

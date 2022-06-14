@@ -6,6 +6,7 @@
   "start": "Start",
   "unfiltered": "Unfiltered",
   "verified": "Verified",
+  "notverified": "Not authenticated",
   "verifynow": "Verify now",
   "registnow": "Register now",
   "setupnow": "Thiết lập ngay",

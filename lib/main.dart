@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
@@ -24,7 +23,6 @@ import 'package:firebase_core/firebase_core.dart';
 init() async {
   await initializeApp();
   configLoading();
-
   return runApp(
     EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('vi')],
@@ -51,9 +49,9 @@ void configLoading() {
 }
 
 initializeApp() async {
+  await StorageService.init();
   WidgetsFlutterBinding.ensureInitialized();
   await InfoDeviceService.init();
-  await StorageService.init();
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   await FirebaseMessagingService.init();
@@ -71,20 +69,15 @@ class _MyAppState extends State<MyApp> {
   Future<Widget> loadFromFuture(Widget? main) async {
     try {
       bool res = await MasterDataService.init();
-      if(res)
-      {
+      if (res) {
         return main!;
       }
-    
-    } catch (e) {
-
-    }    
+    } catch (e) {}
     return const ErrorPage(message: "Vui lòng trở lại sau");
   }
 
   @override
   Widget build(BuildContext context) {
-
     //#to prevent my application from changing its orientation and force the layout
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

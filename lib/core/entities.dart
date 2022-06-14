@@ -47,14 +47,14 @@ class NewsModel extends Entity {
   late String webresourceid;
   late String webresourcename;
   late String webresourceurl;
-  String get TIMEAGO{
-    return CommonMethods.timeagoFormat(CommonMethods.convertToDateTime(publishdate));
+  String get TIMEAGO {
+    return CommonMethods.timeagoFormat(
+        CommonMethods.convertToDateTime(publishdate));
   }
+
   String get URLIMG {
     int fileId = 0;
-    if (img != null) {
-      fileId = int.parse(img);
-    }
+    fileId = int.parse(img);
     return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: url);
   }
 
@@ -79,7 +79,7 @@ class ProductModel extends Entity {
   late String webresourceid;
   late String webresourcename;
   late String webresourceurl;
-  String get urlImg {
+  String get URLIMG {
     int fileId = 0;
     if (img.isNotEmpty) {
       fileId = int.parse(img);
@@ -110,6 +110,8 @@ class UserModel {
   late String email;
   late String phone;
   late String phonenumber;
+  late String verifyphone;
+  late String verifyemail;
   late String address;
   late String note;
   late String status = "1";
@@ -118,6 +120,39 @@ class UserModel {
       _$UserModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  String get URLIMG {
+    try {
+      int fileId = 0;
+      fileId = int.parse(img);
+      return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: fullname);
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+
+      return "";
+    }
+  }
+
+  bool get VERIFY {
+    return VERIFYPHONE && VERIFYEMAIL;
+  }
+
+  bool get VERIFYPHONE {
+    try {
+      return int.parse(verifyphone) == 1;
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+    }
+    return false;
+  }
+
+  bool get VERIFYEMAIL {
+    try {
+      return int.parse(verifyemail) == 1;
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+    }
+    return false;
+  }
 
   Map<String, dynamic> toInsert() => <String, dynamic>{
         'id': -1,

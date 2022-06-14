@@ -1,35 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 
 class RxRoundedButton extends StatelessWidget {
   const RxRoundedButton({
     Key? key,
-    required this.onTap,
-    required this.icon,
+    required this.onPressed,
+    required this.title,
+    this.color,
   }) : super(key: key);
 
-  final GestureTapCallback onTap;
-  final Icon icon;
-  
+  final GestureTapCallback onPressed;
+  final String title;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.12),
-              offset: const Offset(0, 1),
-              blurRadius: 10,
-            ),
-          ],
+    return OutlinedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        side: BorderSide(width: 2.0, color: color?? AppColors.primary),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(32.0),
         ),
-        alignment: Alignment.center,
-        child:  icon,
       ),
+      child: Text(title, style: TextStyle(color: color?? AppColors.primary),),
     );
   }
 }

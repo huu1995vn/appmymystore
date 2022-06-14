@@ -16,6 +16,7 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, utf8;
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../pipes/timeago/timeago.dart' as timeago;
@@ -183,6 +184,7 @@ class CommonMethods {
     }
     idHinh = idHinh > 0 ? idHinh : 0;
     rewriteUrl = rewriteUrl!.isNotEmpty ? rewriteUrl : "image-dailyxe";
+    rewriteUrl = rewriteUrl.convertrUrlPrefix();
     return '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j$prefixSize.jpg';
   }
 

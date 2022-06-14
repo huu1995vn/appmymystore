@@ -28,7 +28,7 @@ class ItemProductHighlightWidget extends StatelessWidget {
             ),
             image: DecorationImage(
               image: NetworkImage(
-                itemProduct.urlImg,
+                itemProduct.URLIMG,
               ),
               fit: BoxFit.cover,
             ),

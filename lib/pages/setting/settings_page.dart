@@ -10,6 +10,7 @@ import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/services/auth.service.dart';
+import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
@@ -84,19 +85,24 @@ class SettingsPage extends StatelessWidget {
                     }),
               ],
             )),
-            Center(
-              child: Padding(
-                padding: EdgeInsets.all(kDefaultPadding),
-                child: SizedBox(
-                  width: SizeConfig.screenWidth / 2,
-                  child: RxPrimaryButton(
-                    text: 'logout'.tr(),
-                    onTap: () {
-                      AuthService.logout(context);
-                    },
+            Column(
+              children: [
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(kDefaultPadding),
+                    child: SizedBox(
+                      width: SizeConfig.screenWidth / 2,
+                      child: RxPrimaryButton(
+                        text: 'logout'.tr(),
+                        onTap: () {
+                          AuthService.logout(context);
+                        },
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                Text(InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase())
+              ],
             )
           ],
         ),

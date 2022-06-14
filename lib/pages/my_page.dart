@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,7 @@ class _MyPageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
+    CommonMethods.versionCheck(context);
     Size size = MediaQuery.of(context).size;
     SizeConfig.init(size);
     return Scaffold(

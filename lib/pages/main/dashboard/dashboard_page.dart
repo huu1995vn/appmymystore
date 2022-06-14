@@ -26,9 +26,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return RxScaffold(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       TopCustomShape(),
-      SizedBox(
-        height: SizeConfig.screenHeight / 34.15,
-      ),
+      
       Expanded(
           child: RxWrapper(
               body: Column(

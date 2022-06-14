@@ -16,61 +16,43 @@ class TopCustomShape extends StatefulWidget {
 class _TopCustomShapeState extends State<TopCustomShape> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: SizeConfig.screenHeight! / 2.84,
-
-      /// 240.0
-      child: Stack(
-        children: [
-          // ClipPath(
-          //   clipper: CustomShape(),
-          //   child: Container(
-          //     height: SizeConfig.screenHeight! / 4.56,
-          //     decoration: kBoxDecorationStyle,
-          //   ),
-          // ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  height: SizeConfig.screenHeight! / 4.88,
-
-                  /// 140.0
-                  width: SizeConfig.screenWidth! / 2.93,
-
-                  /// 140.0
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: Colors.white,
-                          width: SizeConfig.screenWidth! / 51.37),
-                      color: Colors.white,
-                      image: DecorationImage(
-                          image: NetworkImage(CommonMethods.buildUrlHinhDaiDien(
-                              APITokenService.fileId,
-                              rewriteUrl: APITokenService.fullname)))),
-                ),
-                Text(
-                  APITokenService.fullname,
-                  style: const TextStyle(fontSize: 22, color: AppColors.white)
-                      .bold,
-                ),
-                SizedBox(
-                  height: SizeConfig.screenHeight! / 136.6,
-                ),
-
-                /// 5.0
-                // Text(
-                //   "test@gmail.com",
-                //   style: TextStyle(
-                //       fontWeight: FontWeight.w400, color: Colors.black45),
-                // )
-              ],
-            ),
-          )
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(kDefaultPadding),
+      child: SizedBox(
+        height: SizeConfig.screenHeight! / 3.84,
+        /// 240.0
+        child: Stack(
+          children: [         
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    height: SizeConfig.screenHeight! / 4.88,
+                    width: SizeConfig.screenWidth! / 2.93,
+                    /// 140.0
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            color: Colors.white,
+                            width: SizeConfig.screenWidth! / 51.37),
+                        color: Colors.white,
+                        image: DecorationImage(
+                            image: NetworkImage(CommonMethods.buildUrlHinhDaiDien(
+                                APITokenService.fileId,
+                                rewriteUrl: APITokenService.fullname)))),
+                  ),
+                  Text(
+                    APITokenService.fullname,
+                    style: const TextStyle(fontSize: 22, color: AppColors.white)
+                        .bold,
+                  ),
+                 
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

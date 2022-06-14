@@ -9,8 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:material_dialogs/material_dialogs.dart';
+import 'package:new_version/new_version.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, jsonDecode, utf8;
@@ -261,4 +264,22 @@ class CommonMethods {
     return openWebView(context, CommonConfig.linkContent["feedBack"].toString(),
         title: "feedback".tr());
   }
+
+  static versionCheck(context) async {
+    final NewVersion newVersion = NewVersion();
+    VersionStatus? versionStatus = await newVersion.getVersionStatus();
+    if (versionStatus != null && versionStatus.canUpdate) {
+      newVersion.showUpdateDialog(
+        context: context,
+        versionStatus: versionStatus,
+        allowDismissal: false
+        // dismissAction: () {
+        //   CommonMethods.launchURL(versionStatus.appStoreLink);
+        //   CommonNavigates.exit(context);
+        // },
+      );
+    }
+  }
+
+ 
 }

@@ -19,12 +19,12 @@ class ItemProductWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () async {},
         child: SizedBox(
-          height: 100,
+          height: SizeConfig.screenWidth / 4.5,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(15),
                 child: RxImage(itemProduct.URLIMG,
                     width: SizeConfig.screenWidth / 4),
               ),
@@ -54,27 +54,20 @@ class ItemProductWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // Text(
-                    //   itemProduct.webresourcename,
-                    //   style: const TextStyle(
-                    //     color: AppColors.yellow,
-                    //     // fontSize: 28,
-                    //   ),
-                    // ),
+                   
                     Text.rich(
                       TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                              text: "${itemProduct.publishdate} | ",
+                              text: "${itemProduct.publishdate}",
                               style:
                                   const TextStyle(fontStyle: FontStyle.italic)),
-                          TextSpan(
-                              text: "${itemProduct.views} lượt xem",
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          // TextSpan(
+                          //     text: "${itemProduct.views} lượt xem",
+                          //     style:
+                          //         const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                         style: const TextStyle(
-                          // color: AppColors.black50,
                           fontSize: 10,
                         ).textOpacity(0.5).italic.light,
                       ),

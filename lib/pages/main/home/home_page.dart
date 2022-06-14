@@ -14,7 +14,6 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product_highlight.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-
 import 'widgets/item_product.widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,7 +38,7 @@ class _HomePageState extends State<HomePage>
 
   int paging = 1;
   int totalItems = 0;
-  List<ProductModel> listData = <ProductModel>[];
+  List<ProductModel>? listData;
   loadData(nPaging) async {
     nPaging = nPaging ?? 1;
     Map<String, dynamic> params = {
@@ -59,7 +58,7 @@ class _HomePageState extends State<HomePage>
       if (nPaging == 1) {
         listData = newslist;
       } else {
-        listData = (listData+ newslist);
+        listData = (listData!+ newslist);
       }
     });
     paging = nPaging;
@@ -83,7 +82,7 @@ class _HomePageState extends State<HomePage>
       body: RxListView(
         listData,
         (BuildContext context, int index) {
-          return ItemProductWidget(listData[index]);
+          return ItemProductWidget(listData![index]);
         },
         totalItems,
         key: const Key("lHome"),
@@ -133,7 +132,7 @@ class _HomePageState extends State<HomePage>
             SizedBox(
                 height: (SizeConfig.screenHeight / 4) + 28,
                 child: RxDataListView(listData, (context, index) {
-                  return ItemProductHighlightWidget(listData[index]);
+                  return ItemProductHighlightWidget(listData![index]);
                 }, scrollDirection: Axis.horizontal)),
             _buildHeader("Phổ biến", () {}),
           ]))

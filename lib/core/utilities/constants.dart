@@ -34,6 +34,7 @@ const LOGORAOXECOLORIMAGE = "assets/logo-raoxe-comau.png";
 const LOGORAOXEWHITEIMAGE = "assets/images/logo-raoxe-trang.png";
 const UUDAISVG = "assets/images/img-screen/uu-dai.svg";
 const BGBANNER = "assets/images/bg/bg-banner.png";
+const NOTFOUNDDATA = "assets/images/img-screen/no-data.png";
 List<Categorie> CATEGORIES = [
   Categorie(id: 2, categoryname:"Tin tức mới"),
   Categorie(id: 8, categoryname:"Nổi bật"),

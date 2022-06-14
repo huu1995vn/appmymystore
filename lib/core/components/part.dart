@@ -1,7 +1,11 @@
 // ignore_for_file: non_constant_identifier_names, must_be_immutable
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_skeleton/flutter_skeleton.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 Widget RxDivider({double indent = 20}) {
@@ -73,6 +77,7 @@ class RxWebViewState extends State<RxWebView> {
         ));
   }
 }
+
 class RxCustomShape extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -90,4 +95,82 @@ class RxCustomShape extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
     return true;
   }
+}
+
+Widget RxListSkeleton({int barCount = 3}) {
+  try {
+    return ListSkeleton(
+      style: SkeletonStyle(
+        // backgroundColor: SystemVariables.themeData.cardColor,
+        isShowAvatar: false,
+        barCount: barCount,
+        isAnimation: true,
+      ),
+    );
+  } catch (e) {}
+  return const Center(child: CupertinoActivityIndicator());
+}
+
+Widget RxCardSkeleton(
+    {int barCount = 3,
+    bool isShowAvatar = true,
+    bool isCircleAvatar = false,
+    bool isBorderRadius = true}) {
+  try {
+    return Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        child: CardSkeleton(
+          style: SkeletonStyle(
+            // backgroundColor: SystemVariables.themeData.cardColor,
+            // theme: SystemVariables.themeData.primaryColor == Colors.black
+            //     ? SkeletonTheme.Dark
+            //     : SkeletonTheme.Light,
+            isShowAvatar: isShowAvatar ?? true,
+            isCircleAvatar: isCircleAvatar ?? false,
+            borderRadius:
+                BorderRadius.all(Radius.circular(isBorderRadius ? 20.0 : 0)),
+            padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
+            barCount: barCount,
+            isAnimation: true,
+          ),
+        ));
+  } catch (e) {}
+  return const Center(child: CupertinoActivityIndicator());
+}
+
+Widget RxCardListSkeleton(
+    {int barCount = 3, bool isShowAvatar = true, bool isCircleAvatar = false}) {
+  return CardListSkeleton(
+    style: SkeletonStyle(
+      // backgroundColor: SystemVariables.themeData.cardColor,
+      isShowAvatar: isShowAvatar ?? true,
+      isCircleAvatar: isCircleAvatar ?? false,
+      barCount: barCount,
+    ),
+  );
+}
+
+Widget RxNoFound({required String urlImage, String? message}) {
+  return SizedBox(
+    height: SizeConfig.screenHeight -
+        kToolbarHeight -
+        kBottomNavigationBarHeight -
+        25,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        RxImage(
+          urlImage,
+          fullHeight: false,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          message ?? "notfound".tr(),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    ),
+  );
 }

@@ -4,14 +4,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:raoxe/core/components/rx_data_listview.dart';
-import 'package:raoxe/core/components/rx_rounded_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:raoxe/pages/main/news/widgets/item_news.widget.dart';
 import 'package:raoxe/pages/main/news/widgets/types_news.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -75,7 +73,12 @@ class _NewsPageState extends State<NewsPage> {
         body: RxListView(
           listData,
           (BuildContext context, int index) {
-            return ItemNewsWidget(listData![index]);
+            NewsModel item = listData![index];
+            return ItemNewsWidget(
+              item,
+              onTap: () =>
+                  {CommonNavigates.toNewsPage(context, id: int.parse(item.id))},
+            );
           },
           totalItems,
           appBar: SliverAppBar(

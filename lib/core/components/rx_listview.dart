@@ -86,13 +86,13 @@ class RxListViewState extends State<RxListView>
     // CommonMethods.scrollToTop(scrollController);
   }
 
-  // @override
-  // dispose() {
-  //   if (widget.controller == null) {
-  //     super.dispose();
-  //     if (scrollController != null) scrollController?.dispose();
-  //   }
-  // }
+  @override
+  dispose() {
+    if (widget.controller == null) {
+      super.dispose();
+      if (scrollController != null) scrollController?.dispose();
+    }
+  }
 
   _scrollListener() async {
     try {
@@ -148,11 +148,11 @@ class RxListViewState extends State<RxListView>
                         padding: const EdgeInsets.only(
                             top: 10, right: 10, left: 10, bottom: 0),
                         child: widget.awaiting
-                        // ??
-                        //     RxCardSkeleton(
-                        //         barCount: 5,
-                        //         isShowAvatar: false,
-                        //         isBorderRadius: widget.isBorderRadiusSkeleton)
+                        ??
+                            RxCardSkeleton(
+                                barCount: 5,
+                                isShowAvatar: false,
+                                isBorderRadius: widget.isBorderRadiusSkeleton)
                         );
                   },
                   childCount: kItemOnPage,
@@ -162,10 +162,10 @@ class RxListViewState extends State<RxListView>
                 ? SliverToBoxAdapter(
                     child: Container(
                         padding: const EdgeInsets.all(20), child: widget.noFound
-                        //  ??
-                        //     RxNoFound(
-                        //         urlImage: ImagesScreen.noData,
-                        //         message: widget.messageNoData),
+                         ??
+                            RxNoFound(
+                                urlImage: NOTFOUNDDATA,
+                                message: widget.messageNoData),
                         ))
                 : SliverPadding(
                     padding: widget.padding ?? const EdgeInsets.all(10),

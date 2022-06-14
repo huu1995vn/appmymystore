@@ -74,13 +74,13 @@ class ItemProductHighlightWidget extends StatelessWidget {
                       TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                              text: "${itemProduct.publishdate} | ",
+                              text: "${itemProduct.publishdate}",
                               style:
                                   const TextStyle(fontStyle: FontStyle.italic)),
-                          TextSpan(
-                              text: "${itemProduct.views} lượt xem",
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          // TextSpan(
+                          //     text: "${itemProduct.views} lượt xem",
+                          //     style:
+                          //         const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                         style: const TextStyle(
                           color: AppColors.white,
@@ -88,6 +88,7 @@ class ItemProductHighlightWidget extends StatelessWidget {
                         ).textOpacity(0.5).italic.light,
                       ),
                     )
+                    
                   ],
                 ),
               ),

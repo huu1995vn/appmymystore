@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
@@ -8,8 +10,8 @@ import 'package:raoxe/core/utilities/size_config.dart';
 
 class ItemNewsWidget extends StatelessWidget {
   final NewsModel itemNews;
-
-  const ItemNewsWidget(this.itemNews, {super.key});
+  void Function()? onTap;
+  ItemNewsWidget(this.itemNews, {super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +19,20 @@ class ItemNewsWidget extends StatelessWidget {
       padding:
           const EdgeInsets.only(top: kDefaultPadding, bottom: kDefaultPadding),
       child: GestureDetector(
-        onTap: () async {},
+        onTap: onTap,
         child: SizedBox(
-          height: 100,
+          height: SizeConfig.screenWidth/4.5,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child:
-                    RxImage(itemNews.URLIMG, width: SizeConfig.screenWidth / 4),
+              Padding(
+                padding: const EdgeInsets.only(right: kDefaultPadding),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child:
+                      RxImage(itemNews.URLIMG, width: SizeConfig.screenWidth / 4),
+                ),
               ),
-              const SizedBox(width: 24),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +43,6 @@ class ItemNewsWidget extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            // fontSize: 36,
                             ),
                       ),
                     ),
@@ -47,7 +50,6 @@ class ItemNewsWidget extends StatelessWidget {
                       itemNews.webresourcename,
                       style: const TextStyle(
                         color: AppColors.primary,
-                        // fontSize: 28,
                       ).bold,
                     ),
                     Text.rich(

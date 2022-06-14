@@ -105,7 +105,7 @@ class DaiLyXeApiBLL_APIAnonymous extends DaiLyXeApiBLL_Basic {
     apiDAL = DaiLyXeApiDAL();
     apiDAL.controllerName = "apiraoxe/anonymous";
   }
- 
+
   //anonymous
   Future<ResponseModel> insertuser() async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
@@ -122,5 +122,10 @@ class DaiLyXeApiBLL_Page extends DaiLyXeApiBLL_Basic {
 
   Future<ResponseModel> news(Map<String, dynamic> body) async {
     return await post(body, null, "newslist");
+  }
+
+  Future<ResponseModel> newsdetail(int id) async {
+    Map<String, dynamic> body = {"id": id};
+    return await post(body, null, "newsdetail");
   }
 }

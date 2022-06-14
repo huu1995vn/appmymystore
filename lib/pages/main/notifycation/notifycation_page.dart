@@ -9,7 +9,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/pages/main/news/widgets/item_news.widget.dart';
 import 'package:raoxe/pages/main/notifycation/widgets/item_notifycation.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -43,14 +42,14 @@ class _NotifycationPageState extends State<NotifycationPage> {
     ResponseModel res = await DaiLyXeApiBLL_Page().news(params);
     List<dynamic> data = jsonDecode(res.data["newslist"]);
     List<NewsModel> newslist =
-        data.map((val) => NewsModel.fromJson(val)).toList() as List<NewsModel>;
+        data.map((val) => NewsModel.fromJson(val)).toList();
     setState(() {
       totalItems = newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
       listData ??= [];
       if (nPaging == 1) {
         listData = newslist;
       } else {
-        listData = (listData! + newslist)!;
+        listData = (listData! + newslist);
       }
     });
     paging = nPaging;

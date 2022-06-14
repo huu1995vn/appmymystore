@@ -10,16 +10,16 @@ class TopCustomShape extends StatefulWidget {
   const TopCustomShape({Key? key}) : super(key: key);
 
   @override
-  _TopCustomShapeState createState() => _TopCustomShapeState();
+  TopCustomShapeState createState() => TopCustomShapeState();
 }
 
-class _TopCustomShapeState extends State<TopCustomShape> {
+class TopCustomShapeState extends State<TopCustomShape> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(kDefaultPadding),
       child: SizedBox(
-        height: SizeConfig.screenHeight! / 3.84,
+        height: SizeConfig.screenHeight/ 3.84,
         /// 240.0
         child: Stack(
           children: [         
@@ -28,14 +28,14 @@ class _TopCustomShapeState extends State<TopCustomShape> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    height: SizeConfig.screenHeight! / 4.88,
-                    width: SizeConfig.screenWidth! / 2.93,
+                    height: SizeConfig.screenHeight/ 4.88,
+                    width: SizeConfig.screenWidth/ 2.93,
                     /// 140.0
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
                             color: Colors.white,
-                            width: SizeConfig.screenWidth! / 51.37),
+                            width: SizeConfig.screenWidth/ 51.37),
                         color: Colors.white,
                         image: DecorationImage(
                             image: NetworkImage(CommonMethods.buildUrlHinhDaiDien(

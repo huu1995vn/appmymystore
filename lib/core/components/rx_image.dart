@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -21,7 +23,7 @@ class RxImage extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    if (url == null || url.isEmpty) {
+    if (url.isEmpty) {
       return Image.asset(
         NOIMAGE,
         fit: fit,
@@ -32,7 +34,7 @@ class RxImage extends StatelessWidget {
     if (CommonMethods.isURl(url)) {
       return CommonConfig.haveCacheImage
           ? CachedNetworkImage(
-              imageUrl: url ?? "",
+              imageUrl: url,
               width: width ?? MediaQuery.of(context).size.width,
               height: fullHeight ? MediaQuery.of(context).size.height : height,
               fit: fit,

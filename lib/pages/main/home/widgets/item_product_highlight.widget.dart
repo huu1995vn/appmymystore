@@ -67,7 +67,7 @@ class ItemProductHighlightWidget extends StatelessWidget {
                     ),
                     Text(
                       "4.000.000.000 đ",
-                      style: TextStyle(color: AppColors.primary, fontSize: 15)
+                      style: const TextStyle(color: AppColors.primary, fontSize: 15)
                           .bold,
                     ),
                     Text.rich(
@@ -96,13 +96,13 @@ class ItemProductHighlightWidget extends StatelessWidget {
                 right: 10,
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.military_tech_outlined,
                       color: AppColors.yellow,
                     ),
                     Text(
                       " Tin ưu tiên",
-                      style: TextStyle(color: AppColors.yellow).bold,
+                      style: const TextStyle(color: AppColors.yellow).bold,
                     )
                   ],
                 ), //Icon

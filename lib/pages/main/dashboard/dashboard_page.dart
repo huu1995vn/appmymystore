@@ -38,7 +38,7 @@ class _DashboardPageState extends State<DashboardPage> {
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,
-                size: SizeConfig.screenHeight! / 21.34,
+                size: SizeConfig.screenHeight/ 21.34,
               )),
           RxBuildItem(
               title: "Products",
@@ -47,7 +47,7 @@ class _DashboardPageState extends State<DashboardPage> {
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,
-                size: SizeConfig.screenHeight! / 21.34,
+                size: SizeConfig.screenHeight/ 21.34,
               )),
           RxBuildItem(
               title: "Promotions",
@@ -56,7 +56,7 @@ class _DashboardPageState extends State<DashboardPage> {
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,
-                size: SizeConfig.screenHeight! / 21.34,
+                size: SizeConfig.screenHeight/ 21.34,
               )),
           RxBuildItem(
               title: "Address information",
@@ -65,7 +65,7 @@ class _DashboardPageState extends State<DashboardPage> {
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,
-                size: SizeConfig.screenHeight! / 21.34,
+                size: SizeConfig.screenHeight/ 21.34,
               )),
           RxBuildItem(
               title: "Settings",
@@ -74,7 +74,7 @@ class _DashboardPageState extends State<DashboardPage> {
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,
-                size: SizeConfig.screenHeight! / 21.34,
+                size: SizeConfig.screenHeight/ 21.34,
               )),
         ],
       )))

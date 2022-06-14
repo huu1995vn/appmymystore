@@ -1,6 +1,9 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 
 /// This allows the class to access private members in
 /// the generated file called *.g.dart, where the star denotes the source file name.
@@ -46,7 +49,7 @@ class NewsModel extends Entity {
   late String webresourceurl;
   String get urlImg {
     int fileId = 0;
-    if (img!=null) {
+    if (img != null) {
       fileId = img;
     }
     return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: url);
@@ -114,6 +117,7 @@ class UserModel {
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   Map<String, dynamic> toInsert() => <String, dynamic>{
+        'id': -1,
         'fields': <String>[
           "FileId",
           "CityId",
@@ -143,6 +147,30 @@ class UserModel {
           email,
           phone,
           phonenumber,
+          address
+        ],
+      };
+  Map<String, dynamic> toUpdate() => <String, dynamic>{
+        'id': APITokenService.userId,
+        'fields': <String>[
+          "FileId",
+          "CityId",
+          "DistrictId",
+          "IdentityNumber",
+          "FullName",
+          "JobTitle",
+          "BirthDate",
+          "Gender",
+          "Address"
+        ],
+        'datas': <dynamic>[
+          img,
+          cityid,
+          districtid,
+          identitynumber,
+          jobtitle,
+          birthdate,
+          gender,
           address
         ],
       };

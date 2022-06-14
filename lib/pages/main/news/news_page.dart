@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_cast
 
 import 'dart:convert';
 
@@ -49,7 +49,7 @@ class _NewsPageState extends State<NewsPage> {
       if (nPaging == 1) {
         listData = newslist;
       } else {
-        listData = (listData! + newslist)!;
+        listData = (listData! + newslist);
       }
     });
     paging = nPaging;

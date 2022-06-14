@@ -1,11 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
 
 class ItemNotifycationWidget extends StatelessWidget {
   final NewsModel itemNews;
@@ -18,9 +13,7 @@ class ItemNotifycationWidget extends StatelessWidget {
       title: Text(
         itemNews.desc,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-            // fontSize: 16,
-            fontWeight: true ? FontWeight.normal : FontWeight.w700),
+        // style: TextStyle(FontWeight.normal),
       ),
       
       leading: const CircleAvatar(

@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'dart:convert';
 
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -8,11 +10,10 @@ class MasterDataService {
   static Map<String, dynamic> data = <String, dynamic>{};
   static Future<bool> init() async {
     try {
-      int version_masterdata =
+      int versionMasterdata =
           StorageService.get(StorageKeys.version_masterdata);
       dynamic masterdata = StorageService.get(StorageKeys.masterdata);
-      if (version_masterdata != null &&
-          CommonConfig.version_masterdata <= version_masterdata &&
+      if (CommonConfig.version_masterdata <= versionMasterdata &&
               masterdata != null) {
         data = json.decode(masterdata);
         return true;
@@ -23,7 +24,7 @@ class MasterDataService {
         data = json.decode(masterdata);
         StorageService.set(StorageKeys.masterdata, masterdata);
         StorageService.set(StorageKeys.version_masterdata,
-            CommonConfig.version_masterdata ?? 1);
+            CommonConfig.version_masterdata);
       }
       return res.status > 0;
     } catch (e) {

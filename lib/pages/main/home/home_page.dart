@@ -28,10 +28,10 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin<HomePage> {
   @override
   bool get wantKeepAlive => true;
-  final _androidRefreshKey = GlobalKey<RefreshIndicatorState>();
-  GlobalKey<FormState> _homeKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _homeKey = GlobalKey<FormState>();
   AutoScrollController scrollController = AutoScrollController();
 
+  @override
   void initState() {
     super.initState();
     loadData(paging);
@@ -49,16 +49,17 @@ class _HomePageState extends State<HomePage>
     };
     ResponseModel res = await DaiLyXeApiBLL_Page().news(params);
     List<dynamic> data = jsonDecode(res.data["newslist"]);
+    // ignore: unnecessary_cast
     List<ProductModel> newslist = data
         .map((val) => ProductModel.fromJson(val))
         .toList() as List<ProductModel>;
     setState(() {
       totalItems = newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
-      listData ??= [];
+      listData;
       if (nPaging == 1) {
         listData = newslist;
       } else {
-        listData = (listData! + newslist)!;
+        listData = (listData+ newslist);
       }
     });
     paging = nPaging;
@@ -74,6 +75,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final theme = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
@@ -81,7 +83,7 @@ class _HomePageState extends State<HomePage>
       body: RxListView(
         listData,
         (BuildContext context, int index) {
-          return ItemProductWidget(listData![index]);
+          return ItemProductWidget(listData[index]);
         },
         totalItems,
         key: const Key("lHome"),
@@ -141,12 +143,12 @@ class _HomePageState extends State<HomePage>
   }
 }
 
-_buildHeader(String _header, void Function()? onTap) {
+_buildHeader(String header, void Function()? onTap) {
   return Padding(
     padding:
         const EdgeInsets.only(right: kDefaultPadding, left: kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(_header.toUpperCase(), style: const TextStyle().bold),
+      Text(header.toUpperCase(), style: const TextStyle().bold),
       GestureDetector(
         onTap: () {},
         child: Ink(

@@ -1,4 +1,4 @@
-// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: curly_braces_in_flow_control_structures, unnecessary_null_comparison
 
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
@@ -64,7 +64,7 @@ class RxListViewState extends State<RxListView>
     super.initState();
     if (mounted)
       setState(() {
-        scrollController = widget.controller ?? AutoScrollController();
+        scrollController = widget.controller;
       });
     if (widget.onNextPage != null && scrollController != null)
       scrollController.addListener(_scrollListener);

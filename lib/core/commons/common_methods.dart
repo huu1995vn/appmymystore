@@ -12,11 +12,9 @@ import 'package:material_dialogs/material_dialogs.dart';
 import 'package:new_version/new_version.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
-import 'dart:convert' show base64, jsonDecode, utf8;
+import 'dart:convert' show base64, utf8;
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -77,6 +75,7 @@ class CommonMethods {
     } catch (e) {
       return null;
     }
+    return null;
   }
 
   static String generateMd5(String input) {
@@ -217,7 +216,7 @@ class CommonMethods {
 
   static String timeagoFormat(DateTime time) {
     var strTimeAgo = "updating".tr();
-    if (time == null || time.toString() == "") return strTimeAgo;
+    if (time.toString() == "") return strTimeAgo;
     try {
       var i = calculateDifference(time);
       final outputFormat = DateFormat('hh:mm a');

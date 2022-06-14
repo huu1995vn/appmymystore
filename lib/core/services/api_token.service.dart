@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'dart:convert';
 
 import 'package:raoxe/core/commons/common_methods.dart';

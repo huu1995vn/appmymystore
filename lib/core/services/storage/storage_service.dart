@@ -1,9 +1,11 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:localstorage/localstorage.dart';
 
 class StorageService {
   static LocalStorage storage = LocalStorage('app');
-  static Future<bool> init() {
-    return storage.ready;
+  static Future<bool> init() async {
+    return await storage.ready;
   }
 
   /// Retrieves a value from storage

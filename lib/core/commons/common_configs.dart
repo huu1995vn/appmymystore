@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/enviroments/prod.dart';
 import 'package:raoxe/enviroments/dev.dart';

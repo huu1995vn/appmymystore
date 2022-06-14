@@ -31,7 +31,7 @@ class ItemChild extends StatelessWidget {
                         width: SizeConfig.screenWidth - 160,
                         alignment: Alignment.centerRight,
                         child: Text(
-                          value ?? "",
+                          value,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           textAlign: TextAlign.end,

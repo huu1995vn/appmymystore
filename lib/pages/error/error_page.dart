@@ -1,7 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -15,7 +14,6 @@ class ErrorPage extends StatefulWidget {
 }
 
 class _ErrorPageState extends State<ErrorPage> {
-  final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();

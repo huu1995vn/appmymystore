@@ -3,27 +3,26 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
 class TopCustomShape extends StatefulWidget {
   const TopCustomShape({Key? key}) : super(key: key);
 
   @override
-  _TopCustomShapeState createState() => _TopCustomShapeState();
+  TopCustomShapeState createState() => TopCustomShapeState();
 }
 
-class _TopCustomShapeState extends State<TopCustomShape> {
+class TopCustomShapeState extends State<TopCustomShape> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: SizeConfig.screenHeight! / 2.78,
+      height: SizeConfig.screenHeight/ 2.78,
       child: Stack(
         children: [
           ClipPath(
             clipper: CustomShape(),
             child: Container(
-              height: SizeConfig.screenHeight! / 4.78,
+              height: SizeConfig.screenHeight/ 4.78,
               color: AppColors.primary800,
             ),
           ),
@@ -34,7 +33,7 @@ class _TopCustomShapeState extends State<TopCustomShape> {
                 CircleAvatar(
                   radius: 60.0,
                   backgroundColor: Colors.white,
-                  child: CircleAvatar(
+                  child: CircleAvatar( 
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: CircleAvatar(
@@ -55,23 +54,23 @@ class _TopCustomShapeState extends State<TopCustomShape> {
                 ),
                 Text(
                   APITokenService.fullname,
-                  style: TextStyle(fontSize: 22),
+                  style: const TextStyle(fontSize: 22),
                 ),
                 SizedBox(
-                  height: SizeConfig.screenHeight! / 136.6,
+                  height: SizeConfig.screenHeight/ 136.6,
                 ),
-                Text("Đã xác thực",
+                const Text("Đã xác thực",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       // fontSize: 24.0,
                     )),
-                Text(
+                const Text(
                   "email",
                   style: TextStyle(
                     fontSize: 12.0,
                   ),
                 ),
-                Text(
+                const Text(
                   "phone",
                   style: TextStyle(
                     fontSize: 12.0,

@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'messages/en_messages.dart';
 
 import 'messages/es_messages.dart';
@@ -96,6 +98,6 @@ String format(DateTime date,
   }
 
   return [prefix, result, suffix]
-      .where((str) => str != null && str.isNotEmpty)
+      .where((str) => str.isNotEmpty)
       .join(messages.wordSeparator());
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, unnecessary_null_comparison
 
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
@@ -63,7 +63,7 @@ class _RxDataListViewState extends State<RxDataListView>
   @override
   dispose() {
     super.dispose();
-    if (_scrollController != null) _scrollController?.dispose();
+    if (_scrollController != null) _scrollController.dispose();
   }
 
   _scrollListener() async {
@@ -100,7 +100,7 @@ class _RxDataListViewState extends State<RxDataListView>
                    
                     Text(
                       "notfound".tr(),
-                      style: TextStyle(color: AppColors.primary)
+                      style: const TextStyle(color: AppColors.primary)
                     ),
                   ],
                 ))

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/utilities/constants.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({

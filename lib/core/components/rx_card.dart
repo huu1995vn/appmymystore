@@ -21,9 +21,9 @@ class RxCard extends StatelessWidget {
           : RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0),
             ),
+      elevation: 0,
       // margin: margin ?? const EdgeInsets.only(bottom: 20),
       child: child,
-      elevation: 0,
     );
   }
 }

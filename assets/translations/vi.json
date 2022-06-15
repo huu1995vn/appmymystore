@@ -229,6 +229,7 @@
       "concat": "@:info.concat @.lower:invalid.text",
       "text": "@:info.text @.lower:invalid.text"
     },
+    "phone": "@:phone.text @.lower:invalid.text",
     "other": "{} @.lower:invalid.text"
   },
   "updating": "Đang cập nhật",

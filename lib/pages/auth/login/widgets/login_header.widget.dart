@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-import '../../../core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 
-class HeaderBar extends StatelessWidget {
-  const HeaderBar({
+class LoginHeaderWidget extends StatelessWidget {
+  const LoginHeaderWidget({
     Key? key,
   }) : super(key: key);
 

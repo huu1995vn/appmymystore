@@ -3,13 +3,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/pages/forgot_password/forgot_password_page.dart';
-import 'package:raoxe/pages/login/login_page.dart';
+import 'package:raoxe/pages/auth/forgot_password/forgot_password_page.dart';
+import 'package:raoxe/pages/auth/login/login_page.dart';
+import 'package:raoxe/pages/auth/register/register_page.dart';
 import 'package:raoxe/pages/main/index.dart';
 import 'package:raoxe/pages/main/news/news_detail_page.dart';
 import 'package:raoxe/pages/product/product_detail_page.dart';
 import 'package:raoxe/pages/product/product_page.dart';
-import 'package:raoxe/pages/register/register_page.dart';
 import 'package:raoxe/pages/setting/settings_page.dart';
 import 'package:raoxe/pages/user/user_page.dart';
 

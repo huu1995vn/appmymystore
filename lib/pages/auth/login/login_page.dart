@@ -7,7 +7,7 @@ import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:raoxe/pages/login/components/header_bar.dart';
+import 'package:raoxe/pages/auth/login/widgets/login_header.widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
           elevation: 0.0,
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const HeaderBar(),
+          const LoginHeaderWidget(),
           Expanded(
               child: RxWrapper(
                   body: SingleChildScrollView(

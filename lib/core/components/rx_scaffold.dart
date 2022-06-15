@@ -5,13 +5,17 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
 Scaffold RxScaffold(
-    {Key? key, PreferredSizeWidget? appBar, Widget? child, double? top}) {
+    {Key? key,
+    PreferredSizeWidget? appBar,
+    Widget? child,
+    double? top,
+    Decoration? decoration}) {
   return Scaffold(
     key: key,
     appBar: appBar,
     extendBodyBehindAppBar: true,
     body: Container(
-      decoration: kBoxDecorationStyle,
+      decoration: decoration ?? kBoxDecorationStyle,
       width: double.infinity,
       height: SizeConfig.screenHeight,
       child: Padding(

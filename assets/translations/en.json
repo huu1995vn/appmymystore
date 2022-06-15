@@ -9,13 +9,13 @@
   "notverified": "Not authenticated",
   "verifynow": "Verify now",
   "registnow": "Register now",
-  "setupnow": "Thiết lập ngay",
+  "setupnow": "Setup now",
   "onlyyou": "Only visible to you",
   "housenumber": "House Number",
-  "emailorphone": "@:email hoặc @:phone",
+  "emailorphone": "@:email or @:phone",
   "enter": {
     "text": "Enter",
-    "description": "Nhập mô tả",
+    "description": "Enter description",
     "password": {
       "old": "@:enter.text @.lower:password.old",
       "new": "@:enter.text @.lower:password.new",
@@ -30,10 +30,10 @@
     "fullname": "@:enter.text @.lower:fullname",
     "lastname": "@:enter.text @.lower:lastname",
     "address": "@:enter.text @.lower:address",
-    "point":"@:enter.text @.lower:point.text",
+    "point": "@:enter.text @.lower:point.text",
     "other": "@:enter.text {}"
   },
-  "data":"Data",
+  "data": "Data",
   "please": {
     "text": "Please",
     "loginagain": "@:please.text login again",
@@ -77,7 +77,7 @@
     "sendOTP": "Unable to send verification code in {}. {}",
     "locktime": "If you do not complete the authentication, the system temporarily blocks the function of sending the verification code for about {} minutes",
     "limitImage": "Maximum number of pictures posted: {} images",
-    "p014":"Member has violated the rules: {}! Lock account từ {} - {}",
+    "p014": "Member has violated the rules: {}! Lock account từ {} - {}",
     "e000": "Lost Internet connection. Please try again",
     "e001": "Máy chủ đang bận. Please try again",
     "e401": "You do not have permission to do this",
@@ -87,7 +87,7 @@
   },
   "fail": "Fail",
   "warning": "Warning",
-  "uptop":{
+  "uptop": {
     "text": "Up to the top",
     "success": "@:uptop.text @.lower:success",
     "fail": "@:uptop.text @.lower:fail",
@@ -157,16 +157,14 @@
     "award": "@:point.text awarded",
     "other": "@:point.text {}"
   },
-  "notexist":
-  {
+  "notexist": {
     "text": "Not exist",
     "referralcode": "Referral code does @.lower:notexist.text",
     "other": "{} does @.lower:notexist.text"
   },
-  "exist":
-  {
+  "exist": {
     "text": "Exist",
-    "info":{
+    "info": {
       "concat": "@:info.concat @.lower:exist.text",
       "text": "@:info.text @.lower:exist.text"
     },
@@ -202,7 +200,7 @@
   "district": "District",
   "notempty": {
     "text": "Not be empty",
-    "housenumber":"@:housenumber @.lower:notempty.text",
+    "housenumber": "@:housenumber @.lower:notempty.text",
     "password": {
       "old": "@:password.old @.lower:notempty.text",
       "new": "@:password.new @.lower:notempty.text",
@@ -226,12 +224,13 @@
     "code": "@:invalid.text @.lower:code",
     "password": {
       "again": "@:invalid.text @.lower:password.again",
-      "text":"@:invalid.text @.lower:password.text"
+      "text": "@:invalid.text @.lower:password.text"
     },
-    "info":{
-      "concat":"@:invalid.text @.lower:info.concat",
-      "text":"@:invalid.text @.lower:info.text"
+    "info": {
+      "concat": "@:invalid.text @.lower:info.concat",
+      "text": "@:invalid.text @.lower:info.text"
     },
+    "phone": "@:phone.text @.lower:invalid.text",
     "other": "@:invalid.text {}"
   },
   "updating": "Updating",
@@ -243,8 +242,8 @@
     "text": "Password",
     "new": "New @.lower:password.text",
     "old": "Old @.lower:password.text",
-    "again": "@:password.text again",
-    "other": "@:password.text {}"
+    "again": "Password again",
+    "other": "Password {}"
   },
   "info": {
     "text": "Info",
@@ -288,7 +287,7 @@
     "to": "@:from.text {} - {}",
     "other": "@:from.text {}"
   },
-  "to":  {
+  "to": {
     "text": "To",
     "day": "To date",
     "other": "@:to.text {}"
@@ -447,8 +446,7 @@
   "unknown": "Unknown",
   "biometricsturnon": "Turn on biometric login",
   "biometricsturnoff": "Turn off biometric login",
-  "message":
-  {
+  "message": {
     "p001": "{} exist",
     "p002": "You are {}",
     "p003": "Your time is not enough to pin top, you need to add <b>{} point </b> to give enough time. Do you want to change now?",
@@ -490,7 +488,7 @@
     "str038": "Share the referral code with your friends to receive many attractive offers.",
     "str039": "Start time must be less than expected end time",
     "str040": "The intended end time must be greater than the start time",
-    
+
     "alert001": "This function needs <b style='color:green'>verify phone number</b>",
     "alert002": "Are you sure you want to <b>delete</b> this message?",
     "alert003": "Are you sure you want to <b>delete</b> this account?",

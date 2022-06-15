@@ -23,7 +23,7 @@ class AppColors {
   static const Color error = Color(0xFFB71C1C);
   static const Color warning = Color.fromARGB(255, 230, 185, 37);
   static const Color info = Color.fromARGB(255, 8, 171, 235);
-  static const Color success = Color.fromARGB(255, 250, 250, 250);
+  static const Color success = Color.fromARGB(179, 11, 226, 58);
 
   static const MaterialColor red = MaterialColor(
     _redPrimaryValue,

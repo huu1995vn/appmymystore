@@ -76,8 +76,7 @@ class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "masterdata");
   }
 
-  Future<ResponseModel> getStatsUser() async {
-    Map<String, dynamic> body = {};
+  Future<ResponseModel> getStatsUser(Map<String, dynamic> body) async {
     return await post(body, null, "statususer");
   }
 }

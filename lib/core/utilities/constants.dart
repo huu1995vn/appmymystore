@@ -35,6 +35,7 @@ const LOGORAOXEWHITEIMAGE = "assets/images/logo-raoxe-trang.png";
 const UUDAISVG = "assets/images/img-screen/uu-dai.svg";
 const BGBANNER = "assets/images/bg/bg-banner.png";
 const NOTFOUNDDATA = "assets/images/img-screen/no-data.png";
+const BGOTP = "assets/images/img-screen/otp.png";
 List<Categorie> CATEGORIES = [
   Categorie(id: 2, categoryname: "Tin tức mới"),
   Categorie(id: 8, categoryname: "Nổi bật"),
@@ -47,6 +48,7 @@ class RxParttern {
   //[Update]
   static String password =
       r'^(?=.*?[A-Z]).{8,25}$'; // Phải có ít nhất 1 ký tự chữ hoa
+   static String phone = r"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
 }
 abstract class FormStyle {
   // Màu nền form

@@ -12,10 +12,13 @@ import 'package:material_dialogs/material_dialogs.dart';
 import 'package:new_version/new_version.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/components/rx_rounded_button.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, utf8;
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -118,15 +121,16 @@ class CommonMethods {
     Dialogs.materialDialog(
         msg: pmsg,
         title: title ?? "notification".tr(),
-        color: color,
+        // color: color,
         context: context,
         actions: actions ??
             [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.done, color: AppColors.white),
-                color: AppColors.primary,
-              )
+              RxRoundedButton(
+                  onPressed: () {
+                    CommonNavigates.goBack(context);
+                  },
+                  title: "Done",
+                  color: color ?? AppColors.primary)
             ]);
   }
 
@@ -141,7 +145,7 @@ class CommonMethods {
   static void showDialogError(BuildContext context, String pmsg,
       {String? title, List<Widget>? actions}) {
     showDialog(context, pmsg,
-        title: "success.text".tr(), actions: actions, color: AppColors.error);
+        title: "error.text".tr(), actions: actions, color: AppColors.error);
   }
 
   static void showDialogSuccess(BuildContext context, String pmsg,
@@ -304,5 +308,72 @@ class CommonMethods {
             allowDismissal: false);
       }
     }
+  }
+
+  static bool checkStringPhone(String text) {
+    if (text != null) {
+      RegExp regExp = RegExp(
+        RxParttern.phone,
+        caseSensitive: false,
+        multiLine: false,
+      );
+      return regExp.hasMatch(text);
+    } else {
+      return false;
+    }
+  }
+
+  static format(Duration d) => d.toString().split('.').first.padLeft(8, "0");
+
+  static convertTimeDuration(
+      {int? days,
+      int? hours,
+      int? minutes,
+      int? seconds,
+      int? milliseconds,
+      bool isTypeChar = false}) {
+    try {
+      var d = format(Duration(
+        days: days ?? 0,
+        hours: hours ?? 0,
+        minutes: minutes ?? 0,
+        seconds: seconds ?? 0,
+        milliseconds: milliseconds ?? 0,
+      ));
+      d = d.toString();
+      if (d == "00:00:00") return "";
+
+      if (isTypeChar) {
+        String _res = "";
+        var ld = d.split(":");
+        for (var i = 0; i < ld?.length; i++) {
+          String item = ld[i];
+          if (i == 0 && item != "00") {
+            int h = int.parse(item);
+            int day = h ~/ 24;
+            int gio = h % 24;
+            if (day > 0) {
+              _res = '$day ngày';
+            }
+            if (gio > 0) {
+              _res = '$_res $gio giờ';
+            }
+          }
+          if (i == 1 && item != "00") {
+            _res = '$_res $item phút';
+          }
+          if (i == 2 && item != "00") {
+            _res = '$_res $item giây';
+          }
+        }
+        return _res.trim();
+      } else {
+        while (d.indexOf("00:") == 0) {
+          d = d.replaceFirst("00:", "");
+        }
+      }
+      return d;
+    } catch (e) {}
+    return "";
   }
 }

@@ -58,10 +58,10 @@ class ItemNewsWidget extends StatelessWidget {
                             style: const TextStyle(
                                 color: AppColors.black50,
                                 fontStyle: FontStyle.italic)),
-                        Text(itemNews.views,
-                            style: const TextStyle(
-                                color: AppColors.black50,
-                                fontStyle: FontStyle.italic))
+                        // Text(itemNews.views,
+                        //     style: const TextStyle(
+                        //         color: AppColors.black50,
+                        //         fontStyle: FontStyle.italic))
                       ],
                     )
                     // Text.rich(

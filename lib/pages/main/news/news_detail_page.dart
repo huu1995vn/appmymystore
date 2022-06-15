@@ -46,9 +46,7 @@ class NewsDetailPageState extends State<NewsDetailPage> {
   Widget build(BuildContext context) {
     return RxWebView(
       url: initialUrl,
-      javaScriptString: '''document.querySelector("section.header").remove();
-                    document.querySelector("section:nth-child(2) > div").remove();
-                    document.querySelector("body > section:nth-child(8)").remove()''',
+      javaScriptString: '''document.querySelectorAll("section.header, section.get-info, section.footer-info, .breadcrumb, .navbar-custom").forEach(e => e.remove());''',
     );
   }
 }

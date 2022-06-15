@@ -9,7 +9,9 @@
             "args": [
                 "--flavor",
                 "dev",
-                "--no-sound-null-safety"
+                "--no-sound-null-safety",
+                "--release"
+
             ]
 		},
         {
@@ -28,7 +30,8 @@
             "args": [
                 "--flavor",
                 "prod",
-                "--no-sound-null-safety"
+                "--no-sound-null-safety",
+                "--release"
             ]
 		},
 	]

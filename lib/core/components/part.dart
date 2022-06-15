@@ -80,18 +80,26 @@ class RxWebViewState extends State<RxWebView> {
               key: _key,
               initialUrl: widget.url,
               javascriptMode: JavascriptMode.unrestricted,
-              onPageFinished: (finish) {
-                setState(() {
-                  isLoading = false;
-                });
-                if(_webViewController!=null && widget.javaScriptString!=null)
-                {
-                   _webViewController!.runJavascript(
-                     widget.javaScriptString!
-                    );
+
+              onProgress: (progress) {
+                // if (progress > 10) {
+
+                // }
+                if (isLoading) {
+                  if (_webViewController != null &&
+                      widget.javaScriptString != null) {
+                    _webViewController!.runJavascript(widget.javaScriptString!);
+                  }
+                  setState(() {
+                    isLoading = false;
+                  });
                 }
-               
               },
+              // onPageStarted: (url) => {
+              //   if (_webViewController != null &&
+              //       widget.javaScriptString != null)
+              //     {_webViewController!.runJavascript(widget.javaScriptString!)}
+              // },
               onWebViewCreated: (WebViewController webViewController) {
                 _webViewController = webViewController;
               },

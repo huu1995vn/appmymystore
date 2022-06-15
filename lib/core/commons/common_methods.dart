@@ -194,6 +194,16 @@ class CommonMethods {
         rewriteUrl: rewriteUrl, prefixSize: prefixSize);
   }
 
+  static String buildUrlNews(int idNews,
+      {String? rewriteUrl, String? prefixUrl}) {
+    rewriteUrl = rewriteUrl!.convertrUrlPrefix();
+    if (prefixUrl == "videos") {
+      return '${CommonConfig.apiHost}/$prefixUrl/$rewriteUrl-${idNews}0.html';
+    } else {
+      return '${CommonConfig.apiHost}/$prefixUrl/$rewriteUrl-${idNews}d.html';
+    }
+  }
+
   static lockScreen() {
     EasyLoading.show(
         status: "${"awaiting".tr()}...", maskType: EasyLoadingMaskType.custom);
@@ -234,7 +244,7 @@ class CommonMethods {
 
   static String timeagoFormat(DateTime? time) {
     var strTimeAgo = "updating".tr();
-    if(time==null) return strTimeAgo;
+    if (time == null) return strTimeAgo;
     if (time.toString() == "") return strTimeAgo;
     try {
       var i = calculateDifference(time);
@@ -254,8 +264,6 @@ class CommonMethods {
     } catch (e) {}
     return strTimeAgo;
   }
-
- 
 
   static Future<T?> openWebView<T>(context, String url, {String? title}) async {
     if (CommonMethods.isMobile()) {

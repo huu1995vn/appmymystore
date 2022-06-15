@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
         return main!;
       }
     } catch (e) {}
-    return const ErrorPage(message: "Vui lòng trở lại sau");
+    return main!;//const ErrorPage(message: "Vui lòng trở lại sau");
   }
 
   @override

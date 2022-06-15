@@ -1,18 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:raoxe/core/components/rx_scaffold.dart';
-import 'package:raoxe/core/components/rx_wrapper.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/utilities/constants.dart';
 
 class NewsDetailPage extends StatefulWidget {
-  final int id;
-  const NewsDetailPage({super.key, required this.id});
+  final int? id;
+  final NewsModel? news;
+  const NewsDetailPage({super.key, this.id, this.news});
 
   @override
   State<NewsDetailPage> createState() => NewsDetailPageState();
@@ -25,35 +22,33 @@ class NewsDetailPageState extends State<NewsDetailPage> {
     loadData();
   }
 
-  String title = "";
-  String detailcontent = "";
-
+  // String title = "";
+  String? initialUrl;
   Map<String, dynamic>? data;
   loadData() async {
-    ResponseModel res = await DaiLyXeApiBLL_Page().newsdetail(widget.id);
-    setState(() {
+    if (widget.news != null) {
+      setState(() {
+        initialUrl = widget.news!.LINK;
+      });
+    } else {
+      ResponseModel res = await DaiLyXeApiBLL_Page().newsdetail(widget.id!);
       data = res.data;
-      title = data!["name"];
-      detailcontent = data!["detailcontent"];
-    });
+      String prefixUrl = data!["prefix"];
+      String rewriteUrl = data!["url"];
+      setState(() {
+        initialUrl = CommonMethods.buildUrlNews(int.parse(data!["id"]),
+            prefixUrl: prefixUrl, rewriteUrl: rewriteUrl);
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return RxScaffold(
-      appBar: AppBar(
-        title: Text(title,
-            style: TextStyle(
-              color: kWhite,
-              fontSize: 19,
-              fontWeight: FontWeight.bold,
-            )),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
-      child: RxWrapper(
-        body: Text(detailcontent),
-      ),
+    return RxWebView(
+      url: initialUrl,
+      javaScriptString: '''document.querySelector("section.header").remove();
+                    document.querySelector("section:nth-child(2) > div").remove();
+                    document.querySelector("body > section:nth-child(8)").remove()''',
     );
   }
 }

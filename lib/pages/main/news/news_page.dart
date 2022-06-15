@@ -43,18 +43,27 @@ class _NewsPageState extends State<NewsPage> {
       "n": kItemOnPage
     };
     ResponseModel res = await DaiLyXeApiBLL_Page().news(params);
-    List<dynamic> data = jsonDecode(res.data["newslist"]);
-    List<NewsModel> newslist =
-        data.map((val) => NewsModel.fromJson(val)).toList() as List<NewsModel>;
-    setState(() {
-      totalItems = newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
-      listData ??= [];
-      if (nPaging == 1) {
-        listData = newslist;
-      } else {
-        listData = (listData! + newslist);
-      }
-    });
+    if (res.data == null && nPaging == 1) {
+      setState(() {
+        totalItems = 0;
+        listData ??= [];
+      });
+    } else {
+      List<dynamic> data = jsonDecode(res.data["newslist"]);
+      List<NewsModel> newslist = data
+          .map((val) => NewsModel.fromJson(val))
+          .toList() as List<NewsModel>;
+      setState(() {
+        totalItems = newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
+        listData ??= [];
+        if (nPaging == 1) {
+          listData = newslist;
+        } else {
+          listData = (listData! + newslist);
+        }
+      });
+    }
+
     paging = nPaging;
   }
 
@@ -76,8 +85,7 @@ class _NewsPageState extends State<NewsPage> {
             NewsModel item = listData![index];
             return ItemNewsWidget(
               item,
-              onTap: () =>
-                  {CommonNavigates.toNewsPage(context, id: int.parse(item.id))},
+              onTap: () => {CommonNavigates.toNewsPage(context, data: item)},
             );
           },
           totalItems,

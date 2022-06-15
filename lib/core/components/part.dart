@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_skeleton/flutter_skeleton.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -48,15 +49,18 @@ class RxDisabled extends StatelessWidget {
 }
 
 class RxWebView extends StatefulWidget {
-  String url;
+  String? url;
   String? title;
-
-  RxWebView({super.key, required this.url, this.title});
+  String? javaScriptString;
+  RxWebView({super.key, this.url, this.title, this.javaScriptString});
   @override
   RxWebViewState createState() => RxWebViewState();
 }
 
 class RxWebViewState extends State<RxWebView> {
+  final _key = UniqueKey();
+  bool isLoading = true;
+  WebViewController? _webViewController;
   @override
   void initState() {
     super.initState();
@@ -65,15 +69,39 @@ class RxWebViewState extends State<RxWebView> {
 
   @override
   Widget build(BuildContext context) {
-    return RxScaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? ""),
-          backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
-        child: WebView(
-          initialUrl: widget.url,
-          javascriptMode: JavascriptMode.unrestricted,
+        body: Stack(
+          children: <Widget>[
+            WebView(
+              key: _key,
+              initialUrl: widget.url,
+              javascriptMode: JavascriptMode.unrestricted,
+              onPageFinished: (finish) {
+                setState(() {
+                  isLoading = false;
+                });
+                if(_webViewController!=null && widget.javaScriptString!=null)
+                {
+                   _webViewController!.runJavascript(
+                     widget.javaScriptString!
+                    );
+                }
+               
+              },
+              onWebViewCreated: (WebViewController webViewController) {
+                _webViewController = webViewController;
+              },
+            ),
+            isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Stack(),
+          ],
         ));
   }
 }
@@ -174,3 +202,12 @@ Widget RxNoFound({required String urlImage, String? message}) {
     ),
   );
 }
+// Widget RxHtmlWidget(BuildContext context, String html,
+//     {TextStyle? textStyle, void Function(String)? onTapUrl}) {
+//   html = html.formartContent();
+//   // textStyle = textStyle ?? rxDefaultStyle;
+//   // textStyle = textStyle!.copyWith(
+//   //     color: textStyle.color ?? Theme.of(context).textTheme.bodyText1.color,
+//   //     fontSize: Theme.of(context).textTheme.bodyText1.fontSize);
+//   return HtmlWidget(html, textStyle: textStyle);
+// }

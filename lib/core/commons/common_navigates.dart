@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/pages/forgot_password/forgot_password_page.dart';
 import 'package:raoxe/pages/login/login_page.dart';
 import 'package:raoxe/pages/main/index.dart';
@@ -35,10 +36,10 @@ class CommonNavigates {
     }
   }
 
-  static Future toNewsPage(BuildContext context, {int? id}) async {
-    if (id != null && id > 0) {
+  static Future toNewsPage(BuildContext context, {int? id, NewsModel? data}) async {
+    if ((id != null && id > 0) || data!=null) {
       return await Navigator.push(context,
-          CupertinoPageRoute(builder: (context) => NewsDetailPage(id: id)));
+          CupertinoPageRoute(builder: (context) => NewsDetailPage(id: id, news: data)));
     } else {
       return await Navigator.pushReplacementNamed(context, "/news");
     }

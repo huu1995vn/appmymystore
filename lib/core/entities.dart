@@ -47,6 +47,11 @@ class NewsModel extends Entity {
   late String webresourceid;
   late String webresourcename;
   late String webresourceurl;
+  String get LINK {
+    return CommonMethods.buildUrlNews(int.parse(id),
+        prefixUrl: prefix, rewriteUrl: url);
+  }
+
   String get TIMEAGO {
     return CommonMethods.timeagoFormat(
         CommonMethods.convertToDateTime(publishdate));
@@ -230,9 +235,5 @@ class Categorie {
   int id;
   String categoryname;
 
-  Categorie({
-    required this.id,
-    required this.categoryname
-  });
+  Categorie({required this.id, required this.categoryname});
 }
-

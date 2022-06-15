@@ -21,7 +21,7 @@ class ItemNewsWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: SizedBox(
-          height: SizeConfig.screenWidth/4.5,
+          height: SizeConfig.screenWidth / 4.5,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -29,8 +29,8 @@ class ItemNewsWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(right: kDefaultPadding),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child:
-                      RxImage(itemNews.URLIMG, width: SizeConfig.screenWidth / 4),
+                  child: RxImage(itemNews.URLIMG,
+                      width: SizeConfig.screenWidth / 4),
                 ),
               ),
               Expanded(
@@ -42,33 +42,52 @@ class ItemNewsWidget extends StatelessWidget {
                         itemNews.name,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            ),
+                        style: const TextStyle(),
                       ),
                     ),
                     Text(
                       itemNews.webresourcename,
                       style: const TextStyle(
-                        color: AppColors.primary,
-                      ).bold,
+                        color: AppColors.yellow,
+                      ).italic,
                     ),
-                    Text.rich(
-                      TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: "${itemNews.TIMEAGO} ",
-                              style: const TextStyle(fontStyle: FontStyle.italic)),
-                          // TextSpan(
-                          //     text: "${itemNews.views} lượt xem",
-                          //     style: const TextStyle(fontWeight: FontWeight.bold),
-                          //     ),
-                        ],
-                        style: const TextStyle(
-                          color: AppColors.black50,
-                          fontSize: 13,
-                        ).italic.light,
-                      ),
-                    ),
+                    Wrap(
+                      spacing: kDefaultPadding,
+                      children: [
+                        Text(itemNews.TIMEAGO,
+                            style: const TextStyle(
+                                color: AppColors.black50,
+                                fontStyle: FontStyle.italic)),
+                        Text(itemNews.views,
+                            style: const TextStyle(
+                                color: AppColors.black50,
+                                fontStyle: FontStyle.italic))
+                      ],
+                    )
+                    // Text.rich(
+
+                    //   TextSpan(
+                    //     children: <TextSpan>[
+                    //       // TextSpan(
+                    //       //     text: "${itemNews.webresourcename}",
+                    //       //     style: const TextStyle(
+                    //       //         fontStyle: FontStyle.italic,
+                    //       //         color: AppColors.yellow)),
+                    //       TextSpan(
+                    //           text: "${itemNews.TIMEAGO} . ",
+                    //           style:
+                    //               const TextStyle(fontStyle: FontStyle.italic)),
+                    //       TextSpan(
+                    //         text: "${itemNews.views}",
+                    //         style: const TextStyle(fontWeight: FontWeight.bold),
+                    //       ),
+                    //     ],
+                    //     style: const TextStyle(
+                    //       color: AppColors.black50,
+                    //       fontSize: 13,
+                    //     ).italic.light,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

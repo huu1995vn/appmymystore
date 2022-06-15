@@ -13,12 +13,13 @@ class CommonConfig {
   //system
   static Map deviceInfo = {};
   static String env = "dev";
-  static String apiHostDaiLyXe = "http://api.dailyxe.info";
-  static String apiHostSufixDaiLyXe = "/";
-  static String apiHostRaoXe = "https://raoxe.dailyxe.info";
-  static String apiHostSufixRaoXe = "/";
+  static String apiDaiLyXe = "http://api.dailyxe.info";
+  static String apiDaiLyXeSufix = "/";
+  static String apiRaoXe = "https://raoxe.dailyxe.info";
+  static String apiRaoXeSufix = "/";
   static String apiDrive = "http://cdn.dailyxe.info";
   static String uriPrefixDynamicLink = "https://raoxe.page.link";
+  static String apiHost = "https://dailyxe.com.vn";
   static String appStoreID = "1486119532";
   static bool haveCacheImage = true;
   static int version_masterdata = 1;
@@ -33,14 +34,12 @@ class CommonConfig {
         break;
     }
     CommonConfig.env = _config["env"];
-    CommonConfig.apiHostDaiLyXe =
-        _config["apiHostDaiLyXe"] ?? CommonConfig.apiHostDaiLyXe;
-    CommonConfig.apiHostSufixDaiLyXe =
-        _config["apiHostSufixDaiLyXe"] ?? CommonConfig.apiHostSufixDaiLyXe;
-    CommonConfig.apiHostRaoXe =
-        _config["apiHostRaoXe"] ?? CommonConfig.apiHostRaoXe;
-    CommonConfig.apiHostSufixRaoXe =
-        _config["apiHostSufixRaoXe"] ?? CommonConfig.apiHostSufixRaoXe;
+    CommonConfig.apiDaiLyXe = _config["apiDaiLyXe"] ?? CommonConfig.apiDaiLyXe;
+    CommonConfig.apiDaiLyXeSufix =
+        _config["apiDaiLyXeSufix"] ?? CommonConfig.apiDaiLyXeSufix;
+    CommonConfig.apiRaoXe = _config["apiRaoXe"] ?? CommonConfig.apiRaoXe;
+    CommonConfig.apiRaoXeSufix =
+        _config["apiHostSufixRaoXe"] ?? CommonConfig.apiRaoXeSufix;
     CommonConfig.apiDrive = _config["apiDrive"] ?? CommonConfig.apiDrive;
   }
 

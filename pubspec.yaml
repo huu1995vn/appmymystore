@@ -62,7 +62,7 @@ dependencies:
   cached_network_image: # Used cache image
   new_version: #Used update version 
   flutter_skeleton: #Used for skeleton
-
+  
 dev_dependencies:
   build_runner: # Used for code generation libraries
   json_serializable: # Used for code generation libraries

@@ -6,6 +6,7 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 
 extension StringExtension on String {
@@ -114,6 +115,16 @@ extension StringExtension on String {
       // CommonMethods.wirtePrint(e);
     }
     return [];
+  }
+
+  String formartContent() {
+    var str = this ?? "";
+    if (CommonMethods.isMobile()) {
+      return str!.replaceAllMapped(
+          RegExp(r'((\u0023|\u002a|[\u0030-\u0039])\ufe0f\u20e3){1}'),
+          (match) => match[2]!);
+    }
+    return str;
   }
 }
 

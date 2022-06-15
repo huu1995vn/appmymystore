@@ -36,11 +36,12 @@ const UUDAISVG = "assets/images/img-screen/uu-dai.svg";
 const BGBANNER = "assets/images/bg/bg-banner.png";
 const NOTFOUNDDATA = "assets/images/img-screen/no-data.png";
 List<Categorie> CATEGORIES = [
-  Categorie(id: 2, categoryname:"Tin tức mới"),
-  Categorie(id: 8, categoryname:"Nổi bật"),
-  Categorie(id: 3, categoryname:"Đánh giá xe"),
-  Categorie(id: 4, categoryname:"Tư vấn"),
-  Categorie(id: 5, categoryname:"Hình ảnh"),
+  Categorie(id: 2, categoryname: "Tin tức mới"),
+  Categorie(id: 8, categoryname: "Nổi bật"),
+  Categorie(id: 3, categoryname: "Đánh giá xe"),
+  Categorie(id: 4, categoryname: "Tư vấn"),
+  Categorie(id: 5, categoryname: "Hình ảnh"),
+  // Categorie(id: 6, categoryname: "Videos"),
 ];
 
 abstract class FormStyle {

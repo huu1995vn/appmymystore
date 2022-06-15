@@ -6,8 +6,8 @@ class DioTemplate {
 
   //function call api dailyxe
   static _buildDaiLyXeUrl(String controllerName, [String? addApiHostSufix]) {
-    return CommonConfig.apiHostDaiLyXe +
-        (addApiHostSufix ?? CommonConfig.apiHostSufixDaiLyXe) +
+    return CommonConfig.apiDaiLyXe +
+        (addApiHostSufix ?? CommonConfig.apiDaiLyXeSufix) +
         controllerName; //crm/
   }
 
@@ -52,8 +52,8 @@ class DioTemplate {
 
   //function call api dailyxe
   static _buildRaoXeUrl(String controllerName, [String? addApiHostSufix]) {
-    return CommonConfig.apiHostRaoXe +
-        (addApiHostSufix ?? CommonConfig.apiHostSufixRaoXe) +
+    return CommonConfig.apiRaoXe +
+        (addApiHostSufix ?? CommonConfig.apiRaoXeSufix) +
         controllerName; //crm/
   }
 

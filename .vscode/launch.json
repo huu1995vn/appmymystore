@@ -28,6 +28,7 @@
             "args": [
                 "--flavor",
                 "prod",
+                "--no-sound-null-safety"
             ]
 		},
 	]

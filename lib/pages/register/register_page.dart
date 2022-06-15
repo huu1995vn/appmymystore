@@ -7,6 +7,7 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:wc_form_validators/wc_form_validators.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -79,23 +80,44 @@ class _RegisterPageState extends State<RegisterPage> {
                     icon: const Icon(Icons.person),
                     onChanged: (v) => {
                           setState(() => {user.username = v})
-                        }),
+                        },
+                    validator: Validators.compose([
+                            Validators.required("notempty.fullname.text".tr()),
+                          ])
+                          ),
                 RxInput(user.phone,
                     keyboardType: TextInputType.number,
                     labelText: "phone".tr(),
                     icon: const Icon(Icons.phone),
                     onChanged: (v) => {
                           setState(() => {user.phone = v})
-                        }),
+                        },
+                     validator: Validators.compose([
+                            Validators.required("notempty.phone.text".tr()),
+                          ])
+                    ),
                 RxInput(user.password,
                     labelText: "password.text".tr(),
                     icon: const Icon(Icons.lock),
                     onChanged: (v) => {
                           setState(() => {user.password = v})
-                        }),
+                        },
+                    validator: Validators.compose([
+                            Validators.required("notempty.password.text".tr()),
+                            Validators.patternString(RxParttern.password,
+                                "message.str017".tr())
+                          ]),),
                 RxInput(passwordAgain,
                     labelText: "password.again".tr(),
-                    icon: const Icon(Icons.lock)),
+                    icon: const Icon(Icons.lock),
+                    validator: (value) {
+                            if (value != null && value != user.password) {
+                              return "invalid"
+                                  .tr(args: ["password.again".tr()]);
+                            } else {
+                              return null;
+                            }
+                          },),
                 Container(
                   margin: const EdgeInsets.only(top: 32.0),
                   width: double.infinity,

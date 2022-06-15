@@ -43,7 +43,11 @@ List<Categorie> CATEGORIES = [
   Categorie(id: 5, categoryname: "Hình ảnh"),
   // Categorie(id: 6, categoryname: "Videos"),
 ];
-
+class RxParttern {
+  //[Update]
+  static String password =
+      r'^(?=.*?[A-Z]).{8,25}$'; // Phải có ít nhất 1 ký tự chữ hoa
+}
 abstract class FormStyle {
   // Màu nền form
   static dynamic colorBackground = Colors.grey[200];

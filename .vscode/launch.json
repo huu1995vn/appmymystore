@@ -10,7 +10,6 @@
                 "--flavor",
                 "dev",
                 "--no-sound-null-safety",
-                "--release"
 
             ]
 		},

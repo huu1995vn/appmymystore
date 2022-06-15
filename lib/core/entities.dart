@@ -108,9 +108,9 @@ class UserModel {
   late String username;
   late String password;
   late String identitynumber;
-  late String fullname;
+  late String fullname = "";
   late String jobtitle;
-  late String gender;
+  late String gender = "1";
   late String birthdate;
   late String email;
   late String phone;
@@ -120,7 +120,13 @@ class UserModel {
   late String address;
   late String note;
   late String status = "1";
-  UserModel();
+  UserModel(){
+    username = "";
+    password = "";
+    email = "";
+    phone = "";
+
+  }
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 

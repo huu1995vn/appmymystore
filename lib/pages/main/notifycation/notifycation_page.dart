@@ -68,7 +68,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
     return Scaffold(
         key: _tinTucKey,
         // backgroundColor: Colors.grey[200],
-        body: RxListView(
+        body: RxScrollView(
           listData,
           (BuildContext context, int index) {
             return ItemNotifycationWidget(listData![index]);

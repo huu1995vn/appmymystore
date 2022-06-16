@@ -79,7 +79,7 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _tinTucKey,
-        body: RxListView(
+        body: RxScrollView(
           listData,
           (BuildContext context, int index) {
             NewsModel item = listData![index];

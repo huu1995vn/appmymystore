@@ -4,7 +4,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_skeleton/flutter_skeleton.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -203,12 +205,57 @@ Widget RxNoFound({required String urlImage, String? message}) {
     ),
   );
 }
-// Widget RxHtmlWidget(BuildContext context, String html,
-//     {TextStyle? textStyle, void Function(String)? onTapUrl}) {
-//   html = html.formartContent();
-//   // textStyle = textStyle ?? rxDefaultStyle;
-//   // textStyle = textStyle!.copyWith(
-//   //     color: textStyle.color ?? Theme.of(context).textTheme.bodyText1.color,
-//   //     fontSize: Theme.of(context).textTheme.bodyText1.fontSize);
-//   return HtmlWidget(html, textStyle: textStyle);
-// }
+
+Widget RxLoginAccountLabel(context) {
+  return InkWell(
+    onTap: () {
+      CommonNavigates.toLoginPage(context);
+    },
+    child: Container(
+      alignment: Alignment.bottomCenter,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'message.str041'.tr(),
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+          ),
+          Text(
+            "login".tr(),
+            style: const TextStyle(
+                color: AppColors.primary500,
+                fontSize: 13,
+                fontWeight: FontWeight.w600),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget RxCreateAccountLabel(context) {
+  return InkWell(
+    onTap: () {
+      CommonNavigates.toRegisterPage(context);
+    },
+    child: Container(
+      alignment: Alignment.bottomCenter,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            "message.str036".tr(),
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+          ),
+          Text(
+            "registnow".tr(),
+            style: const TextStyle(
+                color: AppColors.primary500,
+                fontSize: 13,
+                fontWeight: FontWeight.w600),
+          ),
+        ],
+      ),
+    ),
+  );
+}

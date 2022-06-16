@@ -1,11 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -32,7 +32,6 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return RxScaffold(
-      // key: keyRegister,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -42,29 +41,32 @@ class _RegisterPageState extends State<RegisterPage> {
             padding: const EdgeInsets.only(top: 32.0),
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(bottom: kDefaultPadding),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          LOGORAOXEWHITEIMAGE,
-                          width: 150,
-                        ),
-                        Text("regist".tr(),
-                            style: const TextStyle(color: AppColors.white))
-                      ],
-                    ),
-                  ),
-                ),
-                getWidgetRegistrationCard(),
+                _header(),
+                _body(),
               ],
             )),
       ),
     );
   }
 
-  Widget getWidgetRegistrationCard() {
+  Widget _header() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: kDefaultPadding),
+      child: Center(
+        child: Column(
+          children: [
+            Image.asset(
+              LOGORAOXEWHITEIMAGE,
+              width: 150,
+            ),
+            Text("regist".tr(), style: const TextStyle(color: AppColors.white))
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _body() {
     return Padding(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
       child: Card(
@@ -140,15 +142,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: const TextStyle(fontSize: 16.0),
                     ),
                     onPressed: () {
-                      _onRegister();
-
-                      // if (_keyValidationForm.currentState!.validate()) {
-                      //   _onRegister();
-                      // }
+                      if (_keyValidationForm.currentState!.validate()) {
+                        _onRegister();
+                      }
                     },
                   ),
                 ), //button: login
-                _loginLabel(context)
+                RxLoginAccountLabel(context)
               ],
             ),
           ),
@@ -157,79 +157,38 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  checkPhone() async {
-    if (!CommonMethods.checkStringPhone(user.phone)) {
-      throw "Số điện thoại không hợp lệ!";
-    }
-    var res = await DaiLyXeApiBLL_APIGets().getStatsUser({"phone": user.phone});
-    int status = res.data;
-    if (status == 1) {
-      throw "TK đã tồn tại";
-    }
-    if (status == 2) {
-      throw "TK đã bị khóa";
-    }
-    if (status == 3) {
-      throw "TK đã xóa. Vui lòng liên hệ với admin để mở lại tài khoản";
-    }
-  }
-
   Future sendOTP(
       void Function(Object) fnError, void Function() fnSuccess) async {
     try {
-      await checkPhone();
-      await FirebaseAuthService.sendOTP(user.phone, fnError, fnSuccess);
-    } catch (e) {
-      fnError(e);
-    }
-  }
-
-  Future verifyOTP(String code) async {
-    try {
-      return await FirebaseAuthService.verifyOTP(user.phone, code);
+      await AuthService.sendOTPPhone(user.phone, false, fnError, fnSuccess);
     } catch (error) {
       CommonMethods.showDialogError(context, error.toString());
     }
   }
 
+  Future<bool> verifyOTP(String code) async {
+    try {
+      return await AuthService.verifyOTPPhone(user.phone, code);
+    } catch (error) {
+      CommonMethods.showDialogError(context, error.toString());
+    }
+    return false;
+  }
+
   Future<void> _onRegister() async {
     try {
-      await checkPhone();
-      showDialog(
+      await AuthService.checkPhone(user.phone, isExist: false);
+      var res = await showDialog(
           context: context,
           builder: (_) => ConfirmOtpPage(
                 sendOTP: sendOTP,
                 verifyOTP: verifyOTP,
               ));
+      if (res!=null) {
+        CommonMethods.showToast("Đăng ký thành công");
+      }
     } catch (e) {
       CommonMethods.showToast(e.toString());
     }
   }
-}
-
-Widget _loginLabel(context) {
-  return InkWell(
-    onTap: () {
-      CommonNavigates.toLoginPage(context);
-    },
-    child: Container(
-      alignment: Alignment.bottomCenter,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text(
-            'Already Register? ',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-          ),
-          Text(
-            "login".tr(),
-            style: const TextStyle(
-                color: AppColors.primary500,
-                fontSize: 13,
-                fontWeight: FontWeight.w600),
-          ),
-        ],
-      ),
-    ),
-  );
 }

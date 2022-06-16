@@ -8,6 +8,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
@@ -16,7 +17,7 @@ class ConfirmOtpPage extends StatefulWidget {
   ConfirmOtpPage({super.key, required this.sendOTP, required this.verifyOTP});
   Future Function(
       void Function(Object) sentOTPFailed, void Function() codeSent)? sendOTP;
-  Future Function(String text)? verifyOTP;
+  Future<bool> Function(String text)? verifyOTP;
 
   @override
   ConfirmOtpPageState createState() => ConfirmOtpPageState();
@@ -45,10 +46,9 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
 
   verifyOTP() async {
     CommonMethods.lockScreen();
-
     try {
-      await widget.verifyOTP!(txtOtp);
-      CommonNavigates.goBack(context);
+      var res = await widget.verifyOTP!(txtOtp);
+      CommonNavigates.goBack(context, res);
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }
@@ -113,7 +113,7 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
                     obscureText: false,
                     animationType: AnimationType.fade,
                     pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.box,
+                      shape: PinCodeFieldShape.underline,
                       borderRadius: BorderRadius.circular(5),
                       activeFillColor: Colors.white,
                     ),
@@ -151,6 +151,7 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
                             fontWeight: (expiredTime + 10 > 120)
                                 ? FontWeight.normal
                                 : FontWeight.bold,
+                            color: AppColors.info,
                             fontSize: 14.0,
                           ),
                         ),

@@ -74,8 +74,8 @@ class CommonNavigates {
     return await Navigator.pushNamed(context, "/user");
   }
 
-  static goBack(BuildContext context) {
-    return Navigator.pop(context);
+  static goBack(BuildContext context, [dynamic? result]) {
+    return Navigator.pop(context, result);
   }
 
   static exit(BuildContext context) {

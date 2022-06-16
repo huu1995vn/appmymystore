@@ -1,5 +1,6 @@
 // ignore_for_file: unused_element, empty_catches
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -13,8 +14,8 @@ class FirebaseAuthService {
     }
     return numberCode;
   }
-  static final FirebaseAuthService _instance =
-      FirebaseAuthService.internal();
+
+  static final FirebaseAuthService _instance = FirebaseAuthService.internal();
   FirebaseAuthService.internal();
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static Map<String, dynamic> verify = <String, String>{};
@@ -27,7 +28,7 @@ class FirebaseAuthService {
     void Function(Object) fnError,
     void Function() fnSuccess,
   ) async {
-    // _auth.setLanguageCode(DefaultVariables.context.locale.languageCode);
+    _auth.setLanguageCode(CommonConfig.languageCode);
     phoneNumber = _convertNumberPhoneWithCountryCode(phoneNumber);
     if (!CommonMethods.isMobile()) {
       try {
@@ -44,6 +45,7 @@ class FirebaseAuthService {
         timeout: Duration(seconds: CommonConfig.timeVerify * 60),
         verificationFailed: (FirebaseAuthException ex) {
           fnError(ex.message!);
+
         },
         codeSent: (String verificationId, int? resend) {
           verify[phoneNumber] = verificationId;
@@ -54,14 +56,15 @@ class FirebaseAuthService {
     }
   }
 
-  static verifyOTP(String phoneNumber, String smsCode) async {
+  static Future<bool> verifyOTP(String phoneNumber, String smsCode) async {
     phoneNumber = _convertNumberPhoneWithCountryCode(phoneNumber);
-     if (!CommonMethods.isMobile()) {
-        return await verify[phoneNumber].confirm(smsCode);
-      } else {
-        return await _auth.signInWithCredential(PhoneAuthProvider.credential(
-            verificationId: verify[phoneNumber], smsCode: smsCode));
-      }
+    if (!CommonMethods.isMobile()) {
+      return await verify[phoneNumber].confirm(smsCode);
+    } else {
+      UserCredential user = await _auth.signInWithCredential(
+          PhoneAuthProvider.credential(
+              verificationId: verify[phoneNumber], smsCode: smsCode));
+      return user.user != null;
+    }
   }
-
 }

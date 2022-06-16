@@ -12,6 +12,7 @@ enum Environment {
 class CommonConfig {
   //system
   static Map deviceInfo = {};
+  static String languageCode = "vi";
   static String env = "dev";
   static String apiDaiLyXe = "http://api.dailyxe.info";
   static String apiDaiLyXeSufix = "/";
@@ -24,6 +25,7 @@ class CommonConfig {
   static bool haveCacheImage = true;
   static int version_masterdata = 1;
   static int timeVerify = 2; // phút
+  static String hotSearch = "vinfast,ford,xe moi";
   static late Map<String, dynamic> _config;
   static void setEnvironment(Environment env) {
     switch (env) {

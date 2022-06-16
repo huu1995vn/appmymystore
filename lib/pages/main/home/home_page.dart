@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/components/index.dart';
-import 'package:raoxe/core/components/rx_data_listview.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
+import 'package:raoxe/core/components/rx_scrollview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -58,7 +60,7 @@ class _HomePageState extends State<HomePage>
       if (nPaging == 1) {
         listData = newslist;
       } else {
-        listData = (listData!+ newslist);
+        listData = (listData! + newslist);
       }
     });
     paging = nPaging;
@@ -75,41 +77,65 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final theme = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
       key: _homeKey,
-      body: RxListView(
+      body: RxScrollView(
         listData,
         (BuildContext context, int index) {
           return ItemProductWidget(listData![index]);
         },
         totalItems,
         key: const Key("lHome"),
-        padding: const EdgeInsets.all(kDefaultPadding),
         controller: scrollController,
         onNextPage: onNextPage,
         onRefresh: onRefresh,
-        appBar: SliverAppBar(
-          floating: true,
-          automaticallyImplyLeading: false,
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          leading: Container(child: null),
-          title: Container(
-            alignment: Alignment.center,
-            child: Image.asset(
-              theme.selectedThemeMode.name == "dark"
-                  ? LOGORAOXEWHITEIMAGE
-                  : LOGORAOXECOLORIMAGE,
-              fit: BoxFit.contain,
-              alignment: Alignment.center,
-              height: 40,
-            ),
-          ),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: kDefaultPadding),
+        appBar: _appBar(),
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+              child: Column(children: [
+            _buildTitle("highlight".tr(), () {}),
+            SizedBox(
+                height: (SizeConfig.screenHeight / 4) + 28,
+                child: RxListView(
+                  listData,
+                  (context, index) {
+                    return ItemProductHighlightWidget(listData![index]);
+                  },
+                  scrollDirection: Axis.horizontal,
+                  awaiting: RxCardSkeleton(barCount: 7, isShowAvatar: false),
+                )),
+            _buildTitle("new".tr(), () {}),
+          ]))
+        ],
+      ),
+    );
+  }
+
+  SliverAppBar _appBar() {
+    final theme = Provider.of<ThemeProvider>(context);
+    return SliverAppBar(
+      floating: true,
+      automaticallyImplyLeading: false,
+      elevation: 0.0,
+      backgroundColor: Colors.transparent,
+      leading: Container(child: null),
+      title: Container(
+        alignment: Alignment.center,
+        child: Image.asset(
+          theme.selectedThemeMode.name == "dark"
+              ? LOGORAOXEWHITEIMAGE
+              : LOGORAOXECOLORIMAGE,
+          fit: BoxFit.contain,
+          alignment: Alignment.center,
+          height: 40,
+        ),
+      ),
+      actions: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(right: kDefaultPadding),
+          child: GestureDetector(
+              onTap: () {},
               child: Ink(
                 decoration: const ShapeDecoration(
                   color: AppColors.grayDark,
@@ -121,28 +147,14 @@ class _HomePageState extends State<HomePage>
                   color: AppColors.black,
                   onPressed: () {},
                 ),
-              ),
-            )
-          ],
-        ),
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-              child: Column(children: [
-            _buildHeader("Nổi bật", () {}),
-            SizedBox(
-                height: (SizeConfig.screenHeight / 4) + 28,
-                child: RxDataListView(listData, (context, index) {
-                  return ItemProductHighlightWidget(listData![index]);
-                }, scrollDirection: Axis.horizontal)),
-            _buildHeader("Phổ biến", () {}),
-          ]))
-        ],
-      ),
+              )),
+        )
+      ],
     );
   }
 }
 
-_buildHeader(String header, void Function()? onTap) {
+_buildTitle(String header, void Function()? onTap) {
   return Padding(
     padding:
         const EdgeInsets.only(right: kDefaultPadding, left: kDefaultPadding),

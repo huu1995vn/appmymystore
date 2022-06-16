@@ -160,6 +160,7 @@
   "notexist": {
     "text": "Not exist",
     "referralcode": "Referral code does @.lower:notexist.text",
+    "account": "@:account @.lower:notexist.text",
     "other": "{} does @.lower:notexist.text"
   },
   "exist": {
@@ -488,7 +489,7 @@
     "str038": "Share the referral code with your friends to receive many attractive offers.",
     "str039": "Start time must be less than expected end time",
     "str040": "The intended end time must be greater than the start time",
-
+    "str041": "Already register? ",
     "alert001": "This function needs <b style='color:green'>verify phone number</b>",
     "alert002": "Are you sure you want to <b>delete</b> this message?",
     "alert003": "Are you sure you want to <b>delete</b> this account?",

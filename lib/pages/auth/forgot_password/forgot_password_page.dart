@@ -1,11 +1,16 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/pages/auth/confirm_otp_page.dart';
+import 'package:wc_form_validators/wc_form_validators.dart';
+
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
 
@@ -26,7 +31,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return RxScaffold(
-      // key: keyRegister,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -36,29 +40,34 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             padding: const EdgeInsets.only(top: 32.0),
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(bottom: kDefaultPadding),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          LOGORAOXEWHITEIMAGE,
-                          width: 150,
-                        ),
-                        Text("forgot.password".tr(),
-                            style: const TextStyle(color: AppColors.white))
-                      ],
-                    ),
-                  ),
-                ),
-                getWidgetRegistrationCard(),
+                _header(),
+                _body(),
               ],
             )),
       ),
     );
   }
 
-  Widget getWidgetRegistrationCard() {
+  //#region widgets private
+  Widget _header() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: kDefaultPadding),
+      child: Center(
+        child: Column(
+          children: [
+            Image.asset(
+              LOGORAOXEWHITEIMAGE,
+              width: 150,
+            ),
+            Text("forgot.password".tr(),
+                style: const TextStyle(color: AppColors.white))
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _body() {
     return Padding(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
       child: Card(
@@ -79,16 +88,38 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     icon: const Icon(Icons.phone),
                     onChanged: (v) => {
                           setState(() => {phone = v})
-                        }),
+                        },
+                    validator: (v) {
+                      if (v == null || !v.isNotEmpty) {
+                        return "notempty.phone.text".tr();
+                      } else {
+                        return CommonMethods.checkStringPhone(v)
+                            ? null
+                            : "invalid.phone".tr();
+                      }
+                    }),
                 RxInput(password,
-                    labelText: "password.text".tr(),
+                    isPassword: true,
+                    labelText: "password.new".tr(),
                     icon: const Icon(Icons.lock),
                     onChanged: (v) => {
                           setState(() => {password = v})
-                        }),
+                        },
+                    validator: Validators.compose([
+                      Validators.required("notempty.password.text".tr()),
+                      // Validators.patternString(
+                      //     RxParttern.password, "message.str017".tr())
+                    ])),
                 RxInput(passwordAgain,
+                    isPassword: true,
                     labelText: "password.again".tr(),
-                    icon: const Icon(Icons.lock)),
+                    icon: const Icon(Icons.lock), validator: (value) {
+                  if (value != null && value != password) {
+                    return "invalid.password.again".tr();
+                  } else {
+                    return null;
+                  }
+                }),
                 Container(
                   margin: const EdgeInsets.only(top: 32.0),
                   width: double.infinity,
@@ -99,14 +130,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     ),
                     onPressed: () {
                       if (_keyValidationForm.currentState!.validate()) {
-                        _onTappedButtonRegister();
+                        onForgotPassword();
                       }
                     },
                     // shape: RoundedRectangleBorder(
                     //     borderRadius: BorderRadius.circular(25.0)),
                   ),
                 ), //button: login
-                _loginLabel(context)
+                RxLoginAccountLabel(context)
               ],
             ),
           ),
@@ -115,32 +146,41 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  void _onTappedButtonRegister() {}
-}
+  //#endregion
+  //#fuction main
+  Future sendOTP(
+      void Function(Object) fnError, void Function() fnSuccess) async {
+    try {
+      await AuthService.sendOTPPhone(phone, true, fnError, fnSuccess);
+    } catch (error) {
+      CommonMethods.showDialogError(context, error.toString());
+    }
+  }
 
-Widget _loginLabel(context) {
-  return InkWell(
-    onTap: () {
-      CommonNavigates.toLoginPage(context);
-    },
-    child: Container(
-      alignment: Alignment.bottomCenter,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text(
-            'Already Register? ',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-          ),
-          Text(
-            "login".tr(),
-            style: const TextStyle(
-                color: AppColors.primary500,
-                fontSize: 13,
-                fontWeight: FontWeight.w600),
-          ),
-        ],
-      ),
-    ),
-  );
+  Future<bool> verifyOTP(String code) async {
+    try {
+      return await AuthService.verifyOTPPhone(phone, code);
+    } catch (error) {
+      CommonMethods.showDialogError(context, error.toString());
+    }
+    return false;
+  }
+
+  Future onForgotPassword() async {
+    try {
+      await AuthService.checkPhone(phone, isExist: true);
+      var res = await showDialog(
+          context: context,
+          builder: (_) => ConfirmOtpPage(
+                sendOTP: sendOTP,
+                verifyOTP: verifyOTP,
+              ));
+      if (res!=null) {
+        CommonMethods.showToast("Thay đổi password thành công");
+      }
+    } catch (e) {
+      CommonMethods.showToast(e.toString());
+    }
+  }
+  //#end function main
 }

@@ -159,6 +159,7 @@
   "notexist": {
     "text": "Không tồn tại",
     "referralcode": "Mã giới thiệu @.lower:notexist.text",
+    "account": "@:account @.lower:notexist.text",
     "other": "{} @.lower:notexist.text"
   },
   "exist": {
@@ -172,7 +173,7 @@
   },
   "pintop": "Pintop",
   "account": "Tài khoản",
-  "notfound": "Không tìm thấy",
+  "notfound": "Không tìm thấy dữ liệu",
   "request": {
     "text": "Yêu cầu",
     "deleteaccount": "@:request.text xóa tài khoản",
@@ -486,6 +487,7 @@
     "str038": "Chia sẽ mã giới thiệu cho bạn bè để nhận được nhiều ưu đãi hấp dẫn.",
     "str039": "Thời gian bắt đầu phải nhỏ hơn kết thúc dự kiến",
     "str040": "Thời gian dự định kết thúc phải lớn hơn thời gian bắt đầu",
+    "str041": "Bạn đã có tài khoản? ",
     "alert001": "Chức năng này cần <b style='color:green'>xác thực số điện thoại</b>",
     "alert002": "Bạn có chắc chắn muốn <b>xóa tin</b> này?",
     "alert003": "Bạn có chắc chắn muốn <b>xóa tài khoản</b> này?",
@@ -493,5 +495,7 @@
     "alert005": "Bạn nên thêm hình ảnh để <b>tin rao tốt hơn</b>",
     "alert006": "Bạn có chắc chắn muốn đổi",
     "alert007": "Bạn có muốn <b>tiếp tục</b> tin chưa hoàn thành trước đó?"
+
   }
+  
 }

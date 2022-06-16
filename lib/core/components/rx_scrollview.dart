@@ -92,12 +92,12 @@ class RxListViewState extends State<RxScrollView>
   _scrollListener() async {
     try {
       var triggerFetchMoreSize =
-            scrollController.position.maxScrollExtent - SizeConfig.screenHeight;
-        if (scrollController.position.pixels > triggerFetchMoreSize) {
-          if (mounted) setState(() => isLoading = true);
-          if (isLoading) await onNextPage();
-          if (mounted) setState(() => isLoading = false);
-        }
+          scrollController.position.maxScrollExtent - SizeConfig.screenHeight;
+      if (scrollController.position.pixels > triggerFetchMoreSize) {
+        if (mounted) setState(() => isLoading = true);
+        if (isLoading) await onNextPage();
+        if (mounted) setState(() => isLoading = false);
+      }
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }
@@ -141,9 +141,7 @@ class RxListViewState extends State<RxScrollView>
         (BuildContext context, int index) {
           return widget.awaiting ??
               RxCardSkeleton(
-                  barCount: 5,
-                  isShowAvatar: false,
-                  isBorderRadius: true);
+                  barCount: 5, isShowAvatar: false, isBorderRadius: true);
         },
         childCount: kItemOnPage,
       ),
@@ -159,9 +157,7 @@ class RxListViewState extends State<RxScrollView>
   }
 
   Widget _bodylist_main() {
-    return SliverPadding(
-        padding: const EdgeInsets.all(kDefaultPadding),
-        sliver: SliverList(
+    return SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               if (index >= widget.data.length) {
@@ -187,14 +183,16 @@ class RxListViewState extends State<RxScrollView>
             },
             childCount: widget.data.length + 1,
           ),
-        ));
+        );
   }
 
   Widget _bodylist() {
-    return widget.data == null
-        ? _bodylist_awaiting()
-        : widget.data.length == 0
-            ? _bodylist_notfound()
-            : _bodylist_main();
+    return SliverPadding(
+        padding: const EdgeInsets.all(kDefaultPadding),
+        sliver: widget.data == null
+            ? _bodylist_awaiting()
+            : widget.data.length == 0
+                ? _bodylist_notfound()
+                : _bodylist_main());
   }
 }

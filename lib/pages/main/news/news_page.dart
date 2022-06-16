@@ -109,12 +109,15 @@ class _NewsPageState extends State<NewsPage> {
           slivers: <Widget>[
             SliverToBoxAdapter(
                 child: Column(children: [
-              TypesNewsWidget(
-                categorie,
-                onPressed: (v) {
-                  categorie = v;
-                  onRefresh();
-                },
+              Padding(
+                padding: const EdgeInsets.only(right: kDefaultPadding, left: kDefaultPadding),
+                child: TypesNewsWidget(
+                  categorie,
+                  onPressed: (v) {
+                    categorie = v;
+                    onRefresh();
+                  },
+                ),
               )
             ]))
           ],

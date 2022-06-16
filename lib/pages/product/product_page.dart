@@ -7,9 +7,22 @@ import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
-class ProductPage extends StatelessWidget {
-  const ProductPage({Key? key}) : super(key: key);
+class ProductPage extends StatefulWidget {
+  Map<String, dynamic>? paramsSearch;
+  ProductPage({super.key, this.paramsSearch});
 
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  @override
+  void initState() {
+    super.initState();
+    loadData(widget.paramsSearch);
+  }
+
+  loadData(Map<String, dynamic>? paramsSearch) {}
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
@@ -28,9 +41,7 @@ class ProductPage extends StatelessWidget {
       ),
       child: RxWrapper(
         body: Column(
-          children: const [
-            Text("products")
-          ],
+          children: const [Text("products")],
         ),
       ),
     );

@@ -29,6 +29,7 @@ class StorageKeys {
   static const String dataLogin = 'dl';
   static const String masterdata = 'msd';
   static const String version_masterdata = 'vmsd';
+  static const String text_search = 'text_search';
 
 
 }

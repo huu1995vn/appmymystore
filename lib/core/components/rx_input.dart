@@ -16,7 +16,7 @@ class RxInput extends StatefulWidget {
   final bool isPassword;
   final void Function(String)? onChanged;
   final Widget? suffixIcon;
-
+  final InputBorder? border;
   const RxInput(this.value,
       {super.key,
       this.disabled = false,
@@ -27,7 +27,9 @@ class RxInput extends StatefulWidget {
       this.readOnly = false,
       this.keyboardType = TextInputType.text,
       this.isPassword = false,
-      this.onChanged, this.suffixIcon});
+      this.onChanged,
+      this.suffixIcon,
+      this.border});
 
   @override
   _InputTextState createState() => _InputTextState();
@@ -65,22 +67,23 @@ class _InputTextState extends State<RxInput> {
           obscureText: !showPassword && widget.isPassword,
           validator: widget.validator,
           onChanged: widget.onChanged,
-           
           decoration: InputDecoration(
-              border: InputBorder.none,
+              border: widget.border ??InputBorder.none,
               labelText: widget.labelText,
               hintText: widget.hintText,
               icon: widget.icon,
-              suffixIcon: widget.isPassword ?  IconButton(
-                                    icon: Icon(showPassword == true
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
-                                    onPressed: () {
-                                      setState(() {
-                                        showPassword = !showPassword;
-                                      });
-                                    },
-                                  ): widget.suffixIcon),
+              suffixIcon: widget.isPassword
+                  ? IconButton(
+                      icon: Icon(showPassword == true
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () {
+                        setState(() {
+                          showPassword = !showPassword;
+                        });
+                      },
+                    )
+                  : widget.suffixIcon),
         ));
   }
 }

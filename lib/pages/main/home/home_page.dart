@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
@@ -145,7 +146,7 @@ class _HomePageState extends State<HomePage>
                   iconSize: 25,
                   icon: const Icon(Icons.search),
                   color: AppColors.black,
-                  onPressed: () {},
+                  onPressed: () {CommonNavigates.toDialogSearch(context);},
                 ),
               )),
         )

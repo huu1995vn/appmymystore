@@ -38,7 +38,7 @@ class DynamicLinkService {
     if (resInfo != null) {
       switch (resInfo["typePage"]) {
         case "rm":
-          CommonNavigates.toProductPage(context, int.parse(resInfo["id"].toString()));
+          CommonNavigates.toProductPage(context, id: int.parse(resInfo["id"].toString()));
           break;
       }
     }

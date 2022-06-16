@@ -243,3 +243,8 @@ class Categorie {
 
   Categorie({required this.id, required this.categoryname});
 }
+class TextSearchModel {
+  bool isLocal = true;
+  String text;
+  TextSearchModel({required this.text, required this.isLocal});
+}

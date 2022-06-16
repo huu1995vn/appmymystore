@@ -1,4 +1,7 @@
 // ignore_for_file: camel_case_types
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.dal.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
@@ -78,6 +81,15 @@ class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
 
   Future<ResponseModel> getStatsUser(Map<String, dynamic> body) async {
     return await post(body, null, "statususer");
+  }
+
+  Future<ResponseModel> getSuggest(String textsearch) async {
+    Map<String, dynamic> body = {"s": textsearch};
+    return await post(body, null, "suggest");
+  }
+
+  Future<ResponseModel> getRaoXe(Map<String, dynamic> body) async {
+    return await post(body, null, "raoxe");
   }
 }
 

@@ -64,30 +64,7 @@ class ItemNewsWidget extends StatelessWidget {
                         //         fontStyle: FontStyle.italic))
                       ],
                     )
-                    // Text.rich(
-
-                    //   TextSpan(
-                    //     children: <TextSpan>[
-                    //       // TextSpan(
-                    //       //     text: "${itemNews.webresourcename}",
-                    //       //     style: const TextStyle(
-                    //       //         fontStyle: FontStyle.italic,
-                    //       //         color: AppColors.yellow)),
-                    //       TextSpan(
-                    //           text: "${itemNews.TIMEAGO} . ",
-                    //           style:
-                    //               const TextStyle(fontStyle: FontStyle.italic)),
-                    //       TextSpan(
-                    //         text: "${itemNews.views}",
-                    //         style: const TextStyle(fontWeight: FontWeight.bold),
-                    //       ),
-                    //     ],
-                    //     style: const TextStyle(
-                    //       color: AppColors.black50,
-                    //       fontSize: 13,
-                    //     ).italic.light,
-                    //   ),
-                    // ),
+                   
                   ],
                 ),
               ),

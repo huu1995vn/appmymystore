@@ -1,7 +1,9 @@
 // ignore_for_file: null_check_always_fails
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:raoxe/core/components/dialogs/search/search.dialog.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/pages/auth/forgot_password/forgot_password_page.dart';
 import 'package:raoxe/pages/auth/login/login_page.dart';
@@ -22,24 +24,30 @@ class CommonNavigates {
     '/forgot-password': (context) => const ForgotPasswordPage(),
     '/user': (context) => const UserPage(),
     '/settings': (context) => const SettingsPage(),
-    '/product': (context) => const ProductPage(),
+    '/product': (context) => ProductPage(),
     '/news': (context) => const NewsPage(),
+    // '/search': (context) => SearchPage(),
   };
 
-  static Future toProductPage(BuildContext context, int parse,
-      {int? id}) async {
+  static Future toProductPage(BuildContext context,
+      {int? id, Map<String, dynamic>? paramsSearch}) async {
     if (id != null && id > 0) {
       return await Navigator.push(context,
           CupertinoPageRoute(builder: (context) => ProductDetailPage(id: id)));
     } else {
-      return await Navigator.pushReplacementNamed(context, "/product");
+      return await Navigator.push(context,
+          CupertinoPageRoute(builder: (context) => ProductPage(paramsSearch: paramsSearch)));
+      // return await Navigator.pushReplacementNamed(context, "/product");
     }
   }
 
-  static Future toNewsPage(BuildContext context, {int? id, NewsModel? data}) async {
-    if ((id != null && id > 0) || data!=null) {
-      return await Navigator.push(context,
-          CupertinoPageRoute(builder: (context) => NewsDetailPage(id: id, news: data)));
+  static Future toNewsPage(BuildContext context,
+      {int? id, NewsModel? data}) async {
+    if ((id != null && id > 0) || data != null) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => NewsDetailPage(id: id, news: data)));
     } else {
       return await Navigator.pushReplacementNamed(context, "/news");
     }
@@ -80,5 +88,13 @@ class CommonNavigates {
 
   static exit(BuildContext context) {
     return SystemNavigator.pop();
+  }
+
+  static Future toDialogSearch(BuildContext context) async {
+    return await Navigator.of(context).push(MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) {
+          return SearchDialog();
+        },
+        fullscreenDialog: true));
   }
 }

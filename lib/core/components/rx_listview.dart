@@ -100,9 +100,7 @@ class _RxDataListViewState extends State<RxListView>
         controller: widget.scrollController != null ? null : _scrollController,
         physics: const BouncingScrollPhysics(),
         scrollDirection: widget.scrollDirection ?? Axis.vertical,
-        itemCount: widget.onNextPage != null
-            ? (widget.data.length + 1)
-            : widget.data.length,
+        itemCount: kItemOnPage,
         padding: const EdgeInsets.all(kDefaultPadding),
         itemBuilder: (context, index) {
           return widget.awaiting ??
@@ -111,7 +109,7 @@ class _RxDataListViewState extends State<RxListView>
   }
 
   Widget _bodylist_notfound() {
-    return SliverToBoxAdapter(
+    return Center(
         child: Container(
       padding: const EdgeInsets.all(20),
       child: widget.noFound ?? Text("notfound".tr()),
@@ -136,8 +134,6 @@ class _RxDataListViewState extends State<RxListView>
           return Column(
             children: [
               widget.itemBuilder(context, index),
-              // if (widget.isDivider && index != widget.data.length - 1)
-              //   RxDivider()
             ],
           );
         }
@@ -156,13 +152,10 @@ class _RxDataListViewState extends State<RxListView>
   }
 
   Widget _buildProgressIndicator() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Center(
-        child: Opacity(
-          opacity: (isLoading) ? 1.0 : 0.0,
-          child: const CupertinoActivityIndicator(),
-        ),
+    return Center(
+      child: Opacity(
+        opacity: (isLoading) ? 1.0 : 0.0,
+        child: const CupertinoActivityIndicator(),
       ),
     );
   }

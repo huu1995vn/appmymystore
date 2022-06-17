@@ -38,7 +38,7 @@ class ItemProductWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            itemProduct.productname ?? "",
+                            itemProduct.name ?? "",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -55,23 +55,23 @@ class ItemProductWidget extends StatelessWidget {
                       ),
                     ),
                    
-                    Text.rich(
-                      TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: "${itemProduct.createdate}",
-                              style:
-                                  const TextStyle(fontStyle: FontStyle.italic)),
-                          // TextSpan(
-                          //     text: "${itemProduct.views} lượt xem",
-                          //     style:
-                          //         const TextStyle(fontWeight: FontWeight.bold)),
-                        ],
-                        style: const TextStyle(
-                          fontSize: 10,
-                        ).textOpacity(0.5).italic.light,
-                      ),
-                    ),
+                    // Text.rich(
+                    //   TextSpan(
+                    //     children: <TextSpan>[
+                    //       TextSpan(
+                    //           text: "${itemProduct.createdate}",
+                    //           style:
+                    //               const TextStyle(fontStyle: FontStyle.italic)),
+                    //       // TextSpan(
+                    //       //     text: "${itemProduct.views} lượt xem",
+                    //       //     style:
+                    //       //         const TextStyle(fontWeight: FontWeight.bold)),
+                    //     ],
+                    //     style: const TextStyle(
+                    //       fontSize: 10,
+                    //     ).textOpacity(0.5).italic.light,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

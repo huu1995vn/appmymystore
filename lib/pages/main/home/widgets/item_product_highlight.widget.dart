@@ -63,7 +63,7 @@ class ItemProductHighlightWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      itemProduct.productname??"",
+                      itemProduct.name??"",
                       style: const TextStyle(
                         color: Colors.white,
                       ),
@@ -73,24 +73,24 @@ class ItemProductHighlightWidget extends StatelessWidget {
                       style: const TextStyle(color: AppColors.primary, fontSize: 15)
                           .bold,
                     ),
-                    Text.rich(
-                      TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: "${itemProduct.createdate}",
-                              style:
-                                  const TextStyle(fontStyle: FontStyle.italic)),
-                          // TextSpan(
-                          //     text: "${itemProduct.views} lượt xem",
-                          //     style:
-                          //         const TextStyle(fontWeight: FontWeight.bold)),
-                        ],
-                        style: const TextStyle(
-                          color: AppColors.white,
-                          fontSize: 10,
-                        ).textOpacity(0.5).italic.light,
-                      ),
-                    )
+                    // Text.rich(
+                    //   TextSpan(
+                    //     children: <TextSpan>[
+                    //       TextSpan(
+                    //           text: "${itemProduct.createdate}",
+                    //           style:
+                    //               const TextStyle(fontStyle: FontStyle.italic)),
+                    //       // TextSpan(
+                    //       //     text: "${itemProduct.views} lượt xem",
+                    //       //     style:
+                    //       //         const TextStyle(fontWeight: FontWeight.bold)),
+                    //     ],
+                    //     style: const TextStyle(
+                    //       color: AppColors.white,
+                    //       fontSize: 10,
+                    //     ).textOpacity(0.5).italic.light,
+                    //   ),
+                    // )
                     
                   ],
                 ),

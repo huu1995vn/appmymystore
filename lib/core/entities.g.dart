@@ -53,6 +53,28 @@ Map<String, dynamic> _$NewsModelToJson(NewsModel instance) => <String, dynamic>{
       'webresourceurl': instance.webresourceurl,
     };
 
+NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
+    NotificationModel(
+      id: json['id'] as String,
+      notificationtypeid: json['notificationtypeid'] as String,
+      subject: json['subject'] as String,
+      message: json['message'] as String,
+      createdate: json['createdate'] as String,
+    )
+      ..TotalRow = json['TotalRow'] as String
+      ..RowIndex = json['RowIndex'] as String;
+
+Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'id': instance.id,
+      'notificationtypeid': instance.notificationtypeid,
+      'subject': instance.subject,
+      'message': instance.message,
+      'createdate': instance.createdate,
+    };
+
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel()
   ..TotalRow = json['TotalRow'] as String
   ..RowIndex = json['RowIndex'] as String
@@ -116,7 +138,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..producttypeid = json['producttypeid'] as String
   ..img = json['img'] as String
   ..imglist = json['imglist'] as String
-  ..productname = json['productname'] as String
+  ..name = json['name'] as String
   ..description = json['description'] as String
   ..price = json['price'] as String
   ..year = json['year'] as String
@@ -134,11 +156,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..review5 = json['review5'] as String
   ..keywordsearch = json['keywordsearch'] as String
   ..status = json['status'] as String
-  ..verifydate = json['verifydate'] as String
-  ..createuserid = json['createuserid'] as String
-  ..createdate = json['createdate'] as String
-  ..updateuserid = json['updateuserid'] as String
-  ..updatedate = json['updatedate'] as String;
+  ..verifydate = json['verifydate'] as String;
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
     <String, dynamic>{
@@ -157,7 +175,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'producttypeid': instance.producttypeid,
       'img': instance.img,
       'imglist': instance.imglist,
-      'productname': instance.productname,
+      'name': instance.name,
       'description': instance.description,
       'price': instance.price,
       'year': instance.year,
@@ -176,8 +194,64 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'keywordsearch': instance.keywordsearch,
       'status': instance.status,
       'verifydate': instance.verifydate,
-      'createuserid': instance.createuserid,
-      'createdate': instance.createdate,
-      'updateuserid': instance.updateuserid,
-      'updatedate': instance.updatedate,
+    };
+
+AdvertModel _$AdvertModelFromJson(Map<String, dynamic> json) => AdvertModel()
+  ..TotalRow = json['TotalRow'] as String
+  ..RowIndex = json['RowIndex'] as String
+  ..id = json['id'] as String
+  ..code = json['code'] as String
+  ..seoid = json['seoid'] as String
+  ..adminid = json['adminid'] as String
+  ..img = json['img'] as String
+  ..userid = json['userid'] as String
+  ..adverttypeid = json['adverttypeid'] as String
+  ..referenceid = json['referenceid'] as String
+  ..widgetcontentid = json['widgetcontentid'] as String
+  ..regionname = json['regionname'] as String
+  ..displayName = json['displayName'] as String
+  ..jobtitle = json['jobtitle'] as String
+  ..phone = json['phone'] as String
+  ..email = json['email'] as String
+  ..name = json['name'] as String
+  ..price = json['price'] as String
+  ..discountprice = json['discountprice'] as String
+  ..saleprice = json['saleprice'] as String
+  ..discount = json['discount'] as String
+  ..expirationdate = json['expirationdate'] as String
+  ..reminderdate = json['reminderdate'] as String
+  ..note = json['note'] as String
+  ..status = json['status'] as String
+  ..adverttypename = json['adverttypename'] as String
+  ..adminname = json['adminname'] as String;
+
+Map<String, dynamic> _$AdvertModelToJson(AdvertModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'id': instance.id,
+      'code': instance.code,
+      'seoid': instance.seoid,
+      'adminid': instance.adminid,
+      'img': instance.img,
+      'userid': instance.userid,
+      'adverttypeid': instance.adverttypeid,
+      'referenceid': instance.referenceid,
+      'widgetcontentid': instance.widgetcontentid,
+      'regionname': instance.regionname,
+      'displayName': instance.displayName,
+      'jobtitle': instance.jobtitle,
+      'phone': instance.phone,
+      'email': instance.email,
+      'name': instance.name,
+      'price': instance.price,
+      'discountprice': instance.discountprice,
+      'saleprice': instance.saleprice,
+      'discount': instance.discount,
+      'expirationdate': instance.expirationdate,
+      'reminderdate': instance.reminderdate,
+      'note': instance.note,
+      'status': instance.status,
+      'adverttypename': instance.adverttypename,
+      'adminname': instance.adminname,
     };

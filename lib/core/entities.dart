@@ -70,6 +70,26 @@ class NewsModel extends Entity {
   Map<String, dynamic> toJson() => _$NewsModelToJson(this);
 }
 
+@JsonSerializable()
+class NotificationModel extends Entity {
+  final String id;
+  final String notificationtypeid;
+  final String subject;
+  final String message;
+  final String createdate;
+  NotificationModel({
+    required this.id,
+    required this.notificationtypeid,
+    required this.subject,
+    required this.message,
+    required this.createdate,
+  });
+
+  factory NotificationModel.fromJson(Map<String, dynamic> json) =>
+      _$NotificationModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificationModelToJson(this);
+}
 
 @JsonSerializable()
 class UserModel extends Entity {
@@ -92,12 +112,11 @@ class UserModel extends Entity {
   late String address;
   late String note;
   late String status = "1";
-  UserModel(){
+  UserModel() {
     username = "";
     password = "";
     email = "";
     phone = "";
-
   }
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
@@ -196,6 +215,7 @@ class UserModel extends Entity {
         ],
       };
 }
+
 @JsonSerializable()
 class ProductModel extends Entity {
   late String id;
@@ -211,7 +231,7 @@ class ProductModel extends Entity {
   late String producttypeid;
   late String img;
   late String imglist;
-  late String productname = "";
+  late String name = "";
   late String description;
   late String price;
   late String year;
@@ -228,13 +248,9 @@ class ProductModel extends Entity {
   late String review4;
   late String review5;
   late String keywordsearch;
-  late String status ="1";
+  late String status = "1";
   late String verifydate;
-  late String createuserid;
-  late String createdate;
-  late String updateuserid;
-  late String updatedate;
-  
+
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
@@ -244,7 +260,7 @@ class ProductModel extends Entity {
     try {
       int fileId = 0;
       fileId = int.parse(img);
-      return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: productname);
+      return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: name);
     } catch (e) {
       CommonMethods.wirtePrint(e);
 
@@ -289,7 +305,7 @@ class ProductModel extends Entity {
           producttypeid,
           img,
           imglist,
-          productname,
+          name,
           description,
           price,
           year,
@@ -336,7 +352,7 @@ class ProductModel extends Entity {
           producttypeid,
           img,
           imglist,
-          productname,
+          name,
           description,
           price,
           year,
@@ -347,6 +363,48 @@ class ProductModel extends Entity {
         ],
       };
 }
+
+@JsonSerializable()
+class AdvertModel extends Entity {
+  late String id;
+  late String code;
+  late String seoid;
+  late String adminid;
+  late String img;
+  late String userid;
+  late String adverttypeid;
+  late String referenceid;
+  late String widgetcontentid;
+  late String regionname;
+  late String displayName;
+  late String jobtitle;
+  late String phone;
+  late String email;
+  late String name;
+  late String price;
+  late String discountprice;
+  late String saleprice;
+  late String discount;
+  late String expirationdate;
+  late String reminderdate;
+  late String note;
+  late String status;
+  late String adverttypename;
+  late String adminname;
+  
+  String get URLIMG {
+    int fileId = 0;
+    fileId = int.parse(img);
+    return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: name);
+  }
+
+  AdvertModel();
+  factory AdvertModel.fromJson(Map<String, dynamic> json) =>
+      _$AdvertModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AdvertModelToJson(this);
+}
+
 class AppTheme {
   ThemeMode mode;
   String title;
@@ -365,6 +423,7 @@ class Categorie {
 
   Categorie({required this.id, required this.categoryname});
 }
+
 class TextSearchModel {
   bool isLocal = true;
   String text;

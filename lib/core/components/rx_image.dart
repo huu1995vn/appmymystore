@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 class RxImage extends StatelessWidget {
@@ -44,7 +45,7 @@ class RxImage extends StatelessWidget {
               width: width ?? MediaQuery.of(context).size.width,
               height: fullHeight ? MediaQuery.of(context).size.height : height,
               placeholder: MemoryImage(KTRANSPARENTIMAGE),
-              image: NetworkImage(url),
+              image: RxImageProvider(url),
               fit: fit,
             );
     } else {

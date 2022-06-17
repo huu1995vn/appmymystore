@@ -38,7 +38,7 @@ class ItemProductWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            itemProduct.name,
+                            itemProduct.productname ?? "",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -59,7 +59,7 @@ class ItemProductWidget extends StatelessWidget {
                       TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                              text: "${itemProduct.publishdate}",
+                              text: "${itemProduct.createdate}",
                               style:
                                   const TextStyle(fontStyle: FontStyle.italic)),
                           // TextSpan(

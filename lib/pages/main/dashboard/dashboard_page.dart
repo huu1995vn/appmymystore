@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -31,7 +32,7 @@ class _DashboardPageState extends State<DashboardPage> {
               body: Column(
         children: [
           RxBuildItem(
-              title: "My information",
+              title: "personalinformation".tr(),
               icon: Icon(Icons.account_circle),
               onTap: () => CommonNavigates.toUserPage(context),
               trailing: Icon(
@@ -40,7 +41,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 size: SizeConfig.screenHeight/ 21.34,
               )),
           RxBuildItem(
-              title: "Products",
+              title: "manager.raoxe".tr(),
               icon: Icon(Icons.car_crash_sharp),
               onTap: () {},
               trailing: Icon(
@@ -49,7 +50,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 size: SizeConfig.screenHeight/ 21.34,
               )),
           RxBuildItem(
-              title: "Promotions",
+              title: "offer".tr(),
               icon: Icon(Icons.shopping_basket),
               onTap: () {},
               trailing: Icon(
@@ -58,7 +59,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 size: SizeConfig.screenHeight/ 21.34,
               )),
           RxBuildItem(
-              title: "Address information",
+              title: "manager.address".tr(),
               icon: Icon(Icons.location_city),
               onTap: () {},
               trailing: Icon(
@@ -67,7 +68,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 size: SizeConfig.screenHeight/ 21.34,
               )),
           RxBuildItem(
-              title: "Settings",
+              title: "setting".tr(),
               icon: Icon(Icons.settings),
               onTap: () => CommonNavigates.toSettingsPage(context),
               trailing: Icon(

@@ -16,4 +16,4 @@ $ flutter pub run flutter_launcher_icons:main
 flutter clean
 
 ## code generation libraries
-flutter pub run build_runner watch
+flutter pub run build_runner watch --delete-conflicting-outputs

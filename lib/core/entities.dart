@@ -70,37 +70,9 @@ class NewsModel extends Entity {
   Map<String, dynamic> toJson() => _$NewsModelToJson(this);
 }
 
-@JsonSerializable()
-class ProductModel extends Entity {
-  late String id;
-  late String type;
-  late String img;
-  late String name;
-  late String desc;
-  late String views;
-  late String publishdate;
-  late String prefix;
-  late String url;
-  late String webresourceid;
-  late String webresourcename;
-  late String webresourceurl;
-  String get URLIMG {
-    int fileId = 0;
-    if (img.isNotEmpty) {
-      fileId = int.parse(img);
-    }
-    return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: url);
-  }
-
-  ProductModel();
-  factory ProductModel.fromJson(Map<String, dynamic> json) =>
-      _$ProductModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
-}
 
 @JsonSerializable()
-class UserModel {
+class UserModel extends Entity {
   late String id;
   late String img;
   late String cityid;
@@ -224,7 +196,157 @@ class UserModel {
         ],
       };
 }
+@JsonSerializable()
+class ProductModel extends Entity {
+  late String id;
+  late String userid;
+  late String usercontactid;
+  late String brandid;
+  late String modelid;
+  late String bodytypeid;
+  late String fueltypeid;
+  late String madeinid;
+  late String colorid;
+  late String cityid;
+  late String producttypeid;
+  late String img;
+  late String imglist;
+  late String productname = "";
+  late String description;
+  late String price;
+  late String year;
+  late String seat;
+  late String door;
+  late String km;
+  late String state;
+  late String views;
+  late String ratingvalue;
+  late String reviewcount;
+  late String review1;
+  late String review2;
+  late String review3;
+  late String review4;
+  late String review5;
+  late String keywordsearch;
+  late String status ="1";
+  late String verifydate;
+  late String createuserid;
+  late String createdate;
+  late String updateuserid;
+  late String updatedate;
+  
+  ProductModel();
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductModelFromJson(json);
 
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
+  String get URLIMG {
+    try {
+      int fileId = 0;
+      fileId = int.parse(img);
+      return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: productname);
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+
+      return "";
+    }
+  }
+
+  Map<String, dynamic> toInsert() => <String, dynamic>{
+        'id': -1,
+        'fields': <String>[
+          "UserId",
+          "UserContactId",
+          "BrandId",
+          "ModelId",
+          "BodyTypeId",
+          "FuelTypeId",
+          "MadeInId",
+          "ColorId",
+          "CityId",
+          "ProductTypeId",
+          "FileId",
+          "FileIdList",
+          "ProductName",
+          "Description",
+          "Price",
+          "Year",
+          "Seat",
+          "Door",
+          "KM",
+          "State",
+        ],
+        'datas': <dynamic>[
+          userid,
+          usercontactid,
+          brandid,
+          modelid,
+          bodytypeid,
+          fueltypeid,
+          madeinid,
+          colorid,
+          cityid,
+          producttypeid,
+          img,
+          imglist,
+          productname,
+          description,
+          price,
+          year,
+          seat,
+          door,
+          km,
+          state,
+        ],
+      };
+  Map<String, dynamic> toUpdate(id) => <String, dynamic>{
+        'id': id,
+        'fields': <String>[
+          "UserId",
+          "UserContactId",
+          "BrandId",
+          "ModelId",
+          "BodyTypeId",
+          "FuelTypeId",
+          "MadeInId",
+          "ColorId",
+          "CityId",
+          "ProductTypeId",
+          "FileId",
+          "FileIdList",
+          "ProductName",
+          "Description",
+          "Price",
+          "Year",
+          "Seat",
+          "Door",
+          "KM",
+          "State",
+        ],
+        'datas': <dynamic>[
+          userid,
+          usercontactid,
+          brandid,
+          modelid,
+          bodytypeid,
+          fueltypeid,
+          madeinid,
+          colorid,
+          cityid,
+          producttypeid,
+          img,
+          imglist,
+          productname,
+          description,
+          price,
+          year,
+          seat,
+          door,
+          km,
+          state,
+        ],
+      };
+}
 class AppTheme {
   ThemeMode mode;
   String title;

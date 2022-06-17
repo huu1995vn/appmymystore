@@ -1,6 +1,7 @@
 // ignore_for_file: empty_catches, no_leading_underscores_for_local_identifiers
 
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';

@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage>
       "n": kItemOnPage
     };
     ResponseModel res = await DaiLyXeApiBLL_Page().news(params);
-    List<dynamic> data = jsonDecode(res.data["newslist"]);
+    List<dynamic> data   = jsonDecode(res.data["newslist"]);
     // ignore: unnecessary_cast
     List<ProductModel> newslist = data
         .map((val) => ProductModel.fromJson(val))
@@ -98,7 +98,8 @@ class _HomePageState extends State<HomePage>
             _buildTitle("highlight".tr(), () {}),
             SizedBox(
                 height: (SizeConfig.screenHeight / 4) + 28,
-                child: RxListView(
+                child: 
+                RxListView(
                   listData,
                   (context, index) {
                     return ItemProductHighlightWidget(listData![index]);

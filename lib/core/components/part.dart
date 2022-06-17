@@ -1,12 +1,18 @@
 // ignore_for_file: non_constant_identifier_names, must_be_immutable
 
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_skeleton/flutter_skeleton.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -259,3 +265,20 @@ Widget RxCreateAccountLabel(context) {
     ),
   );
 }
+ImageProvider<Object> RxImageProvider(String url) {
+    if (url.isEmpty) {
+      url = NOIMAGE;
+    }
+    if (CommonMethods.isURl(url)) {
+      if (CommonConfig.haveCacheImage) {
+        return CachedNetworkImageProvider(url);
+      } else {
+        return NetworkImage(url);
+      }
+    } else {
+      if (url.contains("assets/")) {
+        return AssetImage(url);
+      }
+      return FileImage(File(url));
+    }
+  }

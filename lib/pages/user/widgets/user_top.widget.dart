@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_rounded_button.dart';
 import 'package:raoxe/core/entities.dart';
@@ -48,7 +49,7 @@ class UserTopWidget extends StatelessWidget {
                       ),
                     ),
                     radius: 60.0,
-                    backgroundImage: NetworkImage(data!.URLIMG),
+                    backgroundImage: RxImageProvider(data!.URLIMG),
                   ),
                 ),
                 Text(

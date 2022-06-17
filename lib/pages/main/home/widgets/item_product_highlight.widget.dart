@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -27,7 +30,7 @@ class ItemProductHighlightWidget extends StatelessWidget {
               Radius.circular(10),
             ),
             image: DecorationImage(
-              image: NetworkImage(
+              image: RxImageProvider(
                 itemProduct.URLIMG,
               ),
               fit: BoxFit.cover,
@@ -60,7 +63,7 @@ class ItemProductHighlightWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      itemProduct.name,
+                      itemProduct.productname??"",
                       style: const TextStyle(
                         color: Colors.white,
                       ),
@@ -74,7 +77,7 @@ class ItemProductHighlightWidget extends StatelessWidget {
                       TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                              text: "${itemProduct.publishdate}",
+                              text: "${itemProduct.createdate}",
                               style:
                                   const TextStyle(fontStyle: FontStyle.italic)),
                           // TextSpan(

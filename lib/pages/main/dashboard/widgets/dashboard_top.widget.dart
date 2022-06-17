@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -38,7 +39,7 @@ class DashboardTopWidgetState extends State<DashboardTopWidget> {
                             width: SizeConfig.screenWidth/ 51.37),
                         color: Colors.white,
                         image: DecorationImage(
-                            image: NetworkImage(CommonMethods.buildUrlHinhDaiDien(
+                            image: RxImageProvider(CommonMethods.buildUrlHinhDaiDien(
                                 APITokenService.fileId,
                                 rewriteUrl: APITokenService.fullname)))),
                   ),

@@ -17,7 +17,8 @@ class DashboardTopWidget extends StatefulWidget {
 class DashboardTopWidgetState extends State<DashboardTopWidget> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return 
+    Padding(
       padding: const EdgeInsets.all(kDefaultPadding),
       child: SizedBox(
         height: SizeConfig.screenHeight / 3.84,

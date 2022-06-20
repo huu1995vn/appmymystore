@@ -48,39 +48,34 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.primary800,
-          elevation: 0.0,
-        ),
-        body: data == null
-            ? Container()
-            : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                UserTopWidget(data),
-                Expanded(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: SizeConfig.screenHeight / 34.15,
-                      ),
-                      RxBuildItem(
-                          title: "fullname".tr(),
-                          trailing: Text(data!.fullname)),
-                      RxBuildItem(
-                          title: "address".tr(), trailing: Text(data!.address)),
-                      RxBuildItem(
-                          title: "birthday".tr(),
-                          trailing: Text(CommonMethods.formatDateTime(
-                              CommonMethods.convertToDateTime(
-                                  data!.birthdate)))),
-                      RxBuildItem(
-                          title: "gender".tr(),
-                          trailing: Text(
-                            int.parse(data!.gender) == 1
-                                ? "male".tr()
-                                : "female".tr(),
-                          )),
-                    ],
-                  ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+              expandedHeight: 250.0,
+              flexibleSpace: UserTopWidget(data)),
+          SliverToBoxAdapter(
+              child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    RxBuildItem(
+                        title: "fullname".tr(), trailing: Text(data!.fullname)),
+                    RxBuildItem(
+                        title: "address".tr(), trailing: Text(data!.address)),
+                    RxBuildItem(
+                        title: "birthday".tr(),
+                        trailing: Text(CommonMethods.formatDateTime(
+                            CommonMethods.convertToDateTime(data!.birthdate)))),
+                    RxBuildItem(
+                        title: "gender".tr(),
+                        trailing: Text(
+                          int.parse(data!.gender) == 1
+                              ? "male".tr()
+                              : "female".tr(),
+                        )),
+                  ],
                 ),
                 Center(
                   child: Padding(
@@ -94,6 +89,62 @@ class _UserPageState extends State<UserPage> {
                     ),
                   ),
                 )
-              ]));
+              ],
+            ),
+          ))
+        ],
+      ),
+    );
   }
 }
+
+//     Scaffold(
+//         appBar: AppBar(
+//           backgroundColor: AppColors.primary800,
+//           elevation: 0.0,
+//         ),
+//         body: data == null
+//             ? Container()
+//             : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+//                 UserTopWidget(data),
+//                 Expanded(
+//                   child: Column(
+//                     children: [
+//                       SizedBox(
+//                         height: SizeConfig.screenHeight / 34.15,
+//                       ),
+//                       RxBuildItem(
+//                           title: "fullname".tr(),
+//                           trailing: Text(data!.fullname)),
+//                       RxBuildItem(
+//                           title: "address".tr(), trailing: Text(data!.address)),
+//                       RxBuildItem(
+//                           title: "birthday".tr(),
+//                           trailing: Text(CommonMethods.formatDateTime(
+//                               CommonMethods.convertToDateTime(
+//                                   data!.birthdate)))),
+//                       RxBuildItem(
+//                           title: "gender".tr(),
+//                           trailing: Text(
+//                             int.parse(data!.gender) == 1
+//                                 ? "male".tr()
+//                                 : "female".tr(),
+//                           )),
+//                     ],
+//                   ),
+//                 ),
+//                 Center(
+//                   child: Padding(
+//                     padding: EdgeInsets.all(kDefaultPadding),
+//                     child: SizedBox(
+//                       width: SizeConfig.screenWidth / 2,
+//                       child: RxPrimaryButton(
+//                         text: 'edit.text'.tr(),
+//                         onTap: () {},
+//                       ),
+//                     ),
+//                   ),
+//                 )
+//               ]));
+//   }
+// }

@@ -466,21 +466,28 @@ class AdvertModel extends Entity {
 @JsonSerializable()
 class ContactModel extends Entity {
   final String id;
-  final String userid;
+  late String userid;
   final String cityid;
   final String districtid;
   final String fullname;
   final String phone;
   final String address;
+  late String isdefault;  
   ContactModel({
-    required this.userid,
     required this.id,
     required this.cityid,
     required this.districtid,
     required this.phone,
     required this.address,
     required this.fullname
-  });
+  })
+  {
+    isdefault = "False";
+    userid = APITokenService.userId.toString();
+  }
+   bool get ISDEFAULT {
+    return isdefault == "true";
+  }
   factory ContactModel.fromJson(Map<String, dynamic> json) =>
       _$ContactModelFromJson(json);
 

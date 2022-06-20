@@ -281,7 +281,6 @@ Map<String, dynamic> _$AdvertModelToJson(AdvertModel instance) =>
     };
 
 ContactModel _$ContactModelFromJson(Map<String, dynamic> json) => ContactModel(
-      userid: json['userid'] as String,
       id: json['id'] as String,
       cityid: json['cityid'] as String,
       districtid: json['districtid'] as String,
@@ -290,7 +289,9 @@ ContactModel _$ContactModelFromJson(Map<String, dynamic> json) => ContactModel(
       fullname: json['fullname'] as String,
     )
       ..TotalRow = json['TotalRow'] as String
-      ..RowIndex = json['RowIndex'] as String;
+      ..RowIndex = json['RowIndex'] as String
+      ..userid = json['userid'] as String
+      ..isdefault = json['isdefault'] as String;
 
 Map<String, dynamic> _$ContactModelToJson(ContactModel instance) =>
     <String, dynamic>{
@@ -303,4 +304,5 @@ Map<String, dynamic> _$ContactModelToJson(ContactModel instance) =>
       'fullname': instance.fullname,
       'phone': instance.phone,
       'address': instance.address,
+      'isdefault': instance.isdefault,
     };

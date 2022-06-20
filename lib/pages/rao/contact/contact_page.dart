@@ -7,6 +7,7 @@ import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/rao/advert/widgets/item_advert.widget.dart';
 import 'package:raoxe/pages/rao/contact/widgets/item_contact.widget.dart';
@@ -78,6 +79,13 @@ class _ContactPageState extends State<ContactPage> {
     if (mounted) scrollController.dispose();
   }
 
+  onDelete(int index) {
+    //call api dele
+    setState(() {
+      listData!.remove(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,16 +93,21 @@ class _ContactPageState extends State<ContactPage> {
         body: RxScrollView(
           listData,
           (BuildContext context, int index) {
-            return ItemContactWidget(listData![index]);
+            ContactModel item = listData![index];
+            return ItemContactWidget(listData![index],
+                onTap: () => CommonNavigates.toContactPage(context, item: item),
+                onDelete: () => onDelete(index));
           },
           totalItems,
           appBar: SliverAppBar(
+            centerTitle: true,
             title: Text('address'.tr(),
                 style: TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
+                  // color: Theme.of(context).primaryColor
                 )),
-           elevation: 0.0,
+            elevation: 0.0,
           ),
           key: const Key("LContact"),
           controller: scrollController,

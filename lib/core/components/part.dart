@@ -38,6 +38,16 @@ Widget RxBuildItem(
   );
 }
 
+Widget RxText(String data,
+    {Key? key,
+    TextStyle? style,
+    TextAlign? textAlign,
+    TextOverflow? overflow,
+    int? maxLines}) {
+  return Text(data ?? "not.update".tr(),
+      style: style, textAlign: textAlign, maxLines: maxLines);
+}
+
 class RxDisabled extends StatelessWidget {
   final Widget child;
   final bool disabled;

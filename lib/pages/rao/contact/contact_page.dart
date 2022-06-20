@@ -8,17 +8,18 @@ import 'package:raoxe/core/components/index.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/pages/advert/widgets/item_advert.widget.dart';
+import 'package:raoxe/pages/rao/advert/widgets/item_advert.widget.dart';
+import 'package:raoxe/pages/rao/contact/widgets/item_contact.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-class AdvertPage extends StatefulWidget {
-  const AdvertPage({Key? key}) : super(key: key);
+class ContactPage extends StatefulWidget {
+  const ContactPage({Key? key}) : super(key: key);
 
   @override
-  State<AdvertPage> createState() => _AdvertPageState();
+  State<ContactPage> createState() => _ContactPageState();
 }
 
-class _AdvertPageState extends State<AdvertPage> {
+class _ContactPageState extends State<ContactPage> {
   @override
   void initState() {
     super.initState();
@@ -27,7 +28,7 @@ class _AdvertPageState extends State<AdvertPage> {
 
   int paging = 1;
   int totalItems = 0;
-  List<AdvertModel>? listData;
+  List<ContactModel>? listData;
   AutoScrollController scrollController = AutoScrollController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
@@ -42,8 +43,8 @@ class _AdvertPageState extends State<AdvertPage> {
       ResponseModel res = await DaiLyXeApiBLL_APIUser().advertlist(params);
       if (res.status > 0) {
         List<dynamic> data = jsonDecode(res.data);
-        List<AdvertModel> newslist =
-            data.map((val) => AdvertModel.fromJson(val)).toList();
+        List<ContactModel> newslist =
+            data.map((val) => ContactModel.fromJson(val)).toList();
         setState(() {
           totalItems =
               newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
@@ -84,18 +85,18 @@ class _AdvertPageState extends State<AdvertPage> {
         body: RxScrollView(
           listData,
           (BuildContext context, int index) {
-            return ItemAdvertWidget(listData![index]);
+            return ItemContactWidget(listData![index]);
           },
           totalItems,
           appBar: SliverAppBar(
-            title: Text('adv'.tr(),
+            title: Text('address'.tr(),
                 style: TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
                 )),
            elevation: 0.0,
           ),
-          key: const Key("LAdv"),
+          key: const Key("LContact"),
           controller: scrollController,
           onNextPage: onNextPage,
           onRefresh: onRefresh,

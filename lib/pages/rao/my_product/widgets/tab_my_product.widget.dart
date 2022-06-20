@@ -6,10 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/pages/my_product/widgets/item_my_product.widget.dart';
+import 'package:raoxe/pages/rao/my_product/widgets/item_my_product.widget.dart';
 
 class TabMyProductWidget extends StatefulWidget {
   dynamic status;

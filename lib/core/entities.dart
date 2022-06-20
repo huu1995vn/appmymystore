@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -225,20 +226,20 @@ class ProductModel extends Entity {
   late String usercontactid;
   late String usercontactname = "";
   late String brandid;
-  late String brandname="";
+  late String brandname = "";
   late String modelid;
-  late String modelname="";
+  late String modelname = "";
   late String bodytypeid;
-  late String bodytypename="";
+  late String bodytypename = "";
   late String fueltypeid;
-  late String fueltypename="";
+  late String fueltypename = "";
   late String madeinid;
-  late String madeinname="";
+  late String madeinname = "";
   late String colorid;
-  late String colorname="";
+  late String colorname = "";
   late String cityid;
-  late String cityname="";
-  late String producttypeid="1";
+  late String cityname = "";
+  late String producttypeid = "1";
   late String producttypename;
   late String img;
   late String imglist;
@@ -249,7 +250,7 @@ class ProductModel extends Entity {
   late String seat;
   late String door;
   late String km;
-  late String state="1";
+  late String state = "1";
   late String views;
   late String ratingvalue;
   late String reviewcount;
@@ -272,9 +273,9 @@ class ProductModel extends Entity {
   //  + 1: Ban
   //  + 2: Mua
 
-  // Products.State // tạm bỏ qua mạc định là 
+  // Products.State // tạm bỏ qua mạc định là
   //  + 1: Moi
-  //  + 2: Da su dung  
+  //  + 2: Da su dung
   // Products.Status
   //  + 1: Tao moi
   //  + 2: Da duyet
@@ -285,9 +286,19 @@ class ProductModel extends Entity {
     return CommonMethods.timeagoFormat(
         CommonMethods.convertToDateTime(verifydate));
   }
+
+  String get NUMPRICE {
+    try {
+      return NumberFormat.decimalPattern().format(int.parse(price));
+    } catch (e) {
+      return "not.update".tr();
+    }
+  }
+
   int get STATUS {
     return int.parse(status);
   }
+
   String get URLIMGUSER {
     try {
       int fileId = 0;
@@ -299,6 +310,7 @@ class ProductModel extends Entity {
       return "";
     }
   }
+
   String get URLIMG {
     try {
       int fileId = 0;
@@ -449,6 +461,30 @@ class AdvertModel extends Entity {
       _$AdvertModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$AdvertModelToJson(this);
+}
+
+@JsonSerializable()
+class ContactModel extends Entity {
+  final String id;
+  final String userid;
+  final String cityid;
+  final String districtid;
+  final String fullname;
+  final String phone;
+  final String address;
+  ContactModel({
+    required this.userid,
+    required this.id,
+    required this.cityid,
+    required this.districtid,
+    required this.phone,
+    required this.address,
+    required this.fullname
+  });
+  factory ContactModel.fromJson(Map<String, dynamic> json) =>
+      _$ContactModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ContactModelToJson(this);
 }
 
 class AppTheme {

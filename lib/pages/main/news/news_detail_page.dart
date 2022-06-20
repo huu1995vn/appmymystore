@@ -8,8 +8,8 @@ import 'package:raoxe/core/entities.dart';
 
 class NewsDetailPage extends StatefulWidget {
   final int? id;
-  final NewsModel? news;
-  const NewsDetailPage({super.key, this.id, this.news});
+  final NewsModel? item;
+  const NewsDetailPage({super.key, this.id, this.item});
 
   @override
   State<NewsDetailPage> createState() => NewsDetailPageState();
@@ -26,9 +26,9 @@ class NewsDetailPageState extends State<NewsDetailPage> {
   String? initialUrl;
   Map<String, dynamic>? data;
   loadData() async {
-    if (widget.news != null) {
+    if (widget.item != null) {
       setState(() {
-        initialUrl = widget.news!.LINK;
+        initialUrl = widget.item!.LINK;
       });
     } else {
       ResponseModel res = await DaiLyXeApiBLL_APIGets().newsdetail(widget.id!);

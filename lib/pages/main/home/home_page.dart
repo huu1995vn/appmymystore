@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage>
         slivers: <Widget>[
           SliverToBoxAdapter(
               child: Column(children: [
-            ListBannerWidget(),
+            const ListBannerWidget(),
             _buildTitle("new".tr(), () {}),
           ]))
         ],
@@ -122,17 +122,17 @@ class _HomePageState extends State<HomePage>
         Padding(
           padding: const EdgeInsets.only(right: kDefaultPadding),
           child: GestureDetector(
-              onTap: () {},
+              onTap: () {CommonNavigates.toDialogSearch(context);},
               child: Ink(
                 decoration: const ShapeDecoration(
                   color: AppColors.grayDark,
                   shape: CircleBorder(),
                 ),
                 child: IconButton(
-                  iconSize: 25,
+                  iconSize: 22,
                   icon: const Icon(Icons.search),
-                  color: AppColors.black,
-                  onPressed: () {CommonNavigates.toDialogSearch(context);},
+                  color: AppColors.primary,
+                  onPressed: () {},
                 ),
               )),
         )
@@ -146,7 +146,7 @@ _buildTitle(String header, void Function()? onTap) {
     padding:
         const EdgeInsets.only(right: kDefaultPadding, left: kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(header.toUpperCase(), style: const TextStyle().bold),
+      Text(header.toUpperCase(), style: const TextStyle(color: AppColors.primary).bold),
       GestureDetector(
         onTap: () {},
         child: Ink(
@@ -154,12 +154,7 @@ _buildTitle(String header, void Function()? onTap) {
             color: AppColors.grayDark,
             shape: CircleBorder(),
           ),
-          child: IconButton(
-            iconSize: 25,
-            icon: const Icon(Icons.forward_outlined),
-            color: AppColors.black,
-            onPressed: () {},
-          ),
+          child: const Icon(Icons.arrow_right, size: 30, color: AppColors.primary,),
         ),
       )
     ]),

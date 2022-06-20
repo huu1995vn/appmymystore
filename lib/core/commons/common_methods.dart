@@ -24,6 +24,7 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../pipes/timeago/timeago.dart' as timeago;
+import '../pipes/short_currency.dart' as shortCurrency;
 
 class CommonMethods {
   static bool isURl(String str) {
@@ -269,7 +270,12 @@ class CommonMethods {
     } catch (e) {}
     return strTimeAgo;
   }
-
+  static formatShortCurrency(dynamic amount) {
+    try {
+      return shortCurrency.format(amount);
+    } catch (e) {}
+    return "not.update".tr();
+  }
   static Future<T?> openWebView<T>(context, String url, {String? title}) async {
     if (CommonMethods.isMobile()) {
       return await Navigator.push(

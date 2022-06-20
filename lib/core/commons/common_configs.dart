@@ -22,7 +22,7 @@ class CommonConfig {
   static String uriPrefixDynamicLink = "https://raoxe.page.link";
   static String apiHost = "https://dailyxe.com.vn";
   static String appStoreID = "1486119532";
-  static bool haveCacheImage = false;
+  static bool haveCacheImage = true;
   static int version_masterdata = 1;
   static int timeVerify = 2; // phút
   static String hotSearch = "vinfast,ford,xe moi";

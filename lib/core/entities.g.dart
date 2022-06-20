@@ -279,3 +279,28 @@ Map<String, dynamic> _$AdvertModelToJson(AdvertModel instance) =>
       'adverttypename': instance.adverttypename,
       'adminname': instance.adminname,
     };
+
+ContactModel _$ContactModelFromJson(Map<String, dynamic> json) => ContactModel(
+      userid: json['userid'] as String,
+      id: json['id'] as String,
+      cityid: json['cityid'] as String,
+      districtid: json['districtid'] as String,
+      phone: json['phone'] as String,
+      address: json['address'] as String,
+      fullname: json['fullname'] as String,
+    )
+      ..TotalRow = json['TotalRow'] as String
+      ..RowIndex = json['RowIndex'] as String;
+
+Map<String, dynamic> _$ContactModelToJson(ContactModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'id': instance.id,
+      'userid': instance.userid,
+      'cityid': instance.cityid,
+      'districtid': instance.districtid,
+      'fullname': instance.fullname,
+      'phone': instance.phone,
+      'address': instance.address,
+    };

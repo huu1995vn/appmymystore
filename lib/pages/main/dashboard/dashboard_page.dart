@@ -58,19 +58,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 color: Colors.black45,
                 size: SizeConfig.screenHeight / 21.34,
               )),
-          // RxBuildItem(
-          //     title: "offer".tr(),
-          //     icon: Icon(Icons.shopping_basket),
-          //     onTap: () {},
-          //     trailing: Icon(
-          //       Icons.keyboard_arrow_right,
-          //       color: Colors.black45,
-          //       size: SizeConfig.screenHeight / 21.34,
-          //     )),
           RxBuildItem(
               title: "manager.address".tr(),
               icon: Icon(Icons.location_city),
-              onTap: () {},
+              onTap: () => CommonNavigates.toContactPage(context),
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,

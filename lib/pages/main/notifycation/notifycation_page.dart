@@ -84,6 +84,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
             floating: true,
             automaticallyImplyLeading: false,
             elevation: 0.0,
+            centerTitle: true,
             backgroundColor: Colors.transparent,
             // leading: Container(child: null),
           ),

@@ -26,7 +26,6 @@ class SettingsPage extends StatelessWidget {
         title: Text(
           'setting'.tr(),
           style: TextStyle(
-            color: kWhite,
             fontSize: 19,
             fontWeight: FontWeight.bold,
           ),

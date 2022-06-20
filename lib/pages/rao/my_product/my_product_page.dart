@@ -49,6 +49,7 @@ class _MyProductPageState extends State<MyProductPage> {
                         fontWeight: FontWeight.bold,
                       )),
                   elevation: 0.0,
+                  centerTitle: true,
                 ),
                 SliverPersistentHeader(
                   pinned: true,

@@ -100,13 +100,17 @@ class _ContactPageState extends State<ContactPage> {
           },
           totalItems,
           appBar: SliverAppBar(
-            centerTitle: true,
+             iconTheme: IconThemeData(
+              color: AppColors.primary, //change your color here
+            ),
+              centerTitle: true,
             title: Text('address'.tr(),
                 style: TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
-                  // color: Theme.of(context).primaryColor
+                  color: AppColors.primary
                 )),
+            backgroundColor: Colors.transparent,
             elevation: 0.0,
           ),
           key: const Key("LContact"),

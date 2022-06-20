@@ -265,6 +265,48 @@ Widget RxCreateAccountLabel(context) {
     ),
   );
 }
+
+class RxAvatarImage extends StatelessWidget {
+  final String url;
+  final double? width;
+  final double? height;
+  const RxAvatarImage(this.url, {Key? key, this.width, this.height})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: width,
+        height: height,
+        child: RxCircleAvatar(
+            backgroundImage: RxImageProvider(url)));
+  }
+}
+
+class RxCircleAvatar extends CircleAvatar {
+  const RxCircleAvatar(
+      {super.key,
+      Widget? child,
+      Color? backgroundColor,
+      ImageProvider<Object>? backgroundImage,
+      ImageProvider<Object>? foregroundImage,
+      // void Function(Object, StackTrace)? onBackgroundImageError,
+      void Function(Object, StackTrace)? onForegroundImageError,
+      Color? foregroundColor,
+      double? radius,
+      double? minRadius,
+      double? maxRadius})
+      : super(
+            child: child,
+            backgroundColor: backgroundColor ?? Colors.transparent,
+            backgroundImage: backgroundImage,
+            foregroundImage: foregroundImage,
+            // onBackgroundImageError: onBackgroundImageError,
+            foregroundColor: foregroundColor,
+            radius: radius,
+            minRadius: minRadius,
+            maxRadius: maxRadius);
+}
 ImageProvider<Object> RxImageProvider(String url) {
     if (url.isEmpty) {
       url = NOIMAGE;
@@ -282,3 +324,50 @@ ImageProvider<Object> RxImageProvider(String url) {
       return FileImage(File(url));
     }
   }
+
+class RxSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
+  RxSliverPersistentHeaderDelegate(this._tabBar);
+
+  final TabBar _tabBar;
+
+  @override
+  double get minExtent => _tabBar.preferredSize.height;
+  @override
+  double get maxExtent => _tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      child: _tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(RxSliverPersistentHeaderDelegate oldDelegate) {
+    return false;
+  }
+}
+
+class RxSliverAppBarTabDelegate extends SliverPersistentHeaderDelegate {
+  PreferredSize? child;
+
+  RxSliverAppBarTabDelegate({this.child});
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(child: child);
+  }
+
+  @override
+  double get maxExtent => child!.preferredSize.height;
+
+  @override
+  double get minExtent => child!.preferredSize.height;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
+  }
+}

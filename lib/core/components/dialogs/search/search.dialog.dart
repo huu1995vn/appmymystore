@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -29,7 +27,7 @@ class _SearchPageState extends State<SearchDialog> {
   String textSearch = "";
   final List<String> listHotSearch = CommonConfig.hotSearch.split(",");
   List<String> listSearchLocal =
-      StorageService.get(StorageKeys.text_search) as List<String>;
+      StorageService.get(StorageKeys.text_search)!.split(",");
   List<TextSearchModel>? listSearch;
   final int _value = -1;
   Timer? _debounce;
@@ -198,7 +196,7 @@ class _SearchPageState extends State<SearchDialog> {
       ...[textSearch],
       ...listSearchLocal
     ];
-    StorageService.set(StorageKeys.text_search, listSearchLocal);
+    StorageService.set(StorageKeys.text_search, listSearchLocal.join(","));
     CommonNavigates.toProductPage(context, paramsSearch: {"s": textSearch});
   }
 
@@ -271,7 +269,7 @@ class _SearchPageState extends State<SearchDialog> {
 
   _onDeleteAll() {
     listSearchLocal = [];
-    StorageService.set(StorageKeys.text_search, listSearchLocal);
+    StorageService.set(StorageKeys.text_search, listSearchLocal.join(","));
     setState(() {
       listSearch = [];
     });
@@ -281,7 +279,7 @@ class _SearchPageState extends State<SearchDialog> {
     String txtSearch = listSearch![index].text;
     txtSearch = txtSearch.toLowerCase();
     listSearchLocal.remove(txtSearch);
-    StorageService.set(StorageKeys.text_search, listSearchLocal);
+    StorageService.set(StorageKeys.text_search, listSearchLocal.join(","));
     setState(() {
       listSearch!.removeAt(index);
     });

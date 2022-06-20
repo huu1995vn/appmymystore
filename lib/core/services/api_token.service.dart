@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches
+// ignore_for_file: empty_catches, non_constant_identifier_names
 
 import 'dart:convert';
 
@@ -14,7 +14,11 @@ class APITokenService {
   static bool isExpired = false;
   static bool isValid = false;
   static String fullname = "";
-  static int fileId = -1;
+  static int img = -1;
+  static String get URLIMG {
+    return CommonMethods.buildUrlHinhDaiDien(img,
+        rewriteUrl: fullname);
+  }
 
   static String get getTokenDefaultString {
     String token = "";
@@ -31,11 +35,7 @@ class APITokenService {
   }
 
   static String get token {
-    if (_token.isNotNullEmpty) {
-      return _token;
-    } else {
-      return getTokenDefaultString;
-    }
+    return _token;
   }
 
   static set token(String pToken) {
@@ -86,7 +86,7 @@ class APITokenService {
       if ((data["token"] as String).isNotNullEmpty) {
         token = data["token"];
         fullname = data["fullname"];
-        fileId = int.parse(data["img"] ?? "0");
+        img = int.parse(data["img"] ?? "0");
         return true;
       }
     } catch (e) {
@@ -101,7 +101,7 @@ class APITokenService {
       StorageService.deleteItem(StorageKeys.dataLogin);
       token = "";
       fullname = "";
-      fileId = 0;
+      img = 0;
       return true;
     } catch (e) {
       CommonMethods.wirtePrint(e);

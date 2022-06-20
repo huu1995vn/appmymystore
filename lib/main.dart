@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
@@ -48,13 +49,14 @@ void configLoading() {
 }
 
 initializeApp() async {
-  await StorageService.init();
   WidgetsFlutterBinding.ensureInitialized();
+  await StorageService.init();
   await InfoDeviceService.init();
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   await FirebaseMessagingService.init();
   APITokenService.init();
+  await AuthService.autologin();
 }
 
 class MyApp extends StatefulWidget {

@@ -64,7 +64,8 @@ dependencies:
   new_version: #Used update version 
   flutter_skeleton: #Used for skeleton
   pin_code_fields: #Used for pin_code
-  
+  carousel_slider: #Used for show banner
+    
 dev_dependencies:
   build_runner: # Used for code generation libraries
   json_serializable: # Used for code generation libraries

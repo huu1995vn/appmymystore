@@ -51,6 +51,8 @@ extension StringExtension on String {
           .toLowerCase()
           .replaceAll(RegExp("[\u0300-\u036f]"), '')
           .replaceAll("đ", 'd')
+          .replaceAll(RegExp("/+"), ' ')
+          .replaceAll(RegExp("\\?+"), '')
           .replaceAll(RegExp(" +"), "-");
     } catch (e) {}
     return str;

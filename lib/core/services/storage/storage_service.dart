@@ -3,23 +3,29 @@
 import 'package:localstorage/localstorage.dart';
 
 class StorageService {
+  static String keyStorage = "rx";
+  static Map<String, dynamic> dataStorage = <String, dynamic>{};
   static LocalStorage storage = LocalStorage('app');
   static Future<bool> init() async {
-    return await storage.ready;
+    var res = await storage.ready;
+    dataStorage = storage.getItem(keyStorage)?? <String, dynamic>{};
+    return res;
   }
 
   /// Retrieves a value from storage
   static dynamic get(String key) {
-    return storage.getItem(key);
+    return dataStorage[key];
   }
 
   /// Changes a value in storage
-  static Future<void> set(String key, dynamic value) {
-    return storage.setItem(key, value);
+  static set(String key, dynamic value) {
+    dataStorage[key] = value;
+    storage.setItem(keyStorage, dataStorage);
   }
 
-  static Future<void> deleteItem(String key) {
-    return storage.deleteItem(key);
+  static deleteItem(String key) {
+    dataStorage.remove(key);
+    storage.setItem(keyStorage, dataStorage);
   }
 }
 
@@ -30,6 +36,4 @@ class StorageKeys {
   static const String masterdata = 'msd';
   static const String version_masterdata = 'vmsd';
   static const String text_search = 'text_search';
-
-
 }

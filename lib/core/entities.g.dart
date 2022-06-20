@@ -127,15 +127,26 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..RowIndex = json['RowIndex'] as String
   ..id = json['id'] as String
   ..userid = json['userid'] as String
+  ..imguser = json['imguser'] as String
+  ..username = json['username'] as String
   ..usercontactid = json['usercontactid'] as String
+  ..usercontactname = json['usercontactname'] as String
   ..brandid = json['brandid'] as String
+  ..brandname = json['brandname'] as String
   ..modelid = json['modelid'] as String
+  ..modelname = json['modelname'] as String
   ..bodytypeid = json['bodytypeid'] as String
+  ..bodytypename = json['bodytypename'] as String
   ..fueltypeid = json['fueltypeid'] as String
+  ..fueltypename = json['fueltypename'] as String
   ..madeinid = json['madeinid'] as String
+  ..madeinname = json['madeinname'] as String
   ..colorid = json['colorid'] as String
+  ..colorname = json['colorname'] as String
   ..cityid = json['cityid'] as String
+  ..cityname = json['cityname'] as String
   ..producttypeid = json['producttypeid'] as String
+  ..producttypename = json['producttypename'] as String
   ..img = json['img'] as String
   ..imglist = json['imglist'] as String
   ..name = json['name'] as String
@@ -156,7 +167,8 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..review5 = json['review5'] as String
   ..keywordsearch = json['keywordsearch'] as String
   ..status = json['status'] as String
-  ..verifydate = json['verifydate'] as String;
+  ..verifydate = json['verifydate'] as String
+  ..createdate = json['createdate'] as String;
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
     <String, dynamic>{
@@ -164,15 +176,26 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'RowIndex': instance.RowIndex,
       'id': instance.id,
       'userid': instance.userid,
+      'imguser': instance.imguser,
+      'username': instance.username,
       'usercontactid': instance.usercontactid,
+      'usercontactname': instance.usercontactname,
       'brandid': instance.brandid,
+      'brandname': instance.brandname,
       'modelid': instance.modelid,
+      'modelname': instance.modelname,
       'bodytypeid': instance.bodytypeid,
+      'bodytypename': instance.bodytypename,
       'fueltypeid': instance.fueltypeid,
+      'fueltypename': instance.fueltypename,
       'madeinid': instance.madeinid,
+      'madeinname': instance.madeinname,
       'colorid': instance.colorid,
+      'colorname': instance.colorname,
       'cityid': instance.cityid,
+      'cityname': instance.cityname,
       'producttypeid': instance.producttypeid,
+      'producttypename': instance.producttypename,
       'img': instance.img,
       'imglist': instance.imglist,
       'name': instance.name,
@@ -194,6 +217,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'keywordsearch': instance.keywordsearch,
       'status': instance.status,
       'verifydate': instance.verifydate,
+      'createdate': instance.createdate,
     };
 
 AdvertModel _$AdvertModelFromJson(Map<String, dynamic> json) => AdvertModel()

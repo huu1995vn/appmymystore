@@ -31,7 +31,7 @@ class NewsDetailPageState extends State<NewsDetailPage> {
         initialUrl = widget.news!.LINK;
       });
     } else {
-      ResponseModel res = await DaiLyXeApiBLL_Page().newsdetail(widget.id!);
+      ResponseModel res = await DaiLyXeApiBLL_APIGets().newsdetail(widget.id!);
       data = res.data;
       String prefixUrl = data!["prefix"];
       String rewriteUrl = data!["url"];

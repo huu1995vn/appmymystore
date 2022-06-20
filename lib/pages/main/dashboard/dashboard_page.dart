@@ -38,26 +38,35 @@ class _DashboardPageState extends State<DashboardPage> {
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,
-                size: SizeConfig.screenHeight/ 21.34,
+                size: SizeConfig.screenHeight / 21.34,
               )),
           RxBuildItem(
               title: "manager.raoxe".tr(),
-              icon: Icon(Icons.car_crash_sharp),
-              onTap: () {},
+              icon: Icon(Icons.car_rental_rounded),
+              onTap: () => CommonNavigates.toMyProductPage(context),
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,
-                size: SizeConfig.screenHeight/ 21.34,
+                size: SizeConfig.screenHeight / 21.34,
               )),
           RxBuildItem(
-              title: "offer".tr(),
-              icon: Icon(Icons.shopping_basket),
-              onTap: () {},
+              title: "adv".tr(),
+              icon: Icon(Icons.ad_units_rounded),
+              onTap: () => CommonNavigates.toAdvertPage(context),
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,
-                size: SizeConfig.screenHeight/ 21.34,
+                size: SizeConfig.screenHeight / 21.34,
               )),
+          // RxBuildItem(
+          //     title: "offer".tr(),
+          //     icon: Icon(Icons.shopping_basket),
+          //     onTap: () {},
+          //     trailing: Icon(
+          //       Icons.keyboard_arrow_right,
+          //       color: Colors.black45,
+          //       size: SizeConfig.screenHeight / 21.34,
+          //     )),
           RxBuildItem(
               title: "manager.address".tr(),
               icon: Icon(Icons.location_city),
@@ -65,7 +74,7 @@ class _DashboardPageState extends State<DashboardPage> {
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,
-                size: SizeConfig.screenHeight/ 21.34,
+                size: SizeConfig.screenHeight / 21.34,
               )),
           RxBuildItem(
               title: "setting".tr(),
@@ -74,7 +83,7 @@ class _DashboardPageState extends State<DashboardPage> {
               trailing: Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.black45,
-                size: SizeConfig.screenHeight/ 21.34,
+                size: SizeConfig.screenHeight / 21.34,
               )),
         ],
       )))

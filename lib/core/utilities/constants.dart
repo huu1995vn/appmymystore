@@ -44,6 +44,13 @@ List<Categorie> CATEGORIES = [
   Categorie(id: 5, categoryname: "Hình ảnh"),
   // Categorie(id: 6, categoryname: "Videos"),
 ];
+List<Categorie> PRODUCTSTATUS  = [
+  Categorie(id: 1, categoryname: "Chờ duyệt"),
+  Categorie(id: 2, categoryname: "Đã duyệt"),
+  Categorie(id: 3, categoryname: "Không duyệt"),
+  Categorie(id: 4, categoryname: "Vi phạm"),
+  // Categorie(id: 6, categoryname: "Videos"),
+];
 class RxParttern {
   //[Update]
   static String password =

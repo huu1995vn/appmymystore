@@ -20,35 +20,34 @@ class DashboardTopWidgetState extends State<DashboardTopWidget> {
     return Padding(
       padding: const EdgeInsets.all(kDefaultPadding),
       child: SizedBox(
-        height: SizeConfig.screenHeight/ 3.84,
+        height: SizeConfig.screenHeight / 3.84,
+
         /// 240.0
         child: Stack(
-          children: [         
+          children: [
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    height: SizeConfig.screenHeight/ 4.88,
-                    width: SizeConfig.screenWidth/ 2.93,
+                    height: SizeConfig.screenHeight / 4.88,
+                    width: SizeConfig.screenWidth / 2.93,
+
                     /// 140.0
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
                             color: Colors.white,
-                            width: SizeConfig.screenWidth/ 51.37),
+                            width: SizeConfig.screenWidth / 51.37),
                         color: Colors.white,
                         image: DecorationImage(
-                            image: RxImageProvider(CommonMethods.buildUrlHinhDaiDien(
-                                APITokenService.fileId,
-                                rewriteUrl: APITokenService.fullname)))),
+                            image: RxImageProvider(APITokenService.URLIMG))),
                   ),
                   Text(
                     APITokenService.fullname,
                     style: const TextStyle(fontSize: 22, color: AppColors.white)
                         .bold,
                   ),
-                 
                 ],
               ),
             )

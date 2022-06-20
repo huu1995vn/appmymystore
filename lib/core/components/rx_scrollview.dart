@@ -1,4 +1,4 @@
-// ignore_for_file: curly_braces_in_flow_control_structures, unnecessary_null_comparison, non_constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures, unnecessary_null_comparison, non_constant_identifier_names, empty_catches
 
 import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
@@ -82,11 +82,12 @@ class RxListViewState extends State<RxScrollView>
     super.dispose();
     if (widget.controller == null) {
       if (scrollController != null && mounted) scrollController.dispose();
-    } else {
-      if (mounted) {
-        widget.controller.dispose();
-      }
-    }
+    } 
+    // else {
+    //   if (mounted) {
+    //     widget.controller.dispose();
+    //   }
+    // }
   }
 
   _scrollListener() async {
@@ -158,32 +159,31 @@ class RxListViewState extends State<RxScrollView>
 
   Widget _bodylist_main() {
     return SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              if (index >= widget.data.length) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: widget.totalItems > widget.data.length
-                      ? const Center(
-                          child: CupertinoActivityIndicator(),
-                        )
-                      : Container(),
-                );
-              } else {
-                return Column(
-                  children: <Widget>[
-                    _wrapScrollTag(
-                        index: index,
-                        child: widget.itemBuilder(context, index)),
-                    if (widget.isDivider && index != widget.data.length - 1)
-                      RxDivider()
-                  ],
-                );
-              }
-            },
-            childCount: widget.data.length + 1,
-          ),
-        );
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          if (index >= widget.data.length) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: widget.totalItems > widget.data.length
+                  ? const Center(
+                      child: CupertinoActivityIndicator(),
+                    )
+                  : Container(),
+            );
+          } else {
+            return Column(
+              children: <Widget>[
+                _wrapScrollTag(
+                    index: index, child: widget.itemBuilder(context, index)),
+                if (widget.isDivider && index != widget.data.length - 1)
+                  RxDivider()
+              ],
+            );
+          }
+        },
+        childCount: widget.data.length + 1,
+      ),
+    );
   }
 
   Widget _bodylist() {

@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="vn.com.raoxe">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="vn.com.raoxe" android:installLocation="preferExternal">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application android:label="RaoXe" android:name="${applicationName}" android:icon="@mipmap/ic_launcher">

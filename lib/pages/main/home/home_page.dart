@@ -1,12 +1,9 @@
 import 'dart:convert';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/components/rx_scrollview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
@@ -14,8 +11,7 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
-import 'package:raoxe/pages/main/home/widgets/item_product_highlight.widget.dart';
+import 'package:raoxe/pages/main/home/widgets/list_banner.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'widgets/item_product.widget.dart';
 
@@ -49,8 +45,8 @@ class _HomePageState extends State<HomePage>
       "p": paging,
       "n": kItemOnPage
     };
-    ResponseModel res = await DaiLyXeApiBLL_Page().news(params);
-    List<dynamic> data   = jsonDecode(res.data["newslist"]);
+    ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
+    List<dynamic> data   = jsonDecode(res.data);
     // ignore: unnecessary_cast
     List<ProductModel> newslist = data
         .map((val) => ProductModel.fromJson(val))
@@ -95,18 +91,7 @@ class _HomePageState extends State<HomePage>
         slivers: <Widget>[
           SliverToBoxAdapter(
               child: Column(children: [
-            _buildTitle("highlight".tr(), () {}),
-            SizedBox(
-                height: (SizeConfig.screenHeight / 4) + 28,
-                child: 
-                RxListView(
-                  listData,
-                  (context, index) {
-                    return ItemProductHighlightWidget(listData![index]);
-                  },
-                  scrollDirection: Axis.horizontal,
-                  awaiting: RxCardSkeleton(barCount: 7, isShowAvatar: false),
-                )),
+            ListBannerWidget(),
             _buildTitle("new".tr(), () {}),
           ]))
         ],

@@ -42,14 +42,14 @@ class _NewsPageState extends State<NewsPage> {
       "p": paging,
       "n": kItemOnPage
     };
-    ResponseModel res = await DaiLyXeApiBLL_Page().news(params);
+    ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
     if (res.data == null && nPaging == 1) {
       setState(() {
         totalItems = 0;
         listData ??= [];
       });
     } else {
-      List<dynamic> data = jsonDecode(res.data["newslist"]);
+      List<dynamic> data = jsonDecode(res.data);
       List<NewsModel> newslist = data
           .map((val) => NewsModel.fromJson(val))
           .toList() as List<NewsModel>;
@@ -102,7 +102,7 @@ class _NewsPageState extends State<NewsPage> {
             backgroundColor: Colors.transparent,
             // leading: Container(child: null),
           ),
-          key: const Key("LTinTuc"),
+          key: const Key("LNews"),
           controller: scrollController,
           onNextPage: onNextPage,
           onRefresh: onRefresh,

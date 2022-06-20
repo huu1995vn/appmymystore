@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:raoxe/core/components/dialogs/search/search.dialog.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/pages/advert/advert_detail_page.dart';
+import 'package:raoxe/pages/advert/advert_page.dart';
 import 'package:raoxe/pages/auth/forgot_password/forgot_password_page.dart';
 import 'package:raoxe/pages/auth/login/login_page.dart';
 import 'package:raoxe/pages/auth/register/register_page.dart';
 import 'package:raoxe/pages/main/index.dart';
 import 'package:raoxe/pages/main/news/news_detail_page.dart';
+import 'package:raoxe/pages/my_product/my_product_detail_page.dart';
+import 'package:raoxe/pages/my_product/my_product_page.dart';
 import 'package:raoxe/pages/product/product_detail_page.dart';
 import 'package:raoxe/pages/product/product_page.dart';
 import 'package:raoxe/pages/setting/settings_page.dart';
@@ -25,6 +29,8 @@ class CommonNavigates {
     '/user': (context) => const UserPage(),
     '/settings': (context) => const SettingsPage(),
     '/product': (context) => ProductPage(),
+    '/my-product': (context) => MyProductPage(),
+    '/advert': (context) => AdvertPage(),
     '/news': (context) => const NewsPage(),
     // '/search': (context) => SearchPage(),
   };
@@ -35,9 +41,33 @@ class CommonNavigates {
       return await Navigator.push(context,
           CupertinoPageRoute(builder: (context) => ProductDetailPage(id: id)));
     } else {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => ProductPage(paramsSearch: paramsSearch)));
+      // return await Navigator.pushNamed(context, "/product");
+    }
+  }
+
+  static Future toMyProductPage(BuildContext context,
+      {int? id, Map<String, dynamic>? paramsSearch}) async {
+    if (id != null && id > 0) {
       return await Navigator.push(context,
-          CupertinoPageRoute(builder: (context) => ProductPage(paramsSearch: paramsSearch)));
-      // return await Navigator.pushReplacementNamed(context, "/product");
+          CupertinoPageRoute(builder: (context) => MyProductDetailPage(id: id)));
+    } else {
+      return await Navigator.pushNamed(context, "/my-product");
+    }
+  }
+
+  static Future toAdvertPage(BuildContext context,
+      {int? id, AdvertModel? item}) async {
+    if (id != null && id > 0) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => AdvertDetailPage(id: id, item: item)));
+    } else {
+      return await Navigator.pushNamed(context, "/advert");
     }
   }
 
@@ -49,7 +79,7 @@ class CommonNavigates {
           CupertinoPageRoute(
               builder: (context) => NewsDetailPage(id: id, news: data)));
     } else {
-      return await Navigator.pushReplacementNamed(context, "/news");
+      return await Navigator.pushNamed(context, "/news");
     }
   }
 

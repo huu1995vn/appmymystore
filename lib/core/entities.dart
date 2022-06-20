@@ -220,15 +220,26 @@ class UserModel extends Entity {
 class ProductModel extends Entity {
   late String id;
   late String userid;
+  late String imguser = "";
+  late String username = "";
   late String usercontactid;
+  late String usercontactname = "";
   late String brandid;
+  late String brandname="";
   late String modelid;
+  late String modelname="";
   late String bodytypeid;
+  late String bodytypename="";
   late String fueltypeid;
+  late String fueltypename="";
   late String madeinid;
+  late String madeinname="";
   late String colorid;
+  late String colorname="";
   late String cityid;
-  late String producttypeid;
+  late String cityname="";
+  late String producttypeid="1";
+  late String producttypename;
   late String img;
   late String imglist;
   late String name = "";
@@ -238,7 +249,7 @@ class ProductModel extends Entity {
   late String seat;
   late String door;
   late String km;
-  late String state;
+  late String state="1";
   late String views;
   late String ratingvalue;
   late String reviewcount;
@@ -250,12 +261,44 @@ class ProductModel extends Entity {
   late String keywordsearch;
   late String status = "1";
   late String verifydate;
+  late String createdate;
 
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
+  // Products.ProductTypeId
+  //  + 1: Ban
+  //  + 2: Mua
+
+  // Products.State // tạm bỏ qua mạc định là 
+  //  + 1: Moi
+  //  + 2: Da su dung  
+  // Products.Status
+  //  + 1: Tao moi
+  //  + 2: Da duyet
+  //  + 3: Khong duyet
+  //  + 4: Vi pham (Khoa)
+
+  String get TIMEAGO {
+    return CommonMethods.timeagoFormat(
+        CommonMethods.convertToDateTime(verifydate));
+  }
+  int get STATUS {
+    return int.parse(status);
+  }
+  String get URLIMGUSER {
+    try {
+      int fileId = 0;
+      fileId = int.parse(imguser);
+      return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: name);
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+
+      return "";
+    }
+  }
   String get URLIMG {
     try {
       int fileId = 0;
@@ -391,7 +434,10 @@ class AdvertModel extends Entity {
   late String status;
   late String adverttypename;
   late String adminname;
-  
+  int get STATUS {
+    return int.parse(status);
+  }
+
   String get URLIMG {
     int fileId = 0;
     fileId = int.parse(img);

@@ -30,7 +30,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
   int totalItems = 0;
   List<NewsModel>? listData;
   AutoScrollController scrollController = AutoScrollController();
-  final GlobalKey<FormState> _tinTucKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   loadData(nPaging) async {
     nPaging = nPaging ?? 1;
@@ -39,8 +39,8 @@ class _NotifycationPageState extends State<NotifycationPage> {
       "p": paging,
       "n": kItemOnPage
     };
-    ResponseModel res = await DaiLyXeApiBLL_Page().news(params);
-    List<dynamic> data = jsonDecode(res.data["newslist"]);
+    ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
+    List<dynamic> data = jsonDecode(res.data);
     List<NewsModel> newslist =
         data.map((val) => NewsModel.fromJson(val)).toList();
     setState(() {
@@ -66,7 +66,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _tinTucKey,
+        key: _key,
         // backgroundColor: Colors.grey[200],
         body: RxScrollView(
           listData,
@@ -87,7 +87,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
             backgroundColor: Colors.transparent,
             // leading: Container(child: null),
           ),
-          key: const Key("LTinTuc"),
+          key: const Key("LNoti"),
           controller: scrollController,
           onNextPage: onNextPage,
           onRefresh: onRefresh,

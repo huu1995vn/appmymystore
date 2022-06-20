@@ -68,7 +68,7 @@ class CommonMethods {
       permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied &&
           StorageService.get("isOpened") != null) {
-        StorageService.set("isOpened", true);
+        StorageService.set("isOpened", "true");
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.deniedForever) {
           Future.error('Location Not Available');
@@ -90,13 +90,13 @@ class CommonMethods {
     return null;
   }
 
-  static String formatDateTime(DateTime? date, [String? newPattern]) {
+  static String formatDateTime(DateTime? date, {String? newPattern, String valueDefault = ""}) {
     if (date != null) {
       try {
         return DateFormat(newPattern ?? "dd/MM/yyyy").format(date);
       } catch (e) {}
     }
-    return "";
+    return valueDefault;
   }
 
   static String generateMd5(String input) {

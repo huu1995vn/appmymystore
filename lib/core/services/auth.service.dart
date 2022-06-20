@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
+// import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
 import 'package:raoxe/pages/my_page.dart';
@@ -31,15 +31,12 @@ class AuthService {
     CommonMethods.unlockScreen();
   }
 
-  static Future autologin(BuildContext context) async {
-    var res = await DaiLyXeApiBLL_APIAuth().autologin();
-    if (res.status > 0) {
-      APITokenService.loginByData(res.data);
-      if (!APITokenService.isValid) {
-        CommonNavigates.toLoginPage(context, isReplace: true);
+  static Future autologin() async {
+    if (APITokenService.token != null) {
+      var res = await DaiLyXeApiBLL_APIAuth().autologin();
+      if (res.status > 0) {
+        APITokenService.loginByData(res.data);
       }
-    } else {
-      CommonMethods.showToast(res.message);
     }
   }
 
@@ -59,7 +56,7 @@ class AuthService {
     if (!CommonMethods.checkStringPhone(phone)) {
       throw "invalid.phone".tr();
     }
-    var res = await DaiLyXeApiBLL_APIGets().getStatsUser({"phone": phone});
+    var res = await DaiLyXeApiBLL_APIGets().statsuser({"phone": phone});
     int status = res.data;
     if (isExist) {
       if (status == -1) {

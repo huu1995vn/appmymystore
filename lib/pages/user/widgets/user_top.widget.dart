@@ -70,26 +70,6 @@ class UserTopWidget extends StatelessWidget {
                     style:
                         const TextStyle(color: AppColors.white),
                   )
-
-                  // Container(
-                  //   height: SizeConfig.screenHeight / 4.88,
-                  //   width: SizeConfig.screenWidth / 2.93,
-
-                  //   /// 140.0
-                  //   decoration: BoxDecoration(
-                  //       shape: BoxShape.circle,
-                  //       border: Border.all(
-                  //           color: Colors.white,
-                  //           width: SizeConfig.screenWidth / 51.37),
-                  //       color: Colors.white,
-                  //       image: DecorationImage(
-                  //           image: RxImageProvider(APITokenService.URLIMG))),
-                  // ),
-                  // Text(
-                  //   APITokenService.fullname,
-                  //   style: const TextStyle(fontSize: 22, color: AppColors.white)
-                  //       .bold,
-                  // ),
                 ],
               ),
             )
@@ -99,69 +79,3 @@ class UserTopWidget extends StatelessWidget {
     );
   }
 }
-
-//     return SizedBox(
-//       height: SizeConfig.screenHeight / 2.78,
-//       child: Stack(
-//         children: [
-//           ClipPath(
-//             clipper: RxCustomShape(),
-//             child: Container(
-//               height: SizeConfig.screenHeight / 4.78,
-//               color: AppColors.primary800,
-//             ),
-//           ),
-//           Center(
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.end,
-//               children: [
-//                 CircleAvatar(
-//                   radius: 60.0,
-//                   backgroundColor: Colors.white,
-//                   child: CircleAvatar(
-//                     child: const Align(
-//                       alignment: Alignment.bottomRight,
-//                       child: CircleAvatar(
-//                         backgroundColor: Colors.white,
-//                         radius: 20.0,
-//                         child: Icon(
-//                           Icons.camera_alt,
-//                           size: 20.0,
-//                           color: Color(0xFF404040),
-//                         ),
-//                       ),
-//                     ),
-//                     radius: 60.0,
-//                     backgroundImage: RxImageProvider(data!.URLIMG),
-//                   ),
-//                 ),
-//                 Text(
-//                   APITokenService.fullname,
-//                   style: const TextStyle(fontSize: 22),
-//                 ),
-                
-//                 RxRoundedButton(
-//                     onPressed: () {},
-//                     title: data!.VERIFY ? "verified".tr() : "Chưa xác thực",
-//                     color: data!.VERIFY ? AppColors.red : AppColors.warning),
-//                 Text(
-//                   data!.email,
-//                   style: const TextStyle(
-//                     fontSize: 12.0,
-//                   ),
-//                 ),
-//                 Text(
-//                   data!.phone,
-//                   style: const TextStyle(
-//                     fontSize: 12.0,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-

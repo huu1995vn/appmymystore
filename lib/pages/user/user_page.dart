@@ -48,7 +48,9 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
+      body: 
+      data==null?Expanded(child: RxCardSkeleton()):
+      CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
               expandedHeight: 250.0,

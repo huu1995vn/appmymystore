@@ -142,7 +142,7 @@ class RxListViewState extends State<RxScrollView>
         (BuildContext context, int index) {
           return widget.awaiting ??
               RxCardSkeleton(
-                  barCount: 5, isShowAvatar: false, isBorderRadius: true);
+                  barCount: 3, isShowAvatar: false, isBorderRadius: true);
         },
         childCount: kItemOnPage,
       ),

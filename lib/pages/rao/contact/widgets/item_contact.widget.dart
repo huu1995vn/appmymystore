@@ -19,7 +19,8 @@ class ItemContactWidget extends StatefulWidget {
 class _ItemContactWidgetState extends State<ItemContactWidget> {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
+    return Card(
+        child: ListTile(
       leading: RxCircleAvatar(
           child: Icon(Icons.contact_page_rounded,
               size: 30, color: Colors.blue[500])),
@@ -49,7 +50,7 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
         onTap: widget.onDelete,
         child: Ink(
           decoration: const ShapeDecoration(
-            color: AppColors.grayDark,
+            // color: AppColors.grayDark,
             shape: CircleBorder(),
           ),
           child: const Icon(
@@ -59,6 +60,6 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
         ),
       ),
       onTap: widget.onTap,
-    );
+    ));
   }
 }

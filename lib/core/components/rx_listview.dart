@@ -104,7 +104,7 @@ class _RxDataListViewState extends State<RxListView>
         padding: const EdgeInsets.all(kDefaultPadding),
         itemBuilder: (context, index) {
           return widget.awaiting ??
-              RxCardSkeleton(barCount: 5, isShowAvatar: false);
+              RxCardSkeleton(barCount: 3, isShowAvatar: false);
         });
   }
 

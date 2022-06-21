@@ -15,76 +15,79 @@ class ItemMyProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          const EdgeInsets.only(top: kDefaultPadding, bottom: kDefaultPadding),
-      child: GestureDetector(
-        onTap: () async {},
-        child: SizedBox(
-          height: SizeConfig.screenWidth / 5,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: RxImage(item.URLIMG, width: SizeConfig.screenWidth / 4),
-              ),
-              const SizedBox(width: kDefaultPadding),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.name ?? "",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                // fontSize: 36,
-                                ),
-                          ),
-                          Text(
-                            item.NUMPRICE,
-                            style: const TextStyle(
-                              color: AppColors.primary,
-                            ).bold,
-                          ),
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.only(
+            top: kDefaultPadding, bottom: kDefaultPadding),
+        child: GestureDetector(
+          onTap: () async {},
+          child: SizedBox(
+            height: SizeConfig.screenWidth / 5,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child:
+                      RxImage(item.URLIMG, width: SizeConfig.screenWidth / 4),
+                ),
+                const SizedBox(width: kDefaultPadding),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.name ?? "",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  // fontSize: 36,
+                                  ),
+                            ),
+                            Text(
+                              item.NUMPRICE,
+                              style: const TextStyle(
+                                color: AppColors.primary,
+                              ).bold,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: Text(
+                                  CommonMethods.formatDateTime(
+                                      CommonMethods.convertToDateTime(
+                                          item.createdate, "dd/MM/yyyy"),
+                                      valueDefault: "not.update".tr()),
+                                  style: const TextStyle().italic)),
+                          if (item.STATUS == 2)
+                            GestureDetector(
+                                onTap: () {},
+                                child: const Icon(
+                                  Icons.upload,
+                                  color: AppColors.yellow,
+                                ))
+                          // IconButton(
+                          //     onPressed: () {},
+                          //     icon: const Icon(
+                          //       Icons.upload,
+                          //       color: AppColors.yellow,
+                          //     ),
+                          //     iconSize: 13
+                          //     )
                         ],
                       ),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: Text(
-                                CommonMethods.formatDateTime(
-                                    CommonMethods.convertToDateTime(
-                                        item.createdate, "dd/MM/yyyy"),
-                                    valueDefault: "not.update".tr()),
-                                style: const TextStyle().italic)),
-                        if (item.STATUS == 2)
-                          GestureDetector(
-                              onTap: () {},
-                              child: const Icon(
-                                Icons.upload,
-                                color: AppColors.yellow,
-                              ))
-                        // IconButton(
-                        //     onPressed: () {},
-                        //     icon: const Icon(
-                        //       Icons.upload,
-                        //       color: AppColors.yellow,
-                        //     ),
-                        //     iconSize: 13
-                        //     )
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

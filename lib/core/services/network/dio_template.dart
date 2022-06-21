@@ -3,6 +3,20 @@ import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/services/network/dio_client.dart';
 
 class DioTemplate {
+  //function call api drive
+  static _buildDriveUrl(String controllerName, [String? addApiHostSufix]) {
+    return CommonConfig.apiDrive +
+        (addApiHostSufix ?? CommonConfig.apiDriveSufix) +
+        controllerName; //crm/
+  }
+
+  static postDrive(String controllerName, dynamic data,
+      {Map<String, dynamic>? queryParameters, Options? options}) async {
+    final requestString = _buildDriveUrl(controllerName);
+    return await DioClient.post(requestString, data,
+        queryParameters: queryParameters, options: options);
+  }
+
 
   //function call api dailyxe
   static _buildDaiLyXeUrl(String controllerName, [String? addApiHostSufix]) {

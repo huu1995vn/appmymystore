@@ -1,10 +1,14 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -146,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
     CommonMethods.lockScreen();
     try {
       await AuthService.checkPhone(username, isExist: true);
-      if (mounted) await AuthService.login(context, username, password);
+      if (mounted) await AuthService.login(context, username, password);   
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }

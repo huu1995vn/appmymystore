@@ -2,19 +2,17 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_rounded_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
 
 class UserTopWidget extends StatelessWidget {
   final UserModel? data;
-
-  const UserTopWidget(this.data, {super.key});
+  final void Function()? onUpload;
+  const UserTopWidget(this.data, {super.key, this.onUpload});
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +30,23 @@ class UserTopWidget extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 60.0,
-                    backgroundColor: AppColors.white,
+                    // backgroundColor: AppColors.white,
+                    backgroundImage: const AssetImage('assets/loading_icon.gif'),
+
                     child: CircleAvatar(
-                      child: const Align(
+                      // backgroundColor: Colors.white,
+                      child: Align(
                         alignment: Alignment.bottomRight,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 20.0,
-                          child: Icon(
-                            Icons.camera_alt,
-                            size: 20.0,
-                            color: Color(0xFF404040),
+                        child: GestureDetector(
+                          onTap: onUpload,
+                          child: const CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 20.0,
+                            child: Icon(
+                              Icons.camera_alt,
+                              size: 20.0,
+                              color: Color(0xFF404040),
+                            ),
                           ),
                         ),
                       ),
@@ -51,7 +55,7 @@ class UserTopWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    APITokenService.fullname,
+                    data!.fullname.toUpperCase(),
                     style:
                         const TextStyle(fontSize: 19, color: AppColors.white),
                   ),
@@ -59,16 +63,13 @@ class UserTopWidget extends StatelessWidget {
                       onPressed: () {},
                       title: data!.VERIFY ? "verified".tr() : "Chưa xác thực",
                       color: data!.VERIFY ? AppColors.red : AppColors.warning),
-
                   Text(
                     data!.email,
-                    style:
-                        const TextStyle(color: AppColors.white),
+                    style: const TextStyle(color: AppColors.white),
                   ),
                   Text(
                     data!.phone,
-                    style:
-                        const TextStyle(color: AppColors.white),
+                    style: const TextStyle(color: AppColors.white),
                   )
                 ],
               ),

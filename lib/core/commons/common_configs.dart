@@ -19,6 +19,7 @@ class CommonConfig {
   static String apiRaoXe = "https://raoxe.dailyxe.info";
   static String apiRaoXeSufix = "/";
   static String apiDrive = "http://cdn.dailyxe.info";
+  static String apiDriveSufix = "/";
   static String uriPrefixDynamicLink = "https://raoxe.page.link";
   static String apiHost = "https://dailyxe.com.vn";
   static String appStoreID = "1486119532";

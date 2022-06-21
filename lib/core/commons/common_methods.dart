@@ -25,8 +25,13 @@ import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../pipes/timeago/timeago.dart' as timeago;
 import '../pipes/short_currency.dart' as shortCurrency;
+import 'package:path/path.dart' as p;
 
 class CommonMethods {
+  static String getExtension(File file) {
+    return p.extension(file.path);
+  }
+
   static bool isURl(String str) {
     return Uri.parse(str).isAbsolute;
   }
@@ -91,7 +96,8 @@ class CommonMethods {
     return null;
   }
 
-  static String formatDateTime(DateTime? date, {String? newPattern, String valueDefault = ""}) {
+  static String formatDateTime(DateTime? date,
+      {String? newPattern, String valueDefault = ""}) {
     if (date != null) {
       try {
         return DateFormat(newPattern ?? "dd/MM/yyyy").format(date);
@@ -114,6 +120,7 @@ class CommonMethods {
 
   static showToast(String pmsg) {
     EasyLoading.showToast(pmsg,
+        duration: const Duration(seconds: 5),
         toastPosition: EasyLoadingToastPosition.bottom,
         maskType: EasyLoadingMaskType.black);
   }
@@ -192,6 +199,8 @@ class CommonMethods {
     rewriteUrl = rewriteUrl!.isNotEmpty ? rewriteUrl : "image-dailyxe";
     rewriteUrl = rewriteUrl.convertrUrlPrefix();
     return '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j$prefixSize.jpg';
+
+    // return '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j$prefixSize.jpg';
   }
 
   static String buildUrlHinhDaiDien(int idHinh,
@@ -270,12 +279,14 @@ class CommonMethods {
     } catch (e) {}
     return strTimeAgo;
   }
+
   static formatShortCurrency(dynamic amount) {
     try {
       return shortCurrency.format(amount);
     } catch (e) {}
     return "not.update".tr();
   }
+
   static Future<T?> openWebView<T>(context, String url, {String? title}) async {
     if (CommonMethods.isMobile()) {
       return await Navigator.push(

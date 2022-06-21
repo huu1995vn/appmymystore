@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/aes.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -15,9 +16,17 @@ class APITokenService {
   static bool isValid = false;
   static String fullname = "";
   static int img = -1;
+
+  static UserModel toUser() {
+    UserModel user = UserModel();
+    user.fullname = fullname;
+    user.id = userId.toString();
+    user.img = img.toString();
+    return user;
+  }
+
   static String get URLIMG {
-    return CommonMethods.buildUrlHinhDaiDien(img,
-        rewriteUrl: fullname);
+    return CommonMethods.buildUrlHinhDaiDien(img, rewriteUrl: fullname);
   }
 
   static String get getTokenDefaultString {

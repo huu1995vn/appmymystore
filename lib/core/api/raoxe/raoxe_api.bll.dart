@@ -10,7 +10,7 @@ class RaoXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.get(
-        actionName: actionName, queryParameters: queryParameters);
+        actionName: actionName, queryParameters: queryParameters, headers: headers);
     return ResponseModel.fromJson(res);
   }
 
@@ -19,7 +19,7 @@ class RaoXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.put(data,
-        actionName: actionName, queryParameters: queryParameters);
+        actionName: actionName, queryParameters: queryParameters, headers: headers);
     return ResponseModel.fromJson(res);
   }
 
@@ -28,7 +28,7 @@ class RaoXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.post(data,
-        actionName: actionName, queryParameters: queryParameters);
+        actionName: actionName, queryParameters: queryParameters, headers: headers);
     return ResponseModel.fromJson(res);
   }
 
@@ -38,7 +38,7 @@ class RaoXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.delete(id,
-        actionName: actionName, queryParameters: queryParameters);
+        actionName: actionName, queryParameters: queryParameters, headers: headers);
     return ResponseModel.fromJson(res);
   }
 }

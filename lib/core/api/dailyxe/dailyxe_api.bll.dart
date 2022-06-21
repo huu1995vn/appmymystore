@@ -11,7 +11,7 @@ class DaiLyXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.get(
-        actionName: actionName, queryParameters: queryParameters);
+        actionName: actionName, queryParameters: queryParameters, headers: headers);
     return ResponseModel.fromJson(res);
   }
 
@@ -20,7 +20,7 @@ class DaiLyXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.put(data,
-        actionName: actionName, queryParameters: queryParameters);
+        actionName: actionName, queryParameters: queryParameters, headers: headers);
     return ResponseModel.fromJson(res);
   }
 
@@ -29,7 +29,7 @@ class DaiLyXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.post(data,
-        actionName: actionName, queryParameters: queryParameters);
+        actionName: actionName, queryParameters: queryParameters, headers: headers);
     return ResponseModel.fromJson(res);
   }
 
@@ -39,7 +39,7 @@ class DaiLyXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.delete(id,
-        actionName: actionName, queryParameters: queryParameters);
+        actionName: actionName, queryParameters: queryParameters, headers: headers);
     return ResponseModel.fromJson(res);
   }
 }
@@ -115,7 +115,7 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
 
   Future<ResponseModel> updateuser(Map<String, dynamic> body) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
-    return await post(body, queryParameters, "${APITokenService.userId}");
+    return await post(body, queryParameters, "update");
   }
   
   Future<ResponseModel> advertlist(Map<String, dynamic> body) async {

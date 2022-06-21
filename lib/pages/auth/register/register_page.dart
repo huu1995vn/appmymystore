@@ -81,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
             key: _keyValidationForm,
             child: Column(
               children: <Widget>[
-                RxInput(user.username,
+                RxInput(user.fullname,
                     labelText: "fullname".tr(),
                     icon: const Icon(Icons.person),
                     onChanged: (v) => {

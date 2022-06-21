@@ -120,7 +120,7 @@ class UserModel extends Entity {
     phone = "";
   }
   factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+      _$UserModelFromJson(json.map((key, value) => MapEntry(key, value?.toString())));
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
   String get URLIMG {
@@ -182,6 +182,7 @@ class UserModel extends Entity {
           username,
           password,
           identitynumber,
+          fullname,
           jobtitle,
           birthdate,
           gender,
@@ -209,6 +210,7 @@ class UserModel extends Entity {
           cityid,
           districtid,
           identitynumber,
+          fullname,
           jobtitle,
           birthdate,
           gender,

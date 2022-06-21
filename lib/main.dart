@@ -7,6 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
+import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
@@ -88,7 +89,13 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
+          
         ),
+         ChangeNotifierProvider(
+          create: (_) => UserProvider(),
+          
+        ),
+       
       ],
       child: Consumer<ThemeProvider>(
         child: const MyPage(),

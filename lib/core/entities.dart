@@ -121,6 +121,16 @@ class UserModel extends Entity {
   }
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(
       json.map((key, value) => MapEntry(key, value?.toString())));
+
+  ContactModel toContact() {
+    ContactModel contact = ContactModel();
+    contact.fullname = fullname;
+    contact.address = address;
+    contact.cityid = cityid;
+    contact.districtid = districtid;
+    return contact;
+  }
+
   UserModel clone() => UserModel.fromJson(toJson());
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
   String get URLIMG {

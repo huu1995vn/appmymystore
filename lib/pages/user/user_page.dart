@@ -37,10 +37,10 @@ class _UserPageState extends State<UserPage> {
   }
 
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
-  String birthdate = "";
-  String fullname = "";
-  String address = "";
-  int gender = 1;
+  // String birthdate = "";
+  // String fullname = "";
+  // String address = "";
+  // int gender = 1;
 
   loadData() async {
     try {
@@ -51,10 +51,10 @@ class _UserPageState extends State<UserPage> {
           data = user;
           urlImage = data!.URLIMG;
         });
-        birthdate = CommonMethods.convertToDateTime(user.birthdate).toString();
-        fullname = user.fullname;
-        address = user.address;
-        gender = int.parse(user.gender);
+        // birthdate = CommonMethods.convertToDateTime(user.birthdate).toString();
+        // fullname = user.fullname;
+        // address = user.address;
+        // gender = int.parse(user.gender);
         Provider.of<UserProvider>(context, listen: false).setUserModel(user);
       } else {
         CommonMethods.showToast(res.message);
@@ -105,10 +105,6 @@ class _UserPageState extends State<UserPage> {
     CommonMethods.lockScreen();
     try {
       var dataClone = data!.clone();
-      dataClone.fullname = fullname;
-      dataClone.address = address;
-      dataClone.birthdate = birthdate;
-      dataClone.gender = gender.toString();
       ResponseModel res =
           await DaiLyXeApiBLL_APIUser().updateuser(dataClone.toUpdate());
       if (res.status > 0) {
@@ -126,13 +122,16 @@ class _UserPageState extends State<UserPage> {
     CommonMethods.unlockScreen();
   }
 
-  _onAddress() {
-    var contact = ContactModel();
-    contact.fullname = fullname;
-    contact.cityid = data!.cityid;
-    contact.districtid = data!.districtid;
-    contact.address = data!.address;
-    CommonNavigates.openDialog(context, ContactDialog(contact: contact));
+  _onAddress() async {
+    var res = await CommonNavigates.openDialog(
+        context, ContactDialog(contact: data!.toContact()));
+    if (res != null) {
+      setState(() {
+        data!.cityid = res.cityid;
+        data!.districtid = res.districtid;
+        data!.address = res.address;
+      });
+    }
   }
 
   @override
@@ -155,19 +154,19 @@ class _UserPageState extends State<UserPage> {
                     key: _keyValidationForm,
                     child: Column(
                       children: <Widget>[
-                        RxInput(fullname,
+                        RxInput(data!.fullname,
                             // labelText: "fullname".tr(),
                             icon: const Icon(Icons.person),
-                            onChanged: (v) => {fullname = v},
+                            onChanged: (v) => {data!.fullname = v},
                             validator: Validators.compose([
                               Validators.required(
                                   "notempty.fullname.text".tr()),
                             ])),
                         RxInput(
                           readOnly: true,
-                          address,
+                          data!.address,
                           icon: const Icon(Icons.location_city),
-                          onChanged: (v) => {address = v},
+                          onChanged: (v) => {data!.address = v},
                           validator: Validators.compose([
                             Validators.required("notempty.address.text".tr()),
                           ]),
@@ -177,18 +176,20 @@ class _UserPageState extends State<UserPage> {
                         DateTimePicker(
                           icon: const Icon(Icons.calendar_today),
                           locale: Locale("vi"),
-                          initialValue: birthdate,
+                          initialValue:
+                              CommonMethods.convertToDateTime(data!.birthdate)
+                                  .toString(),
                           dateMask: 'dd-MM-yyyy',
                           firstDate: DateTime(1977),
                           lastDate: DateTime(2100),
-                          onChanged: (value) => {birthdate = value},
+                          onChanged: (value) => {data!.birthdate = value},
                         ),
                         ListTile(
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
-                              _CustomRadioButton("male".tr(), 1),
-                              _CustomRadioButton("female".tr(), 0),
+                              _CustomRadioButton("male".tr(), "1"),
+                              _CustomRadioButton("female".tr(), "0"),
                             ],
                           ),
                         )
@@ -211,24 +212,25 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget _CustomRadioButton(String text, int index) {
+  Widget _CustomRadioButton(String text, String value) {
     return OutlinedButton(
       onPressed: () {
         setState(() {
-          gender = index;
+          data!.gender = value;
         });
       },
       child: Text(
         text,
         style: TextStyle(
-          color: (gender == index) ? AppColors.primary : AppColors.black50,
+          color:
+              (data!.gender == value) ? AppColors.primary : AppColors.black50,
         ),
       ),
       style: ButtonStyle(
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
             side: BorderSide(
-                color: (gender == index)
+                color: (data!.gender == value)
                     ? AppColors.primary
                     : AppColors.black50))),
       ),

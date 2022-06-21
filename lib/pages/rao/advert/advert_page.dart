@@ -82,29 +82,31 @@ class _AdvertPageState extends State<AdvertPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _key,
-        body: RxScrollView(
-          listData,
-          (BuildContext context, int index) {
-            return ItemAdvertWidget(listData![index]);
-          },
-          totalItems,
-          appBar: SliverAppBar(
-            iconTheme: IconThemeData(
-              color: AppColors.primary, //change your color here
-            ),
-            centerTitle: true,
-            title: Text('adv'.tr(),
-                style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary)),
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-          ),
-          key: const Key("LAdv"),
-          controller: scrollController,
-          onNextPage: onNextPage,
-          onRefresh: onRefresh,
-        ));
+        body: Container(
+            decoration: BoxDecoration(color: Theme.of(context).cardColor),
+            child: RxScrollView(
+              listData,
+              (BuildContext context, int index) {
+                return ItemAdvertWidget(listData![index]);
+              },
+              totalItems,
+              appBar: SliverAppBar(
+                iconTheme: IconThemeData(
+                  color: AppColors.primary, //change your color here
+                ),
+                centerTitle: true,
+                title: Text('adv'.tr(),
+                    style: TextStyle(
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary)),
+                elevation: 0.0,
+                backgroundColor: Colors.transparent,
+              ),
+              key: const Key("LAdv"),
+              controller: scrollController,
+              onNextPage: onNextPage,
+              onRefresh: onRefresh,
+            )));
   }
 }

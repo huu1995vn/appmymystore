@@ -39,7 +39,6 @@ class _UserPageState extends State<ContactDialog> {
           MasterDataService.getNameById("city", int.parse(contact.cityid));
       districtname = MasterDataService.getNameById(
           "district", int.parse(contact.districtid));
-      address = contact.address;
     });
   }
 
@@ -117,10 +116,10 @@ class _UserPageState extends State<ContactDialog> {
                     onTap: _onDistrict,
                     suffixIcon: Icon(Icons.keyboard_arrow_down),
                   ),
-                  RxInput(address,
+                  RxInput(contact.address,
                       hintText: "address".tr(),
                       // icon: const Icon(Icons.person),
-                      onChanged: (v) => {address = v},
+                      onChanged: (v) => {contact.address = v},
                       validator: Validators.compose([
                         Validators.required("notempty.address.text".tr()),
                       ])),

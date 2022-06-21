@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
+// ignore: unused_import
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
@@ -62,7 +63,7 @@ class ItemAdvertWidget extends StatelessWidget {
                                     CommonMethods.convertToDateTime(
                                         item.expirationdate, "dd/MM/yyyy"),
                                     valueDefault: "not.update".tr()),
-                                style: const TextStyle().bold)),
+                                style: const TextStyle().italic)),
                         Text(
                           item.STATUS == 1 ? "active".tr() : "expired".tr(),
                           maxLines: 2,

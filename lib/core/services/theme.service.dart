@@ -7,8 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 class ThemeService {
   static ThemeData main({bool isDark = false}) {
     Color primaryColor = AppColors.primary;
-   
+
     return ThemeData(
+      inputDecorationTheme: const InputDecorationTheme(
+        border: InputBorder.none,
+      ),
       brightness: isDark ? Brightness.dark : Brightness.light,
       primaryColor: primaryColor,
       scaffoldBackgroundColor: isDark ? AppColors.black : AppColors.gray,

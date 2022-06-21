@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/search/search.dialog.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/rx_scrollview.dart';
 import 'package:raoxe/core/entities.dart';
@@ -122,7 +123,7 @@ class _HomePageState extends State<HomePage>
         Padding(
           padding: const EdgeInsets.only(right: kDefaultPadding),
           child: GestureDetector(
-              onTap: () {CommonNavigates.toDialogSearch(context);},
+              onTap: () {},
               child: Ink(
                 decoration: const ShapeDecoration(
                   color: AppColors.grayDark,
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage>
                   iconSize: 22,
                   icon: const Icon(Icons.search),
                   color: AppColors.primary,
-                  onPressed: () {},
+                  onPressed: () {CommonNavigates.openDialog(context, SearchDialog());},
                 ),
               )),
         )

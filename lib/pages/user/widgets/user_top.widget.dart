@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_rounded_button.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 
 class UserTopWidget extends StatelessWidget {
   final UserModel? data;
@@ -32,7 +32,6 @@ class UserTopWidget extends StatelessWidget {
                     radius: 60.0,
                     // backgroundColor: AppColors.white,
                     backgroundImage: const AssetImage('assets/loading_icon.gif'),
-
                     child: CircleAvatar(
                       // backgroundColor: Colors.white,
                       child: Align(
@@ -57,7 +56,7 @@ class UserTopWidget extends StatelessWidget {
                   Text(
                     data!.fullname.toUpperCase(),
                     style:
-                        const TextStyle(fontSize: 19, color: AppColors.white),
+                        const TextStyle(fontSize: 19, color: AppColors.white).bold,
                   ),
                   RxRoundedButton(
                       onPressed: () {},

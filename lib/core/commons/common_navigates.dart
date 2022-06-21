@@ -138,11 +138,23 @@ class CommonNavigates {
     return SystemNavigator.pop();
   }
 
-  static Future toDialogSearch(BuildContext context) async {
+  static Future openDialog(BuildContext context, Widget child) async {
     return await Navigator.of(context).push(MaterialPageRoute<dynamic>(
         builder: (BuildContext context) {
-          return SearchDialog();
+          return child;
         },
         fullscreenDialog: true));
+  }
+
+  static Future openSelect(BuildContext context, Widget child) async {
+    return showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (context) {
+          return FractionallySizedBox(
+            heightFactor: 0.95,
+            child: child,
+          );
+        });
   }
 }

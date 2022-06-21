@@ -17,6 +17,7 @@ class RxInput extends StatefulWidget {
   final void Function(String)? onChanged;
   final Widget? suffixIcon;
   final InputBorder? border;
+  final void Function()? onTap;
   const RxInput(this.value,
       {super.key,
       this.disabled = false,
@@ -29,7 +30,8 @@ class RxInput extends StatefulWidget {
       this.isPassword = false,
       this.onChanged,
       this.suffixIcon,
-      this.border});
+      this.border,
+      this.onTap});
 
   @override
   _InputTextState createState() => _InputTextState();
@@ -41,10 +43,17 @@ class _InputTextState extends State<RxInput> {
   @override
   void initState() {
     super.initState();
-    if (mounted && widget.value != input.text)
-      setState(() {
-        input.text = widget.value;
+    if (mounted && widget.value != input.text) input.text = widget.value;
+  }
+
+  @override
+  void didUpdateWidget(RxInput oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.value != oldWidget.value) {
+      Future.delayed(Duration.zero, () {
+        if (mounted && widget.value != input.text) input.text = widget.value;
       });
+    }
   }
 
   @override
@@ -58,6 +67,8 @@ class _InputTextState extends State<RxInput> {
     return RxDisabled(
         disabled: widget.disabled,
         child: TextFormField(
+          key: UniqueKey(),
+          onTap: widget.onTap,
           readOnly: widget.readOnly || widget.disabled,
           controller: input,
           keyboardType: widget.keyboardType,
@@ -68,7 +79,7 @@ class _InputTextState extends State<RxInput> {
           validator: widget.validator,
           onChanged: widget.onChanged,
           decoration: InputDecoration(
-              border: widget.border ??InputBorder.none,
+              border: widget.border ?? InputBorder.none,
               labelText: widget.labelText,
               hintText: widget.hintText,
               icon: widget.icon,

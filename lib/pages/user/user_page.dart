@@ -1,24 +1,23 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously
 
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_primary_button.dart';
+import 'package:date_time_picker/date_time_picker.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/contact.dialog.dart';
+import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
-
+import 'package:wc_form_validators/wc_form_validators.dart';
 import 'widgets/user_top.widget.dart';
 
 class UserPage extends StatefulWidget {
@@ -37,14 +36,26 @@ class _UserPageState extends State<UserPage> {
     loadData();
   }
 
+  final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
+  String birthdate = "";
+  String fullname = "";
+  String address = "";
+  int gender = 1;
+
   loadData() async {
     try {
       ResponseModel res = await DaiLyXeApiBLL_APIUser().getuser();
       if (res.status > 0) {
+        var user = UserModel.fromJson(jsonDecode(res.data));
         setState(() {
-          data = UserModel.fromJson(jsonDecode(res.data));
+          data = user;
           urlImage = data!.URLIMG;
         });
+        birthdate = CommonMethods.convertToDateTime(user.birthdate).toString();
+        fullname = user.fullname;
+        address = user.address;
+        gender = int.parse(user.gender);
+        Provider.of<UserProvider>(context, listen: false).setUserModel(user);
       } else {
         CommonMethods.showToast(res.message);
       }
@@ -66,18 +77,21 @@ class _UserPageState extends State<UserPage> {
             await FileService().uploadImage(file, idFile: -1, name: fullname);
         // ignore: curly_braces_in_flow_control_structures
         if (img != idAvatar) {
+          var dataClone = data!.clone();
+          dataClone.img = idAvatar.toString();
+
           ResponseModel res =
-              await DaiLyXeApiBLL_APIUser().updateuser(data!.toUpdate());
-          data!.img = idAvatar.toString();
+              await DaiLyXeApiBLL_APIUser().updateuser(dataClone.toUpdate());
           if (res.status > 0) {
             setState(() {
-              data!.img = idAvatar.toString();
+              data = dataClone;
               APITokenService.img = idAvatar;
             });
           } else {
             CommonMethods.showToast(res.message);
           }
-          Provider.of<UserProvider>(context, listen: false).setUserModel(img: idAvatar.toString());
+          Provider.of<UserProvider>(context, listen: false)
+              .setData(img: idAvatar.toString());
         }
       }
     } catch (e) {
@@ -85,6 +99,40 @@ class _UserPageState extends State<UserPage> {
     }
 
     CommonMethods.unlockScreen();
+  }
+
+  _onSave() async {
+    CommonMethods.lockScreen();
+    try {
+      var dataClone = data!.clone();
+      dataClone.fullname = fullname;
+      dataClone.address = address;
+      dataClone.birthdate = birthdate;
+      dataClone.gender = gender.toString();
+      ResponseModel res =
+          await DaiLyXeApiBLL_APIUser().updateuser(dataClone.toUpdate());
+      if (res.status > 0) {
+        setState(() {
+          data = dataClone;
+        });
+      } else {
+        CommonMethods.showToast(res.message);
+      }
+      Provider.of<UserProvider>(context, listen: false).setUserModel(dataClone);
+    } catch (e) {
+      CommonMethods.showDialogError(context, e.toString());
+    }
+
+    CommonMethods.unlockScreen();
+  }
+
+  _onAddress() {
+    var contact = ContactModel();
+    contact.fullname = fullname;
+    contact.cityid = data!.cityid;
+    contact.districtid = data!.districtid;
+    contact.address = data!.address;
+    CommonNavigates.openDialog(context, ContactDialog(contact: contact));
   }
 
   @override
@@ -98,55 +146,92 @@ class _UserPageState extends State<UserPage> {
           : CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
-                    // iconTheme: IconThemeData(
-                    //   color: AppColors.primary
-                    // ),
-                    // backgroundColor: Colors.transparent,
                     expandedHeight: 250.0,
                     flexibleSpace: UserTopWidget(data, onUpload: onUpload)),
                 SliverToBoxAdapter(
                     child: Padding(
-                        padding: const EdgeInsets.all(kDefaultPadding),
-                        child: Column(
-                          children: [
-                            Column(
-                              children: [
-                                RxBuildItem(
-                                    title: "fullname".tr(),
-                                    trailing: Text(data!.fullname)),
-                                RxBuildItem(
-                                    title: "address".tr(),
-                                    trailing: Text(data!.address)),
-                                RxBuildItem(
-                                    title: "birthday".tr(),
-                                    trailing: Text(CommonMethods.formatDateTime(
-                                        CommonMethods.convertToDateTime(
-                                            data!.birthdate)))),
-                                RxBuildItem(
-                                    title: "gender".tr(),
-                                    trailing: Text(
-                                      int.parse(data!.gender) == 1
-                                          ? "male".tr()
-                                          : "female".tr(),
-                                    )),
-                              ],
-                            ),
-                            Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(kDefaultPadding),
-                                child: SizedBox(
-                                  width: SizeConfig.screenWidth / 2,
-                                  child: RxPrimaryButton(
-                                    text: 'edit.text'.tr(),
-                                    onTap: () {},
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        )))
+                  padding: const EdgeInsets.all(16.0),
+                  child: Form(
+                    key: _keyValidationForm,
+                    child: Column(
+                      children: <Widget>[
+                        RxInput(fullname,
+                            // labelText: "fullname".tr(),
+                            icon: const Icon(Icons.person),
+                            onChanged: (v) => {fullname = v},
+                            validator: Validators.compose([
+                              Validators.required(
+                                  "notempty.fullname.text".tr()),
+                            ])),
+                        RxInput(
+                          readOnly: true,
+                          address,
+                          icon: const Icon(Icons.location_city),
+                          onChanged: (v) => {address = v},
+                          validator: Validators.compose([
+                            Validators.required("notempty.address.text".tr()),
+                          ]),
+                          onTap: _onAddress,
+                          suffixIcon: Icon(Icons.keyboard_arrow_down),
+                        ),
+                        DateTimePicker(
+                          icon: const Icon(Icons.calendar_today),
+                          locale: Locale("vi"),
+                          initialValue: birthdate,
+                          dateMask: 'dd-MM-yyyy',
+                          firstDate: DateTime(1977),
+                          lastDate: DateTime(2100),
+                          onChanged: (value) => {birthdate = value},
+                        ),
+                        ListTile(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              _CustomRadioButton("male".tr(), 1),
+                              _CustomRadioButton("female".tr(), 0),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ))
               ],
             ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.all(kDefaultPadding),
+        child: RxPrimaryButton(
+            onTap: () {
+              if (_keyValidationForm.currentState!.validate()) {
+                _onSave();
+              }
+            },
+            text: 'save'.tr()),
+      ),
+    );
+  }
+
+  Widget _CustomRadioButton(String text, int index) {
+    return OutlinedButton(
+      onPressed: () {
+        setState(() {
+          gender = index;
+        });
+      },
+      child: Text(
+        text,
+        style: TextStyle(
+          color: (gender == index) ? AppColors.primary : AppColors.black50,
+        ),
+      ),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(
+                color: (gender == index)
+                    ? AppColors.primary
+                    : AppColors.black50))),
+      ),
     );
   }
 }

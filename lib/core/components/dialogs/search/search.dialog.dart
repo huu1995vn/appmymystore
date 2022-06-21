@@ -27,7 +27,7 @@ class _SearchPageState extends State<SearchDialog> {
   String textSearch = "";
   final List<String> listHotSearch = CommonConfig.hotSearch.split(",");
   List<String> listSearchLocal =
-      StorageService.get(StorageKeys.text_search)!.split(",");
+      (StorageService.get(StorageKeys.text_search)??"")!.split(",");
   List<TextSearchModel>? listSearch;
   final int _value = -1;
   Timer? _debounce;

@@ -9,11 +9,13 @@ class MasterDataService {
   static Map<String, dynamic> data = <String, dynamic>{};
   static Future<bool> init() async {
     try {
-      int versionMasterdata =int.parse(
-          StorageService.get(StorageKeys.version_masterdata));
+      int versionMasterdata =
+          int.parse(StorageService.get(StorageKeys.version_masterdata)??"0");
       dynamic masterdata = StorageService.get(StorageKeys.masterdata);
-      if (masterdata!=null && versionMasterdata!=null &&  CommonConfig.version_masterdata <= versionMasterdata &&
-              masterdata != null) {
+      if (masterdata != null &&
+          versionMasterdata != null &&
+          CommonConfig.version_masterdata <= versionMasterdata &&
+          masterdata != null) {
         data = json.decode(masterdata);
         return true;
       }
@@ -26,8 +28,15 @@ class MasterDataService {
             CommonConfig.version_masterdata.toString());
       }
       return res.status > 0;
-    } catch (e) {
-    }
+    } catch (e) {}
     return false;
+  }
+
+  static String getNameById(String type, int id) {
+    try {
+      return (data[type] as List)
+          .firstWhere((element) => element["id"] == id)["name"];
+    } catch (e) {}
+    return "";
   }
 }

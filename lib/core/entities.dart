@@ -119,9 +119,9 @@ class UserModel extends Entity {
     email = "";
     phone = "";
   }
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json.map((key, value) => MapEntry(key, value?.toString())));
-
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(
+      json.map((key, value) => MapEntry(key, value?.toString())));
+  UserModel clone() => UserModel.fromJson(toJson());
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
   String get URLIMG {
     try {
@@ -467,29 +467,24 @@ class AdvertModel extends Entity {
 
 @JsonSerializable()
 class ContactModel extends Entity {
-  final String id;
+  late String id;
   late String userid;
-  final String cityid;
-  final String districtid;
-  final String fullname;
-  final String phone;
-  final String address;
-  late String isdefault;  
-  ContactModel({
-    required this.id,
-    required this.cityid,
-    required this.districtid,
-    required this.phone,
-    required this.address,
-    required this.fullname
-  })
-  {
+  late String cityid;
+  late String districtid;
+  late String fullname;
+  late String phone;
+  late String address;
+  late String isdefault;
+  ContactModel() {
     isdefault = "False";
     userid = APITokenService.userId.toString();
   }
-   bool get ISDEFAULT {
+  UserModel clone() => UserModel.fromJson(toJson());
+
+  bool get ISDEFAULT {
     return isdefault == "true";
   }
+
   factory ContactModel.fromJson(Map<String, dynamic> json) =>
       _$ContactModelFromJson(json);
 

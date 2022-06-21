@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 
 class RxCard extends StatelessWidget {
   final Widget child;
@@ -16,7 +17,7 @@ class RxCard extends StatelessWidget {
       shape: isBorder
           ? (shape ??
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(kDefaultPadding),
               ))
           : RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0),

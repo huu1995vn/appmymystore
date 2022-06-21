@@ -334,6 +334,15 @@ class ProductModel extends Entity {
       return "";
     }
   }
+  List<String> get LISTURLIMG {
+    try {
+      return imglist.split(",").map((e) => CommonMethods.buildUrlHinhDaiDien(int.parse(e), rewriteUrl: name)).toList();
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+
+      return [];
+    }
+  }
 
   Map<String, dynamic> toInsert() => <String, dynamic>{
         'id': -1,

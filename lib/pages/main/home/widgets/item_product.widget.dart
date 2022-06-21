@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
@@ -13,10 +14,9 @@ class ItemProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        child: Padding(
-      padding:
-          const EdgeInsets.only(top: kDefaultPadding, bottom: kDefaultPadding),
+    int lenimg = Random().nextInt(15); //itemProduct.LISTURLIMG.length
+
+    return RxCard(
       child: GestureDetector(
         onTap: () async {},
         child: SizedBox(
@@ -25,61 +25,104 @@ class ItemProductWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: RxImage(itemProduct.URLIMG,
-                    width: SizeConfig.screenWidth / 4),
-              ),
-              const SizedBox(width: kDefaultPadding),
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(kDefaultPadding),
+                      topLeft: Radius.circular(kDefaultPadding)),
+                  child: Stack(
+                    children: <Widget>[
+                      RxImage(itemProduct.URLIMG,
+                          width: SizeConfig.screenWidth / 4),
+                      if (lenimg > 0)
+                        Positioned(
+                          top: 5,
+                          right: 5,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              border: Border.all(color: AppColors.white50),
+                              color: AppColors.black50,
+                            ),
+                            child: SizedBox(
+                                height: 15, width: 20, child: Container()),
+                          ),
+                        ),
+                      if (lenimg > 0)
+                        Positioned(
+                          top: 3,
+                          right: 3,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              border: Border.all(color: AppColors.white50),
+                              color: AppColors.black,
+                            ),
+                            child: SizedBox(
+                                height: 15,
+                                width: 20,
+                                child: Center(
+                                    child: Text(
+                                  lenimg >= 9 ? "9+" : lenimg.toString(),
+                                  style: TextStyle(color: AppColors.white)
+                                      .bold
+                                      .size(12),
+                                ))),
+                          ),
+                        ),
+                    ],
+                  )),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                child: Padding(
+                  padding: const EdgeInsets.all(kDefaultPadding),
+                  child: 
+                  Stack(children: [
+                    Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          itemProduct.name ?? "",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              // fontSize: 36,
+                              ),
+                        ),
+                      ),
+                      Row(
+                        // spacing: kDefaultPadding,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            itemProduct.name ?? "",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                // fontSize: 36,
-                                ),
-                          ),
-                          Text(
-                            "4.000.000 đ",
+                            itemProduct.price ?? "4.000.000",
                             style: const TextStyle(
                               color: AppColors.primary,
                             ).bold,
                           ),
+                          
+                          Text(
+                            "Tin ưu tiên",
+                            style: const TextStyle(
+                              color: AppColors.yellow,
+                            ).bold.size(12),
+                          ),
+                          const Icon(Icons.favorite_border_outlined, color: AppColors.black50, size: 19,)
+                          // Text(itemProduct.TIMEAGO,
+                          //     style: const TextStyle(
+                          //             color: AppColors.black50,
+                          //             fontStyle: FontStyle.italic)
+                          //         .size(12)),
                         ],
                       ),
-                    ),
-
-                    // Text.rich(
-                    //   TextSpan(
-                    //     children: <TextSpan>[
-                    //       TextSpan(
-                    //           text: "${itemProduct.createdate}",
-                    //           style:
-                    //               const TextStyle(fontStyle: FontStyle.italic)),
-                    //       // TextSpan(
-                    //       //     text: "${itemProduct.views} lượt xem",
-                    //       //     style:
-                    //       //         const TextStyle(fontWeight: FontWeight.bold)),
-                    //     ],
-                    //     style: const TextStyle(
-                    //       fontSize: 10,
-                    //     ).textOpacity(0.5).italic.light,
-                    //   ),
-                    // ),
-                  ],
+                    ],
+                  ),
+                  ],)
+                  
                 ),
               ),
             ],
           ),
         ),
       ),
-    ));
+    );
   }
 }

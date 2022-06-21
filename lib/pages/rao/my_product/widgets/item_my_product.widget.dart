@@ -27,10 +27,26 @@ class ItemMyProductWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child:
-                      RxImage(item.URLIMG, width: SizeConfig.screenWidth / 4),
-                ),
+                    borderRadius: BorderRadius.circular(5),
+                    child: Stack(
+                      children: <Widget>[
+                        RxImage(item.URLIMG, width: SizeConfig.screenWidth / 4),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: Ink(
+                            decoration: const ShapeDecoration(
+                              color: AppColors.grayDark,
+                              shape: CircleBorder(),
+                            ),
+                            child: Text(
+                              item.LISTURLIMG.length.toString(),
+                              style: const TextStyle().bold,
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
                 const SizedBox(width: kDefaultPadding),
                 Expanded(
                   child: Column(

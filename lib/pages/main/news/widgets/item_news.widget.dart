@@ -15,25 +15,24 @@ class ItemNewsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          const EdgeInsets.only(top: kDefaultPadding, bottom: kDefaultPadding),
-      child: GestureDetector(
-        onTap: onTap,
-        child: SizedBox(
-          height: SizeConfig.screenWidth / 4.5,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: kDefaultPadding),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: RxImage(itemNews.URLIMG,
-                      width: SizeConfig.screenWidth / 4),
-                ),
-              ),
-              Expanded(
+    return RxCard(
+        child: GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        height: SizeConfig.screenWidth / 4.5,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(kDefaultPadding),
+                  topLeft: Radius.circular(kDefaultPadding)),
+              child:
+                  RxImage(itemNews.URLIMG, width: SizeConfig.screenWidth / 4.5),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(kDefaultPadding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -45,33 +44,34 @@ class ItemNewsWidget extends StatelessWidget {
                         style: const TextStyle(),
                       ),
                     ),
-                    Text(
-                      itemNews.webresourcename,
-                      style: const TextStyle(
-                        color: AppColors.yellow,
-                      ).italic,
-                    ),
-                    Wrap(
-                      spacing: kDefaultPadding,
+                    Row(
+                      // spacing: kDefaultPadding,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Text(
+                          itemNews.webresourcename,
+                          style: const TextStyle(
+                            color: AppColors.yellow,
+                          ).italic,
+                        ),
                         Text(itemNews.TIMEAGO,
                             style: const TextStyle(
-                                color: AppColors.black50,
-                                fontStyle: FontStyle.italic)),
+                                    color: AppColors.black50,
+                                    fontStyle: FontStyle.italic)
+                                .size(12)),
                         // Text(itemNews.views,
                         //     style: const TextStyle(
                         //         color: AppColors.black50,
                         //         fontStyle: FontStyle.italic))
                       ],
                     )
-                   
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    );
+    ));
   }
 }

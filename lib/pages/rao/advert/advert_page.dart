@@ -97,7 +97,6 @@ class _AdvertPageState extends State<AdvertPage> {
             title: Text('adv'.tr(),
                 style: TextStyle(
                     fontSize: 19,
-                    fontWeight: FontWeight.bold,
                     color: AppColors.primary)),
             elevation: 0.0,
             backgroundColor: Colors.transparent,

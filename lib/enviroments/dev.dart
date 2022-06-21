@@ -3,6 +3,6 @@ const configDev = {
   "env": 'Dev',
   "apiDaiLyXe": "http://api.dailyxe.info",
   "apiDaiLyXeSufix": "/",
-  "apiDrive": "http://cdn.dailyxe.info",
+  "apiDrive": "https://cdn.dailyxe.com.vn",
 
 };

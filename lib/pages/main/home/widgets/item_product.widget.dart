@@ -13,7 +13,8 @@ class ItemProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Card(
+        child: Padding(
       padding:
           const EdgeInsets.only(top: kDefaultPadding, bottom: kDefaultPadding),
       child: GestureDetector(
@@ -54,7 +55,7 @@ class ItemProductWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                   
+
                     // Text.rich(
                     //   TextSpan(
                     //     children: <TextSpan>[
@@ -79,6 +80,6 @@ class ItemProductWidget extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }

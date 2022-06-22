@@ -77,7 +77,8 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Text("regist".tr(), style: const TextStyle(color: AppColors.white)),
             if (user!.phone != null)
-              Text(user!.phone, style: kTextHeaderStyle.copyWith(color: AppColors.white))
+              Text(user!.phone,
+                  style: kTextHeaderStyle.copyWith(color: AppColors.white))
           ],
         ),
       ),
@@ -136,21 +137,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     }
                   },
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 32.0),
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    child: Text(
-                      'continue'.tr(),
-                      style: const TextStyle(fontSize: 16.0),
-                    ),
-                    onPressed: () {
+                RxPrimaryButton(
+                    onTap: () {
                       if (_keyValidationForm.currentState!.validate()) {
                         _onRegister();
                       }
                     },
-                  ),
-                ), //button: login
+                    text: 'continue'.tr()),
+                //button: login
                 RxLoginAccountLabel(context)
               ],
             ),

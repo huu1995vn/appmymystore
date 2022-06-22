@@ -133,23 +133,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     return null;
                   }
                 }),
-                Container(
-                  margin: const EdgeInsets.only(top: 32.0),
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    child: Text(
-                      'continue'.tr(),
-                      style: const TextStyle(fontSize: 16.0),
-                    ),
-                    onPressed: () {
+                RxPrimaryButton(
+                    onTap: () {
                       if (_keyValidationForm.currentState!.validate()) {
                         onForgotPassword();
                       }
                     },
-                    // shape: RoundedRectangleBorder(
-                    //     borderRadius: BorderRadius.circular(25.0)),
-                  ),
-                ), //button: login
+                    text: 'continue'.tr()),
+                //button: login
                 RxLoginAccountLabel(context)
               ],
             ),

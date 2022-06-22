@@ -2,12 +2,15 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 // import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
+import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/pages/my_page.dart';
+import 'package:local_auth/local_auth.dart';
 
 class AuthService {
   static Future login(
@@ -16,6 +19,8 @@ class AuthService {
     try {
       var res = await DaiLyXeApiBLL_APIAuth().login(username, password);
       if (res.status > 0) {
+        await StorageService.set(StorageKeys.userlogin,
+          <String, String>{"username": username, "password": password});
         APITokenService.loginByData(res.data);
         if (APITokenService.isValid) {
           Navigator.pushAndRemoveUntil(
@@ -31,13 +36,15 @@ class AuthService {
     CommonMethods.unlockScreen();
   }
 
-  static Future autologin() async {
+  static Future<bool> autologin() async {
     if (APITokenService.token != null) {
       var res = await DaiLyXeApiBLL_APIAuth().autologin();
       if (res.status > 0) {
         APITokenService.loginByData(res.data);
       }
+      return res.status==1;
     }
+    return false;
   }
 
   static Future logout(context) async {
@@ -84,5 +91,30 @@ class AuthService {
 
   static Future<bool> verifyOTPPhone(String phone, String code) async {
     return await FirebaseAuthService.verifyOTP(phone, code);
+  }
+
+  static Future<bool> authBiometric() async {
+    //initialize Local Authentication plugin.
+    final LocalAuthentication _localAuthentication = LocalAuthentication();
+    //status of authentication.
+    bool isAuthenticated = false;
+    //check if device supports biometrics authentication.
+    bool isBiometricSupported = await _localAuthentication.isDeviceSupported();
+    //check if user has enabled biometrics.
+    //check
+    bool canCheckBiometrics = await _localAuthentication.canCheckBiometrics;
+
+    //if device supports biometrics and user has enabled biometrics, then authenticate.
+    if (isBiometricSupported && canCheckBiometrics) {
+      try {
+        isAuthenticated = await _localAuthentication.authenticate(
+            localizedReason: 'Scan your fingerprint to authenticate',
+            options: const AuthenticationOptions(
+                biometricOnly: true, useErrorDialogs: true, stickyAuth: true));
+      } on PlatformException catch (e) {
+        CommonMethods.wirtePrint(e);
+      }
+    }
+    return isAuthenticated;
   }
 }

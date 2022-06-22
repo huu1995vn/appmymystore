@@ -1,18 +1,18 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
+import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/pages/my_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -25,6 +25,21 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> keyLogin = GlobalKey<FormState>();
   String username = "";
   String password = "";
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  String? tokenbiometrics;
+  dynamic usl;
+  loadData() {
+    setState(() {
+      tokenbiometrics = StorageService.get(StorageKeys.biometrics);
+      usl = StorageService.get(StorageKeys.userlogin);
+      if (usl != null) username = usl!["username"];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +152,23 @@ class _LoginPageState extends State<LoginPage> {
                   _onLogin(username, password);
                 },
                 text: "continue".tr().toUpperCase()),
-            _createAccountLabel(context)
+            _createAccountLabel(context),
+            Center(
+                child: Padding(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: Ink(
+                decoration: const ShapeDecoration(
+                  shape: CircleBorder(),
+                  color: Colors.teal,
+                ),
+                child: IconButton(
+                  iconSize: 59,
+                  icon: const Icon(Icons.fingerprint),
+                  color: AppColors.black50,
+                  onPressed: _onLoginBiometrics,
+                ),
+              ),
+            ))
           ],
         ),
       ),
@@ -169,6 +200,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  _onLoginBiometrics() async {
+    if (tokenbiometrics == null || usl == null) {
+      CommonMethods.showToast("Chức năng này chưa bật");
+    } else {
+      bool authBiometric = await AuthService.authBiometric();
+      if (!authBiometric) {
+        CommonMethods.showToast("Thiết bị không khả dụng");
+      }
+      _onLogin(username, usl!["password"]!);
+    }
+  }
+
   _onForgotPassword() {
     CommonNavigates.toForgotPasswordPage(context, "0379787904");
   }
@@ -178,9 +221,11 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await AuthService.checkPhone(username, isExist: true);
       if (mounted) await AuthService.login(context, username, password);
+      
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }
+
     CommonMethods.unlockScreen();
   }
 }

@@ -116,8 +116,10 @@ class CommonNavigates {
   }
 
   static Future toForgotPasswordPage(BuildContext context, String phone) async {
-    return await Navigator.push(context,
-        CupertinoPageRoute(builder: (context) => ForgotPasswordPage(phone: phone)));
+    return await Navigator.push(
+        context,
+        CupertinoPageRoute(
+            builder: (context) => ForgotPasswordPage(phone: phone)));
   }
 
   static pop(BuildContext context, Object? value) {
@@ -133,7 +135,11 @@ class CommonNavigates {
   }
 
   static goBack(BuildContext context, [dynamic? result]) {
-    return Navigator.pop(context, result);
+    if (result != null) {
+      return Navigator.pop(context, result);
+    } else {
+      return Navigator.pop(context);
+    }
   }
 
   static exit(BuildContext context) {

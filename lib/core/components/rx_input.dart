@@ -70,7 +70,7 @@ class _InputTextState extends State<RxInput> {
         child: Padding(
           padding: const EdgeInsets.only(bottom: kDefaultPadding),
           child: SizedBox(
-            height: 45,
+            height: 50,
             child: TextFormField(
               key: UniqueKey(),
               onTap: widget.onTap,

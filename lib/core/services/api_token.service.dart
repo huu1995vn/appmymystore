@@ -16,12 +16,14 @@ class APITokenService {
   static bool isValid = false;
   static String fullname = "";
   static int img = -1;
+  static String phone = "";
 
   static UserModel toUser() {
     UserModel user = UserModel();
     user.fullname = fullname;
     user.id = userId.toString();
     user.img = img.toString();
+
     return user;
   }
 
@@ -87,9 +89,9 @@ class APITokenService {
     return pText.replaceAll('+', '_').replaceAll('/', '-').split("=")[0];
   }
 
-  static bool loginByData(String pData) {
+  static Future<bool> loginByData(String pData) async {
     try {
-      StorageService.set(StorageKeys.dataLogin, pData);
+      await StorageService.set(StorageKeys.dataLogin, pData);
       String dataBase64 = convertBase64FromUrl(pData);
       Map data = json.decode(AESService.decrypt(dataBase64));
       if ((data["token"] as String).isNotNullEmpty) {

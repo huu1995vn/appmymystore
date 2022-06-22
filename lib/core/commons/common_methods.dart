@@ -74,7 +74,7 @@ class CommonMethods {
       permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied &&
           StorageService.get("isOpened") != null) {
-        StorageService.set("isOpened", "true");
+        await StorageService.set("isOpened", "true");
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.deniedForever) {
           Future.error('Location Not Available');
@@ -120,7 +120,7 @@ class CommonMethods {
 
   static showToast(String pmsg) {
     EasyLoading.showToast(pmsg,
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 3),
         toastPosition: EasyLoadingToastPosition.bottom,
         maskType: EasyLoadingMaskType.black);
   }

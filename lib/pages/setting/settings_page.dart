@@ -9,14 +9,36 @@ import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
+import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  bool authBiometric = false;
+  _onBiometric(bool v) async {
+    bool authBiometric = await AuthService.authBiometric();
+    if (!authBiometric) {
+      CommonMethods.showToast("Thao tác thất bại");
+    }
+    if (v) {
+      await StorageService.set(StorageKeys.biometrics, APITokenService.token);
+    } else {
+      StorageService.deleteItem(StorageKeys.biometrics);
+    }
+    setState(() {
+      authBiometric = v;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +88,18 @@ class SettingsPage extends StatelessWidget {
                     activeColor: Colors.red,
                   ),
                 ),
+                RxBuildItem(
+                    icon: const Icon(Icons.fingerprint),
+                    title: "Đăng nhập bằng sinh trắc học",
+                    trailing: Switch(
+                      value: authBiometric,
+                      onChanged: _onBiometric,
+                      activeTrackColor: Colors.red[200],
+                      activeColor: Colors.red,
+                    ),
+                    onTap: () {
+                      // _authenticateWithBiometrics();
+                    }),
                 RxBuildItem(
                     title: "termsandcondition".tr(),
                     onTap: () {

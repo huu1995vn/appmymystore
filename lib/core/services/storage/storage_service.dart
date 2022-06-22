@@ -6,9 +6,10 @@ class StorageService {
   static String keyStorage = "rx";
   static Map<String, dynamic> dataStorage = <String, dynamic>{};
   static LocalStorage storage = LocalStorage('app');
+
   static Future<bool> init() async {
     var res = await storage.ready;
-    dataStorage = storage.getItem(keyStorage)?? <String, dynamic>{};
+    dataStorage = storage.getItem(keyStorage) ?? <String, dynamic>{};
     return res;
   }
 
@@ -18,9 +19,10 @@ class StorageService {
   }
 
   /// Changes a value in storage
-  static set(String key, dynamic value) {
+   static Future<void> set(String key, dynamic value) async {
     dataStorage[key] = value;
-    storage.setItem(keyStorage, dataStorage);
+    await storage.setItem(keyStorage, dataStorage);
+
   }
 
   static deleteItem(String key) {
@@ -36,4 +38,6 @@ class StorageKeys {
   static const String masterdata = 'msd';
   static const String version_masterdata = 'vmsd';
   static const String text_search = 'text_search';
+  static const String biometrics = 'biometrics';
+  static const String userlogin = 'usl';
 }

@@ -63,11 +63,13 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
   }
 
   _onCity() async {
+        int cityid = data!.cityid == null ? -1 : int.parse(data!.cityid);
+
     var res = await showSearch(
         context: context,
         delegate: SelectDelegate(
             data: MasterDataService.data["city"],
-            value: int.parse(data!.cityid ?? "-1")));
+            value: cityid));
     if (res != null) {
       setState(() {
         data!.cityid = res.toString();
@@ -79,7 +81,9 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
   }
 
   _onDistrict() async {
-    int cityid = int.parse(data!.cityid ?? "-1");
+    int cityid = data!.cityid == null ? -1 : int.parse(data!.cityid);
+    int districtid =
+        data!.districtid == null ? -1 : int.parse(data!.districtid);
     var district = cityid > 0
         ? MasterDataService.data["district"]
             .where((element) => element['cityid'] == cityid)
@@ -88,7 +92,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
     var res = await showSearch(
         context: context,
         delegate:
-            SelectDelegate(data: district, value: int.parse(data!.districtid)));
+            SelectDelegate(data: district, value: districtid));
     if (res != null) {
       setState(() {
         data!.districtid = res.toString();

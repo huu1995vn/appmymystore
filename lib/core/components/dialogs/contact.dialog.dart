@@ -35,19 +35,19 @@ class _UserPageState extends State<ContactDialog> {
   loadData() {
     setState(() {
       contact = widget.contact;
-      cityname =
-          MasterDataService.getNameById("city", int.parse(contact.cityid));
+      cityname = MasterDataService.getNameById(
+          "city", int.parse(contact.cityid ?? "-2"));
       districtname = MasterDataService.getNameById(
           "district", int.parse(contact.districtid));
     });
   }
 
   _onCity() async {
+    int cityid = contact.cityid == null ? -1 : int.parse(contact.cityid);
     var res = await showSearch(
         context: context,
         delegate: SelectDelegate(
-            data: MasterDataService.data["city"],
-            value: int.parse(contact.cityid)));
+            data: MasterDataService.data["city"], value: cityid));
     if (res != null) {
       setState(() {
         contact.cityid = res.toString();
@@ -59,7 +59,11 @@ class _UserPageState extends State<ContactDialog> {
   }
 
   _onDistrict() async {
-    int cityid = int.parse(contact.cityid ?? "-1");
+    int cityid = contact.cityid == null ? -1 : int.parse(contact.cityid);
+
+    int districtid =
+        contact.districtid == null ? -1 : int.parse(contact.districtid);
+
     var district = cityid > 0
         ? MasterDataService.data["district"]
             .where((element) => element['cityid'] == cityid)
@@ -67,8 +71,7 @@ class _UserPageState extends State<ContactDialog> {
         : [];
     var res = await showSearch(
         context: context,
-        delegate: SelectDelegate(
-            data: district, value: int.parse(contact.districtid)));
+        delegate: SelectDelegate(data: district, value: districtid));
     if (res != null) {
       setState(() {
         contact.districtid = res.toString();

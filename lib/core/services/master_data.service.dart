@@ -23,8 +23,8 @@ class MasterDataService {
       if (res.status > 0) {
         masterdata = json.decode(res.data)[0]["masterdata"];
         data = json.decode(masterdata);
-        StorageService.set(StorageKeys.masterdata, masterdata);
-        StorageService.set(StorageKeys.version_masterdata,
+        await StorageService.set(StorageKeys.masterdata, masterdata);
+        await StorageService.set(StorageKeys.version_masterdata,
             CommonConfig.version_masterdata.toString());
       }
       return res.status > 0;

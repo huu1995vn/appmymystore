@@ -12,7 +12,8 @@ import 'package:raoxe/pages/auth/confirm_otp_page.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
-  const ForgotPasswordPage({super.key});
+  final String phone;
+  const ForgotPasswordPage({super.key, required this.phone});
 
   @override
   _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
@@ -26,6 +27,16 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
+  }
+
+  loadData() {
+    if (widget.phone.isNotEmpty &&
+        CommonMethods.checkStringPhone(widget.phone)) {
+      setState(() {
+        phone = widget.phone;
+      });
+    }
   }
 
   @override
@@ -60,7 +71,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               width: 150,
             ),
             Text("forgot.password".tr(),
-                style: const TextStyle(color: AppColors.white))
+                style: const TextStyle(color: AppColors.white)),
+            if (phone != null)
+              Text(phone, style: kTextHeaderStyle.copyWith(color: AppColors.white))
           ],
         ),
       ),
@@ -82,22 +95,22 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             key: _keyValidationForm,
             child: Column(
               children: <Widget>[
-                RxInput(phone,
-                    keyboardType: TextInputType.number,
-                    labelText: "phone".tr(),
-                    icon: const Icon(Icons.phone),
-                    onChanged: (v) => {
-                          setState(() => {phone = v})
-                        },
-                    validator: (v) {
-                      if (v == null || !v.isNotEmpty) {
-                        return "notempty.phone.text".tr();
-                      } else {
-                        return CommonMethods.checkStringPhone(v)
-                            ? null
-                            : "invalid.phone".tr();
-                      }
-                    }),
+                // RxInput(phone,
+                //     keyboardType: TextInputType.number,
+                //     labelText: "phone".tr(),
+                //     icon: const Icon(Icons.phone),
+                //     onChanged: (v) => {
+                //           setState(() => {phone = v})
+                //         },
+                //     validator: (v) {
+                //       if (v == null || !v.isNotEmpty) {
+                //         return "notempty.phone.text".tr();
+                //       } else {
+                //         return CommonMethods.checkStringPhone(v)
+                //             ? null
+                //             : "invalid.phone".tr();
+                //       }
+                //     }),
                 RxInput(password,
                     isPassword: true,
                     labelText: "password.new".tr(),
@@ -175,7 +188,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 sendOTP: sendOTP,
                 verifyOTP: verifyOTP,
               ));
-      if (res!=null) {
+      if (res != null) {
         CommonMethods.showToast("Thay đổi password thành công");
       }
     } catch (e) {

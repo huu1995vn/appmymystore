@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
-import 'package:raoxe/pages/main/dashboard/widgets/dashboard_top.widget.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -27,52 +26,105 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).cardColor,
+      // backgroundColor: Theme.of(context).cardColor,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            title: DashboardTopWidget(),
-            // backgroundColor: Colors.transparent,
+            expandedHeight: 150,
+            flexibleSpace: Center(
+              child: Text(
+                "Dashboard",
+                style: kTextHeaderStyle.size(39),
+              ),
+            ),
+            backgroundColor: Colors.transparent,
             automaticallyImplyLeading: false,
             centerTitle: true,
           ),
           SliverToBoxAdapter(
-              child: Padding(
-            padding: const EdgeInsets.all(kDefaultPadding),
-            child: Column(
-                children: [
-                  RxBuildItem(
-                      title: "manager.raoxe".tr(),
-                      icon: Icon(Icons.car_rental_rounded),
-                      onTap: () => CommonNavigates.toMyProductPage(context),
-                      trailing: Icon(
-                        Icons.keyboard_arrow_right,
-                        color: Colors.black45,
-                        size: SizeConfig.screenHeight / 21.34,
-                      )),
-                  RxBuildItem(
-                      title: "adv".tr(),
-                      icon: Icon(Icons.ad_units_rounded),
-                      onTap: () => CommonNavigates.toAdvertPage(context),
-                      trailing: Icon(
-                        Icons.keyboard_arrow_right,
-                        color: Colors.black45,
-                        size: SizeConfig.screenHeight / 21.34,
-                      )),
-                  RxBuildItem(
-                      title: "manager.address".tr(),
-                      icon: Icon(Icons.location_city),
-                      onTap: () => CommonNavigates.toContactPage(context),
-                      trailing: Icon(
-                        Icons.keyboard_arrow_right,
-                        color: Colors.black45,
-                        size: SizeConfig.screenHeight / 21.34,
-                      )),
-                ],
-              ),
+              child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(kDefaultPadding),
+                child: Column(
+                  children: [
+                    _top(),
+                    _card(
+                      child: ListTile(
+                        title: Text("manager.raoxe".tr()),
+                        leading: Icon(
+                          Icons.car_rental_rounded,
+                          color: AppColors.primary,
+                        ),
+                        onTap: () => CommonNavigates.toMyProductPage(context),
+                        subtitle: Text("Quản lý danh sách tin rao"),
+                      ),
+                    ),
+                    _card(
+                      child: ListTile(
+                        title: Text("adv".tr()),
+                        leading: Icon(
+                          Icons.monetization_on,
+                          color: AppColors.yellow,
+                        ),
+                        onTap: () => CommonNavigates.toAdvertPage(context),
+                        subtitle: Text("Quản lý danh sách quảng cáo"),
+                      ),
+                    ),
+                    _card(
+                      child: ListTile(
+                        title: Text("address".tr()),
+                        leading: Icon(
+                          Icons.location_city,
+                          color: AppColors.info,
+                        ),
+                        onTap: () => CommonNavigates.toContactPage(context),
+                        subtitle: Text("Sổ địa chỉ"),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ))
         ],
       ),
+    );
+  }
+
+  Widget _card({Widget? child}) {
+    return Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(kDefaultPadding),
+        ),
+        child: child);
+  }
+
+  Widget _top()
+  {
+    final userProvider = Provider.of<UserProvider>(context);
+    return ListTile(
+      leading: RxAvatarImage(userProvider.urlImage, size: 40),
+      title: InkWell(
+          onTap: () {
+            CommonNavigates.toUserPage(context);
+          },
+          child: Text(
+            userProvider.fullname,
+            style: const TextStyle(
+              fontSize: 19,
+            ),
+          )),
+      trailing: InkWell(
+          onTap: () {
+            CommonNavigates.toSettingsPage(context);
+          },
+          child: const Icon(
+            Icons.settings,
+            color: AppColors.black,
+            size: 19,
+          )),
+      onTap: () => {},
     );
   }
 }

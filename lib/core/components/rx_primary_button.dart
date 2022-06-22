@@ -19,7 +19,7 @@ class RxPrimaryButton extends StatelessWidget {
         width: double.infinity,
         height: 50.0,
         decoration: kBoxDecorationStyle.copyWith(
-            borderRadius: BorderRadius.circular(50)),
+            borderRadius: BorderRadius.circular(5)),
         alignment: Alignment.center,
         child: Text(
           text,

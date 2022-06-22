@@ -55,10 +55,7 @@ class ItemNewsWidget extends StatelessWidget {
                           ).italic,
                         ),
                         Text(itemNews.TIMEAGO,
-                            style: const TextStyle(
-                                    color: AppColors.black50,
-                                    fontStyle: FontStyle.italic)
-                                .size(12)),
+                            style: kTextTimeStyle),
                         // Text(itemNews.views,
                         //     style: const TextStyle(
                         //         color: AppColors.black50,

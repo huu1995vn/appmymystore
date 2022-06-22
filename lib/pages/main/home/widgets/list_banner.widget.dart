@@ -38,25 +38,7 @@ class _ListBannerWidgetState extends State<ListBannerWidget>
   }
 
   loadData() {
-    // List<String> listLinkBanner = [];
-    // // if (SystemVariables.cauHinhHeThong != null &&
-    // //     SystemVariables.cauHinhHeThong["ImageBanner"] != null) {
-    // //   List ids = SystemVariables.cauHinhHeThong["ImageBanner"].split(',');
-    // //   if (ids != null && ids.isNotEmpty) {
-    // //     for (var id in ids) {
-    // //       try {
-    // //         listLinkBanner.add(CommonMethods.buildUrlImage(int.parse(id),
-    // //             rewriteUrl: "banner-raoxe"));
-    // //       } catch (e) {}
-    // //     }
-    // //   }
-    // // }
-    // // if (!mounted) return;
-    // // setState(() {
-    // //   data = (listLinkBanner == null || listLinkBanner.isEmpty)
-    // //       ? DefaultVariables.listLinkBanner
-    // //       : listLinkBanner;
-    // // });
+   
   }
 
   @override

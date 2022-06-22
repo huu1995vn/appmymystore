@@ -117,9 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
-                      onTap: () {
-                        CommonNavigates.toForgotPasswordPage(context);
-                      },
+                      onTap: _onForgotPassword,
                       child: RichText(
                         text: TextSpan(
                           children: [
@@ -139,18 +137,47 @@ class _LoginPageState extends State<LoginPage> {
                   _onLogin(username, password);
                 },
                 text: "continue".tr().toUpperCase()),
-            RxCreateAccountLabel(context)
+            _createAccountLabel(context)
           ],
         ),
       ),
     )));
   }
 
+  Widget _createAccountLabel(context) {
+    return GestureDetector(
+      onTap: () => {CommonNavigates.toRegisterPage(context, "0379787904")},
+      child: Container(
+        alignment: Alignment.bottomCenter,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "message.str036".tr(),
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+            ),
+            Text(
+              "registnow".tr(),
+              style: const TextStyle(
+                  color: AppColors.primary500,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _onForgotPassword() {
+    CommonNavigates.toForgotPasswordPage(context, "0379787904");
+  }
+
   _onLogin(String username, String password) async {
     CommonMethods.lockScreen();
     try {
       await AuthService.checkPhone(username, isExist: true);
-      if (mounted) await AuthService.login(context, username, password);   
+      if (mounted) await AuthService.login(context, username, password);
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }

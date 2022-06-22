@@ -67,7 +67,6 @@ class _NotifycationPageState extends State<NotifycationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _key,
-        // backgroundColor: Colors.grey[200],
         body: RxScrollView(
           listData,
           (BuildContext context, int index) {
@@ -76,17 +75,12 @@ class _NotifycationPageState extends State<NotifycationPage> {
           totalItems,
           appBar: SliverAppBar(
             title: Text('notification.text'.tr(),
-                style: TextStyle(
-                  color: AppColors.primary,
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
-                )),
+                style: kTextHeaderStyle.copyWith(color: Theme.of(context).textTheme.bodyText1!.color)),
             floating: true,
             automaticallyImplyLeading: false,
             elevation: 0.0,
             centerTitle: true,
             backgroundColor: Colors.transparent,
-            // leading: Container(child: null),
           ),
           key: const Key("LNoti"),
           controller: scrollController,

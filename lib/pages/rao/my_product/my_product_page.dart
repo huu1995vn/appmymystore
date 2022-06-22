@@ -44,10 +44,7 @@ class _MyProductPageState extends State<MyProductPage> {
               return <Widget>[
                 SliverAppBar(
                   title: Text("manager.raoxe".tr(),
-                      style: TextStyle(
-                        fontSize: 19,
-                        fontWeight: FontWeight.bold,
-                      )),
+                      style: kTextHeaderStyle),
                   elevation: 0.0,
                   centerTitle: true,
                 ),

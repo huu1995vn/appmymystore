@@ -89,7 +89,7 @@ class RxWebViewState extends State<RxWebView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title ?? ""),
+          title: Text(widget.title ?? "", style: kTextHeaderStyle),
           elevation: 0.0,
         ),
         body: Stack(
@@ -249,47 +249,39 @@ Widget RxLoginAccountLabel(context) {
   );
 }
 
-Widget RxCreateAccountLabel(context) {
-  return InkWell(
-    onTap: () {
-      CommonNavigates.toRegisterPage(context);
-    },
-    child: Container(
-      alignment: Alignment.bottomCenter,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "message.str036".tr(),
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-          ),
-          Text(
-            "registnow".tr(),
-            style: const TextStyle(
-                color: AppColors.primary500,
-                fontSize: 13,
-                fontWeight: FontWeight.w600),
-          ),
-        ],
-      ),
-    ),
-  );
-}
 
 class RxAvatarImage extends StatelessWidget {
   final String url;
-  final double? width;
-  final double? height;
-  const RxAvatarImage(this.url, {Key? key, this.width, this.height})
+  final double size;
+  final BoxBorder? border;
+  const RxAvatarImage(this.url,
+      {Key? key, this.border, required this.size})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: width,
-        height: height,
-        child: RxCircleAvatar(
-            backgroundImage: RxImageProvider(url)));
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: const Color(0xff7c94b6),
+        image: DecorationImage(
+          image: RxImageProvider(url),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(size/2)),
+        border: border ??
+            Border.all(
+              color: AppColors.white,
+              width: 3.0,
+            ),
+      ),
+    );
+    // SizedBox(
+    //     width: width,
+    //     height: height,
+    //     child: RxCircleAvatar(
+    //         backgroundImage: RxImageProvider(url)));
   }
 }
 
@@ -317,23 +309,24 @@ class RxCircleAvatar extends CircleAvatar {
             minRadius: minRadius,
             maxRadius: maxRadius);
 }
+
 ImageProvider<Object> RxImageProvider(String url) {
-    if (url.isEmpty) {
-      url = NOIMAGE;
-    }
-    if (CommonMethods.isURl(url)) {
-      if (CommonConfig.haveCacheImage) {
-        return CachedNetworkImageProvider(url);
-      } else {
-        return NetworkImage(url);
-      }
-    } else {
-      if (url.contains("assets/")) {
-        return AssetImage(url);
-      }
-      return FileImage(File(url));
-    }
+  if (url.isEmpty) {
+    url = NOIMAGE;
   }
+  if (CommonMethods.isURl(url)) {
+    if (CommonConfig.haveCacheImage) {
+      return CachedNetworkImageProvider(url);
+    } else {
+      return NetworkImage(url);
+    }
+  } else {
+    if (url.contains("assets/")) {
+      return AssetImage(url);
+    }
+    return FileImage(File(url));
+  }
+}
 
 class RxSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   RxSliverPersistentHeaderDelegate(this._tabBar);

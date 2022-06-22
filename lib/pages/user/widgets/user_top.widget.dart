@@ -58,10 +58,13 @@ class UserTopWidget extends StatelessWidget {
                     style:
                         const TextStyle(fontSize: 19, color: AppColors.white).bold,
                   ),
-                  RxRoundedButton(
-                      onPressed: () {},
-                      title: data!.VERIFY ? "verified".tr() : "Chưa xác thực",
-                      color: data!.VERIFY ? AppColors.red : AppColors.warning),
+                  SizedBox(
+                    height: 25,
+                    child: RxRoundedButton(
+                        onPressed: () {},
+                        title: data!.VERIFY ? "verified".tr() : "Chưa xác thực",
+                        color: data!.VERIFY ? AppColors.red : AppColors.warning),
+                  ),
                   Text(
                     data!.email,
                     style: const TextStyle(color: AppColors.white),

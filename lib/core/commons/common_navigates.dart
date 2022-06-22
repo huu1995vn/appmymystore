@@ -26,8 +26,8 @@ class CommonNavigates {
       <String, WidgetBuilder>{
     // '/': (context) => const MyPage(),
     '/login': (context) => const LoginPage(),
-    '/register': (context) => const RegisterPage(),
-    '/forgot-password': (context) => const ForgotPasswordPage(),
+    // '/register': (context) => RegisterPage(),
+    // '/forgot-password': (context) => const ForgotPasswordPage(),
     '/user': (context) => const UserPage(),
     '/settings': (context) => const SettingsPage(),
     '/product': (context) => ProductPage(),
@@ -110,12 +110,14 @@ class CommonNavigates {
     return await Navigator.pushNamed(context, "/login");
   }
 
-  static Future toRegisterPage(BuildContext context) async {
-    return await Navigator.pushReplacementNamed(context, "/register");
+  static Future toRegisterPage(BuildContext context, String phone) async {
+    return await Navigator.push(context,
+        CupertinoPageRoute(builder: (context) => RegisterPage(phone: phone)));
   }
 
-  static Future toForgotPasswordPage(BuildContext context) async {
-    return await Navigator.pushReplacementNamed(context, "/forgot-password");
+  static Future toForgotPasswordPage(BuildContext context, String phone) async {
+    return await Navigator.push(context,
+        CupertinoPageRoute(builder: (context) => ForgotPasswordPage(phone: phone)));
   }
 
   static pop(BuildContext context, Object? value) {

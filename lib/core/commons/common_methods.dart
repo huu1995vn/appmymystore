@@ -130,7 +130,6 @@ class CommonMethods {
     Dialogs.materialDialog(
         msg: pmsg,
         title: title ?? "notification".tr(),
-        // color: color,
         context: context,
         actions: actions ??
             [
@@ -283,6 +282,13 @@ class CommonMethods {
   static formatShortCurrency(dynamic amount) {
     try {
       return shortCurrency.format(amount);
+    } catch (e) {}
+    return "not.update".tr();
+  }
+
+   static formatNumber(dynamic amount) {
+    try {
+      return NumberFormat.decimalPattern().format(int.parse(amount.toString()));
     } catch (e) {}
     return "not.update".tr();
   }

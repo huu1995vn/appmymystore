@@ -106,11 +106,7 @@ class ItemProductWidget extends StatelessWidget {
                             ).bold.size(12),
                           ),
                           const Icon(Icons.favorite_border_outlined, color: AppColors.black50, size: 19,)
-                          // Text(itemProduct.TIMEAGO,
-                          //     style: const TextStyle(
-                          //             color: AppColors.black50,
-                          //             fontStyle: FontStyle.italic)
-                          //         .size(12)),
+                         
                         ],
                       ),
                     ],

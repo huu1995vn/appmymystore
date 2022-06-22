@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 
 class RxInput extends StatefulWidget {
   final String value;
@@ -16,7 +17,7 @@ class RxInput extends StatefulWidget {
   final bool isPassword;
   final void Function(String)? onChanged;
   final Widget? suffixIcon;
-  final InputBorder? border;
+  final bool isBorder;
   final void Function()? onTap;
   const RxInput(this.value,
       {super.key,
@@ -30,7 +31,7 @@ class RxInput extends StatefulWidget {
       this.isPassword = false,
       this.onChanged,
       this.suffixIcon,
-      this.border,
+      this.isBorder = false,
       this.onTap});
 
   @override
@@ -66,35 +67,41 @@ class _InputTextState extends State<RxInput> {
   Widget build(context) {
     return RxDisabled(
         disabled: widget.disabled,
-        child: TextFormField(
-          key: UniqueKey(),
-          onTap: widget.onTap,
-          readOnly: widget.readOnly || widget.disabled,
-          controller: input,
-          keyboardType: widget.keyboardType,
-          inputFormatters: widget.keyboardType == TextInputType.number
-              ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
-              : null,
-          obscureText: !showPassword && widget.isPassword,
-          validator: widget.validator,
-          onChanged: widget.onChanged,
-          decoration: InputDecoration(
-              border: widget.border ?? InputBorder.none,
-              labelText: widget.labelText,
-              hintText: widget.hintText,
-              icon: widget.icon,
-              suffixIcon: widget.isPassword
-                  ? IconButton(
-                      icon: Icon(showPassword == true
-                          ? Icons.visibility_off
-                          : Icons.visibility),
-                      onPressed: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                        });
-                      },
-                    )
-                  : widget.suffixIcon),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: kDefaultPadding),
+          child: SizedBox(
+            height: 45,
+            child: TextFormField(
+              key: UniqueKey(),
+              onTap: widget.onTap,
+              readOnly: widget.readOnly || widget.disabled,
+              controller: input,
+              keyboardType: widget.keyboardType,
+              inputFormatters: widget.keyboardType == TextInputType.number
+                  ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
+                  : null,
+              obscureText: !showPassword && widget.isPassword,
+              validator: widget.validator,
+              onChanged: widget.onChanged,
+              decoration: InputDecoration(
+                  border: widget.isBorder == true ? const OutlineInputBorder() : InputBorder.none,
+                  labelText: widget.labelText,
+                  hintText: widget.hintText,
+                  icon: widget.icon,
+                  suffixIcon: widget.isPassword
+                      ? IconButton(
+                          icon: Icon(showPassword == true
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                          onPressed: () {
+                            setState(() {
+                              showPassword = !showPassword;
+                            });
+                          },
+                        )
+                      : widget.suffixIcon),
+            ),
+          ),
         ));
   }
 }

@@ -16,6 +16,7 @@ import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -136,7 +137,7 @@ class AfterSplash extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Welcome In SplashScreen Package"),
+          title: const Text("Welcome In SplashScreen Package", style: kTextHeaderStyle),
           automaticallyImplyLeading: false),
       body: const Center(
         child: Text(

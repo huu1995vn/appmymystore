@@ -72,8 +72,7 @@ class _SearchPageState extends State<SearchDialog> {
                                         selectedColor: Colors.red[300],
                                         padding: const EdgeInsets.all(13),
                                         onSelected: (bool selected) {
-                                          // toPageTimKiemPage(
-                                          //     context, _listTuKhoaHot[index]);
+                                         
                                         }));
                               },
                             ).toList(),
@@ -144,8 +143,7 @@ class _SearchPageState extends State<SearchDialog> {
                     _onChanged();
                   },
                   onSubmitted: (value) {
-                    // focusNode.unfocus();
-                    // toPageTimKiemPage(context, textSearch);
+                    
                   }),
               actions: <Widget>[
                 IconButton(
@@ -173,19 +171,11 @@ class _SearchPageState extends State<SearchDialog> {
     TextSearchModel item = listSearch![index];
     return ListTile(
       onTap: () {
-        // toPageTimKiemPage(context, item["text"]);
       },
       leading: Icon(Icons
           .search), //item["type"] == 0 ? Icon(Icons.history) : Icon(Icons.search),
       title: Text(item.text),
-      // trailing: item.isLocal
-      //     ? IconButton(
-      //         icon: Icon(Icons.remove),
-      //         onPressed: () {
-      //           _onDelete(index);
-      //         },
-      //       )
-      //     : null
+      
     );
   }
 

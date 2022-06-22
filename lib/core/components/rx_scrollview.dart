@@ -120,7 +120,6 @@ class RxListViewState extends State<RxScrollView>
         controller: scrollController,
         index: index,
         child: child,
-        // highlightColor: Colors.black.withOpacity(0.1),
       );
   Widget _content(BuildContext context) {
     return CustomScrollView(

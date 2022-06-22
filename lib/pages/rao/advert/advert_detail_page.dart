@@ -55,16 +55,11 @@ class _AdvertDetailPageState extends State<AdvertDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context);
     return RxScaffold(
       appBar: AppBar(
         title: Text(
           'Chi tiết quảng cáo',
-          style: TextStyle(
-            color: kWhite,
-            fontSize: 19,
-            fontWeight: FontWeight.bold,
-          ),
+          style: kTextHeaderStyle,
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,

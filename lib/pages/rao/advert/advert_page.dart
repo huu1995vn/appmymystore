@@ -82,8 +82,7 @@ class _AdvertPageState extends State<AdvertPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _key,
-        body: 
-        RxScrollView(
+        body: RxScrollView(
           listData,
           (BuildContext context, int index) {
             return ItemAdvertWidget(listData![index]);
@@ -91,13 +90,10 @@ class _AdvertPageState extends State<AdvertPage> {
           totalItems,
           appBar: SliverAppBar(
             iconTheme: IconThemeData(
-              color: AppColors.primary, //change your color here
+              color: Theme.of(context).textTheme.bodyText1!.color, //change your color here
             ),
             centerTitle: true,
-            title: Text('adv'.tr(),
-                style: TextStyle(
-                    fontSize: 19,
-                    color: AppColors.primary)),
+            title: Text('adv'.tr(), style: kTextHeaderStyle.copyWith(color: Theme.of(context).textTheme.bodyText1!.color)),
             elevation: 0.0,
             backgroundColor: Colors.transparent,
           ),

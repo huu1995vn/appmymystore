@@ -100,15 +100,11 @@ class _ContactPageState extends State<ContactPage> {
           totalItems,
           appBar: SliverAppBar(
              iconTheme: IconThemeData(
-              color: AppColors.primary, //change your color here
+              color: Theme.of(context).textTheme.bodyText1!.color, //change your color here
             ),
               centerTitle: true,
             title: Text('address'.tr(),
-                style: TextStyle(
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primary
-                )),
+                style: kTextHeaderStyle.copyWith(color: Theme.of(context).textTheme.bodyText1!.color)),
             backgroundColor: Colors.transparent,
             elevation: 0.0,
           ),

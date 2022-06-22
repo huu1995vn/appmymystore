@@ -334,9 +334,14 @@ class ProductModel extends Entity {
       return "";
     }
   }
+
   List<String> get LISTURLIMG {
     try {
-      return imglist.split(",").map((e) => CommonMethods.buildUrlHinhDaiDien(int.parse(e), rewriteUrl: name)).toList();
+      return imglist
+          .split(",")
+          .map((e) =>
+              CommonMethods.buildUrlHinhDaiDien(int.parse(e), rewriteUrl: name))
+          .toList();
     } catch (e) {
       CommonMethods.wirtePrint(e);
 
@@ -471,6 +476,14 @@ class AdvertModel extends Entity {
     return int.parse(status);
   }
 
+  String get NUMPRICE {
+    try {
+      return NumberFormat.decimalPattern().format(int.parse(price));
+    } catch (e) {
+      return "not.update".tr();
+    }
+  }
+  
   String get URLIMG {
     int fileId = 0;
     fileId = int.parse(img);
@@ -489,7 +502,9 @@ class ContactModel extends Entity {
   late String id;
   late String userid;
   late String cityid;
+  late String cityname;
   late String districtid;
+  late String districtname;
   late String fullname;
   late String phone;
   late String address;

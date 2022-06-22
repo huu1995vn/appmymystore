@@ -18,69 +18,75 @@ class ItemAdvertWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.only(
-            top: kDefaultPadding, bottom: kDefaultPadding),
-        child: GestureDetector(
-            onTap: () async {},
-            child: SizedBox(
-              height: SizeConfig.screenWidth / 6,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child:
-                        RxImage(item.URLIMG, width: SizeConfig.screenWidth / 6),
-                  ),
-                  const SizedBox(width: kDefaultPadding),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.name ?? "",
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                               style: const TextStyle(color: AppColors.primary).bold,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Row(
+    return RxCard(
+      child: GestureDetector(
+        onTap: () async {},
+        child: SizedBox(
+          height: SizeConfig.screenWidth / 4.5,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(kDefaultPadding),
+                    topLeft: Radius.circular(kDefaultPadding)),
+                child: RxImage(item.URLIMG, width: SizeConfig.screenWidth / 4),
+              ),
+              Expanded(
+                child: Padding(
+                    padding: const EdgeInsets.all(kDefaultPadding),
+                    child: Stack(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            // Text("${"paymentdeadline".tr()}: ",
-                            //     style: const TextStyle().italic),
                             Expanded(
-                                child: Text(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.name ?? "",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,                                   
+                                  ),
+                                  Text(
+                                    item.STATUS == 1
+                                        ? "active".tr()
+                                        : "expired".tr(),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: item.STATUS == 1
+                                            ? Colors.green
+                                            : Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              // spacing: kDefaultPadding,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  item.NUMPRICE,
+                                  style: kTextPriceStyle,
+                                ),
+                                Text(
                                     CommonMethods.formatDateTime(
                                         CommonMethods.convertToDateTime(
                                             item.expirationdate, "dd/MM/yyyy"),
                                         valueDefault: "not.update".tr()),
-                                    style: const TextStyle().italic)),
-                            Text(
-                              item.STATUS == 1 ? "active".tr() : "expired".tr(),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: item.STATUS == 1
-                                      ? Colors.green
-                                      : Colors.red),
+                                    style: kTextTimeStyle)
+                              ],
                             ),
-                            SizedBox(width: 10,)
                           ],
                         ),
                       ],
-                    ),
-                  ),
-                ],
+                    )),
               ),
-            )),
+            ],
+          ),
+        ),
       ),
     );
   }

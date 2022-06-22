@@ -25,10 +25,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'setting'.tr(),
-          style: TextStyle(
-            fontSize: 19,
-            fontWeight: FontWeight.bold,
-          ),
+          style: kTextHeaderStyle,
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -88,21 +85,16 @@ class SettingsPage extends StatelessWidget {
             )),
             Column(
               children: [
-                Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(kDefaultPadding),
-                    child: SizedBox(
-                      width: SizeConfig.screenWidth / 2,
-                      child: RxPrimaryButton(
-                        text: 'logout'.tr(),
-                        onTap: () {
-                          AuthService.logout(context);
-                        },
-                      ),
-                    ),
-                  ),
+                RxPrimaryButton(
+                  text: 'logout'.tr(),
+                  onTap: () {
+                    AuthService.logout(context);
+                  },
                 ),
-                Text("${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}", style: TextStyle().italic,)
+                Text(
+                  "${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
+                  style: TextStyle().italic,
+                )
               ],
             )
           ],

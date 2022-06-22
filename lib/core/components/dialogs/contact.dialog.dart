@@ -84,7 +84,7 @@ class _UserPageState extends State<ContactDialog> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            title: Text("info.concat".tr()),
+            title: Text("info.concat".tr(), style: kTextHeaderStyle),
             elevation: 0.0,
           ),
           SliverToBoxAdapter(

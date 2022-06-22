@@ -5,16 +5,14 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/services/auth.service.dart';
-import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:raoxe/pages/auth/confirm_otp_page.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final String phone;
+  const RegisterPage({super.key, required this.phone});
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -22,11 +20,24 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
-  UserModel user = UserModel();
+  UserModel? user;
   String passwordAgain = "";
   @override
   void initState() {
     super.initState();
+    loadData();
+  }
+
+  loadData() {
+    if (widget.phone.isNotEmpty &&
+        CommonMethods.checkStringPhone(widget.phone)) {
+      setState(() {
+        user = UserModel();
+        user!.phone = widget.phone;
+        user!.fullname = "";
+        user!.password = "";
+      });
+    }
   }
 
   @override
@@ -36,16 +47,21 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      child: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.only(top: 32.0),
-            child: Column(
-              children: <Widget>[
-                _header(),
-                _body(),
-              ],
-            )),
-      ),
+      child: user == null
+          ? Expanded(
+              child: Center(
+              child: Text("notfound".tr()),
+            ))
+          : SingleChildScrollView(
+              child: Padding(
+                  padding: const EdgeInsets.only(top: 32.0),
+                  child: Column(
+                    children: <Widget>[
+                      _header(),
+                      _body(),
+                    ],
+                  )),
+            ),
     );
   }
 
@@ -59,7 +75,9 @@ class _RegisterPageState extends State<RegisterPage> {
               LOGORAOXEWHITEIMAGE,
               width: 150,
             ),
-            Text("regist".tr(), style: const TextStyle(color: AppColors.white))
+            Text("regist".tr(), style: const TextStyle(color: AppColors.white)),
+            if (user!.phone != null)
+              Text(user!.phone, style: kTextHeaderStyle.copyWith(color: AppColors.white))
           ],
         ),
       ),
@@ -81,38 +99,23 @@ class _RegisterPageState extends State<RegisterPage> {
             key: _keyValidationForm,
             child: Column(
               children: <Widget>[
-                RxInput(user.fullname,
+                RxInput(user!.fullname,
                     labelText: "fullname".tr(),
                     icon: const Icon(Icons.person),
                     onChanged: (v) => {
-                          setState(() => {user.username = v})
+                          setState(() => {user!.fullname = v})
                         },
                     validator: Validators.compose([
                       Validators.required("notempty.fullname.text".tr()),
                     ])),
-                RxInput(user.phone,
-                    keyboardType: TextInputType.number,
-                    labelText: "phone".tr(),
-                    icon: const Icon(Icons.phone),
-                    onChanged: (v) => {
-                          setState(() => {user.phone = v})
-                        },
-                    validator: (v) {
-                      if (v == null || !v.isNotEmpty) {
-                        return "notempty.phone.text".tr();
-                      } else {
-                        return CommonMethods.checkStringPhone(v)
-                            ? null
-                            : "invalid.phone".tr();
-                      }
-                    }),
+
                 RxInput(
-                  user.password,
+                  user!.password,
                   isPassword: true,
                   labelText: "password.text".tr(),
                   icon: const Icon(Icons.lock),
                   onChanged: (v) => {
-                    setState(() => {user.password = v})
+                    setState(() => {user!.password = v})
                   },
                   validator: Validators.compose([
                     Validators.required("notempty.password.text".tr()),
@@ -126,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   labelText: "password.again".tr(),
                   icon: const Icon(Icons.lock),
                   validator: (value) {
-                    if (value != null && value != user.password) {
+                    if (value != null && value != user!.password) {
                       return "invalid.password.again".tr();
                     } else {
                       return null;
@@ -157,36 +160,36 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Future sendOTP(
-      void Function(Object) fnError, void Function() fnSuccess) async {
-    try {
-      await AuthService.sendOTPPhone(user.phone, false, fnError, fnSuccess);
-    } catch (error) {
-      CommonMethods.showDialogError(context, error.toString());
-    }
-  }
+  // Future sendOTP(
+  //     void Function(Object) fnError, void Function() fnSuccess) async {
+  //   try {
+  //     await AuthService.sendOTPPhone(user!.phone, false, fnError, fnSuccess);
+  //   } catch (error) {
+  //     CommonMethods.showDialogError(context, error.toString());
+  //   }
+  // }
 
-  Future<bool> verifyOTP(String code) async {
-    try {
-      return await AuthService.verifyOTPPhone(user.phone, code);
-    } catch (error) {
-      CommonMethods.showDialogError(context, error.toString());
-    }
-    return false;
-  }
+  // Future<bool> verifyOTP(String code) async {
+  //   try {
+  //     return await AuthService.verifyOTPPhone(user!.phone, code);
+  //   } catch (error) {
+  //     CommonMethods.showDialogError(context, error.toString());
+  //   }
+  //   return false;
+  // }
 
   Future<void> _onRegister() async {
     try {
-      await AuthService.checkPhone(user.phone, isExist: false);
-      var res = await showDialog(
-          context: context,
-          builder: (_) => ConfirmOtpPage(
-                sendOTP: sendOTP,
-                verifyOTP: verifyOTP,
-              ));
-      if (res!=null) {
-        CommonMethods.showToast("Đăng ký thành công");
-      }
+      // await AuthService.checkPhone(user!.phone, isExist: false);
+      // var res = await showDialog(
+      //     context: context,
+      //     builder: (_) => ConfirmOtpPage(
+      //           sendOTP: sendOTP,
+      //           verifyOTP: verifyOTP,
+      //         ));
+      // if (res!=null) {
+      //   CommonMethods.showToast("Đăng ký thành công");
+      // }
     } catch (e) {
       CommonMethods.showToast(e.toString());
     }

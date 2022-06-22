@@ -286,7 +286,9 @@ ContactModel _$ContactModelFromJson(Map<String, dynamic> json) => ContactModel()
   ..id = json['id'] as String
   ..userid = json['userid'] as String
   ..cityid = json['cityid'] as String
+  ..cityname = json['cityname'] as String
   ..districtid = json['districtid'] as String
+  ..districtname = json['districtname'] as String
   ..fullname = json['fullname'] as String
   ..phone = json['phone'] as String
   ..address = json['address'] as String
@@ -299,7 +301,9 @@ Map<String, dynamic> _$ContactModelToJson(ContactModel instance) =>
       'id': instance.id,
       'userid': instance.userid,
       'cityid': instance.cityid,
+      'cityname': instance.cityname,
       'districtid': instance.districtid,
+      'districtname': instance.districtname,
       'fullname': instance.fullname,
       'phone': instance.phone,
       'address': instance.address,

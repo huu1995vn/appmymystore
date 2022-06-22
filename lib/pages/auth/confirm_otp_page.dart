@@ -81,7 +81,7 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       child: RxScaffold(
           appBar: AppBar(
-            title: const Text("Confirm your OTP"),
+            title: const Text("Confirm your OTP", style: kTextHeaderStyle),            
             backgroundColor: Colors.transparent,
             elevation: 0.0,
           ),

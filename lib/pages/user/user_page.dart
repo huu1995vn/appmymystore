@@ -155,17 +155,20 @@ class _UserPageState extends State<UserPage> {
                     child: Column(
                       children: <Widget>[
                         RxInput(data!.fullname,
-                            // labelText: "fullname".tr(),
-                            icon: const Icon(Icons.person),
+                            labelText: "fullname".tr(),
+                            isBorder: true,
+                            // icon: const Icon(Icons.person),
                             onChanged: (v) => {data!.fullname = v},
                             validator: Validators.compose([
                               Validators.required(
                                   "notempty.fullname.text".tr()),
                             ])),
                         RxInput(
+                          isBorder: true,
                           readOnly: true,
                           data!.address,
-                          icon: const Icon(Icons.location_city),
+                          labelText: "address".tr(),
+                          // icon: const Icon(Icons.location_city),
                           onChanged: (v) => {data!.address = v},
                           validator: Validators.compose([
                             Validators.required("notempty.address.text".tr()),
@@ -173,16 +176,23 @@ class _UserPageState extends State<UserPage> {
                           onTap: _onAddress,
                           suffixIcon: Icon(Icons.keyboard_arrow_down),
                         ),
-                        DateTimePicker(
-                          icon: const Icon(Icons.calendar_today),
-                          locale: Locale("vi"),
-                          initialValue:
-                              CommonMethods.convertToDateTime(data!.birthdate)
-                                  .toString(),
-                          dateMask: 'dd-MM-yyyy',
-                          firstDate: DateTime(1977),
-                          lastDate: DateTime(2100),
-                          onChanged: (value) => {data!.birthdate = value},
+                        SizedBox(
+                          height: 45,
+                          child: DateTimePicker(
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText: "birthday".tr(),
+                            ),
+                            // icon: const Icon(Icons.calendar_today),
+                            locale: Locale("vi"),
+                            initialValue:
+                                CommonMethods.convertToDateTime(data!.birthdate)
+                                    .toString(),
+                            dateMask: 'dd-MM-yyyy',
+                            firstDate: DateTime(1977),
+                            lastDate: DateTime(2100),
+                            onChanged: (value) => {data!.birthdate = value},
+                          ),
                         ),
                         ListTile(
                           title: Row(

@@ -1,6 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -15,95 +14,99 @@ class ItemMyProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.only(
-            top: kDefaultPadding, bottom: kDefaultPadding),
-        child: GestureDetector(
-          onTap: () async {},
-          child: SizedBox(
-            height: SizeConfig.screenWidth / 5,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Stack(
-                      children: <Widget>[
-                        RxImage(item.URLIMG, width: SizeConfig.screenWidth / 4),
+    int lenimg = Random().nextInt(15); //item.LISTURLIMG.length
+
+    return RxCard(
+      child: GestureDetector(
+        onTap: () async {},
+        child: SizedBox(
+          height: SizeConfig.screenWidth / 4.5,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(kDefaultPadding),
+                      topLeft: Radius.circular(kDefaultPadding)),
+                  child: Stack(
+                    children: <Widget>[
+                      RxImage(item.URLIMG,
+                          width: SizeConfig.screenWidth / 4),
+                      if (lenimg > 0)
                         Positioned(
-                          top: 0,
-                          right: 0,
-                          child: Ink(
-                            decoration: const ShapeDecoration(
-                              color: AppColors.grayDark,
-                              shape: CircleBorder(),
+                          top: 5,
+                          right: 5,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              border: Border.all(color: AppColors.white50),
+                              color: AppColors.black50,
                             ),
-                            child: Text(
-                              item.LISTURLIMG.length.toString(),
-                              style: const TextStyle().bold,
-                            ),
+                            child: SizedBox(
+                                height: 15, width: 20, child: Container()),
                           ),
-                        )
-                      ],
-                    )),
-                const SizedBox(width: kDefaultPadding),
-                Expanded(
-                  child: Column(
+                        ),
+                      if (lenimg > 0)
+                        Positioned(
+                          top: 3,
+                          right: 3,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              border: Border.all(color: AppColors.white50),
+                              color: AppColors.black,
+                            ),
+                            child: SizedBox(
+                                height: 15,
+                                width: 20,
+                                child: Center(
+                                    child: Text(
+                                  lenimg >= 9 ? "9+" : lenimg.toString(),
+                                  style: TextStyle(color: AppColors.white)
+                                      .bold
+                                      .size(12),
+                                ))),
+                          ),
+                        ),
+                    ],
+                  )),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(kDefaultPadding),
+                  child: 
+                  Stack(children: [
+                    Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              item.name ?? "",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  // fontSize: 36,
-                                  ),
-                            ),
-                            Text(
-                              item.NUMPRICE,
-                              style: const TextStyle(
-                                color: AppColors.primary,
-                              ).bold,
-                            ),
-                          ],
+                        child: Text(
+                          item.name ?? "",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              // fontSize: 36,
+                              ),
                         ),
                       ),
                       Row(
-                        children: <Widget>[
-                          Expanded(
-                              child: Text(
-                                  CommonMethods.formatDateTime(
-                                      CommonMethods.convertToDateTime(
-                                          item.createdate, "dd/MM/yyyy"),
-                                      valueDefault: "not.update".tr()),
-                                  style: const TextStyle().italic)),
-                          if (item.STATUS == 2)
-                            GestureDetector(
-                                onTap: () {},
-                                child: const Icon(
-                                  Icons.upload,
-                                  color: AppColors.yellow,
-                                ))
-                          // IconButton(
-                          //     onPressed: () {},
-                          //     icon: const Icon(
-                          //       Icons.upload,
-                          //       color: AppColors.yellow,
-                          //     ),
-                          //     iconSize: 13
-                          //     )
+                        // spacing: kDefaultPadding,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            item.NUMPRICE,
+                            style: kTextPriceStyle,
+                          ),                          
+                          const Icon(Icons.upload, size: 19,)
+                       
                         ],
                       ),
                     ],
                   ),
+                  ],)
+                  
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

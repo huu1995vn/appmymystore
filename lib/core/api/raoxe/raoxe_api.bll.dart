@@ -43,25 +43,3 @@ class RaoXeApiBLL_Basic {
   }
 }
 
-// class RaoXeRaoXeApiBLL_APIRaoXe extends RaoXeApiBLL_Basic {
-//   RaoXeRaoXeApiBLL_APIRaoXe() {
-//     apiDAL = RaoXeApiDAL();
-//     apiDAL.controllerName = "ApiRaoXe";
-//   }
-//   Future<ResponseModel> login(String username, String password) async {
-//     Map<String, dynamic> queryParameters = <String, dynamic>{};
-//     Map<String, dynamic> body = {"username": username, "password": password};
-//     return post(body, queryParameters, "Login");
-//   }
-
-//   Future<ResponseModel> autologin(String username, String password) async {
-//     Map<String, dynamic> queryParameters = <String, dynamic>{};
-//     Map<String, dynamic> body = {};
-//     return post(body, queryParameters, "AutoLogin");
-//   }
-
-//   Future<ResponseModel> user(String username, String password) async {
-//     Map<String, dynamic> queryParameters = <String, dynamic>{};
-//     return get(queryParameters, "Users");
-//   }
-// }

@@ -35,7 +35,6 @@ class RxCartButton extends StatelessWidget {
                 child: Text(
                   'Cart',
                   style: TextStyle(
-                    // color: kWhite,
                     fontSize: 14.0,
                   ),
                 ),
@@ -49,7 +48,6 @@ class RxCartButton extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25.0),
-                  // color: kWhite,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.12),
@@ -61,7 +59,6 @@ class RxCartButton extends StatelessWidget {
                 child: const Text(
                   '+',
                   style: TextStyle(
-                    // color: kPrimaryColor,
                     fontSize: 26.0,
                     fontWeight: FontWeight.bold,
                   ),

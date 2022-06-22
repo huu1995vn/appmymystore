@@ -60,11 +60,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       appBar: AppBar(
         title: Text(
           'Chi tiết quảng cáo',
-          style: TextStyle(
-            color: kWhite,
-            fontSize: 19,
-            fontWeight: FontWeight.bold,
-          ),
+          style: kTextHeaderStyle,
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,

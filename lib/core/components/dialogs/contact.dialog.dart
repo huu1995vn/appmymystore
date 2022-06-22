@@ -17,10 +17,10 @@ class ContactDialog extends StatefulWidget {
   });
   final ContactModel contact;
   @override
-  State<ContactDialog> createState() => _UserPageState();
+  State<ContactDialog> createState() => _ContactDialogState();
 }
 
-class _UserPageState extends State<ContactDialog> {
+class _ContactDialogState extends State<ContactDialog> {
   @override
   void initState() {
     super.initState();

@@ -19,10 +19,10 @@ class AuthService {
     try {
       var res = await DaiLyXeApiBLL_APIAuth().login(username, password);
       if (res.status > 0) {
-        await StorageService.set(StorageKeys.userlogin,
-          <String, String>{"username": username, "password": password});
-        APITokenService.loginByData(res.data);
+        await APITokenService.loginByData(res.data);
         if (APITokenService.isValid) {
+          StorageService.set(StorageKeys.userlogin,
+              <String, String>{"username": username, "password": password});
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
@@ -42,7 +42,7 @@ class AuthService {
       if (res.status > 0) {
         APITokenService.loginByData(res.data);
       }
-      return res.status==1;
+      return res.status == 1;
     }
     return false;
   }

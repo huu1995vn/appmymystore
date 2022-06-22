@@ -1,18 +1,15 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/confirm_phone.dialog.dart';
 import 'package:raoxe/core/components/index.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:raoxe/pages/my_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -175,9 +172,20 @@ class _LoginPageState extends State<LoginPage> {
     )));
   }
 
+  _toRegister() async {
+    var phone = await showDialog(
+        context: context,
+        builder: (_) => const ConfirmPhoneDialog(
+              isExist: false,
+            ));
+    if (phone != null) {
+      CommonNavigates.toRegisterPage(context, phone);
+    }
+  }
+
   Widget _createAccountLabel(context) {
     return GestureDetector(
-      onTap: () => {CommonNavigates.toRegisterPage(context, "0379787904")},
+      onTap: _toRegister,
       child: Container(
         alignment: Alignment.bottomCenter,
         child: Row(
@@ -211,9 +219,15 @@ class _LoginPageState extends State<LoginPage> {
       _onLogin(username, usl!["password"]!);
     }
   }
-
-  _onForgotPassword() {
-    CommonNavigates.toForgotPasswordPage(context, "0379787904");
+  _onForgotPassword() async {
+    var phone = await showDialog(
+        context: context,
+        builder: (_) => const ConfirmPhoneDialog(
+              isExist: true,
+            ));
+    if (phone != null) {
+      CommonNavigates.toForgotPasswordPage(context, phone);
+    }
   }
 
   _onLogin(String username, String password) async {
@@ -221,7 +235,6 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await AuthService.checkPhone(username, isExist: true);
       if (mounted) await AuthService.login(context, username, password);
-      
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }

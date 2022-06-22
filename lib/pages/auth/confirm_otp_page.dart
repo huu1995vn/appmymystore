@@ -79,14 +79,18 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-      child: RxScaffold(
+      child: Scaffold(
           appBar: AppBar(
-            title: const Text("Confirm your OTP", style: kTextHeaderStyle),            
+             iconTheme: IconThemeData(
+              color: Theme.of(context).textTheme.bodyText1!.color, //change your color here
+            ),
+            centerTitle: true,
+            title: Text("Confirm your OTP", style: kTextHeaderStyle.copyWith(color: Theme.of(context).textTheme.bodyText1!.color)),
             backgroundColor: Colors.transparent,
             elevation: 0.0,
           ),
-          child: RxWrapper(
-            body: Padding(
+          body: SingleChildScrollView(
+            child: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,10 +117,14 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
                     obscureText: false,
                     animationType: AnimationType.fade,
                     pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.underline,
-                      borderRadius: BorderRadius.circular(5),
-                      activeFillColor: Colors.white,
-                    ),
+                        shape: PinCodeFieldShape.underline,
+                        borderRadius: BorderRadius.circular(5),
+                        activeFillColor: AppColors.white,
+                        inactiveColor: AppColors.white,
+                        selectedFillColor: AppColors.white,
+                        inactiveFillColor: AppColors.white,
+                        selectedColor: AppColors.primary,
+                        activeColor: AppColors.success),
                     animationDuration: const Duration(milliseconds: 300),
                     cursorColor: Colors.blue.shade50,
                     enableActiveFill: true,
@@ -158,8 +166,10 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
                       ),
                     ],
                   ),
-                  const Spacer(),
-                  RxPrimaryButton(onTap: verifyOTP, text: "Verify"),
+                  Padding(
+                    padding: const EdgeInsets.only(top: kDefaultPaddingTop),
+                    child: RxPrimaryButton(onTap: verifyOTP, text: "Verify"),
+                  ),
                 ],
               ),
             ),

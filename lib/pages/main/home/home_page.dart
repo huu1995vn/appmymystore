@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage>
       "n": kItemOnPage
     };
     ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
-    List<dynamic> data   = jsonDecode(res.data);
+    List<dynamic> data = jsonDecode(res.data);
     // ignore: unnecessary_cast
     List<ProductModel> newslist = data
         .map((val) => ProductModel.fromJson(val))
@@ -133,12 +133,17 @@ class _HomePageState extends State<HomePage>
                   iconSize: 22,
                   icon: const Icon(Icons.search),
                   color: AppColors.primary,
-                  onPressed: () {CommonNavigates.openDialog(context, SearchDialog());},
+                  onPressed:()=>{_onSearch()},
                 ),
               )),
         )
       ],
     );
+  }
+
+  _onSearch() async {
+    var res = await showSearch(context: context, delegate: RxSearchDelegate());
+    if (res != null) {}
   }
 }
 
@@ -147,7 +152,8 @@ _buildTitle(String header, void Function()? onTap) {
     padding:
         const EdgeInsets.only(right: kDefaultPadding, left: kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(header.toUpperCase(), style: const TextStyle(color: AppColors.primary).bold),
+      Text(header.toUpperCase(),
+          style: const TextStyle(color: AppColors.primary).bold),
       GestureDetector(
         onTap: () {},
         child: Ink(
@@ -155,7 +161,11 @@ _buildTitle(String header, void Function()? onTap) {
             color: AppColors.grayDark,
             shape: CircleBorder(),
           ),
-          child: const Icon(Icons.arrow_right, size: 30, color: AppColors.primary,),
+          child: const Icon(
+            Icons.arrow_right,
+            size: 30,
+            color: AppColors.primary,
+          ),
         ),
       )
     ]),

@@ -544,8 +544,8 @@ class Categorie {
   Categorie({required this.id, required this.categoryname});
 }
 
-class TextSearchModel {
+class SuggestionModel {
   bool isLocal = true;
   String text;
-  TextSearchModel({required this.text, required this.isLocal});
+  SuggestionModel({required this.text, required this.isLocal});
 }

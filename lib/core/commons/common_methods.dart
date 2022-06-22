@@ -195,7 +195,7 @@ class CommonMethods {
       prefixSize = prefixSize.toString();
     }
     idHinh = idHinh > 0 ? idHinh : 0;
-    rewriteUrl = rewriteUrl!.isNotEmpty ? rewriteUrl : "image-dailyxe";
+    rewriteUrl = rewriteUrl!=null && rewriteUrl!.isNotEmpty ? rewriteUrl : "image-dailyxe";
     rewriteUrl = rewriteUrl.convertrUrlPrefix();
     return '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j$prefixSize.jpg';
 

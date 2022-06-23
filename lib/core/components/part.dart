@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, must_be_immutable
+// ignore_for_file: non_constant_identifier_names, must_be_immutable, import_of_legacy_library_into_null_safe
 
 import 'dart:io';
 
@@ -13,16 +13,12 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-Widget RxDivider({double indent = 20}) {
-  return Divider(
-      thickness: 1, // thickness of the line
-      indent: indent,
-      endIndent: indent,
-      height: 1);
+class RxDivider extends Divider {
+  const RxDivider({super.key, double indent = 20})
+      : super(indent: indent, endIndent: indent, height: 1, thickness: 1);
 }
 
 Widget RxBuildItem(
@@ -36,16 +32,6 @@ Widget RxBuildItem(
     trailing: trailing,
     onTap: onTap,
   );
-}
-
-Widget RxText(String data,
-    {Key? key,
-    TextStyle? style,
-    TextAlign? textAlign,
-    TextOverflow? overflow,
-    int? maxLines}) {
-  return Text(data ?? "not.update".tr(),
-      style: style, textAlign: textAlign, maxLines: maxLines);
 }
 
 class RxDisabled extends StatelessWidget {
@@ -164,14 +150,8 @@ Widget RxCardSkeleton(
     bool isCircleAvatar = false,
     bool isBorderRadius = true}) {
   try {
-    return Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        child: CardSkeleton(
+    return CardSkeleton(
           style: SkeletonStyle(
-            // backgroundColor: SystemVariables.themeData.cardColor,
-            // theme: SystemVariables.themeData.primaryColor == Colors.black
-            //     ? SkeletonTheme.Dark
-            //     : SkeletonTheme.Light,
             isShowAvatar: isShowAvatar ?? true,
             isCircleAvatar: isCircleAvatar ?? false,
             borderRadius:
@@ -180,7 +160,7 @@ Widget RxCardSkeleton(
             barCount: barCount,
             isAnimation: true,
           ),
-        ));
+        );
   } catch (e) {}
   return const Center(child: CupertinoActivityIndicator());
 }
@@ -249,13 +229,11 @@ Widget RxLoginAccountLabel(context) {
   );
 }
 
-
 class RxAvatarImage extends StatelessWidget {
   final String url;
   final double size;
   final BoxBorder? border;
-  const RxAvatarImage(this.url,
-      {Key? key, this.border, required this.size})
+  const RxAvatarImage(this.url, {Key? key, this.border, required this.size})
       : super(key: key);
 
   @override
@@ -269,7 +247,7 @@ class RxAvatarImage extends StatelessWidget {
           image: RxImageProvider(url),
           fit: BoxFit.cover,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(size/2)),
+        borderRadius: BorderRadius.all(Radius.circular(size / 2)),
         border: border ??
             Border.all(
               color: AppColors.white,
@@ -372,5 +350,62 @@ class RxSliverAppBarTabDelegate extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
     return false;
+  }
+}
+class RxRoundedButton extends StatelessWidget {
+  const RxRoundedButton({
+    Key? key,
+    required this.onPressed,
+    required this.title,
+    this.color, this.radius,
+  }) : super(key: key);
+
+  final GestureTapCallback onPressed;
+  final String title;
+  final Color? color;
+  final double? radius;
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        side: BorderSide(width: 2.0, color: color?? AppColors.primary),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius?? 32.0),
+        ),
+      ),
+      child: Text(title, style: TextStyle(color: color?? AppColors.primary),),
+    );
+  }
+}
+class RxPrimaryButton extends StatelessWidget {
+  const RxPrimaryButton({
+    Key? key,
+    required this.onTap,
+    required this.text,
+  }) : super(key: key);
+
+  final GestureTapCallback onTap;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 50.0,
+        decoration: kBoxDecorationStyle.copyWith(
+            borderRadius: BorderRadius.circular(5)),
+        alignment: Alignment.center,
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: kWhite,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
   }
 }

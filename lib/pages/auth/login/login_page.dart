@@ -5,6 +5,7 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/dialogs/confirm_phone.dialog.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';

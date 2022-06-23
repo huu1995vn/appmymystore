@@ -9,6 +9,7 @@ import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/dialogs/select/select.dialog.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/services/master_data.service.dart';

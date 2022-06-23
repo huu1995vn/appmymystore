@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';

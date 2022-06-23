@@ -1,7 +1,6 @@
 // ignore_for_file: empty_catches, no_leading_underscores_for_local_identifiers
 
 import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +14,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_rounded_button.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, utf8;
 import 'package:raoxe/core/utilities/app_colors.dart';

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/components/rx_wrapper.dart';
@@ -98,6 +99,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     onTap: () {
                       // _authenticateWithBiometrics();
+                    }),
+                RxBuildItem(
+                    title: "Clear cache".tr(),
+                    onTap: () {
+                      RxSearchDelegate.cacheapiSearch = {};
+                      CommonMethods.showToast("Đã xóa cache");
                     }),
                 RxBuildItem(
                     title: "termsandcondition".tr(),

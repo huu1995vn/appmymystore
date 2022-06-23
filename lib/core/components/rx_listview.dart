@@ -16,7 +16,7 @@ class RxListView extends StatefulWidget {
   final ScrollController? scrollController;
   final Widget? awaiting;
   final Widget? noFound;
-
+  final EdgeInsetsGeometry? padding;
   const RxListView(this.data, this.itemBuilder,
       {Key? key,
       this.onNextPage,
@@ -24,7 +24,7 @@ class RxListView extends StatefulWidget {
       this.scrollController,
       this.scrollDirection,
       this.awaiting,
-      this.noFound})
+      this.noFound, this.padding})
       : super(key: key);
   @override
   _RxDataListViewState createState() => _RxDataListViewState();
@@ -101,7 +101,7 @@ class _RxDataListViewState extends State<RxListView>
         physics: const BouncingScrollPhysics(),
         scrollDirection: widget.scrollDirection ?? Axis.vertical,
         itemCount: kItemOnPage,
-        padding: const EdgeInsets.all(kDefaultPadding),
+        padding: widget.padding?? const EdgeInsets.all(kDefaultPadding),
         itemBuilder: (context, index) {
           return widget.awaiting ??
               RxCardSkeleton(barCount: 3, isShowAvatar: false);
@@ -126,7 +126,7 @@ class _RxDataListViewState extends State<RxListView>
       itemCount: widget.onNextPage != null
           ? (widget.data.length + 1)
           : widget.data.length,
-      padding: const EdgeInsets.all(kDefaultPadding),
+      padding: widget.padding?? const EdgeInsets.all(kDefaultPadding),
       itemBuilder: (context, index) {
         if (index >= widget.data.length) {
           return _buildProgressIndicator();

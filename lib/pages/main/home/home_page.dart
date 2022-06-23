@@ -3,9 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/dialogs/search/search.dialog.dart';
-import 'package:raoxe/core/components/index.dart';
-import 'package:raoxe/core/components/rx_scrollview.dart';
+import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
+import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -78,15 +78,10 @@ class _HomePageState extends State<HomePage>
 
     return Scaffold(
       key: _homeKey,
-      body: RxScrollView(
-        listData,
-        (BuildContext context, int index) {
-          return ItemProductWidget(listData![index]);
-        },
-        totalItems,
+      body: RxCustomScrollView(
         key: const Key("lHome"),
         controller: scrollController,
-        onNextPage: onNextPage,
+        onNextScroll: onNextPage,
         onRefresh: onRefresh,
         appBar: _appBar(),
         slivers: <Widget>[
@@ -94,7 +89,10 @@ class _HomePageState extends State<HomePage>
               child: Column(children: [
             const ListBannerWidget(),
             _buildTitle("new".tr(), () {}),
-          ]))
+          ])),
+          RxSliverList(listData, (BuildContext context, int index) {
+            return ItemProductWidget(listData![index]);
+          })
         ],
       ),
     );
@@ -133,7 +131,7 @@ class _HomePageState extends State<HomePage>
                   iconSize: 22,
                   icon: const Icon(Icons.search),
                   color: AppColors.primary,
-                  onPressed:()=>{_onSearch()},
+                  onPressed: () => {_onSearch()},
                 ),
               )),
         )
@@ -143,7 +141,9 @@ class _HomePageState extends State<HomePage>
 
   _onSearch() async {
     var res = await showSearch(context: context, delegate: RxSearchDelegate());
-    if (res != null) {}
+    if (res != null) {
+      CommonNavigates.toProductPage(context, paramsSearch: {"s": res});
+    }
   }
 }
 

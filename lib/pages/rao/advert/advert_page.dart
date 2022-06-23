@@ -4,8 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
-import 'package:raoxe/core/components/index.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/rao/advert/widgets/item_advert.widget.dart';
@@ -81,25 +82,30 @@ class _AdvertPageState extends State<AdvertPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _key,
-        body: RxScrollView(
-          listData,
-          (BuildContext context, int index) {
-            return ItemAdvertWidget(listData![index]);
-          },
-          totalItems,
+        body: RxCustomScrollView(
           appBar: SliverAppBar(
             iconTheme: IconThemeData(
-              color: Theme.of(context).textTheme.bodyText1!.color, //change your color here
+              color: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .color, //change your color here
             ),
             centerTitle: true,
-            title: Text('adv'.tr(), style: kTextHeaderStyle.copyWith(color: Theme.of(context).textTheme.bodyText1!.color)),
+            title: Text('adv'.tr(),
+                style: kTextHeaderStyle.copyWith(
+                    color: Theme.of(context).textTheme.bodyText1!.color)),
             elevation: 0.0,
             backgroundColor: Colors.transparent,
           ),
           key: const Key("LAdv"),
           controller: scrollController,
-          onNextPage: onNextPage,
+          onNextScroll: onNextPage,
           onRefresh: onRefresh,
+          slivers: <Widget>[
+            RxSliverList(listData, (BuildContext context, int index) {
+              return ItemAdvertWidget(listData![index]);
+            })
+          ],
         ));
   }
 }

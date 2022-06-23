@@ -2,15 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+// ignore: unused_import
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
-class SelectDelegate extends SearchDelegate<dynamic> {
+class RxSelectDelegate extends SearchDelegate<dynamic> {
   List data;
   dynamic value;
   bool? ismultiple = false;
-  SelectDelegate({required this.data, required this.value, this.ismultiple});
+  RxSelectDelegate({required this.data, required this.value, this.ismultiple});
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -42,7 +43,7 @@ class SelectDelegate extends SearchDelegate<dynamic> {
   Widget buildSuggestions(BuildContext context) {
     final suggestionList = query.isEmpty
         ? data
-        : data!
+        : data
             .where((element) =>
                 element['name'].toString().toLowerCase().startsWith(query))
             .toList();
@@ -54,14 +55,14 @@ class SelectDelegate extends SearchDelegate<dynamic> {
           return Column(children: [
             Expanded(
                 child: ListView.builder(
-              itemCount: suggestionList!.length ?? 0,
+              itemCount: suggestionList.length,
               itemBuilder: (context, index) {
                 var item = suggestionList[index];
                 return ismultiple == true
                     ? CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.trailing,
                         // selected: (value as List<int>).indexOf(item["id"])>=0,
-                        value: (value as List<int>).indexOf(item["id"]) >= 0,
+                        value: (value as List<int>).contains(item["id"]),
                         title: Text(item["name"]),
                         onChanged: (v) {
                           setState(() {

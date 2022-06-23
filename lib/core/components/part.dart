@@ -357,24 +357,24 @@ class RxRoundedButton extends StatelessWidget {
     Key? key,
     required this.onPressed,
     required this.title,
-    this.color, this.radius,
+    this.color = AppColors.primary, this.radius,
   }) : super(key: key);
 
   final GestureTapCallback onPressed;
   final String title;
-  final Color? color;
+  final Color color;
   final double? radius;
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        side: BorderSide(width: 2.0, color: color?? AppColors.primary),
+        side: BorderSide(width: 2.0, color: color!),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radius?? 32.0),
+          borderRadius: BorderRadius.circular(radius?? kDefaultPadding),
         ),
       ),
-      child: Text(title, style: TextStyle(color: color?? AppColors.primary),),
+      child: Text(title, style: TextStyle(color: color),),
     );
   }
 }

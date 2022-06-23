@@ -24,7 +24,7 @@ class DriveApiBLL_ApiFile extends DriveApiBLL_Basic {
     apiDAL.controllerName = "apifile";
   }
   //uploadfile
-  Future<ResponseModel> uploadfile(File file, int fileId, String name) async {
+  Future<ResponseModel> uploadfile(File file, int fileId, String? name) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     queryParameters["name"] = name ?? p.basename(file.path);
     if (fileId > 0) {

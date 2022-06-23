@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
-import 'package:raoxe/core/components/index.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/rao/contact/widgets/item_contact.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -89,29 +89,36 @@ class _ContactPageState extends State<ContactPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _key,
-        body: RxScrollView(
-          listData,
-          (BuildContext context, int index) {
-            ContactModel item = listData![index];
-            return ItemContactWidget(listData![index],
-                onTap: () => CommonNavigates.toContactPage(context, item: item),
-                onDelete: () => onDelete(index));
-          },
-          totalItems,
+        body: RxCustomScrollView(
+         
           appBar: SliverAppBar(
-             iconTheme: IconThemeData(
-              color: Theme.of(context).textTheme.bodyText1!.color, //change your color here
+            iconTheme: IconThemeData(
+              color: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .color, //change your color here
             ),
-              centerTitle: true,
+            centerTitle: true,
             title: Text('address'.tr(),
-                style: kTextHeaderStyle.copyWith(color: Theme.of(context).textTheme.bodyText1!.color)),
+                style: kTextHeaderStyle.copyWith(
+                    color: Theme.of(context).textTheme.bodyText1!.color)),
             backgroundColor: Colors.transparent,
             elevation: 0.0,
           ),
           key: const Key("LContact"),
           controller: scrollController,
-          onNextPage: onNextPage,
+          onNextScroll: onNextPage,
           onRefresh: onRefresh,
+          slivers: <Widget>[
+            RxSliverList(listData, (BuildContext context, int index) {
+              ContactModel item = listData![index];
+
+              return ItemContactWidget(listData![index],
+                  onTap: () =>
+                      CommonNavigates.toContactPage(context, item: item),
+                  onDelete: () => onDelete(index));
+            })
+          ],
         ));
   }
 }

@@ -4,16 +4,13 @@ import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
-import 'package:raoxe/core/components/dialogs/select/select.dialog.dart';
+import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
@@ -68,7 +65,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
 
     var res = await showSearch(
         context: context,
-        delegate: SelectDelegate(
+        delegate: RxSelectDelegate(
             data: MasterDataService.data["city"],
             value: cityid));
     if (res != null) {
@@ -93,7 +90,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
     var res = await showSearch(
         context: context,
         delegate:
-            SelectDelegate(data: district, value: districtid));
+            RxSelectDelegate(data: district, value: districtid));
     if (res != null) {
       setState(() {
         data!.districtid = res.toString();

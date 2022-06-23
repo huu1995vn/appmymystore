@@ -89,6 +89,8 @@ class _MyPageState extends State<MyPage> {
     Size size = MediaQuery.of(context).size;
     SizeConfig.init(size);
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+
       body: PageView(
         controller: _pageController,
         children: <Widget> [

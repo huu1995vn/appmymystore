@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.all(10),
                         decoration: const BoxDecoration(
                             border: Border(
-                                bottom: BorderSide(color: AppColors.gray))),
+                                bottom: BorderSide(color: AppColors.grey))),
                         child: RxInput(
                           username,
                           labelText: "phone".tr(),
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: const EdgeInsets.all(10),
                           decoration: const BoxDecoration(
                               border: Border(
-                                  bottom: BorderSide(color: AppColors.gray))),
+                                  bottom: BorderSide(color: AppColors.grey))),
                           child: RxInput(
                             password,
                             isPassword: true,

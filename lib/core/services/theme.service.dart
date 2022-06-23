@@ -14,7 +14,7 @@ class ThemeService {
       ),
       brightness: isDark ? Brightness.dark : Brightness.light,
       primaryColor: primaryColor,
-      scaffoldBackgroundColor: isDark ? AppColors.black : AppColors.gray,
+      scaffoldBackgroundColor: isDark ? AppColors.black : AppColors.grey,
       cardColor: isDark ? AppColors.blackLight : AppColors.white,
       dividerColor: isDark
           ? AppColors.white.withOpacity(0.2)

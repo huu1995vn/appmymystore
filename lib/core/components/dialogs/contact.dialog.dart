@@ -3,7 +3,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/index.dart';
-import 'package:raoxe/core/components/dialogs/select/select.dialog.dart';
+import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
@@ -37,7 +37,7 @@ class _ContactDialogState extends State<ContactDialog> {
     setState(() {
       contact = widget.contact;
       cityname = MasterDataService.getNameById(
-          "city", int.parse(contact.cityid ?? "-2"));
+          "city", int.parse(contact.cityid ?? "-1"));
       districtname = MasterDataService.getNameById(
           "district", int.parse(contact.districtid));
     });
@@ -47,7 +47,7 @@ class _ContactDialogState extends State<ContactDialog> {
     int cityid = contact.cityid == null ? -1 : int.parse(contact.cityid);
     var res = await showSearch(
         context: context,
-        delegate: SelectDelegate(
+        delegate: RxSelectDelegate(
             data: MasterDataService.data["city"], value: cityid));
     if (res != null) {
       setState(() {
@@ -72,7 +72,7 @@ class _ContactDialogState extends State<ContactDialog> {
         : [];
     var res = await showSearch(
         context: context,
-        delegate: SelectDelegate(data: district, value: districtid));
+        delegate: RxSelectDelegate(data: district, value: districtid));
     if (res != null) {
       setState(() {
         contact.districtid = res.toString();

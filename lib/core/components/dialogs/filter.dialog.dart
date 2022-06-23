@@ -1,0 +1,135 @@
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:raoxe/core/commons/index.dart';
+import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
+import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/components/rx_input.dart';
+import 'package:raoxe/core/components/rx_scaffold.dart';
+import 'package:raoxe/core/components/rx_wrapper.dart';
+import 'package:raoxe/core/services/master_data.service.dart';
+import 'package:raoxe/core/utilities/size_config.dart';
+
+class FilterDialog extends StatefulWidget {
+  const FilterDialog({
+    super.key,
+    required this.searchParams,
+  });
+  final Map<String, dynamic> searchParams;
+  @override
+  State<FilterDialog> createState() => _FilterDialogState();
+}
+
+class _FilterDialogState extends State<FilterDialog> {
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Map<String, dynamic> searchParams = {};
+  Map<String, dynamic> names = {};
+  @override
+  initState() {
+    super.initState();
+    setState(() {
+      searchParams = widget.searchParams ?? {};
+    });
+  }
+
+  _onDone() {
+    CommonNavigates.goBack(context, searchParams);
+  }
+
+  _onSelect(String type, int id,
+      {bool Function(dynamic)? fnWhere, Function()? afterChange}) async {
+    List data = MasterDataService.data[type];
+    if (fnWhere != null) {
+      data = data.where(fnWhere!).toList();
+    }
+    var res = await showSearch(
+        context: context, delegate: RxSelectDelegate(data: data, value: id));
+    if (res != null) {
+      setState(() {
+        searchParams[type] = res;
+        if (afterChange != null) afterChange!();
+      });
+    }
+  }
+
+  String getNameById(String type, int id) {
+    try {
+      return (MasterDataService.data[type] as List)
+          .firstWhere((element) => element["id"] == id)["name"];
+    } catch (e) {
+      return "";
+    }
+  }
+
+  @override
+  Widget build(context) {
+    return RxScaffold(
+      appBar: AppBar(
+        title: Text(
+          'Bộ lọc',
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
+      child: RxWrapper(
+          body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                RxInput(
+                  getNameById("brand", searchParams["brand"]),
+                  isBorder: true,
+                  readOnly: true,
+                  labelText: "brand".tr(),
+                  onTap: () => _onSelect("brand", searchParams["brand"]),
+                  suffixIcon: Icon(Icons.keyboard_arrow_down),
+                ),
+                RxInput(
+                  getNameById("bodytype", searchParams["bodytype"]),
+                  isBorder: true,
+                  readOnly: true,
+                  labelText: "bodytype".tr(),
+                  onTap: () => _onSelect("bodytype", searchParams["bodytype"],
+                      afterChange: () => {searchParams["model"] = null}),
+                  suffixIcon: Icon(Icons.keyboard_arrow_down),
+                ),
+                RxInput(
+                  getNameById("model", searchParams["model"]),
+                  isBorder: true,
+                  readOnly: true,
+                  labelText: "model".tr(),
+                  onTap: () =>
+                      _onSelect("model", searchParams["model"], fnWhere: (v) {
+                    return v["bodytypeid"] == searchParams["bodytype"];
+                  }),
+                  suffixIcon: Icon(Icons.keyboard_arrow_down),
+                ),
+                RxInput(
+                  getNameById("city", searchParams["city"]),
+                  isBorder: true,
+                  readOnly: true,
+                  labelText: "city".tr(),
+                  onTap: () => _onSelect("city", searchParams["city"]),
+                  suffixIcon: Icon(Icons.keyboard_arrow_down),
+                ),
+
+                //Gia
+                //Sort
+                RxPrimaryButton(
+                  onTap: _onDone,
+                  text: "Done",
+                )
+              ],
+            ),
+          ),
+        ],
+      )),
+    );
+  }
+}

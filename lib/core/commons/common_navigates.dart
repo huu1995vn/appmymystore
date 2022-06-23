@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:raoxe/core/components/dialogs/search/search.dialog.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/pages/rao/advert/advert_detail_page.dart';
 import 'package:raoxe/pages/rao/advert/advert_page.dart';
@@ -31,8 +30,8 @@ class CommonNavigates {
     '/user': (context) => const UserPage(),
     '/settings': (context) => const SettingsPage(),
     '/product': (context) => ProductPage(),
-    '/my-product': (context) => MyProductPage(),
-    '/advert': (context) => AdvertPage(),
+    '/my-product': (context) => const MyProductPage(),
+    '/advert': (context) => const AdvertPage(),
     '/news': (context) => const NewsPage(),
     '/contact': (context) => const ContactPage(),
 

@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches, no_leading_underscores_for_local_identifiers
+// ignore_for_file: empty_catches, no_leading_underscores_for_local_identifiers, depend_on_referenced_packages, library_prefixes
 
 import 'dart:io';
 import 'package:crypto/crypto.dart';
@@ -124,7 +124,7 @@ class CommonMethods {
   }
 
   static showDialog(BuildContext context, String pmsg,
-      {String? title, List<Widget>? actions, Color color = AppColors.white}) {
+      {String? title, List<Widget>? actions, Color? color = AppColors.white}) {
     Dialogs.materialDialog(
         msg: pmsg,
         title: title ?? "notification".tr(),
@@ -193,7 +193,7 @@ class CommonMethods {
       prefixSize = prefixSize.toString();
     }
     idHinh = idHinh > 0 ? idHinh : 0;
-    rewriteUrl = rewriteUrl!=null && rewriteUrl!.isNotEmpty ? rewriteUrl : "image-dailyxe";
+    rewriteUrl = rewriteUrl!=null && rewriteUrl.isNotEmpty ? rewriteUrl : "image-dailyxe";
     rewriteUrl = rewriteUrl.convertrUrlPrefix();
     return '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j$prefixSize.jpg';
 
@@ -332,7 +332,7 @@ class CommonMethods {
     }
   }
 
-  static bool checkStringPhone(String text) {
+  static bool checkStringPhone(String? text) {
     if (text != null) {
       RegExp regExp = RegExp(
         RxParttern.phone,

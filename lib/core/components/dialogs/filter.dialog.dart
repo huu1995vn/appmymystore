@@ -82,43 +82,15 @@ class _FilterDialogState extends State<FilterDialog> {
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                RxInput(
-                  getNameById("brand", searchParams["brand"]),
-                  isBorder: true,
-                  readOnly: true,
-                  labelText: "brand".tr(),
-                  onTap: () => _onSelect("brand", searchParams["brand"]),
-                  suffixIcon: Icon(Icons.keyboard_arrow_down),
+                Row(
+                  children: [_selectInput("brand")],
                 ),
-                RxInput(
-                  getNameById("bodytype", searchParams["bodytype"]),
-                  isBorder: true,
-                  readOnly: true,
-                  labelText: "bodytype".tr(),
-                  onTap: () => _onSelect("bodytype", searchParams["bodytype"],
-                      afterChange: () => {searchParams["model"] = null}),
-                  suffixIcon: Icon(Icons.keyboard_arrow_down),
-                ),
-                RxInput(
-                  getNameById("model", searchParams["model"]),
-                  isBorder: true,
-                  readOnly: true,
-                  labelText: "model".tr(),
-                  onTap: () =>
-                      _onSelect("model", searchParams["model"], fnWhere: (v) {
-                    return v["bodytypeid"] == searchParams["bodytype"];
-                  }),
-                  suffixIcon: Icon(Icons.keyboard_arrow_down),
-                ),
-                RxInput(
-                  getNameById("city", searchParams["city"]),
-                  isBorder: true,
-                  readOnly: true,
-                  labelText: "city".tr(),
-                  onTap: () => _onSelect("city", searchParams["city"]),
-                  suffixIcon: Icon(Icons.keyboard_arrow_down),
-                ),
-
+                _selectInput("bodytype",
+                    afterChange: () => {searchParams["model"] = null}),
+                _selectInput("model", fnWhere: (v) {
+                  return v["bodytypeid"] == searchParams["bodytype"];
+                }),
+                _selectInput("city"),
                 //Gia
                 //Sort
                 RxPrimaryButton(
@@ -130,6 +102,23 @@ class _FilterDialogState extends State<FilterDialog> {
           ),
         ],
       )),
+    );
+  }
+
+  Widget _selectInput(
+    String type, {
+    bool Function(dynamic)? fnWhere,
+    dynamic Function()? afterChange,
+  }) {
+    return RxInput(
+      getNameById(type, searchParams[type]),
+      isBorder: true,
+      readOnly: true,
+      key: Key(type),
+      labelText: type.tr(),
+      onTap: () => _onSelect(type, searchParams[type],
+          fnWhere: fnWhere, afterChange: afterChange),
+      suffixIcon: Icon(Icons.keyboard_arrow_down),
     );
   }
 }

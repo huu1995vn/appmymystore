@@ -4,8 +4,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/dialogs/filter.dialog.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';

@@ -2,12 +2,14 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
@@ -28,6 +30,8 @@ class _ContactDialogState extends State<ContactDialog> {
     loadData();
   }
 
+  TextStyle styleTitle =
+      kTextHeaderStyle.copyWith(fontSize: 15, fontWeight: FontWeight.normal);
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
   String cityname = "";
   String districtname = "";
@@ -43,106 +47,131 @@ class _ContactDialogState extends State<ContactDialog> {
     });
   }
 
-  _onCity() async {
-    int cityid = contact.cityid == null ? -1 : int.parse(contact.cityid);
-    var res = await showSearch(
-        context: context,
-        delegate: RxSelectDelegate(
-            data: MasterDataService.data["city"], value: cityid));
-    if (res != null) {
-      setState(() {
-        contact.cityid = res.toString();
-        cityname = MasterDataService.getNameById("city", res);
-        contact.districtid = "-1";
-        districtname = "";
-      });
-    }
-  }
-
-  _onDistrict() async {
-    int cityid = contact.cityid == null ? -1 : int.parse(contact.cityid);
-
-    int districtid =
-        contact.districtid == null ? -1 : int.parse(contact.districtid);
-
-    var district = cityid > 0
-        ? MasterDataService.data["district"]
-            .where((element) => element['cityid'] == cityid)
-            .toList()
-        : [];
-    var res = await showSearch(
-        context: context,
-        delegate: RxSelectDelegate(data: district, value: districtid));
-    if (res != null) {
-      setState(() {
-        contact.districtid = res.toString();
-        districtname = MasterDataService.getNameById("district", res);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).cardColor,
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            title: Text("info.concat".tr(), style: kTextHeaderStyle),
-            elevation: 0.0,
-          ),
-          SliverToBoxAdapter(
-              child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _keyValidationForm,
-              child: Column(
-                children: <Widget>[
-                  RxInput(
-                    cityname,
-                    readOnly: true,
-                    hintText: "city".tr(),
-                    onChanged: (v) => {cityname = v},
-                    validator: Validators.compose([
-                      Validators.required("notempty.city.text".tr()),
-                    ]),
-                    onTap: _onCity,
-                    suffixIcon: Icon(Icons.keyboard_arrow_down),
-                  ),
-                  RxInput(
-                    districtname,
-                    readOnly: true,
-                    hintText: "district".tr(),
-                    onChanged: (v) => {districtname = v},
-                    validator: Validators.compose([
-                      Validators.required("notempty.district.text".tr()),
-                    ]),
-                    onTap: _onDistrict,
-                    suffixIcon: Icon(Icons.keyboard_arrow_down),
-                  ),
-                  RxInput(contact.address,
-                      hintText: "address".tr(),
-                      // icon: const Icon(Icons.person),
-                      onChanged: (v) => {contact.address = v},
-                      validator: Validators.compose([
-                        Validators.required("notempty.address.text".tr()),
-                      ])),
-                ],
+        backgroundColor: Colors.transparent,
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              iconTheme: IconThemeData(
+                color: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .color, //change your color here
               ),
+              centerTitle: true,
+              title: Text("info.concat".tr(),
+                  style: kTextHeaderStyle.copyWith(
+                      color: Theme.of(context).textTheme.bodyText1!.color)),
+              elevation: 0.0,
+              backgroundColor: AppColors.grey,
             ),
-          ))
-        ],
+            SliverToBoxAdapter(
+                child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Form(
+                        key: _keyValidationForm,
+                        child: Column(
+                          children: [
+                            Card(
+                                child: Column(
+                              children: <Widget>[
+                                _selectInput(
+                                  "city",
+                                  int.parse(contact.cityid.toString()),
+                                  afterChange: (v) => {
+                                    setState(() {
+                                      contact.cityid = v!.toString();
+                                      contact.districtid = "-1";
+                                    })
+                                  },
+                                ),
+                                _selectInput(
+                                  "district",
+                                  int.parse(contact.districtid.toString()),
+                                  fnWhere: (v) {
+                                    return v["cityid"] ==
+                                        int.parse(contact.cityid.toString());
+                                  },
+                                  afterChange: (v) => {
+                                    setState(() {
+                                      contact.districtid = v!.toString();
+                                    })
+                                  },
+                                ),
+                                ListTile(
+                                  title:
+                                      Text("address".tr(), style: styleTitle),
+                                  subtitle: SizedBox(
+                                    height: 40,
+                                    child: RxInput(
+                                      contact.address,
+                                      hintText: "address".tr(),
+                                      onChanged: (v) => {contact.address = v},
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                            RxPrimaryButton(
+                                onTap: () {
+                                  if (_keyValidationForm.currentState!
+                                      .validate()) {
+                                    CommonNavigates.goBack(context, contact);
+                                  }
+                                },
+                                text: 'save'.tr())
+                          ],
+                        ))))
+          ],
+        ));
+  }
+
+  Widget _selectInput(
+    String type,
+    dynamic id, {
+    String? title,
+    String hideText = "Chọn lọc",
+    bool Function(dynamic)? fnWhere,
+    dynamic Function(dynamic)? afterChange,
+    bool isRequire = false,
+  }) {
+    var name = CommonMethods.getNameMasterById(type, id);
+    return ListTile(
+      title: RichText(
+        text: TextSpan(
+          text: title ?? type.tr(),
+          style: DefaultTextStyle.of(context).style,
+          children: <TextSpan>[
+            if (isRequire)
+              TextSpan(
+                  text: '*',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: AppColors.primary)),
+          ],
+        ),
       ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(kDefaultPadding),
-        child: RxPrimaryButton(
-            onTap: () {
-              if (_keyValidationForm.currentState!.validate()) {
-                CommonNavigates.goBack(context, contact);
-              }
-            },
-            text: 'save'.tr()),
-      ),
+      subtitle: Text(name != null && name.length > 0 ? name : hideText,
+          style: TextStyle(
+              color:
+                  name != null && name.length > 0 ? AppColors.primary : null)),
+      onTap: () =>
+          _onSelect(type, id, fnWhere: fnWhere, afterChange: afterChange),
+      trailing: Icon(Icons.keyboard_arrow_right),
     );
+  }
+
+  _onSelect(String type, dynamic id,
+      {bool Function(dynamic)? fnWhere, Function(dynamic)? afterChange}) async {
+    List data = MasterDataService.data[type];
+    if (fnWhere != null) {
+      data = data.where(fnWhere!).toList();
+    }
+    var res = await showSearch(
+        context: context, delegate: RxSelectDelegate(data: data, value: id));
+    if (res != null) {
+      if (afterChange != null) afterChange!(res);
+    }
   }
 }

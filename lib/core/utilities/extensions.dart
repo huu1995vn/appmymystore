@@ -2,6 +2,7 @@
 
 library extension_rao;
 
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -177,6 +178,16 @@ extension ListFileExtension on List<File> {
       }
     } catch (e) {}
     return listPath;
+  }
+  List clone() {
+    return [...this];
+  }
+}
+
+
+extension MapExtension on Map {
+  Map clone() {
+    return json.decode(json.encode(this));
   }
 }
 

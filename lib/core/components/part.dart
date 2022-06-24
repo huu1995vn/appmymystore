@@ -76,6 +76,7 @@ class RxWebViewState extends State<RxWebView> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "", style: kTextHeaderStyle),
+          centerTitle: true,
           elevation: 0.0,
         ),
         body: Stack(

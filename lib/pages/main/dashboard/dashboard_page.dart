@@ -122,7 +122,7 @@ class _DashboardPageState extends State<DashboardPage> {
           child: const Icon(
             Icons.settings,
             color: AppColors.black,
-            size: 19,
+            // size: 19,
           )),
       onTap: () => {},
     );

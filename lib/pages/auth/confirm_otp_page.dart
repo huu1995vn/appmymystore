@@ -87,7 +87,7 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
             ),
             centerTitle: true,
             title: Text("Confirm your OTP", style: kTextHeaderStyle.copyWith(color: Theme.of(context).textTheme.bodyText1!.color)),
-            backgroundColor: Colors.transparent,
+            backgroundColor: AppColors.grey,
             elevation: 0.0,
           ),
           body: SingleChildScrollView(

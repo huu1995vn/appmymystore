@@ -70,7 +70,8 @@ dependencies:
   date_time_picker: #Used for open date picker
   local_auth: #Used for auth device
   debounce_throttle: #Used for debounce
-  
+  flutter_slidable: #Used for action item
+
 dev_dependencies:
   build_runner: # Used for code generation libraries
   json_serializable: # Used for code generation libraries

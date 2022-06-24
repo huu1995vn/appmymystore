@@ -11,6 +11,7 @@ import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
@@ -122,7 +123,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                   title: Text("info.concat".tr(),
                       style: kTextHeaderStyle.copyWith(
                           color: Theme.of(context).textTheme.bodyText1!.color)),
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: AppColors.grey,
                   elevation: 0.0,
                 ),
                 SliverToBoxAdapter(

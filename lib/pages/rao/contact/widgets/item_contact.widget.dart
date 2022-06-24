@@ -28,7 +28,7 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
         children: <Widget>[
           Container(
             margin: const EdgeInsets.only(right: 5),
-            child: Text(widget.item.fullname, style: const TextStyle().bold),
+            child: Text(widget.item.fullname??"", style: const TextStyle().bold),
           ),
           if (widget.item.ISDEFAULT)
             Text("default".tr(),
@@ -43,7 +43,7 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
           const SizedBox(
             height: 5,
           ),
-          Text(widget.item.address, style: const TextStyle().italic),
+          Text(widget.item.address??"", style: const TextStyle().italic),
         ],
       ),
       trailing: GestureDetector(

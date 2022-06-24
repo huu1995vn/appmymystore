@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(
               child: Column(children: [
             const ListBannerWidget(),
-            _buildTitle("new".tr(), () {}),
+            _buildTitle("new".tr(), () {CommonNavigates.toProductPage(context);}),
           ])),
           RxSliverList(listData, (BuildContext context, int index) {
             return ItemProductWidget(listData![index]);
@@ -155,7 +155,7 @@ _buildTitle(String header, void Function()? onTap) {
       Text(header.toUpperCase(),
           style: const TextStyle(color: AppColors.primary).bold),
       GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: Ink(
           decoration: const ShapeDecoration(
             color: AppColors.grayDark,

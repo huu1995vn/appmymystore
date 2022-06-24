@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -23,6 +24,10 @@ const kBoxDecorationStyle = BoxDecoration(
 const kTextHeaderStyle = TextStyle(
   fontSize: 19,
   fontWeight: FontWeight.bold,
+);
+const TextStyle styleTextTitleStyle = TextStyle(
+  fontSize: 15,
+  fontWeight: FontWeight.normal,
 );
 const kTextPriceStyle = TextStyle(
   fontWeight: FontWeight.bold,
@@ -54,7 +59,6 @@ List<Categorie> CATEGORIES = [
   Categorie(id: 3, categoryname: "Đánh giá xe"),
   Categorie(id: 4, categoryname: "Tư vấn"),
   Categorie(id: 5, categoryname: "Hình ảnh"),
-  // Categorie(id: 6, categoryname: "Videos"),
 ];
 List<Categorie> PRODUCTSTATUS = [
   Categorie(id: 1, categoryname: "Chờ duyệt"),
@@ -62,6 +66,28 @@ List<Categorie> PRODUCTSTATUS = [
   Categorie(id: 3, categoryname: "Không duyệt"),
   Categorie(id: 4, categoryname: "Vi phạm"),
   // Categorie(id: 6, categoryname: "Videos"),
+];
+
+List PRICES = [
+    {"name": "0 - 500 triệu", "id": 0},
+    {"name": "500 - 1 tỷ", "id": 0},
+    {"name": "1tỷ - 5tỷ", "id": 0},
+    {"name": "hơn 5tỷ", "id": 0}
+];
+
+List SORTS = [
+    {"name": "Mới nhất", "id": "NgayUp:desc"},
+    {"name": "Cũ nhất", "id": "NgayUp:asc"},
+    {"name": "Giá cao trước", "id": "Gia:desc"},
+    {"name": "Giá thấp trước", "id": "Gia:asc"}
+];
+List PRODUCTTYPES = [
+    {"name": "Bán", "id": 1},
+    {"name": "Mua", "id": 2},
+];
+List PRODUCTSTATES = [
+    {"name": "Mới", "id": 1},
+    {"name": "Đã sử dụng", "id": 2},
 ];
 
 class RxParttern {

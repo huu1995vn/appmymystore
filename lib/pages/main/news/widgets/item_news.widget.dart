@@ -15,7 +15,7 @@ class ItemNewsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RxCard(
+    return Card(
         child: GestureDetector(
       onTap: onTap,
       child: SizedBox(

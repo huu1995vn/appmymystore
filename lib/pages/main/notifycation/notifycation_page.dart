@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:raoxe/core/components/index.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
@@ -65,6 +64,13 @@ class _NotifycationPageState extends State<NotifycationPage> {
     return await loadData(1);
   }
 
+  _onDelete(index) {
+    //Call api gọi api xóa
+    setState(() {
+      listData!.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +84,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
             automaticallyImplyLeading: false,
             elevation: 0.0,
             centerTitle: true,
-            backgroundColor: Colors.transparent,
+            backgroundColor: AppColors.grey,
           ),
           key: const Key("LNoti"),
           controller: scrollController,
@@ -86,7 +92,8 @@ class _NotifycationPageState extends State<NotifycationPage> {
           onRefresh: onRefresh,
           slivers: <Widget>[
             RxSliverList(listData, (BuildContext context, int index) {
-              return ItemNotifycationWidget(listData![index]);
+              return ItemNotifycationWidget(listData![index],
+                  onDelete: (context) => {_onDelete(index)});
             })
           ],
         ));

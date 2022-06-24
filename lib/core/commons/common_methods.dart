@@ -14,6 +14,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, utf8;
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -397,5 +398,14 @@ class CommonMethods {
       return d;
     } catch (e) {}
     return "";
+  }
+
+  static String getNameMasterById(String type, dynamic id) {
+    try {
+      return (MasterDataService.data[type] as List)
+          .firstWhere((element) => element["id"] == id)["name"];
+    } catch (e) {
+      return "";
+    }
   }
 }

@@ -18,6 +18,7 @@ import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 import 'widgets/user_top.widget.dart';
 
@@ -124,8 +125,10 @@ class _UserPageState extends State<UserPage> {
   }
 
   _onAddress() async {
-    var res = await CommonNavigates.openDialog(
-        context, ContactDialog(contact: data!.toContact()));
+    var res = await CommonNavigates.showDialogBottomSheet(
+        context, ContactDialog(contact: data!.toContact()),
+        height: 350);
+
     if (res != null) {
       setState(() {
         data!.cityid = res.cityid;
@@ -138,89 +141,87 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).cardColor,
-      body: data == null
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar(
-                    expandedHeight: 250.0,
-                    flexibleSpace: UserTopWidget(data, onUpload: onUpload)),
-                SliverToBoxAdapter(
-                    child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Form(
-                    key: _keyValidationForm,
-                    child: Column(
-                      children: <Widget>[
-                        RxInput(data!.fullname,
-                            labelText: "fullname".tr(),
-                            isBorder: true,
-                            // icon: const Icon(Icons.person),
-                            onChanged: (v) => {data!.fullname = v},
-                            validator: Validators.compose([
-                              Validators.required(
-                                  "notempty.fullname.text".tr()),
-                            ])),
-                        RxInput(
-                          isBorder: true,
-                          readOnly: true,
-                          data!.address,
-                          labelText: "address".tr(),
-                          // icon: const Icon(Icons.location_city),
-                          onChanged: (v) => {data!.address = v},
-                          validator: Validators.compose([
-                            Validators.required("notempty.address.text".tr()),
-                          ]),
-                          onTap: _onAddress,
-                          suffixIcon: Icon(Icons.keyboard_arrow_down),
-                        ),
-                        SizedBox(
-                          height: 45,
-                          child: DateTimePicker(
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: "birthday".tr(),
+        backgroundColor: Theme.of(context).cardColor,
+        body: data == null
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                      expandedHeight: 250.0,
+                      flexibleSpace: UserTopWidget(data, onUpload: onUpload)),
+                  SliverToBoxAdapter(
+                      child: Padding(
+                    padding: const EdgeInsets.all(kDefaultPadding),
+                    child: Form(
+                      key: _keyValidationForm,
+                      child: Column(
+                        children: <Widget>[
+                          ListTile(
+                            title: Text("fullname".tr(),
+                                style: styleTextTitleStyle),
+                            subtitle: RxInput(data!.fullname,
+                                onChanged: (v) => {data!.fullname = v},
+                                hintText: "fullname".tr(),
+                                validator: Validators.compose([
+                                  Validators.required(
+                                      "notempty.fullname.text".tr()),
+                                ])),
+                          ),
+                          ListTile(
+                            title: Text("address".tr(),
+                                style: styleTextTitleStyle),
+                            subtitle: RxInput(
+                              readOnly: true,
+                              data!.address,
+                              onChanged: (v) => {data!.address = v},
+                              validator: Validators.compose([
+                                Validators.required(
+                                    "notempty.address.text".tr()),
+                              ]),
+                              onTap: _onAddress,
+                              suffixIcon: Icon(Icons.keyboard_arrow_down),
                             ),
-                            // icon: const Icon(Icons.calendar_today),
-                            locale: Locale("vi"),
-                            initialValue:
-                                CommonMethods.convertToDateTime(data!.birthdate)
-                                    .toString(),
-                            dateMask: 'dd-MM-yyyy',
-                            firstDate: DateTime(1977),
-                            lastDate: DateTime(2100),
-                            onChanged: (value) => {data!.birthdate = value},
                           ),
-                        ),
-                        ListTile(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              _CustomRadioButton("male".tr(), "1"),
-                              _CustomRadioButton("female".tr(), "0"),
-                            ],
+                          ListTile(
+                            title: Text("birthday".tr(),
+                                style: styleTextTitleStyle),
+                            subtitle: DateTimePicker(
+                              locale: Locale("vi"),
+                              initialValue: CommonMethods.convertToDateTime(
+                                      data!.birthdate)
+                                  .toString(),
+                              dateMask: 'dd-MM-yyyy',
+                              firstDate: DateTime(1977),
+                              lastDate: DateTime(2100),
+                              onChanged: (value) => {data!.birthdate = value},
+                            ),
                           ),
-                        )
-                      ],
+                          ListTile(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                _CustomRadioButton("male".tr(), "1"),
+                                _CustomRadioButton("female".tr(), "0"),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ))
-              ],
-            ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(kDefaultPadding),
-        child: RxPrimaryButton(
-            onTap: () {
-              if (_keyValidationForm.currentState!.validate()) {
-                _onSave();
-              }
-            },
-            text: 'save'.tr()),
-      ),
-    );
+                  ))
+                ],
+              ),
+        persistentFooterButtons: [
+          RxPrimaryButton(
+              onTap: () {
+                if (_keyValidationForm.currentState!.validate()) {
+                  _onSave();
+                }
+              },
+              text: 'save'.tr())
+        ]);
   }
 
   Widget _CustomRadioButton(String text, String value) {

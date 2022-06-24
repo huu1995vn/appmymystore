@@ -153,13 +153,20 @@ class CommonNavigates {
         fullscreenDialog: true));
   }
 
-  static Future openSelect(BuildContext context, Widget child) async {
+  static Future openSelect(BuildContext context, Widget child,
+      {double? height}) async {
+    return showDialogBottomSheet(context, child);
+  }
+
+  static Future showDialogBottomSheet(BuildContext context, Widget child,
+      {double height = 0.95}) async {
     return showModalBottomSheet(
         context: context,
+        isDismissible: true,
         isScrollControlled: true,
         builder: (context) {
-          return FractionallySizedBox(
-            heightFactor: 0.95,
+          return SizedBox(
+            height: height,
             child: child,
           );
         });

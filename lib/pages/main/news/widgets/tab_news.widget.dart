@@ -6,12 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/news/widgets/item_news.widget.dart';
-import 'package:raoxe/pages/rao/my_product/widgets/item_my_product.widget.dart';
 
 class TabNewsWidget extends StatefulWidget {
   dynamic categorie;
@@ -90,7 +89,10 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
     return RxListView(
       listData,
       (context, index) {
-        return ItemNewsWidget(listData![index]);
+        var item =listData![index];
+        return ItemNewsWidget(item, onTap: (){
+          CommonNavigates.toNewsPage(context, item: item);
+        },);
       },
       onNextPage: onNextPage,
       onRefresh: loadData,

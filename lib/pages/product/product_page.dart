@@ -51,7 +51,7 @@ class _ProductPageState extends State<ProductPage> {
     List<ProductModel> newslist = data
         .map((val) => ProductModel.fromJson(val))
         .toList() as List<ProductModel>;
-
+  if(mounted) {
     setState(() {
       totalItems = newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
       listData;
@@ -61,6 +61,7 @@ class _ProductPageState extends State<ProductPage> {
         listData = (listData! + newslist);
       }
     });
+  }
     paging = paging;
   }
 

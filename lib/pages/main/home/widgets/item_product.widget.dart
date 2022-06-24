@@ -20,7 +20,7 @@ class ItemProductWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () async {},
         child: SizedBox(
-          height: SizeConfig.screenWidth / 4.5,
+          height: SizeConfig.screenWidth / 4,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -62,7 +62,7 @@ class ItemProductWidget extends StatelessWidget {
                                 child: Center(
                                     child: Text(
                                   lenimg >= 9 ? "9+" : lenimg.toString(),
-                                  style: TextStyle(color: AppColors.white)
+                                  style: const TextStyle(color: AppColors.white)
                                       .bold
                                       .size(12),
                                 ))),
@@ -72,48 +72,65 @@ class ItemProductWidget extends StatelessWidget {
                   )),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
-                  child: 
-                  Stack(children: [
-                    Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          itemProduct.name ?? "",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              // fontSize: 36,
+                    padding: const EdgeInsets.all(kDefaultPadding),
+                    child: Stack(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    itemProduct.name ?? "",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        // fontSize: 36,
+                                        ),
+                                  ),
+                                  Text(
+                                    itemProduct.price ?? "4.000.000",
+                                    style: const TextStyle(
+                                      color: AppColors.primary,
+                                    ).bold,
+                                  ),
+                                ],
                               ),
+                            ),
+                            Row(
+                              // spacing: kDefaultPadding,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  itemProduct.cityname ?? "Tp.HCM",
+                                  style: const TextStyle(
+                                    color: AppColors.black50,
+                                  ).bold.size(12
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.brightness_low_outlined,
+                                        color: AppColors.yellow, size: 19,),
+                                    Text("Tin ưu tiên",
+                                        style: const TextStyle(
+                                          color: AppColors.yellow,
+                                        ).bold.size(10)),
+                                  ],
+                                ),
+                                const Icon(
+                                  Icons.favorite_border_outlined,
+                                  color: AppColors.primary,
+                                  size: 19,
+                                )
+                              ],
+                            ),
+                          ],
                         ),
-                      ),
-                      Row(
-                        // spacing: kDefaultPadding,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            itemProduct.price ?? "4.000.000",
-                            style: const TextStyle(
-                              color: AppColors.primary,
-                            ).bold,
-                          ),
-                          
-                          Text(
-                            "Tin ưu tiên",
-                            style: const TextStyle(
-                              color: AppColors.yellow,
-                            ).bold.size(12),
-                          ),
-                          const Icon(Icons.favorite_border_outlined, color: AppColors.black50, size: 19,)
-                         
-                        ],
-                      ),
-                    ],
-                  ),
-                  ],)
-                  
-                ),
+                      ],
+                    )),
               ),
             ],
           ),

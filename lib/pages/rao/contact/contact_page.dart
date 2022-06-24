@@ -8,6 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/rao/contact/widgets/item_contact.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -102,7 +103,7 @@ class _ContactPageState extends State<ContactPage> {
             title: Text('address'.tr(),
                 style: kTextHeaderStyle.copyWith(
                     color: Theme.of(context).textTheme.bodyText1!.color)),
-            backgroundColor: Colors.transparent,
+            backgroundColor: AppColors.grey,
             elevation: 0.0,
           ),
           key: const Key("LContact"),

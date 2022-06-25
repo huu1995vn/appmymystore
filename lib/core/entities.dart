@@ -237,6 +237,9 @@ class ProductModel extends Entity {
   late String username = "";
   late String usercontactid;
   late String usercontactname = "";
+  late String usercontactphone = "";
+  late String usercontactemail = "";
+  late String usercontactaddress = "";
   late String brandid;
   late String brandname = "";
   late String modelid;
@@ -483,7 +486,7 @@ class AdvertModel extends Entity {
       return "not.update".tr();
     }
   }
-  
+
   String get URLIMG {
     int fileId = 0;
     fileId = int.parse(img);

@@ -65,43 +65,42 @@ class _InputTextState extends State<RxInput> {
 
   @override
   Widget build(context) {
-    return SizedBox(
-      height: 40,
-      child: RxDisabled(
-          disabled: widget.disabled,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: kDefaultPadding),
-            child: TextFormField(
-                key: UniqueKey(),
-                onTap: widget.onTap,
-                readOnly: widget.readOnly || widget.disabled,
-                controller: input,
-                keyboardType: widget.keyboardType,
-                inputFormatters: widget.keyboardType == TextInputType.number
-                    ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
-                    : null,
-                obscureText: !showPassword && widget.isPassword,
-                validator: widget.validator,
-                onChanged: widget.onChanged,
-                decoration: InputDecoration(
-                    border: widget.isBorder == true ? const OutlineInputBorder() : InputBorder.none,
-                    labelText: widget.labelText,
-                    hintText: widget.hintText,
-                    icon: widget.icon,
-                    suffixIcon: widget.isPassword
-                        ? IconButton(
-                            icon: Icon(showPassword == true
-                                ? Icons.visibility_off
-                                : Icons.visibility),
-                            onPressed: () {
-                              setState(() {
-                                showPassword = !showPassword;
-                              });
-                            },
-                          )
-                        : widget.suffixIcon),
-              ),
-          )),
-    );
+    return RxDisabled(
+        disabled: widget.disabled,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: kDefaultPadding),
+          child: TextFormField(
+            key: UniqueKey(),
+            onTap: widget.onTap,
+            readOnly: widget.readOnly || widget.disabled,
+            controller: input,
+            keyboardType: widget.keyboardType,
+            inputFormatters: widget.keyboardType == TextInputType.number
+                ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
+                : null,
+            obscureText: !showPassword && widget.isPassword,
+            validator: widget.validator,
+            onChanged: widget.onChanged,
+            decoration: InputDecoration(
+                border: widget.isBorder == true
+                    ? const OutlineInputBorder()
+                    : InputBorder.none,
+                labelText: widget.labelText,
+                hintText: widget.hintText,
+                icon: widget.icon,
+                suffixIcon: widget.isPassword
+                    ? IconButton(
+                        icon: Icon(showPassword == true
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        onPressed: () {
+                          setState(() {
+                            showPassword = !showPassword;
+                          });
+                        },
+                      )
+                    : widget.suffixIcon),
+          ),
+        ));
   }
 }

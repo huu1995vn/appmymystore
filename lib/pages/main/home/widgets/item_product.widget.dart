@@ -9,16 +9,16 @@ import 'package:raoxe/core/utilities/size_config.dart';
 
 class ItemProductWidget extends StatelessWidget {
   final ProductModel itemProduct;
-
-  const ItemProductWidget(this.itemProduct, {super.key});
+  final void Function()? onTap;
+  const ItemProductWidget(this.itemProduct, {super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     int lenimg = Random().nextInt(15); //itemProduct.LISTURLIMG.length
 
-    return RxCard(
+    return Card(
       child: GestureDetector(
-        onTap: () async {},
+        onTap: onTap,
         child: SizedBox(
           height: SizeConfig.screenWidth / 4,
           child: Row(
@@ -107,13 +107,15 @@ class ItemProductWidget extends StatelessWidget {
                                   itemProduct.cityname ?? "Tp.HCM",
                                   style: const TextStyle(
                                     color: AppColors.black50,
-                                  ).bold.size(12
-                                  ),
+                                  ).bold.size(12),
                                 ),
                                 Row(
                                   children: [
-                                    const Icon(Icons.brightness_low_outlined,
-                                        color: AppColors.yellow, size: 19,),
+                                    const Icon(
+                                      Icons.brightness_low_outlined,
+                                      color: AppColors.yellow,
+                                      size: 19,
+                                    ),
                                     Text("Tin ưu tiên",
                                         style: const TextStyle(
                                           color: AppColors.yellow,

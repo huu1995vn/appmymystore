@@ -88,10 +88,15 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(
               child: Column(children: [
             const ListBannerWidget(),
-            _buildTitle("new".tr(), () {CommonNavigates.toProductPage(context);}),
+            _buildTitle("new".tr(), () {
+              CommonNavigates.toProductPage(context);
+            }),
           ])),
           RxSliverList(listData, (BuildContext context, int index) {
-            return ItemProductWidget(listData![index]);
+            ProductModel item = listData![index];
+            return ItemProductWidget(item, onTap: () {
+              CommonNavigates.toProductPage(context, id: int.parse(item.id));
+            });
           })
         ],
       ),

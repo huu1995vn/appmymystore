@@ -39,10 +39,12 @@ class CommonNavigates {
   };
 
   static Future toProductPage(BuildContext context,
-      {int? id, Map<String, dynamic>? paramsSearch}) async {
-    if (id != null && id > 0) {
-      return await Navigator.push(context,
-          CupertinoPageRoute(builder: (context) => ProductDetailPage(id: id)));
+      {int? id, ProductModel? item, Map<String, dynamic>? paramsSearch}) async {
+    if ((id != null && id > 0) || item != null) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => ProductDetailPage(id: id, item: item)));
     } else {
       return await Navigator.push(
           context,

@@ -12,6 +12,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/dialogs/contact.dialog.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
@@ -146,7 +147,7 @@ class _UserPageState extends State<UserPage> {
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : CustomScrollView(
+            : RxCustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
                       expandedHeight: 250.0,

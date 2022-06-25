@@ -8,15 +8,17 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 class RxCustomScrollView extends StatefulWidget {
   final List<Widget>? slivers;
-  final AutoScrollController controller;
+  final AutoScrollController? controller;
   final SliverAppBar? appBar;
   final Future<dynamic> Function()? onNextScroll;
   final Future<dynamic> Function()? onRefresh;
   const RxCustomScrollView(
       {super.key,
-      required this.controller,
+      this.controller,
       this.slivers,
-      this.appBar, this.onNextScroll, this.onRefresh});
+      this.appBar,
+      this.onNextScroll,
+      this.onRefresh});
   @override
   RxListViewState createState() => RxListViewState();
 }
@@ -38,20 +40,20 @@ class RxListViewState extends State<RxCustomScrollView>
     super.initState();
     if (mounted)
       setState(() {
-        scrollController = widget.controller;
+        scrollController = widget.controller ?? AutoScrollController();
       });
     if (widget.onNextScroll != null && scrollController != null)
       scrollController.addListener(_scrollListener);
   }
-
 
   @override
   dispose() {
     super.dispose();
     if (widget.controller == null) {
       if (scrollController != null && mounted) scrollController.dispose();
-    } 
+    }
   }
+
   Future<void> onNextScroll() async {
     if (widget.onNextScroll != null) {
       await widget.onNextScroll!();
@@ -101,5 +103,4 @@ class RxListViewState extends State<RxCustomScrollView>
       ],
     );
   }
-
 }

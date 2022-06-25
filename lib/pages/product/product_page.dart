@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable
+// ignore_for_file: prefer_const_constructors, unused_local_variable, must_be_immutable
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
+import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
@@ -34,7 +34,6 @@ class _ProductPageState extends State<ProductPage> {
   int paging = 1;
   int totalItems = 0;
   List<ProductModel>? listData;
-  AutoScrollController scrollController = AutoScrollController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   Map<String, dynamic> paramsSearch = {};
   loadData([npaging = 1]) async {
@@ -51,17 +50,17 @@ class _ProductPageState extends State<ProductPage> {
     List<ProductModel> newslist = data
         .map((val) => ProductModel.fromJson(val))
         .toList() as List<ProductModel>;
-  if(mounted) {
-    setState(() {
-      totalItems = newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
-      listData;
-      if (paging == 1) {
-        listData = newslist;
-      } else {
-        listData = (listData! + newslist);
-      }
-    });
-  }
+    if (mounted) {
+      setState(() {
+        totalItems = newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
+        listData;
+        if (paging == 1) {
+          listData = newslist;
+        } else {
+          listData = (listData! + newslist);
+        }
+      });
+    }
     paging = paging;
   }
 
@@ -86,8 +85,6 @@ class _ProductPageState extends State<ProductPage> {
       loadData();
     });
   }
-
-   
 
   @override
   Widget build(BuildContext context) {
@@ -115,11 +112,13 @@ class _ProductPageState extends State<ProductPage> {
                     onPressed: (v) => {_onBrandChange(v)},
                     value: paramsSearch["brand"])),
             RxSliverList(listData, (BuildContext context, int index) {
-              return ItemProductWidget(listData![index]);
+              var item = listData![index];
+              return ItemProductWidget(listData![index], onTap: () {
+                CommonNavigates.toProductPage(context, id: int.parse(item.id));
+              });
             })
           ],
           key: const Key("LProcduct"),
-          controller: scrollController,
           onNextScroll: onNextPage,
           onRefresh: onRefresh,
         ));

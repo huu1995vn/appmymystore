@@ -240,27 +240,27 @@ class ProductModel extends Entity {
   late String usercontactphone = "";
   late String usercontactemail = "";
   late String usercontactaddress = "";
-  late String brandid;
+  late String brandid = "-1";
   late String brandname = "";
-  late String modelid;
+  late String modelid = "-1";
   late String modelname = "";
-  late String bodytypeid;
+  late String bodytypeid = "-1";
   late String bodytypename = "";
-  late String fueltypeid;
+  late String fueltypeid = "-1";
   late String fueltypename = "";
-  late String madeinid;
+  late String madeinid = "-1";
   late String madeinname = "";
-  late String colorid;
+  late String colorid = "-1";
   late String colorname = "";
-  late String cityid;
+  late String cityid = "-1";
   late String cityname = "";
   late String producttypeid = "1";
   late String producttypename;
   late String img;
   late String imglist;
   late String name = "";
-  late String description;
-  late String price;
+  String? description;
+  late String price = "0";
   late String year;
   late String seat;
   late String door;
@@ -526,6 +526,33 @@ class ContactModel extends Entity {
       _$ContactModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ContactModelToJson(this);
+}
+
+@JsonSerializable()
+class ProductReviewsModel extends Entity {
+  late String id;
+  late String userid;
+  late String username = "";
+  late String productid;
+  late String comment;
+  late String reviewcount;
+  late String ratingvalue;
+  late String createdate;
+  ProductReviewsModel() {
+    userid = APITokenService.userId.toString();
+  }
+  
+  String get TIMEAGO {
+    return CommonMethods.timeagoFormat(
+        CommonMethods.convertToDateTime(createdate));
+  }
+
+  UserModel clone() => UserModel.fromJson(toJson());
+
+  factory ProductReviewsModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductReviewsModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductReviewsModelToJson(this);
 }
 
 class AppTheme {

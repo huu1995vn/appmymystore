@@ -161,7 +161,7 @@ class _UserPageState extends State<UserPage> {
                         children: <Widget>[
                           ListTile(
                             title: Text("fullname".tr(),
-                                style: styleTextTitleStyle),
+                                style: kTextTitleStyle),
                             subtitle: RxInput(data!.fullname,
                                 onChanged: (v) => {data!.fullname = v},
                                 hintText: "fullname".tr(),
@@ -172,7 +172,7 @@ class _UserPageState extends State<UserPage> {
                           ),
                           ListTile(
                             title: Text("address".tr(),
-                                style: styleTextTitleStyle),
+                                style: kTextTitleStyle),
                             subtitle: RxInput(
                               readOnly: true,
                               data!.address,
@@ -187,7 +187,7 @@ class _UserPageState extends State<UserPage> {
                           ),
                           ListTile(
                             title: Text("birthday".tr(),
-                                style: styleTextTitleStyle),
+                                style: kTextTitleStyle),
                             subtitle: DateTimePicker(
                               locale: Locale("vi"),
                               initialValue: CommonMethods.convertToDateTime(

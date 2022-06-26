@@ -7,6 +7,7 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
@@ -103,7 +104,17 @@ class _MyPageState extends State<MyPage> {
         onPageChanged: (value) => {onPressedTab(value)},
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          if(CommonMethods.isLogin)
+          {
+            CommonNavigates.toMyProductPage(context, item: ProductModel());
+          }
+          else
+          {
+            CommonMethods.showToast("Vui lòng đăng nhập trước");
+          }
+
+        },
         child: const Icon(
           Icons.add,
           color: Colors.white,

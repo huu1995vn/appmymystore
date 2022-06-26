@@ -113,11 +113,10 @@ class _ContactPageState extends State<ContactPage> {
           slivers: <Widget>[
             RxSliverList(listData, (BuildContext context, int index) {
               ContactModel item = listData![index];
-
-              return ItemContactWidget(listData![index],
+              return ItemContactWidget(item,
                   onTap: () =>
                       CommonNavigates.toContactPage(context, item: item),
-                  onDelete: () => onDelete(index));
+                  onDelete: (context) => onDelete(index));
             })
           ],
         ));

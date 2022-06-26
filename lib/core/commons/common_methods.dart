@@ -14,6 +14,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, utf8;
@@ -46,7 +47,7 @@ class CommonMethods {
   }
 
   static get isLogin {
-    return false;
+    return APITokenService.token!=null;
   }
 
   static Future<PackageInfo?> getPackageInfo() async {

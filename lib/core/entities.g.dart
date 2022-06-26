@@ -131,6 +131,9 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..username = json['username'] as String
   ..usercontactid = json['usercontactid'] as String
   ..usercontactname = json['usercontactname'] as String
+  ..usercontactphone = json['usercontactphone'] as String
+  ..usercontactemail = json['usercontactemail'] as String
+  ..usercontactaddress = json['usercontactaddress'] as String
   ..brandid = json['brandid'] as String
   ..brandname = json['brandname'] as String
   ..modelid = json['modelid'] as String
@@ -180,6 +183,9 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'username': instance.username,
       'usercontactid': instance.usercontactid,
       'usercontactname': instance.usercontactname,
+      'usercontactphone': instance.usercontactphone,
+      'usercontactemail': instance.usercontactemail,
+      'usercontactaddress': instance.usercontactaddress,
       'brandid': instance.brandid,
       'brandname': instance.brandname,
       'modelid': instance.modelid,
@@ -308,4 +314,32 @@ Map<String, dynamic> _$ContactModelToJson(ContactModel instance) =>
       'phone': instance.phone,
       'address': instance.address,
       'isdefault': instance.isdefault,
+    };
+
+ProductReviewsModel _$ProductReviewsModelFromJson(Map<String, dynamic> json) =>
+    ProductReviewsModel()
+      ..TotalRow = json['TotalRow'] as String
+      ..RowIndex = json['RowIndex'] as String
+      ..id = json['id'] as String
+      ..userid = json['userid'] as String
+      ..username = json['username'] as String
+      ..productid = json['productid'] as String
+      ..comment = json['comment'] as String
+      ..reviewcount = json['reviewcount'] as String
+      ..ratingvalue = json['ratingvalue'] as String
+      ..createdate = json['createdate'] as String;
+
+Map<String, dynamic> _$ProductReviewsModelToJson(
+        ProductReviewsModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'id': instance.id,
+      'userid': instance.userid,
+      'username': instance.username,
+      'productid': instance.productid,
+      'comment': instance.comment,
+      'reviewcount': instance.reviewcount,
+      'ratingvalue': instance.ratingvalue,
+      'createdate': instance.createdate,
     };

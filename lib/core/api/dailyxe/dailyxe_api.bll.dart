@@ -98,6 +98,10 @@ class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "newsdetail");
   }
 
+   Future<ResponseModel> ratinglist(Map<String, dynamic> body) async {
+    return await post(body, null, "ratinglist");
+  }
+
   
 }
 

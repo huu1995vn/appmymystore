@@ -11,7 +11,6 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';
 import 'package:raoxe/pages/product/widgets/search_app_bar.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
 
 class ProductPage extends StatefulWidget {
   Map<String, dynamic>? paramsSearch;

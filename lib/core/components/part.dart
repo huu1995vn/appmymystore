@@ -395,7 +395,7 @@ class RxPrimaryButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: 50.0,
+        height: kSizeHeight,
         decoration: kBoxDecorationStyle.copyWith(
             borderRadius: BorderRadius.circular(5)),
         alignment: Alignment.center,

@@ -6,6 +6,7 @@ import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_rating.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -80,21 +81,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             .bodyText1!
                             .color, //change your color here
                       ),
+                      title: Image.asset(
+                        LOGORAOXECOLORIMAGE,
+                        width: 100,
+                      ),
                       centerTitle: true,
                       elevation: 0.0,
                       backgroundColor: AppColors.grey,
                       actions: <Widget>[
-                        // Text("Tin ưu tiên",
-                        //     style: const TextStyle(
-                        //       color: AppColors.yellow,
-                        //     ).bold),
-                        IconButton(
-                          icon: Icon(Icons.email, color: AppColors.yellow),
-                          onPressed: () {
-                            CommonMethods.launchURL(
-                                "mailto:" + data!.usercontactemail!.toString());
-                          },
-                        ),
+                        
                         IconButton(
                           icon: Icon(
                               isLike
@@ -106,7 +101,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         IconButton(
                           icon: Icon(
                             Icons.share,
-                            color: AppColors.info,
+                            color: AppColors.black50,
                           ),
                           tooltip: 'Share',
                           onPressed: () {
@@ -124,8 +119,29 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 )),
       persistentFooterButtons: [
         if (data != null)
-          RxPrimaryButton(
-              onTap: () {}, text: data!.usercontactphone ?? "0379787904")
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              width: SizeConfig.screenWidth * 0.8,
+              height: kSizeHeight,
+              decoration: kBoxDecorationStyle.copyWith(
+                  borderRadius: BorderRadius.circular(5)),
+              alignment: Alignment.center,
+              child: Icon(Icons.call, color: AppColors.white),
+            ),
+          ),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            decoration: BoxDecoration(color: AppColors.grey),
+            width: SizeConfig.screenWidth * 0.13,
+            height: kSizeHeight,
+            // decoration: kBoxDecorationStyle.copyWith(
+            //     borderRadius: BorderRadius.circular(5)),
+            alignment: Alignment.center,
+            child: Icon(Icons.sms, color: AppColors.info),
+          ),
+        )
       ],
     );
   }
@@ -135,7 +151,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       leading: leading,
       title: Text(
         title,
-        style: kTextHeaderStyle,
+        style: kTextTitleStyle,
       ),
       subtitle: Text(
         subtitle,
@@ -145,123 +161,194 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   Widget _buildDetail() {
-    return Stack(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Column(
-          children: <Widget>[
-            Card(
-              child: ListTile(
-                leading: GestureDetector(
-                  onTap: () {},
-                  child:
-                      RxAvatarImage(data!.URLIMGUSER ?? NOIMAGEUSER, size: 40),
-                ),
-                title: GestureDetector(
-                  onTap: () {},
-                  child: Text(data!.usercontactname ?? "",
-                      style: const TextStyle().bold),
-                ),
-                subtitle: Row(
-                  // spacing: kDefaultPadding,
+        ListBannerWidget(),
+        Card(
+            child: SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data!.name ?? "",
+                    style: kTextHeaderStyle.copyWith(fontSize: 17),
+                    maxLines: 2),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      data!.usercontactaddress,
-                      style: const TextStyle(
-                        color: AppColors.black50,
-                      ).bold.size(12),
-                    ),
+                    Text(CommonMethods.formatNumber(data!.price ?? "40000000"),
+                        style: kTextPriceStyle),
+                     Text(data!.TIMEAGO, style: TextStyle(fontSize: 13, color: AppColors.black50)),
                   ],
                 ),
-              ),
-            ),
-
-            ListBannerWidget(),
-
-            if (data!.state == "1")
-              Card(
-                child: Column(
-                  children: [
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Icon(Icons.map, color: AppColors.black50, size: 13,),
                     Text(
-                      "Thông tin thông số".toUpperCase(),
-                      style: const TextStyle().bold,
+                      "371 Nguyễn Kiệm",
+                      style: TextStyle(fontSize: 13, color: AppColors.black50),
                     ),
-                    _listTitle("vehiclelife".tr(), data!.madeinname),
-                    _listTitle("vehicletype".tr(), data!.modelname),
-                    _listTitle("vehicle".tr(), data!.bodytypename),
-                    _listTitle("fuel".tr(), data!.fueltypename),
-                    _listTitle("color".tr(), data!.colorname),
                   ],
-                ),
-              ),
-            Card(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  SizedBox(
-                    width: 120,
-                    child: Icon(
-                      Icons.security,
-                      size: 50,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  Expanded(
-                      child: Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Container(
-                                margin: const EdgeInsets.only(bottom: 10),
-                                child: Text(
-                                  "message.str012".tr(),
-                                ),
-                              ),
-                              ElevatedButton.icon(
-                                  onPressed: () {
-                                    // onReport(context);
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            AppColors.yellow),
-                                  ),
-                                  icon: Icon(Icons.warning),
-                                  label: Text(
-                                      "report.violation".tr().toUpperCase()))
-                            ],
-                          )))
-                ],
-              ),
+                )
+              ],
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              margin: const EdgeInsets.only(bottom: 0),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "news.related".tr().toUpperCase(),
-                style: const TextStyle().bold,
-              ),
-            ),
-            // TinRaoLienQuanList({
-            //   CommonParams.idDongXes: data.IdDongXe,
-            //   CommonParams.notId: data.Id
-            // }),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              margin: const EdgeInsets.only(bottom: 10),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "evaluate".tr().toUpperCase(),
-                style: const TextStyle().bold,
-              ),
-            ),
-            // CardBorder(child: Rating(data, onLogin: onLogin)),
-          ],
+          ),
+        )),
+        Padding(
+          padding: const EdgeInsets.only(left: kDefaultPadding / 2),
+          child: Text(
+            "Mô tả chi tiết".toUpperCase(),
+            style: const TextStyle().bold,
+          ),
         ),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: kDefaultPadding, right: kDefaultPadding),
+            child: TextFormField(
+              initialValue: """Toyota Yaris 1.5G 2019
+              ⭕️⭕️ Xe qua Sử Dụng Chính Hãng ⭕️⭕️
+              -Loại xe: Yaris
+              -Sản xuất: 2019
+              -ĐK lần đầu: 28/03/2019
+              -Màu: Bạc
+              -Bs: 51H-
+              -ODO: 51.210Km
+              📍 Toyota Đông Sài Gòn""",
+              minLines:
+                  6, // any number you need (It works as the rows for the textarea)
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: kDefaultPadding / 2),
+          child: Text(
+            "Thông tin thông số".toUpperCase(),
+            style: const TextStyle().bold,
+          ),
+        ),
+        Card(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(kDefaultPadding),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _listTitle(
+                          "vehiclelife".tr(), data!.madeinname ?? "madeinname"),
+                      _listTitle(
+                          "vehicletype".tr(), data!.modelname ?? "modelname"),
+                      _listTitle(
+                          "vehicle".tr(), data!.bodytypename ?? "bodytypename"),
+                    ],
+                  ),
+                ),
+              ),
+              Flexible(
+                fit: FlexFit.tight,
+                child: Padding(
+                  padding: const EdgeInsets.all(kDefaultPadding),
+                  child: Column(
+                    children: [
+                      _listTitle(
+                          "fuel".tr(), data!.fueltypename ?? "fueltypename"),
+                      _listTitle("color".tr(), data!.colorname ?? "colorname"),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: GestureDetector(
+              onTap: () {},
+              child: RxAvatarImage(data!.URLIMGUSER ?? NOIMAGEUSER, size: 40),
+            ),
+            title: GestureDetector(
+              onTap: () {},
+              child: Text(data!.usercontactname ?? "Nguyễn Trọng Hữu",
+                  style: const TextStyle().bold),
+            ),
+            subtitle: Row(
+              // spacing: kDefaultPadding,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  data!.cityname ?? "Tp.HCM",
+                  style: const TextStyle(
+                    color: AppColors.black50,
+                  ).bold.size(12),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SizedBox(
+                  width: 120,
+                  child: Icon(
+                    Icons.security,
+                    size: 50,
+                    color: Colors.blue,
+                  ),
+                ),
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "message.str012".tr(),
+                    ),
+                    ElevatedButton.icon(
+                        onPressed: () {
+                          // onReport(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.grey,
+                          minimumSize: const Size.fromHeight(36), // NEW
+                        ),
+                        icon: Icon(
+                          Icons.warning,
+                          color: AppColors.yellow,
+                        ),
+                        label: Text(
+                          "report.text".tr().toUpperCase(),
+                          style: TextStyle(color: AppColors.yellow).bold,
+                        )),
+                  ],
+                ))
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: kDefaultPadding / 2),
+          child: Text(
+            "evaluate".tr().toUpperCase(),
+            style: const TextStyle().bold,
+          ),
+        ),
+        Card(child: RxReview(data!))
       ],
     );
   }

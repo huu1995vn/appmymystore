@@ -141,7 +141,8 @@ class _FilterDialogState extends State<FilterDialog> {
         ),
         body: RxWrapper(
           body: SingleChildScrollView(
-            child: Column(
+            child:
+             Column(
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               // mainAxisSize: MainAxisSize.max,

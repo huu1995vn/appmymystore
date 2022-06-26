@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -89,7 +89,10 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
     return RxListView(
       listData,
       (context, index) {
-        return ItemMyProductWidget(listData![index]);
+        var item = listData![index];
+        return ItemMyProductWidget(item, onTap: ()=>{
+          CommonNavigates.toMyProductPage(context, item: item)
+        });
       },
       onNextPage: onNextPage,
       onRefresh: loadData,

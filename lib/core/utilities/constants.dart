@@ -13,6 +13,7 @@ const kTextLightColor = Color(0xFF949098);
 const kDefaultPadding = 10.0;
 const kDefaultPaddingTop = 79.0;
 const kItemOnPage = 10;
+const kSizeHeight = 39.0;
 
 const kBoxDecorationStyle = BoxDecoration(
     gradient: LinearGradient(colors: [
@@ -21,11 +22,11 @@ const kBoxDecorationStyle = BoxDecoration(
   AppColors.primary500,
   AppColors.primary
 ]));
-const kTextHeaderStyle = TextStyle(
+const TextStyle kTextHeaderStyle = TextStyle(
   fontSize: 19,
   fontWeight: FontWeight.bold,
 );
-const TextStyle styleTextTitleStyle = TextStyle(
+const TextStyle kTextTitleStyle = TextStyle(
   fontSize: 15,
   fontWeight: FontWeight.normal,
 );

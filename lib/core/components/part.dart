@@ -52,6 +52,7 @@ class RxDisabled extends StatelessWidget {
   }
 }
 
+
 class RxWebView extends StatefulWidget {
   String? url;
   String? title;
@@ -152,16 +153,16 @@ Widget RxCardSkeleton(
     bool isBorderRadius = true}) {
   try {
     return CardSkeleton(
-          style: SkeletonStyle(
-            isShowAvatar: isShowAvatar ?? true,
-            isCircleAvatar: isCircleAvatar ?? false,
-            borderRadius:
-                BorderRadius.all(Radius.circular(isBorderRadius ? 20.0 : 0)),
-            padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
-            barCount: barCount,
-            isAnimation: true,
-          ),
-        );
+      style: SkeletonStyle(
+        isShowAvatar: isShowAvatar ?? true,
+        isCircleAvatar: isCircleAvatar ?? false,
+        borderRadius:
+            BorderRadius.all(Radius.circular(isBorderRadius ? 20.0 : 0)),
+        padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
+        barCount: barCount,
+        isAnimation: true,
+      ),
+    );
   } catch (e) {}
   return const Center(child: CupertinoActivityIndicator());
 }
@@ -353,12 +354,14 @@ class RxSliverAppBarTabDelegate extends SliverPersistentHeaderDelegate {
     return false;
   }
 }
+
 class RxRoundedButton extends StatelessWidget {
   const RxRoundedButton({
     Key? key,
     required this.onPressed,
     required this.title,
-    this.color = AppColors.primary, this.radius,
+    this.color = AppColors.primary,
+    this.radius,
   }) : super(key: key);
 
   final GestureTapCallback onPressed;
@@ -372,13 +375,17 @@ class RxRoundedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         side: BorderSide(width: 2.0, color: color!),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radius?? kDefaultPadding),
+          borderRadius: BorderRadius.circular(radius ?? kDefaultPadding),
         ),
       ),
-      child: Text(title, style: TextStyle(color: color),),
+      child: Text(
+        title,
+        style: TextStyle(color: color),
+      ),
     );
   }
 }
+
 class RxPrimaryButton extends StatelessWidget {
   const RxPrimaryButton({
     Key? key,

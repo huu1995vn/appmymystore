@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -14,7 +13,8 @@ const kDefaultPadding = 10.0;
 const kDefaultPaddingTop = 79.0;
 const kItemOnPage = 10;
 const kSizeHeight = 39.0;
-
+const kEdgeInsetsCardPadding = EdgeInsets.only(left: kDefaultPadding, right: kDefaultPadding);
+const kEdgeInsetsPadding =  EdgeInsets.only(left: kDefaultPadding, right: kDefaultPadding, top: kDefaultPadding/2, bottom: kDefaultPadding/2);
 const kBoxDecorationStyle = BoxDecoration(
     gradient: LinearGradient(colors: [
   AppColors.primary,

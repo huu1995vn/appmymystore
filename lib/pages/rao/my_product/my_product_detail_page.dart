@@ -149,9 +149,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     );
   }
 
-  Widget _radioButton(String text, int value) {
-    return Container(
-        width: SizeConfig.screenWidth / 2.5,
+  Widget _radioProductType(String text, int value) {
+    return SizedBox(
+        width: SizeConfig.screenWidth / 2.4,
         child: OutlinedButton(
           onPressed: () {
             setState(() {
@@ -159,6 +159,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             });
           },
           style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith((states) {
+              return AppColors.white;
+            }),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 side: BorderSide(
@@ -185,18 +188,16 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       // mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         _header("BẠN MUỐN"),
-        Card(
-          child: ListTile(
+        ListTile(
             title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: map<Widget>(
                   MasterDataService.data["productype"],
                   (index, item) {
-                    return _radioButton(item["name"], item["id"]);
+                    return _radioProductType(item["name"], item["id"]);
                   },
                 ).toList()),
           ),
-        ),
         _header("THÔNG TIN XE"),
         Card(
           child: Column(
@@ -213,7 +214,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                 subtitle: RxInput(
                   keyboardType: TextInputType.number,
                   data!.price!.toString(),
-                  onChanged: (v) => {data!.price = CommonMethods.convertToInt32(v)},
+                  onChanged: (v) =>
+                      {data!.price = CommonMethods.convertToInt32(v)},
                   hintText: "price".tr(),
                 ),
               ),

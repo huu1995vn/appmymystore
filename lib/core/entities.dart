@@ -261,7 +261,7 @@ class ProductModel extends Entity {
   String? colorname;
   int cityid = 0;
   String? cityname;
-  int producttypeid = 0;
+  int producttypeid = 1;
   String? producttypename;
   int img = 0;
   String? imglist;
@@ -299,7 +299,7 @@ class ProductModel extends Entity {
     json["madeinid"] = CommonMethods.convertToInt32(json["madeinid"]);
     json["colorid"] = CommonMethods.convertToInt32(json["colorid"]);
     json["cityid"] = CommonMethods.convertToInt32(json["cityid"]);
-    json["producttypeid"] = CommonMethods.convertToInt32(json["producttypeid"]);
+    json["producttypeid"] = CommonMethods.convertToInt32(json["producttypeid"], 1);
     json["img"] = CommonMethods.convertToInt32(json["img"]);
     json["price"] = CommonMethods.convertToInt32(json["price"]);
     json["state"] = CommonMethods.convertToInt32(json["state"], 1);

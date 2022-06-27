@@ -142,7 +142,6 @@ class _RatingState extends State<RxReview> {
           RxListView(data, _listItem,
               key: Key("writerreview".tr()),
               onRefresh: loadData,
-              padding: EdgeInsets.zero,
               noFound: Container(
                   padding: const EdgeInsets.all(10),
                   child: Text("not.evaluate".tr()))),

@@ -103,8 +103,8 @@ class _RxDataListViewState extends State<RxListView>
         itemCount: kItemOnPage,
         padding: widget.padding?? const EdgeInsets.all(kDefaultPadding),
         itemBuilder: (context, index) {
-          return widget.awaiting ??
-              RxCardSkeleton(barCount: 3, isShowAvatar: false);
+          return Padding(padding: kEdgeInsetsPadding, child: widget.awaiting ??
+              RxCardSkeleton(barCount: 3, isShowAvatar: false)) ;
         });
   }
 

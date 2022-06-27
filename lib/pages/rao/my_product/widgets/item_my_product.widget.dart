@@ -73,7 +73,7 @@ class ItemMyProductWidget extends StatelessWidget {
                   )),
               Expanded(
                 child: Padding(
-                    padding: const EdgeInsets.all(kDefaultPadding),
+                    padding: kEdgeInsetsPadding,
                     child: Stack(
                       children: [
                         Column(

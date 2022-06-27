@@ -52,11 +52,10 @@ class RxListViewState extends State<RxSliverList>
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: kDefaultPadding),
-            child: widget.awaiting ??
-                RxCardSkeleton(
-                    barCount: 3, isShowAvatar: false, isBorderRadius: true),
-          );
+              padding: kEdgeInsetsPadding,
+              child: widget.awaiting ??
+                  RxCardSkeleton(
+                      barCount: 3, isShowAvatar: false, isBorderRadius: true));
         },
         childCount: kItemOnPage,
       ),
@@ -65,20 +64,17 @@ class RxListViewState extends State<RxSliverList>
 
   Widget _bodylist_notfound() {
     return SliverToBoxAdapter(
-        child: Container(
-      padding: const EdgeInsets.all(20),
-      child: widget.noFound ?? Text("notfound".tr()),
-    ));
+        child: widget.noFound ??
+            Text(
+              "notfound".tr(),
+            ));
   }
 
   Widget _bodylist_main() {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: kDefaultPadding),
-            child: widget.itemBuilder(context, index),
-          );
+          return widget.itemBuilder(context, index);
         },
         childCount: widget.data.length,
       ),

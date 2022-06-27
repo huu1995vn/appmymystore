@@ -45,7 +45,7 @@ class _ListBrandWidgetState extends State<ListBrandWidget>
         },
         key: UniqueKey(),
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
+        // padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
       ),
     );
   }

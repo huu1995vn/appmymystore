@@ -1,18 +1,19 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class RegisterPage extends StatefulWidget {
-  final String phone;
-  const RegisterPage({super.key, required this.phone});
+  const RegisterPage({super.key});
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -29,15 +30,12 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   loadData() {
-    if (widget.phone.isNotEmpty &&
-        CommonMethods.checkStringPhone(widget.phone)) {
-      setState(() {
-        user = UserModel();
-        user!.phone = widget.phone;
-        user!.fullname = "";
-        user!.password = "";
-      });
-    }
+    setState(() {
+      user = UserModel();
+      user!.phone = "";
+      user!.fullname = "";
+      user!.password = "";
+    });
   }
 
   @override
@@ -104,19 +102,34 @@ class _RegisterPageState extends State<RegisterPage> {
                     labelText: "fullname".tr(),
                     icon: const Icon(Icons.person),
                     onChanged: (v) => {
-                          setState(() => {user!.fullname = v})
+                          user!.fullname = v
                         },
                     validator: Validators.compose([
                       Validators.required("notempty.fullname.text".tr()),
                     ])),
-
+                RxInput(user!.phone!,
+                    keyboardType: TextInputType.number,
+                    labelText: "phone".tr(),
+                    icon: const Icon(Icons.phone),
+                    onChanged: (v) => {
+                          user!.phone = v
+                        },
+                    validator: (v) {
+                      if (v == null || !v.isNotEmpty) {
+                        return "notempty.phone.text".tr();
+                      } else {
+                        return CommonMethods.checkStringPhone(v)
+                            ? null
+                            : "invalid.phone".tr();
+                      }
+                    }),
                 RxInput(
                   user!.password!,
                   isPassword: true,
                   labelText: "password.text".tr(),
                   icon: const Icon(Icons.lock),
                   onChanged: (v) => {
-                    setState(() => {user!.password = v})
+                     user!.password = v
                   },
                   validator: Validators.compose([
                     Validators.required("notempty.password.text".tr()),
@@ -154,36 +167,12 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  // Future sendOTP(
-  //     void Function(Object) fnError, void Function() fnSuccess) async {
-  //   try {
-  //     await AuthService.sendOTPPhone(user!.phone, false, fnError, fnSuccess);
-  //   } catch (error) {
-  //     CommonMethods.showDialogError(context, error.toString());
-  //   }
-  // }
-
-  // Future<bool> verifyOTP(String code) async {
-  //   try {
-  //     return await AuthService.verifyOTPPhone(user!.phone, code);
-  //   } catch (error) {
-  //     CommonMethods.showDialogError(context, error.toString());
-  //   }
-  //   return false;
-  // }
-
   Future<void> _onRegister() async {
-    try {
-      // await AuthService.checkPhone(user!.phone, isExist: false);
-      // var res = await showDialog(
-      //     context: context,
-      //     builder: (_) => ConfirmOtpPage(
-      //           sendOTP: sendOTP,
-      //           verifyOTP: verifyOTP,
-      //         ));
-      // if (res!=null) {
-      //   CommonMethods.showToast("Đăng ký thành công");
-      // }
+    try {      
+      await AuthService.checkPhone(user!.phone, isExist: false);
+      bool res = await CommonNavigates.openOtpVerificationDialog(context, user!.phone!, false);
+      //api đăng ký
+      CommonMethods.showToast("Đăng ký thành công");
     } catch (e) {
       CommonMethods.showToast(e.toString());
     }

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/confirm_otp.dialog.dart';
 import 'package:raoxe/core/components/dialogs/confirm_phone.dialog.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -174,14 +175,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _toRegister() async {
-    var phone = await showDialog(
-        context: context,
-        builder: (_) => const ConfirmPhoneDialog(
-              isExist: false,
-            ));
-    if (phone != null) {
-      CommonNavigates.toRegisterPage(context, phone);
-    }
+    CommonNavigates.toRegisterPage(context);
   }
 
   Widget _createAccountLabel(context) {
@@ -220,15 +214,9 @@ class _LoginPageState extends State<LoginPage> {
       _onLogin(username, usl!["password"]!);
     }
   }
+
   _onForgotPassword() async {
-    var phone = await showDialog(
-        context: context,
-        builder: (_) => const ConfirmPhoneDialog(
-              isExist: true,
-            ));
-    if (phone != null) {
-      CommonNavigates.toForgotPasswordPage(context, phone);
-    }
+    CommonNavigates.toForgotPasswordPage(context);
   }
 
   _onLogin(String username, String password) async {

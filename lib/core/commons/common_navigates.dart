@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:raoxe/core/components/dialogs/confirm_otp.dialog.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/pages/rao/advert/advert_detail_page.dart';
 import 'package:raoxe/pages/rao/advert/advert_page.dart';
@@ -25,8 +26,8 @@ class CommonNavigates {
       <String, WidgetBuilder>{
     // '/': (context) => const MyPage(),
     '/login': (context) => const LoginPage(),
-    // '/register': (context) => RegisterPage(),
-    // '/forgot-password': (context) => const ForgotPasswordPage(),
+    '/register': (context) => const RegisterPage(),
+    '/forgot-password': (context) => const ForgotPasswordPage(),
     '/user': (context) => const UserPage(),
     '/settings': (context) => const SettingsPage(),
     '/product': (context) => ProductPage(),
@@ -111,16 +112,12 @@ class CommonNavigates {
     return await Navigator.pushNamed(context, "/login");
   }
 
-  static Future toRegisterPage(BuildContext context, String phone) async {
-    return await Navigator.push(context,
-        CupertinoPageRoute(builder: (context) => RegisterPage(phone: phone)));
+  static Future toRegisterPage(BuildContext context) async {
+    return await Navigator.pushNamed(context, "/register");
   }
 
-  static Future toForgotPasswordPage(BuildContext context, String phone) async {
-    return await Navigator.push(
-        context,
-        CupertinoPageRoute(
-            builder: (context) => ForgotPasswordPage(phone: phone)));
+  static Future toForgotPasswordPage(BuildContext context) async {
+    return await Navigator.pushNamed(context, "/forgot-password");
   }
 
   static pop(BuildContext context, Object? value) {
@@ -153,6 +150,13 @@ class CommonNavigates {
           return child;
         },
         fullscreenDialog: true));
+  }
+
+   static Future openOtpVerificationDialog(BuildContext context, String phone, bool isExist) async {
+    return await Navigator.of(context).push(MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) {
+          return OtpVerificationDialog(phone: phone, isExist: isExist);
+        }));
   }
 
   static Future openSelect(BuildContext context, Widget child,

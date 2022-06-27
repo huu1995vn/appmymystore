@@ -19,6 +19,7 @@ import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+// ignore: unused_import
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 import 'widgets/user_top.widget.dart';
@@ -40,11 +41,7 @@ class _UserPageState extends State<UserPage> {
   }
 
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
-  // String birthdate = "";
-  // String fullname = "";
-  // String address = "";
-  // int gender = 1;
-
+ 
   loadData() async {
     try {
       ResponseModel res = await DaiLyXeApiBLL_APIUser().getuser();
@@ -54,10 +51,7 @@ class _UserPageState extends State<UserPage> {
           data = user;
           urlImage = data!.rximg;
         });
-        // birthdate = CommonMethods.convertToDateTime(user.birthdate).toString();
-        // fullname = user.fullname;
-        // address = user.address;
-        // gender = int.parse(user.gender);
+        
         Provider.of<UserProvider>(context, listen: false).setUserModel(user);
       } else {
         CommonMethods.showToast(res.message);

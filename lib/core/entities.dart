@@ -139,8 +139,11 @@ class UserModel extends Entity {
   }
   factory UserModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["img"] = CommonMethods.convertToInt32(json["img"]);
     json["notificationtypeid"] =
         CommonMethods.convertToInt32(json["notificationtypeid"]);
+    json["cityid"] = CommonMethods.convertToInt32(json["cityid"]);
+    json["districtid"] = CommonMethods.convertToInt32(json["districtid"]);
     json["gender"] = CommonMethods.convertToInt32(json["gender"]);
     json["status"] = CommonMethods.convertToInt32(json["status"]);
     json["verifyphone"] = CommonMethods.convertToBoolean(json["verifyphone"]);
@@ -299,7 +302,8 @@ class ProductModel extends Entity {
     json["madeinid"] = CommonMethods.convertToInt32(json["madeinid"]);
     json["colorid"] = CommonMethods.convertToInt32(json["colorid"]);
     json["cityid"] = CommonMethods.convertToInt32(json["cityid"]);
-    json["producttypeid"] = CommonMethods.convertToInt32(json["producttypeid"], 1);
+    json["producttypeid"] =
+        CommonMethods.convertToInt32(json["producttypeid"], 1);
     json["img"] = CommonMethods.convertToInt32(json["img"]);
     json["price"] = CommonMethods.convertToInt32(json["price"]);
     json["state"] = CommonMethods.convertToInt32(json["state"], 1);

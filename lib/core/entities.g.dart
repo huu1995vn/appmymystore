@@ -21,14 +21,14 @@ Map<String, dynamic> _$ResponseModelToJson(ResponseModel instance) =>
     };
 
 NewsModel _$NewsModelFromJson(Map<String, dynamic> json) => NewsModel()
-  ..TotalRow = json['TotalRow'] as String
-  ..RowIndex = json['RowIndex'] as String
-  ..id = json['id'] as String
-  ..type = json['type'] as String
-  ..img = json['img'] as String
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..id = json['id'] as int
+  ..type = json['type'] as int
+  ..img = json['img'] as int
   ..name = json['name'] as String
   ..desc = json['desc'] as String
-  ..views = json['views'] as String
+  ..views = json['views'] as int
   ..publishdate = json['publishdate'] as String
   ..prefix = json['prefix'] as String
   ..url = json['url'] as String
@@ -55,14 +55,16 @@ Map<String, dynamic> _$NewsModelToJson(NewsModel instance) => <String, dynamic>{
 
 NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
     NotificationModel(
-      id: json['id'] as String,
-      notificationtypeid: json['notificationtypeid'] as String,
+      id: json['id'] as int,
+      notificationtypeid: json['notificationtypeid'] as int,
       subject: json['subject'] as String,
       message: json['message'] as String,
-      createdate: json['createdate'] as String,
+      createdate: json['createdate'] == null
+          ? null
+          : DateTime.parse(json['createdate'] as String),
     )
-      ..TotalRow = json['TotalRow'] as String
-      ..RowIndex = json['RowIndex'] as String;
+      ..TotalRow = json['TotalRow']
+      ..RowIndex = json['RowIndex'];
 
 Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
     <String, dynamic>{
@@ -72,31 +74,31 @@ Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
       'notificationtypeid': instance.notificationtypeid,
       'subject': instance.subject,
       'message': instance.message,
-      'createdate': instance.createdate,
+      'createdate': instance.createdate?.toIso8601String(),
     };
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel()
-  ..TotalRow = json['TotalRow'] as String
-  ..RowIndex = json['RowIndex'] as String
-  ..id = json['id'] as String
-  ..img = json['img'] as String
-  ..cityid = json['cityid'] as String
-  ..districtid = json['districtid'] as String
-  ..username = json['username'] as String
-  ..password = json['password'] as String
-  ..identitynumber = json['identitynumber'] as String
-  ..fullname = json['fullname'] as String
-  ..jobtitle = json['jobtitle'] as String
-  ..gender = json['gender'] as String
-  ..birthdate = json['birthdate'] as String
-  ..email = json['email'] as String
-  ..phone = json['phone'] as String
-  ..phonenumber = json['phonenumber'] as String
-  ..verifyphone = json['verifyphone'] as String
-  ..verifyemail = json['verifyemail'] as String
-  ..address = json['address'] as String
-  ..note = json['note'] as String
-  ..status = json['status'] as String;
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..id = json['id'] as int
+  ..img = json['img'] as int
+  ..cityid = json['cityid'] as int
+  ..districtid = json['districtid'] as int
+  ..username = json['username'] as String?
+  ..password = json['password'] as String?
+  ..identitynumber = json['identitynumber'] as String?
+  ..fullname = json['fullname'] as String?
+  ..jobtitle = json['jobtitle'] as String?
+  ..gender = json['gender'] as int
+  ..birthdate = json['birthdate'] as String?
+  ..email = json['email'] as String?
+  ..phone = json['phone'] as String?
+  ..phonenumber = json['phonenumber'] as String?
+  ..verifyphone = json['verifyphone'] as bool
+  ..verifyemail = json['verifyemail'] as bool
+  ..address = json['address'] as String?
+  ..note = json['note'] as String?
+  ..status = json['status'] as int;
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'TotalRow': instance.TotalRow,
@@ -123,55 +125,59 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
     };
 
 ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
-  ..TotalRow = json['TotalRow'] as String
-  ..RowIndex = json['RowIndex'] as String
-  ..id = json['id'] as String
-  ..userid = json['userid'] as String
-  ..imguser = json['imguser'] as String
-  ..username = json['username'] as String
-  ..usercontactid = json['usercontactid'] as String
-  ..usercontactname = json['usercontactname'] as String
-  ..usercontactphone = json['usercontactphone'] as String
-  ..usercontactemail = json['usercontactemail'] as String
-  ..usercontactaddress = json['usercontactaddress'] as String
-  ..brandid = json['brandid'] as String
-  ..brandname = json['brandname'] as String
-  ..modelid = json['modelid'] as String
-  ..modelname = json['modelname'] as String
-  ..bodytypeid = json['bodytypeid'] as String
-  ..bodytypename = json['bodytypename'] as String
-  ..fueltypeid = json['fueltypeid'] as String
-  ..fueltypename = json['fueltypename'] as String
-  ..madeinid = json['madeinid'] as String
-  ..madeinname = json['madeinname'] as String
-  ..colorid = json['colorid'] as String
-  ..colorname = json['colorname'] as String
-  ..cityid = json['cityid'] as String
-  ..cityname = json['cityname'] as String
-  ..producttypeid = json['producttypeid'] as String
-  ..producttypename = json['producttypename'] as String
-  ..img = json['img'] as String
-  ..imglist = json['imglist'] as String
-  ..name = json['name'] as String
-  ..description = json['description'] as String
-  ..price = json['price'] as String
-  ..year = json['year'] as String
-  ..seat = json['seat'] as String
-  ..door = json['door'] as String
-  ..km = json['km'] as String
-  ..state = json['state'] as String
-  ..views = json['views'] as String
-  ..ratingvalue = json['ratingvalue'] as String
-  ..reviewcount = json['reviewcount'] as String
-  ..review1 = json['review1'] as String
-  ..review2 = json['review2'] as String
-  ..review3 = json['review3'] as String
-  ..review4 = json['review4'] as String
-  ..review5 = json['review5'] as String
-  ..keywordsearch = json['keywordsearch'] as String
-  ..status = json['status'] as String
-  ..verifydate = json['verifydate'] as String
-  ..createdate = json['createdate'] as String;
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..id = json['id'] as int
+  ..userid = json['userid'] as int
+  ..imguser = json['imguser'] as int
+  ..username = json['username'] as String?
+  ..usercontactid = json['usercontactid'] as int
+  ..usercontactname = json['usercontactname'] as String?
+  ..usercontactphone = json['usercontactphone'] as String?
+  ..usercontactemail = json['usercontactemail'] as String?
+  ..usercontactaddress = json['usercontactaddress'] as String?
+  ..brandid = json['brandid'] as int
+  ..brandname = json['brandname'] as String?
+  ..modelid = json['modelid'] as int
+  ..modelname = json['modelname'] as String?
+  ..bodytypeid = json['bodytypeid'] as int
+  ..bodytypename = json['bodytypename'] as String?
+  ..fueltypeid = json['fueltypeid'] as int
+  ..fueltypename = json['fueltypename'] as String?
+  ..madeinid = json['madeinid'] as int
+  ..madeinname = json['madeinname'] as String?
+  ..colorid = json['colorid'] as int
+  ..colorname = json['colorname'] as String?
+  ..cityid = json['cityid'] as int
+  ..cityname = json['cityname'] as String?
+  ..producttypeid = json['producttypeid'] as int
+  ..producttypename = json['producttypename'] as String?
+  ..img = json['img'] as int
+  ..imglist = json['imglist'] as String?
+  ..name = json['name'] as String?
+  ..description = json['description'] as String?
+  ..price = json['price'] as int
+  ..year = json['year'] as String?
+  ..seat = json['seat'] as String?
+  ..door = json['door'] as String?
+  ..km = json['km'] as String?
+  ..state = json['state'] as int
+  ..views = json['views'] as int
+  ..ratingvalue = (json['ratingvalue'] as num).toDouble()
+  ..reviewcount = json['reviewcount'] as int
+  ..review1 = json['review1'] as int
+  ..review2 = json['review2'] as int
+  ..review3 = json['review3'] as int
+  ..review4 = json['review4'] as int
+  ..review5 = json['review5'] as int
+  ..keywordsearch = json['keywordsearch'] as String?
+  ..status = json['status'] as int
+  ..verifydate = json['verifydate'] == null
+      ? null
+      : DateTime.parse(json['verifydate'] as String)
+  ..createdate = json['createdate'] == null
+      ? null
+      : DateTime.parse(json['createdate'] as String);
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
     <String, dynamic>{
@@ -222,38 +228,39 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'review5': instance.review5,
       'keywordsearch': instance.keywordsearch,
       'status': instance.status,
-      'verifydate': instance.verifydate,
-      'createdate': instance.createdate,
+      'verifydate': instance.verifydate?.toIso8601String(),
+      'createdate': instance.createdate?.toIso8601String(),
     };
 
 AdvertModel _$AdvertModelFromJson(Map<String, dynamic> json) => AdvertModel()
-  ..TotalRow = json['TotalRow'] as String
-  ..RowIndex = json['RowIndex'] as String
-  ..id = json['id'] as String
-  ..code = json['code'] as String
-  ..seoid = json['seoid'] as String
-  ..adminid = json['adminid'] as String
-  ..img = json['img'] as String
-  ..userid = json['userid'] as String
-  ..adverttypeid = json['adverttypeid'] as String
-  ..referenceid = json['referenceid'] as String
-  ..widgetcontentid = json['widgetcontentid'] as String
-  ..regionname = json['regionname'] as String
-  ..displayName = json['displayName'] as String
-  ..jobtitle = json['jobtitle'] as String
-  ..phone = json['phone'] as String
-  ..email = json['email'] as String
-  ..name = json['name'] as String
-  ..price = json['price'] as String
-  ..discountprice = json['discountprice'] as String
-  ..saleprice = json['saleprice'] as String
-  ..discount = json['discount'] as String
-  ..expirationdate = json['expirationdate'] as String
-  ..reminderdate = json['reminderdate'] as String
-  ..note = json['note'] as String
-  ..status = json['status'] as String
-  ..adverttypename = json['adverttypename'] as String
-  ..adminname = json['adminname'] as String;
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..id = json['id'] as int
+  ..code = json['code'] as String?
+  ..img = json['img'] as int
+  ..userid = json['userid'] as int
+  ..adverttypeid = json['adverttypeid'] as int
+  ..referenceid = json['referenceid'] as int
+  ..regionname = json['regionname'] as String?
+  ..displayName = json['displayName'] as String?
+  ..jobtitle = json['jobtitle'] as String?
+  ..phone = json['phone'] as String?
+  ..email = json['email'] as String?
+  ..name = json['name'] as String?
+  ..price = json['price'] as int
+  ..discountprice = json['discountprice'] as String?
+  ..saleprice = json['saleprice'] as String?
+  ..discount = json['discount'] as String?
+  ..expirationdate = json['expirationdate'] == null
+      ? null
+      : DateTime.parse(json['expirationdate'] as String)
+  ..reminderdate = json['reminderdate'] == null
+      ? null
+      : DateTime.parse(json['reminderdate'] as String)
+  ..note = json['note'] as String?
+  ..status = json['status'] as int
+  ..adverttypename = json['adverttypename'] as String?
+  ..adminname = json['adminname'] as String?;
 
 Map<String, dynamic> _$AdvertModelToJson(AdvertModel instance) =>
     <String, dynamic>{
@@ -261,13 +268,10 @@ Map<String, dynamic> _$AdvertModelToJson(AdvertModel instance) =>
       'RowIndex': instance.RowIndex,
       'id': instance.id,
       'code': instance.code,
-      'seoid': instance.seoid,
-      'adminid': instance.adminid,
       'img': instance.img,
       'userid': instance.userid,
       'adverttypeid': instance.adverttypeid,
       'referenceid': instance.referenceid,
-      'widgetcontentid': instance.widgetcontentid,
       'regionname': instance.regionname,
       'displayName': instance.displayName,
       'jobtitle': instance.jobtitle,
@@ -278,8 +282,8 @@ Map<String, dynamic> _$AdvertModelToJson(AdvertModel instance) =>
       'discountprice': instance.discountprice,
       'saleprice': instance.saleprice,
       'discount': instance.discount,
-      'expirationdate': instance.expirationdate,
-      'reminderdate': instance.reminderdate,
+      'expirationdate': instance.expirationdate?.toIso8601String(),
+      'reminderdate': instance.reminderdate?.toIso8601String(),
       'note': instance.note,
       'status': instance.status,
       'adverttypename': instance.adverttypename,
@@ -287,18 +291,18 @@ Map<String, dynamic> _$AdvertModelToJson(AdvertModel instance) =>
     };
 
 ContactModel _$ContactModelFromJson(Map<String, dynamic> json) => ContactModel()
-  ..TotalRow = json['TotalRow'] as String
-  ..RowIndex = json['RowIndex'] as String
-  ..id = json['id'] as String
-  ..userid = json['userid'] as String
-  ..cityid = json['cityid'] as String
-  ..cityname = json['cityname'] as String
-  ..districtid = json['districtid'] as String
-  ..districtname = json['districtname'] as String
-  ..fullname = json['fullname'] as String
-  ..phone = json['phone'] as String
-  ..address = json['address'] as String
-  ..isdefault = json['isdefault'] as String;
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..id = json['id'] as int
+  ..userid = json['userid'] as int
+  ..cityid = json['cityid'] as int
+  ..cityname = json['cityname'] as String?
+  ..districtid = json['districtid'] as int
+  ..districtname = json['districtname'] as String?
+  ..fullname = json['fullname'] as String?
+  ..phone = json['phone'] as String?
+  ..address = json['address'] as String?
+  ..isdefault = json['isdefault'] as bool;
 
 Map<String, dynamic> _$ContactModelToJson(ContactModel instance) =>
     <String, dynamic>{
@@ -318,16 +322,18 @@ Map<String, dynamic> _$ContactModelToJson(ContactModel instance) =>
 
 ProductReviewsModel _$ProductReviewsModelFromJson(Map<String, dynamic> json) =>
     ProductReviewsModel()
-      ..TotalRow = json['TotalRow'] as String
-      ..RowIndex = json['RowIndex'] as String
-      ..id = json['id'] as String
-      ..userid = json['userid'] as String
-      ..username = json['username'] as String
-      ..productid = json['productid'] as String
-      ..comment = json['comment'] as String
-      ..reviewcount = json['reviewcount'] as String
-      ..ratingvalue = json['ratingvalue'] as String
-      ..createdate = json['createdate'] as String;
+      ..TotalRow = json['TotalRow']
+      ..RowIndex = json['RowIndex']
+      ..id = json['id'] as int
+      ..userid = json['userid'] as int
+      ..username = json['username'] as String?
+      ..productid = json['productid'] as int
+      ..comment = json['comment'] as String?
+      ..reviewcount = json['reviewcount'] as int
+      ..ratingvalue = json['ratingvalue'] as int
+      ..createdate = json['createdate'] == null
+          ? null
+          : DateTime.parse(json['createdate'] as String);
 
 Map<String, dynamic> _$ProductReviewsModelToJson(
         ProductReviewsModel instance) =>
@@ -341,5 +347,5 @@ Map<String, dynamic> _$ProductReviewsModelToJson(
       'comment': instance.comment,
       'reviewcount': instance.reviewcount,
       'ratingvalue': instance.ratingvalue,
-      'createdate': instance.createdate,
+      'createdate': instance.createdate?.toIso8601String(),
     };

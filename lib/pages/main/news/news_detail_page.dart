@@ -29,7 +29,7 @@ class NewsDetailPageState extends State<NewsDetailPage> {
   loadData() async {
     if (widget.item != null) {
       setState(() {
-        initialUrl = widget.item!.LINK;
+        initialUrl = widget.item!.rxlink;
       });
     } else {
       ResponseModel res = await DaiLyXeApiBLL_APIGets().newsdetail(widget.id!);

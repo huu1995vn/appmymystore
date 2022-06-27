@@ -53,16 +53,15 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
       ResponseModel res = await DaiLyXeApiBLL_APIUser().advertlist(params);
       if (res.status > 0) {
         List<dynamic> data = jsonDecode(res.data);
-        List<ProductModel> newslist =
+        List<ProductModel> list =
             data.map((val) => ProductModel.fromJson(val)).toList();
         setState(() {
-          totalItems =
-              newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
+          totalItems = list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
-            listData = newslist;
+            listData = list;
           } else {
-            listData = (listData! + newslist);
+            listData = (listData! + list);
           }
         });
         paging = nPaging;
@@ -90,9 +89,9 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
       listData,
       (context, index) {
         var item = listData![index];
-        return ItemMyProductWidget(item, onTap: ()=>{
-          CommonNavigates.toMyProductPage(context, item: item)
-        });
+        return ItemMyProductWidget(item,
+            onTap: () =>
+                {CommonNavigates.toMyProductPage(context, item: item)});
       },
       onNextPage: onNextPage,
       onRefresh: loadData,

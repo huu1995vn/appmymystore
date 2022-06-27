@@ -52,7 +52,7 @@ class _UserPageState extends State<UserPage> {
         var user = UserModel.fromJson(jsonDecode(res.data));
         setState(() {
           data = user;
-          urlImage = data!.URLIMG;
+          urlImage = data!.rximg;
         });
         // birthdate = CommonMethods.convertToDateTime(user.birthdate).toString();
         // fullname = user.fullname;
@@ -74,14 +74,13 @@ class _UserPageState extends State<UserPage> {
       if (file == null) return;
       CommonMethods.lockScreen();
       if (file != null) {
-        int img = int.parse(data!.img ?? "-1");
-        String fullname = data!.fullname;
+        
         int idAvatar =
-            await FileService().uploadImage(file, idFile: -1, name: fullname);
+            await FileService().uploadImage(file, idFile: -1, name: data!.fullname!);
         // ignore: curly_braces_in_flow_control_structures
-        if (img != idAvatar) {
+        if (data!.img != idAvatar) {
           var dataClone = data!.clone();
-          dataClone.img = idAvatar.toString();
+          dataClone.img = idAvatar;
 
           ResponseModel res =
               await DaiLyXeApiBLL_APIUser().updateuser(dataClone.toUpdate());
@@ -94,7 +93,7 @@ class _UserPageState extends State<UserPage> {
             CommonMethods.showToast(res.message);
           }
           Provider.of<UserProvider>(context, listen: false)
-              .setData(img: idAvatar.toString());
+              .setData(img: idAvatar);
         }
       }
     } catch (e) {
@@ -162,7 +161,7 @@ class _UserPageState extends State<UserPage> {
                           ListTile(
                             title: Text("fullname".tr(),
                                 style: kTextTitleStyle),
-                            subtitle: RxInput(data!.fullname,
+                            subtitle: RxInput(data!.fullname!,
                                 onChanged: (v) => {data!.fullname = v},
                                 hintText: "fullname".tr(),
                                 validator: Validators.compose([
@@ -175,7 +174,7 @@ class _UserPageState extends State<UserPage> {
                                 style: kTextTitleStyle),
                             subtitle: RxInput(
                               readOnly: true,
-                              data!.address,
+                              data!.address!,
                               onChanged: (v) => {data!.address = v},
                               validator: Validators.compose([
                                 Validators.required(
@@ -191,7 +190,7 @@ class _UserPageState extends State<UserPage> {
                             subtitle: DateTimePicker(
                               locale: Locale("vi"),
                               initialValue: CommonMethods.convertToDateTime(
-                                      data!.birthdate)
+                                      data!.birthdate!)
                                   .toString(),
                               dateMask: 'dd-MM-yyyy',
                               firstDate: DateTime(1977),
@@ -203,8 +202,8 @@ class _UserPageState extends State<UserPage> {
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
-                                _CustomRadioButton("male".tr(), "1"),
-                                _CustomRadioButton("female".tr(), "0"),
+                                _CustomRadioButton("male".tr(), 1),
+                                _CustomRadioButton("female".tr(), 0),
                               ],
                             ),
                           )
@@ -225,7 +224,7 @@ class _UserPageState extends State<UserPage> {
         ]);
   }
 
-  Widget _CustomRadioButton(String text, String value) {
+  Widget _CustomRadioButton(String text, dynamic value) {
     return OutlinedButton(
       onPressed: () {
         setState(() {

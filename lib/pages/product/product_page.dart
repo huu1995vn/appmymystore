@@ -46,17 +46,17 @@ class _ProductPageState extends State<ProductPage> {
     ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
     List<dynamic> data = jsonDecode(res.data);
     // ignore: unnecessary_cast
-    List<ProductModel> newslist = data
+    List<ProductModel> list = data
         .map((val) => ProductModel.fromJson(val))
         .toList() as List<ProductModel>;
     if (mounted) {
       setState(() {
-        totalItems = newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
+        totalItems = list[0].rxtotalrow;
         listData;
         if (paging == 1) {
-          listData = newslist;
+          listData = list;
         } else {
-          listData = (listData! + newslist);
+          listData = (listData! + list);
         }
       });
     }
@@ -113,7 +113,7 @@ class _ProductPageState extends State<ProductPage> {
             RxSliverList(listData, (BuildContext context, int index) {
               var item = listData![index];
               return ItemProductWidget(listData![index], onTap: () {
-                CommonNavigates.toProductPage(context, id: int.parse(item.id));
+                CommonNavigates.toProductPage(context, id: item.id);
               });
             })
           ],

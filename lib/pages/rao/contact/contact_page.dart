@@ -44,16 +44,15 @@ class _ContactPageState extends State<ContactPage> {
       ResponseModel res = await DaiLyXeApiBLL_APIUser().advertlist(params);
       if (res.status > 0) {
         List<dynamic> data = jsonDecode(res.data);
-        List<ContactModel> newslist =
+        List<ContactModel> list =
             data.map((val) => ContactModel.fromJson(val)).toList();
         setState(() {
-          totalItems =
-              newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
+          totalItems =  list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
-            listData = newslist;
+            listData = list;
           } else {
-            listData = (listData! + newslist);
+            listData = (listData! + list);
           }
         });
         paging = nPaging;

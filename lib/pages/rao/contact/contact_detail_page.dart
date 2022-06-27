@@ -62,7 +62,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
   }
 
   _onCity() async {
-        int cityid = data!.cityid == null ? -1 : int.parse(data!.cityid);
+        int cityid = data!.cityid == null ? -1 : data!.cityid;
 
     var res = await showSearch(
         context: context,
@@ -71,30 +71,28 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
             value: cityid));
     if (res != null) {
       setState(() {
-        data!.cityid = res.toString();
-        data!.cityname = MasterDataService.getNameById("city", res ?? "-1");
-        data!.districtid = "-1";
+        data!.cityid = res;
+        data!.cityname = MasterDataService.getNameById("city", res ?? 0);
+        data!.districtid =0;
         data!.districtname = "";
       });
     }
   }
 
   _onDistrict() async {
-    int cityid = data!.cityid == null ? -1 : int.parse(data!.cityid);
-    int districtid =
-        data!.districtid == null ? -1 : int.parse(data!.districtid);
-    var district = cityid > 0
+   
+    var district = data!.cityid > 0
         ? MasterDataService.data["district"]
-            .where((element) => element['cityid'] == cityid)
+            .where((element) => element['cityid'] == data!.cityid)
             .toList()
         : [];
     var res = await showSearch(
         context: context,
         delegate:
-            RxSelectDelegate(data: district, value: districtid));
+            RxSelectDelegate(data: district, value: data!.districtid));
     if (res != null) {
       setState(() {
-        data!.districtid = res.toString();
+        data!.districtid = res;
         data!.districtname =
             MasterDataService.getNameById("district", res ?? "-1");
       });
@@ -133,7 +131,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                     key: _keyValidationForm,
                     child: Column(
                       children: <Widget>[
-                        RxInput(data!.fullname,
+                        RxInput(data!.fullname!,
                             isBorder: true,
                             labelText: "fullname".tr(),
                             onChanged: (v) => {
@@ -143,7 +141,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                               Validators.required(
                                   "notempty.fullname.text".tr()),
                             ])),
-                        RxInput(data!.phone,
+                        RxInput(data!.phone!,
                             isBorder: true,
                             keyboardType: TextInputType.number,
                             labelText: "phone".tr(),
@@ -183,7 +181,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                           onTap: _onDistrict,
                           suffixIcon: Icon(Icons.keyboard_arrow_down),
                         ),
-                        RxInput(data!.address,
+                        RxInput(data!.address!,
                             isBorder: true,
                             labelText: "address".tr(),
                             onChanged: (v) => {data!.address = v},

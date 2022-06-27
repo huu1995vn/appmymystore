@@ -181,7 +181,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   children: [
                     Text(CommonMethods.formatNumber(data!.price ?? "40000000"),
                         style: kTextPriceStyle),
-                     Text(data!.TIMEAGO, style: TextStyle(fontSize: 13, color: AppColors.black50)),
+                     Text(data!.rxtimeago, style: TextStyle(fontSize: 13, color: AppColors.black50)),
                   ],
                 ),
                 Row(
@@ -275,7 +275,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           child: ListTile(
             leading: GestureDetector(
               onTap: () {},
-              child: RxAvatarImage(data!.URLIMGUSER ?? NOIMAGEUSER, size: 40),
+              child: RxAvatarImage(data!.rximguser ?? NOIMAGEUSER, size: 40),
             ),
             title: GestureDetector(
               onTap: () {},

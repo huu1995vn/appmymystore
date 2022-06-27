@@ -21,13 +21,13 @@ class APITokenService {
   static UserModel toUser() {
     UserModel user = UserModel();
     user.fullname = fullname;
-    user.id = userId.toString();
-    user.img = img.toString();
+    user.id = userId;
+    user.img = img;
 
     return user;
   }
 
-  static String get URLIMG {
+  static String get rximg {
     return CommonMethods.buildUrlHinhDaiDien(img, rewriteUrl: fullname);
   }
 

@@ -77,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Text("regist".tr(), style: const TextStyle(color: AppColors.white)),
             if (user!.phone != null)
-              Text(user!.phone,
+              Text(user!.phone!,
                   style: kTextHeaderStyle.copyWith(color: AppColors.white))
           ],
         ),
@@ -100,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
             key: _keyValidationForm,
             child: Column(
               children: <Widget>[
-                RxInput(user!.fullname,
+                RxInput(user!.fullname!,
                     labelText: "fullname".tr(),
                     icon: const Icon(Icons.person),
                     onChanged: (v) => {
@@ -111,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ])),
 
                 RxInput(
-                  user!.password,
+                  user!.password!,
                   isPassword: true,
                   labelText: "password.text".tr(),
                   icon: const Icon(Icons.lock),

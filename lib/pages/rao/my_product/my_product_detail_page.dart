@@ -155,17 +155,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         child: OutlinedButton(
           onPressed: () {
             setState(() {
-              data!.producttypeid = value!.toString();
+              data!.producttypeid = value;
             });
           },
-          child: Text(
-            text,
-            style: TextStyle(
-              color: (data!.producttypeid == value)
-                  ? AppColors.primary
-                  : AppColors.black,
-            ),
-          ),
           style: ButtonStyle(
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -174,6 +166,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                       ? AppColors.primary
                       : AppColors.black,
                 ))),
+          ),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: (data!.producttypeid == value)
+                  ? AppColors.primary
+                  : AppColors.black,
+            ),
           ),
         ));
   }
@@ -201,19 +201,19 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         Card(
           child: Column(
             children: [
-              _selectInput("brand", data!.brandid??"-1",
+              _selectInput("brand", data!.brandid,
                   title: "Hãng xe",
                   afterChange: (v) => {
                         setState(() {
-                          data!.brandid = v!.toString();
+                          data!.brandid = CommonMethods.convertToInt32(v);
                         })
                       }),
               ListTile(
                 title: Text("price".tr(), style: kTextTitleStyle),
                 subtitle: RxInput(
                   keyboardType: TextInputType.number,
-                  data!.price??"",
-                  onChanged: (v) => {data!.price = v},
+                  data!.price!.toString(),
+                  onChanged: (v) => {data!.price = CommonMethods.convertToInt32(v)},
                   hintText: "price".tr(),
                 ),
               ),
@@ -237,28 +237,28 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                 title: "Tình trạng",
                 afterChange: (v) => {
                       setState(() {
-                        data!.state = v!.toString();
+                        data!.state = v;
                       })
                     }),
-            _selectInput("fueltype", data!.fueltypeid??"-1",
+            _selectInput("fueltype", data!.fueltypeid,
                 title: "Nhiên liệu",
                 afterChange: (v) => {
                       setState(() {
-                        data!.fueltypeid = v!.toString();
+                        data!.fueltypeid = v;
                       })
                     }),
-            _selectInput("madein", data!.madeinid??"-1",
+            _selectInput("madein", data!.madeinid,
                 title: "Năm sản xuất",
                 afterChange: (v) => {
                       setState(() {
-                        data!.madeinid = v!.toString();
+                        data!.madeinid = v;
                       })
                     }),
-            _selectInput("color", data!.colorid??"-1",
+            _selectInput("color", data!.colorid,
                 title: "Màu sắc",
                 afterChange: (v) => {
                       setState(() {
-                        data!.colorid = v!.toString();
+                        data!.colorid = v;
                       })
                     }),
           ],
@@ -268,7 +268,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
           child: ListTile(
             leading: GestureDetector(
               onTap: () {},
-              child: RxAvatarImage(data!.URLIMGUSER ?? NOIMAGEUSER, size: 40),
+              child: RxAvatarImage(data!.rximguser ?? NOIMAGEUSER, size: 40),
             ),
             title: GestureDetector(
               onTap: () {},

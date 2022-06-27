@@ -49,11 +49,11 @@ class UserTopWidget extends StatelessWidget {
                         ),
                       ),
                       radius: 60.0,
-                      backgroundImage: RxImageProvider(data!.URLIMG),
+                      backgroundImage: RxImageProvider(data!.rximg),
                     ),
                   ),
                   Text(
-                    data!.fullname.toUpperCase(),
+                    data!.fullname!.toUpperCase(),
                     style:
                         const TextStyle(fontSize: 19, color: AppColors.white).bold,
                   ),
@@ -61,15 +61,15 @@ class UserTopWidget extends StatelessWidget {
                     height: 25,
                     child: RxRoundedButton(
                         onPressed: () {},
-                        title: data!.VERIFY ? "verified".tr() : "Chưa xác thực",
-                        color: data!.VERIFY ? AppColors.red : AppColors.warning),
+                        title: data!.rxverify ? "verified".tr() : "Chưa xác thực",
+                        color: data!.rxverify ? AppColors.red : AppColors.warning),
                   ),
                   Text(
-                    data!.email,
+                    data!.email!,
                     style: const TextStyle(color: AppColors.white),
                   ),
                   Text(
-                    data!.phone,
+                    data!.phone!,
                     style: const TextStyle(color: AppColors.white),
                   )
                 ],

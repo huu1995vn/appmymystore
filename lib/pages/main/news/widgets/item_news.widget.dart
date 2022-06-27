@@ -28,7 +28,7 @@ class ItemNewsWidget extends StatelessWidget {
                   bottomLeft: Radius.circular(kDefaultPadding),
                   topLeft: Radius.circular(kDefaultPadding)),
               child:
-                  RxImage(itemNews.URLIMG, width: SizeConfig.screenWidth / 4.5),
+                  RxImage(itemNews.rximg, width: SizeConfig.screenWidth / 4.5),
             ),
             Expanded(
               child: Padding(
@@ -45,7 +45,6 @@ class ItemNewsWidget extends StatelessWidget {
                       ),
                     ),
                     Row(
-                      // spacing: kDefaultPadding,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -54,12 +53,9 @@ class ItemNewsWidget extends StatelessWidget {
                             color: AppColors.yellow,
                           ).italic,
                         ),
-                        Text(itemNews.TIMEAGO,
+                        Text(itemNews.rxtimeago,
                             style: kTextTimeStyle),
-                        // Text(itemNews.views,
-                        //     style: const TextStyle(
-                        //         color: AppColors.black50,
-                        //         fontStyle: FontStyle.italic))
+                        
                       ],
                     )
                   ],

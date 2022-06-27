@@ -42,15 +42,15 @@ class _NotifycationPageState extends State<NotifycationPage> {
     };
     ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
     List<dynamic> data = jsonDecode(res.data);
-    List<NewsModel> newslist =
+    List<NewsModel> list =
         data.map((val) => NewsModel.fromJson(val)).toList();
     setState(() {
-      totalItems = newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
+      totalItems = list[0].rxtotalrow;
       listData ??= [];
       if (nPaging == 1) {
-        listData = newslist;
+        listData = list;
       } else {
-        listData = (listData! + newslist);
+        listData = (listData! + list);
       }
     });
     paging = nPaging;

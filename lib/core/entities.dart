@@ -11,8 +11,15 @@ import 'package:raoxe/core/services/api_token.service.dart';
 part 'entities.g.dart';
 
 class Entity {
-  late String TotalRow;
-  late String RowIndex;
+  dynamic TotalRow;
+  dynamic RowIndex;
+  int get rxtotalrow {
+    return CommonMethods.convertToInt32(TotalRow);
+  }
+
+  int get rxrowindex {
+    return CommonMethods.convertToInt32(RowIndex);
+  }
 }
 
 /// An annotation for the code generator to know that this class needs
@@ -28,56 +35,62 @@ class ResponseModel {
     required this.status,
   });
 
-  factory ResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$ResponseModelFromJson(json);
+  factory ResponseModel.fromJson(Map<String, dynamic> json) {
+    json["status"] = CommonMethods.convertToInt32(json["status"]);
+    return _$ResponseModelFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$ResponseModelToJson(this);
 }
 
 @JsonSerializable()
 class NewsModel extends Entity {
-  late String id;
-  late String type;
-  late String img;
+  late int id;
+  late int type;
+  late int img;
   late String name;
   late String desc;
-  late String views;
+  late int views;
   late String publishdate;
   late String prefix;
   late String url;
   late String webresourceid;
   late String webresourcename;
   late String webresourceurl;
-  String get LINK {
-    return CommonMethods.buildUrlNews(int.parse(id),
-        prefixUrl: prefix, rewriteUrl: url);
+  String get rxlink {
+    return CommonMethods.buildUrlNews(id, prefixUrl: prefix, rewriteUrl: url);
   }
 
-  String get TIMEAGO {
+  String get rxtimeago {
     return CommonMethods.timeagoFormat(
         CommonMethods.convertToDateTime(publishdate));
   }
 
-  String get URLIMG {
+  String get rximg {
     int fileId = 0;
-    fileId = int.parse(img);
+    fileId = img;
     return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: url);
   }
 
   NewsModel();
-  factory NewsModel.fromJson(Map<String, dynamic> json) =>
-      _$NewsModelFromJson(json);
+  factory NewsModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["type"] = CommonMethods.convertToInt32(json["type"], 1);
+    json["img"] = CommonMethods.convertToInt32(json["img"]);
+    json["views"] = CommonMethods.convertToInt32(json["views"]);
+    return _$NewsModelFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$NewsModelToJson(this);
 }
 
 @JsonSerializable()
 class NotificationModel extends Entity {
-  final String id;
-  final String notificationtypeid;
-  final String subject;
-  final String message;
-  final String createdate;
+  int id = 0;
+  int notificationtypeid = 1;
+  String subject;
+  String message;
+  DateTime? createdate;
   NotificationModel({
     required this.id,
     required this.notificationtypeid,
@@ -86,42 +99,54 @@ class NotificationModel extends Entity {
     required this.createdate,
   });
 
-  factory NotificationModel.fromJson(Map<String, dynamic> json) =>
-      _$NotificationModelFromJson(json);
+  factory NotificationModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["notificationtypeid"] =
+        CommonMethods.convertToInt32(json["notificationtypeid"]);
+    json["createdate"] = CommonMethods.convertToDateTime(json["createdate"]);
+    return _$NotificationModelFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$NotificationModelToJson(this);
 }
 
 @JsonSerializable()
 class UserModel extends Entity {
-  late String id;
-  late String img;
-  late String cityid;
-  late String districtid;
-  late String username;
-  late String password;
-  late String identitynumber;
-  late String fullname = "";
-  late String jobtitle;
-  late String gender = "1";
-  late String birthdate;
-  late String email;
-  late String phone;
-  late String phonenumber;
-  late String verifyphone;
-  late String verifyemail;
-  late String address;
-  late String note;
-  late String status = "1";
+  int id = 0;
+  int img = 0;
+  int cityid = 0;
+  int districtid = 0;
+  String? username;
+  String? password;
+  String? identitynumber;
+  String? fullname;
+  String? jobtitle;
+  int gender = 1;
+  String? birthdate;
+  String? email;
+  String? phone;
+  String? phonenumber;
+  bool verifyphone = false;
+  bool verifyemail = false;
+  String? address;
+  String? note;
+  int status = 1;
   UserModel() {
-    username = "";
-    password = "";
-    email = "";
-    phone = "";
+    username;
+    password;
+    email;
+    phone;
   }
-  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(
-      json.map((key, value) => MapEntry(key, value?.toString())));
-
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["notificationtypeid"] =
+        CommonMethods.convertToInt32(json["notificationtypeid"]);
+    json["gender"] = CommonMethods.convertToInt32(json["gender"]);
+    json["status"] = CommonMethods.convertToInt32(json["status"]);
+    json["verifyphone"] = CommonMethods.convertToBoolean(json["verifyphone"]);
+    json["verifyemail"] = CommonMethods.convertToBoolean(json["verifyemail"]);
+    return _$UserModelFromJson(json);
+  }
   ContactModel toContact() {
     ContactModel contact = ContactModel();
     contact.fullname = fullname;
@@ -133,10 +158,10 @@ class UserModel extends Entity {
 
   UserModel clone() => UserModel.fromJson(toJson());
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
-  String get URLIMG {
+  String get rximg {
     try {
       int fileId = 0;
-      fileId = int.parse(img);
+      fileId = img;
       return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: fullname);
     } catch (e) {
       CommonMethods.wirtePrint(e);
@@ -145,26 +170,8 @@ class UserModel extends Entity {
     }
   }
 
-  bool get VERIFY {
-    return VERIFYPHONE && VERIFYEMAIL;
-  }
-
-  bool get VERIFYPHONE {
-    try {
-      return int.parse(verifyphone) == 1;
-    } catch (e) {
-      CommonMethods.wirtePrint(e);
-    }
-    return false;
-  }
-
-  bool get VERIFYEMAIL {
-    try {
-      return int.parse(verifyemail) == 1;
-    } catch (e) {
-      CommonMethods.wirtePrint(e);
-    }
-    return false;
+  bool get rxverify {
+    return verifyphone && verifyemail;
   }
 
   Map<String, dynamic> toInsert() => <String, dynamic>{
@@ -231,57 +238,84 @@ class UserModel extends Entity {
 
 @JsonSerializable()
 class ProductModel extends Entity {
-  late String id;
-  late String userid;
-  late String imguser = "";
-  late String username = "";
-  late String usercontactid;
-  late String usercontactname = "";
-  late String usercontactphone = "";
-  late String usercontactemail = "";
-  late String usercontactaddress = "";
-  late String brandid = "-1";
-  late String brandname = "";
-  late String modelid = "-1";
-  late String modelname = "";
-  late String bodytypeid = "-1";
-  late String bodytypename = "";
-  late String fueltypeid = "-1";
-  late String fueltypename = "";
-  late String madeinid = "-1";
-  late String madeinname = "";
-  late String colorid = "-1";
-  late String colorname = "";
-  late String cityid = "-1";
-  late String cityname = "";
-  late String producttypeid = "1";
-  late String producttypename;
-  late String img;
-  late String imglist;
-  late String name = "";
+  int id = 0;
+  int userid = 0;
+  int imguser = 0;
+  String? username;
+  int usercontactid = 0;
+  String? usercontactname;
+  String? usercontactphone;
+  String? usercontactemail;
+  String? usercontactaddress;
+  int brandid = 0;
+  String? brandname;
+  int modelid = 0;
+  String? modelname;
+  int bodytypeid = 0;
+  String? bodytypename;
+  int fueltypeid = 0;
+  String? fueltypename;
+  int madeinid = 0;
+  String? madeinname;
+  int colorid = 0;
+  String? colorname;
+  int cityid = 0;
+  String? cityname;
+  int producttypeid = 0;
+  String? producttypename;
+  int img = 0;
+  String? imglist;
+  String? name;
   String? description;
-  late String price = "0";
-  late String year;
-  late String seat;
-  late String door;
-  late String km;
-  late String state = "1";
-  late String views;
-  late String ratingvalue;
-  late String reviewcount;
-  late String review1;
-  late String review2;
-  late String review3;
-  late String review4;
-  late String review5;
-  late String keywordsearch;
-  late String status = "1";
-  late String verifydate;
-  late String createdate;
+  int price = 0;
+  String? year;
+  String? seat;
+  String? door;
+  String? km;
+  int state = 1;
+  int views = 0;
+  double ratingvalue = 0;
+  int reviewcount = 0;
+  int review1 = 0;
+  int review2 = 0;
+  int review3 = 0;
+  int review4 = 0;
+  int review5 = 0;
+  String? keywordsearch;
+  int status = 1;
+  DateTime? verifydate;
+  DateTime? createdate;
 
   ProductModel();
-  factory ProductModel.fromJson(Map<String, dynamic> json) =>
-      _$ProductModelFromJson(json);
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["userid"] = CommonMethods.convertToInt32(json["userid"]);
+    json["imguser"] = CommonMethods.convertToInt32(json["imguser"]);
+    json["usercontactid"] = CommonMethods.convertToInt32(json["usercontactid"]);
+    json["brandid"] = CommonMethods.convertToInt32(json["brandid"]);
+    json["modelid"] = CommonMethods.convertToInt32(json["modelid"]);
+    json["bodytypeid"] = CommonMethods.convertToInt32(json["bodytypeid"]);
+    json["fueltypeid"] = CommonMethods.convertToInt32(json["fueltypeid"]);
+    json["madeinid"] = CommonMethods.convertToInt32(json["madeinid"]);
+    json["colorid"] = CommonMethods.convertToInt32(json["colorid"]);
+    json["cityid"] = CommonMethods.convertToInt32(json["cityid"]);
+    json["producttypeid"] = CommonMethods.convertToInt32(json["producttypeid"]);
+    json["img"] = CommonMethods.convertToInt32(json["img"]);
+    json["price"] = CommonMethods.convertToInt32(json["price"]);
+    json["state"] = CommonMethods.convertToInt32(json["state"], 1);
+    json["views"] = CommonMethods.convertToInt32(json["views"], 1);
+    json["ratingvalue"] = CommonMethods.convertToDouble(json["ratingvalue"]);
+    json["reviewcount"] = CommonMethods.convertToInt32(json["reviewcount"]);
+    json["status"] = CommonMethods.convertToInt32(json["status"], 1);
+    json["review1"] = CommonMethods.convertToInt32(json["review1"]);
+    json["review2"] = CommonMethods.convertToInt32(json["review2"]);
+    json["review3"] = CommonMethods.convertToInt32(json["review3"]);
+    json["review4"] = CommonMethods.convertToInt32(json["review4"]);
+    json["review5"] = CommonMethods.convertToInt32(json["review5"]);
+    json["verifydate"] = CommonMethods.convertToDateTime(json["verifydate"]);
+    json["verifydate"] = CommonMethods.convertToDateTime(json["verifydate"]);
+    return _$ProductModelFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
   // Products.ProductTypeId
@@ -297,28 +331,21 @@ class ProductModel extends Entity {
   //  + 3: Khong duyet
   //  + 4: Vi pham (Khoa)
 
-  String get TIMEAGO {
-    return CommonMethods.timeagoFormat(
-        CommonMethods.convertToDateTime(verifydate));
+  String get rxtimeago {
+    return CommonMethods.timeagoFormat(verifydate);
   }
 
-  String get NUMPRICE {
+  String get rxprice {
     try {
-      return NumberFormat.decimalPattern().format(int.parse(price));
+      return NumberFormat.decimalPattern().format(price);
     } catch (e) {
-      return "not.update".tr();
+      return "Liên hệ";
     }
   }
 
-  int get STATUS {
-    return int.parse(status);
-  }
-
-  String get URLIMGUSER {
+  String get rximguser {
     try {
-      int fileId = 0;
-      fileId = int.parse(imguser);
-      return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: name);
+      return CommonMethods.buildUrlHinhDaiDien(imguser, rewriteUrl: name);
     } catch (e) {
       CommonMethods.wirtePrint(e);
 
@@ -326,11 +353,9 @@ class ProductModel extends Entity {
     }
   }
 
-  String get URLIMG {
+  String get rximg {
     try {
-      int fileId = 0;
-      fileId = int.parse(img);
-      return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: name);
+      return CommonMethods.buildUrlHinhDaiDien(img, rewriteUrl: name);
     } catch (e) {
       CommonMethods.wirtePrint(e);
 
@@ -338,16 +363,15 @@ class ProductModel extends Entity {
     }
   }
 
-  List<String> get LISTURLIMG {
+  List<String> get rximglist {
     try {
-      return imglist
+      return imglist!
           .split(",")
           .map((e) =>
               CommonMethods.buildUrlHinhDaiDien(int.parse(e), rewriteUrl: name))
           .toList();
     } catch (e) {
       CommonMethods.wirtePrint(e);
-
       return [];
     }
   }
@@ -450,107 +474,119 @@ class ProductModel extends Entity {
 
 @JsonSerializable()
 class AdvertModel extends Entity {
-  late String id;
-  late String code;
-  late String seoid;
-  late String adminid;
-  late String img;
-  late String userid;
-  late String adverttypeid;
-  late String referenceid;
-  late String widgetcontentid;
-  late String regionname;
-  late String displayName;
-  late String jobtitle;
-  late String phone;
-  late String email;
-  late String name;
-  late String price;
-  late String discountprice;
-  late String saleprice;
-  late String discount;
-  late String expirationdate;
-  late String reminderdate;
-  late String note;
-  late String status;
-  late String adverttypename;
-  late String adminname;
-  int get STATUS {
-    return int.parse(status);
-  }
+  int id = 0;
+  String? code;
+  int img = 0;
+  int userid = 0;
+  int adverttypeid = 0;
+  int referenceid = 0;
+  String? regionname;
+  String? displayName;
+  String? jobtitle;
+  String? phone;
+  String? email;
+  String? name;
+  int price = 0;
+  String? discountprice;
+  String? saleprice;
+  String? discount;
+  DateTime? expirationdate;
+  DateTime? reminderdate;
+  String? note;
+  int status = 1;
+  String? adverttypename;
+  String? adminname;
 
-  String get NUMPRICE {
+  String get rxprice {
     try {
-      return NumberFormat.decimalPattern().format(int.parse(price));
+      return NumberFormat.decimalPattern().format(price);
     } catch (e) {
-      return "not.update".tr();
+      return "Liên hệ";
     }
   }
 
-  String get URLIMG {
-    int fileId = 0;
-    fileId = int.parse(img);
-    return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: name);
+  String get rximg {
+    return CommonMethods.buildUrlHinhDaiDien(img, rewriteUrl: name);
   }
 
   AdvertModel();
-  factory AdvertModel.fromJson(Map<String, dynamic> json) =>
-      _$AdvertModelFromJson(json);
+  factory AdvertModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["img"] = CommonMethods.convertToInt32(json["img"]);
+    json["userid"] = CommonMethods.convertToInt32(json["userid"]);
+    json["adverttypeid"] = CommonMethods.convertToInt32(json["adverttypeid"]);
+    json["referenceid"] = CommonMethods.convertToInt32(json["referenceid"]);
+    json["price"] = CommonMethods.convertToInt32(json["price"]);
+    json["status"] = CommonMethods.convertToInt32(json["price"], 1);
+    json["expirationdate"] =
+        CommonMethods.convertToDateTime(json["expirationdate"], "dd/MM/yyyy");
+    json["reminderdate"] =
+        CommonMethods.convertToDateTime(json["reminderdate"], "dd/MM/yyyy");
+    return _$AdvertModelFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$AdvertModelToJson(this);
 }
 
 @JsonSerializable()
 class ContactModel extends Entity {
-  late String id;
-  late String userid;
-  late String cityid;
-  late String cityname;
-  late String districtid;
-  late String districtname;
-  late String fullname;
-  late String phone;
-  late String address;
-  late String isdefault;
-  ContactModel() {
-    isdefault = "False";
-    userid = APITokenService.userId.toString();
-  }
+  int id = 0;
+  int userid = APITokenService.userId;
+  int cityid = 0;
+  String? cityname;
+  int districtid = 0;
+  String? districtname;
+  String? fullname;
+  String? phone;
+  String? address;
+  bool isdefault = false;
   UserModel clone() => UserModel.fromJson(toJson());
-
-  bool get ISDEFAULT {
+  ContactModel();
+  bool get rxisdefault {
     return isdefault == "true";
   }
 
-  factory ContactModel.fromJson(Map<String, dynamic> json) =>
-      _$ContactModelFromJson(json);
+  factory ContactModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["userid"] =
+        CommonMethods.convertToInt32(json["userid"], APITokenService.userId);
+    json["cityid"] = CommonMethods.convertToInt32(json["cityid"]);
+    json["districtid"] = CommonMethods.convertToInt32(json["districtid"]);
+    json["isdefault"] = CommonMethods.convertToBoolean(json["isdefault"]);
+
+    return _$ContactModelFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$ContactModelToJson(this);
 }
 
 @JsonSerializable()
 class ProductReviewsModel extends Entity {
-  late String id;
-  late String userid;
-  late String username = "";
-  late String productid;
-  late String comment;
-  late String reviewcount;
-  late String ratingvalue;
-  late String createdate;
-  ProductReviewsModel() {
-    userid = APITokenService.userId.toString();
-  }
-  
-  String get TIMEAGO {
-    return CommonMethods.timeagoFormat(
-        CommonMethods.convertToDateTime(createdate));
+  int id = 0;
+  int userid = APITokenService.userId;
+  String? username;
+  int productid = 0;
+  String? comment;
+  int reviewcount = 0;
+  int ratingvalue = 0;
+  DateTime? createdate;
+  ProductReviewsModel();
+  String get rxtimeago {
+    return CommonMethods.timeagoFormat(createdate);
   }
 
   UserModel clone() => UserModel.fromJson(toJson());
 
-  factory ProductReviewsModel.fromJson(Map<String, dynamic> json) =>
-      _$ProductReviewsModelFromJson(json);
+  factory ProductReviewsModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["userid"] =
+        CommonMethods.convertToInt32(json["userid"], APITokenService.userId);
+    json["productid"] = CommonMethods.convertToInt32(json["productid"]);
+    json["reviewcount"] = CommonMethods.convertToInt32(json["reviewcount"]);
+    json["ratingvalue"] = CommonMethods.convertToInt32(json["ratingvalue"]);
+
+    return _$ProductReviewsModelFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$ProductReviewsModelToJson(this);
 }

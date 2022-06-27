@@ -8,7 +8,6 @@ import 'package:raoxe/core/entities.dart';
 // ignore: unused_import
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
 class ItemAdvertWidget extends StatelessWidget {
@@ -30,7 +29,7 @@ class ItemAdvertWidget extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(kDefaultPadding),
                     topLeft: Radius.circular(kDefaultPadding)),
-                child: RxImage(item.URLIMG, width: SizeConfig.screenWidth / 4),
+                child: RxImage(item.rximg, width: SizeConfig.screenWidth / 4),
               ),
               Expanded(
                 child: Padding(
@@ -47,16 +46,16 @@ class ItemAdvertWidget extends StatelessWidget {
                                   Text(
                                     item.name ?? "",
                                     maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,                                   
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
-                                    item.STATUS == 1
+                                    item.status == 1
                                         ? "active".tr()
                                         : "expired".tr(),
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: item.STATUS == 1
+                                        color: item.status == 1
                                             ? Colors.green
                                             : Colors.red),
                                   ),
@@ -68,13 +67,12 @@ class ItemAdvertWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  item.NUMPRICE,
+                                  item.rxprice,
                                   style: kTextPriceStyle,
                                 ),
                                 Text(
                                     CommonMethods.formatDateTime(
-                                        CommonMethods.convertToDateTime(
-                                            item.expirationdate, "dd/MM/yyyy"),
+                                        item.expirationdate,
                                         valueDefault: "not.update".tr()),
                                     style: kTextTimeStyle)
                               ],

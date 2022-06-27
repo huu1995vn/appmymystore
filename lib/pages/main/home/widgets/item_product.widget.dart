@@ -14,7 +14,7 @@ class ItemProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int lenimg = Random().nextInt(15); //itemProduct.LISTURLIMG.length
+    int lenimg = Random().nextInt(15); //itemProduct.rximglist.length
 
     return Card(
       child: GestureDetector(
@@ -30,7 +30,7 @@ class ItemProductWidget extends StatelessWidget {
                       topLeft: Radius.circular(kDefaultPadding)),
                   child: Stack(
                     children: <Widget>[
-                      RxImage(itemProduct.URLIMG,
+                      RxImage(itemProduct.rximg,
                           width: SizeConfig.screenWidth / 4),
                       if (lenimg > 0)
                         Positioned(
@@ -91,7 +91,7 @@ class ItemProductWidget extends StatelessWidget {
                                         ),
                                   ),
                                   Text(
-                                    itemProduct.price ?? "4.000.000",
+                                    itemProduct.rxprice,
                                     style: const TextStyle(
                                       color: AppColors.primary,
                                     ).bold,

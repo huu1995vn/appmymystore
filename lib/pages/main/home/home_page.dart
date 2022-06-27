@@ -49,16 +49,16 @@ class _HomePageState extends State<HomePage>
     ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
     List<dynamic> data = jsonDecode(res.data);
     // ignore: unnecessary_cast
-    List<ProductModel> newslist = data
+    List<ProductModel> list = data
         .map((val) => ProductModel.fromJson(val))
         .toList() as List<ProductModel>;
     setState(() {
-      totalItems = newslist.isNotEmpty ? int.parse(newslist[0].TotalRow) : 0;
+      totalItems = list[0].rxtotalrow;
       listData;
       if (nPaging == 1) {
-        listData = newslist;
+        listData = list;
       } else {
-        listData = (listData! + newslist);
+        listData = (listData! + list);
       }
     });
     paging = nPaging;
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage>
           RxSliverList(listData, (BuildContext context, int index) {
             ProductModel item = listData![index];
             return ItemProductWidget(item, onTap: () {
-              CommonNavigates.toProductPage(context, id: int.parse(item.id));
+              CommonNavigates.toProductPage(context, id: item.id);
             });
           })
         ],

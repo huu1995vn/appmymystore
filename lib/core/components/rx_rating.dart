@@ -67,12 +67,12 @@ class _RatingState extends State<RxReview> {
 
   @override
   Widget build(BuildContext context) {
-    double ratingvalue = double.parse(widget.item.ratingvalue ?? "0.0");
-    double review1 = double.parse(widget.item.review1 ?? "0.0");
-    double review2 = double.parse(widget.item.review2 ?? "0.0");
-    double review3 = double.parse(widget.item.review3 ?? "0.0");
-    double review4 = double.parse(widget.item.review4 ?? "0.0");
-    double review5 = double.parse(widget.item.review5 ?? "0.0");
+    double ratingvalue = CommonMethods.convertToDouble(widget.item.ratingvalue);
+    double review1 = CommonMethods.convertToDouble(widget.item.review1);
+    double review2 = CommonMethods.convertToDouble(widget.item.review2);
+    double review3 = CommonMethods.convertToDouble(widget.item.review3);
+    double review4 = CommonMethods.convertToDouble(widget.item.review4);
+    double review5 = CommonMethods.convertToDouble(widget.item.review5);
 
     return Container(
         padding: const EdgeInsets.only(top: 10),
@@ -188,12 +188,12 @@ class _RatingState extends State<RxReview> {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               RatingBar.builder(
-                initialRating: double.parse(item.ratingvalue ?? "0.0"),
+                initialRating: CommonMethods.convertToDouble(item.ratingvalue),
                 itemSize: 15.0,
                 minRating: 0,
                 direction: Axis.horizontal,
                 itemCount: 5,
-                itemBuilder: (context, _) => Icon(
+                itemBuilder: (context, _) => const Icon(
                   Icons.star,
                   color: Colors.amber,
                 ),
@@ -234,7 +234,7 @@ class _RatingState extends State<RxReview> {
         minRating: 0,
         direction: Axis.horizontal,
         itemCount: 5,
-        itemBuilder: (context, _) => Icon(
+        itemBuilder: (context, _) => const Icon(
           Icons.star,
           color: Colors.amber,
         ),

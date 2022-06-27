@@ -41,9 +41,9 @@ class _ContactDialogState extends State<ContactDialog> {
     setState(() {
       contact = widget.contact;
       cityname = MasterDataService.getNameById(
-          "city", int.parse(contact.cityid ?? "-1"));
+          "city", contact.cityid);
       districtname = MasterDataService.getNameById(
-          "district", int.parse(contact.districtid));
+          "district", contact.districtid);
     });
   }
 
@@ -82,8 +82,8 @@ class _ContactDialogState extends State<ContactDialog> {
                                   int.parse(contact.cityid.toString()),
                                   afterChange: (v) => {
                                     setState(() {
-                                      contact.cityid = v!.toString();
-                                      contact.districtid = "-1";
+                                      contact.cityid = v;
+                                      contact.districtid = 0;
                                     })
                                   },
                                 ),
@@ -96,7 +96,7 @@ class _ContactDialogState extends State<ContactDialog> {
                                   },
                                   afterChange: (v) => {
                                     setState(() {
-                                      contact.districtid = v!.toString();
+                                      contact.districtid = v;
                                     })
                                   },
                                 ),
@@ -106,7 +106,7 @@ class _ContactDialogState extends State<ContactDialog> {
                                   subtitle: SizedBox(
                                     height: 40,
                                     child: RxInput(
-                                      contact.address,
+                                      contact.address!,
                                       hintText: "address".tr(),
                                       onChanged: (v) => {contact.address = v},
                                     ),

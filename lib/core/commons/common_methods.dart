@@ -47,7 +47,7 @@ class CommonMethods {
   }
 
   static get isLogin {
-    return APITokenService.token!=null;
+    return APITokenService.token != null;
   }
 
   static Future<PackageInfo?> getPackageInfo() async {
@@ -87,6 +87,38 @@ class CommonMethods {
       return null;
     }
     return null;
+  }
+
+  static int convertToInt32(dynamic pNumber, [int valuedefault = 0]) {
+    try {
+      return int.parse(pNumber.toString());
+    } catch (e) {
+      return valuedefault;
+    }
+  }
+
+  static double convertToDouble(dynamic pNumber, [double valuedefault = 0]) {
+    try {
+      return double.parse(pNumber.toString());
+    } catch (e) {
+      return valuedefault;
+    }
+  }
+
+  static String convertToString(dynamic pString, [String valuedefault = ""]) {
+    try {
+      return pString.toString();
+    } catch (e) {
+      return valuedefault;
+    }
+  }
+
+  static bool convertToBoolean(dynamic pBoolean, [bool valuedefault = false]) {
+    try {
+      return pBoolean == 1 || pBoolean.toString().toLowerCase() == "true";
+    } catch (e) {
+      return valuedefault;
+    }
   }
 
   static DateTime? convertToDateTime(String date, [String? newPattern]) {
@@ -195,7 +227,9 @@ class CommonMethods {
       prefixSize = prefixSize.toString();
     }
     idHinh = idHinh > 0 ? idHinh : 0;
-    rewriteUrl = rewriteUrl!=null && rewriteUrl.isNotEmpty ? rewriteUrl : "image-dailyxe";
+    rewriteUrl = rewriteUrl != null && rewriteUrl.isNotEmpty
+        ? rewriteUrl
+        : "image-dailyxe";
     rewriteUrl = rewriteUrl.convertrUrlPrefix();
     return '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j$prefixSize.jpg';
 
@@ -204,8 +238,12 @@ class CommonMethods {
 
   static String buildUrlHinhDaiDien(int idHinh,
       {String? rewriteUrl, prefixSize = 0}) {
-    return buildUrlImage(idHinh,
-        rewriteUrl: rewriteUrl, prefixSize: prefixSize);
+    if (idHinh > 0) {
+      return buildUrlImage(idHinh,
+          rewriteUrl: rewriteUrl, prefixSize: prefixSize);
+    } else {
+      return IMAGE_NOT_FOUND;
+    }
   }
 
   static String buildUrlNews(int idNews,
@@ -286,7 +324,7 @@ class CommonMethods {
     return "not.update".tr();
   }
 
-   static formatNumber(dynamic amount) {
+  static formatNumber(dynamic amount) {
     try {
       return NumberFormat.decimalPattern().format(int.parse(amount.toString()));
     } catch (e) {}

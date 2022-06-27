@@ -15,7 +15,7 @@ class ItemMyProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int lenimg = Random().nextInt(15); //itemProduct.LISTURLIMG.length
+    int lenimg = Random().nextInt(15); //itemProduct.rximglist.length
 
     return Card(
       child: GestureDetector(
@@ -31,7 +31,7 @@ class ItemMyProductWidget extends StatelessWidget {
                       topLeft: Radius.circular(kDefaultPadding)),
                   child: Stack(
                     children: <Widget>[
-                      RxImage(itemProduct.URLIMG,
+                      RxImage(itemProduct.rximg,
                           width: SizeConfig.screenWidth / 4),
                       if (lenimg > 0)
                         Positioned(

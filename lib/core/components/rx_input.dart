@@ -19,6 +19,7 @@ class RxInput extends StatefulWidget {
   final Widget? suffixIcon;
   final bool isBorder;
   final void Function()? onTap;
+  final TextStyle? style;
   const RxInput(this.value,
       {super.key,
       this.disabled = false,
@@ -32,7 +33,7 @@ class RxInput extends StatefulWidget {
       this.onChanged,
       this.suffixIcon,
       this.isBorder = false,
-      this.onTap});
+      this.onTap, this.style});
 
   @override
   _InputTextState createState() => _InputTextState();
@@ -70,7 +71,6 @@ class _InputTextState extends State<RxInput> {
         child: Padding(
           padding: const EdgeInsets.only(bottom: kDefaultPadding),
           child: TextFormField(
-            key: UniqueKey(),
             onTap: widget.onTap,
             readOnly: widget.readOnly || widget.disabled,
             controller: input,
@@ -81,6 +81,7 @@ class _InputTextState extends State<RxInput> {
             obscureText: !showPassword && widget.isPassword,
             validator: widget.validator,
             onChanged: widget.onChanged,
+            style: widget.style,
             decoration: InputDecoration(
                 border: widget.isBorder == true
                     ? const OutlineInputBorder()

@@ -40,6 +40,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   String? initialUrl;
   ProductModel? data;
   bool isNotFound = false;
+  String txtprice = "";
   loadData() async {
     if (widget.item != null) {
       setState(() {
@@ -50,6 +51,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       if (res.status > 0) {
         setState(() {
           data = ProductModel.fromJson(res.data);
+          txtprice = CommonMethods.formatNumber(data!.price);
         });
       } else {
         setState(() {
@@ -112,7 +114,150 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                     SliverToBoxAdapter(
                         child: Padding(
                       padding: const EdgeInsets.all(kDefaultPadding),
-                      child: _buildDetail(),
+                      child: Form(
+                          child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          _header("BẠN MUỐN"),
+                          ListTile(
+                            title: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: map<Widget>(
+                                  MasterDataService.data["productype"],
+                                  (index, item) {
+                                    return _radioProductType(
+                                        item["name"], item["id"]);
+                                  },
+                                ).toList()),
+                          ),
+                          _header("THÔNG TIN XE"),
+                          Card(
+                            child: Column(
+                              children: [
+                                _selectInput("brand", data!.brandid,
+                                    title: "Hãng xe",
+                                    afterChange: (v) => {
+                                          setState(() {
+                                            data!.brandid =
+                                                CommonMethods.convertToInt32(v);
+                                          })
+                                        }),
+                                ListTile(
+                                  title: Row(
+                                    children: [
+                                      Text("${'price'.tr()}: ",
+                                          style: kTextTitleStyle),
+                                      Text(
+                                        data!.price > 0
+                                            ? CommonMethods.formatNumber(
+                                                data!.price)
+                                            : "Liên hệ",
+                                        style: kTextPriceStyle.size(13),
+                                      )
+                                    ],
+                                  ),
+                                  subtitle: RxInput(
+                                    keyboardType: TextInputType.number,
+                                    txtprice,
+                                    onChanged: (v) {
+                                      txtprice = v;
+                                      setState(() {
+                                        data!.price =
+                                            CommonMethods.convertToInt32(v);
+                                      });
+                                    },
+                                    hintText: "price".tr(),
+                                    style: TextStyle(color: AppColors.black50)
+                                        .size(13),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          _header("MÔ TẢ CHI TIẾT"),
+                          Card(
+                              child: Padding(
+                            padding: kEdgeInsetsPadding,
+                            child: TextFormField(
+                              initialValue: data!.description,
+                              minLines:
+                                  6, // any number you need (It works as the rows for the textarea)
+                              keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                            ),
+                          )),
+                          _header("THÔNG SỐ KỸ THUẬT"),
+                          Card(
+                              child: Column(
+                            children: [
+                              _selectInput("producstate", data!.state,
+                                  title: "Tình trạng",
+                                  afterChange: (v) => {
+                                        setState(() {
+                                          data!.state = v;
+                                        })
+                                      }),
+                              _selectInput("fueltype", data!.fueltypeid,
+                                  title: "Nhiên liệu",
+                                  afterChange: (v) => {
+                                        setState(() {
+                                          data!.fueltypeid = v;
+                                        })
+                                      }),
+                              _selectInput("madein", data!.madeinid,
+                                  title: "Năm sản xuất",
+                                  afterChange: (v) => {
+                                        setState(() {
+                                          data!.madeinid = v;
+                                        })
+                                      }),
+                              _selectInput("color", data!.colorid,
+                                  title: "Màu sắc",
+                                  afterChange: (v) => {
+                                        setState(() {
+                                          data!.colorid = v;
+                                        })
+                                      }),
+                            ],
+                          )),
+                          _header("LIÊN HỆ"),
+                          Card(
+                            child: ListTile(
+                              leading: RxAvatarImage(
+                                  data!.rximguser ?? NOIMAGEUSER,
+                                  size: 40),
+                              title: GestureDetector(
+                                onTap: () {},
+                                child: Text(
+                                    data!.usercontactname ?? "Nguyễn Trọng Hữu",
+                                    style: const TextStyle().bold),
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                // spacing: kDefaultPadding,
+                                // mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data!.usercontactphone ?? "0379787904",
+                                    style: const TextStyle(
+                                      color: AppColors.black50,
+                                    ).bold.size(12),
+                                  ),
+                                  Text(
+                                    data!.usercontactaddress ?? "Tp.HCM",
+                                    style: const TextStyle(
+                                      color: AppColors.black50,
+                                    ).bold.size(12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
                     ))
                   ],
                 )),
@@ -179,127 +324,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             ),
           ),
         ));
-  }
-
-  Widget _buildDetail() {
-    return Column(
-      // mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      // mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        _header("BẠN MUỐN"),
-        ListTile(
-            title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: map<Widget>(
-                  MasterDataService.data["productype"],
-                  (index, item) {
-                    return _radioProductType(item["name"], item["id"]);
-                  },
-                ).toList()),
-          ),
-        _header("THÔNG TIN XE"),
-        Card(
-          child: Column(
-            children: [
-              _selectInput("brand", data!.brandid,
-                  title: "Hãng xe",
-                  afterChange: (v) => {
-                        setState(() {
-                          data!.brandid = CommonMethods.convertToInt32(v);
-                        })
-                      }),
-              ListTile(
-                title: Text("price".tr(), style: kTextTitleStyle),
-                subtitle: RxInput(
-                  keyboardType: TextInputType.number,
-                  data!.price!.toString(),
-                  onChanged: (v) =>
-                      {data!.price = CommonMethods.convertToInt32(v)},
-                  hintText: "price".tr(),
-                ),
-              ),
-            ],
-          ),
-        ),
-        _header("MÔ TẢ CHI TIẾT"),
-        Card(
-            child: TextFormField(
-          initialValue: data!.description,
-          minLines:
-              6, // any number you need (It works as the rows for the textarea)
-          keyboardType: TextInputType.multiline,
-          maxLines: null,
-        )),
-        _header("THÔNG SỐ KỸ THUẬT"),
-        Card(
-            child: Column(
-          children: [
-            _selectInput("producstate", data!.state,
-                title: "Tình trạng",
-                afterChange: (v) => {
-                      setState(() {
-                        data!.state = v;
-                      })
-                    }),
-            _selectInput("fueltype", data!.fueltypeid,
-                title: "Nhiên liệu",
-                afterChange: (v) => {
-                      setState(() {
-                        data!.fueltypeid = v;
-                      })
-                    }),
-            _selectInput("madein", data!.madeinid,
-                title: "Năm sản xuất",
-                afterChange: (v) => {
-                      setState(() {
-                        data!.madeinid = v;
-                      })
-                    }),
-            _selectInput("color", data!.colorid,
-                title: "Màu sắc",
-                afterChange: (v) => {
-                      setState(() {
-                        data!.colorid = v;
-                      })
-                    }),
-          ],
-        )),
-        _header("LIÊN HỆ"),
-        Card(
-          child: ListTile(
-            leading: GestureDetector(
-              onTap: () {},
-              child: RxAvatarImage(data!.rximguser ?? NOIMAGEUSER, size: 40),
-            ),
-            title: GestureDetector(
-              onTap: () {},
-              child: Text(data!.usercontactname ?? "Nguyễn Trọng Hữu",
-                  style: const TextStyle().bold),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // spacing: kDefaultPadding,
-              // mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  data!.usercontactphone ?? "0379787904",
-                  style: const TextStyle(
-                    color: AppColors.black50,
-                  ).bold.size(12),
-                ),
-                Text(
-                  data!.usercontactaddress ?? "Tp.HCM",
-                  style: const TextStyle(
-                    color: AppColors.black50,
-                  ).bold.size(12),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
   }
 
   _onSelect(String type, int id,

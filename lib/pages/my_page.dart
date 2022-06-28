@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -127,14 +128,14 @@ class _MyPageState extends State<MyPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             RxButtonBar(
-              icon: const Icon(Icons.home),
+              icon: const Icon(AppIcons.home_1, size: 19),
               isEnable: _selectedIndex == 0,
               onPressed: () {
                 onPressedTab(0);
               },
             ),
             RxButtonBar(
-              icon: const Icon(Icons.newspaper),
+              icon: Icon(AppIcons.earth, size: 19),
               isEnable: _selectedIndex == 1,
               onPressed: () {
                 onPressedTab(1);
@@ -145,7 +146,7 @@ class _MyPageState extends State<MyPage> {
             ),
             Stack(children: <Widget>[
               RxButtonBar(
-                icon: const Icon(Icons.notifications),
+                icon: Icon(AppIcons.alarm),
                 isEnable: _selectedIndex == 2,
                 onPressed: () {
                   onPressedTab(2);
@@ -159,11 +160,11 @@ class _MyPageState extends State<MyPage> {
                     padding: EdgeInsets.all(3),
                     decoration: BoxDecoration(
                       color: Colors.red,
-                      borderRadius: BorderRadius.circular(9),
+                      borderRadius: BorderRadius.circular(7),
                     ),
                     constraints: BoxConstraints(
-                      minWidth: 18,
-                      minHeight: 18,
+                      minWidth: 14,
+                      minHeight: 14,
                     ),
                     child: Text(
                       '$_totalNotifications',
@@ -177,7 +178,7 @@ class _MyPageState extends State<MyPage> {
                 )
             ]),
             RxButtonBar(
-              icon: const Icon(Icons.person),
+              icon: const Icon(AppIcons.user_1, size: 19),
               isEnable: _selectedIndex == 3,
               onPressed: () {
                 onPressedTab(3);

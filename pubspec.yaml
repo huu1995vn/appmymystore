@@ -105,6 +105,11 @@ flutter:
     - assets/images/intro/
     - assets/css/dailyxe.css
     - assets/translations/
+  fonts:
+  - family: AppIcons
+    fonts:
+      - asset: assets/fonts/AppIcons.ttf
+      
 flutter_icons:
   android: true
   ios: true
@@ -136,6 +141,7 @@ flutter_icons:
   #       - asset: assets/fonts/TrajanPro.ttf
   #       - asset: assets/fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
+  
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-assets/fonts/#from-packages

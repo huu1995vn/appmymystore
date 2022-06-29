@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -167,7 +168,7 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
                                   style: const TextStyle(color: AppColors.info)
                                       .size(13),
                                 ),
-                                const Icon(Icons.refresh,
+                                const Icon(AppIcons.sync_1,
                                     size: 13, color: AppColors.info),
                               ],
                             )),

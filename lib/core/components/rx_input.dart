@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 class RxInput extends StatefulWidget {
@@ -33,7 +34,8 @@ class RxInput extends StatefulWidget {
       this.onChanged,
       this.suffixIcon,
       this.isBorder = false,
-      this.onTap, this.style});
+      this.onTap,
+      this.style});
 
   @override
   _InputTextState createState() => _InputTextState();
@@ -45,7 +47,7 @@ class _InputTextState extends State<RxInput> {
   @override
   void initState() {
     super.initState();
-    if (mounted && widget.value != input.text) input.text = widget.value;
+    if (mounted && widget.value != input.text) input.text = widget.value! ?? "";
   }
 
   @override
@@ -53,7 +55,8 @@ class _InputTextState extends State<RxInput> {
     super.didUpdateWidget(oldWidget);
     if (widget.value != oldWidget.value) {
       Future.delayed(Duration.zero, () {
-        if (mounted && widget.value != input.text) input.text = widget.value;
+        if (mounted && widget.value != input.text)
+          input.text = widget.value! ?? "";
       });
     }
   }
@@ -83,6 +86,10 @@ class _InputTextState extends State<RxInput> {
             onChanged: widget.onChanged,
             style: widget.style,
             decoration: InputDecoration(
+                isDense: true,
+                contentPadding:  widget.isBorder? const EdgeInsets.fromLTRB(5, 0, 5, 0): null,
+                fillColor: widget.isBorder? AppColors.white: null ,
+                filled: widget.isBorder,
                 border: widget.isBorder == true
                     ? const OutlineInputBorder()
                     : InputBorder.none,

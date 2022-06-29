@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -102,7 +103,7 @@ class _ConfirmPhoneDialogState extends State<ConfirmPhoneDialog> {
                     labelText: "phone".tr(),
                     keyboardType: const TextInputType.numberWithOptions(
                         signed: true, decimal: true),
-                    icon: const Icon(Icons.phone),
+                    icon: const Icon(AppIcons.phone_handset),
                     onChanged: (v) => {
                           phone = v
                         },

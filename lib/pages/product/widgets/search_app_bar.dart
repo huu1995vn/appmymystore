@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
 import 'package:raoxe/core/components/dialogs/filter.dialog.dart';
@@ -86,7 +87,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
         children: [
           IconButton(
               icon: const Icon(
-                Icons.search,
+                AppIcons.magnifier,
                 color: AppColors.black50,
               ),
               onPressed: _onSearch),
@@ -113,7 +114,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
               child: Stack(
                 children: [
                   const IconButton(
-                      icon: Icon(Icons.filter_list), onPressed: null),
+                      icon: Icon(AppIcons.funnel), onPressed: null),
                   if (numFillter > 0)
                     Positioned(
                         top: 0.0,

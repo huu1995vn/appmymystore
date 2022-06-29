@@ -243,41 +243,26 @@ class UserModel extends Entity {
 class ProductModel extends Entity {
   int id = 0;
   int userid = 0;
-  int imguser = 0;
-  String? username;
   int usercontactid = 0;
-  String? usercontactname;
-  String? usercontactphone;
-  String? usercontactemail;
-  String? usercontactaddress;
   int brandid = 0;
-  String? brandname;
   int modelid = 0;
-  String? modelname;
   int bodytypeid = 0;
-  String? bodytypename;
   int fueltypeid = 0;
-  String? fueltypename;
   int madeinid = 0;
-  String? madeinname;
   int colorid = 0;
-  String? colorname;
-  int cityid = 0;
-  String? cityname;
-  int producttypeid = 1;
-  String? producttypename;
+  int producttypeid = 0;
   int img = 0;
   String? imglist;
   String? name;
-  String? description;
-  int price = 0;
-  String? year;
-  String? seat;
-  String? door;
-  String? km;
+  String? des;
+  int? price;
+  int? year;
+  int? seat;
+  int? door;
+  int? km;
   int state = 1;
   int views = 0;
-  double ratingvalue = 0;
+  double ratingvalue = 0.0;
   int reviewcount = 0;
   int review1 = 0;
   int review2 = 0;
@@ -287,8 +272,24 @@ class ProductModel extends Entity {
   String? keywordsearch;
   int status = 1;
   DateTime? verifydate;
+  int? createuserid;
   DateTime? createdate;
-
+  int? updateuserid;
+  DateTime? updatedate;
+  String? cityname;
+  String? brandname;
+  String? bodytypename;
+  String? madeinname;
+  String? modelname;
+  String? colorname;
+  String? fueltypename;
+  String? fullname;
+  int imguser = 0;
+  int? cityid;
+  int? districtid;
+  String? districtname;
+  String? address;
+  String? phone;
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
@@ -418,7 +419,7 @@ class ProductModel extends Entity {
           img,
           imglist,
           name,
-          description,
+          des,
           price,
           year,
           seat,
@@ -465,7 +466,7 @@ class ProductModel extends Entity {
           img,
           imglist,
           name,
-          description,
+          des,
           price,
           year,
           seat,

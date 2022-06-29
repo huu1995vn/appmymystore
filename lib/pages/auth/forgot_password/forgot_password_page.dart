@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -93,7 +94,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 RxInput(phone,
                     keyboardType: TextInputType.number,
                     labelText: "phone".tr(),
-                    icon: const Icon(Icons.phone),
+                    icon: const Icon(AppIcons.phone_handset),
                     onChanged: (v) => {
                           setState(() => {phone = v})
                         },
@@ -109,7 +110,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 RxInput(password,
                     isPassword: true,
                     labelText: "password.new".tr(),
-                    icon: const Icon(Icons.lock),
+                    icon: const Icon(AppIcons.lock_1),
                     onChanged: (v) => {
                           setState(() => {password = v})
                         },
@@ -119,7 +120,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 RxInput(passwordAgain,
                     isPassword: true,
                     labelText: "password.again".tr(),
-                    icon: const Icon(Icons.lock), validator: (value) {
+                    icon: const Icon(AppIcons.lock_1), validator: (value) {
                   if (value != null && value != password) {
                     return "invalid.password.again".tr();
                   } else {

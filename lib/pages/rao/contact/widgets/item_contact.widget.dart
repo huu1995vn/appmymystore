@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -31,7 +32,7 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
               onPressed: widget.onDelete,
               backgroundColor: AppColors.danger,
               foregroundColor: Colors.white,
-              icon: Icons.delete,
+              icon: AppIcons.trash_1,
               label: 'Delete',
             ),
           ],
@@ -42,7 +43,7 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
         child: Card(
             child: ListTile(
                 leading: RxCircleAvatar(
-                    child: Icon(Icons.contact_page_rounded,
+                    child: Icon(AppIcons.map_marker,
                         size: 30, color: Colors.blue[500])),
                 title: Text(
                   widget.item.fullname ?? "",

@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/dialogs/confirm_otp.dialog.dart';
@@ -106,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: RxInput(
                           username,
                           labelText: "phone".tr(),
-                          icon: const Icon(Icons.phone),
+                          icon: const Icon(AppIcons.phone_handset),
                           keyboardType: TextInputType.number,
                           onChanged: (v) => {username = v},
                         ),
@@ -120,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                             password,
                             isPassword: true,
                             labelText: "password.text".tr(),
-                            icon: const Icon(Icons.lock),
+                            icon: const Icon(AppIcons.lock_1),
                             onChanged: (v) => {password = v},
                           )),
                     ],
@@ -162,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: IconButton(
                   iconSize: 59,
-                  icon: const Icon(Icons.fingerprint),
+                  icon: const Icon(AppIcons.fingerprint),
                   color: AppColors.black50,
                   onPressed: _onLoginBiometrics,
                 ),

@@ -3,6 +3,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
@@ -53,7 +54,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: ListTile(
                         title: Text("manager.raoxe".tr()),
                         leading: Icon(
-                          Icons.car_rental_rounded,
+                          AppIcons.car,
                           color: AppColors.primary,
                         ),
                         onTap: () => CommonNavigates.toMyProductPage(context),
@@ -64,7 +65,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: ListTile(
                         title: Text("adv".tr()),
                         leading: Icon(
-                          Icons.monetization_on,
+                          AppIcons.cart,
                           color: AppColors.yellow,
                         ),
                         onTap: () => CommonNavigates.toAdvertPage(context),
@@ -73,9 +74,31 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                     _card(
                       child: ListTile(
+                        title: Text("favorite"),
+                        leading: Icon(
+                          AppIcons.heart_1,
+                          color: AppColors.red,
+                        ),
+                        onTap: () => CommonNavigates.toContactPage(context),
+                        subtitle: Text("Sản phẩm yêu thích"),
+                      ),
+                    ),
+                    _card(
+                      child: ListTile(
+                        title: Text("evaluate".tr()),
+                        leading: Icon(
+                          AppIcons.star_1,
+                          color: AppColors.yellow,
+                        ),
+                        onTap: () => CommonNavigates.toContactPage(context),
+                        subtitle: Text("Danh sách đánh giá"),
+                      ),
+                    ),
+                    _card(
+                      child: ListTile(
                         title: Text("address".tr()),
                         leading: Icon(
-                          Icons.location_city,
+                          AppIcons.map_marker,
                           color: AppColors.info,
                         ),
                         onTap: () => CommonNavigates.toContactPage(context),
@@ -100,8 +123,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: child);
   }
 
-  Widget _top()
-  {
+  Widget _top() {
     final userProvider = Provider.of<UserProvider>(context);
     return ListTile(
       leading: RxAvatarImage(userProvider.urlImage!, size: 40),
@@ -120,7 +142,7 @@ class _DashboardPageState extends State<DashboardPage> {
             CommonNavigates.toSettingsPage(context);
           },
           child: const Icon(
-            Icons.settings,
+            AppIcons.cog_1,
             color: AppColors.black,
             // size: 19,
           )),

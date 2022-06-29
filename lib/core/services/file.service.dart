@@ -73,7 +73,7 @@ class FileService {
                 isDefaultAction: true,
                 child: Row(
                   children: <Widget>[
-                    // RxIcon(Icons.close, color: Colors.grey),
+                    // RxIcon(AppIcons.cross, color: Colors.grey),
                     Text("cancel".tr())
                   ],
                 ),
@@ -116,7 +116,7 @@ class FileService {
                       onTap: () {
                         return Navigator.pop(context, null);
                       },
-                      // leading: RxIcon(Icons.close, color: Colors.grey),
+                      // leading: RxIcon(AppIcons.cross, color: Colors.grey),
                       title: Row(
                         children: <Widget>[Text("cancel".tr())],
                       )),

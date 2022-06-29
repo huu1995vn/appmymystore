@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 // ignore: unused_import
 import 'package:raoxe/core/components/index.dart';
@@ -17,7 +18,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: Icon(AppIcons.close),
         onPressed: () {
           query = '';
         },
@@ -28,7 +29,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: Icon(AppIcons.arrow_left),
       onPressed: () {
         Navigator.pop(context);
       },

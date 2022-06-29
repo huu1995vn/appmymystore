@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -60,7 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Column(
               children: [
                 RxBuildItem(
-                    icon: const Icon(Icons.screen_share_rounded),
+                    icon: const Icon(AppIcons.sun),
                     title: "Dark mode",
                     trailing: Switch(
                       value: theme.selectedThemeMode.name == "dark",
@@ -74,7 +75,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       // _authenticateWithBiometrics();
                     }),
                 RxBuildItem(
-                  icon: const Icon(Icons.language),
+                  icon: const Icon(AppIcons.text_format),
                   title: context.locale.languageCode == "vi"
                       ? "Việt Nam"
                       : "English",
@@ -89,7 +90,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 RxBuildItem(
-                    icon: const Icon(Icons.fingerprint),
+                    icon: const Icon(AppIcons.fingerprint),
                     title: "Đăng nhập bằng sinh trắc học",
                     trailing: Switch(
                       value: authBiometric,

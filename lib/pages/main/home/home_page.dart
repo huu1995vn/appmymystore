@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
@@ -134,7 +135,7 @@ class _HomePageState extends State<HomePage>
                 ),
                 child: IconButton(
                   iconSize: 22,
-                  icon: const Icon(Icons.search),
+                  icon: const Icon(AppIcons.magnifier),
                   color: AppColors.primary,
                   onPressed: () => {_onSearch()},
                 ),
@@ -167,7 +168,7 @@ _buildTitle(String header, void Function()? onTap) {
             shape: CircleBorder(),
           ),
           child: const Icon(
-            Icons.arrow_right,
+            AppIcons.chevron_right,
             size: 30,
             color: AppColors.primary,
           ),

@@ -212,11 +212,7 @@ class CommonMethods {
         ),
         context: context,
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.done, color: AppColors.white),
-            color: AppColors.primary,
-          ),
+          RxPrimaryButton(onTap: () {}, text: "done".tr())          
         ]);
   }
 

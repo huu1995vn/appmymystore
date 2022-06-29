@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -39,7 +40,7 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: Icon(AppIcons.close),
         onPressed: () {
           query = '';
         },
@@ -50,7 +51,7 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: Icon(AppIcons.arrow_left),
       onPressed: () {
         Navigator.pop(context);
       },
@@ -107,7 +108,7 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
                           SuggestionModel item = suggestionList[index];
                           return ListTile(
                             leading: Icon(
-                              item.isLocal ? Icons.history : Icons.search,
+                              item.isLocal ? AppIcons.history : AppIcons.magnifier,
                               size: 19,
                             ),
                             title: GestureDetector(
@@ -122,7 +123,7 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
                                     onTap: () {
                                       _deleteSuggest(item.text, setState);
                                     },
-                                    child: Icon(Icons.close, size: 19))
+                                    child: Icon(AppIcons.cross, size: 19))
                                 : null,
                           );
                         },

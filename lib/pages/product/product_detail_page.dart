@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -89,13 +90,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       elevation: 0.0,
                       backgroundColor: AppColors.grey,
                       actions: <Widget>[
-                        
                         IconButton(
-                          icon: Icon(
-                              isLike
-                                  ? Icons.favorite
-                                  : Icons.favorite_border_outlined,
-                              color: AppColors.primary),
+                          icon: Icon(AppIcons.heart_1,
+                              color:
+                                  isLike ? AppColors.primary : AppColors.black50),
                           onPressed: () {},
                         ),
                         IconButton(
@@ -127,21 +125,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               decoration: kBoxDecorationStyle.copyWith(
                   borderRadius: BorderRadius.circular(5)),
               alignment: Alignment.center,
-              child: Icon(Icons.call, color: AppColors.white),
+              child: Icon(AppIcons.phone_handset, color: AppColors.white),
             ),
           ),
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            decoration: BoxDecoration(color: AppColors.grey),
-            width: SizeConfig.screenWidth * 0.13,
-            height: kSizeHeight,
-            // decoration: kBoxDecorationStyle.copyWith(
-            //     borderRadius: BorderRadius.circular(5)),
-            alignment: Alignment.center,
-            child: Icon(Icons.sms, color: AppColors.info),
-          ),
-        )
+        if (data != null)
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              decoration: BoxDecoration(color: AppColors.grey),
+              width: SizeConfig.screenWidth * 0.13,
+              height: kSizeHeight,
+            
+              alignment: Alignment.center,
+              child: Icon(AppIcons.envelope, color: AppColors.yellow),
+            ),
+          )
       ],
     );
   }
@@ -181,13 +179,19 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   children: [
                     Text(CommonMethods.formatNumber(data!.price ?? "40000000"),
                         style: kTextPriceStyle),
-                     Text(data!.rxtimeago, style: TextStyle(fontSize: 13, color: AppColors.black50)),
+                    Text(data!.rxtimeago,
+                        style:
+                            TextStyle(fontSize: 13, color: AppColors.black50)),
                   ],
                 ),
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
-                    Icon(Icons.map, color: AppColors.black50, size: 13,),
+                    Icon(
+                      AppIcons.map_marker,
+                      color: AppColors.black50,
+                      size: 13,
+                    ),
                     Text(
                       "371 Nguyễn Kiệm",
                       style: TextStyle(fontSize: 13, color: AppColors.black50),
@@ -279,7 +283,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             ),
             title: GestureDetector(
               onTap: () {},
-              child: Text(data!.usercontactname ?? "Nguyễn Trọng Hữu",
+              child: Text(data!.fullname ?? "Nguyễn Trọng Hữu",
                   style: const TextStyle().bold),
             ),
             subtitle: Row(
@@ -306,7 +310,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 SizedBox(
                   width: 120,
                   child: Icon(
-                    Icons.security,
+                    AppIcons.security,
                     size: 50,
                     color: Colors.blue,
                   ),
@@ -328,7 +332,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           minimumSize: const Size.fromHeight(36), // NEW
                         ),
                         icon: Icon(
-                          Icons.warning,
+                          AppIcons.warning,
                           color: AppColors.yellow,
                         ),
                         label: Text(

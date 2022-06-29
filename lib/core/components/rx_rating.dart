@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
@@ -91,7 +92,7 @@ class _RatingState extends State<RxReview> {
                     direction: Axis.horizontal,
                     itemCount: 5,
                     itemBuilder: (context, _) => const Icon(
-                      Icons.star,
+                      AppIcons.star_1,
                       color: Colors.amber,
                     ),
                     allowHalfRating: true,
@@ -162,7 +163,7 @@ class _RatingState extends State<RxReview> {
                             color: Colors.blue, fontWeight: FontWeight.w500),
                       ),
                       Icon(
-                        Icons.chevron_right,
+                        AppIcons.chevron_right,
                         color: Colors.blue,
                       )
                     ],
@@ -193,7 +194,7 @@ class _RatingState extends State<RxReview> {
                 direction: Axis.horizontal,
                 itemCount: 5,
                 itemBuilder: (context, _) => const Icon(
-                  Icons.star,
+                  AppIcons.star_1,
                   color: Colors.amber,
                 ),
                 onRatingUpdate: (_) {},
@@ -234,7 +235,7 @@ class _RatingState extends State<RxReview> {
         direction: Axis.horizontal,
         itemCount: 5,
         itemBuilder: (context, _) => const Icon(
-          Icons.star,
+          AppIcons.star_1,
           color: Colors.amber,
         ),
         onRatingUpdate: (_) {},

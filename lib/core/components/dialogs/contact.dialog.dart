@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -130,7 +131,7 @@ class _ContactDialogState extends State<ContactDialog> {
     String type,
     dynamic id, {
     String? title,
-    String hideText = "Chọn lọc",
+    String hintText = "Chọn lọc",
     bool Function(dynamic)? fnWhere,
     dynamic Function(dynamic)? afterChange,
     bool isRequire = false,
@@ -150,13 +151,13 @@ class _ContactDialogState extends State<ContactDialog> {
           ],
         ),
       ),
-      subtitle: Text(name != null && name.length > 0 ? name : hideText,
+      subtitle: Text(name != null && name.length > 0 ? name : hintText,
           style: TextStyle(
               color:
                   name != null && name.length > 0 ? AppColors.primary : null)),
       onTap: () =>
           _onSelect(type, id, fnWhere: fnWhere, afterChange: afterChange),
-      trailing: Icon(Icons.keyboard_arrow_right),
+      trailing: Icon(AppIcons.chevron_right),
     );
   }
 

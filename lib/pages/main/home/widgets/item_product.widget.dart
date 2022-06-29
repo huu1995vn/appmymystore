@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -112,18 +113,18 @@ class ItemProductWidget extends StatelessWidget {
                                 Row(
                                   children: [
                                     const Icon(
-                                      Icons.brightness_low_outlined,
+                                      AppIcons.rocket_1,
                                       color: AppColors.yellow,
                                       size: 19,
                                     ),
-                                    Text("Tin ưu tiên",
+                                    Text(" Tin ưu tiên",
                                         style: const TextStyle(
                                           color: AppColors.yellow,
                                         ).bold.size(10)),
                                   ],
                                 ),
                                 const Icon(
-                                  Icons.favorite_border_outlined,
+                                  AppIcons.heart_1,
                                   color: AppColors.primary,
                                   size: 19,
                                 )

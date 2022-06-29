@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,18 +38,13 @@ class ThemeService {
     AppTheme(
       mode: ThemeMode.light,
       title: 'Light',
-      icon: Icons.brightness_5_rounded,
+      icon: AppIcons.sun,
     ),
     AppTheme(
       mode: ThemeMode.dark,
       title: 'Dark',
-      icon: Icons.brightness_2_rounded,
+      icon: AppIcons.sun,
     ),
-    // AppTheme(
-    //   mode: ThemeMode.system,
-    //   title: 'System',
-    //   icon: Icons.brightness_4_rounded,
-    // ),
   ];
   static Color getShade(Color color, {bool darker = false, double value = .1}) {
     assert(value >= 0 && value <= 1);

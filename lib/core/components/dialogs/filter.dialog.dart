@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -266,7 +267,7 @@ class _FilterDialogState extends State<FilterDialog> {
   Widget _selectInput(
     String type, {
     String? title,
-    String hideText = "Chọn lọc",
+    String hintText = "Chọn lọc",
     bool Function(dynamic)? fnWhere,
     dynamic Function()? afterChange,
   }) {
@@ -276,13 +277,13 @@ class _FilterDialogState extends State<FilterDialog> {
         title ?? type.tr(),
         style: styleTitle,
       ),
-      subtitle: Text(name != null && name.length > 0 ? name : hideText,
+      subtitle: Text(name != null && name.length > 0 ? name : hintText,
           style: TextStyle(
               color:
                   name != null && name.length > 0 ? AppColors.primary : null)),
       onTap: () => _onSelect(type, searchParams[type],
           fnWhere: fnWhere, afterChange: afterChange),
-      trailing: Icon(Icons.keyboard_arrow_right),
+      trailing: Icon(AppIcons.chevron_right),
     );
   }
 }

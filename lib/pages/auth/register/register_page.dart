@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -100,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: <Widget>[
                 RxInput(user!.fullname!,
                     labelText: "fullname".tr(),
-                    icon: const Icon(Icons.person),
+                    icon: const Icon(AppIcons.user_1),
                     onChanged: (v) => {
                           user!.fullname = v
                         },
@@ -110,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 RxInput(user!.phone!,
                     keyboardType: TextInputType.number,
                     labelText: "phone".tr(),
-                    icon: const Icon(Icons.phone),
+                    icon: const Icon(AppIcons.phone_handset),
                     onChanged: (v) => {
                           user!.phone = v
                         },
@@ -127,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   user!.password!,
                   isPassword: true,
                   labelText: "password.text".tr(),
-                  icon: const Icon(Icons.lock),
+                  icon: const Icon(AppIcons.lock_1),
                   onChanged: (v) => {
                      user!.password = v
                   },
@@ -141,7 +142,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   passwordAgain,
                   isPassword: true,
                   labelText: "password.again".tr(),
-                  icon: const Icon(Icons.lock),
+                  icon: const Icon(AppIcons.lock_1),
                   validator: (value) {
                     if (value != null && value != user!.password) {
                       return "invalid.password.again".tr();

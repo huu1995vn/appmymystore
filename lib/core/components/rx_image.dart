@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -39,7 +40,7 @@ class RxImage extends StatelessWidget {
               width: width ?? MediaQuery.of(context).size.width,
               height: fullHeight ? MediaQuery.of(context).size.height : height,
               fit: fit,
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(AppIcons.sad),
             )
           : FadeInImage(
               width: width ?? MediaQuery.of(context).size.width,

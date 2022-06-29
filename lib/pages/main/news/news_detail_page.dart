@@ -48,7 +48,7 @@ class NewsDetailPageState extends State<NewsDetailPage> {
     return RxWebView(
       url: initialUrl,
       javaScriptString: '''document.querySelectorAll("section.header, section.get-info, section.footer-info, .breadcrumb, .navbar-custom").forEach(e => e.remove());''',
-      title: "news".tr(),
+      title: "news.text".tr(),
     );
   }
 }

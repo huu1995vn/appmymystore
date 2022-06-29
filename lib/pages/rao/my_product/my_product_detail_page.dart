@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
@@ -95,13 +96,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                       backgroundColor: AppColors.grey,
                       actions: <Widget>[
                         IconButton(
-                          icon: Icon(Icons.brightness_low_outlined,
+                          icon: Icon(AppIcons.rocket_1,
                               color: AppColors.black50),
                           onPressed: () {},
                         ),
                         IconButton(
                           icon: Icon(
-                            Icons.upload,
+                            AppIcons.cloud_upload,
                             color: AppColors.black50,
                           ),
                           tooltip: 'Share',
@@ -151,7 +152,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       Text("${'price'.tr()}: ",
                                           style: kTextTitleStyle),
                                       Text(
-                                        data!.price > 0
+                                        data!.price! > 0
                                             ? CommonMethods.formatNumber(
                                                 data!.price)
                                             : "Liên hệ",
@@ -182,7 +183,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                               child: Padding(
                             padding: kEdgeInsetsPadding,
                             child: TextFormField(
-                              initialValue: data!.description,
+                              initialValue: data!.des,
                               minLines:
                                   6, // any number you need (It works as the rows for the textarea)
                               keyboardType: TextInputType.multiline,
@@ -232,7 +233,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                               title: GestureDetector(
                                 onTap: () {},
                                 child: Text(
-                                    data!.usercontactname ?? "Nguyễn Trọng Hữu",
+                                    data!.fullname ?? "Nguyễn Trọng Hữu",
                                     style: const TextStyle().bold),
                               ),
                               subtitle: Column(
@@ -241,13 +242,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                 // mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    data!.usercontactphone ?? "0379787904",
+                                    data!.phone ?? "0379787904",
                                     style: const TextStyle(
                                       color: AppColors.black50,
                                     ).bold.size(12),
                                   ),
                                   Text(
-                                    data!.usercontactaddress ?? "Tp.HCM",
+                                    data!.address ?? "Tp.HCM",
                                     style: const TextStyle(
                                       color: AppColors.black50,
                                     ).bold.size(12),
@@ -343,7 +344,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     String type,
     dynamic value, {
     String? title,
-    String hideText = "Chọn lọc",
+    String hintText = "Chọn lọc",
     bool Function(dynamic)? fnWhere,
     dynamic Function(dynamic)? afterChange,
   }) {
@@ -353,13 +354,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         title ?? type.tr(),
         style: styleTitle,
       ),
-      subtitle: Text(name != null && name.length > 0 ? name : hideText,
+      subtitle: Text(name != null && name.length > 0 ? name : hintText,
           style: TextStyle(
               color:
                   name != null && name.length > 0 ? AppColors.primary : null)),
       onTap: () =>
           _onSelect(type, value, fnWhere: fnWhere, afterChange: afterChange),
-      trailing: Icon(Icons.keyboard_arrow_right),
+      trailing: Icon(AppIcons.chevron_right),
     );
   }
 }

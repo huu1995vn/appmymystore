@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:date_time_picker/date_time_picker.dart';
@@ -175,7 +176,7 @@ class _UserPageState extends State<UserPage> {
                                     "notempty.address.text".tr()),
                               ]),
                               onTap: _onAddress,
-                              suffixIcon: Icon(Icons.keyboard_arrow_down),
+                              suffixIcon: Icon(AppIcons.chevron_right),
                             ),
                           ),
                           ListTile(

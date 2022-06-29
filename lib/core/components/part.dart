@@ -7,12 +7,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_skeleton/flutter_skeleton.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -51,7 +55,6 @@ class RxDisabled extends StatelessWidget {
             child: child));
   }
 }
-
 
 class RxWebView extends StatefulWidget {
   String? url;
@@ -415,5 +418,107 @@ class RxPrimaryButton extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Widget rxTextInput(BuildContext context, String? value,
+    {Widget? title,
+    String? hintText = "Nhập",
+    String? labelText,
+    bool isBorder = false,
+    TextInputType? keyboardType = TextInputType.text,
+    void Function(String)? onChanged,
+    String? Function(String?)? validator}) {
+  return ListTile(
+    title: title ??
+        RichText(
+          text: TextSpan(
+            children: <TextSpan>[
+              TextSpan(
+                  text: labelText ?? "",
+                  style: kTextTitleStyle.copyWith(
+                      color: Theme.of(context).textTheme.bodyText1!.color)),
+              if (validator != null)
+                const TextSpan(
+                    text: ' *',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: AppColors.primary)),
+            ],
+          ),
+        ),
+    subtitle: RxInput(value ?? "",
+        isBorder: isBorder,
+        keyboardType: keyboardType,
+        onChanged: onChanged,
+        hintText: hintText,
+        style: TextStyle(
+            color:
+                value != null && value.length > 0 ? AppColors.primary : null).size(13),
+        validator: validator,
+        suffixIcon: const Icon(null)),
+  );
+}
+
+Widget rxSelectInput(BuildContext context, String type, dynamic id,
+    {Widget? title,
+    String? labelText,
+    String hintText = "Chọn lọc",
+    bool isBorder = false,
+    bool Function(dynamic)? fnWhere,
+    dynamic Function(dynamic)? afterChange,
+    String? Function(String?)? validator}) {
+  var name = CommonMethods.getNameMasterById(type, id);
+  return ListTile(
+    title: title ??
+        RichText(
+          text: TextSpan(
+            // text: lableText ?? type.tr(),
+            children: <TextSpan>[
+              TextSpan(
+                  text: labelText ?? type.tr(),
+                  style: kTextTitleStyle.copyWith(
+                      color: Theme.of(context).textTheme.bodyText1!.color)),
+              if (validator != null)
+                const TextSpan(
+                    text: ' *',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: AppColors.primary)),
+            ],
+          ),
+        ),
+    subtitle: RxInput(name,
+        isBorder: isBorder,
+        readOnly: true,
+        hintText: hintText,
+        style: TextStyle(
+                color:
+                    name != null && name.length > 0 ? AppColors.primary : null)
+            .size(13),
+        validator: validator, onTap: () {
+      _onSelect(context, type, id, fnWhere: fnWhere, afterChange: afterChange);
+    }, suffixIcon: const Icon(AppIcons.chevron_right)),
+    // onTap: () {
+    //   _onSelect(context, type, id, fnWhere: fnWhere, afterChange: afterChange);
+    // },
+    // trailing: const Icon(AppIcons.chevron_right),
+  );
+
+  // GestureDetector(
+  //   onTap: () =>  _onSelect(context, type, id,
+  //       fnWhere: fnWhere, afterChange: afterChange),
+  //   child:
+  // );
+}
+
+_onSelect(BuildContext context, String type, dynamic id,
+    {bool Function(dynamic)? fnWhere, Function(dynamic)? afterChange}) async {
+  List data = MasterDataService.data[type];
+  if (fnWhere != null) {
+    data = data.where(fnWhere!).toList();
+  }
+  var res = await showSearch(
+      context: context, delegate: RxSelectDelegate(data: data, value: id));
+  if (res != null) {
+    if (afterChange != null) afterChange!(res);
   }
 }

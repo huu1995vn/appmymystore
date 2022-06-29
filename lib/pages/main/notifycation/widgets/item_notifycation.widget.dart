@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -22,7 +23,7 @@ class ItemNotifycationWidget extends StatelessWidget {
             onPressed: onDelete,
             backgroundColor: AppColors.danger,
             foregroundColor: Colors.white,
-            icon: Icons.delete,
+            icon: AppIcons.trash_1,
             label: 'Delete',
           ),
         ],
@@ -38,7 +39,7 @@ class ItemNotifycationWidget extends StatelessWidget {
         ),
         leading: const CircleAvatar(
             backgroundColor: AppColors.grayDark,
-            child: Icon(Icons.notifications,
+            child: Icon(AppIcons.alarm,
                 color: AppColors.primary800, size: 30)),
         subtitle: Text(itemNews.publishdate),
       ),

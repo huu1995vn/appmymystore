@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -38,10 +39,10 @@ class UserTopWidget extends StatelessWidget {
                         child: GestureDetector(
                           onTap: onUpload,
                           child: const CircleAvatar(
-                            backgroundColor: Colors.white,
+                            backgroundColor: AppColors.grey,
                             radius: 20.0,
                             child: Icon(
-                              Icons.camera_alt,
+                              AppIcons.camera_1,
                               size: 20.0,
                               color: Color(0xFF404040),
                             ),

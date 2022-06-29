@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
@@ -13,6 +14,7 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class ContactDetailPage extends StatefulWidget {
@@ -61,149 +63,101 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
     }
   }
 
-  _onCity() async {
-        int cityid = data!.cityid == null ? -1 : data!.cityid;
-
-    var res = await showSearch(
-        context: context,
-        delegate: RxSelectDelegate(
-            data: MasterDataService.data["city"],
-            value: cityid));
-    if (res != null) {
-      setState(() {
-        data!.cityid = res;
-        data!.cityname = MasterDataService.getNameById("city", res ?? 0);
-        data!.districtid =0;
-        data!.districtname = "";
-      });
-    }
-  }
-
-  _onDistrict() async {
-   
-    var district = data!.cityid > 0
-        ? MasterDataService.data["district"]
-            .where((element) => element['cityid'] == data!.cityid)
-            .toList()
-        : [];
-    var res = await showSearch(
-        context: context,
-        delegate:
-            RxSelectDelegate(data: district, value: data!.districtid));
-    if (res != null) {
-      setState(() {
-        data!.districtid = res;
-        data!.districtname =
-            MasterDataService.getNameById("district", res ?? "-1");
-      });
-    }
-  }
-
   _onSave() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).cardColor,
-      body: data == null
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar(
-                  iconTheme: IconThemeData(
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .color, //change your color here
+        body: data == null
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                    iconTheme: IconThemeData(
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .color, //change your color here
+                    ),
+                    centerTitle: true,
+                    title: Text("info.concat".tr(),
+                        style: kTextHeaderStyle.copyWith(
+                            color:
+                                Theme.of(context).textTheme.bodyText1!.color)),
+                    backgroundColor: Colors.transparent,
+                    elevation: 0.0,
                   ),
-                  centerTitle: true,
-                  title: Text("info.concat".tr(),
-                      style: kTextHeaderStyle.copyWith(
-                          color: Theme.of(context).textTheme.bodyText1!.color)),
-                  backgroundColor: AppColors.grey,
-                  elevation: 0.0,
-                ),
-                SliverToBoxAdapter(
-                    child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Form(
+                  SliverToBoxAdapter(
+                      child: Card(
+                          child: Form(
                     key: _keyValidationForm,
                     child: Column(
                       children: <Widget>[
-                        RxInput(data!.fullname!,
-                            isBorder: true,
+                        rxTextInput(context, data!.fullname,
                             labelText: "fullname".tr(),
-                            onChanged: (v) => {
-                                  setState(() => {data!.fullname = v})
-                                },
+                            onChanged: (v) => {data!.fullname = v},
                             validator: Validators.compose([
-                              Validators.required(
-                                  "notempty.fullname.text".tr()),
+                              Validators.required("notempty.text".tr()),
                             ])),
-                        RxInput(data!.phone!,
-                            isBorder: true,
-                            keyboardType: TextInputType.number,
+                        rxTextInput(context, data!.phone,
                             labelText: "phone".tr(),
-                            onChanged: (v) => {
-                                  setState(() => {data!.phone = v})
-                                },
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) => {data!.phone = v},
                             validator: (v) {
                               if (v == null || !v.isNotEmpty) {
-                                return "notempty.phone.text".tr();
+                                return "notempty.text".tr();
                               } else {
                                 return CommonMethods.checkStringPhone(v)
                                     ? null
                                     : "invalid.phone".tr();
                               }
                             }),
-                        RxInput(
-                          data!.cityname ?? "",
-                          isBorder: true,
-                          readOnly: true,
-                          labelText: "city".tr(),
-                          onChanged: (v) => {data!.cityname = v},
-                          validator: Validators.compose([
-                            Validators.required("notempty.city.text".tr()),
-                          ]),
-                          onTap: _onCity,
-                          suffixIcon: Icon(Icons.keyboard_arrow_down),
-                        ),
-                        RxInput(
-                          data!.districtname ?? "",
-                          isBorder: true,
-                          readOnly: true,
-                          labelText: "district".tr(),
-                          onChanged: (v) => {data!.districtname = v},
-                          validator: Validators.compose([
-                            Validators.required("notempty.district.text".tr()),
-                          ]),
-                          onTap: _onDistrict,
-                          suffixIcon: Icon(Icons.keyboard_arrow_down),
-                        ),
-                        RxInput(data!.address!,
-                            isBorder: true,
+                        rxSelectInput(context, "city", data!.cityid,
+                            afterChange: (v) => {
+                                  setState(() {
+                                    data!.cityid = v;
+                                    data!.districtid = 0;
+                                  })
+                                },
+                            validator: (v) {
+                              if (!(data!.cityid > 0)) {
+                                return "notempty.text".tr();
+                              }
+                            }),
+                        rxSelectInput(context, "district", data!.districtid,
+                            fnWhere: (item) {
+                              return item["cityid"] == data!.cityid;
+                            },
+                            afterChange: (v) => {
+                                  setState(() {
+                                    data!.districtid = v;
+                                  })
+                                },
+                            validator: (v) {
+                              if (!(data!.districtid > 0)) {
+                                return "notempty.text".tr();
+                              }
+                            }),
+                        rxTextInput(context, data!.address,
                             labelText: "address".tr(),
                             onChanged: (v) => {data!.address = v},
                             validator: Validators.compose([
-                              Validators.required("notempty.address.text".tr()),
+                              Validators.required("notempty.text".tr()),
                             ])),
                       ],
                     ),
-                  ),
-                ))
-              ],
-            ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(kDefaultPadding),
-        child: RxPrimaryButton(
-            onTap: () {
-              if (_keyValidationForm.currentState!.validate()) {
-                _onSave();
-              }
-            },
-            text: 'save'.tr()),
-      ),
-    );
+                  )))
+                ],
+              ),
+        persistentFooterButtons: [
+          RxPrimaryButton(
+              onTap: () {
+                if (_keyValidationForm.currentState!.validate()) {
+                  _onSave();
+                }
+              },
+              text: 'save'.tr())
+        ]);
   }
 }

@@ -25,6 +25,7 @@ class ThemeService {
       textTheme: GoogleFonts.latoTextTheme(
           ThemeData(brightness: isDark ? Brightness.dark : Brightness.light)
               .textTheme),
+      iconTheme: const IconThemeData(size: 19),
       appBarTheme: AppBarTheme(
         elevation: 0,
         backgroundColor: primaryColor,

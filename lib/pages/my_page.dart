@@ -128,14 +128,14 @@ class _MyPageState extends State<MyPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             RxButtonBar(
-              icon: const Icon(AppIcons.home_1, size: 19),
+              icon: const Icon(AppIcons.home_1, size: 17),
               isEnable: _selectedIndex == 0,
               onPressed: () {
                 onPressedTab(0);
               },
             ),
             RxButtonBar(
-              icon: Icon(AppIcons.earth, size: 19),
+              icon: Icon(AppIcons.earth, size: 17),
               isEnable: _selectedIndex == 1,
               onPressed: () {
                 onPressedTab(1);
@@ -146,7 +146,7 @@ class _MyPageState extends State<MyPage> {
             ),
             Stack(children: <Widget>[
               RxButtonBar(
-                icon: Icon(AppIcons.alarm),
+                icon: Icon(AppIcons.alarm, size: 19),
                 isEnable: _selectedIndex == 2,
                 onPressed: () {
                   onPressedTab(2);
@@ -178,7 +178,7 @@ class _MyPageState extends State<MyPage> {
                 )
             ]),
             RxButtonBar(
-              icon: const Icon(AppIcons.user_1, size: 19),
+              icon: const Icon(AppIcons.user_1, size: 17),
               isEnable: _selectedIndex == 3,
               onPressed: () {
                 onPressedTab(3);

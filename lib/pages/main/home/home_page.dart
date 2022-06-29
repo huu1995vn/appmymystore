@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage>
               : LOGORAOXECOLORIMAGE,
           fit: BoxFit.contain,
           alignment: Alignment.center,
-          height: 40,
+          height: 35,
         ),
       ),
       actions: <Widget>[
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage>
                   shape: CircleBorder(),
                 ),
                 child: IconButton(
-                  iconSize: 22,
+                  iconSize: 17,
                   icon: const Icon(AppIcons.magnifier),
                   color: AppColors.primary,
                   onPressed: () => {_onSearch()},

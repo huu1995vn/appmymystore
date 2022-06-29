@@ -152,7 +152,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       Text("${'price'.tr()}: ",
                                           style: kTextTitleStyle),
                                       Text(
-                                        data!.price! > 0
+                                        (data!.price!=null &&  data!.price! > 0)
                                             ? CommonMethods.formatNumber(
                                                 data!.price)
                                             : "Liên hệ",

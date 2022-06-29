@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty
 
 import 'dart:convert';
 import 'dart:io';
@@ -20,6 +20,7 @@ import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 // ignore: unused_import
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
@@ -42,7 +43,7 @@ class _UserPageState extends State<UserPage> {
   }
 
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
- 
+
   loadData() async {
     try {
       ResponseModel res = await DaiLyXeApiBLL_APIUser().getuser();
@@ -52,7 +53,7 @@ class _UserPageState extends State<UserPage> {
           data = user;
           urlImage = data!.rximg;
         });
-        
+
         Provider.of<UserProvider>(context, listen: false).setUserModel(user);
       } else {
         CommonMethods.showToast(res.message);
@@ -69,9 +70,8 @@ class _UserPageState extends State<UserPage> {
       if (file == null) return;
       CommonMethods.lockScreen();
       if (file != null) {
-        
-        int idAvatar =
-            await FileService().uploadImage(file, idFile: -1, name: data!.fullname!);
+        int idAvatar = await FileService()
+            .uploadImage(file, idFile: -1, name: data!.fullname!);
         // ignore: curly_braces_in_flow_control_structures
         if (data!.img != idAvatar) {
           var dataClone = data!.clone();
@@ -136,80 +136,100 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).cardColor,
+        backgroundColor: Colors.transparent,
         body: data == null
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : RxCustomScrollView(
+            : CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
-                      expandedHeight: 250.0,
-                      flexibleSpace: UserTopWidget(data, onUpload: onUpload)),
+                    iconTheme: IconThemeData(
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .color, //change your color here
+                    ),
+                    expandedHeight: 250.0,
+                    flexibleSpace: UserTopWidget(data, onUpload: onUpload),
+                    backgroundColor: Colors.transparent,
+                  ),
                   SliverToBoxAdapter(
                       child: Padding(
                     padding: const EdgeInsets.all(kDefaultPadding),
                     child: Form(
-                      key: _keyValidationForm,
-                      child: Column(
-                        children: <Widget>[
-                          ListTile(
-                            title: Text("fullname".tr(),
-                                style: kTextTitleStyle),
-                            subtitle: RxInput(data!.fullname!,
-                                onChanged: (v) => {data!.fullname = v},
-                                hintText: "fullname".tr(),
+                        key: _keyValidationForm,
+                        child: Card(
+                            child: Column(
+                          children: <Widget>[
+                            rxTextInput(context, data!.fullname,
+                                labelText: "fullname".tr(),
+                                onChanged: (v) => {data!.address = v},
                                 validator: Validators.compose([
-                                  Validators.required(
-                                      "notempty.fullname.text".tr()),
+                                  Validators.required("fullname.text".tr()),
                                 ])),
-                          ),
-                          ListTile(
-                            title: Text("address".tr(),
-                                style: kTextTitleStyle),
-                            subtitle: RxInput(
-                              readOnly: true,
-                              data!.address!,
-                              onChanged: (v) => {data!.address = v},
-                              validator: Validators.compose([
-                                Validators.required(
-                                    "notempty.address.text".tr()),
-                              ]),
-                              onTap: _onAddress,
-                              suffixIcon: Icon(AppIcons.chevron_right),
+                            rxTextInput(context, data!.address,
+                                labelText: "address".tr(),
+                                onTap: _onAddress,
+                                validator: Validators.compose([
+                                  Validators.required("fullname.text".tr()),
+                                ])),
+                            ListTile(
+                              title: RichText(
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: "birthday".tr(),
+                                        style: kTextTitleStyle.copyWith(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color)),
+                                    const TextSpan(
+                                        text: ' *',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.primary)),
+                                  ],
+                                ),
+                              ),
+                              subtitle: DateTimePicker(
+                                style: TextStyle(
+                                        color: data!.birthdate != null &&
+                                                data!.birthdate!
+                                                        .toString()
+                                                        .length >
+                                                    0
+                                            ? AppColors.primary
+                                            : null)
+                                    .size(13),
+                                locale: Locale("vi"),
+                                initialValue: CommonMethods.convertToDateTime(
+                                        data!.birthdate!)
+                                    .toString(),
+                                dateMask: 'dd-MM-yyyy',
+                                firstDate: DateTime(1977),
+                                lastDate: DateTime(2100),
+                                onChanged: (value) => {data!.birthdate = value},
+                              ),
                             ),
-                          ),
-                          ListTile(
-                            title: Text("birthday".tr(),
-                                style: kTextTitleStyle),
-                            subtitle: DateTimePicker(
-                              locale: Locale("vi"),
-                              initialValue: CommonMethods.convertToDateTime(
-                                      data!.birthdate!)
-                                  .toString(),
-                              dateMask: 'dd-MM-yyyy',
-                              firstDate: DateTime(1977),
-                              lastDate: DateTime(2100),
-                              onChanged: (value) => {data!.birthdate = value},
-                            ),
-                          ),
-                          ListTile(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                _CustomRadioButton("male".tr(), 1),
-                                _CustomRadioButton("female".tr(), 0),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                            ListTile(
+                              title: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  _CustomRadioButton("male".tr(), 1),
+                                  _CustomRadioButton("female".tr(), 0),
+                                ],
+                              ),
+                            )
+                          ],
+                        ))),
                   ))
                 ],
               ),
         persistentFooterButtons: [
-          RxPrimaryButton(
+          if(data!=null) RxPrimaryButton(
               onTap: () {
                 if (_keyValidationForm.currentState!.validate()) {
                   _onSave();

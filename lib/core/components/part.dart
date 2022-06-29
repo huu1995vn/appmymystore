@@ -428,7 +428,8 @@ Widget rxTextInput(BuildContext context, String? value,
     bool isBorder = false,
     TextInputType? keyboardType = TextInputType.text,
     void Function(String)? onChanged,
-    String? Function(String?)? validator}) {
+    String? Function(String?)? validator,
+    void Function()? onTap}) {
   return ListTile(
     title: title ??
         RichText(
@@ -447,10 +448,12 @@ Widget rxTextInput(BuildContext context, String? value,
           ),
         ),
     subtitle: RxInput(value ?? "",
+        readOnly: onTap!=null,
         isBorder: isBorder,
         keyboardType: keyboardType,
         onChanged: onChanged,
         hintText: hintText,
+        onTap: onTap,
         style: TextStyle(
             color:
                 value != null && value.length > 0 ? AppColors.primary : null).size(13),

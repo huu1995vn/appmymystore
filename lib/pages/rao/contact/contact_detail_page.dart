@@ -67,6 +67,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.transparent,
         body: data == null
             ? Center(
                 child: CircularProgressIndicator(),
@@ -85,69 +86,73 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                         style: kTextHeaderStyle.copyWith(
                             color:
                                 Theme.of(context).textTheme.bodyText1!.color)),
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: AppColors.grey,
                     elevation: 0.0,
                   ),
                   SliverToBoxAdapter(
+                      child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: kDefaultPadding),
+                    child: Form(
+                      key: _keyValidationForm,
                       child: Card(
-                          child: Form(
-                    key: _keyValidationForm,
-                    child: Column(
-                      children: <Widget>[
-                        rxTextInput(context, data!.fullname,
-                            labelText: "fullname".tr(),
-                            onChanged: (v) => {data!.fullname = v},
-                            validator: Validators.compose([
-                              Validators.required("notempty.text".tr()),
-                            ])),
-                        rxTextInput(context, data!.phone,
-                            labelText: "phone".tr(),
-                            keyboardType: TextInputType.number,
-                            onChanged: (v) => {data!.phone = v},
-                            validator: (v) {
-                              if (v == null || !v.isNotEmpty) {
-                                return "notempty.text".tr();
-                              } else {
-                                return CommonMethods.checkStringPhone(v)
-                                    ? null
-                                    : "invalid.phone".tr();
-                              }
-                            }),
-                        rxSelectInput(context, "city", data!.cityid,
-                            afterChange: (v) => {
-                                  setState(() {
-                                    data!.cityid = v;
-                                    data!.districtid = 0;
-                                  })
-                                },
-                            validator: (v) {
-                              if (!(data!.cityid > 0)) {
-                                return "notempty.text".tr();
-                              }
-                            }),
-                        rxSelectInput(context, "district", data!.districtid,
-                            fnWhere: (item) {
-                              return item["cityid"] == data!.cityid;
-                            },
-                            afterChange: (v) => {
-                                  setState(() {
-                                    data!.districtid = v;
-                                  })
-                                },
-                            validator: (v) {
-                              if (!(data!.districtid > 0)) {
-                                return "notempty.text".tr();
-                              }
-                            }),
-                        rxTextInput(context, data!.address,
-                            labelText: "address".tr(),
-                            onChanged: (v) => {data!.address = v},
-                            validator: Validators.compose([
-                              Validators.required("notempty.text".tr()),
-                            ])),
-                      ],
+                          child: Column(
+                        children: <Widget>[
+                          rxTextInput(context, data!.fullname,
+                              labelText: "fullname".tr(),
+                              onChanged: (v) => {data!.fullname = v},
+                              validator: Validators.compose([
+                                Validators.required("notempty.text".tr()),
+                              ])),
+                          rxTextInput(context, data!.phone,
+                              labelText: "phone".tr(),
+                              keyboardType: TextInputType.number,
+                              onChanged: (v) => {data!.phone = v},
+                              validator: (v) {
+                                if (v == null || !v.isNotEmpty) {
+                                  return "notempty.text".tr();
+                                } else {
+                                  return CommonMethods.checkStringPhone(v)
+                                      ? null
+                                      : "invalid.phone".tr();
+                                }
+                              }),
+                          rxSelectInput(context, "city", data!.cityid,
+                              afterChange: (v) => {
+                                    setState(() {
+                                      data!.cityid = v;
+                                      data!.districtid = 0;
+                                    })
+                                  },
+                              validator: (v) {
+                                if (!(data!.cityid > 0)) {
+                                  return "notempty.text".tr();
+                                }
+                              }),
+                          rxSelectInput(context, "district", data!.districtid,
+                              fnWhere: (item) {
+                                return item["cityid"] == data!.cityid;
+                              },
+                              afterChange: (v) => {
+                                    setState(() {
+                                      data!.districtid = v;
+                                    })
+                                  },
+                              validator: (v) {
+                                if (!(data!.districtid > 0)) {
+                                  return "notempty.text".tr();
+                                }
+                              }),
+                          rxTextInput(context, data!.address,
+                              labelText: "address".tr(),
+                              onChanged: (v) => {data!.address = v},
+                              validator: Validators.compose([
+                                Validators.required("notempty.text".tr()),
+                              ])),
+                        ],
+                      )),
                     ),
-                  )))
+                  ))
                 ],
               ),
         persistentFooterButtons: [

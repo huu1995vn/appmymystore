@@ -124,67 +124,70 @@ class _MyPageState extends State<MyPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            RxButtonBar(
-              icon: const Icon(AppIcons.home_1, size: 17),
-              isEnable: _selectedIndex == 0,
-              onPressed: () {
-                onPressedTab(0);
-              },
-            ),
-            RxButtonBar(
-              icon: Icon(AppIcons.earth, size: 17),
-              isEnable: _selectedIndex == 1,
-              onPressed: () {
-                onPressedTab(1);
-              },
-            ),
-            const SizedBox(
-              width: 40,
-            ),
-            Stack(children: <Widget>[
+        child: SizedBox(
+          height: 40,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
               RxButtonBar(
-                icon: Icon(AppIcons.alarm, size: 19),
-                isEnable: _selectedIndex == 2,
+                icon: const Icon(AppIcons.home_1, size: 17),
+                isEnable: _selectedIndex == 0,
                 onPressed: () {
-                  onPressedTab(2);
+                  onPressedTab(0);
                 },
               ),
-              if (_totalNotifications > 0)
-                Positioned(
-                  right: 6,
-                  top: 8,
-                  child: Container(
-                    padding: EdgeInsets.all(3),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(7),
-                    ),
-                    constraints: BoxConstraints(
-                      minWidth: 14,
-                      minHeight: 14,
-                    ),
-                    child: Text(
-                      '$_totalNotifications',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 8,
+              RxButtonBar(
+                icon: Icon(AppIcons.earth, size: 17),
+                isEnable: _selectedIndex == 1,
+                onPressed: () {
+                  onPressedTab(1);
+                },
+              ),
+              const SizedBox(
+                width: 40,
+              ),
+              Stack(children: <Widget>[
+                RxButtonBar(
+                  icon: Icon(AppIcons.alarm, size: 19),
+                  isEnable: _selectedIndex == 2,
+                  onPressed: () {
+                    onPressedTab(2);
+                  },
+                ),
+                if (_totalNotifications > 0)
+                  Positioned(
+                    right: 6,
+                    top: 8,
+                    child: Container(
+                      padding: EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(7),
                       ),
-                      textAlign: TextAlign.center,
+                      constraints: BoxConstraints(
+                        minWidth: 14,
+                        minHeight: 14,
+                      ),
+                      child: Text(
+                        '$_totalNotifications',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 8,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                )
-            ]),
-            RxButtonBar(
-              icon: const Icon(AppIcons.user_1, size: 17),
-              isEnable: _selectedIndex == 3,
-              onPressed: () {
-                onPressedTab(3);
-              },
-            ),
-          ],
+                  )
+              ]),
+              RxButtonBar(
+                icon: const Icon(AppIcons.user_1, size: 17),
+                isEnable: _selectedIndex == 3,
+                onPressed: () {
+                  onPressedTab(3);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

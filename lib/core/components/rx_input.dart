@@ -69,11 +69,7 @@ class _InputTextState extends State<RxInput> {
 
   @override
   Widget build(context) {
-    return RxDisabled(
-        disabled: widget.disabled,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: kDefaultPadding),
-          child: TextFormField(
+    return TextFormField(
             onTap: widget.onTap,
             readOnly: widget.readOnly || widget.disabled,
             controller: input,
@@ -87,12 +83,12 @@ class _InputTextState extends State<RxInput> {
             style: widget.style,
             decoration: InputDecoration(
                 isDense: true,
-                contentPadding:  widget.isBorder? const EdgeInsets.fromLTRB(5, 0, 5, 0): null,
-                fillColor: widget.isBorder? AppColors.white: null ,
+                fillColor: widget.isBorder ? AppColors.white : null,
                 filled: widget.isBorder,
                 border: widget.isBorder == true
                     ? const OutlineInputBorder()
                     : InputBorder.none,
+                
                 labelText: widget.labelText,
                 hintText: widget.hintText,
                 icon: widget.icon,
@@ -108,7 +104,6 @@ class _InputTextState extends State<RxInput> {
                         },
                       )
                     : widget.suffixIcon),
-          ),
-        ));
+          );
   }
 }

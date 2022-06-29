@@ -20,8 +20,6 @@ class UserTopWidget extends StatelessWidget {
       padding: const EdgeInsets.all(kDefaultPadding),
       child: SizedBox(
         height: 250,
-
-        /// 240.0
         child: Stack(
           children: [
             Center(
@@ -56,7 +54,7 @@ class UserTopWidget extends StatelessWidget {
                   Text(
                     data!.fullname!.toUpperCase(),
                     style:
-                        const TextStyle(fontSize: 19, color: AppColors.white).bold,
+                        const TextStyle(fontSize: 19).bold,
                   ),
                   SizedBox(
                     height: 25,
@@ -67,11 +65,11 @@ class UserTopWidget extends StatelessWidget {
                   ),
                   Text(
                     data!.email!,
-                    style: const TextStyle(color: AppColors.white),
+                    // style: const TextStyle(color: AppColors.white),
                   ),
                   Text(
                     data!.phone!,
-                    style: const TextStyle(color: AppColors.white),
+                    // style: const TextStyle(color: AppColors.white),
                   )
                 ],
               ),

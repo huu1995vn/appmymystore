@@ -54,11 +54,11 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: ListTile(
                         title: Text("manager.raoxe".tr()),
                         leading: Icon(
-                          AppIcons.car,
-                          color: AppColors.primary,
-                        ),
+                            AppIcons.car,
+                            color: AppColors.primary,
+                          ),
                         onTap: () => CommonNavigates.toMyProductPage(context),
-                        subtitle: Text("Quản lý danh sách tin rao"),
+                        // subtitle: Text("Quản lý danh sách tin rao"),
                       ),
                     ),
                     _card(
@@ -69,18 +69,18 @@ class _DashboardPageState extends State<DashboardPage> {
                           color: AppColors.yellow,
                         ),
                         onTap: () => CommonNavigates.toAdvertPage(context),
-                        subtitle: Text("Quản lý danh sách quảng cáo"),
+                        // subtitle: Text("Quản lý danh sách quảng cáo"),
                       ),
                     ),
                     _card(
                       child: ListTile(
-                        title: Text("favorite"),
+                        title: Text("Favorite"),
                         leading: Icon(
                           AppIcons.heart_1,
                           color: AppColors.red,
                         ),
                         onTap: () => CommonNavigates.toContactPage(context),
-                        subtitle: Text("Sản phẩm yêu thích"),
+                        // subtitle: Text("Sản phẩm yêu thích"),
                       ),
                     ),
                     _card(
@@ -91,7 +91,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           color: AppColors.yellow,
                         ),
                         onTap: () => CommonNavigates.toContactPage(context),
-                        subtitle: Text("Danh sách đánh giá"),
+                        // subtitle: Text("Danh sách đánh giá"),
                       ),
                     ),
                     _card(
@@ -102,7 +102,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           color: AppColors.info,
                         ),
                         onTap: () => CommonNavigates.toContactPage(context),
-                        subtitle: Text("Sổ địa chỉ"),
+                        // subtitle: Text("Sổ địa chỉ"),
                       ),
                     ),
                   ],

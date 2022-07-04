@@ -113,6 +113,7 @@ class _MyAppState extends State<MyApp> {
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
                 .copyWith(
                     secondary: AppColors.primary, brightness: Brightness.dark),
+            
           ),
           themeMode: themeProvider.selectedThemeMode,
           home: SplashScreen(

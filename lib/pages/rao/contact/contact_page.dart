@@ -41,13 +41,12 @@ class _ContactPageState extends State<ContactPage> {
         "p": paging,
         "n": kItemOnPage
       };
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().advertlist(params);
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().contactlist(params);
       if (res.status > 0) {
-        List<dynamic> data = jsonDecode(res.data);
-        List<ContactModel> list =
-            data.map((val) => ContactModel.fromJson(val)).toList();
+        List<ContactModel> list = CommonMethods.convertToList<ContactModel>(
+            res.data, (val) => ContactModel.fromJson(val));
         setState(() {
-          totalItems =  list[0].rxtotalrow;
+          totalItems = list.length > 0 ? list[0].rxtotalrow : 0;
           listData ??= [];
           if (nPaging == 1) {
             listData = list;
@@ -88,20 +87,17 @@ class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.transparent,
         key: _key,
         body: RxCustomScrollView(
-         
           appBar: SliverAppBar(
             iconTheme: IconThemeData(
-              color: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .color, //change your color here
+              color: AppColors.black, //change your color here
             ),
             centerTitle: true,
             title: Text('address'.tr(),
                 style: kTextHeaderStyle.copyWith(
-                    color: Theme.of(context).textTheme.bodyText1!.color)),
+                    color: AppColors.black)),
             backgroundColor: AppColors.grey,
             elevation: 0.0,
           ),

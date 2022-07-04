@@ -42,8 +42,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
     };
     ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
     List<dynamic> data = jsonDecode(res.data);
-    List<NewsModel> list =
-        data.map((val) => NewsModel.fromJson(val)).toList();
+    List<NewsModel> list = data.map((val) => NewsModel.fromJson(val)).toList();
     setState(() {
       totalItems = list[0].rxtotalrow;
       listData ??= [];
@@ -74,6 +73,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.transparent,
         key: _key,
         body: RxCustomScrollView(
           appBar: SliverAppBar(

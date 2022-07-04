@@ -65,6 +65,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: isNotFound
           ? Expanded(child: Center(child: Text("not.found".tr())))
           : (data == null
@@ -77,10 +78,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   slivers: <Widget>[
                     SliverAppBar(
                       iconTheme: IconThemeData(
-                        color: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .color, //change your color here
+                        color: AppColors.black, //change your color here
                       ),
                       title: Image.asset(
                         LOGORAOXECOLORIMAGE,
@@ -92,8 +90,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       actions: <Widget>[
                         IconButton(
                           icon: Icon(AppIcons.heart_1,
-                              color:
-                                  isLike ? AppColors.primary : AppColors.black50),
+                              color: isLike
+                                  ? AppColors.primary
+                                  : AppColors.black50),
                           onPressed: () {},
                         ),
                         IconButton(
@@ -135,7 +134,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               decoration: BoxDecoration(color: AppColors.grey),
               width: SizeConfig.screenWidth * 0.13,
               height: kSizeHeight,
-            
               alignment: Alignment.center,
               child: Icon(AppIcons.envelope, color: AppColors.yellow),
             ),

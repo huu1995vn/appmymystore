@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 class RxSliverList extends StatefulWidget {
@@ -63,10 +64,27 @@ class RxListViewState extends State<RxSliverList>
   }
 
   Widget _bodylist_notfound() {
-    return SliverToBoxAdapter(
+    return SliverFillRemaining(
+        hasScrollBody: true,
         child: widget.noFound ??
-            Text(
-              "notfound".tr(),
+            Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 200,
+                    child: Image.asset(
+                      EMPTYDATA,
+                      height: 200,
+                      width: double.infinity,
+                    ),
+                  ),
+                  const Text(
+                    "Không tìm thấy data",
+                    
+                  ),
+                ],
+              ),
             ));
   }
 

@@ -27,7 +27,6 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Theme.of(context).cardColor,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -141,9 +140,9 @@ class _DashboardPageState extends State<DashboardPage> {
           onTap: () {
             CommonNavigates.toSettingsPage(context);
           },
-          child: const Icon(
+          child: Icon(
             AppIcons.cog_1,
-            color: AppColors.black,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             // size: 19,
           )),
       onTap: () => {},

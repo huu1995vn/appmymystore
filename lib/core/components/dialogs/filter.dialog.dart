@@ -116,15 +116,12 @@ class _FilterDialogState extends State<FilterDialog> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
-            color: Theme.of(context)
-                .textTheme
-                .bodyText1!
-                .color, //change your color here
+            color: AppColors.black, //change your color here
           ),
           centerTitle: true,
           title: Text('Bộ lọc',
               style: kTextHeaderStyle.copyWith(
-                  color: Theme.of(context).textTheme.bodyText1!.color)),
+                  color: AppColors.black)),
           backgroundColor: AppColors.grey,
           elevation: 0.0,
           actions: <Widget>[

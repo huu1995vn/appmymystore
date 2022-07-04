@@ -12,6 +12,7 @@ const kTextLightColor = Color(0xFF949098);
 const kDefaultPadding = 10.0;
 const kDefaultPaddingTop = 79.0;
 const kItemOnPage = 10;
+const kMaxImages = 15;
 const kSizeHeight = 39.0;
 const kEdgeInsetsCardPadding = EdgeInsets.only(left: kDefaultPadding, right: kDefaultPadding);
 const kEdgeInsetsPadding =  EdgeInsets.only(left: kDefaultPadding, right: kDefaultPadding, top: kDefaultPadding/2, bottom: kDefaultPadding/2);
@@ -53,6 +54,7 @@ const LOGORAOXEWHITEIMAGE = "assets/images/logo-raoxe-trang.png";
 const UUDAISVG = "assets/images/img-screen/uu-dai.svg";
 const BGBANNER = "assets/images/bg/bg-banner.png";
 const NOTFOUNDDATA = "assets/images/img-screen/no-data.png";
+const EMPTYDATA = "assets/images/img-screen/empty-data.png";
 const BGOTP = "assets/images/img-screen/otp.png";
 const String IMAGE_NOT_FOUND = "https://cdn.gianhangvn.com/image/hinh-anh-khong-ton-tai.jpg";
 

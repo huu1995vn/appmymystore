@@ -11,7 +11,9 @@ class DaiLyXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.get(
-        actionName: actionName, queryParameters: queryParameters, headers: headers);
+        actionName: actionName,
+        queryParameters: queryParameters,
+        headers: headers);
     return ResponseModel.fromJson(res);
   }
 
@@ -20,7 +22,9 @@ class DaiLyXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.put(data,
-        actionName: actionName, queryParameters: queryParameters, headers: headers);
+        actionName: actionName,
+        queryParameters: queryParameters,
+        headers: headers);
     return ResponseModel.fromJson(res);
   }
 
@@ -29,7 +33,9 @@ class DaiLyXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.post(data,
-        actionName: actionName, queryParameters: queryParameters, headers: headers);
+        actionName: actionName,
+        queryParameters: queryParameters,
+        headers: headers);
     return ResponseModel.fromJson(res);
   }
 
@@ -39,7 +45,9 @@ class DaiLyXeApiBLL_Basic {
       String? actionName,
       Map<String, dynamic>? headers]) async {
     var res = await apiDAL.delete(id,
-        actionName: actionName, queryParameters: queryParameters, headers: headers);
+        actionName: actionName,
+        queryParameters: queryParameters,
+        headers: headers);
     return ResponseModel.fromJson(res);
   }
 }
@@ -98,11 +106,9 @@ class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "newsdetail");
   }
 
-   Future<ResponseModel> ratinglist(Map<String, dynamic> body) async {
+  Future<ResponseModel> ratinglist(Map<String, dynamic> body) async {
     return await post(body, null, "ratinglist");
   }
-
-  
 }
 
 class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
@@ -121,7 +127,14 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     return await post(body, queryParameters, "update");
   }
-  
+
+  Future<ResponseModel> updateavatar(int img) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = <String, dynamic>{};
+    body["img"] = img;
+    return await post(body, queryParameters, "UpdateAvatar");
+  }
+
   Future<ResponseModel> advertlist(Map<String, dynamic> body) async {
     return await post(body, null, "advertlist");
   }
@@ -129,6 +142,15 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
   Future<ResponseModel> advertdetail(dynamic id) async {
     Map<String, dynamic> body = {"id": id};
     return await post(body, null, "advertdetail");
+  }
+
+  Future<ResponseModel> contactlist(Map<String, dynamic> body) async {
+    return await post(body, null, "contactlist");
+  }
+
+  Future<ResponseModel> contactdetail(dynamic id) async {
+    Map<String, dynamic> body = {"id": id};
+    return await post(body, null, "contactdetail");
   }
 }
 

@@ -47,7 +47,7 @@ class _AdvertPageState extends State<AdvertPage> {
         List<AdvertModel> list =
             data.map((val) => AdvertModel.fromJson(val)).toList();
         setState(() {
-          totalItems =  list[0].rxtotalrow;
+          totalItems = list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
             listData = list;
@@ -81,19 +81,17 @@ class _AdvertPageState extends State<AdvertPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.transparent,
         key: _key,
         body: RxCustomScrollView(
           appBar: SliverAppBar(
             iconTheme: IconThemeData(
-              color: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .color, //change your color here
+              color: AppColors.black, //change your color here
             ),
             centerTitle: true,
             title: Text('adv'.tr(),
                 style: kTextHeaderStyle.copyWith(
-                    color: Theme.of(context).textTheme.bodyText1!.color)),
+                    color: AppColors.black)),
             elevation: 0.0,
             backgroundColor: AppColors.grey,
           ),

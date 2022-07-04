@@ -7,6 +7,7 @@ import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';
@@ -90,10 +91,7 @@ class _ProductPageState extends State<ProductPage> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
-            color: Theme.of(context)
-                .textTheme
-                .bodyText1!
-                .color, //change your color here
+            color: AppColors.black, //change your color here
           ),
           title: SearchAppBar(
             paramsSearch: paramsSearch ?? {},

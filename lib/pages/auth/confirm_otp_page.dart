@@ -82,10 +82,10 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
       child: Scaffold(
           appBar: AppBar(
              iconTheme: IconThemeData(
-              color: Theme.of(context).textTheme.bodyText1!.color, //change your color here
+              color: AppColors.black //change your color here
             ),
             centerTitle: true,
-            title: Text("Confirm your OTP", style: kTextHeaderStyle.copyWith(color: Theme.of(context).textTheme.bodyText1!.color)),
+            title: Text("Confirm your OTP", style: kTextHeaderStyle.copyWith(color: AppColors.black)),
             backgroundColor: AppColors.grey,
             elevation: 0.0,
           ),

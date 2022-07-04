@@ -14,6 +14,7 @@ import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 
@@ -44,103 +45,121 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
-    return RxScaffold(
-      appBar: AppBar(
-        title: Text(
-          'setting'.tr(),
-          style: kTextHeaderStyle,
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            iconTheme: IconThemeData(
+              color: AppColors.black, //change your color here
+            ),
+            title: Text(
+              'setting'.tr(),
+              style: kTextHeaderStyle.copyWith(color: AppColors.black),
+            ),
+            centerTitle: true,
+            backgroundColor: AppColors.grayDark,
+            elevation: 0.0,
+          ),
+          SliverFillRemaining(
+              child: Card(
+                  child: Padding(
+                      padding: const EdgeInsets.all(kDefaultPadding),
+                      child: Column(
+                        children: [
+                          Expanded(
+                              child: ListView(
+                            shrinkWrap: true,
+                            children: [
+                              RxBuildItem(
+                                  icon: Icon(AppIcons.sun),
+                                  title: "Dark mode",
+                                  trailing: Switch(
+                                    value:
+                                        theme.selectedThemeMode.name == "dark",
+                                    onChanged: (value) {
+                                      theme.enableDarkMode(value);
+                                    },
+                                    activeTrackColor: Colors.red[200],
+                                    activeColor: Colors.red,
+                                  ),
+                                  onTap: () {
+                                    // _authenticateWithBiometrics();
+                                  }),
+                              RxBuildItem(
+                                icon: const Icon(AppIcons.text_format),
+                                title: context.locale.languageCode == "vi"
+                                    ? "Việt Nam"
+                                    : "English",
+                                trailing: Switch(
+                                  value: context.locale.languageCode != "vi",
+                                  onChanged: (value) {
+                                    context.setLocale(value
+                                        ? const Locale("en")
+                                        : const Locale("vi"));
+                                  },
+                                  activeTrackColor: Colors.red[200],
+                                  activeColor: Colors.red,
+                                ),
+                              ),
+                              RxBuildItem(
+                                  icon: const Icon(AppIcons.fingerprint),
+                                  title: "Đăng nhập bằng sinh trắc học",
+                                  trailing: Switch(
+                                    value: authBiometric,
+                                    onChanged: _onBiometric,
+                                    activeTrackColor: Colors.red[200],
+                                    activeColor: Colors.red,
+                                  ),
+                                  onTap: () {
+                                    // _authenticateWithBiometrics();
+                                  }),
+                              RxBuildItem(
+                                  title: "Clear cache".tr(),
+                                  onTap: () {
+                                    RxSearchDelegate.cacheapiSearch = {};
+                                    CommonMethods.showToast("Đã xóa cache");
+                                  }),
+                              RxBuildItem(
+                                  title: "termsandcondition".tr(),
+                                  onTap: () {
+                                    CommonMethods.openWebViewTermsAndCondition(
+                                        context);
+                                  }),
+                              RxBuildItem(
+                                  title: "policy".tr(),
+                                  onTap: () {
+                                    CommonMethods.openWebViewPolicy(context);
+                                  }),
+                              RxBuildItem(
+                                  title: "feedback".tr(),
+                                  onTap: () {
+                                    CommonMethods.openWebViewFeedBack(context);
+                                  }),
+                            ],
+                          )),
+                          RxRoundedButton(
+                            title: 'logout'.tr(),
+                            onPressed: () {
+                              AuthService.logout(context);
+                            },
+                          ),
+                          Text(
+                            "${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
+                            style: TextStyle().italic.size(12),
+                          )
+                        ],
+                      ))))
+        ],
       ),
-      child: RxWrapper(
-        body: Column(
-          children: [
-            Expanded(
-                child: Column(
-              children: [
-                RxBuildItem(
-                    icon: const Icon(AppIcons.sun),
-                    title: "Dark mode",
-                    trailing: Switch(
-                      value: theme.selectedThemeMode.name == "dark",
-                      onChanged: (value) {
-                        theme.enableDarkMode(value);
-                      },
-                      activeTrackColor: Colors.red[200],
-                      activeColor: Colors.red,
-                    ),
-                    onTap: () {
-                      // _authenticateWithBiometrics();
-                    }),
-                RxBuildItem(
-                  icon: const Icon(AppIcons.text_format),
-                  title: context.locale.languageCode == "vi"
-                      ? "Việt Nam"
-                      : "English",
-                  trailing: Switch(
-                    value: context.locale.languageCode != "vi",
-                    onChanged: (value) {
-                      context.setLocale(
-                          value ? const Locale("en") : const Locale("vi"));
-                    },
-                    activeTrackColor: Colors.red[200],
-                    activeColor: Colors.red,
-                  ),
-                ),
-                RxBuildItem(
-                    icon: const Icon(AppIcons.fingerprint),
-                    title: "Đăng nhập bằng sinh trắc học",
-                    trailing: Switch(
-                      value: authBiometric,
-                      onChanged: _onBiometric,
-                      activeTrackColor: Colors.red[200],
-                      activeColor: Colors.red,
-                    ),
-                    onTap: () {
-                      // _authenticateWithBiometrics();
-                    }),
-                RxBuildItem(
-                    title: "Clear cache".tr(),
-                    onTap: () {
-                      RxSearchDelegate.cacheapiSearch = {};
-                      CommonMethods.showToast("Đã xóa cache");
-                    }),
-                RxBuildItem(
-                    title: "termsandcondition".tr(),
-                    onTap: () {
-                      CommonMethods.openWebViewTermsAndCondition(context);
-                    }),
-                RxBuildItem(
-                    title: "policy".tr(),
-                    onTap: () {
-                      CommonMethods.openWebViewPolicy(context);
-                    }),
-                RxBuildItem(
-                    title: "feedback".tr(),
-                    onTap: () {
-                      CommonMethods.openWebViewFeedBack(context);
-                    }),
-              ],
-            )),
-            Column(
-              children: [
-                RxPrimaryButton(
-                  text: 'logout'.tr(),
-                  onTap: () {
-                    AuthService.logout(context);
-                  },
-                ),
-                Text(
-                  "${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
-                  style: TextStyle().italic,
-                )
-              ],
-            )
-          ],
-        ),
-      ),
+      // persistentFooterButtons: [
+      //   RxPrimaryButton(
+      //     text: 'logout'.tr(),
+      //     onTap: () {
+      //       AuthService.logout(context);
+      //     },
+      //   ),
+      // ],
     );
   }
 }

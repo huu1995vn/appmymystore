@@ -443,4 +443,14 @@ class CommonMethods {
       return "";
     }
   }
+  static List<T> convertToList<T>(List data, T Function(dynamic) toElement)
+  {
+    try {
+          return data.map(toElement).toList();
+
+    } catch (e) {
+        return <T>[];
+    }
+  }
+  
 }

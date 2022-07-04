@@ -5,15 +5,13 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/address.dialog.dart';
 import 'package:raoxe/core/components/dialogs/contact.dialog.dart';
-import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
@@ -76,9 +74,8 @@ class _UserPageState extends State<UserPage> {
         if (data!.img != idAvatar) {
           var dataClone = data!.clone();
           dataClone.img = idAvatar;
-
           ResponseModel res =
-              await DaiLyXeApiBLL_APIUser().updateuser(dataClone.toUpdate());
+              await DaiLyXeApiBLL_APIUser().updateavatar(idAvatar);
           if (res.status > 0) {
             setState(() {
               data = dataClone;
@@ -121,7 +118,7 @@ class _UserPageState extends State<UserPage> {
 
   _onAddress() async {
     var res = await CommonNavigates.showDialogBottomSheet(
-        context, ContactDialog(contact: data!.toContact()),
+        context, AddressDialog(contact: data!.toContact()),
         height: 350);
 
     if (res != null) {
@@ -145,10 +142,7 @@ class _UserPageState extends State<UserPage> {
                 slivers: <Widget>[
                   SliverAppBar(
                     iconTheme: IconThemeData(
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .color, //change your color here
+                      color: AppColors.black, //change your color here
                     ),
                     expandedHeight: 250.0,
                     flexibleSpace: UserTopWidget(data, onUpload: onUpload),
@@ -164,7 +158,7 @@ class _UserPageState extends State<UserPage> {
                           children: <Widget>[
                             rxTextInput(context, data!.fullname,
                                 labelText: "fullname".tr(),
-                                onChanged: (v) => {data!.address = v},
+                                onChanged: (v) => {data!.fullname = v},
                                 validator: Validators.compose([
                                   Validators.required("fullname.text".tr()),
                                 ])),
@@ -194,6 +188,7 @@ class _UserPageState extends State<UserPage> {
                                 ),
                               ),
                               subtitle: DateTimePicker(
+                                dateHintText: "birthday".tr(),
                                 style: TextStyle(
                                         color: data!.birthdate != null &&
                                                 data!.birthdate!
@@ -211,6 +206,9 @@ class _UserPageState extends State<UserPage> {
                                 firstDate: DateTime(1977),
                                 lastDate: DateTime(2100),
                                 onChanged: (value) => {data!.birthdate = value},
+                                validator: Validators.compose([
+                                  Validators.required("birthday.text".tr()),
+                                ])
                               ),
                             ),
                             ListTile(
@@ -229,13 +227,14 @@ class _UserPageState extends State<UserPage> {
                 ],
               ),
         persistentFooterButtons: [
-          if(data!=null) RxPrimaryButton(
-              onTap: () {
-                if (_keyValidationForm.currentState!.validate()) {
-                  _onSave();
-                }
-              },
-              text: 'save'.tr())
+          if (data != null)
+            RxPrimaryButton(
+                onTap: () {
+                  if (_keyValidationForm.currentState!.validate()) {
+                    _onSave();
+                  }
+                },
+                text: 'save'.tr())
         ]);
   }
 

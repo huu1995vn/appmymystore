@@ -8,14 +8,13 @@ import 'package:google_fonts/google_fonts.dart';
 class ThemeService {
   static ThemeData main({bool isDark = false}) {
     Color primaryColor = AppColors.primary;
-
     return ThemeData(
       inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
       ),
       brightness: isDark ? Brightness.dark : Brightness.light,
       primaryColor: primaryColor,
-      scaffoldBackgroundColor: isDark ? AppColors.black : AppColors.grey,
+      scaffoldBackgroundColor: isDark ? Colors.black : AppColors.grey,
       cardColor: isDark ? AppColors.blackLight : AppColors.white,
       dividerColor: isDark
           ? AppColors.white.withOpacity(0.2)
@@ -25,7 +24,7 @@ class ThemeService {
       textTheme: GoogleFonts.latoTextTheme(
           ThemeData(brightness: isDark ? Brightness.dark : Brightness.light)
               .textTheme),
-      iconTheme: const IconThemeData(size: 19),
+      iconTheme: IconThemeData(size: 19, color: isDark ?  AppColors.white : AppColors.grayDark),
       appBarTheme: AppBarTheme(
         elevation: 0,
         backgroundColor: primaryColor,

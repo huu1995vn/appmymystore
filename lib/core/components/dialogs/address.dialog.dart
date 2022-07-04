@@ -10,17 +10,17 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
-class ContactDialog extends StatefulWidget {
-  const ContactDialog({
+class AddressDialog extends StatefulWidget {
+  const AddressDialog({
     super.key,
     required this.contact,
   });
   final ContactModel contact;
   @override
-  State<ContactDialog> createState() => _ContactDialogState();
+  State<AddressDialog> createState() => _AddressDialogState();
 }
 
-class _ContactDialogState extends State<ContactDialog> {
+class _AddressDialogState extends State<AddressDialog> {
   @override
   void initState() {
     super.initState();
@@ -54,7 +54,7 @@ class _ContactDialogState extends State<ContactDialog> {
               color: AppColors.black, //change your color here
             ),
             centerTitle: true,
-            title: Text("info.concat".tr(),
+            title: Text("Địa chỉ",
                 style: kTextHeaderStyle.copyWith(
                     color: AppColors.black)),
             elevation: 0.0,
@@ -68,24 +68,6 @@ class _ContactDialogState extends State<ContactDialog> {
                       child: Card(
                           child: Column(
                         children: <Widget>[
-                          rxTextInput(context, contact.phone,
-                              labelText: "phone".tr(),
-                              onChanged: (v) => {contact.phone = v},
-                              validator: (v) {
-                                if (v == null || !v.isNotEmpty) {
-                                  return "notempty.phone.text".tr();
-                                } else {
-                                  return CommonMethods.checkStringPhone(v)
-                                      ? null
-                                      : "invalid.phone".tr();
-                                }
-                              }),
-                          rxTextInput(context, contact.fullname,
-                              labelText: "fullname".tr(),
-                              onChanged: (v) => {contact.fullname = v},
-                              validator: Validators.compose([
-                                Validators.required("notempty.text".tr()),
-                              ])),
                           rxSelectInput(context, "city", contact.cityid,
                               afterChange: (v) => {
                                     setState(() {

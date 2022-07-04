@@ -133,6 +133,7 @@ class _ListBannerWidgetState extends State<ListBannerWidget>
 
 List<T> map<T>(List list, Function handler) {
   List<T> result = [];
+  if(list==null) return result;
   for (var i = 0; i < list.length; i++) {
     result.add(handler(i, list[i]));
   }

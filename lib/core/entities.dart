@@ -250,7 +250,7 @@ class ProductModel extends Entity {
   int fueltypeid = 0;
   int madeinid = 0;
   int colorid = 0;
-  int producttypeid = 0;
+  int producttypeid = 1;
   int img = 0;
   String? imglist;
   String? name;
@@ -321,7 +321,16 @@ class ProductModel extends Entity {
     json["verifydate"] = CommonMethods.convertToDateTime(json["verifydate"]);
     return _$ProductModelFromJson(json);
   }
-
+  ContactModel toContact() {
+    ContactModel contact = ContactModel();
+    contact.id = usercontactid;
+    contact.fullname = fullname;
+    contact.phone = phone;
+    contact.address = address;
+    contact.cityid = cityid??0;
+    contact.districtid = districtid??0;
+    return contact;
+  }
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
   // Products.ProductTypeId
   //  + 1: Ban

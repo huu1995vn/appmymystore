@@ -71,7 +71,8 @@ dependencies:
   local_auth: #Used for auth device
   debounce_throttle: #Used for debounce
   flutter_slidable: #Used for action item
-
+  photo_view: #Used for show gallery
+  
 dev_dependencies:
   build_runner: # Used for code generation libraries
   json_serializable: # Used for code generation libraries

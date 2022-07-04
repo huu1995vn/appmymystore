@@ -139,7 +139,8 @@ Widget RxListSkeleton({int barCount = 3}) {
   try {
     return ListSkeleton(
       style: SkeletonStyle(
-        // backgroundColor: SystemVariables.themeData.cardColor,
+        backgroundColor:
+            CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
         isShowAvatar: false,
         barCount: barCount,
         isAnimation: true,
@@ -157,6 +158,8 @@ Widget RxCardSkeleton(
   try {
     return CardSkeleton(
       style: SkeletonStyle(
+        backgroundColor:
+            CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
         isShowAvatar: isShowAvatar ?? true,
         isCircleAvatar: isCircleAvatar ?? false,
         borderRadius:
@@ -174,7 +177,8 @@ Widget RxCardListSkeleton(
     {int barCount = 3, bool isShowAvatar = true, bool isCircleAvatar = false}) {
   return CardListSkeleton(
     style: SkeletonStyle(
-      // backgroundColor: SystemVariables.themeData.cardColor,
+      backgroundColor:
+          CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
       isShowAvatar: isShowAvatar ?? true,
       isCircleAvatar: isCircleAvatar ?? false,
       barCount: barCount,
@@ -448,15 +452,17 @@ Widget rxTextInput(BuildContext context, String? value,
           ),
         ),
     subtitle: RxInput(value ?? "",
-        readOnly: onTap!=null,
+        readOnly: onTap != null,
         isBorder: isBorder,
         keyboardType: keyboardType,
         onChanged: onChanged,
         hintText: hintText,
         onTap: onTap,
         style: TextStyle(
-            color:
-                value != null && value.length > 0 ? AppColors.primary : null).size(13),
+                color: value != null && value.length > 0
+                    ? AppColors.primary
+                    : null)
+            .size(13),
         validator: validator,
         suffixIcon: const Icon(null)),
   );
@@ -500,10 +506,6 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
         validator: validator, onTap: () {
       _onSelect(context, type, id, fnWhere: fnWhere, afterChange: afterChange);
     }, suffixIcon: const Icon(AppIcons.chevron_right)),
-    // onTap: () {
-    //   _onSelect(context, type, id, fnWhere: fnWhere, afterChange: afterChange);
-    // },
-    // trailing: const Icon(AppIcons.chevron_right),
   );
 
   // GestureDetector(

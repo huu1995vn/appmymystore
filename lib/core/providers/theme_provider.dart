@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 
 class ThemeProvider with ChangeNotifier {
@@ -9,6 +10,7 @@ class ThemeProvider with ChangeNotifier {
     selectedThemeMode = StorageService.get(StorageKeys.themeMode) == null
         ? ThemeMode.light
         : ThemeMode.values.byName(StorageService.get(StorageKeys.themeMode));
+    CommonConfig.isDark = selectedThemeMode.name == "dark";
   }
   late ThemeMode selectedThemeMode;
 
@@ -16,6 +18,7 @@ class ThemeProvider with ChangeNotifier {
     selectedThemeMode = mode;
     StorageService.set(StorageKeys.themeMode, mode.name);
     notifyListeners();
+    CommonConfig.isDark = selectedThemeMode.name == "dark";
   }
 
   enableDarkMode(bool isEnable) {

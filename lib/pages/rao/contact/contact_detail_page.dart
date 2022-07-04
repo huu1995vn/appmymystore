@@ -76,16 +76,13 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                 slivers: <Widget>[
                   SliverAppBar(
                     iconTheme: IconThemeData(
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .color, //change your color here
+                      color: AppColors.black, //change your color here
                     ),
                     centerTitle: true,
                     title: Text("info.concat".tr(),
                         style: kTextHeaderStyle.copyWith(
                             color:
-                                Theme.of(context).textTheme.bodyText1!.color)),
+                                AppColors.black)),
                     backgroundColor: AppColors.grey,
                     elevation: 0.0,
                   ),

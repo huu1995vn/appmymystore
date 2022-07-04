@@ -11,6 +11,7 @@ enum Environment {
 
 class CommonConfig {
   //system
+  static bool isDark = false;
   static Map deviceInfo = {};
   static String languageCode = "vi";
   static String env = "dev";

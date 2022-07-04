@@ -49,5 +49,5 @@ class AppColors {
   static const Color text50 = Color(0x88000000);
   static const Color black = Color(0xff001424);
   static const Color black50 = Color(0x88001424);
-  static const Color blackLight = Color(0xff011f35);
+  static const Color blackLight = Color.fromARGB(255, 30, 33, 36);
 }

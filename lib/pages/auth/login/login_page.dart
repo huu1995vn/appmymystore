@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/dialogs/confirm_otp.dialog.dart';
-import 'package:raoxe/core/components/dialogs/confirm_phone.dialog.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/services/auth.service.dart';

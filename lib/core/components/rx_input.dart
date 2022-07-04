@@ -2,9 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/constants.dart';
 
 class RxInput extends StatefulWidget {
   final String value;
@@ -70,40 +68,39 @@ class _InputTextState extends State<RxInput> {
   @override
   Widget build(context) {
     return TextFormField(
-            onTap: widget.onTap,
-            readOnly: widget.readOnly || widget.disabled,
-            controller: input,
-            keyboardType: widget.keyboardType,
-            inputFormatters: widget.keyboardType == TextInputType.number
-                ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
-                : null,
-            obscureText: !showPassword && widget.isPassword,
-            validator: widget.validator,
-            onChanged: widget.onChanged,
-            style: widget.style,
-            decoration: InputDecoration(
-                isDense: true,
-                fillColor: widget.isBorder ? AppColors.white : null,
-                filled: widget.isBorder,
-                border: widget.isBorder == true
-                    ? const OutlineInputBorder()
-                    : InputBorder.none,
-                
-                labelText: widget.labelText,
-                hintText: widget.hintText,
-                icon: widget.icon,
-                suffixIcon: widget.isPassword
-                    ? IconButton(
-                        icon: Icon(showPassword == true
-                            ? Icons.visibility_off
-                            : Icons.visibility),
-                        onPressed: () {
-                          setState(() {
-                            showPassword = !showPassword;
-                          });
-                        },
-                      )
-                    : widget.suffixIcon),
-          );
+      onTap: widget.onTap,
+      readOnly: widget.readOnly || widget.disabled,
+      controller: input,
+      keyboardType: widget.keyboardType,
+      inputFormatters: widget.keyboardType == TextInputType.number
+          ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
+          : null,
+      obscureText: !showPassword && widget.isPassword,
+      validator: widget.validator,
+      onChanged: widget.onChanged,
+      style: widget.style,
+      decoration: InputDecoration(
+          isDense: true,
+          fillColor: widget.isBorder ? AppColors.white : null,
+          filled: widget.isBorder,
+          border: widget.isBorder == true
+              ? const OutlineInputBorder()
+              : InputBorder.none,
+          labelText: widget.labelText,
+          hintText: widget.hintText,
+          icon: widget.icon,
+          suffixIcon: widget.isPassword
+              ? IconButton(
+                  icon: Icon(showPassword == true
+                      ? Icons.visibility_off
+                      : Icons.visibility),
+                  onPressed: () {
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                )
+              : widget.suffixIcon),
+    );
   }
 }

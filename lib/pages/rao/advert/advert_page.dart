@@ -43,9 +43,8 @@ class _AdvertPageState extends State<AdvertPage> {
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().advert(params);
       if (res.status > 0) {
-        List<dynamic> data = jsonDecode(res.data);
-        List<AdvertModel> list =
-            data.map((val) => AdvertModel.fromJson(val)).toList();
+        List<AdvertModel> list = CommonMethods.convertToList<AdvertModel>(
+            res.data, (val) => AdvertModel.fromJson(val));
         setState(() {
           totalItems = list[0].rxtotalrow;
           listData ??= [];
@@ -90,8 +89,7 @@ class _AdvertPageState extends State<AdvertPage> {
             ),
             centerTitle: true,
             title: Text('adv'.tr(),
-                style: kTextHeaderStyle.copyWith(
-                    color: AppColors.black)),
+                style: kTextHeaderStyle.copyWith(color: AppColors.black)),
             elevation: 0.0,
             backgroundColor: AppColors.grey,
           ),

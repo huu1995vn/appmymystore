@@ -10,7 +10,6 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/dialogs/address.dialog.dart';
-import 'package:raoxe/core/components/dialogs/contact.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';

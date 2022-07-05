@@ -45,7 +45,7 @@ class _ProductPageState extends State<ProductPage> {
     params["p"] = paging;
     params["n"] = kItemOnPage;
     ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);
-    List<dynamic> data = jsonDecode(res.data);
+    List<dynamic> data = res.data;
     // ignore: unnecessary_cast
     List<ProductModel> list = data
         .map((val) => ProductModel.fromJson(val))

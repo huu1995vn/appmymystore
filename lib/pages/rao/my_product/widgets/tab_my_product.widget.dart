@@ -52,9 +52,8 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().product(params);
       if (res.status > 0) {
-        List<dynamic> data = jsonDecode(res.data);
-        List<ProductModel> list =
-            data.map((val) => ProductModel.fromJson(val)).toList();
+        List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
+            res.data, (val) => ProductModel.fromJson(val));
         setState(() {
           totalItems = list[0].rxtotalrow;
           listData ??= [];

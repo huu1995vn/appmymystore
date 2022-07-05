@@ -52,9 +52,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
       };
       ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
       if (res.status > 0) {
-        List<dynamic> data = jsonDecode(res.data);
-        List<NewsModel> list =
-            data.map((val) => NewsModel.fromJson(val)).toList();
+        List<NewsModel> list = CommonMethods.convertToList<NewsModel>(res.data, (val) => NewsModel.fromJson(val));
         setState(() {
           totalItems = list[0].rxtotalrow;
           listData ??= [];

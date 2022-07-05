@@ -37,11 +37,10 @@ class _ReviewState extends State<RxReview> {
         "n": 2
       };
       var res = await DaiLyXeApiBLL_APIGets().review(body);
-      if (res.status > 0) {
-        
+      if (res.status > 0) {        
         if (!mounted) return;
         setState(() {
-          data = res.data; // Chỉ lấy 2 phần tử đầu.
+          data = res.data; 
         });
       }
     } catch (e) {

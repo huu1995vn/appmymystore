@@ -41,7 +41,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
       "n": kItemOnPage
     };
     ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
-    List<dynamic> data = jsonDecode(res.data);
+    List<dynamic> data = res.data;
     List<NewsModel> list = data.map((val) => NewsModel.fromJson(val)).toList();
     setState(() {
       totalItems = list[0].rxtotalrow;

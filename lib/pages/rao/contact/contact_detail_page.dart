@@ -3,10 +3,12 @@
 import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
@@ -38,28 +40,26 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
         });
       } else {
         ResponseModel res =
-            await DaiLyXeApiBLL_APIUser().advertbyid(widget.id!);
+            await DaiLyXeApiBLL_APIUser().contactbyid(widget.id!);
         if (res.status > 0) {
-          List<dynamic> ldata = jsonDecode(res.data);
           setState(() {
-            data = ContactModel.fromJson(ldata[0]);
+            data = ContactModel.fromJson(res.data);
           });
         } else {
           CommonMethods.showToast(res.message);
         }
       }
-    
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }
   }
 
   _onSave() async {
-     CommonMethods.lockScreen();
+    CommonMethods.lockScreen();
     try {
       var dataClone = data!.clone();
       ResponseModel res =
-          await DaiLyXeApiBLL_APIUser().contactsavedata(dataClone.toJson());
+          await DaiLyXeApiBLL_APIUser().contactsavedata(dataClone.toDataSave(dataClone.id));
       if (res.status > 0) {
         setState(() {
           data = dataClone;
@@ -73,8 +73,13 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
 
     CommonMethods.unlockScreen();
   }
+
   @override
   Widget build(BuildContext context) {
+    // final userProvider = Provider.of<UserProvider>(context);
+    // data!.fullname = userProvider.user.fullname;
+    // data!.phone = userProvider.user.phone;
+
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: data == null
@@ -104,25 +109,25 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                           child: ListView(
                             shrinkWrap: true,
                             children: <Widget>[
-                              // rxTextInput(context, data!.fullname,
-                              //     labelText: "fullname".tr(),
-                              //     onChanged: (v) => {data!.fullname = v},
-                              //     validator: Validators.compose([
-                              //       Validators.required("notempty.text".tr()),
-                              //     ])),
-                              // rxTextInput(context, data!.phone,
-                              //     labelText: "phone".tr(),
-                              //     keyboardType: TextInputType.number,
-                              //     onChanged: (v) => {data!.phone = v},
-                              //     validator: (v) {
-                              //       if (v == null || !v.isNotEmpty) {
-                              //         return "notempty.text".tr();
-                              //       } else {
-                              //         return CommonMethods.checkStringPhone(v)
-                              //             ? null
-                              //             : "invalid.phone".tr();
-                              //       }
-                              //     }),
+                              rxTextInput(context, data!.fullname,
+                                  labelText: "fullname".tr(),
+                                  onChanged: (v) => {data!.fullname = v},
+                                  validator: Validators.compose([
+                                    Validators.required("notempty.text".tr()),
+                                  ])),
+                              rxTextInput(context, data!.phone,
+                                  labelText: "phone".tr(),
+                                  keyboardType: TextInputType.number,
+                                  onChanged: (v) => {data!.phone = v},
+                                  validator: (v) {
+                                    if (v == null || !v.isNotEmpty) {
+                                      return "notempty.text".tr();
+                                    } else {
+                                      return CommonMethods.checkStringPhone(v)
+                                          ? null
+                                          : "invalid.phone".tr();
+                                    }
+                                  }),
                               rxSelectInput(context, "city", data!.cityid,
                                   afterChange: (v) => {
                                         setState(() {

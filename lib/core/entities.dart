@@ -327,10 +327,11 @@ class ProductModel extends Entity {
     contact.fullname = fullname;
     contact.phone = phone;
     contact.address = address;
-    contact.cityid = cityid??0;
-    contact.districtid = districtid??0;
+    contact.cityid = cityid ?? 0;
+    contact.districtid = districtid ?? 0;
     return contact;
   }
+
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
   // Products.ProductTypeId
   //  + 1: Ban
@@ -572,6 +573,27 @@ class ContactModel extends Entity {
   }
 
   Map<String, dynamic> toJson() => _$ContactModelToJson(this);
+
+  
+  Map<String, dynamic> toDataSave([id = -1]) => <String, dynamic>{
+        'id': id,
+        'fields': <String>[
+          "UserId",
+          "CityId",
+          "DistrictId",
+          "FullName",
+          "Phone",
+          "Address"
+        ],
+        'datas': <dynamic>[
+          userid,        
+          cityid,
+          districtid,
+          fullname,
+          phone,
+          address,
+        ],
+      };
 }
 
 @JsonSerializable()

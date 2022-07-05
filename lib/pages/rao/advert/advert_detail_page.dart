@@ -40,9 +40,8 @@ class _AdvertDetailPageState extends State<AdvertDetailPage> {
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().advertbyid(widget.id!);
         if (res.status > 0) {
-          List<dynamic> ldata = jsonDecode(res.data);
           setState(() {
-            data = AdvertModel.fromJson(ldata[0]);
+            data = AdvertModel.fromJson(res.data);
           });
         } else {
           CommonMethods.showToast(res.message);

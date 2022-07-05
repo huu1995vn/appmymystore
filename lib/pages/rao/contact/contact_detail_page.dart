@@ -1,20 +1,14 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable
 
 import 'dart:convert';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
-import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
-import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class ContactDetailPage extends StatefulWidget {
@@ -44,7 +38,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
         });
       } else {
         ResponseModel res =
-            await DaiLyXeApiBLL_APIUser().advertdetail(widget.id!);
+            await DaiLyXeApiBLL_APIUser().advertbyid(widget.id!);
         if (res.status > 0) {
           List<dynamic> ldata = jsonDecode(res.data);
           setState(() {
@@ -54,16 +48,31 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
           CommonMethods.showToast(res.message);
         }
       }
-      // data!.cityname =
-      //     MasterDataService.getNameById("city", int.parse(data!.cityid));
-      // data!.districtname = MasterDataService.getNameById(
-      //     "district", int.parse(data!.districtid));
+    
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }
   }
 
-  _onSave() {}
+  _onSave() async {
+     CommonMethods.lockScreen();
+    try {
+      var dataClone = data!.clone();
+      ResponseModel res =
+          await DaiLyXeApiBLL_APIUser().contactsavedata(dataClone.toJson());
+      if (res.status > 0) {
+        setState(() {
+          data = dataClone;
+        });
+      } else {
+        CommonMethods.showToast(res.message);
+      }
+    } catch (e) {
+      CommonMethods.showDialogError(context, e.toString());
+    }
+
+    CommonMethods.unlockScreen();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,74 +89,75 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                     ),
                     centerTitle: true,
                     title: Text("info.concat".tr(),
-                        style: kTextHeaderStyle.copyWith(
-                            color:
-                                AppColors.black)),
+                        style:
+                            kTextHeaderStyle.copyWith(color: AppColors.black)),
                     backgroundColor: AppColors.grey,
                     elevation: 0.0,
                   ),
-                  SliverToBoxAdapter(
-                      child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: kDefaultPadding),
-                    child: Form(
-                      key: _keyValidationForm,
+                  SliverFillRemaining(
                       child: Card(
-                          child: Column(
-                        children: <Widget>[
-                          rxTextInput(context, data!.fullname,
-                              labelText: "fullname".tr(),
-                              onChanged: (v) => {data!.fullname = v},
-                              validator: Validators.compose([
-                                Validators.required("notempty.text".tr()),
-                              ])),
-                          rxTextInput(context, data!.phone,
-                              labelText: "phone".tr(),
-                              keyboardType: TextInputType.number,
-                              onChanged: (v) => {data!.phone = v},
-                              validator: (v) {
-                                if (v == null || !v.isNotEmpty) {
-                                  return "notempty.text".tr();
-                                } else {
-                                  return CommonMethods.checkStringPhone(v)
-                                      ? null
-                                      : "invalid.phone".tr();
-                                }
-                              }),
-                          rxSelectInput(context, "city", data!.cityid,
-                              afterChange: (v) => {
-                                    setState(() {
-                                      data!.cityid = v;
-                                      data!.districtid = 0;
-                                    })
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.symmetric(vertical: kDefaultPadding),
+                      child: Form(
+                          key: _keyValidationForm,
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: <Widget>[
+                              // rxTextInput(context, data!.fullname,
+                              //     labelText: "fullname".tr(),
+                              //     onChanged: (v) => {data!.fullname = v},
+                              //     validator: Validators.compose([
+                              //       Validators.required("notempty.text".tr()),
+                              //     ])),
+                              // rxTextInput(context, data!.phone,
+                              //     labelText: "phone".tr(),
+                              //     keyboardType: TextInputType.number,
+                              //     onChanged: (v) => {data!.phone = v},
+                              //     validator: (v) {
+                              //       if (v == null || !v.isNotEmpty) {
+                              //         return "notempty.text".tr();
+                              //       } else {
+                              //         return CommonMethods.checkStringPhone(v)
+                              //             ? null
+                              //             : "invalid.phone".tr();
+                              //       }
+                              //     }),
+                              rxSelectInput(context, "city", data!.cityid,
+                                  afterChange: (v) => {
+                                        setState(() {
+                                          data!.cityid = v;
+                                          data!.districtid = 0;
+                                        })
+                                      },
+                                  validator: (v) {
+                                    if (!(data!.cityid > 0)) {
+                                      return "notempty.text".tr();
+                                    }
+                                  }),
+                              rxSelectInput(
+                                  context, "district", data!.districtid,
+                                  fnWhere: (item) {
+                                    return item["cityid"] == data!.cityid;
                                   },
-                              validator: (v) {
-                                if (!(data!.cityid > 0)) {
-                                  return "notempty.text".tr();
-                                }
-                              }),
-                          rxSelectInput(context, "district", data!.districtid,
-                              fnWhere: (item) {
-                                return item["cityid"] == data!.cityid;
-                              },
-                              afterChange: (v) => {
-                                    setState(() {
-                                      data!.districtid = v;
-                                    })
-                                  },
-                              validator: (v) {
-                                if (!(data!.districtid > 0)) {
-                                  return "notempty.text".tr();
-                                }
-                              }),
-                          rxTextInput(context, data!.address,
-                              labelText: "address".tr(),
-                              onChanged: (v) => {data!.address = v},
-                              validator: Validators.compose([
-                                Validators.required("notempty.text".tr()),
-                              ])),
-                        ],
-                      )),
+                                  afterChange: (v) => {
+                                        setState(() {
+                                          data!.districtid = v;
+                                        })
+                                      },
+                                  validator: (v) {
+                                    if (!(data!.districtid > 0)) {
+                                      return "notempty.text".tr();
+                                    }
+                                  }),
+                              rxTextInput(context, data!.address,
+                                  labelText: "address".tr(),
+                                  onChanged: (v) => {data!.address = v},
+                                  validator: Validators.compose([
+                                    Validators.required("notempty.text".tr()),
+                                  ])),
+                            ],
+                          )),
                     ),
                   ))
                 ],

@@ -56,7 +56,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         data = widget.item!;
       });
     } else {
-      ResponseModel res = await DaiLyXeApiBLL_APIGets().newsdetail(widget.id!);
+      ResponseModel res = await DaiLyXeApiBLL_APIGets().productbyid(widget.id!);
       if (res.status > 0) {
         setState(() {
           data = ProductModel.fromJson(res.data);
@@ -407,7 +407,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     return Card(
       child: ListTile(
         leading: RxAvatarImage(data!.rximguser ?? NOIMAGEUSER, size: 40),
-        title: Text(userProvider.fullname!, style: const TextStyle().bold),
+        title: Text(userProvider.user.fullname!, style: const TextStyle().bold),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

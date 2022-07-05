@@ -44,7 +44,7 @@ class _ProductPageState extends State<ProductPage> {
     var params = Map<String, dynamic>.from(paramsSearch);
     params["p"] = paging;
     params["n"] = kItemOnPage;
-    ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
+    ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);
     List<dynamic> data = jsonDecode(res.data);
     // ignore: unnecessary_cast
     List<ProductModel> list = data

@@ -7,7 +7,7 @@ import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
-import 'package:raoxe/core/components/rx_rating.dart';
+import 'package:raoxe/core/components/rx_review.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -44,7 +44,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         data = widget.item!;
       });
     } else {
-      ResponseModel res = await DaiLyXeApiBLL_APIGets().newsdetail(widget.id!);
+      ResponseModel res = await DaiLyXeApiBLL_APIGets().productbyid(widget.id!);
       if (res.status > 0) {
         setState(() {
           data = ProductModel.fromJson(res.data);

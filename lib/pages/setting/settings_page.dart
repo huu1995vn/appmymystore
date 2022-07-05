@@ -152,14 +152,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ))))
         ],
       ),
-      // persistentFooterButtons: [
-      //   RxPrimaryButton(
-      //     text: 'logout'.tr(),
-      //     onTap: () {
-      //       AuthService.logout(context);
-      //     },
-      //   ),
-      // ],
+      
     );
   }
 }

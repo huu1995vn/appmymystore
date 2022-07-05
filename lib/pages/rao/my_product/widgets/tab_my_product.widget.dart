@@ -50,7 +50,7 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
         "p": paging,
         "n": kItemOnPage
       };
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().advertlist(params);
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().product(params);
       if (res.status > 0) {
         List<dynamic> data = jsonDecode(res.data);
         List<ProductModel> list =

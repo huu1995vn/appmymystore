@@ -15,10 +15,10 @@ class RxReview extends StatefulWidget {
   final ProductModel item;
 
   @override
-  _RatingState createState() => _RatingState();
+  _ReviewState createState() => _ReviewState();
 }
 
-class _RatingState extends State<RxReview> {
+class _ReviewState extends State<RxReview> {
   int displayPage = 1;
   bool loading = false;
   List<ProductReviewsModel> data = [];
@@ -36,7 +36,7 @@ class _RatingState extends State<RxReview> {
         "p": 1,
         "n": 2
       };
-      var res = await DaiLyXeApiBLL_APIGets().ratinglist(body);
+      var res = await DaiLyXeApiBLL_APIGets().review(body);
       if (res.status > 0) {
         
         if (!mounted) return;

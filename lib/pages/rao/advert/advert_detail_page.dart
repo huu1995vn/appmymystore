@@ -38,7 +38,7 @@ class _AdvertDetailPageState extends State<AdvertDetailPage> {
         });
       } else {
         ResponseModel res =
-            await DaiLyXeApiBLL_APIUser().advertdetail(widget.id!);
+            await DaiLyXeApiBLL_APIUser().advertbyid(widget.id!);
         if (res.status > 0) {
           List<dynamic> ldata = jsonDecode(res.data);
           setState(() {

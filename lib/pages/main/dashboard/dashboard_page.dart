@@ -125,13 +125,13 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget _top() {
     final userProvider = Provider.of<UserProvider>(context);
     return ListTile(
-      leading: RxAvatarImage(userProvider.urlImage!, size: 40),
+      leading: RxAvatarImage(userProvider.user.rximg!, size: 40),
       title: InkWell(
           onTap: () {
             CommonNavigates.toUserPage(context);
           },
           child: Text(
-            userProvider.fullname!,
+            userProvider.user.fullname!,
             style: const TextStyle(
               fontSize: 19,
             ),

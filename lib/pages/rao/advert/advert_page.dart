@@ -41,7 +41,7 @@ class _AdvertPageState extends State<AdvertPage> {
         "p": paging,
         "n": kItemOnPage
       };
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().advertlist(params);
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().advert(params);
       if (res.status > 0) {
         List<dynamic> data = jsonDecode(res.data);
         List<AdvertModel> list =

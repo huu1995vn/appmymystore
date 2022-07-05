@@ -97,17 +97,35 @@ class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "raoxe");
   }
 
-  Future<ResponseModel> newslist(Map<String, dynamic> body) async {
-    return await post(body, null, "newslist");
+  Future<ResponseModel> news(Map<String, dynamic> body) async {
+    return await post(body, null, "news");
   }
 
-  Future<ResponseModel> newsdetail(dynamic id) async {
-    Map<String, dynamic> body = {"id": id};
-    return await post(body, null, "newsdetail");
+  Future<ResponseModel> newsbyid(dynamic id) async {
+    Map<String, dynamic> body = {};
+    return await post(body, null, "news/$id");
   }
 
-  Future<ResponseModel> ratinglist(Map<String, dynamic> body) async {
-    return await post(body, null, "ratinglist");
+  Future<ResponseModel> ranktype(Map<String, dynamic> body) async {
+    return await post(body, null, "ranktype");
+  }
+
+  Future<ResponseModel> product(Map<String, dynamic> body) async {
+    return await post(body, null, "product");
+  }
+
+  Future<ResponseModel> productbyid(dynamic id) async {
+    Map<String, dynamic> body = {};
+    return await post(body, null, "product/$id");
+  }
+
+  Future<ResponseModel> review(Map<String, dynamic> body) async {
+    return await post(body, null, "review");
+  }
+
+  Future<ResponseModel> reviewbyid(dynamic id) async {
+    Map<String, dynamic> body = {};
+    return await post(body, null, "review/$id");
   }
 }
 
@@ -135,22 +153,39 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     return await post(body, queryParameters, "UpdateAvatar");
   }
 
-  Future<ResponseModel> advertlist(Map<String, dynamic> body) async {
-    return await post(body, null, "advertlist");
+  Future<ResponseModel> product(Map<String, dynamic> body) async {
+    return await post(body, null, "product");
   }
 
-  Future<ResponseModel> advertdetail(dynamic id) async {
-    Map<String, dynamic> body = {"id": id};
-    return await post(body, null, "advertdetail");
+  Future<ResponseModel> productbyid(dynamic id) async {
+    Map<String, dynamic> body = {};
+    return await post(body, null, "product/$id");
   }
 
-  Future<ResponseModel> contactlist(Map<String, dynamic> body) async {
-    return await post(body, null, "contactlist");
+  Future<ResponseModel> productsavedata(Map<String, dynamic> body) async {
+    return await post(body, null, "product/savedata");
   }
 
-  Future<ResponseModel> contactdetail(dynamic id) async {
-    Map<String, dynamic> body = {"id": id};
-    return await post(body, null, "contactdetail");
+  Future<ResponseModel> advert(Map<String, dynamic> body) async {
+    return await post(body, null, "advert");
+  }
+
+  Future<ResponseModel> advertbyid(dynamic id) async {
+    Map<String, dynamic> body = {};
+    return await post(body, null, "advert/$id");
+  }
+
+  Future<ResponseModel> contact(Map<String, dynamic> body) async {
+    return await post(body, null, "contact");
+  }
+
+  Future<ResponseModel> contactbyid(dynamic id) async {
+    Map<String, dynamic> body = {};
+    return await post(body, null, "contact/$id");
+  }
+
+  Future<ResponseModel> contactsavedata(Map<String, dynamic> body) async {
+    return await post(body, null, "contact/savedata");
   }
 }
 

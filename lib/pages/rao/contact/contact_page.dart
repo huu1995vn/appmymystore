@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
@@ -41,7 +42,7 @@ class _ContactPageState extends State<ContactPage> {
         "p": paging,
         "n": kItemOnPage
       };
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().contactlist(params);
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().contact(params);
       if (res.status > 0) {
         List<ContactModel> list = CommonMethods.convertToList<ContactModel>(
             res.data, (val) => ContactModel.fromJson(val));
@@ -114,6 +115,9 @@ class _ContactPageState extends State<ContactPage> {
                   onDelete: (context) => onDelete(index));
             })
           ],
-        ));
+        ),
+        persistentFooterButtons: [
+          RxPrimaryButton(onTap: () => {CommonNavigates.toContactPage(context, item: ContactModel())}, text: "add.text".tr())
+        ],);
   }
 }

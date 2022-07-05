@@ -40,7 +40,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
       "p": paging,
       "n": kItemOnPage
     };
-    ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
+    ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
     List<dynamic> data = jsonDecode(res.data);
     List<NewsModel> list = data.map((val) => NewsModel.fromJson(val)).toList();
     setState(() {
@@ -77,9 +77,12 @@ class _NotifycationPageState extends State<NotifycationPage> {
         key: _key,
         body: RxCustomScrollView(
           appBar: SliverAppBar(
+            iconTheme: IconThemeData(
+              color: AppColors.black, //change your color here
+            ),
             title: Text('notification.text'.tr(),
                 style: kTextHeaderStyle.copyWith(
-                    color: Theme.of(context).textTheme.bodyText1!.color)),
+                    color: AppColors.black)),
             floating: true,
             automaticallyImplyLeading: false,
             elevation: 0.0,

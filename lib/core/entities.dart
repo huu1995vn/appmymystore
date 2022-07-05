@@ -112,14 +112,14 @@ class NotificationModel extends Entity {
 
 @JsonSerializable()
 class UserModel extends Entity {
-  int id = 0;
-  int img = 0;
+  int id = APITokenService.userId;
+  int img = APITokenService.img;
   int cityid = 0;
   int districtid = 0;
   String? username;
   String? password;
   String? identitynumber;
-  String? fullname;
+  String? fullname = APITokenService.fullname;
   String? jobtitle;
   int gender = 1;
   String? birthdate;
@@ -554,7 +554,7 @@ class ContactModel extends Entity {
   String? phone;
   String? address;
   bool isdefault = false;
-  UserModel clone() => UserModel.fromJson(toJson());
+  ContactModel clone() => ContactModel.fromJson(toJson());
   ContactModel();
   bool get rxisdefault {
     return isdefault == "true";

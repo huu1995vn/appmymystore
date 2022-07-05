@@ -41,7 +41,7 @@ class _NewsPageState extends State<NewsPage> {
             SliverAppBar(
               title: Center(
                 child: Text("news.text".tr(),
-                    style: kTextHeaderStyle),
+                    style: kTextHeaderStyle.copyWith(color: AppColors.white)),
               ),
             ),
             SliverPersistentHeader(

@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage>
       "p": paging,
       "n": kItemOnPage
     };
-    ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
+    ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
     List<dynamic> data = jsonDecode(res.data);
     // ignore: unnecessary_cast
     List<ProductModel> list = data

@@ -50,7 +50,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
         "p": paging,
         "n": kItemOnPage
       };
-      ResponseModel res = await DaiLyXeApiBLL_APIGets().newslist(params);
+      ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
       if (res.status > 0) {
         List<dynamic> data = jsonDecode(res.data);
         List<NewsModel> list =

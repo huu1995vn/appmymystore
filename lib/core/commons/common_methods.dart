@@ -182,29 +182,29 @@ class CommonMethods {
         color: AppColors.info);
   }
 
-  static void showDialogError(BuildContext context, String pmsg,
+  static void showDialogError(BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) {
-    showDialog(context, pmsg,
+    showDialog(context, pmsg.toString(),
         title: "error.text".tr(), actions: actions, color: AppColors.error);
   }
 
-  static void showDialogSuccess(BuildContext context, String pmsg,
+  static void showDialogSuccess(BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) {
-    showDialog(context, pmsg,
+    showDialog(context, pmsg.toString(),
         title: "success.text".tr(), actions: actions, color: AppColors.success);
   }
 
-  static void showDialogWarning(BuildContext context, String pmsg,
+  static void showDialogWarning(BuildContext context, Object pmsg,
       {List<Widget>? actions}) {
-    showDialog(context, pmsg,
+    showDialog(context, pmsg.toString(),
         title: "warning".tr(), actions: actions, color: AppColors.warning);
   }
 
-  static void showDialogCongratulations(BuildContext context, String pmsg,
+  static void showDialogCongratulations(BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) {
     Dialogs.materialDialog(
         color: AppColors.white,
-        msg: pmsg,
+        msg: pmsg.toString(),
         title: "congratulations".tr(),
         lottieBuilder: Lottie.asset(
           'assets/congratulations.json',

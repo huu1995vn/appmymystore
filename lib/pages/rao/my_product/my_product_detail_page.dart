@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable
+// ignore_for_file: prefer_const_constructors, unused_local_variable, use_build_context_synchronously
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -90,11 +90,27 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     }
   }
 
+  onUpTop() async {
+    CommonMethods.lockScreen();
+    try {
+      Map<String, dynamic> body = <String, dynamic>{};
+      body["ids"] = [widget.id];
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().productuptop(body);
+      if (res.status > 0) {
+        CommonMethods.showToast("update.success".tr());
+      } else {
+        CommonMethods.showDialogError(context, res.message);
+      }
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
+    }
+    CommonMethods.unlockScreen();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            backgroundColor: Colors.transparent,
-
+      backgroundColor: Colors.transparent,
       body: isNotFound
           ? Expanded(child: Center(child: Text("not.found".tr())))
           : (data == null
@@ -116,27 +132,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                       centerTitle: true,
                       elevation: 0.0,
                       backgroundColor: AppColors.grey,
-                      actions: <Widget>[
-                        RxDisabled(
-                            disabled: (data == null || data!.status != 2),
-                            child: IconButton(
-                              icon: Icon(AppIcons.rocket_1,
-                                  color: AppColors.black50),
-                              onPressed: () {},
-                            )),
-                        RxDisabled(
-                            disabled: (data == null || data!.status != 2),
-                            child: IconButton(
-                              icon: Icon(
-                                AppIcons.arrow_up,
-                                color: AppColors.black50,
-                              ),
-                              tooltip: 'Share',
-                              onPressed: () {
-                                // onSetting(context);
-                              },
-                            )),
-                      ],
                     ),
                     SliverToBoxAdapter(
                         child: Padding(
@@ -251,7 +246,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         text: TextSpan(
                                           children: [
                                             WidgetSpan(
-                                              child: Icon(AppIcons.upload_1),
+                                              child: Icon(AppIcons.upload_1,
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .color),
                                             ),
                                             TextSpan(
                                                 text: " Tải ảnh",
@@ -374,13 +373,31 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       persistentFooterButtons: [
         SizedBox(
             height: kSizeHeight,
-            child: RxPrimaryButton(
-                onTap: () {
-                  if (_keyValidationForm.currentState!.validate()) {
-                    _onSave();
-                  }
-                },
-                text: "done".tr()))
+            child: Row(
+              children: [
+                RxDisabled(
+                    disabled: (data == null || data!.status != 2),
+                    child: IconButton(
+                      icon: Icon(
+                        AppIcons.arrow_up_circle,
+                      ),
+                      tooltip: 'UpTop',
+                      onPressed: () {
+                        onUpTop();
+                      },
+                    )),
+                SizedBox(
+                  width: SizeConfig.screenWidth * 0.8,
+                  child: RxPrimaryButton(
+                      onTap: () {
+                        if (_keyValidationForm.currentState!.validate()) {
+                          _onSave();
+                        }
+                      },
+                      text: "done".tr()),
+                ),
+              ],
+            ))
       ],
     );
   }
@@ -388,7 +405,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   _onAddress() async {
     var res = await CommonNavigates.showDialogBottomSheet(
         context, ContactDialog(contact: data!.toContact()),
-        height: SizeConfig.screenHeight*0.8);
+        height: SizeConfig.screenHeight * 0.8);
 
     if (res != null) {
       setState(() {

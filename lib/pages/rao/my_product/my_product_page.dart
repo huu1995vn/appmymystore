@@ -43,8 +43,7 @@ class _MyProductPageState extends State<MyProductPage> {
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
-                  title: Text("manager.raoxe".tr(),
-                      style: kTextHeaderStyle),
+                  title: Text("manager.raoxe".tr(), style: kTextHeaderStyle),
                   elevation: 0.0,
                   centerTitle: true,
                 ),
@@ -73,26 +72,13 @@ class _MyProductPageState extends State<MyProductPage> {
             ),
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: _buttonAdd());
-  }
-
-  Widget _buttonAdd() {
-    return Container(
-        width: 55.0,
-        height: 55.0,
-        decoration: kBoxDecorationStyle.copyWith(
-            borderRadius: BorderRadius.circular(30.0)),
-        child: RawMaterialButton(
-          shape: const CircleBorder(),
-          elevation: 0.0,
-          child: Icon(
-            Icons.add,
-            color: AppColors.white,
-          ),
-          onPressed: () {
-            CommonNavigates.toMyProductPage(context, item: ProductModel());
-          },
-        ));
+        persistentFooterButtons: [
+          RxPrimaryButton(
+              onTap: () => {
+                    CommonNavigates.toMyProductPage(context,
+                        item: ProductModel())
+                  },
+              text: "add.text".tr())
+        ]);
   }
 }

@@ -166,6 +166,10 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "product/savedata");
   }
 
+   Future<ResponseModel> productuptop(Map<String, dynamic> body) async {
+    return await post(body, null, "product/uptop");
+  }
+
   Future<ResponseModel> advert(Map<String, dynamic> body) async {
     return await post(body, null, "advert");
   }

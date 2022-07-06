@@ -91,6 +91,10 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   }
 
   onUpTop() async {
+    if (data!.status != 2) {
+      CommonMethods.showToast("Đẩy lên đầu phải được duyệt");
+      return;
+    }
     CommonMethods.lockScreen();
     try {
       Map<String, dynamic> body = <String, dynamic>{};
@@ -375,9 +379,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             height: kSizeHeight,
             child: Row(
               children: [
-                RxDisabled(
-                    disabled: (data == null || data!.status != 2),
-                    child: IconButton(
+                IconButton(
                       icon: Icon(
                         AppIcons.arrow_up_circle,
                       ),
@@ -385,7 +387,18 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                       onPressed: () {
                         onUpTop();
                       },
-                    )),
+                    ),
+                // RxDisabled(
+                //     disabled: (data == null || data!.status != 2),
+                //     child: IconButton(
+                //       icon: Icon(
+                //         AppIcons.arrow_up_circle,
+                //       ),
+                //       tooltip: 'UpTop',
+                //       onPressed: () {
+                //         onUpTop();
+                //       },
+                //     )),
                 SizedBox(
                   width: SizeConfig.screenWidth * 0.8,
                   child: RxPrimaryButton(

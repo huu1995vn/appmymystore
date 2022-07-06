@@ -54,8 +54,8 @@ class _HomePageState extends State<HomePage>
         .map((val) => ProductModel.fromJson(val))
         .toList() as List<ProductModel>;
     setState(() {
-      totalItems = list[0].rxtotalrow;
-      listData;
+totalItems =
+            (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;      listData;
       if (nPaging == 1) {
         listData = list;
       } else {

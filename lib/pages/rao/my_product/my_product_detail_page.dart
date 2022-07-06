@@ -406,7 +406,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
     return Card(
       child: ListTile(
-        leading: RxAvatarImage(data!.rximguser ?? NOIMAGEUSER, size: 40),
+        leading: RxAvatarImage(data!.rximguser, size: 40),
         title: Text(userProvider.user.fullname!, style: const TextStyle().bold),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

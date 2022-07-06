@@ -12,7 +12,9 @@ class ItemContactWidget extends StatefulWidget {
   final ContactModel item;
   final void Function()? onTap;
   final void Function(BuildContext)? onDelete;
-  const ItemContactWidget(this.item, {super.key, this.onTap, this.onDelete});
+
+  const ItemContactWidget(this.item,
+      {super.key, this.onTap, this.onDelete});
   @override
   State<ItemContactWidget> createState() => _ItemContactWidgetState();
 }

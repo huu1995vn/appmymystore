@@ -187,6 +187,9 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
   Future<ResponseModel> contactsavedata(Map<String, dynamic> body) async {
     return await post(body, null, "contact/savedata");
   }
+  Future<ResponseModel> contactdelete(Map<String, dynamic> body) async {
+    return await post(body, null, "contact/delete");
+  }
 }
 
 class DaiLyXeApiBLL_APIAnonymous extends DaiLyXeApiBLL_Basic {

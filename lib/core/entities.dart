@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 
 /// This allows the class to access private members in
 /// the generated file called *.g.dart, where the star denotes the source file name.
@@ -103,7 +104,10 @@ class NotificationModel extends Entity {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
     json["notificationtypeid"] =
         CommonMethods.convertToInt32(json["notificationtypeid"]);
-    json["createdate"] = CommonMethods.convertToDateTime(json["createdate"]);
+    json["createdate"] = json["createdate"] == null
+        ? null
+        : CommonMethods.convertToDateTime(json["createdate"])!
+            .toIso8601String();
     return _$NotificationModelFromJson(json);
   }
 
@@ -317,8 +321,19 @@ class ProductModel extends Entity {
     json["review3"] = CommonMethods.convertToInt32(json["review3"]);
     json["review4"] = CommonMethods.convertToInt32(json["review4"]);
     json["review5"] = CommonMethods.convertToInt32(json["review5"]);
-    json["verifydate"] = CommonMethods.convertToDateTime(json["verifydate"]);
-    json["verifydate"] = CommonMethods.convertToDateTime(json["verifydate"]);
+    json["verifydate"] = json["verifydate"] == null
+        ? null
+        : CommonMethods.convertToDateTime(json["verifydate"])!
+            .toIso8601String();
+    json["createdate"] = json["updatedate"] == null
+        ? null
+        : CommonMethods.convertToDateTime(json["createdate"])!
+            .toIso8601String();
+    json["updatedate"] = json["updatedate"] == null
+        ? null
+        : CommonMethods.convertToDateTime(json["updatedate"])!
+            .toIso8601String();
+
     return _$ProductModelFromJson(json);
   }
   ContactModel toContact() {
@@ -359,12 +374,15 @@ class ProductModel extends Entity {
   }
 
   String get rximguser {
+    if (!(imguser > 0)) {
+      return NOIMAGEUSER;
+    }
     try {
       return CommonMethods.buildUrlHinhDaiDien(imguser, rewriteUrl: name);
     } catch (e) {
       CommonMethods.wirtePrint(e);
 
-      return "";
+      return NOIMAGEUSER;
     }
   }
 
@@ -374,7 +392,7 @@ class ProductModel extends Entity {
     } catch (e) {
       CommonMethods.wirtePrint(e);
 
-      return "";
+      return NOIMAGEUSER;
     }
   }
 
@@ -532,11 +550,15 @@ class AdvertModel extends Entity {
     json["adverttypeid"] = CommonMethods.convertToInt32(json["adverttypeid"]);
     json["referenceid"] = CommonMethods.convertToInt32(json["referenceid"]);
     json["price"] = CommonMethods.convertToInt32(json["price"]);
-    json["status"] = CommonMethods.convertToInt32(json["price"], 1);
-    json["expirationdate"] =
-        CommonMethods.convertToDateTime(json["expirationdate"], "dd/MM/yyyy");
-    json["reminderdate"] =
-        CommonMethods.convertToDateTime(json["reminderdate"], "dd/MM/yyyy");
+    json["status"] = CommonMethods.convertToInt32(json["status"], 1);
+    json["expirationdate"] = json["expirationdate"] == null
+        ? null
+        : CommonMethods.convertToDateTime(json["expirationdate"])!
+            .toIso8601String();
+    json["reminderdate"] = json["reminderdate"] == null
+        ? null
+        : CommonMethods.convertToDateTime(json["reminderdate"])!
+            .toIso8601String();
     return _$AdvertModelFromJson(json);
   }
 
@@ -574,7 +596,6 @@ class ContactModel extends Entity {
 
   Map<String, dynamic> toJson() => _$ContactModelToJson(this);
 
-  
   Map<String, dynamic> toDataSave([id = -1]) => <String, dynamic>{
         'id': id,
         'fields': <String>[
@@ -586,7 +607,7 @@ class ContactModel extends Entity {
           "Address"
         ],
         'datas': <dynamic>[
-          userid,        
+          userid,
           cityid,
           districtid,
           fullname,
@@ -620,7 +641,10 @@ class ProductReviewsModel extends Entity {
     json["productid"] = CommonMethods.convertToInt32(json["productid"]);
     json["reviewcount"] = CommonMethods.convertToInt32(json["reviewcount"]);
     json["ratingvalue"] = CommonMethods.convertToInt32(json["ratingvalue"]);
-
+    json["createdate"] = json["createdate"] == null
+        ? null
+        : CommonMethods.convertToDateTime(json["createdate"])!
+            .toIso8601String();
     return _$ProductReviewsModelFromJson(json);
   }
 

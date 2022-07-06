@@ -45,7 +45,7 @@ class _UserPageState extends State<UserPage> {
     try {
       ResponseModel res = await DaiLyXeApiBLL_APIUser().getuser();
       if (res.status > 0) {
-        var user = UserModel.fromJson(jsonDecode(res.data));
+        var user = UserModel.fromJson(res.data);
         setState(() {
           data = user;
           urlImage = data!.rximg;

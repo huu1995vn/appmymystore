@@ -68,12 +68,12 @@ class CommonNavigates {
   }
 
   static Future toContactPage(BuildContext context,
-      {int? id, ContactModel? item}) async {
+      {int? id, ContactModel? item, void Function(ContactModel)? onChanged}) async {
     if ((id != null && id > 0) || item != null) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => ContactDetailPage(id: id, item: item)));
+              builder: (context) => ContactDetailPage(id: id, item: item, onChanged: onChanged)));
     } else {
       return await Navigator.pushNamed(context, "/contact");
     }

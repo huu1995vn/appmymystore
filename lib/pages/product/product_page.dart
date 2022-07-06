@@ -36,11 +36,11 @@ class _ProductPageState extends State<ProductPage> {
   List<ProductModel>? listData;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   Map<String, dynamic> paramsSearch = {};
-  loadData([npaging = 1]) async {
-    if (listData != null && npaging > 1 && totalItems <= listData!.length)
+  loadData([nPaging = 1]) async {
+    if (listData != null && nPaging > 1 && totalItems <= listData!.length)
       // ignore: curly_braces_in_flow_control_structures
       return;
-    paging = npaging ?? 1;
+    paging = nPaging ?? 1;
     var params = Map<String, dynamic>.from(paramsSearch);
     params["p"] = paging;
     params["n"] = kItemOnPage;
@@ -52,7 +52,8 @@ class _ProductPageState extends State<ProductPage> {
         .toList() as List<ProductModel>;
     if (mounted) {
       setState(() {
-        totalItems = list[0].rxtotalrow;
+        totalItems =
+            (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
         listData;
         if (paging == 1) {
           listData = list;

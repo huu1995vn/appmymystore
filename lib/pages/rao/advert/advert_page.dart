@@ -46,7 +46,8 @@ class _AdvertPageState extends State<AdvertPage> {
         List<AdvertModel> list = CommonMethods.convertToList<AdvertModel>(
             res.data, (val) => AdvertModel.fromJson(val));
         setState(() {
-          totalItems = list[0].rxtotalrow;
+          totalItems =
+              (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
             listData = list;

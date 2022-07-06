@@ -52,9 +52,11 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
       };
       ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
       if (res.status > 0) {
-        List<NewsModel> list = CommonMethods.convertToList<NewsModel>(res.data, (val) => NewsModel.fromJson(val));
+        List<NewsModel> list = CommonMethods.convertToList<NewsModel>(
+            res.data, (val) => NewsModel.fromJson(val));
         setState(() {
-          totalItems = list[0].rxtotalrow;
+          totalItems =
+              (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
             listData = list;
@@ -86,10 +88,13 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
     return RxListView(
       listData,
       (context, index) {
-        var item =listData![index];
-        return ItemNewsWidget(item, onTap: (){
-          CommonNavigates.toNewsPage(context, item: item);
-        },);
+        var item = listData![index];
+        return ItemNewsWidget(
+          item,
+          onTap: () {
+            CommonNavigates.toNewsPage(context, item: item);
+          },
+        );
       },
       onNextPage: onNextPage,
       onRefresh: loadData,

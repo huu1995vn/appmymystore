@@ -1,14 +1,11 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable
+// ignore_for_file: prefer_const_constructors, unused_local_variable, use_build_context_synchronously
 
-import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
@@ -16,8 +13,9 @@ import 'package:wc_form_validators/wc_form_validators.dart';
 class ContactDetailPage extends StatefulWidget {
   final int? id;
   final ContactModel? item;
+  final void Function(ContactModel)? onChanged;
 
-  const ContactDetailPage({super.key, this.id, this.item});
+  const ContactDetailPage({super.key, this.id, this.item, this.onChanged});
 
   @override
   State<ContactDetailPage> createState() => _ContactDetailPageState();
@@ -58,12 +56,19 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
     CommonMethods.lockScreen();
     try {
       var dataClone = data!.clone();
-      ResponseModel res =
-          await DaiLyXeApiBLL_APIUser().contactsavedata(dataClone.toDataSave(dataClone.id));
+      ResponseModel res = await DaiLyXeApiBLL_APIUser()
+          .contactsavedata(dataClone.toDataSave(dataClone.id));
       if (res.status > 0) {
-        setState(() {
-          data = dataClone;
-        });
+        if (widget.onChanged != null) widget.onChanged!(dataClone);
+        if (dataClone.id > 0) {
+          setState(() {
+            data = dataClone;
+          });
+          CommonMethods.showToast("update.success".tr());
+        } else {
+          CommonNavigates.goBack(context);
+          CommonMethods.showToast("create.success".tr());
+        }
       } else {
         CommonMethods.showToast(res.message);
       }
@@ -76,10 +81,6 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final userProvider = Provider.of<UserProvider>(context);
-    // data!.fullname = userProvider.user.fullname;
-    // data!.phone = userProvider.user.phone;
-
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: data == null

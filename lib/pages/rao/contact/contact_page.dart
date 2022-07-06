@@ -34,7 +34,7 @@ class _ContactPageState extends State<ContactPage> {
   AutoScrollController scrollController = AutoScrollController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  loadData(nPaging) async {
+  loadData([nPaging = 1]) async {
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> params = {
@@ -47,7 +47,8 @@ class _ContactPageState extends State<ContactPage> {
         List<ContactModel> list = CommonMethods.convertToList<ContactModel>(
             res.data, (val) => ContactModel.fromJson(val));
         setState(() {
-          totalItems = list.length > 0 ? list[0].rxtotalrow : 0;
+          totalItems =
+              (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
             listData = list;
@@ -78,46 +79,72 @@ class _ContactPageState extends State<ContactPage> {
     if (mounted) scrollController.dispose();
   }
 
-  onDelete(int index) {
-    //call api dele
-    setState(() {
-      listData!.remove(index);
-    });
+  onDelete(int index) async {
+    var item = listData![index];
+    Map<String, dynamic> body = {
+      "ids": [item.id]
+    };
+    ResponseModel res = await DaiLyXeApiBLL_APIUser().contactdelete(body);
+    if (res.status > 0) {
+      //call api dele
+      setState(() {
+        listData!.removeAt(index);
+      });
+    } else {
+      CommonMethods.showToast(res.message);
+    }
+  }
+
+  onDetail([int index = -1]) async {
+    ContactModel item = index > 0 ? listData![index] : ContactModel();
+    CommonNavigates.toContactPage(context,
+        item: item,
+        onChanged: (v) => {
+              if (v.id > 0)
+                {
+                  setState(() {
+                    listData![index] = v;
+                  })
+                }
+              else
+                {loadData()}
+            });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.transparent,
-        key: _key,
-        body: RxCustomScrollView(
-          appBar: SliverAppBar(
-            iconTheme: IconThemeData(
-              color: AppColors.black, //change your color here
-            ),
-            centerTitle: true,
-            title: Text('address'.tr(),
-                style: kTextHeaderStyle.copyWith(
-                    color: AppColors.black)),
-            backgroundColor: AppColors.grey,
-            elevation: 0.0,
+      backgroundColor: Colors.transparent,
+      key: _key,
+      body: RxCustomScrollView(
+        appBar: SliverAppBar(
+          iconTheme: IconThemeData(
+            color: AppColors.black, //change your color here
           ),
-          key: const Key("LContact"),
-          controller: scrollController,
-          onNextScroll: onNextPage,
-          onRefresh: onRefresh,
-          slivers: <Widget>[
-            RxSliverList(listData, (BuildContext context, int index) {
-              ContactModel item = listData![index];
-              return ItemContactWidget(item,
-                  onTap: () =>
-                      CommonNavigates.toContactPage(context, item: item),
-                  onDelete: (context) => onDelete(index));
-            })
-          ],
+          centerTitle: true,
+          title: Text('address'.tr(),
+              style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+          backgroundColor: AppColors.grey,
+          elevation: 0.0,
         ),
-        persistentFooterButtons: [
-          RxPrimaryButton(onTap: () => {CommonNavigates.toContactPage(context, item: ContactModel())}, text: "add.text".tr())
-        ],);
+        key: const Key("LContact"),
+        controller: scrollController,
+        onNextScroll: onNextPage,
+        onRefresh: onRefresh,
+        slivers: <Widget>[
+          RxSliverList(listData, (BuildContext context, int index) {
+            ContactModel item = listData![index];
+            return ItemContactWidget(item,
+                onTap: () => {onDetail(index)},
+                onDelete: (context) => onDelete(index));
+          })
+        ],
+      ),
+      persistentFooterButtons: [
+        RxPrimaryButton(
+            onTap: onDetail,
+            text: "add.text".tr())
+      ],
+    );
   }
 }

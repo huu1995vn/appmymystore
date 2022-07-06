@@ -55,7 +55,8 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
         List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
             res.data, (val) => ProductModel.fromJson(val));
         setState(() {
-          totalItems = list[0].rxtotalrow;
+          totalItems =
+              (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
             listData = list;

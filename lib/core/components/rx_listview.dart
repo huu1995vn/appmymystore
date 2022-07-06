@@ -24,7 +24,8 @@ class RxListView extends StatefulWidget {
       this.scrollController,
       this.scrollDirection,
       this.awaiting,
-      this.noFound, this.padding})
+      this.noFound,
+      this.padding})
       : super(key: key);
   @override
   _RxDataListViewState createState() => _RxDataListViewState();
@@ -101,10 +102,12 @@ class _RxDataListViewState extends State<RxListView>
         physics: const BouncingScrollPhysics(),
         scrollDirection: widget.scrollDirection ?? Axis.vertical,
         itemCount: kItemOnPage,
-        padding: widget.padding?? const EdgeInsets.all(kDefaultPadding),
+        padding: widget.padding ?? const EdgeInsets.all(kDefaultPadding),
         itemBuilder: (context, index) {
-          return Padding(padding: kEdgeInsetsPadding, child: widget.awaiting ??
-              RxCardSkeleton(barCount: 3, isShowAvatar: false)) ;
+          return Padding(
+              padding: kEdgeInsetsPadding,
+              child: widget.awaiting ??
+                  RxCardSkeleton(barCount: 3, isShowAvatar: false));
         });
   }
 
@@ -112,7 +115,25 @@ class _RxDataListViewState extends State<RxListView>
     return Center(
         child: Container(
       padding: const EdgeInsets.all(20),
-      child: widget.noFound ?? Text("notfound".tr()),
+      child: widget.noFound ??
+          Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: 200,
+                  child: Image.asset(
+                    EMPTYDATA,
+                    height: 200,
+                    width: double.infinity,
+                  ),
+                ),
+                const Text(
+                  "Không tìm thấy data",
+                ),
+              ],
+            ),
+          ),
     ));
   }
 
@@ -126,7 +147,7 @@ class _RxDataListViewState extends State<RxListView>
       itemCount: widget.onNextPage != null
           ? (widget.data.length + 1)
           : widget.data.length,
-      padding: widget.padding?? const EdgeInsets.all(kDefaultPadding),
+      padding: widget.padding ?? const EdgeInsets.all(kDefaultPadding),
       itemBuilder: (context, index) {
         if (index >= widget.data.length) {
           return _buildProgressIndicator();

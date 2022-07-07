@@ -7,7 +7,6 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
-import 'package:raoxe/core/components/dialogs/contact.dialog.dart';
 import 'package:raoxe/core/components/dialogs/photo_view.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
@@ -44,6 +43,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     loadData();
   }
 
+  List<ContactModel> list = <ContactModel>[];
   // String title = "";
   String? initialUrl;
   ProductModel? data;
@@ -109,6 +109,69 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       CommonMethods.showDialogError(context, e);
     }
     CommonMethods.unlockScreen();
+  }
+
+  _onAddress() async {
+    if (list != null) {
+      ResponseModel res =
+          await DaiLyXeApiBLL_APIUser().contact(<String, dynamic>{});
+      if (res.status > 0) {
+        list = CommonMethods.convertToList<ContactModel>(
+            res.data, (val) => ContactModel.fromJson(val));
+        if (list.length == 0) {
+          CommonMethods.showDialogWarning(
+              context, "Vui lòng tạo địa chỉ trước khi tạo tin");
+          return;
+        }
+      } else {
+        CommonMethods.showToast(res.message);
+      }
+    }
+
+    ContactModel contact = await showSearch(
+        context: context,
+        delegate: RxSelectDelegate(
+            data: list,
+            value: -1,
+            itemBuilder: (context, index) {
+              ContactModel item = list[index];
+              return Card(
+                  child: ListTile(
+                      leading: RxCircleAvatar(
+                          child: Icon(AppIcons.map_marker,
+                              size: 30, color: Colors.blue[500])),
+                      title: Text(
+                        item.fullname ?? "",
+                        overflow: TextOverflow.ellipsis,
+                        // style: TextStyle(FontWeight.normal),
+                      ),
+                      // isThreeLine: true,
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(item.phone ?? "",
+                              style: const TextStyle().italic),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(item.address ?? "",
+                              style: const TextStyle().italic),
+                        ],
+                      ),
+                      onTap: () {
+                        CommonNavigates.goBack(context, item);
+                      }));
+            }));
+    if (contact != null) {
+      setState(() {
+        data!.address = contact.address;
+        data!.cityid = contact.cityid;
+        data!.districtid = contact.districtid;
+        data!.phone = contact.phone;
+        data!.fullname = contact.fullname;
+        data!.usercontactid = contact.id;
+      });
+    }
   }
 
   @override
@@ -188,7 +251,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                     data!.price! > 0)
                                                 ? CommonMethods.formatNumber(
                                                     data!.price)
-                                                : "Liên hệ",
+                                                : "Thỏa thuận",
                                             style: kTextPriceStyle.size(13),
                                           )
                                         ],
@@ -380,14 +443,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             child: Row(
               children: [
                 IconButton(
-                      icon: Icon(
-                        AppIcons.arrow_up_circle,
-                      ),
-                      tooltip: 'UpTop',
-                      onPressed: () {
-                        onUpTop();
-                      },
-                    ),
+                  icon: Icon(
+                    AppIcons.arrow_up_circle,
+                  ),
+                  tooltip: 'UpTop',
+                  onPressed: () {
+                    onUpTop();
+                  },
+                ),
                 // RxDisabled(
                 //     disabled: (data == null || data!.status != 2),
                 //     child: IconButton(
@@ -413,20 +476,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             ))
       ],
     );
-  }
-
-  _onAddress() async {
-    var res = await CommonNavigates.showDialogBottomSheet(
-        context, ContactDialog(contact: data!.toContact()),
-        height: SizeConfig.screenHeight * 0.8);
-
-    if (res != null) {
-      setState(() {
-        data!.cityid = res.cityid;
-        data!.districtid = res.districtid;
-        data!.address = res.address;
-      });
-    }
   }
 
   _onSave() {}
@@ -503,20 +552,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                 ),
               )),
       ],
-    );
-  }
-
-  Widget _listTitle(String title, String subtitle, {Widget? leading}) {
-    return ListTile(
-      leading: leading,
-      title: Text(
-        title,
-        style: kTextTitleStyle,
-      ),
-      subtitle: Text(
-        subtitle,
-        style: TextStyle(color: AppColors.primary),
-      ),
     );
   }
 

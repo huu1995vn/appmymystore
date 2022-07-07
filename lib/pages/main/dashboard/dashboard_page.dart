@@ -1,11 +1,14 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
+import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -19,98 +22,123 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  UserModel? data;
   @override
   void initState() {
     super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    try {
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().getuser();
+      if (res.status > 0) {
+        data = UserModel.fromJson(res.data);
+        Provider.of<UserProvider>(context, listen: false).setUserModel(data!);
+      } else {
+        CommonMethods.showToast(res.message);
+      }
+    } catch (e) {
+      CommonMethods.showToast(e.toString());
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: 150,
-            flexibleSpace: Center(
-              child: Text(
-                "Dashboard",
-                style: kTextHeaderStyle.size(39),
-              ),
-            ),
-            backgroundColor: Colors.transparent,
-            automaticallyImplyLeading: false,
-            centerTitle: true,
-          ),
-          SliverToBoxAdapter(
-              child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(kDefaultPadding),
-                child: Column(
-                  children: [
-                    _top(),
-                    _card(
-                      child: ListTile(
-                        title: Text("manager.raoxe".tr()),
-                        leading: Icon(
-                            AppIcons.car,
-                            color: AppColors.primary,
-                          ),
-                        onTap: () => CommonNavigates.toMyProductPage(context),
-                        // subtitle: Text("Quản lý danh sách tin rao"),
-                      ),
+      body: data == null
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : CustomScrollView(
+              slivers: <Widget>[
+                SliverAppBar(
+                  expandedHeight: 150,
+                  flexibleSpace: Center(
+                    child: Text(
+                      "Dashboard",
+                      style: kTextHeaderStyle.size(39),
                     ),
-                    _card(
-                      child: ListTile(
-                        title: Text("adv".tr()),
-                        leading: Icon(
-                          AppIcons.cart,
-                          color: AppColors.yellow,
-                        ),
-                        onTap: () => CommonNavigates.toAdvertPage(context),
-                        // subtitle: Text("Quản lý danh sách quảng cáo"),
-                      ),
-                    ),
-                    _card(
-                      child: ListTile(
-                        title: Text("Favorite"),
-                        leading: Icon(
-                          AppIcons.heart_1,
-                          color: AppColors.red,
-                        ),
-                        onTap: () => CommonNavigates.toContactPage(context),
-                        // subtitle: Text("Sản phẩm yêu thích"),
-                      ),
-                    ),
-                    _card(
-                      child: ListTile(
-                        title: Text("evaluate".tr()),
-                        leading: Icon(
-                          AppIcons.star_1,
-                          color: AppColors.yellow,
-                        ),
-                        onTap: () => CommonNavigates.toContactPage(context),
-                        // subtitle: Text("Danh sách đánh giá"),
-                      ),
-                    ),
-                    _card(
-                      child: ListTile(
-                        title: Text("address".tr()),
-                        leading: Icon(
-                          AppIcons.map_marker,
-                          color: AppColors.info,
-                        ),
-                        onTap: () => CommonNavigates.toContactPage(context),
-                        // subtitle: Text("Sổ địa chỉ"),
-                      ),
-                    ),
-                  ],
+                  ),
+                  backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: false,
+                  centerTitle: true,
                 ),
-              )
-            ],
-          ))
-        ],
-      ),
+                SliverToBoxAdapter(
+                    child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(kDefaultPadding),
+                      child: Column(
+                        children: [
+                          _top(),
+                          _card(
+                            child: ListTile(
+                              title: Text("manager.raoxe".tr()),
+                              leading: Icon(
+                                AppIcons.car,
+                                color: AppColors.primary,
+                              ),
+                              onTap: () =>
+                                  CommonNavigates.toMyProductPage(context),
+                              // subtitle: Text("Quản lý danh sách tin rao"),
+                            ),
+                          ),
+                          _card(
+                            child: ListTile(
+                              title: Text("adv".tr()),
+                              leading: Icon(
+                                AppIcons.cart,
+                                color: AppColors.yellow,
+                              ),
+                              onTap: () =>
+                                  CommonNavigates.toAdvertPage(context),
+                              // subtitle: Text("Quản lý danh sách quảng cáo"),
+                            ),
+                          ),
+                          _card(
+                            child: ListTile(
+                              title: Text("Favorite"),
+                              leading: Icon(
+                                AppIcons.heart_1,
+                                color: AppColors.red,
+                              ),
+                              onTap: () =>
+                                  CommonNavigates.toContactPage(context),
+                              // subtitle: Text("Sản phẩm yêu thích"),
+                            ),
+                          ),
+                          _card(
+                            child: ListTile(
+                              title: Text("evaluate".tr()),
+                              leading: Icon(
+                                AppIcons.star_1,
+                                color: AppColors.yellow,
+                              ),
+                              onTap: () =>
+                                  CommonNavigates.toContactPage(context),
+                              // subtitle: Text("Danh sách đánh giá"),
+                            ),
+                          ),
+                          _card(
+                            child: ListTile(
+                              title: Text("address".tr()),
+                              leading: Icon(
+                                AppIcons.map_marker,
+                                color: AppColors.info,
+                              ),
+                              onTap: () =>
+                                  CommonNavigates.toContactPage(context),
+                              // subtitle: Text("Sổ địa chỉ"),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ))
+              ],
+            ),
     );
   }
 

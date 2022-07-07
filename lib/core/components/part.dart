@@ -507,12 +507,6 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
       _onSelect(context, type, id, fnWhere: fnWhere, afterChange: afterChange);
     }, suffixIcon: const Icon(AppIcons.chevron_right)),
   );
-
-  // GestureDetector(
-  //   onTap: () =>  _onSelect(context, type, id,
-  //       fnWhere: fnWhere, afterChange: afterChange),
-  //   child:
-  // );
 }
 
 _onSelect(BuildContext context, String type, dynamic id,

@@ -3,6 +3,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -246,7 +247,7 @@ class UserModel extends Entity {
 @JsonSerializable()
 class ProductModel extends Entity {
   int id = 0;
-  int userid = 0;
+  int userid = CommonConfig.user.id;
   int usercontactid = 0;
   int brandid = 0;
   int modelid = 0;
@@ -288,12 +289,12 @@ class ProductModel extends Entity {
   String? colorname;
   String? fueltypename;
   String? fullname;
-  int imguser = 0;
-  int? cityid;
-  int? districtid;
+  int imguser = CommonConfig.user.img;
+  int? cityid = CommonConfig.user.cityid;
+  int? districtid = CommonConfig.user.districtid;
   String? districtname;
-  String? address;
-  String? phone;
+  String? address = CommonConfig.user.address;
+  String? phone = CommonConfig.user.phone;
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);

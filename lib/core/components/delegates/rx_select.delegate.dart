@@ -12,8 +12,16 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
   List data;
   dynamic value;
   bool? ismultiple = false;
+  String? pkey = "name";
+  String? pvalue = "id";
+  Widget Function(BuildContext, int)? itemBuilder;
   RxSelectDelegate(
-      {required this.data, required this.value, this.ismultiple}) {}
+      {required this.data,
+      required this.value,
+      this.ismultiple,
+      this.pkey,
+      this.pvalue,
+      this.itemBuilder}) {}
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -47,7 +55,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
         ? data
         : data
             .where((element) =>
-                element['name'].toString().toLowerCase().startsWith(query))
+                element[pkey].toString().toLowerCase().startsWith(query))
             .toList();
 
     return data == null
@@ -62,30 +70,29 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
                 Expanded(
                     child: ListView.builder(
                   itemCount: suggestionList!.length,
-                  itemBuilder: (context, index) {
+                  itemBuilder: itemBuilder ?? (context, index) {
                     var item = suggestionList[index];
                     return ismultiple == true
-                        ? CheckboxListTile(
+                        ? CheckboxListTile(                          
                             controlAffinity: ListTileControlAffinity.trailing,
-                            // selected: (value as List<int>).indexOf(item["id"])>=0,
-                            value: (value as List<int>).contains(item["id"]),
-                            title: Text(item["name"]),
+                            value: (value as List<int>).contains(item[pvalue]),
+                            title: Text(item[pkey]),
                             onChanged: (v) {
                               setState(() {
                                 if (v == true) {
-                                  (value as List<int>).add(item["id"]);
+                                  (value as List<int>).add(item[pvalue]);
                                 } else {
-                                  (value as List<int>).remove(item["id"]);
+                                  (value as List<int>).remove(item[pvalue]);
                                 }
                               });
                             },
                           )
-                        : RadioListTile(
+                        : RadioListTile(                          
                             toggleable: true,
                             controlAffinity: ListTileControlAffinity.trailing,
-                            selected: item["id"] == value,
-                            value: item["id"],
-                            title: Text(item["name"]),
+                            selected: item[pvalue] == value,
+                            value: item[pvalue],
+                            title: Text(item[pkey]),
                             groupValue: value,
                             onChanged: (v) {
                               setState(() {
@@ -95,7 +102,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
                           );
                   },
                 )),
-                Padding(
+                if(itemBuilder == null) Padding(
                   padding: const EdgeInsets.all(kDefaultPadding),
                   child: RxPrimaryButton(
                       onTap: () {

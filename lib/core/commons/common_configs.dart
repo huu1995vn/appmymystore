@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/enviroments/prod.dart';
 import 'package:raoxe/enviroments/dev.dart';
@@ -11,6 +12,7 @@ enum Environment {
 
 class CommonConfig {
   //system
+  static UserModel user = UserModel();
   static bool isDark = false;
   static Map deviceInfo = {};
   static String languageCode = "vi";

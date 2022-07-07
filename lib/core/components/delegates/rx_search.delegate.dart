@@ -9,8 +9,6 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
-// ignore: unused_import
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:debounce_throttle/debounce_throttle.dart';
 import 'dart:async';

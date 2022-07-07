@@ -1,4 +1,6 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,9 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 class MyProductDetailPage extends StatefulWidget {
   final int? id;
   final ProductModel? item;
-  const MyProductDetailPage({super.key, this.id, this.item});
+  final void Function(ProductModel)? onChanged;
+
+  const MyProductDetailPage({super.key, this.id, this.item, this.onChanged});
 
   @override
   State<MyProductDetailPage> createState() => _MyProductDetailPageState();
@@ -83,9 +87,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     }
     var limg =
         await FileService.getMultiImagePicker(context, maxImages: maxImages);
-    if (limg != null && limg.length > 0) {
+    if (limg.length > 0) {
       setState(() {
-        imgs.addAll(limg.map((e) => e.path));
+        imgs.addAll(limg);
       });
     }
   }
@@ -112,20 +116,18 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   }
 
   _onAddress() async {
-    if (list != null) {
-      ResponseModel res =
-          await DaiLyXeApiBLL_APIUser().contact(<String, dynamic>{});
-      if (res.status > 0) {
-        list = CommonMethods.convertToList<ContactModel>(
-            res.data, (val) => ContactModel.fromJson(val));
-        if (list.length == 0) {
-          CommonMethods.showDialogWarning(
-              context, "Vui lòng tạo địa chỉ trước khi tạo tin");
-          return;
-        }
-      } else {
-        CommonMethods.showToast(res.message);
+    ResponseModel res =
+        await DaiLyXeApiBLL_APIUser().contact(<String, dynamic>{});
+    if (res.status > 0) {
+      list = CommonMethods.convertToList<ContactModel>(
+          res.data, (val) => ContactModel.fromJson(val));
+      if (list.length == 0) {
+        CommonMethods.showDialogWarning(
+            context, "Vui lòng tạo địa chỉ trước khi tạo tin");
+        return;
       }
+    } else {
+      CommonMethods.showToast(res.message);
     }
 
     ContactModel contact = await showSearch(
@@ -162,16 +164,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                         CommonNavigates.goBack(context, item);
                       }));
             }));
-    if (contact != null) {
-      setState(() {
-        data!.address = contact.address;
-        data!.cityid = contact.cityid;
-        data!.districtid = contact.districtid;
-        data!.phone = contact.phone;
-        data!.fullname = contact.fullname;
-        data!.usercontactid = contact.id;
-      });
-    }
+    setState(() {
+      data!.address = contact.address;
+      data!.cityid = contact.cityid;
+      data!.districtid = contact.districtid;
+      data!.phone = contact.phone;
+      data!.fullname = contact.fullname;
+      data!.usercontactid = contact.id;
+    });
   }
 
   @override
@@ -181,7 +181,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       body: isNotFound
           ? Expanded(child: Center(child: Text("not.found".tr())))
           : (data == null
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : RxCustomScrollView(
@@ -189,7 +189,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                   controller: scrollController,
                   slivers: <Widget>[
                     SliverAppBar(
-                      iconTheme: IconThemeData(
+                      iconTheme: const IconThemeData(
                         color: AppColors.black, //change your color here
                       ),
                       title: Image.asset(
@@ -267,15 +267,67 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           });
                                         },
                                         hintText: "price".tr(),
-                                        style:
-                                            TextStyle(color: AppColors.black50)
-                                                .size(13),
+                                        style: const TextStyle(
+                                                color: AppColors.black50)
+                                            .size(13),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              _header(title: "MÔ TẢ CHI TIẾT"),
+                              _header(
+                                header: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                          text: "TIÊU ĐỀ ",
+                                          style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .color)
+                                              .bold),
+                                      const TextSpan(
+                                          text: "*",
+                                          style: TextStyle(
+                                              color: AppColors.primary)),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                  child: Padding(
+                                padding: kEdgeInsetsPadding,
+                                child: TextFormField(
+                                  initialValue: data!.name,
+                                  onChanged: (value) => {data!.name = value},
+                                  validator: (value) {
+                                    if (!(value == null || value!.isEmpty)) {
+                                      return "notempty.text".tr();
+                                    }
+                                  },
+                                ),
+                              )),
+                              _header(
+                                header: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                          text: "MÔ TẢ CHI TIẾT ",
+                                          style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .color)
+                                              .bold),
+                                      const TextSpan(
+                                          text: "*",
+                                          style: TextStyle(
+                                              color: AppColors.primary)),
+                                    ],
+                                  ),
+                                ),
+                              ),
                               Card(
                                   child: Padding(
                                 padding: kEdgeInsetsPadding,
@@ -285,6 +337,12 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       6, // any number you need (It works as the rows for the textarea)
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
+                                  onChanged: (value) => {data!.name = value},
+                                  validator: (value) {
+                                    if (!(value == null || value!.isEmpty)) {
+                                      return "notempty.text".tr();
+                                    }
+                                  },
                                 ),
                               )),
                               _header(
@@ -302,7 +360,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         TextSpan(
                                             text:
                                                 "(${imgs.length}/$kMaxImages)",
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: AppColors.primary)),
                                       ],
                                     ),
@@ -340,7 +398,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       itemCount:
                                           imgs.length > 7 ? 7 : imgs.length,
                                       gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 4),
                                       itemBuilder: (context, index) {
                                         return Card(
@@ -396,7 +454,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   ),
                                   rxSelectInput(
                                       context, "madein", data!.madeinid,
-                                      labelText: "Năm",
+                                      labelText: "Nguồn gốc",
                                       afterChange: (v) => {
                                             setState(() {
                                               data!.madeinid = v;
@@ -423,7 +481,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                       .bodyText1!
                                                       .color)
                                               .bold),
-                                      TextSpan(
+                                      const TextSpan(
                                           text: "*",
                                           style: TextStyle(
                                               color: AppColors.primary)),
@@ -443,7 +501,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             child: Row(
               children: [
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     AppIcons.arrow_up_circle,
                   ),
                   tooltip: 'UpTop',
@@ -451,17 +509,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                     onUpTop();
                   },
                 ),
-                // RxDisabled(
-                //     disabled: (data == null || data!.status != 2),
-                //     child: IconButton(
-                //       icon: Icon(
-                //         AppIcons.arrow_up_circle,
-                //       ),
-                //       tooltip: 'UpTop',
-                //       onPressed: () {
-                //         onUpTop();
-                //       },
-                //     )),
                 SizedBox(
                   width: SizeConfig.screenWidth * 0.8,
                   child: RxPrimaryButton(
@@ -478,11 +525,40 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     );
   }
 
-  _onSave() {}
+  _onSave() async {
+    CommonMethods.lockScreen();
+    ProductModel dataClone = data!.clone();
+    try {
+      List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
+          name: data!.name!);
+      if (idFiles.isEmpty) {
+        CommonMethods.showToast("Vui lòng chọn hình ảnh đính kèm");
+        return;
+      }
+      dataClone.imglist = idFiles.join(',');
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().productsavedata(
+          data!.id > 0 ? dataClone.toUpdate() : dataClone.toInsert());
+      if (res.status > 0) {
+        if (widget.onChanged != null) {
+          widget.onChanged!(dataClone!);
+        }
+
+        if (!(dataClone!.id > 0)) {
+          CommonNavigates.goBack(context);
+        }
+        CommonMethods.showToast(
+            dataClone!.id > 0 ? "update.success".tr() : "create.success".tr());
+      } else {
+        CommonMethods.showDialogError(context, res.message);
+      }
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
+    }
+    CommonMethods.unlockScreen();
+  }
 
   Widget _contact() {
     final userProvider = Provider.of<UserProvider>(context);
-
     return Card(
       child: ListTile(
         leading: RxAvatarImage(data!.rximguser, size: 40),
@@ -529,7 +605,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         if (showPlus)
           Center(
               child: Text("+${imgs.length - 8}",
-                  style: TextStyle(color: AppColors.white).size(17).bold)),
+                  style:
+                      const TextStyle(color: AppColors.white).size(17).bold)),
         if (!showPlus)
           Positioned(
               top: 2,
@@ -544,7 +621,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                     ),
                     // height: SizeConfig.screenWidth / 4,
                     // width: SizeConfig.screenWidth / 4,
-                    child: Icon(
+                    child: const Icon(
                       AppIcons.close,
                       color: AppColors.white,
                     ),

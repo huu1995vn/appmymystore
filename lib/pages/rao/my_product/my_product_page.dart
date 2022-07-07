@@ -20,19 +20,29 @@ class _MyProductPageState extends State<MyProductPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
+  }
+
+  List<Widget> tabs = <Widget>[];
+  List<Widget> tabviews = <Widget>[];
+
+  loadData() {
+    setState(() {
+      tabs = PRODUCTSTATUS
+          .map((item) => Tab(
+                child: Text(item.categoryname),
+              ))
+          .toList();
+      tabviews = PRODUCTSTATUS
+          .map(
+            (item) => TabMyProductWidget(status: item.id),
+          )
+          .toList();
+    });
   }
 
   int itemselect = 1;
-  List<Widget> tabs = PRODUCTSTATUS
-      .map((item) => Tab(
-            child: Text(item.categoryname),
-          ))
-      .toList();
-  List<Widget> tabviews = PRODUCTSTATUS
-      .map(
-        (item) => TabMyProductWidget(status: item.id),
-      )
-      .toList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +86,7 @@ class _MyProductPageState extends State<MyProductPage> {
           RxPrimaryButton(
               onTap: () => {
                     CommonNavigates.toMyProductPage(context,
-                        item: ProductModel())
+                        item: ProductModel(), onChanged: (v) => {loadData()})
                   },
               text: "add.text".tr())
         ]);

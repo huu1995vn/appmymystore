@@ -337,6 +337,8 @@ class ProductModel extends Entity {
 
     return _$ProductModelFromJson(json);
   }
+  ProductModel clone() => ProductModel.fromJson(toJson());
+
   ContactModel toContact() {
     ContactModel contact = ContactModel();
     contact.id = usercontactid;
@@ -457,7 +459,7 @@ class ProductModel extends Entity {
           state,
         ],
       };
-  Map<String, dynamic> toUpdate(id) => <String, dynamic>{
+  Map<String, dynamic> toUpdate() => <String, dynamic>{
         'id': id,
         'fields': <String>[
           "UserId",

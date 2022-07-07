@@ -11,6 +11,16 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 
 extension StringExtension on String {
+  int getIdFile() {
+    var str = this;
+    if (Uri.parse(str).isAbsolute) {
+      RegExpMatch? match = RegExp(r"-(\d*)j\d*\.").firstMatch(str);
+      var idFile = match!.group(1);
+      if (idFile != null) return int.parse(idFile);
+    }
+    return -1;
+  }
+
   String toUcfirst() {
     var str = this;
     str = str.toLowerCase();
@@ -179,11 +189,11 @@ extension ListFileExtension on List<File> {
     } catch (e) {}
     return listPath;
   }
+
   List clone() {
     return [...this];
   }
 }
-
 
 extension MapExtension on Map {
   Map clone() {

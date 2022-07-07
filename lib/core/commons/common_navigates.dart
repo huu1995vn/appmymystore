@@ -56,12 +56,12 @@ class CommonNavigates {
   }
 
   static Future toMyProductPage(BuildContext context,
-      {int? id, ProductModel? item}) async {
+      {int? id, ProductModel? item, void Function(ProductModel)? onChanged}) async {
     if ((id != null && id > 0) || item != null) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => MyProductDetailPage(id: id, item: item)));
+              builder: (context) => MyProductDetailPage(id: id, item: item, onChanged: onChanged)));
     } else {
       return await Navigator.pushNamed(context, "/my-product");
     }

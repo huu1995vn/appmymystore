@@ -5,15 +5,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:raoxe/core/api/drive/drive_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FileService {
-  Future<int> uploadImage(File f, {int idFile = -1, String name = ""}) async {
+  static Future<int> uploadImage(File f,
+      {int idFile = -1, String name = ""}) async {
     var extension = CommonMethods.getExtension(f);
     ResponseModel res =
         await DriveApiBLL_ApiFile().uploadfile(f, idFile, "$name$extension");
@@ -21,19 +22,19 @@ class FileService {
     return res.data;
   }
 
-  static Future<File?> getImagePicker(context,
+  static Future<String> getImagePicker(context,
       {bool cropImage = false, bool circleShape = false}) async {
     if (!CommonMethods.isMobile()) {
       throw "Chức năng không hỗ trợ thiết bị này";
     }
-    List<File> lfile = await getMultiImagePicker(context, single: true);
+    List<String> lfile = await getMultiImagePicker(context, single: true);
     if (lfile != null && lfile.isNotEmpty) {
       return lfile[0];
     }
-    return null;
+    return null!;
   }
 
-  static Future<List<File>> getMultiImagePicker(context,
+  static Future<List<String>> getMultiImagePicker(context,
       {bool single = false, int maxImages = 1}) async {
     maxImages = single ? 1 : maxImages;
     int? action;
@@ -138,39 +139,27 @@ class FileService {
     return [];
   }
 
-  static Future<List<File>> openCamera() async {
+  static Future<List<String>> openCamera() async {
     try {
       // ignore: deprecated_member_use
-      final pickedFile = await ImagePicker().getImage(
+      XFile? pickImage = await ImagePicker().pickImage(
         source: ImageSource.camera,
       );
-      if (pickedFile == null) return [];
-      return [File(pickedFile.path)];
+      if (pickImage == null) return [];
+      return [pickImage.path];
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }
     return [];
   }
 
-  static Future<List<File>> openGallery({int maxImages = 1}) async {
+  static Future<List<String>> openGallery({int maxImages = 1}) async {
     try {
-      List<Asset> assetArray = <Asset>[];
-      assetArray = await MultiImagePicker.pickImages(
-        maxImages: maxImages,
-        enableCamera: true,
-        cupertinoOptions: const CupertinoOptions(takePhotoIcon: "chat"),
-        materialOptions: MaterialOptions(
-          actionBarTitle: "gallery".tr(),
-          allViewTitle: "all".tr(),
-          actionBarColor: "#b71c1c",
-          statusBarColor: "#b71c1c",
-          useDetailsView: false,
-          selectCircleStrokeColor: "#ffffff",
-          // startInAllView: true
-        ),
-      );
-      if (assetArray == null || assetArray.isEmpty) return [];
-      List<File> img = await _convertToListFile(assetArray);
+      List<XFile>? pickedFiles =
+          await ImagePicker().pickMultiImage(imageQuality: 80);
+      if (pickedFiles == null || pickedFiles.length == 0) return [];
+      List<String> img =
+          pickedFiles.map((pickImage) => pickImage.path).toList();
       if (img == null || img.isEmpty) return null!;
       return img.sublist(0, img.length >= maxImages ? maxImages : img.length);
     } catch (e) {
@@ -179,31 +168,22 @@ class FileService {
     return [];
   }
 
-  static Future<List<File>> _convertToListFile(List<Asset> assetArray) async {
-    List<File> fileImageArray = [];
-    try {
-      for (var i = 0; i < assetArray.length; i++) {
-        var imageAsset = assetArray[i];
-        File tempFile = await _convertToFile(imageAsset);
-        if (tempFile.existsSync()) {
-          fileImageArray.add(tempFile);
-        }
-      }
-    } catch (e) {}
-
-    return fileImageArray;
+  static Future<int> uploadImageByPath(String path, {String? name}) async {
+    int idFileDaiDien = -1;
+    if (Uri.parse(path).isAbsolute) {
+      idFileDaiDien = path.getIdFile();
+    }
+    if (idFileDaiDien > 0) {
+      return idFileDaiDien;
+    }
+    File file = File(path);
+    return await uploadImage(file, name: name!);
   }
 
-  static Future<File> _convertToFile(Asset asset) async {
-    final byteData = await asset.getByteData();
-
-    final tempFile =
-        File("${(await getTemporaryDirectory()).path}/${asset.name}");
-    final file = await tempFile.writeAsBytes(
-      byteData.buffer
-          .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes),
-    );
-
-    return file;
+  static Future<List<int>> convertListHinhAnhToListInt(List<String> listPath,
+      {String? name}) async {
+    List<Future<int>> listApi =
+        listPath.map((url) => uploadImageByPath(url, name: name)).toList();
+    return await Future.wait(listApi);
   }
 }

@@ -12,15 +12,15 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
   List data;
   dynamic value;
   bool? ismultiple = false;
-  String? pkey = "name";
-  String? pvalue = "id";
+  String pkey ;
+  String pvalue;
   Widget Function(BuildContext, int)? itemBuilder;
   RxSelectDelegate(
       {required this.data,
       required this.value,
       this.ismultiple,
-      this.pkey,
-      this.pvalue,
+      this.pkey = "name",
+      this.pvalue = "id",
       this.itemBuilder}) {}
   @override
   List<Widget> buildActions(BuildContext context) {

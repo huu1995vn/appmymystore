@@ -90,8 +90,15 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
       (context, index) {
         var item = listData![index];
         return ItemMyProductWidget(item,
-            onTap: () =>
-                {CommonNavigates.toMyProductPage(context, item: item)});
+            onTap: () => {
+                  CommonNavigates.toMyProductPage(context,
+                      item: item,
+                      onChanged: (v) => {
+                            setState(() {
+                              listData![index] = item;
+                            })
+                          })
+                });
       },
       onNextPage: onNextPage,
       onRefresh: loadData,

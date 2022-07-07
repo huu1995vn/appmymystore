@@ -62,29 +62,30 @@ class _UserPageState extends State<UserPage> {
 
   Future onUpload() async {
     try {
-      File? file = await FileService.getImagePicker(context,
+      String pathfile = await FileService.getImagePicker(context,
           cropImage: true, circleShape: true);
+      File file = File(pathfile);
       if (file == null) return;
       CommonMethods.lockScreen();
       if (file != null) {
-        int idAvatar = await FileService()
+        int fileId = await FileService
             .uploadImage(file, idFile: -1, name: data!.fullname!);
         // ignore: curly_braces_in_flow_control_structures
-        if (data!.img != idAvatar) {
+        if (data!.img != fileId) {
           var dataClone = data!.clone();
-          dataClone.img = idAvatar;
+          dataClone.img = fileId;
           ResponseModel res =
-              await DaiLyXeApiBLL_APIUser().updateavatar(idAvatar);
+              await DaiLyXeApiBLL_APIUser().updateavatar(fileId);
           if (res.status > 0) {
             setState(() {
               data = dataClone;
-              APITokenService.img = idAvatar;
+              APITokenService.img = fileId;
             });
           } else {
             CommonMethods.showToast(res.message);
           }
           Provider.of<UserProvider>(context, listen: false)
-              .setData(img: idAvatar);
+              .setData(img: fileId);
         }
       }
     } catch (e) {

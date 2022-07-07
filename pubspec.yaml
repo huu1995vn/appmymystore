@@ -65,7 +65,7 @@ dependencies:
   flutter_skeleton: #Used for skeleton
   pin_code_fields: #Used for pin_code
   carousel_slider: #Used for show banner
-  multi_image_picker: #Used for open gallery
+  # multi_image_picker: #Used for open gallery
   image_picker: #Used for open camera
   date_time_picker: #Used for open date picker
   local_auth: #Used for auth device

@@ -21,7 +21,7 @@ class RxReview extends StatefulWidget {
 class _ReviewState extends State<RxReview> {
   int displayPage = 1;
   bool loading = false;
-  List<ProductReviewsModel> data = [];
+  List<ReviewModel> data = [];
   int userId = APITokenService.userId;
   @override
   initState() {
@@ -172,7 +172,7 @@ class _ReviewState extends State<RxReview> {
   }
 
   Widget _listItem(BuildContext context, int index) {
-    ProductReviewsModel item = data![index];
+    ReviewModel item = data![index];
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(

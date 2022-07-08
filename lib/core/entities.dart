@@ -623,23 +623,25 @@ class ContactModel extends Entity {
 }
 
 @JsonSerializable()
-class ProductReviewsModel extends Entity {
+class ReviewModel extends Entity {
   int id = 0;
   int userid = APITokenService.userId;
   String? username;
   int productid = 0;
   String? comment;
+  String? productname;
+  String? price;
   int reviewcount = 0;
   int ratingvalue = 0;
   DateTime? createdate;
-  ProductReviewsModel();
+  ReviewModel();
   String get rxtimeago {
     return CommonMethods.timeagoFormat(createdate);
   }
 
   UserModel clone() => UserModel.fromJson(toJson());
 
-  factory ProductReviewsModel.fromJson(Map<String, dynamic> json) {
+  factory ReviewModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
     json["userid"] =
         CommonMethods.convertToInt32(json["userid"], APITokenService.userId);
@@ -648,10 +650,10 @@ class ProductReviewsModel extends Entity {
     json["ratingvalue"] = CommonMethods.convertToInt32(json["ratingvalue"]);
     json["createdate"] =
         CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
-    return _$ProductReviewsModelFromJson(json);
+    return _$ReviewModelFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$ProductReviewsModelToJson(this);
+  Map<String, dynamic> toJson() => _$ReviewModelToJson(this);
 }
 
 class AppTheme {

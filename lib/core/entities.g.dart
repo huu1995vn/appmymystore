@@ -131,7 +131,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..userid = json['userid'] as int
   ..usercontactid = json['usercontactid'] as int
   ..brandid = json['brandid'] as int
-..modelid = json['modelid'] as int
+  ..modelid = json['modelid'] as int
   ..bodytypeid = json['bodytypeid'] as int
   ..fueltypeid = json['fueltypeid'] as int
   ..madeinid = json['madeinid'] as int
@@ -326,23 +326,23 @@ Map<String, dynamic> _$ContactModelToJson(ContactModel instance) =>
       'isdefault': instance.isdefault,
     };
 
-ProductReviewsModel _$ProductReviewsModelFromJson(Map<String, dynamic> json) =>
-    ProductReviewsModel()
-      ..TotalRow = json['TotalRow']
-      ..RowIndex = json['RowIndex']
-      ..id = json['id'] as int
-      ..userid = json['userid'] as int
-      ..username = json['username'] as String?
-      ..productid = json['productid'] as int
-      ..comment = json['comment'] as String?
-      ..reviewcount = json['reviewcount'] as int
-      ..ratingvalue = json['ratingvalue'] as int
-      ..createdate = json['createdate'] == null
-          ? null
-          : DateTime.parse(json['createdate'] as String);
+ReviewModel _$ReviewModelFromJson(Map<String, dynamic> json) => ReviewModel()
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..id = json['id'] as int
+  ..userid = json['userid'] as int
+  ..username = json['username'] as String?
+  ..productid = json['productid'] as int
+  ..comment = json['comment'] as String?
+  ..productname = json['productname'] as String?
+  ..price = json['price'] as String?
+  ..reviewcount = json['reviewcount'] as int
+  ..ratingvalue = json['ratingvalue'] as int
+  ..createdate = json['createdate'] == null
+      ? null
+      : DateTime.parse(json['createdate'] as String);
 
-Map<String, dynamic> _$ProductReviewsModelToJson(
-        ProductReviewsModel instance) =>
+Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
     <String, dynamic>{
       'TotalRow': instance.TotalRow,
       'RowIndex': instance.RowIndex,
@@ -351,6 +351,8 @@ Map<String, dynamic> _$ProductReviewsModelToJson(
       'username': instance.username,
       'productid': instance.productid,
       'comment': instance.comment,
+      'productname': instance.productname,
+      'price': instance.price,
       'reviewcount': instance.reviewcount,
       'ratingvalue': instance.ratingvalue,
       'createdate': instance.createdate?.toIso8601String(),

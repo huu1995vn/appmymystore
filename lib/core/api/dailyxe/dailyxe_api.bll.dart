@@ -119,6 +119,10 @@ class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "product/$id");
   }
 
+  Future<ResponseModel> favorite(Map<String, dynamic> body) async {
+    return await post(body, null, "favorite");
+  }
+
   Future<ResponseModel> review(Map<String, dynamic> body) async {
     return await post(body, null, "review");
   }
@@ -166,7 +170,7 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "product/savedata");
   }
 
-   Future<ResponseModel> productuptop(Map<String, dynamic> body) async {
+  Future<ResponseModel> productuptop(Map<String, dynamic> body) async {
     return await post(body, null, "product/uptop");
   }
 
@@ -191,8 +195,30 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
   Future<ResponseModel> contactsavedata(Map<String, dynamic> body) async {
     return await post(body, null, "contact/savedata");
   }
+
   Future<ResponseModel> contactdelete(Map<String, dynamic> body) async {
     return await post(body, null, "contact/delete");
+  }
+
+  Future<ResponseModel> favorite(Map<String, dynamic> body) async {
+    return await post(body, null, "favorite");
+  }
+
+  Future<ResponseModel> favoritedelete(Map<String, dynamic> body) async {
+    return await post(body, null, "favorite/delete");
+  }
+
+  Future<ResponseModel> review(Map<String, dynamic> body) async {
+    return await post(body, null, "review");
+  }
+
+  Future<ResponseModel> reviewbyid(dynamic id) async {
+    Map<String, dynamic> body = {};
+    return await post(body, null, "review/$id");
+  }
+
+  Future<ResponseModel> reviewdelete(Map<String, dynamic> body) async {
+    return await post(body, null, "review/delete");
   }
 }
 

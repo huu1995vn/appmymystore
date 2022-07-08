@@ -107,8 +107,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 color: AppColors.red,
                               ),
                               onTap: () =>
-                                  CommonNavigates.toContactPage(context),
-                              // subtitle: Text("Sản phẩm yêu thích"),
+                                  CommonNavigates.toFavoritePage(context),
                             ),
                           ),
                           _card(
@@ -119,7 +118,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 color: AppColors.yellow,
                               ),
                               onTap: () =>
-                                  CommonNavigates.toContactPage(context),
+                                  CommonNavigates.toReviewPage(context),
                               // subtitle: Text("Danh sách đánh giá"),
                             ),
                           ),

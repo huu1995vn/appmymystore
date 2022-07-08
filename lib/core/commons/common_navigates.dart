@@ -14,10 +14,12 @@ import 'package:raoxe/pages/main/index.dart';
 import 'package:raoxe/pages/main/news/news_detail_page.dart';
 import 'package:raoxe/pages/rao/contact/contact_detail_page.dart';
 import 'package:raoxe/pages/rao/contact/contact_page.dart';
+import 'package:raoxe/pages/rao/farvorite/farvorite_page.dart';
 import 'package:raoxe/pages/rao/my_product/my_product_detail_page.dart';
 import 'package:raoxe/pages/rao/my_product/my_product_page.dart';
 import 'package:raoxe/pages/product/product_detail_page.dart';
 import 'package:raoxe/pages/product/product_page.dart';
+import 'package:raoxe/pages/rao/review/review_page.dart';
 import 'package:raoxe/pages/setting/settings_page.dart';
 import 'package:raoxe/pages/user/user_page.dart';
 
@@ -35,6 +37,8 @@ class CommonNavigates {
     '/advert': (context) => const AdvertPage(),
     '/news': (context) => const NewsPage(),
     '/contact': (context) => const ContactPage(),
+    '/review': (context) => const ReviewPage(),
+    '/favorite': (context) => const FavoritePage(),
 
     // '/search': (context) => SearchPage(),
   };
@@ -88,6 +92,30 @@ class CommonNavigates {
               builder: (context) => AdvertDetailPage(id: id, item: item)));
     } else {
       return await Navigator.pushNamed(context, "/advert");
+    }
+  }
+
+  static Future toFavoritePage(BuildContext context,
+      {int? id, ProductModel? item}) async {
+    if (id != null && id > 0 || item!=null) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => ProductDetailPage(id: id, item: item)));
+    } else {
+      return await Navigator.pushNamed(context, "/favorite");
+    }
+  }
+
+  static Future toReviewPage(BuildContext context,
+      {ReviewModel? item}) async {
+    if (item != null) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => ProductDetailPage(id: item.productid )));
+    } else {
+      return await Navigator.pushNamed(context, "/review");
     }
   }
 

@@ -211,7 +211,7 @@ class _ReviewState extends State<RxReview> {
                 Container(
                   margin: const EdgeInsets.only(bottom: 5),
                   child:
-                      Text(item.username ?? "", style: const TextStyle().bold),
+                      Text(item.name ?? "", style: const TextStyle().bold),
                 ),
                 TextFormField(
                   initialValue: item.comment,

@@ -297,6 +297,9 @@ class ProductModel extends Entity {
   String? districtname;
   String? address = CommonConfig.user.address;
   String? phone = CommonConfig.user.phone;
+  int userfavoriteid = -1;
+  bool isfavorite = false;
+
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
@@ -335,6 +338,8 @@ class ProductModel extends Entity {
         CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
     json["updatedate"] =
         CommonMethods.convertToDateTime(json["updatedate"])?.toIso8601String();
+    json["userfavoriteid"] = CommonMethods.convertToInt32(json["userfavoriteid"]);
+    json["isfavorite"] = CommonMethods.convertToBoolean(json["isfavorite"]);
 
     return _$ProductModelFromJson(json);
   }
@@ -626,10 +631,10 @@ class ContactModel extends Entity {
 class ReviewModel extends Entity {
   int id = 0;
   int userid = APITokenService.userId;
-  String? username;
   int productid = 0;
   String? comment;
-  String? productname;
+  String? name;
+  String? des;
   String? price;
   int reviewcount = 0;
   int ratingvalue = 0;

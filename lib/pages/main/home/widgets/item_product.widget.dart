@@ -123,9 +123,9 @@ class ItemProductWidget extends StatelessWidget {
                                 //         ).bold.size(10)),
                                 //   ],
                                 // ),
-                                const Icon(
+                                Icon(
                                   AppIcons.heart_1,
-                                  color: AppColors.primary,
+                                  color: itemProduct!.isfavorite? AppColors.primary: null,
                                   size: 19,
                                 )
                               ],

@@ -83,7 +83,7 @@ class _ReviewPageState extends State<ReviewPage> {
     Map<String, dynamic> body = {
       "ids": [item.id]
     };
-    ResponseModel res = await DaiLyXeApiBLL_APIUser().reviewdelete(body);
+    ResponseModel res = await DaiLyXeApiBLL_APIUser().reviewbyid(body);
     if (res.status > 0) {
       //call api dele
       setState(() {
@@ -111,7 +111,7 @@ class _ReviewPageState extends State<ReviewPage> {
             color: AppColors.black, //change your color here
           ),
           centerTitle: true,
-          title: Text('address'.tr(),
+          title: Text('review'.tr(),
               style: kTextHeaderStyle.copyWith(color: AppColors.black)),
           backgroundColor: AppColors.grey,
           elevation: 0.0,

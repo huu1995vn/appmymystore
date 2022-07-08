@@ -79,9 +79,10 @@ class _FavoritePageState extends State<FavoritePage> {
   onDelete(int index) async {
     var item = listData![index];
     Map<String, dynamic> body = {
-      "ids": [item.id]
+      "ids": [item.id],
+      "status": 2,
     };
-    ResponseModel res = await DaiLyXeApiBLL_APIUser().favorite(body);
+    ResponseModel res = await DaiLyXeApiBLL_APIUser().favoritepost(body);
     if (res.status > 0) {
       //call api dele
       setState(() {
@@ -109,7 +110,7 @@ class _FavoritePageState extends State<FavoritePage> {
             color: AppColors.black, //change your color here
           ),
           centerTitle: true,
-          title: Text('address'.tr(),
+          title: Text('favorite'.tr(),
               style: kTextHeaderStyle.copyWith(color: AppColors.black)),
           backgroundColor: AppColors.grey,
           elevation: 0.0,

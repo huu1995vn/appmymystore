@@ -181,7 +181,9 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..districtid = json['districtid'] as int?
   ..districtname = json['districtname'] as String?
   ..address = json['address'] as String?
-  ..phone = json['phone'] as String?;
+  ..phone = json['phone'] as String?
+  ..userfavoriteid = json['userfavoriteid'] as int
+  ..isfavorite = json['isfavorite'] as bool;
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
     <String, dynamic>{
@@ -236,6 +238,8 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'districtname': instance.districtname,
       'address': instance.address,
       'phone': instance.phone,
+      'userfavoriteid': instance.userfavoriteid,
+      'isfavorite': instance.isfavorite,
     };
 
 AdvertModel _$AdvertModelFromJson(Map<String, dynamic> json) => AdvertModel()
@@ -331,10 +335,10 @@ ReviewModel _$ReviewModelFromJson(Map<String, dynamic> json) => ReviewModel()
   ..RowIndex = json['RowIndex']
   ..id = json['id'] as int
   ..userid = json['userid'] as int
-  ..username = json['username'] as String?
   ..productid = json['productid'] as int
   ..comment = json['comment'] as String?
-  ..productname = json['productname'] as String?
+  ..name = json['name'] as String?
+  ..des = json['des'] as String?
   ..price = json['price'] as String?
   ..reviewcount = json['reviewcount'] as int
   ..ratingvalue = json['ratingvalue'] as int
@@ -348,10 +352,10 @@ Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
       'RowIndex': instance.RowIndex,
       'id': instance.id,
       'userid': instance.userid,
-      'username': instance.username,
       'productid': instance.productid,
       'comment': instance.comment,
-      'productname': instance.productname,
+      'name': instance.name,
+      'des': instance.des,
       'price': instance.price,
       'reviewcount': instance.reviewcount,
       'ratingvalue': instance.ratingvalue,

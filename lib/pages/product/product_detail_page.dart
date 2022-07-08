@@ -89,10 +89,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       backgroundColor: AppColors.grey,
                       actions: <Widget>[
                         IconButton(
-                          icon: Icon(AppIcons.heart_1,
-                              color: isLike
-                                  ? AppColors.primary
-                                  : AppColors.black50),
+                          icon: Icon(
+                            AppIcons.heart_1,
+                            color: data!.isfavorite ? AppColors.primary : null,
+                          ),
                           onPressed: () {},
                         ),
                         IconButton(

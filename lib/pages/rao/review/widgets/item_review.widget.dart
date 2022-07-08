@@ -49,7 +49,7 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                     child: Icon(AppIcons.map_marker,
                         size: 30, color: Colors.blue[500])),
                 title: Text(
-                  widget.item.productname?.toString() ?? "",
+                  widget.item.name?.toString() ?? "",
                   overflow: TextOverflow.ellipsis,
                   // style: TextStyle(FontWeight.normal),
                 ),

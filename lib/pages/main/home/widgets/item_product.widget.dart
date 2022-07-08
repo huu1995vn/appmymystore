@@ -110,19 +110,19 @@ class ItemProductWidget extends StatelessWidget {
                                     color: AppColors.black50,
                                   ).bold.size(12),
                                 ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      AppIcons.rocket_1,
-                                      color: AppColors.yellow,
-                                      size: 19,
-                                    ),
-                                    Text(" Tin ưu tiên",
-                                        style: const TextStyle(
-                                          color: AppColors.yellow,
-                                        ).bold.size(10)),
-                                  ],
-                                ),
+                                // Row(
+                                //   children: [
+                                //     const Icon(
+                                //       AppIcons.rocket_1,
+                                //       color: AppColors.yellow,
+                                //       size: 19,
+                                //     ),
+                                //     Text(" Tin ưu tiên",
+                                //         style: const TextStyle(
+                                //           color: AppColors.yellow,
+                                //         ).bold.size(10)),
+                                //   ],
+                                // ),
                                 const Icon(
                                   AppIcons.heart_1,
                                   color: AppColors.primary,

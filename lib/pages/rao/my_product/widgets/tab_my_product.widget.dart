@@ -45,12 +45,12 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
   Future loadData([nPaging = 1]) async {
     try {
       nPaging = nPaging ?? 1;
-      Map<String, dynamic> params = {
-        "id": 2, // cái này là lại ParentIdList === tin tức mới
+      Map<String, dynamic> body = {
         "p": paging,
-        "n": kItemOnPage
+        "n": kItemOnPage,
+        "filter": { "Status" : widget.status}
       };
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().product(params);
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().product(body);
       if (res.status > 0) {
         List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
             res.data, (val) => ProductModel.fromJson(val));

@@ -120,11 +120,11 @@ class CommonMethods {
     }
   }
 
-  static DateTime? convertToDateTime(String date, [String? newPattern]) {
+  static DateTime? convertToDateTime(String date, [String? newPattern, DateTime? valuedefault = null]) {
     try {
       return DateFormat(newPattern ?? "MM/dd/yyyy").parse(date);
     } catch (e) {}
-    return null;
+    return valuedefault;
   }
 
   static String formatDateTime(DateTime? date,

@@ -52,19 +52,19 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   String? initialUrl;
   ProductModel? data;
   bool isNotFound = false;
-  String txtprice = "";
   List<String> imgs = <String>[];
   loadData() async {
     if (widget.item != null) {
       setState(() {
         data = widget.item!;
+        imgs = data!.rximglist;
       });
     } else {
       ResponseModel res = await DaiLyXeApiBLL_APIGets().productbyid(widget.id!);
       if (res.status > 0) {
         setState(() {
           data = ProductModel.fromJson(res.data);
-          txtprice = CommonMethods.formatNumber(data!.price);
+          imgs = data!.rximglist;
         });
       } else {
         setState(() {
@@ -234,10 +234,42 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                               setState(() {
                                                 data!.brandid = CommonMethods
                                                     .convertToInt32(v);
+                                                data!.modelid = -1;
                                               })
                                             },
                                         validator: (v) {
                                           if (!(data!.brandid > 0)) {
+                                            return "notempty.text".tr();
+                                          }
+                                        }),
+                                    rxSelectInput(
+                                        context, "model", data!.modelid,
+                                        labelText: "Dòng xe",
+                                        afterChange: (v) => {
+                                              setState(() {
+                                                data!.modelid = CommonMethods
+                                                    .convertToInt32(v);
+                                              })
+                                            },
+                                        fnWhere: (e) {
+                                          return e["brandid"] == data!.brandid;
+                                        },
+                                        validator: (v) {
+                                          if (!(data!.modelid > 0)) {
+                                            return "notempty.text".tr();
+                                          }
+                                        }),
+                                    rxSelectInput(
+                                        context, "bodytype", data!.bodytypeid,
+                                        labelText: "Loại xe",
+                                        afterChange: (v) => {
+                                              setState(() {
+                                                data!.bodytypeid = CommonMethods
+                                                    .convertToInt32(v);
+                                              })
+                                            },
+                                        validator: (v) {
+                                          if (!(data!.bodytypeid > 0)) {
                                             return "notempty.text".tr();
                                           }
                                         }),
@@ -258,9 +290,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       ),
                                       subtitle: RxInput(
                                         keyboardType: TextInputType.number,
-                                        txtprice,
+                                        data!.price?.toString() ?? "",
                                         onChanged: (v) {
-                                          txtprice = v;
                                           setState(() {
                                             data!.price =
                                                 CommonMethods.convertToInt32(v);
@@ -299,10 +330,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   child: Padding(
                                 padding: kEdgeInsetsPadding,
                                 child: TextFormField(
+                                  showCursor: true,
+                                  key: const Key("name"),
                                   initialValue: data!.name,
+                                  keyboardType: TextInputType.multiline,
                                   onChanged: (value) => {data!.name = value},
                                   validator: (value) {
-                                    if (!(value == null || value!.isEmpty)) {
+                                    if ((data!.name == null ||
+                                        data!.name!.isEmpty)) {
                                       return "notempty.text".tr();
                                     }
                                   },
@@ -332,14 +367,17 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   child: Padding(
                                 padding: kEdgeInsetsPadding,
                                 child: TextFormField(
+                                  showCursor: true,
+                                  key: const Key("des"),
                                   initialValue: data!.des,
                                   minLines:
                                       6, // any number you need (It works as the rows for the textarea)
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
-                                  onChanged: (value) => {data!.name = value},
+                                  onChanged: (value) => {data!.des = value},
                                   validator: (value) {
-                                    if (!(value == null || value!.isEmpty)) {
+                                    if ((data!.des == null ||
+                                        data!.des!.isEmpty)) {
                                       return "notempty.text".tr();
                                     }
                                   },
@@ -527,7 +565,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   _onSave() async {
     CommonMethods.lockScreen();
-    ProductModel dataClone = data!.clone();
     try {
       List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
           name: data!.name!);
@@ -535,7 +572,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         CommonMethods.showToast("Vui lòng chọn hình ảnh đính kèm");
         return;
       }
-      dataClone.imglist = idFiles.join(',');
+      if (idFiles.isNotEmpty) {
+        setState(() {
+          data!.imglist = idFiles.join(',');
+          data!.img = idFiles[0];
+        });
+      }
+      ProductModel dataClone = data!.clone();
+
       ResponseModel res = await DaiLyXeApiBLL_APIUser().productsavedata(
           data!.id > 0 ? dataClone.toUpdate() : dataClone.toInsert());
       if (res.status > 0) {
@@ -562,18 +606,29 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     return Card(
       child: ListTile(
         leading: RxAvatarImage(data!.rximguser, size: 40),
-        title: Text(userProvider.user.fullname!, style: const TextStyle().bold),
+        title: Text(data!.fullname ?? "NAN", style: const TextStyle().bold),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              data!.phone ?? "",
-              style: const TextStyle(color: AppColors.primary).size(12),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  data!.phone ?? "NAN",
+                  style: const TextStyle(color: AppColors.primary).size(12),
+                ),
+                if (data!.cityid != null || data!.cityid! > 0)
+                  Text(
+                    data!.cityname ?? "NAN",
+                    style: const TextStyle().size(12),
+                  ),
+              ],
             ),
             Text(
               data!.address ?? "Vui lòng chọn địa chỉ",
-              style: const TextStyle(color: AppColors.primary).size(12),
-            ),
+              style: const TextStyle().italic.size(12),
+            )
           ],
         ),
         onTap: _onAddress,

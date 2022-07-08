@@ -64,8 +64,12 @@ class NewsModel extends Entity {
   }
 
   String get rxtimeago {
-    return CommonMethods.timeagoFormat(
-        CommonMethods.convertToDateTime(publishdate));
+    try {
+      return CommonMethods.timeagoFormat(
+          CommonMethods.convertToDateTime(publishdate));
+    } catch (e) {
+      return "NAN";
+    }
   }
 
   String get rximg {
@@ -105,10 +109,8 @@ class NotificationModel extends Entity {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
     json["notificationtypeid"] =
         CommonMethods.convertToInt32(json["notificationtypeid"]);
-    json["createdate"] = json["createdate"] == null
-        ? null
-        : CommonMethods.convertToDateTime(json["createdate"])!
-            .toIso8601String();
+    json["createdate"] =
+        CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
     return _$NotificationModelFromJson(json);
   }
 
@@ -308,10 +310,15 @@ class ProductModel extends Entity {
     json["madeinid"] = CommonMethods.convertToInt32(json["madeinid"]);
     json["colorid"] = CommonMethods.convertToInt32(json["colorid"]);
     json["cityid"] = CommonMethods.convertToInt32(json["cityid"]);
+    json["districtid"] = CommonMethods.convertToInt32(json["districtid"]);
     json["producttypeid"] =
         CommonMethods.convertToInt32(json["producttypeid"], 1);
     json["img"] = CommonMethods.convertToInt32(json["img"]);
     json["price"] = CommonMethods.convertToInt32(json["price"]);
+    json["year"] = CommonMethods.convertToInt32(json["year"]);
+    json["seat"] = CommonMethods.convertToInt32(json["seat"]);
+    json["door"] = CommonMethods.convertToInt32(json["door"]);
+    json["km"] = CommonMethods.convertToInt32(json["km"]);
     json["state"] = CommonMethods.convertToInt32(json["state"], 1);
     json["views"] = CommonMethods.convertToInt32(json["views"], 1);
     json["ratingvalue"] = CommonMethods.convertToDouble(json["ratingvalue"]);
@@ -322,18 +329,12 @@ class ProductModel extends Entity {
     json["review3"] = CommonMethods.convertToInt32(json["review3"]);
     json["review4"] = CommonMethods.convertToInt32(json["review4"]);
     json["review5"] = CommonMethods.convertToInt32(json["review5"]);
-    json["verifydate"] = json["verifydate"] == null
-        ? null
-        : CommonMethods.convertToDateTime(json["verifydate"])!
-            .toIso8601String();
-    json["createdate"] = json["updatedate"] == null
-        ? null
-        : CommonMethods.convertToDateTime(json["createdate"])!
-            .toIso8601String();
-    json["updatedate"] = json["updatedate"] == null
-        ? null
-        : CommonMethods.convertToDateTime(json["updatedate"])!
-            .toIso8601String();
+    json["verifydate"] =
+        CommonMethods.convertToDateTime(json["verifydate"])?.toIso8601String();
+    json["createdate"] =
+        CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
+    json["updatedate"] =
+        CommonMethods.convertToDateTime(json["updatedate"])?.toIso8601String();
 
     return _$ProductModelFromJson(json);
   }
@@ -435,6 +436,7 @@ class ProductModel extends Entity {
           "Door",
           "KM",
           "State",
+          "Status",
         ],
         'datas': <dynamic>[
           userid,
@@ -457,6 +459,7 @@ class ProductModel extends Entity {
           door,
           km,
           state,
+          1,
         ],
       };
   Map<String, dynamic> toUpdate() => <String, dynamic>{
@@ -482,6 +485,7 @@ class ProductModel extends Entity {
           "Door",
           "KM",
           "State",
+          "Status",
         ],
         'datas': <dynamic>[
           userid,
@@ -504,6 +508,7 @@ class ProductModel extends Entity {
           door,
           km,
           state,
+          1
         ],
       };
 }
@@ -554,14 +559,11 @@ class AdvertModel extends Entity {
     json["referenceid"] = CommonMethods.convertToInt32(json["referenceid"]);
     json["price"] = CommonMethods.convertToInt32(json["price"]);
     json["status"] = CommonMethods.convertToInt32(json["status"], 1);
-    json["expirationdate"] = json["expirationdate"] == null
-        ? null
-        : CommonMethods.convertToDateTime(json["expirationdate"])!
-            .toIso8601String();
-    json["reminderdate"] = json["reminderdate"] == null
-        ? null
-        : CommonMethods.convertToDateTime(json["reminderdate"])!
-            .toIso8601String();
+    json["expirationdate"] =
+        CommonMethods.convertToDateTime(json["expirationdate"])
+            ?.toIso8601String();
+    json["reminderdate"] = CommonMethods.convertToDateTime(json["reminderdate"])
+        ?.toIso8601String();
     return _$AdvertModelFromJson(json);
   }
 
@@ -644,10 +646,8 @@ class ProductReviewsModel extends Entity {
     json["productid"] = CommonMethods.convertToInt32(json["productid"]);
     json["reviewcount"] = CommonMethods.convertToInt32(json["reviewcount"]);
     json["ratingvalue"] = CommonMethods.convertToInt32(json["ratingvalue"]);
-    json["createdate"] = json["createdate"] == null
-        ? null
-        : CommonMethods.convertToDateTime(json["createdate"])!
-            .toIso8601String();
+    json["createdate"] =
+        CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
     return _$ProductReviewsModelFromJson(json);
   }
 

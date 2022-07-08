@@ -156,11 +156,11 @@ class FileService {
   static Future<List<String>> openGallery({int maxImages = 1}) async {
     try {
       List<XFile>? pickedFiles =
-          await ImagePicker().pickMultiImage(imageQuality: 80);
-      if (pickedFiles == null || pickedFiles.length == 0) return [];
+          await ImagePicker().pickMultiImage(imageQuality: 70, maxWidth: 1440);
+      if (pickedFiles == null || pickedFiles.isEmpty) return [];
       List<String> img =
           pickedFiles.map((pickImage) => pickImage.path).toList();
-      if (img == null || img.isEmpty) return null!;
+      if (img == null || img.isEmpty) return <String>[];
       return img.sublist(0, img.length >= maxImages ? maxImages : img.length);
     } catch (e) {
       CommonMethods.wirtePrint(e);

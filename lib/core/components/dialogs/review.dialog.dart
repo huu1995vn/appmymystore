@@ -10,6 +10,7 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 
 class ReviewDialog extends StatefulWidget {
   const ReviewDialog({
@@ -69,7 +70,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
               color: AppColors.black, //change your color here
             ),
             centerTitle: true,
-            title: Text("review".tr(),
+            title: Text("",
                 style: kTextHeaderStyle.copyWith(color: AppColors.black)),
             elevation: 0.0,
             backgroundColor: AppColors.grey,
@@ -79,12 +80,11 @@ class _ReviewDialogState extends State<ReviewDialog> {
                   padding: const EdgeInsets.all(kDefaultPadding),
                   child: Form(
                       key: _keyValidationForm,
-                      child: Card(
-                          child: Column(
+                      child: Column(
                         children: <Widget>[
                           RatingBar.builder(
                             initialRating: 5,
-                            itemSize: 15.0,
+                            itemSize: 39.0,
                             ignoreGestures: false,
                             minRating: 0,
                             direction: Axis.horizontal,
@@ -94,27 +94,53 @@ class _ReviewDialogState extends State<ReviewDialog> {
                               color: Colors.amber,
                             ),
                             onRatingUpdate: (_) {
-                              review.ratingvalue = CommonMethods.convertToInt32(_);
+                              review.ratingvalue =
+                                  CommonMethods.convertToInt32(_);
                             },
                           ),
-                          TextFormField(
-                            showCursor: true,
-                            key: const Key("review"),
-                            initialValue: review.comment,
-                            minLines:
-                                6, // any number you need (It works as the rows for the textarea)
-                            keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                            onChanged: (value) => {review.comment = value},
-                            validator: (value) {
-                              if ((review.comment == null ||
-                                  review.comment!.isEmpty)) {
-                                return "notempty.text".tr();
-                              }
-                            },
+                          _header(
+                            header: RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                      text: "Đánh giá ",
+                                      style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1!
+                                                  .color)
+                                          .bold),
+                                  const TextSpan(
+                                      text: "*",
+                                      style:
+                                          TextStyle(color: AppColors.primary)),
+                                ],
+                              ),
+                            ),
                           ),
+                          Card(
+                            child: Padding(
+                                padding: kEdgeInsetsPadding,
+                                child: TextFormField(
+                                  showCursor: true,
+                                  key: const Key("review"),
+                                  initialValue: review.comment,
+                                  minLines:
+                                      6, // any number you need (It works as the rows for the textarea)
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  onChanged: (value) =>
+                                      {review.comment = value},
+                                  validator: (value) {
+                                    if ((review.comment == null ||
+                                        review.comment!.isEmpty)) {
+                                      return "notempty.text".tr();
+                                    }
+                                  },
+                                )),
+                          )
                         ],
-                      )))))
+                      ))))
         ],
       ),
       persistentFooterButtons: [
@@ -126,6 +152,27 @@ class _ReviewDialogState extends State<ReviewDialog> {
             },
             text: 'save'.tr())
       ],
+    );
+  }
+
+  Widget _header({String? title, Widget? header, Widget? action}) {
+    return Padding(
+      padding: const EdgeInsets.all(kDefaultPadding)
+          .copyWith(left: kDefaultPadding / 2),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          header ??
+              Text(
+                title!,
+                style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyText1!.color)
+                    .bold,
+              ),
+          if (action != null) action
+        ],
+      ),
     );
   }
 }

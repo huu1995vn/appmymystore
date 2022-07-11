@@ -640,7 +640,7 @@ class ReviewModel extends Entity {
   String? des;
   String? price;
   int reviewcount = 0;
-  int ratingvalue = 0;
+  int ratingvalue = 5;
   DateTime? createdate;
   int status = 1;
   String? reject;

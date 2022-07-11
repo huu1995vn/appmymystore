@@ -221,15 +221,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             padding: const EdgeInsets.only(
                 left: kDefaultPadding, right: kDefaultPadding),
             child: TextFormField(
-              initialValue: """Toyota Yaris 1.5G 2019
-              ⭕️⭕️ Xe qua Sử Dụng Chính Hãng ⭕️⭕️
-              -Loại xe: Yaris
-              -Sản xuất: 2019
-              -ĐK lần đầu: 28/03/2019
-              -Màu: Bạc
-              -Bs: 51H-
-              -ODO: 51.210Km
-              📍 Toyota Đông Sài Gòn""",
+              initialValue: data.des,
               minLines:
                   6, // any number you need (It works as the rows for the textarea)
               keyboardType: TextInputType.multiline,

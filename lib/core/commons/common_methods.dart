@@ -10,9 +10,11 @@ import 'package:geolocator/geolocator.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:new_version/new_version.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
@@ -120,7 +122,8 @@ class CommonMethods {
     }
   }
 
-  static DateTime? convertToDateTime(String date, [String? newPattern, DateTime? valuedefault = null]) {
+  static DateTime? convertToDateTime(String date,
+      [String? newPattern, DateTime? valuedefault = null]) {
     try {
       return DateFormat(newPattern ?? "MM/dd/yyyy").parse(date);
     } catch (e) {}
@@ -210,9 +213,7 @@ class CommonMethods {
           fit: BoxFit.contain,
         ),
         context: context,
-        actions: [
-          RxPrimaryButton(onTap: () {}, text: "done".tr())          
-        ]);
+        actions: [RxPrimaryButton(onTap: () {}, text: "done".tr())]);
   }
 
   static String buildUrlImage(int idHinh,
@@ -442,15 +443,29 @@ class CommonMethods {
       return "";
     }
   }
-  static List<T> convertToList<T>(List data, T Function(dynamic) toElement)
-  {
-    try {
-          return data.map(toElement).toList();
 
+  static List<T> convertToList<T>(List data, T Function(dynamic) toElement) {
+    try {
+      return data.map(toElement).toList();
     } catch (e) {
-        return <T>[];
+      return <T>[];
     }
   }
 
-  
+  static Future<bool> onFavorite(List<int> ids, bool status) async {
+    try {
+      ResponseModel res =
+          await DaiLyXeApiBLL_APIUser().favoritepost(ids, status);
+      if (res.status > 0) {
+        status
+            ? StorageService.addFavorite(ids)
+            : StorageService.deleteFavorite(ids);
+        return true;
+      } else {
+        CommonMethods.showToast(res.message);
+      }
+    } catch (e) {
+    }
+    return false;
+  }
 }

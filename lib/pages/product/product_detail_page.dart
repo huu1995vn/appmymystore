@@ -9,6 +9,7 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_review.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
@@ -39,27 +40,36 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   ProductModel? data;
   bool isNotFound = false;
   loadData() async {
-    if (widget.item != null) {
-      setState(() {
-        data = widget.item!;
-      });
-    } else {
-      ResponseModel res = await DaiLyXeApiBLL_APIGets().productbyid(widget.id!);
-      if (res.status > 0) {
+    try {
+      if (widget.item != null) {
         setState(() {
-          data = ProductModel.fromJson(res.data);
+          data = widget.item!;
         });
       } else {
-        setState(() {
-          isNotFound = true;
-        });
-        CommonMethods.showToast(res.message);
+        ResponseModel res =
+            await DaiLyXeApiBLL_APIGets().productbyid(widget.id!);
+        if (res.status > 0) {
+          setState(() {
+            data = ProductModel.fromJson(res.data);
+          });
+        } else {
+          setState(() {
+            isNotFound = true;
+          });
+          CommonMethods.showToast(res.message);
+        }
       }
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
     }
   }
 
-  bool get isLike {
-    return false;
+  onFavorite() async {
+    try {
+      CommonMethods.onFavorite([data!.id], !data!.isfavorite);
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
+    }
   }
 
   @override
@@ -93,7 +103,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             AppIcons.heart_1,
                             color: data!.isfavorite ? AppColors.primary : null,
                           ),
-                          onPressed: () {},
+                          onPressed: onFavorite,
                         ),
                         IconButton(
                           icon: Icon(

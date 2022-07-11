@@ -7,6 +7,7 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
@@ -35,10 +36,7 @@ class _FavoritePageState extends State<FavoritePage> {
   loadData([nPaging = 1]) async {
     try {
       nPaging = nPaging ?? 1;
-      Map<String, dynamic> body = {
-        "p": paging,
-        "n": kItemOnPage
-      };
+      Map<String, dynamic> body = {"p": paging, "n": kItemOnPage};
       ResponseModel res = await DaiLyXeApiBLL_APIUser().favorite(body);
       if (res.status > 0) {
         List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
@@ -77,26 +75,18 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   onDelete(int index) async {
-    var item = listData![index];
-    Map<String, dynamic> body = {
-      "ids": [item.id],
-      "status": 2,
-    };
-    ResponseModel res = await DaiLyXeApiBLL_APIUser().favoritepost(body);
-    if (res.status > 0) {
-      //call api dele
-      setState(() {
-        listData!.removeAt(index);
-      });
-    } else {
-      CommonMethods.showToast(res.message);
+    try {
+      var item = listData![index];
+      CommonMethods.onFavorite([item!.id], !item!.isfavorite);
+      listData!.removeAt(index);
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
     }
   }
 
   onDetail([int index = -1]) async {
     ProductModel item = index > 0 ? listData![index] : ProductModel();
-    CommonNavigates.toFavoritePage(context,
-        item: item);
+    CommonNavigates.toFavoritePage(context, item: item);
   }
 
   @override
@@ -122,15 +112,12 @@ class _FavoritePageState extends State<FavoritePage> {
         slivers: <Widget>[
           RxSliverList(listData, (BuildContext context, int index) {
             ProductModel item = listData![index];
-            return ItemProductWidget(item,
-                onTap: () => {onDetail(index)});
+            return ItemProductWidget(item, onTap: () => {onDetail(index)});
           })
         ],
       ),
       persistentFooterButtons: [
-        RxPrimaryButton(
-            onTap: onDetail,
-            text: "add.text".tr())
+        RxPrimaryButton(onTap: onDetail, text: "add.text".tr())
       ],
     );
   }

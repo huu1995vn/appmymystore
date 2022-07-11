@@ -89,7 +89,8 @@ class APITokenService {
     return pText.replaceAll('+', '_').replaceAll('/', '-').split("=")[0];
   }
 
-  static Future<bool> loginByData(String pData) async {
+   static Future<bool> loginByData(String pData) async {
+    bool res = false;
     try {
       await StorageService.set(StorageKeys.dataLogin, pData);
       String dataBase64 = convertBase64FromUrl(pData);
@@ -98,13 +99,14 @@ class APITokenService {
         token = data["token"];
         fullname = data["fullname"];
         img = int.parse(data["img"] ?? "0");
-        return true;
+        res = true;
       }
+      await StorageService.initFavorite();
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }
 
-    return false;
+    return res;
   }
 
   static bool logout() {

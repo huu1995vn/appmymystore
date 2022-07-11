@@ -203,8 +203,8 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
   Future<ResponseModel> favorite(Map<String, dynamic> body) async {
     return await post(body, null, "favorite");
   }
-   Future<ResponseModel> favoritepost(Map<String, dynamic> body) async {
-    Map<String, dynamic> body = {};
+   Future<ResponseModel> favoritepost(List<int> ids, bool status) async {
+    Map<String, dynamic> body = {"ids": ids, "status": status};
     return await post(body, null, "favorite/post");
   }
   Future<ResponseModel> favoritedelete(Map<String, dynamic> body) async {

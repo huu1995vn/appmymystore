@@ -1,18 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:raoxe/core/commons/index.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_customscrollview.dart';
-import 'package:raoxe/core/components/rx_sliverlist.dart';
-import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/pages/rao/review/widgets/item_review.widget.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:raoxe/pages/rao/review/widgets/tab_review.widget.dart';
 
 class ReviewPage extends StatefulWidget {
   const ReviewPage({Key? key}) : super(key: key);
@@ -25,116 +18,67 @@ class _ReviewPageState extends State<ReviewPage> {
   @override
   void initState() {
     super.initState();
-    loadData(paging);
+    loadData();
   }
 
-  int paging = 1;
-  int totalItems = 0;
-  List<ReviewModel>? listData;
-  AutoScrollController scrollController = AutoScrollController();
-  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  List<Widget> tabs = <Widget>[];
+  List<Widget> tabviews = <Widget>[];
 
-  loadData([nPaging = 1]) async {
-    if(nPaging > 1 && listData!=null && totalItems <= listData!.length ) return;
-    try {
-      nPaging = nPaging ?? 1;
-      Map<String, dynamic> body = {
-        "p": nPaging,
-        "n": kItemOnPage
-      };
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().review(body);
-      if (res.status > 0) {
-        List<ReviewModel> list = CommonMethods.convertToList<ReviewModel>(
-            res.data, (val) => ReviewModel.fromJson(val));
-        setState(() {
-          totalItems =
-              (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
-          listData ??= [];
-          if (nPaging == 1) {
-            listData = list;
-          } else {
-            listData = (listData! + list);
-          }
-        });
-        paging = nPaging;
-      } else {
-        CommonMethods.showToast(res.message);
-      }
-    } catch (e) {
-      CommonMethods.showDialogError(context, e.toString());
-    }
+  loadData() {
+    setState(() {
+      tabs = PRODUCTREVIEWSTATUS
+          .map((item) => Tab(
+                child: Text(item.categoryname),
+              ))
+          .toList();
+      tabviews = PRODUCTREVIEWSTATUS
+          .map(
+            (item) => TabReviewWidget(status: item.id),
+          )
+          .toList();
+    });
   }
 
-  Future<dynamic> onNextPage() async {
-    return await loadData(paging + 1);
-  }
-
-  Future<dynamic> onRefresh() async {
-    return await loadData(1);
-  }
-
-  @override
-  dispose() {
-    super.dispose();
-    if (mounted) scrollController.dispose();
-  }
-
-  onDelete(int index) async {
-    var item = listData![index];
-    Map<String, dynamic> body = {
-      "ids": [item.id]
-    };
-    ResponseModel res = await DaiLyXeApiBLL_APIUser().reviewbyid(body);
-    if (res.status > 0) {
-      //call api dele
-      setState(() {
-        listData!.removeAt(index);
-      });
-    } else {
-      CommonMethods.showToast(res.message);
-    }
-  }
-
-  onDetail([int index = -1]) async {
-    ReviewModel item = index > 0 ? listData![index] : ReviewModel();
-    CommonNavigates.toReviewPage(context,
-        item: item);
-  }
+  int itemselect = 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      key: _key,
-      body: RxCustomScrollView(
-        appBar: SliverAppBar(
-          iconTheme: IconThemeData(
-            color: AppColors.black, //change your color here
+      body: DefaultTabController(
+        length: tabs.length,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                title: Text("review".tr(), style: kTextHeaderStyle),
+                elevation: 0.0,
+                centerTitle: true,
+              ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: RxSliverAppBarTabDelegate(
+                  child: PreferredSize(
+                    preferredSize: Size.fromHeight(45.0),
+                    child: Container(
+                      color: Colors.white,
+                      child: TabBar(
+                        isScrollable: true,
+                        labelColor: AppColors.primary,
+                        unselectedLabelColor: AppColors.black50,
+                        indicatorColor: AppColors.primary,
+                        tabs: tabs,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            children: tabviews,
           ),
-          centerTitle: true,
-          title: Text('review'.tr(),
-              style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-          backgroundColor: AppColors.grey,
-          elevation: 0.0,
         ),
-        key: const Key("LReview"),
-        controller: scrollController,
-        onNextScroll: onNextPage,
-        onRefresh: onRefresh,
-        slivers: <Widget>[
-          RxSliverList(listData, (BuildContext context, int index) {
-            ReviewModel item = listData![index];
-            return ItemReviewWidget(item,
-                onTap: () => {onDetail(index)},
-                onDelete: (context) => onDelete(index));
-          })
-        ],
       ),
-      persistentFooterButtons: [
-        RxPrimaryButton(
-            onTap: onDetail,
-            text: "add.text".tr())
-      ],
     );
   }
 }

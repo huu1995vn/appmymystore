@@ -73,7 +73,7 @@ List<Categorie> PRODUCTSTATUS = [
   // Categorie(id: 6, categoryname: "Videos"),
 ];
 
-List<Categorie> PRODUCTREVIEWSSTATUS = [
+List<Categorie> PRODUCTREVIEWSTATUS = [
   Categorie(id: 1, categoryname: "Đã duyệt"),
   Categorie(id: 2, categoryname: "Không duyệt"),
 ];

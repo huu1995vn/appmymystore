@@ -112,7 +112,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           _card(
                             child: ListTile(
-                              title: Text("evaluate".tr()),
+                              title: Text("review".tr()),
                               leading: Icon(
                                 AppIcons.star_1,
                                 color: AppColors.yellow,

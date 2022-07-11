@@ -111,7 +111,7 @@ class _ReviewState extends State<RxReview> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  _buildRating(context, 1,
+                _buildRating(context, 1,
                       ratingvalue == 0.0 ? 0.0 : (review1 / ratingvalue)),
                   _buildRating(context, 2,
                       ratingvalue == 0.0 ? 0.0 : (review2 / ratingvalue)),

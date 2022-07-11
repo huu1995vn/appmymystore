@@ -220,8 +220,7 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "review/$id");
   }
    Future<ResponseModel> reviewpost(Map<String, dynamic> body) async {
-    Map<String, dynamic> body = {};
-    return await post(body, null, "review/post");
+    return await post(body, body, "review/post");
   }
 
   Future<ResponseModel> reviewdelete(Map<String, dynamic> body) async {

@@ -49,7 +49,6 @@ class _ReviewDialogState extends State<ReviewDialog> {
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().reviewpost(body);
       if (res.status > 0) {
-        CommonNavigates.goBack(context, review);
         CommonMethods.showDialogSuccess(context, "Đánh giá thành công");
       } else {
         CommonMethods.showToast(res.message);

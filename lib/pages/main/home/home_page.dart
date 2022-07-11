@@ -1,8 +1,10 @@
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
@@ -47,15 +49,12 @@ class _HomePageState extends State<HomePage>
       "p": paging,
       "n": kItemOnPage
     };
-    ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
-    List<dynamic> data = res.data;
-    // ignore: unnecessary_cast
-    List<ProductModel> list = data
-        .map((val) => ProductModel.fromJson(val))
-        .toList() as List<ProductModel>;
+    ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);
+    List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
+        res.data, (val) => ProductModel.fromJson(val));
     setState(() {
-totalItems =
-            (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;      listData;
+      totalItems = (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
+      listData;
       if (nPaging == 1) {
         listData = list;
       } else {
@@ -71,6 +70,18 @@ totalItems =
 
   Future<dynamic> onRefresh() async {
     return await loadData(1);
+  }
+
+  onFavorite(int index) async {
+    ProductModel item = listData![index];
+    try {
+      await CommonMethods.onFavorite([item.id], !item.isfavorite);
+      setState(() {
+        listData![index] = item;
+      });
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
+    }
   }
 
   @override
@@ -95,9 +106,13 @@ totalItems =
           ])),
           RxSliverList(listData, (BuildContext context, int index) {
             ProductModel item = listData![index];
-            return ItemProductWidget(item, onTap: () {
-              CommonNavigates.toProductPage(context, id: item.id);
-            });
+            return ItemProductWidget(
+              item,
+              onTap: () {
+                CommonNavigates.toProductPage(context, id: item.id);
+              },
+              onFavorite: () => {onFavorite(index)},
+            );
           })
         ],
       ),

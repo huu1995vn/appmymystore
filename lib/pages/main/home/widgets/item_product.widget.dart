@@ -9,14 +9,13 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
 class ItemProductWidget extends StatelessWidget {
-  final ProductModel itemProduct;
+  final ProductModel item;
   final void Function()? onTap;
-  const ItemProductWidget(this.itemProduct, {super.key, this.onTap});
-
+  final void Function()? onFavorite;
+  const ItemProductWidget(this.item, {super.key, this.onTap, this.onFavorite});
   @override
   Widget build(BuildContext context) {
-    int lenimg = Random().nextInt(15); //itemProduct.rximglist.length
-
+    int lenimg = item.rximglist.length;
     return Card(
       child: GestureDetector(
         onTap: onTap,
@@ -31,7 +30,7 @@ class ItemProductWidget extends StatelessWidget {
                       topLeft: Radius.circular(kDefaultPadding)),
                   child: Stack(
                     children: <Widget>[
-                      RxImage(itemProduct.rximg,
+                      RxImage(item.rximg,
                           width: SizeConfig.screenWidth / 4),
                       if (lenimg > 0)
                         Positioned(
@@ -55,7 +54,7 @@ class ItemProductWidget extends StatelessWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
                               border: Border.all(color: AppColors.white50),
-                              color: AppColors.black,
+                              color: AppColors.blackLight,
                             ),
                             child: SizedBox(
                                 height: 15,
@@ -84,7 +83,7 @@ class ItemProductWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    itemProduct.name ?? "",
+                                    item.name ?? "",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
@@ -92,7 +91,7 @@ class ItemProductWidget extends StatelessWidget {
                                         ),
                                   ),
                                   Text(
-                                    itemProduct.rxprice,
+                                    item.rxprice,
                                     style: const TextStyle(
                                       color: AppColors.primary,
                                     ).bold,
@@ -105,29 +104,20 @@ class ItemProductWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  itemProduct.cityname ?? "Tp.HCM",
+                                  item.cityname ?? "Tp.HCM",
                                   style: const TextStyle(
                                     color: AppColors.black50,
                                   ).bold.size(12),
                                 ),
-                                // Row(
-                                //   children: [
-                                //     const Icon(
-                                //       AppIcons.rocket_1,
-                                //       color: AppColors.yellow,
-                                //       size: 19,
-                                //     ),
-                                //     Text(" Tin ưu tiên",
-                                //         style: const TextStyle(
-                                //           color: AppColors.yellow,
-                                //         ).bold.size(10)),
-                                //   ],
-                                // ),
-                                Icon(
+                                GestureDetector(
+                                  onTap: onFavorite,
+                                  child: Icon(
                                   AppIcons.heart_1,
-                                  color: itemProduct!.isfavorite? AppColors.primary: null,
+                                  color: item.isfavorite? AppColors.primary: null,
                                   size: 19,
                                 )
+                                ),
+                                
                               ],
                             ),
                           ],

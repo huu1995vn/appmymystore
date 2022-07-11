@@ -11,7 +11,10 @@ class StorageService {
   static List<int> listFavorite = [];
   static Future<bool> init() async {
     var res = await storage.ready;
-    dataStorage = storage.getItem(keyStorage) ?? <String, dynamic>{};
+    try {
+          dataStorage = storage.getItem(keyStorage) ?? <String, dynamic>{};
+    } catch (e) {
+    }
     return res;
   }
 
@@ -43,18 +46,18 @@ class StorageService {
         if(res.data > 0)
         {
           listFavorite = (res.data as List).map((e) => int.parse(e["id"])).toList();
-          storage.setItem(StorageKeys.favorite, listFavorite);
+          set(StorageKeys.favorite, listFavorite);
         }
       } 
     } catch (e) {}
   }
   static deleteFavorite(List<int> ids) {
     listFavorite.removeWhere((element) => ids.contains(element));
-    storage.setItem(keyStorage, listFavorite.toSet().toList());
+    set(keyStorage, listFavorite.toSet().toList());
   }
   static addFavorite(List<int> ids) {
     listFavorite.addAll(ids);
-    storage.setItem(keyStorage, listFavorite.toSet().toList());
+    set(keyStorage, listFavorite.toSet().toList());
   }
 }
 

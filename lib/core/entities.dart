@@ -6,6 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 /// This allows the class to access private members in
@@ -297,9 +298,9 @@ class ProductModel extends Entity {
   String? districtname;
   String? address = CommonConfig.user.address;
   String? phone = CommonConfig.user.phone;
-  int userfavoriteid = -1;
-  bool isfavorite = false;
-
+  bool get isfavorite {
+    return StorageService.listFavorite.contains(id);
+  }
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
@@ -338,7 +339,8 @@ class ProductModel extends Entity {
         CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
     json["updatedate"] =
         CommonMethods.convertToDateTime(json["updatedate"])?.toIso8601String();
-    json["userfavoriteid"] = CommonMethods.convertToInt32(json["userfavoriteid"]);
+    json["userfavoriteid"] =
+        CommonMethods.convertToInt32(json["userfavoriteid"]);
     json["isfavorite"] = CommonMethods.convertToBoolean(json["isfavorite"]);
 
     return _$ProductModelFromJson(json);

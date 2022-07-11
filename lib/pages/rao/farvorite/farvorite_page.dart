@@ -7,7 +7,6 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';

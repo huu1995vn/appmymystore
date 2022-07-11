@@ -454,6 +454,10 @@ class CommonMethods {
 
   static Future<bool> onFavorite(List<int> ids, bool status) async {
     try {
+      if (APITokenService.userId <= 0) {
+        CommonMethods.showToast("Vùi lòng đăng nhập trước");
+        return false;
+      }
       ResponseModel res =
           await DaiLyXeApiBLL_APIUser().favoritepost(ids, status);
       if (res.status > 0) {
@@ -464,8 +468,7 @@ class CommonMethods {
       } else {
         CommonMethods.showToast(res.message);
       }
-    } catch (e) {
-    }
+    } catch (e) {}
     return false;
   }
 }

@@ -10,13 +10,13 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
 class ItemMyProductWidget extends StatelessWidget {
- final ProductModel itemProduct;
+  final ProductModel item;
   final void Function()? onTap;
-  const ItemMyProductWidget(this.itemProduct, {super.key, this.onTap});
+  const ItemMyProductWidget(this.item, {super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    int lenimg = Random().nextInt(15); //itemProduct.rximglist.length
+    int lenimg = item.rximglist.length;
 
     return Card(
       child: GestureDetector(
@@ -32,8 +32,7 @@ class ItemMyProductWidget extends StatelessWidget {
                       topLeft: Radius.circular(kDefaultPadding)),
                   child: Stack(
                     children: <Widget>[
-                      RxImage(itemProduct.rximg,
-                          width: SizeConfig.screenWidth / 4),
+                      RxImage(item.rximg, width: SizeConfig.screenWidth / 4),
                       if (lenimg > 0)
                         Positioned(
                           top: 5,
@@ -85,7 +84,7 @@ class ItemMyProductWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    itemProduct.name ?? "",
+                                    item.name ?? "",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
@@ -93,7 +92,8 @@ class ItemMyProductWidget extends StatelessWidget {
                                         ),
                                   ),
                                   Text(
-                                    CommonMethods.formatNumber(itemProduct.price ?? "4000000"),
+                                    CommonMethods.formatNumber(
+                                        item.price ?? "4000000"),
                                     style: const TextStyle(
                                       color: AppColors.primary,
                                     ).bold,
@@ -106,24 +106,11 @@ class ItemMyProductWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  itemProduct.cityname ?? "Tp.HCM",
+                                  item.cityname ?? "Tp.HCM",
                                   style: const TextStyle(
                                     color: AppColors.black50,
                                   ).bold.size(12),
                                 ),
-                                // Row(
-                                //   children: [
-                                //     const Icon(
-                                //       AppIcons.rocket_1,
-                                //       color: AppColors.yellow,
-                                //       size: 19,
-                                //     ),
-                                //     Text(" Tin ưu tiên",
-                                //         style: const TextStyle(
-                                //           color: AppColors.yellow,
-                                //         ).bold.size(10)),
-                                //   ],
-                                // ),
                                 
                               ],
                             ),

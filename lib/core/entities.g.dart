@@ -181,7 +181,8 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..districtid = json['districtid'] as int?
   ..districtname = json['districtname'] as String?
   ..address = json['address'] as String?
-  ..phone = json['phone'] as String?;
+  ..phone = json['phone'] as String?
+  ..reject = json['reject'] as String?;
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
     <String, dynamic>{
@@ -236,6 +237,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'districtname': instance.districtname,
       'address': instance.address,
       'phone': instance.phone,
+      'reject': instance.reject,
     };
 
 AdvertModel _$AdvertModelFromJson(Map<String, dynamic> json) => AdvertModel()
@@ -340,7 +342,9 @@ ReviewModel _$ReviewModelFromJson(Map<String, dynamic> json) => ReviewModel()
   ..ratingvalue = json['ratingvalue'] as int
   ..createdate = json['createdate'] == null
       ? null
-      : DateTime.parse(json['createdate'] as String);
+      : DateTime.parse(json['createdate'] as String)
+  ..status = json['status'] as int
+  ..reject = json['reject'] as String?;
 
 Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
     <String, dynamic>{
@@ -356,4 +360,6 @@ Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
       'reviewcount': instance.reviewcount,
       'ratingvalue': instance.ratingvalue,
       'createdate': instance.createdate?.toIso8601String(),
+      'status': instance.status,
+      'reject': instance.reject,
     };

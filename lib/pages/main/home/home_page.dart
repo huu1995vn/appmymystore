@@ -43,10 +43,13 @@ class _HomePageState extends State<HomePage>
   int totalItems = 0;
   List<ProductModel>? listData;
   loadData(nPaging) async {
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+      return;
+
     nPaging = nPaging ?? 1;
     Map<String, dynamic> params = {
       "id": 2, // cái này là lại ParentIdList === tin tức mới
-      "p": paging,
+      "p": nPaging,
       "n": kItemOnPage
     };
     ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);

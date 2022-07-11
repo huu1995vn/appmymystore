@@ -28,7 +28,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
 
   List<dynamic>? listData;
   int paging = 1;
-  int? totalItems;
+  int totalItems = 0;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
@@ -43,11 +43,14 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
   }
 
   Future loadData([nPaging = 1]) async {
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+      return;
+
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> params = {
         "id": widget.categorie, // cái này là lại ParentIdList === tin tức mới
-        "p": paging,
+        "p": nPaging,
         "n": kItemOnPage
       };
       ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);

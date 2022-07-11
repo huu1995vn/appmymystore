@@ -33,9 +33,12 @@ class _FavoritePageState extends State<FavoritePage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   loadData([nPaging = 1]) async {
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+      return;
+
     try {
       nPaging = nPaging ?? 1;
-      Map<String, dynamic> body = {"p": paging, "n": kItemOnPage};
+      Map<String, dynamic> body = {"p": nPaging, "n": kItemOnPage};
       ResponseModel res = await DaiLyXeApiBLL_APIUser().favorite(body);
       if (res.status > 0) {
         List<ProductModel> list = CommonMethods.convertToList<ProductModel>(

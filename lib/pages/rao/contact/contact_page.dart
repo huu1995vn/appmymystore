@@ -35,11 +35,14 @@ class _ContactPageState extends State<ContactPage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   loadData([nPaging = 1]) async {
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+      return;
+
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> params = {
         "id": 2, // cái này là lại ParentIdList === tin tức mới
-        "p": paging,
+        "p": nPaging,
         "n": kItemOnPage
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().contact(params);
@@ -141,9 +144,7 @@ class _ContactPageState extends State<ContactPage> {
         ],
       ),
       persistentFooterButtons: [
-        RxPrimaryButton(
-            onTap: onDetail,
-            text: "add.text".tr())
+        RxPrimaryButton(onTap: onDetail, text: "add.text".tr())
       ],
     );
   }

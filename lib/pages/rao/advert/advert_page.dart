@@ -34,11 +34,14 @@ class _AdvertPageState extends State<AdvertPage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   loadData(nPaging) async {
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+      return;
+
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> params = {
         "id": 2, // cái này là lại ParentIdList === tin tức mới
-        "p": paging,
+        "p": nPaging,
         "n": kItemOnPage
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().advert(params);

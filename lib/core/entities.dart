@@ -298,6 +298,7 @@ class ProductModel extends Entity {
   String? districtname;
   String? address = CommonConfig.user.address;
   String? phone = CommonConfig.user.phone;
+  String? reject;
   bool get isfavorite {
     return StorageService.listFavorite.contains(id);
   }
@@ -592,7 +593,7 @@ class ContactModel extends Entity {
   ContactModel clone() => ContactModel.fromJson(toJson());
   ContactModel();
   bool get rxisdefault {
-    return isdefault == "true";
+    return isdefault == "true" || isdefault == 1;
   }
 
   factory ContactModel.fromJson(Map<String, dynamic> json) {
@@ -641,6 +642,8 @@ class ReviewModel extends Entity {
   int reviewcount = 0;
   int ratingvalue = 0;
   DateTime? createdate;
+  int status = 1;
+  String? reject;
   ReviewModel();
   String get rxtimeago {
     return CommonMethods.timeagoFormat(createdate);
@@ -655,6 +658,8 @@ class ReviewModel extends Entity {
     json["productid"] = CommonMethods.convertToInt32(json["productid"]);
     json["reviewcount"] = CommonMethods.convertToInt32(json["reviewcount"]);
     json["ratingvalue"] = CommonMethods.convertToInt32(json["ratingvalue"]);
+    json["status"] = CommonMethods.convertToInt32(json["status"], 1);
+
     json["createdate"] =
         CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
     return _$ReviewModelFromJson(json);

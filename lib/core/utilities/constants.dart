@@ -73,6 +73,12 @@ List<Categorie> PRODUCTSTATUS = [
   // Categorie(id: 6, categoryname: "Videos"),
 ];
 
+List<Categorie> PRODUCTREVIEWSSTATUS = [
+  Categorie(id: 1, categoryname: "Đã duyệt"),
+  Categorie(id: 2, categoryname: "Không duyệt"),
+];
+
+
 List PRICES = [
     {"name": "0 - 500 triệu", "id": 0},
     {"name": "500 - 1 tỷ", "id": 0},

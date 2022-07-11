@@ -28,7 +28,7 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
 
   List<dynamic>? listData;
   int paging = 1;
-  int? totalItems;
+  int totalItems = 0;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
@@ -43,12 +43,15 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
   }
 
   Future loadData([nPaging = 1]) async {
+    if (nPaging > 1 && listData != null && totalItems! <= listData!.length)
+      return;
+
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> body = {
-        "p": paging,
+        "p": nPaging,
         "n": kItemOnPage,
-        "filter": { "Status" : widget.status}
+        "filter": {"Status": widget.status}
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().product(body);
       if (res.status > 0) {

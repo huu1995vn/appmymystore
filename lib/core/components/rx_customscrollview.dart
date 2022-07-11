@@ -72,11 +72,12 @@ class RxListViewState extends State<RxCustomScrollView>
           scrollController.position.maxScrollExtent - SizeConfig.screenHeight;
       if (scrollController.position.pixels > triggerFetchMoreSize) {
         if (mounted) setState(() => isLoading = true);
-        if (isLoading) await onNextScroll();
+        if (!isLoading) await onNextScroll();
         if (mounted) setState(() => isLoading = false);
       }
     } catch (e) {
       CommonMethods.wirtePrint(e);
+      if (mounted) setState(() => isLoading = false);
     }
   }
 

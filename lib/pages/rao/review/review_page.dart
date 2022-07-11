@@ -35,10 +35,11 @@ class _ReviewPageState extends State<ReviewPage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   loadData([nPaging = 1]) async {
+    if(nPaging > 1 && listData!=null && totalItems <= listData!.length ) return;
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> body = {
-        "p": paging,
+        "p": nPaging,
         "n": kItemOnPage
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().review(body);

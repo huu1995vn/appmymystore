@@ -34,10 +34,13 @@ class _NotifycationPageState extends State<NotifycationPage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   loadData(nPaging) async {
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+      return;
+
     nPaging = nPaging ?? 1;
     Map<String, dynamic> params = {
       "id": 2, // cái này là lại ParentIdList === tin tức mới
-      "p": paging,
+      "p": nPaging,
       "n": kItemOnPage
     };
     ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
@@ -88,7 +91,6 @@ class _NotifycationPageState extends State<NotifycationPage> {
             automaticallyImplyLeading: false,
             elevation: 0.0,
           ),
-          
           key: const Key("LNoti"),
           controller: scrollController,
           onNextScroll: onNextPage,

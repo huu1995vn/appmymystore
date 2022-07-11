@@ -3,6 +3,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/review.dialog.dart';
+import 'package:raoxe/core/components/dialogs/review_all.dialog.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -48,16 +51,18 @@ class _ReviewState extends State<RxReview> {
     }
   }
 
-  onDialogRating(context) async {
-    
-  }
+  _onReview() async {
+    var res = await CommonNavigates.showDialogBottomSheet(
+        context, ReviewDialog(product: widget.item),
+        height: 500);
 
+  }
   viewAll() {
-    // CommonNavigates.openDialog(
-    //     context,
-    //     DialogRatingList(
-    //       item: widget.item,
-    //     ));
+    CommonNavigates.openDialog(
+        context,
+        ReviewAllDialog(
+          product: widget.item,
+        ));
   }
 
   @override
@@ -122,13 +127,7 @@ class _ReviewState extends State<RxReview> {
           ),
          
           GestureDetector(
-            onTap: () {
-              if (!CommonMethods.isLogin()) {
-                CommonMethods.showToast("Vui lòng đăng nhập trước");
-              } else {
-                onDialogRating(context);
-              }
-            },
+            onTap: _onReview,
             child: Container(
                 color: Colors.transparent,
                 padding:

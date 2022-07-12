@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, curly_braces_in_flow_control_structures
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +8,7 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_images.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
@@ -15,7 +16,6 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:raoxe/pages/main/home/widgets/list_banner.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'widgets/item_product.widget.dart';
 
@@ -45,10 +45,8 @@ class _HomePageState extends State<HomePage>
   loadData(nPaging) async {
     if (nPaging > 1 && listData != null && totalItems <= listData!.length)
       return;
-
     nPaging = nPaging ?? 1;
     Map<String, dynamic> params = {
-      "id": 2, // cái này là lại ParentIdList === tin tức mới
       "p": nPaging,
       "n": kItemOnPage
     };
@@ -102,7 +100,7 @@ class _HomePageState extends State<HomePage>
         slivers: <Widget>[
           SliverToBoxAdapter(
               child: Column(children: [
-            const ListBannerWidget(),
+              const RxImages(data: []),
             _buildTitle("new".tr(), () {
               CommonNavigates.toProductPage(context);
             }),

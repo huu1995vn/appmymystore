@@ -1,31 +1,26 @@
-// ignore_for_file: empty_catches
+// ignore_for_file: empty_catches, unnecessary_null_comparison
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_image.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
-class ListBannerWidget extends StatefulWidget {
-  const ListBannerWidget({super.key});
+class RxImages extends StatefulWidget {
+  final List<String> data;
+  const RxImages({super.key, required this.data});
   @override
-  State<ListBannerWidget> createState() => _ListBannerWidgetState();
+  State<RxImages> createState() => _RxImagesState();
 }
 
-class _ListBannerWidgetState extends State<ListBannerWidget>
-    with AutomaticKeepAliveClientMixin<ListBannerWidget> {
+class _RxImagesState extends State<RxImages>
+    with AutomaticKeepAliveClientMixin<RxImages> {
   @override
   bool get wantKeepAlive => true;
   int _current = 0;
-  static List<String> data = [
-    'https://stgcdndlxad02.dailyxe.com.vn/image/banner-raoxe-99059j.jpg',
-    'https://stgcdndlxad02.dailyxe.com.vn/image/banner-raoxe-99059j.jpg',
-    'https://stgcdndlxad02.dailyxe.com.vn/image/banner-raoxe-99059j.jpg',
-    'https://stgcdndlxad02.dailyxe.com.vn/image/banner-raoxe-99059j.jpg',
-  ];
-  // List<String> data;
-  // StreamSubscription sup;
+  List<String> data = [];
   @override
   initState() {
     super.initState();
@@ -38,17 +33,20 @@ class _ListBannerWidgetState extends State<ListBannerWidget>
   }
 
   loadData() {
-   
+    setState(() {
+      data = widget.data ?? [IMAGE_NOT_FOUND];
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return data == null
-        ? Container(
+    if (widget.data == null && widget.data.isNotEmpty) {
+      return Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: RxCardSkeleton())
-        : Stack(children: [
+            child: RxCardSkeleton());
+    } else {
+      return Stack(children: [
             CarouselSlider(
                 items: _items(),
                 options: CarouselOptions(
@@ -71,7 +69,7 @@ class _ListBannerWidgetState extends State<ListBannerWidget>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: map<Widget>(
-                      data,
+                      widget.data,
                       (index, url) {
                         return Container(
                           width: 8.0,
@@ -88,55 +86,40 @@ class _ListBannerWidgetState extends State<ListBannerWidget>
                   ),
                 )),
           ]);
+    }
   }
 
   List<Widget> _items() {
     return map<Widget>(
-      data,
+      widget.data,
       (index, i) {
-        return Container(
-          margin: const EdgeInsets.all(10.0),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-            child: Stack(children: <Widget>[
-              RxImage(data[index]),
-              Positioned(
-                bottom: 0.0,
-                left: 0.0,
-                right: 0.0,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color.fromARGB(200, 0, 0, 0),
-                        Color.fromARGB(0, 0, 0, 0)
-                      ],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20.0),
-                  child: Text(
-                    '',
-                    style: const TextStyle().bold,
-                  ),
+        return Stack(children: <Widget>[
+          RxImage(widget.data[index]),
+          Positioned(
+            bottom: 0.0,
+            left: 0.0,
+            right: 0.0,
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(200, 0, 0, 0),
+                    Color.fromARGB(0, 0, 0, 0)
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
                 ),
               ),
-            ]),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              child: Text(
+                '',
+                style: const TextStyle().bold,
+              ),
+            ),
           ),
-        );
+        ]);
       },
     ).toList();
   }
-}
-
-List<T> map<T>(List list, Function handler) {
-  List<T> result = [];
-  if(list==null) return result;
-  for (var i = 0; i < list.length; i++) {
-    result.add(handler(i, list[i]));
-  }
-
-  return result;
 }

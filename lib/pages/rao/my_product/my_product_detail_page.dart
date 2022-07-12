@@ -22,7 +22,6 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
-import 'package:raoxe/pages/main/home/widgets/list_banner.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class MyProductDetailPage extends StatefulWidget {

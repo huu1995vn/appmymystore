@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
@@ -21,7 +21,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
       this.ismultiple,
       this.pkey = "name",
       this.pvalue = "id",
-      this.itemBuilder}) {}
+      this.itemBuilder});
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -69,7 +69,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
               return Column(children: [
                 Expanded(
                     child: ListView.builder(
-                  itemCount: suggestionList!.length,
+                  itemCount: suggestionList.length,
                   itemBuilder: itemBuilder ?? (context, index) {
                     var item = suggestionList[index];
                     return ismultiple == true

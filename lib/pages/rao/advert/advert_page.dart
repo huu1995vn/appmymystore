@@ -40,7 +40,6 @@ class _AdvertPageState extends State<AdvertPage> {
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> params = {
-        "id": 2, // cái này là lại ParentIdList === tin tức mới
         "p": nPaging,
         "n": kItemOnPage
       };

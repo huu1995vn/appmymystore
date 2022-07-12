@@ -7,13 +7,12 @@ import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_images.dart';
 import 'package:raoxe/core/components/rx_review.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
-import 'package:raoxe/pages/main/home/widgets/list_banner.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -168,7 +167,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        ListBannerWidget(),
+        RxImages(data: data!.rximglist),
         Card(
             child: SizedBox(
           width: double.infinity,
@@ -185,23 +184,23 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   children: [
                     Text(CommonMethods.formatNumber(data!.price ?? "40000000"),
                         style: kTextPriceStyle),
-                    Text(data!.rxtimeago,
-                        style:
-                            TextStyle(fontSize: 13, color: AppColors.black50)),
                   ],
                 ),
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Icon(
-                      AppIcons.map_marker,
+                      AppIcons.clock_1,
                       color: AppColors.black50,
                       size: 13,
                     ),
-                    Text(
-                      "371 Nguyễn Kiệm",
-                      style: TextStyle(fontSize: 13, color: AppColors.black50),
-                    ),
+                    Text(data!.rxtimeago,
+                        style:
+                            TextStyle(fontSize: 13, color: AppColors.black50)),
+                    // Text(
+                    //   "371 Nguyễn Kiệm",
+                    //   style: TextStyle(fontSize: 13, color: AppColors.black50),
+                    // ),
                   ],
                 )
               ],

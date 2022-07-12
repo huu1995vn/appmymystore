@@ -1,6 +1,4 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'dart:convert';
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -39,7 +37,6 @@ class _NotifycationPageState extends State<NotifycationPage> {
 
     nPaging = nPaging ?? 1;
     Map<String, dynamic> params = {
-      "id": 2, // cái này là lại ParentIdList === tin tức mới
       "p": nPaging,
       "n": kItemOnPage
     };

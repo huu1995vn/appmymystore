@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -41,7 +41,6 @@ class _ContactPageState extends State<ContactPage> {
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> params = {
-        "id": 2, // cái này là lại ParentIdList === tin tức mới
         "p": nPaging,
         "n": kItemOnPage
       };

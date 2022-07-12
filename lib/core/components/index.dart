@@ -6,4 +6,4 @@ export 'rx_scaffold.dart';
 export 'rx_input.dart';
 export 'rx_card.dart';
 export 'rx_image.dart';
-
+export 'rx_images.dart';

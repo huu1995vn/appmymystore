@@ -64,7 +64,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   onFavorite() async {
     try {
-      CommonMethods.onFavorite([data!.id], !data!.isfavorite);
+      var res = await CommonMethods.onFavorite([data!.id], !data!.isfavorite);
+      setState(() {
+        data = data;
+      });
     } catch (e) {
       CommonMethods.showDialogError(context, e);
     }
@@ -130,17 +133,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: Icon(AppIcons.phone_handset, color: AppColors.white),
             ),
           ),
-        // if (data != null)
-        //   GestureDetector(
-        //     onTap: () {},
-        //     child: Container(
-        //       decoration: BoxDecoration(color: AppColors.grey),
-        //       width: SizeConfig.screenWidth * 0.13,
-        //       height: kSizeHeight,
-        //       alignment: Alignment.center,
-        //       child: Icon(AppIcons.envelope, color: AppColors.yellow),
-        //     ),
-        //   )
       ],
     );
   }
@@ -152,12 +144,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         children: [
           if (leading != null) leading,
           Text(
-            "$title: ",
-            style: kTextTitleStyle,
+            " $title: ",
+            style: kTextTitleStyle.copyWith(color: AppColors.black50),
           ),
           Text(
-            subtitle?.toString() ?? "not.update".tr(),
-            style: TextStyle(color: AppColors.primary),
+            (subtitle is int
+                    ? (subtitle > 0 ? subtitle?.toString() : null)
+                    : subtitle?.toString()) ??
+                "not.update".tr(),
+            style: TextStyle().italic.copyWith(color: AppColors.black50),
           )
         ],
       ),
@@ -171,34 +166,37 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         RxImages(data: data!.rximglist),
         Card(
           // color: AppColors.grey,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              RxAvatarImage(data!.rximguser, size: 40),
-              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Text(
-                  data!.fullname!,
-                  style: const TextStyle(
-                    color: AppColors.black50,
-                  ).bold.size(12),
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      AppIcons.map_marker,
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                RxAvatarImage(data!.rximguser, size: 40),
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Text(
+                    data!.fullname!,
+                    style: const TextStyle(
                       color: AppColors.black50,
-                      size: 13,
-                    ),
-                    Text(
-                      data!.address!,
-                      style: const TextStyle(
+                    ).bold.size(12),
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        AppIcons.map_marker,
                         color: AppColors.black50,
-                      ).size(12),
-                    ),
-                  ],
-                )
-              ]),
-            ],
+                        size: 13,
+                      ),
+                      Text(
+                        data!.address!,
+                        style: const TextStyle(
+                          color: AppColors.black50,
+                        ).size(12),
+                      ),
+                    ],
+                  )
+                ]),
+              ],
+            ),
           ),
         ),
         Card(
@@ -255,15 +253,29 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               // mainAxisSize: MainAxisSize.min,
               children: [
-                _listTitle("madein".tr(), data!.madeinname),
-                _listTitle("model".tr(), data!.modelname),
-                _listTitle("bodytype".tr(), data!.bodytypename),
-                _listTitle("fueltype".tr(), data!.fueltypename),
-                _listTitle("color".tr(), data!.colorname),
-                _listTitle("year".tr(), data!.year),
-                _listTitle("seat".tr(), data!.seat),
-                _listTitle("door".tr(), data!.door),
-                _listTitle("km".tr(), data!.km),
+                _listTitle("status".tr(), data!.statename,
+                    leading: Icon(AppIcons.brightness_low,
+                        color: AppColors.black50)),
+                _listTitle("madein".tr(), data!.madeinname,
+                    leading: Icon(AppIcons.vpn_lock, color: AppColors.black50)),
+                _listTitle("model".tr(), data!.modelname,
+                    leading:
+                        Icon(AppIcons.turned_in_not, color: AppColors.black50)),
+                _listTitle("bodytype".tr(), data!.bodytypename,
+                    leading: Icon(AppIcons.directions_car,
+                        color: AppColors.black50)),
+                _listTitle("fueltype".tr(), data!.fueltypename,
+                    leading: Icon(AppIcons.opacity, color: AppColors.black50)),
+                _listTitle("color".tr(), data!.colorname,
+                    leading: Icon(AppIcons.format_color_fill,
+                        color: AppColors.black50)),
+                _listTitle("year".tr(), data!.year,
+                    leading: Icon(AppIcons.timer, color: AppColors.black50)),
+                _listTitle("seat".tr(), data!.seat,
+                    leading: Icon(
+                      AppIcons.airline_seat_legroom_normal,
+                      color: AppColors.black50,
+                    ))
               ],
             ),
           ),

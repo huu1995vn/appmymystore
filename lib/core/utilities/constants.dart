@@ -14,8 +14,13 @@ const kDefaultPaddingTop = 79.0;
 const kItemOnPage = 10;
 const kMaxImages = 15;
 const kSizeHeight = 39.0;
-const kEdgeInsetsCardPadding = EdgeInsets.only(left: kDefaultPadding, right: kDefaultPadding);
-const kEdgeInsetsPadding =  EdgeInsets.only(left: kDefaultPadding, right: kDefaultPadding, top: kDefaultPadding/2, bottom: kDefaultPadding/2);
+const kEdgeInsetsCardPadding =
+    EdgeInsets.only(left: kDefaultPadding, right: kDefaultPadding);
+const kEdgeInsetsPadding = EdgeInsets.only(
+    left: kDefaultPadding,
+    right: kDefaultPadding,
+    top: kDefaultPadding / 2,
+    bottom: kDefaultPadding / 2);
 const kBoxDecorationStyle = BoxDecoration(
     gradient: LinearGradient(colors: [
   AppColors.primary,
@@ -36,10 +41,7 @@ const kTextPriceStyle = TextStyle(
   color: AppColors.primary,
 );
 const kTextTimeStyle = TextStyle(
-  fontStyle: FontStyle.italic,
-  color: AppColors.black50,
-  fontSize: 12
-);
+    fontStyle: FontStyle.italic, color: AppColors.black50, fontSize: 12);
 const NOIMAGE = "assets/images/no-image.jpg";
 const NOIMAGEAVAILABELFOLDER = "/resources/Images/hinh-anh-khong-ton-tai/";
 const NOIMAGEUUDAI = "assets/images/gift.png";
@@ -56,7 +58,8 @@ const BGBANNER = "assets/images/bg/bg-banner.png";
 const NOTFOUNDDATA = "assets/images/img-screen/no-data.png";
 const EMPTYDATA = "assets/images/img-screen/empty-data.png";
 const BGOTP = "assets/images/img-screen/otp.png";
-const String IMAGE_NOT_FOUND = "https://cdn.gianhangvn.com/image/hinh-anh-khong-ton-tai.jpg";
+const String IMAGE_NOT_FOUND =
+    "https://cdn.gianhangvn.com/image/hinh-anh-khong-ton-tai.jpg";
 
 List<Categorie> CATEGORIES = [
   Categorie(id: 2, categoryname: "Tin tức mới"),
@@ -78,27 +81,26 @@ List<Categorie> PRODUCTREVIEWSTATUS = [
   Categorie(id: 2, categoryname: "Không duyệt"),
 ];
 
-
 List PRICES = [
-    {"name": "0 - 500 triệu", "id": 0},
-    {"name": "500 - 1 tỷ", "id": 0},
-    {"name": "1tỷ - 5tỷ", "id": 0},
-    {"name": "hơn 5tỷ", "id": 0}
+  {"name": "0 - 500 triệu", "id": 0},
+  {"name": "500 - 1 tỷ", "id": 0},
+  {"name": "1tỷ - 5tỷ", "id": 0},
+  {"name": "hơn 5tỷ", "id": 0}
 ];
 
 List SORTS = [
-    {"name": "Mới nhất", "id": "NgayUp:desc"},
-    {"name": "Cũ nhất", "id": "NgayUp:asc"},
-    {"name": "Giá cao trước", "id": "Gia:desc"},
-    {"name": "Giá thấp trước", "id": "Gia:asc"}
+  {"name": "Mới nhất", "id": "NgayUp:desc"},
+  {"name": "Cũ nhất", "id": "NgayUp:asc"},
+  {"name": "Giá cao trước", "id": "Gia:desc"},
+  {"name": "Giá thấp trước", "id": "Gia:asc"}
 ];
 List PRODUCTTYPES = [
-    {"name": "Bán", "id": 1},
-    {"name": "Mua", "id": 2},
+  {"name": "Bán", "id": 1},
+  {"name": "Mua", "id": 2},
 ];
 List PRODUCTSTATES = [
-    {"name": "Mới", "id": 1},
-    {"name": "Đã sử dụng", "id": 2},
+  {"name": "Mới", "id": 1},
+  {"name": "Đã sử dụng", "id": 2},
 ];
 
 class RxParttern {
@@ -134,4 +136,10 @@ abstract class FormStyle {
     ),
   );
   static String charRequire = "*";
+}
+
+class NAMEFIREBASEDATABASE {
+  static String configs = "configs";
+  static String tokens = "tokens";
+  static String banners = "banners";
 }

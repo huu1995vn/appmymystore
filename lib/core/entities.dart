@@ -304,6 +304,10 @@ class ProductModel extends Entity {
     return StorageService.listFavorite.contains(id);
   }
 
+  String get statename {
+    return state == 1 ? "new".tr() : "old".tr();
+  }
+
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
@@ -695,6 +699,32 @@ class ReviewModel extends Entity {
   }
 
   Map<String, dynamic> toJson() => _$ReviewModelToJson(this);
+}
+
+@JsonSerializable()
+class ConfigModel extends Entity {
+  String? apiDaiLyXe;  
+  String? apiDaiLyXeSufix;  
+  String? apiDrive;  
+  int? version;  
+  ConfigModel();  
+  ConfigModel clone() => ConfigModel.fromJson(toJson());
+  factory ConfigModel.fromJson(Map<String, dynamic> json) {
+    return _$ConfigModelFromJson(json);
+  }
+  Map<String, dynamic> toJson() => _$ConfigModelToJson(this);
+}
+
+@JsonSerializable()
+class BannerModel extends Entity {
+  String? img;  
+  String? herf;  
+  BannerModel();  
+  BannerModel clone() => BannerModel.fromJson(toJson());
+  factory BannerModel.fromJson(Map<String, dynamic> json) {
+    return _$BannerModelFromJson(json);
+  }
+  Map<String, dynamic> toJson() => _$BannerModelToJson(this);
 }
 
 class AppTheme {

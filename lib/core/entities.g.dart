@@ -371,3 +371,35 @@ Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
       'imguser': instance.imguser,
       'username': instance.username,
     };
+
+ConfigModel _$ConfigModelFromJson(Map<String, dynamic> json) => ConfigModel()
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..apiDaiLyXe = json['apiDaiLyXe'] as String?
+  ..apiDaiLyXeSufix = json['apiDaiLyXeSufix'] as String?
+  ..apiDrive = json['apiDrive'] as String?
+  ..version = json['version'] as int?;
+
+Map<String, dynamic> _$ConfigModelToJson(ConfigModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'apiDaiLyXe': instance.apiDaiLyXe,
+      'apiDaiLyXeSufix': instance.apiDaiLyXeSufix,
+      'apiDrive': instance.apiDrive,
+      'version': instance.version,
+    };
+
+BannerModel _$BannerModelFromJson(Map<String, dynamic> json) => BannerModel()
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..img = json['img'] as String?
+  ..herf = json['herf'] as String?;
+
+Map<String, dynamic> _$BannerModelToJson(BannerModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'img': instance.img,
+      'herf': instance.herf,
+    };

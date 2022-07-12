@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
+import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
@@ -59,6 +61,7 @@ initializeApp() async {
   await FirebaseMessagingService.init();
   APITokenService.init();
   await AuthService.autologin();
+  await CloudFirestoreSerivce.init();
 }
 
 class MyApp extends StatefulWidget {

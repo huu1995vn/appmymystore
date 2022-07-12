@@ -14,6 +14,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:rating_bar/rating_bar.dart';
 
 class RxReview extends StatefulWidget {
@@ -99,10 +100,15 @@ class _ReviewState extends State<RxReview> {
                     emptyIcon: AppIcons.star_1,
                     filledIcon: AppIcons.star_1,
                   ),
-                  Text(
-                    '(${widget.item.reviewcount ?? 0} nhận xét)',
-                    style: const TextStyle(fontStyle: FontStyle.italic),
-                  ),
+                  GestureDetector(
+                      onTap: _onReview,
+                      child: Text(
+                        '(${widget.item.reviewcount ?? 0} nhận xét)',
+                        style: const TextStyle(
+                                fontStyle: FontStyle.italic,
+                                color: AppColors.info)
+                            .underline,
+                      )),
                 ],
               ),
               Column(
@@ -122,18 +128,18 @@ class _ReviewState extends State<RxReview> {
               ),
             ],
           ),
-          GestureDetector(
-            onTap: _onReview,
-            child: Container(
-                color: Colors.transparent,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                child: Text(
-                  "writerreview".tr().toUpperCase(),
-                  style: const TextStyle(
-                      color: Colors.blue, fontWeight: FontWeight.w500),
-                )),
-          ),
+          // GestureDetector(
+          //   onTap: _onReview,
+          //   child: Container(
+          //       color: Colors.transparent,
+          //       padding:
+          //           const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          //       child: Text(
+          //         "writerreview".tr().toUpperCase(),
+          //         style: const TextStyle(
+          //             color: Colors.blue, fontWeight: FontWeight.w500),
+          //       )),
+          // ),
           if (listData != null)
             RxListView(listData, (context, index) {
               var item = listData![index];

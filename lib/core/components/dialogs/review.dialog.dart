@@ -82,7 +82,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(widget.product.name!,
+                          Text(widget.product.name! ?? "NAN",
                               style: kTextHeaderStyle.copyWith(
                                   color: AppColors.black).size(17)),
                           Padding(

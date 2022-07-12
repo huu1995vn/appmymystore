@@ -128,7 +128,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           GestureDetector(
             onTap: () {},
             child: Container(
-              width: SizeConfig.screenWidth * 0.8,
               height: kSizeHeight,
               decoration: kBoxDecorationStyle.copyWith(
                   borderRadius: BorderRadius.circular(5)),
@@ -136,17 +135,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: Icon(AppIcons.phone_handset, color: AppColors.white),
             ),
           ),
-        if (data != null)
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              decoration: BoxDecoration(color: AppColors.grey),
-              width: SizeConfig.screenWidth * 0.13,
-              height: kSizeHeight,
-              alignment: Alignment.center,
-              child: Icon(AppIcons.envelope, color: AppColors.yellow),
-            ),
-          )
+        // if (data != null)
+        //   GestureDetector(
+        //     onTap: () {},
+        //     child: Container(
+        //       decoration: BoxDecoration(color: AppColors.grey),
+        //       width: SizeConfig.screenWidth * 0.13,
+        //       height: kSizeHeight,
+        //       alignment: Alignment.center,
+        //       child: Icon(AppIcons.envelope, color: AppColors.yellow),
+        //     ),
+        //   )
       ],
     );
   }

@@ -525,44 +525,50 @@ _onSelect(BuildContext context, String type, dynamic id,
 }
 
 Widget RxBuildItemReview(ReviewModel item) {
-    return 
-    ListTile(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              verticalDirection: VerticalDirection.up,
-              children: [
-                RxAvatarImage(item.rximguser, size: 25),
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Text(
-                    item.username ?? "NAN",
-                    style: const TextStyle().size(12),
-                  ),
+  return ListTile(
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            verticalDirection: VerticalDirection.up,
+            children: [
+              RxAvatarImage(item.rximguser, size: 25),
+              Padding(
+                padding: const EdgeInsets.all(5),
+                child: Text(
+                  item.username ?? "NAN",
+                  style: const TextStyle().size(12),
                 ),
-              ],
-            ),
-            RatingBar.readOnly(
-              filledColor: AppColors.yellow,
-              size: 15,
-              initialRating:
-                  CommonMethods.convertToDouble(item.ratingvalue ?? 0.0),
-              filledIcon: AppIcons.star_1, 
-              emptyIcon: AppIcons.star_1,
-            ),
-          ],
-        ),
-        // isThreeLine: true,
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          verticalDirection: VerticalDirection.up,
-          children: <Widget>[
-            Text(item.comment ?? "",
-                style: const TextStyle().italic, maxLines: 6),
-            Text(item.rxtimeago, style: kTextTimeStyle),
-          ],
-        ));
-  }
+              ),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RatingBar.readOnly(
+                filledColor: AppColors.yellow,
+                size: 15,
+                initialRating:
+                    CommonMethods.convertToDouble(item.ratingvalue ?? 0.0),
+                filledIcon: AppIcons.star_1,
+                emptyIcon: AppIcons.star_1,
+              ),
+              const Spacer()
+            ],
+          ),
+        ],
+      ),
+      // isThreeLine: true,
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        verticalDirection: VerticalDirection.up,
+        children: <Widget>[
+          Text(item.comment ?? "",
+              style: const TextStyle().italic, maxLines: 6),
+          Text(item.rxtimeago, style: kTextTimeStyle),
+        ],
+      ));
+}

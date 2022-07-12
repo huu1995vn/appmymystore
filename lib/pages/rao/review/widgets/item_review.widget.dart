@@ -42,13 +42,15 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                     ),
                   ],
                 ),
-                RatingBar.readOnly(
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: RatingBar.readOnly(
                   filledColor: AppColors.yellow,
                   size: 15,
                   initialRating: 5,
                   emptyIcon: AppIcons.star_1,
                   filledIcon: AppIcons.star_1,
-                ),
+                )) ,
                 Text(widget.item.rxtimeago, style: kTextTimeStyle),
               ],
             ),

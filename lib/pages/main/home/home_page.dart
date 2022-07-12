@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
@@ -46,10 +47,7 @@ class _HomePageState extends State<HomePage>
     if (nPaging > 1 && listData != null && totalItems <= listData!.length)
       return;
     nPaging = nPaging ?? 1;
-    Map<String, dynamic> params = {
-      "p": nPaging,
-      "n": kItemOnPage
-    };
+    Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
     ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);
     List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
         res.data, (val) => ProductModel.fromJson(val));
@@ -100,7 +98,7 @@ class _HomePageState extends State<HomePage>
         slivers: <Widget>[
           SliverToBoxAdapter(
               child: Column(children: [
-              const RxImages(data: []),
+            RxImages(data: CommonConfig.banners.map((e) => e.img!).toList()),
             _buildTitle("new".tr(), () {
               CommonNavigates.toProductPage(context);
             }),

@@ -19,7 +19,7 @@ class CloudFirestoreSerivce {
       data["userid"] = APITokenService.userId;
       data["token"] = FirebaseMessagingService.token;
       data["uid"] = uid;
-      fireStoreService.add(data);
+      fireStoreService.doc(uid).set(data);
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }
@@ -37,7 +37,7 @@ class CloudFirestoreSerivce {
           FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.configs);
       var value = await fireStoreService.get();
       if (value.docs != null && value.docs.isNotEmpty) {
-        var item = value.docs[0];
+        dynamic item = value.docs[0].data()!;
         CommonConfig.apiDaiLyXe = item["apiDaiLyXe"] ?? CommonConfig.apiDaiLyXe;
         CommonConfig.apiDaiLyXeSufix =
             item["apiDaiLyXeSufix"] ?? CommonConfig.apiDaiLyXeSufix;
@@ -55,9 +55,10 @@ class CloudFirestoreSerivce {
       var value = await fireStoreService.get();
       if (value.docs != null && value.docs.isNotEmpty) {
         CommonConfig.banners = value.docs.map((i) {
+          dynamic _item = value.docs[0].data();
           BannerModel item = BannerModel();
-          item.img = i["img"];
-          item.herf = i["herf"];
+          item.img = _item["img"];
+          item.herf = _item["herf"];
           return item;
         }).toList();
       }

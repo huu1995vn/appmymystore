@@ -717,7 +717,7 @@ class ConfigModel extends Entity {
 
 @JsonSerializable()
 class BannerModel extends Entity {
-  String? img;  
+  String img = IMAGE_NOT_FOUND;  
   String? herf;  
   BannerModel();  
   BannerModel clone() => BannerModel.fromJson(toJson());

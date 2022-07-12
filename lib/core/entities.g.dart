@@ -393,7 +393,7 @@ Map<String, dynamic> _$ConfigModelToJson(ConfigModel instance) =>
 BannerModel _$BannerModelFromJson(Map<String, dynamic> json) => BannerModel()
   ..TotalRow = json['TotalRow']
   ..RowIndex = json['RowIndex']
-  ..img = json['img'] as String?
+  ..img = json['img'] as String
   ..herf = json['herf'] as String?;
 
 Map<String, dynamic> _$BannerModelToJson(BannerModel instance) =>

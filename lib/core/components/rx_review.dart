@@ -54,9 +54,9 @@ class _ReviewState extends State<RxReview> {
   }
 
   _onReview() async {
-    var res = await CommonNavigates.showDialogBottomSheet(
+    await CommonNavigates.showDialogBottomSheet(
         context, ReviewDialog(product: widget.item),
-        height: 350);
+        height: 400);
   }
 
   viewAll() {

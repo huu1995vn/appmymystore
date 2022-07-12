@@ -80,23 +80,31 @@ class _ReviewDialogState extends State<ReviewDialog> {
                   child: Form(
                       key: _keyValidationForm,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          RatingBar(
-                            filledColor: AppColors.yellow,
-                            size: 25,
-                            initialRating: 5,
-                            onRatingChanged: (_) {
-                              review.ratingvalue =
-                                  CommonMethods.convertToInt32(_);
-                            },
-                            emptyIcon: AppIcons.star_1, filledIcon: AppIcons.star_1,
+                          Text(widget.product.name!,
+                              style: kTextHeaderStyle.copyWith(
+                                  color: AppColors.black).size(17)),
+                          Padding(
+                            padding: const EdgeInsets.all(kDefaultPadding),
+                            child: RatingBar(
+                              filledColor: AppColors.yellow,
+                              size: 39,
+                              initialRating: 5,
+                              onRatingChanged: (_) {
+                                review.ratingvalue =
+                                    CommonMethods.convertToInt32(_);
+                              },
+                              emptyIcon: AppIcons.star_1,
+                              filledIcon: AppIcons.star_1,
+                            ),
                           ),
                           _header(
                             header: RichText(
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: "Đánh giá ",
+                                      text: "review".tr(),
                                       style: TextStyle(
                                               color: Theme.of(context)
                                                   .textTheme

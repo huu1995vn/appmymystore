@@ -1,19 +1,20 @@
 // ignore_for_file: empty_catches
 
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/dialogs/review.dialog.dart';
 import 'package:raoxe/core/components/dialogs/review_all.dialog.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:raoxe/core/utilities/constants.dart';
+import 'package:rating_bar/rating_bar.dart';
 
 class RxReview extends StatefulWidget {
   const RxReview(this.item, {Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _ReviewState extends State<RxReview> {
   Future<void> loadData() async {
     try {
       Map<String, dynamic> body = {"r": widget.item.id, "p": 1, "n": 2};
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().review(body);
+      ResponseModel res = await DaiLyXeApiBLL_APIGets().review(body);
       if (res.status > 0) {
         List<ReviewModel> list = CommonMethods.convertToList<ReviewModel>(
             res.data, (val) => ReviewModel.fromJson(val));
@@ -91,17 +92,10 @@ class _ReviewState extends State<RxReview> {
                   Text(
                     "$ratingvalue/5",
                   ),
-                  RatingBar.builder(
+                  RatingBar.readOnly(
                     initialRating: ratingvalue,
-                    itemSize: 25.0,
-                    direction: Axis.horizontal,
-                    itemCount: 5,
-                    itemBuilder: (context, _) => const Icon(
-                      AppIcons.star_1,
-                      color: Colors.amber,
-                    ),
-                    allowHalfRating: true,
-                    onRatingUpdate: (_) {},
+                    emptyIcon: AppIcons.star_1,
+                    filledIcon: AppIcons.star_1,
                   ),
                   Text(
                     '(${widget.item.reviewcount ?? 0} nhận xét)',
@@ -139,104 +133,47 @@ class _ReviewState extends State<RxReview> {
                 )),
           ),
           if (listData != null)
-            RxListView(listData, _listItem,
+            RxListView(listData, (context, index) {
+              var item = listData![index];
+              return RxBuildItemReview(item);
+            },
                 key: Key("writerreview".tr()),
                 onRefresh: loadData,
                 noFound: Container(
                     padding: const EdgeInsets.all(10),
                     child: Text("not.evaluate".tr()))),
-          if (listData != null && listData!.length >= 2)
+          if (listData != null && totalItems > 2)
             GestureDetector(
               onTap: () {
                 viewAll();
               },
-              child: Container(
-                  color: Colors.transparent,
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Text(
-                        "Xem tất cả",
-                        style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.w500),
-                      ),
-                      Icon(
-                        AppIcons.chevron_right,
-                        color: Colors.blue,
-                      )
-                    ],
-                  )),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: kDefaultPadding),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "${"all".tr()} (${totalItems})",
+                      style: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.w500),
+                    ),
+                    const Icon(
+                      AppIcons.chevron_right,
+                      color: Colors.blue,
+                    )
+                  ],
+                ),
+              ),
             )
         ]));
   }
 
-  Widget _listItem(BuildContext context, int index) {
-    ReviewModel item = listData![index];
-    return Container(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        decoration: BoxDecoration(
-            border: Border(
-                top: BorderSide(
-                    width: 1,
-                    color: index != 0 ? Colors.black12 : Colors.transparent))),
-        child: ListTile(
-          title: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              RatingBar.builder(
-                initialRating: CommonMethods.convertToDouble(item.ratingvalue),
-                itemSize: 15.0,
-                minRating: 0,
-                direction: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, _) => const Icon(
-                  AppIcons.star_1,
-                  color: Colors.amber,
-                ),
-                onRatingUpdate: (_) {},
-              ),
-              // Container(
-              //   margin: const EdgeInsets.only(bottom: 3, top: 0),
-              //   child: Text(CommonMethods.timeagoFormat(item.NgayCapNhat)),
-              // ),
-            ],
-          ),
-          subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(bottom: 5),
-                  child: Text(item.name ?? "", style: const TextStyle().bold),
-                ),
-                TextFormField(
-                  initialValue: item.comment,
-                  minLines:
-                      6, // any number you need (It works as the rows for the textarea)
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                ),
-              ]),
-        ));
-  }
-
   Widget _buildRating(BuildContext context, double rating, double value) {
     return Row(children: <Widget>[
-      RatingBar.builder(
-        initialRating: rating,
-        itemSize: 15.0,
-        ignoreGestures: false,
-        minRating: 0,
-        direction: Axis.horizontal,
-        itemCount: 5,
-        itemBuilder: (context, _) => const Icon(
-          AppIcons.star_1,
-          color: Colors.amber,
-        ),
-        onRatingUpdate: (_) {},
+      RatingBar.readOnly(
+        initialRating: CommonMethods.convertToDouble(rating ?? 0.0),
+        filledIcon: AppIcons.star_1,
+        emptyIcon: AppIcons.star_1,
       ),
       Container(
         width: 60,

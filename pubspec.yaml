@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: 
   flutter_svg:  # Used to render svg images
   google_fonts:  # Used to include google fonts
-  flutter_rating_bar:  # Used for show product star ratings
+  rating_bar:  # Used for show product star ratings
   dio:  # Used for call api
   provider:  # Used for custome theme
   localstorage: # Used for save local data

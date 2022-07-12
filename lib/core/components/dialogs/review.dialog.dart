@@ -2,7 +2,6 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -11,6 +10,7 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:rating_bar/rating_bar.dart';
 
 class ReviewDialog extends StatefulWidget {
   const ReviewDialog({
@@ -81,21 +81,13 @@ class _ReviewDialogState extends State<ReviewDialog> {
                       key: _keyValidationForm,
                       child: Column(
                         children: <Widget>[
-                          RatingBar.builder(
+                          RatingBar(
                             initialRating: 5,
-                            itemSize: 39.0,
-                            ignoreGestures: false,
-                            minRating: 0,
-                            direction: Axis.horizontal,
-                            itemCount: 5,
-                            itemBuilder: (context, _) => const Icon(
-                              AppIcons.star_1,
-                              color: Colors.amber,
-                            ),
-                            onRatingUpdate: (_) {
+                            onRatingChanged: (_) {
                               review.ratingvalue =
                                   CommonMethods.convertToInt32(_);
                             },
+                            emptyIcon: AppIcons.star_1, filledIcon: AppIcons.star_1,
                           ),
                           _header(
                             header: RichText(

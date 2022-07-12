@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/pages/rao/review/widgets/item_review.widget.dart';
 
 class ReviewAllDialog extends StatefulWidget {
   const ReviewAllDialog({
@@ -81,16 +83,26 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return RxListView(
-      listData,
-      (context, index) {
-        var item = listData![index];
-        return ItemReviewWidget(item,
-            onTap: () => {});
-      },
-      onNextPage: onNextPage,
-      onRefresh: loadData,
-      key: widget.key,
-    );
+    return Scaffold(
+        appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: AppColors.black, //change your color here
+          ),
+          centerTitle: true,
+          title: Text('review'.tr(),
+              style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+          backgroundColor: AppColors.grey,
+          elevation: 0.0,
+        ),
+        body: RxListView(
+          listData,
+          (context, index) {
+            var item = listData![index];
+            return Card(child: RxBuildItemReview(item));
+          },
+          onNextPage: onNextPage,
+          onRefresh: loadData,
+          key: widget.key,
+        ));
   }
 }

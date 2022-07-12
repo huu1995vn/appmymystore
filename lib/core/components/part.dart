@@ -13,11 +13,13 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
+import 'package:rating_bar/rating_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class RxDivider extends Divider {
@@ -521,3 +523,43 @@ _onSelect(BuildContext context, String type, dynamic id,
     if (afterChange != null) afterChange!(res);
   }
 }
+
+Widget RxBuildItemReview(ReviewModel item) {
+    return 
+    ListTile(
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              verticalDirection: VerticalDirection.up,
+              children: [
+                RxAvatarImage(item.rximguser, size: 25),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Text(
+                    item.username ?? "NAN",
+                    style: const TextStyle().size(12),
+                  ),
+                ),
+              ],
+            ),
+            RatingBar.readOnly(
+              initialRating:
+                  CommonMethods.convertToDouble(item.ratingvalue ?? 0.0),
+              filledIcon: AppIcons.star_1, 
+              emptyIcon: AppIcons.star_1,
+            ),
+          ],
+        ),
+        // isThreeLine: true,
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          verticalDirection: VerticalDirection.up,
+          children: <Widget>[
+            Text(item.comment ?? "",
+                style: const TextStyle().italic, maxLines: 6),
+            Text(item.rxtimeago, style: kTextTimeStyle),
+          ],
+        ));
+  }

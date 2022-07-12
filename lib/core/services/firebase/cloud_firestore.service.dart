@@ -55,7 +55,7 @@ class CloudFirestoreSerivce {
       var value = await fireStoreService.get();
       if (value.docs != null && value.docs.isNotEmpty) {
         CommonConfig.banners = value.docs.map((i) {
-          dynamic _item = value.docs[0].data();
+          dynamic _item = i.data();
           BannerModel item = BannerModel();
           item.img = _item["img"];
           item.herf = _item["herf"];

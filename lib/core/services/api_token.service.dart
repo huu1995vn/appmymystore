@@ -1,5 +1,6 @@
 // ignore_for_file: empty_catches, non_constant_identifier_names
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -89,7 +90,7 @@ class APITokenService {
     return pText.replaceAll('+', '_').replaceAll('/', '-').split("=")[0];
   }
 
-   static Future<bool> loginByData(String pData) async {
+  static Future<bool> loginByData(String pData) async {
     bool res = false;
     try {
       await StorageService.set(StorageKeys.dataLogin, pData);
@@ -101,7 +102,9 @@ class APITokenService {
         img = int.parse(data["img"] ?? "0");
         res = true;
       }
-      await StorageService.initFavorite();
+      Timer(Duration.zero, () async {
+        await StorageService.initFavorite();
+      });
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }

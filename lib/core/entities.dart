@@ -299,6 +299,7 @@ class ProductModel extends Entity {
   String? address = CommonConfig.user.address;
   String? phone = CommonConfig.user.phone;
   String? reject;
+  String? username;
   bool get isfavorite {
     return StorageService.listFavorite.contains(id);
   }

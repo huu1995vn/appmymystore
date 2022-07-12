@@ -182,7 +182,8 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..districtname = json['districtname'] as String?
   ..address = json['address'] as String?
   ..phone = json['phone'] as String?
-  ..reject = json['reject'] as String?;
+  ..reject = json['reject'] as String?
+  ..username = json['username'] as String?;
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
     <String, dynamic>{
@@ -238,6 +239,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'address': instance.address,
       'phone': instance.phone,
       'reject': instance.reject,
+      'username': instance.username,
     };
 
 AdvertModel _$AdvertModelFromJson(Map<String, dynamic> json) => AdvertModel()

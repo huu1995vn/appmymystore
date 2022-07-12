@@ -115,11 +115,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         ),
                       ],
                     ),
-                    SliverToBoxAdapter(
-                        child: Padding(
-                      padding: const EdgeInsets.all(kDefaultPadding),
-                      child: _buildDetail(),
-                    ))
+                    SliverToBoxAdapter(child: _buildDetail())
                   ],
                 )),
       persistentFooterButtons: [
@@ -149,16 +145,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
-  Widget _listTitle(String title, String subtitle, {Widget? leading}) {
-    return ListTile(
-      leading: leading,
-      title: Text(
-        title,
-        style: kTextTitleStyle,
-      ),
-      subtitle: Text(
-        subtitle,
-        style: TextStyle(color: AppColors.primary),
+  Widget _listTitle(String title, dynamic? subtitle, {Widget? leading}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: Row(
+        children: [
+          if (leading != null) leading,
+          Text(
+            "$title: ",
+            style: kTextTitleStyle,
+          ),
+          Text(
+            subtitle?.toString() ?? "not.update".tr(),
+            style: TextStyle(color: AppColors.primary),
+          )
+        ],
       ),
     );
   }
@@ -168,6 +169,38 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         RxImages(data: data!.rximglist),
+        Card(
+          // color: AppColors.grey,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              RxAvatarImage(data!.rximguser, size: 40),
+              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Text(
+                  data!.fullname!,
+                  style: const TextStyle(
+                    color: AppColors.black50,
+                  ).bold.size(12),
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      AppIcons.map_marker,
+                      color: AppColors.black50,
+                      size: 13,
+                    ),
+                    Text(
+                      data!.address!,
+                      style: const TextStyle(
+                        color: AppColors.black50,
+                      ).size(12),
+                    ),
+                  ],
+                )
+              ]),
+            ],
+          ),
+        ),
         Card(
             child: SizedBox(
           width: double.infinity,
@@ -182,12 +215,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(CommonMethods.formatNumber(data!.price ?? "40000000"),
+                    Text(CommonMethods.formatNumber(data!.price ?? "Liên hệ"),
                         style: kTextPriceStyle),
                   ],
                 ),
                 Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
                       AppIcons.clock_1,
@@ -197,106 +229,70 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     Text(data!.rxtimeago,
                         style:
                             TextStyle(fontSize: 13, color: AppColors.black50)),
-                    // Text(
-                    //   "371 Nguyễn Kiệm",
-                    //   style: TextStyle(fontSize: 13, color: AppColors.black50),
-                    // ),
                   ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: kDefaultPadding, right: kDefaultPadding),
+                  child: TextFormField(
+                    initialValue: data!.des,
+                    minLines:
+                        6, // any number you need (It works as the rows for the textarea)
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                  ),
                 )
               ],
             ),
           ),
         )),
-        Padding(
-          padding: const EdgeInsets.only(left: kDefaultPadding / 2),
-          child: Text(
-            "Mô tả chi tiết".toUpperCase(),
-            style: const TextStyle().bold,
-          ),
-        ),
+
         Card(
           child: Padding(
-            padding: const EdgeInsets.only(
-                left: kDefaultPadding, right: kDefaultPadding),
-            child: TextFormField(
-              initialValue: data!.des,
-              minLines:
-                  6, // any number you need (It works as the rows for the textarea)
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: kDefaultPadding / 2),
-          child: Text(
-            "Thông tin thông số".toUpperCase(),
-            style: const TextStyle().bold,
-          ),
-        ),
-        Card(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
-                  child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    // mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _listTitle(
-                          "vehiclelife".tr(), data!.madeinname ?? "madeinname"),
-                      _listTitle(
-                          "vehicletype".tr(), data!.modelname ?? "modelname"),
-                      _listTitle(
-                          "vehicle".tr(), data!.bodytypename ?? "bodytypename"),
-                    ],
-                  ),
-                ),
-              ),
-              Flexible(
-                fit: FlexFit.tight,
-                child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
-                  child: Column(
-                    children: [
-                      _listTitle(
-                          "fuel".tr(), data!.fueltypename ?? "fueltypename"),
-                      _listTitle("color".tr(), data!.colorname ?? "colorname"),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: GestureDetector(
-              onTap: () {},
-              child: RxAvatarImage(data!.rximguser ?? NOIMAGEUSER, size: 40),
-            ),
-            title: GestureDetector(
-              onTap: () {},
-              child: Text(data!.fullname ?? "Nguyễn Trọng Hữu",
-                  style: const TextStyle().bold),
-            ),
-            subtitle: Row(
-              // spacing: kDefaultPadding,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  data!.cityname ?? "Tp.HCM",
-                  style: const TextStyle(
-                    color: AppColors.black50,
-                  ).bold.size(12),
-                ),
+                _listTitle("madein".tr(), data!.madeinname),
+                _listTitle("model".tr(), data!.modelname),
+                _listTitle("bodytype".tr(), data!.bodytypename),
+                _listTitle("fueltype".tr(), data!.fueltypename),
+                _listTitle("color".tr(), data!.colorname),
+                _listTitle("year".tr(), data!.year),
+                _listTitle("seat".tr(), data!.seat),
+                _listTitle("door".tr(), data!.door),
+                _listTitle("km".tr(), data!.km),
               ],
             ),
           ),
         ),
+        // Card(
+        //   child: ListTile(
+        //     leading: GestureDetector(
+        //       onTap: () {},
+        //       child: RxAvatarImage(data!.rximguser ?? NOIMAGEUSER, size: 40),
+        //     ),
+        //     title: GestureDetector(
+        //       onTap: () {},
+        //       child: Text(data!.fullname ?? "",
+        //           style: const TextStyle().bold),
+        //     ),
+        //     subtitle: Row(
+        //       // spacing: kDefaultPadding,
+        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       children: [
+        //         Text(
+        //           data!.address!,
+        //           style: const TextStyle(
+        //             color: AppColors.black50,
+        //           ).bold.size(12),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         Card(
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
@@ -340,13 +336,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ))
               ],
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: kDefaultPadding / 2),
-          child: Text(
-            "evaluate".tr().toUpperCase(),
-            style: const TextStyle().bold,
           ),
         ),
         Card(child: RxReview(data!))

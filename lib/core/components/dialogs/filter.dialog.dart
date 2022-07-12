@@ -130,7 +130,7 @@ class _FilterDialogState extends State<FilterDialog> {
                   padding: const EdgeInsets.all(kDefaultPadding),
                   child: Center(
                       child: Text(
-                    "Bỏ lọc",
+                    "unfiltered".tr(),
                     style: TextStyle(color: AppColors.primary),
                   )),
                 )),

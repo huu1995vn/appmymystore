@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:raoxe/app_icons.dart';
@@ -22,9 +24,8 @@ class RxReview extends StatefulWidget {
 }
 
 class _ReviewState extends State<RxReview> {
-  int displayPage = 1;
-  bool loading = false;
-  List<ReviewModel> data = [];
+  int totalItems = 0;
+  List<ReviewModel>? listData;
   int userId = APITokenService.userId;
   @override
   initState() {
@@ -34,29 +35,29 @@ class _ReviewState extends State<RxReview> {
 
   Future<void> loadData() async {
     try {
-      Map<String, dynamic> body = {
-        "productid": widget.item.id,
-        "p": 1,
-        "n": 2
-      };
-      var res = await DaiLyXeApiBLL_APIGets().review(body);
-      if (res.status > 0) {        
-        if (!mounted) return;
+      Map<String, dynamic> body = {"r": widget.item.id, "p": 1, "n": 2};
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().review(body);
+      if (res.status > 0) {
+        List<ReviewModel> list = CommonMethods.convertToList<ReviewModel>(
+            res.data, (val) => ReviewModel.fromJson(val));
         setState(() {
-          data = res.data; 
+          totalItems = (list.length == 0) ? 0 : list[0].rxtotalrow;
+          listData = list;
         });
-      }
-    } catch (e) {
-      // CommonMethods.showDialogError(context, e.toString());
-    }
+        return;
+      } else {}
+    } catch (e) {}
+    setState(() {
+      listData = [];
+    });
   }
 
   _onReview() async {
     var res = await CommonNavigates.showDialogBottomSheet(
         context, ReviewDialog(product: widget.item),
         height: 350);
-
   }
+
   viewAll() {
     CommonNavigates.openDialog(
         context,
@@ -111,7 +112,7 @@ class _ReviewState extends State<RxReview> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                _buildRating(context, 1,
+                  _buildRating(context, 1,
                       ratingvalue == 0.0 ? 0.0 : (review1 / ratingvalue)),
                   _buildRating(context, 2,
                       ratingvalue == 0.0 ? 0.0 : (review2 / ratingvalue)),
@@ -125,7 +126,6 @@ class _ReviewState extends State<RxReview> {
               ),
             ],
           ),
-         
           GestureDetector(
             onTap: _onReview,
             child: Container(
@@ -138,13 +138,14 @@ class _ReviewState extends State<RxReview> {
                       color: Colors.blue, fontWeight: FontWeight.w500),
                 )),
           ),
-          RxListView(data, _listItem,
-              key: Key("writerreview".tr()),
-              onRefresh: loadData,
-              noFound: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Text("not.evaluate".tr()))),
-          if (data != null && data!.length >= 2)
+          if (listData != null)
+            RxListView(listData, _listItem,
+                key: Key("writerreview".tr()),
+                onRefresh: loadData,
+                noFound: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Text("not.evaluate".tr()))),
+          if (listData != null && listData!.length >= 2)
             GestureDetector(
               onTap: () {
                 viewAll();
@@ -171,7 +172,7 @@ class _ReviewState extends State<RxReview> {
   }
 
   Widget _listItem(BuildContext context, int index) {
-    ReviewModel item = data![index];
+    ReviewModel item = listData![index];
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
@@ -209,8 +210,7 @@ class _ReviewState extends State<RxReview> {
               children: <Widget>[
                 Container(
                   margin: const EdgeInsets.only(bottom: 5),
-                  child:
-                      Text(item.name ?? "", style: const TextStyle().bold),
+                  child: Text(item.name ?? "", style: const TextStyle().bold),
                 ),
                 TextFormField(
                   initialValue: item.comment,

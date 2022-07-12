@@ -43,7 +43,7 @@ class StorageService {
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().favorite(body);
       if (res.status > 0) {
-        if(res.data > 0)
+        if(res.data!=null && res.data.length > 0)
         {
           listFavorite = (res.data as List).map((e) => int.parse(e["id"])).toList();
           set(StorageKeys.favorite, listFavorite);

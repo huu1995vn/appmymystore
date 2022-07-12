@@ -344,7 +344,10 @@ ReviewModel _$ReviewModelFromJson(Map<String, dynamic> json) => ReviewModel()
       ? null
       : DateTime.parse(json['createdate'] as String)
   ..status = json['status'] as int
-  ..reject = json['reject'] as String?;
+  ..reject = json['reject'] as String?
+  ..img = json['img'] as int
+  ..imguser = json['imguser'] as int
+  ..username = json['username'] as String;
 
 Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
     <String, dynamic>{
@@ -362,4 +365,7 @@ Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
       'createdate': instance.createdate?.toIso8601String(),
       'status': instance.status,
       'reject': instance.reject,
+      'img': instance.img,
+      'imguser': instance.imguser,
+      'username': instance.username,
     };

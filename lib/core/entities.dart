@@ -302,6 +302,7 @@ class ProductModel extends Entity {
   bool get isfavorite {
     return StorageService.listFavorite.contains(id);
   }
+
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
@@ -644,9 +645,35 @@ class ReviewModel extends Entity {
   DateTime? createdate;
   int status = 1;
   String? reject;
+  int img = 1;
+  int imguser = 1;
+  String username = "";
   ReviewModel();
   String get rxtimeago {
     return CommonMethods.timeagoFormat(createdate);
+  }
+
+  String get rximguser {
+    if (!(imguser > 0)) {
+      return NOIMAGEUSER;
+    }
+    try {
+      return CommonMethods.buildUrlHinhDaiDien(imguser, rewriteUrl: name);
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+
+      return NOIMAGEUSER;
+    }
+  }
+
+  String get rximg {
+    try {
+      return CommonMethods.buildUrlHinhDaiDien(img, rewriteUrl: name);
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+
+      return NOIMAGEUSER;
+    }
   }
 
   UserModel clone() => UserModel.fromJson(toJson());
@@ -659,7 +686,8 @@ class ReviewModel extends Entity {
     json["reviewcount"] = CommonMethods.convertToInt32(json["reviewcount"]);
     json["ratingvalue"] = CommonMethods.convertToInt32(json["ratingvalue"]);
     json["status"] = CommonMethods.convertToInt32(json["status"], 1);
-
+    json["imguser"] = CommonMethods.convertToInt32(json["imguser"]);
+    json["img"] = CommonMethods.convertToInt32(json["img"]);
     json["createdate"] =
         CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
     return _$ReviewModelFromJson(json);

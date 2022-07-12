@@ -93,6 +93,8 @@ class _ReviewState extends State<RxReview> {
                     "$ratingvalue/5",
                   ),
                   RatingBar.readOnly(
+                    filledColor: AppColors.yellow,
+                    size: 25,
                     initialRating: ratingvalue,
                     emptyIcon: AppIcons.star_1,
                     filledIcon: AppIcons.star_1,
@@ -154,7 +156,7 @@ class _ReviewState extends State<RxReview> {
                   children: <Widget>[
                     Text(
                       "${"all".tr()} (${totalItems})",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.blue, fontWeight: FontWeight.w500),
                     ),
                     const Icon(
@@ -171,6 +173,8 @@ class _ReviewState extends State<RxReview> {
   Widget _buildRating(BuildContext context, double rating, double value) {
     return Row(children: <Widget>[
       RatingBar.readOnly(
+        filledColor: AppColors.yellow,
+        size: 15,
         initialRating: CommonMethods.convertToDouble(rating ?? 0.0),
         filledIcon: AppIcons.star_1,
         emptyIcon: AppIcons.star_1,

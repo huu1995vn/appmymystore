@@ -82,6 +82,8 @@ class _ReviewDialogState extends State<ReviewDialog> {
                       child: Column(
                         children: <Widget>[
                           RatingBar(
+                            filledColor: AppColors.yellow,
+                            size: 25,
                             initialRating: 5,
                             onRatingChanged: (_) {
                               review.ratingvalue =

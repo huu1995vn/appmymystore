@@ -529,6 +529,7 @@ Widget RxBuildItemReview(ReviewModel item) {
     ListTile(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -545,6 +546,8 @@ Widget RxBuildItemReview(ReviewModel item) {
               ],
             ),
             RatingBar.readOnly(
+              filledColor: AppColors.yellow,
+              size: 15,
               initialRating:
                   CommonMethods.convertToDouble(item.ratingvalue ?? 0.0),
               filledIcon: AppIcons.star_1, 

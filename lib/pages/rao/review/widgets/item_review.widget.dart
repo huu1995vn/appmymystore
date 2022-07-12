@@ -43,6 +43,7 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                   ],
                 ),
                 RatingBar.readOnly(
+                  filledColor: AppColors.yellow,
                   size: 15,
                   initialRating: 5,
                   emptyIcon: AppIcons.star_1,

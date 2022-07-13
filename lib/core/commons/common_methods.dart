@@ -48,7 +48,7 @@ class CommonMethods {
   }
 
   static get isLogin {
-    return APITokenService.token != null;
+    return APITokenService.token != null && APITokenService.token.isNotEmpty;
   }
 
   static Future<PackageInfo?> getPackageInfo() async {
@@ -454,8 +454,8 @@ class CommonMethods {
 
   static Future<bool> onFavorite(List<int> ids, bool status) async {
     try {
-      if (APITokenService.userId <= 0) {
-        CommonMethods.showToast("Vùi lòng đăng nhập trước");
+      if (!CommonMethods.isLogin) {
+        CommonMethods.showToast("please.login".tr());
         return false;
       }
       ResponseModel res =

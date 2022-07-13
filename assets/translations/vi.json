@@ -1,4 +1,5 @@
 {
+  "failedaction": "Thao tác thất bại",
   "madein": "Xuất xứ",
   "km": "Số Km đã đi",
   "color": "Màu sắc",
@@ -47,6 +48,7 @@
       "endtime": "@:please chọn thời gian kết thúc",
       "other": "@:please chọn {}"
     },
+    "login": "@:please.text đăng nhập",
     "other": "@:please.text {}"
   },
   "dealer": "Đại lý",
@@ -490,6 +492,7 @@
     "str039": "Thời gian bắt đầu phải nhỏ hơn kết thúc dự kiến",
     "str040": "Thời gian dự định kết thúc phải lớn hơn thời gian bắt đầu",
     "str041": "Bạn đã có tài khoản? ",
+    "str042":"Vui lòng chọn file đính kèm",
     "alert001": "Chức năng này cần <b style='color:green'>xác thực số điện thoại</b>",
     "alert002": "Bạn có chắc chắn muốn <b>xóa tin</b> này?",
     "alert003": "Bạn có chắc chắn muốn <b>xóa tài khoản</b> này?",

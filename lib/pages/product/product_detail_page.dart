@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/review.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_images.dart';
@@ -13,6 +15,7 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:rating_bar/rating_bar.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -62,7 +65,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     }
   }
 
-  onFavorite() async {
+  _onFavorite() async {
     try {
       var res = await CommonMethods.onFavorite([data!.id], !data!.isfavorite);
       setState(() {
@@ -71,6 +74,16 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     } catch (e) {
       CommonMethods.showDialogError(context, e);
     }
+  }
+
+  _onReview() async {
+    if (!CommonMethods.isLogin) {
+      CommonMethods.showToast("please.login".tr());
+      return;
+    }
+    await CommonNavigates.showDialogBottomSheet(
+        context, ReviewDialog(product: data!),
+        height: 400);
   }
 
   @override
@@ -104,7 +117,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             AppIcons.heart_1,
                             color: data!.isfavorite ? AppColors.primary : null,
                           ),
-                          onPressed: onFavorite,
+                          onPressed: _onFavorite,
                         ),
                         IconButton(
                           icon: Icon(
@@ -167,37 +180,65 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         Card(
           // color: AppColors.grey,
           child: Padding(
-            padding: const EdgeInsets.all(kDefaultPadding),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                RxAvatarImage(data!.rximguser, size: 40),
-                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Text(
-                    data!.fullname!,
-                    style: const TextStyle(
-                      color: AppColors.black50,
-                    ).bold.size(12),
-                  ),
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
-                        AppIcons.map_marker,
-                        color: AppColors.black50,
-                        size: 13,
-                      ),
-                      Text(
-                        data!.address!,
-                        style: const TextStyle(
-                          color: AppColors.black50,
-                        ).size(12),
-                      ),
+                      RxAvatarImage(data!.rximguser, size: 40),
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              data!.fullname!,
+                              style: const TextStyle(
+                                color: AppColors.black50,
+                              ).bold.size(12),
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  AppIcons.map_marker,
+                                  color: AppColors.black50,
+                                  size: 13,
+                                ),
+                                Text(
+                                  data!.address!,
+                                  style: const TextStyle(
+                                    color: AppColors.black50,
+                                  ).size(12),
+                                ),
+                              ],
+                            )
+                          ]),
                     ],
-                  )
-                ]),
-              ],
-            ),
-          ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      RatingBar.readOnly(
+                        filledColor: AppColors.yellow,
+                        size: 19,
+                        initialRating: data!.ratingvalue,
+                        emptyIcon: AppIcons.star_1,
+                        filledIcon: AppIcons.star_1,
+                      ),
+                      GestureDetector(
+                          onTap: _onReview,
+                          child: Text(
+                            "review".tr(),
+                            style: const TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: AppColors.info)
+                                .underline,
+                          )),
+                    ],
+                  ),
+                ],
+              )),
         ),
         Card(
             child: SizedBox(
@@ -280,31 +321,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             ),
           ),
         ),
-        // Card(
-        //   child: ListTile(
-        //     leading: GestureDetector(
-        //       onTap: () {},
-        //       child: RxAvatarImage(data!.rximguser ?? NOIMAGEUSER, size: 40),
-        //     ),
-        //     title: GestureDetector(
-        //       onTap: () {},
-        //       child: Text(data!.fullname ?? "",
-        //           style: const TextStyle().bold),
-        //     ),
-        //     subtitle: Row(
-        //       // spacing: kDefaultPadding,
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: [
-        //         Text(
-        //           data!.address!,
-        //           style: const TextStyle(
-        //             color: AppColors.black50,
-        //           ).bold.size(12),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
+        
         Card(
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
@@ -354,4 +371,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       ],
     );
   }
+
+  
 }

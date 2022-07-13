@@ -1,4 +1,5 @@
 {
+  "failedaction": "Failed action",
   "madein": "Made in",
   "km": "Number of kilometers traveled",
   "color": "Color",
@@ -47,6 +48,7 @@
       "endtime": "@:please.text choose a end time",
       "other": "@:please.text choose {}"
     },
+    "login": "@:please.text login",
     "other": "@:please.text {}"
 
   },
@@ -492,6 +494,7 @@
     "str039": "Start time must be less than expected end time",
     "str040": "The intended end time must be greater than the start time",
     "str041": "Already register? ",
+    "str042": "Please select attachment",
     "alert001": "This function needs <b style='color:green'>verify phone number</b>",
     "alert002": "Are you sure you want to <b>delete</b> this message?",
     "alert003": "Are you sure you want to <b>delete</b> this account?",

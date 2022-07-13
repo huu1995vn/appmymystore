@@ -81,7 +81,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   chooseImages() async {
     int maxImages = kMaxImages - imgs.length;
     if (maxImages <= 0) {
-      CommonMethods.showToast("Vượt quá giới hạn ảnh upload");
       return;
     }
     var limg =
@@ -95,7 +94,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   onUpTop() async {
     if (data!.status != 2) {
-      CommonMethods.showToast("Đẩy lên đầu phải được duyệt");
       return;
     }
     CommonMethods.lockScreen();
@@ -568,7 +566,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
           name: data!.name!);
       if (idFiles.isEmpty) {
-        CommonMethods.showToast("Vui lòng chọn hình ảnh đính kèm");
+        CommonMethods.showToast("message.str042".tr());
         return;
       }
       if (idFiles.isNotEmpty) {

@@ -92,8 +92,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                               size: 39,
                               initialRating: 5,
                               onRatingChanged: (_) {
-                                review.ratingvalue =
-                                    CommonMethods.convertToInt32(_);
+                                review.ratingvalue =_.round();
                               },
                               emptyIcon: AppIcons.star_1,
                               filledIcon: AppIcons.star_1,

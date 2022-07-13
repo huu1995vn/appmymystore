@@ -2,13 +2,16 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_listview.dart';
+import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:rating_bar/rating_bar.dart';
 
 class ReviewAllDialog extends StatefulWidget {
   const ReviewAllDialog({
@@ -84,7 +87,11 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      body: RxCustomScrollView(
+        key: const Key("lHome"),
+        onNextScroll: onNextPage,
+        onRefresh: onRefresh,
+        appBar: SliverAppBar(
           iconTheme: IconThemeData(
             color: AppColors.black, //change your color here
           ),
@@ -94,15 +101,65 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
           backgroundColor: AppColors.grey,
           elevation: 0.0,
         ),
-        body: RxListView(
-          listData,
-          (context, index) {
-            var item = listData![index];
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    RatingBar.readOnly(
+                      filledColor: AppColors.yellow,
+                      size: 25,
+                      initialRating: widget.product.ratingvalue,
+                      emptyIcon: AppIcons.star_1,
+                      filledIcon: AppIcons.star_1,
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    _buildRating(context, 1, widget.product.review1),
+                    _buildRating(context, 2, widget.product.review2),
+                    _buildRating(context, 3, widget.product.review3),
+                    _buildRating(context, 4, widget.product.review4),
+                    _buildRating(context, 5, widget.product.review5),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          RxSliverList(listData, (BuildContext context, int index) {
+            ReviewModel item = listData![index];
             return Card(child: RxBuildItemReview(item));
-          },
-          onNextPage: onNextPage,
-          onRefresh: loadData,
-          key: widget.key,
-        ));
+          })
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRating(BuildContext context, double rating, int value) {
+    return Row(children: <Widget>[
+      RatingBar.readOnly(
+        filledColor: AppColors.yellow,
+        size: 15,
+        initialRating: CommonMethods.convertToDouble(rating ?? 0.0),
+        filledIcon: AppIcons.star_1,
+        emptyIcon: AppIcons.star_1,
+      ),
+      Container(
+        width: 60,
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: LinearProgressIndicator(
+          backgroundColor: Colors.green[100],
+          valueColor: AlwaysStoppedAnimation<Color>(
+            AppColors.success.withOpacity(0.8),
+          ),
+          value: value.toDouble(),
+        ),
+      ),
+      SizedBox(width: 50.0, child: Text(value.toString()))
+    ]);
   }
 }

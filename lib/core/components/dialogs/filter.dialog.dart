@@ -87,7 +87,7 @@ class _FilterDialogState extends State<FilterDialog> {
     CommonNavigates.goBack(context, searchParams);
   }
 
-  _onSelect(String type, int id,
+  _onSelect(String key ,String type, int id,
       {bool Function(dynamic)? fnWhere, Function()? afterChange}) async {
     List data = MasterDataService.data[type];
     if (fnWhere != null) {
@@ -97,7 +97,7 @@ class _FilterDialogState extends State<FilterDialog> {
         context: context, delegate: RxSelectDelegate(data: data, value: id));
     if (res != null) {
       setState(() {
-        searchParams[type] = res;
+        searchParams[key] = res;
         if (afterChange != null) afterChange();
       });
     }
@@ -278,7 +278,7 @@ class _FilterDialogState extends State<FilterDialog> {
           style: TextStyle(
               color:
                   name != null && name.length > 0 ? AppColors.primary : null)),
-      onTap: () => _onSelect(type, searchParams[key],
+      onTap: () => _onSelect(key, type, searchParams[key],
           fnWhere: fnWhere, afterChange: afterChange),
       trailing: Icon(AppIcons.chevron_right),
     );

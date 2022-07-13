@@ -105,11 +105,16 @@ class _ProductPageState extends State<ProductPage> {
     ];
     for (var key in keyfilters) {
       var value = paramsSearch[key];
-      if(key=="Price")
-      {
-        value = value.toString().split(",").map((e) => e*kStepPrice).toList().join(",");
-      }
+
       if (value == null) continue;
+      if (key == "Price") {
+        value = value
+            .toString()
+            .split(",")
+            .map((e) => int.parse(e) * kStepPrice)
+            .toList()
+            .join(",");
+      }
       filter[key] = value;
     }
     return filter;

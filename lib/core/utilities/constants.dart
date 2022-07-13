@@ -89,10 +89,10 @@ List PRICES = [
 ];
 
 List SORTS = [
-  {"name": "Mới nhất", "id": "NgayUp:desc"},
-  {"name": "Cũ nhất", "id": "NgayUp:asc"},
-  {"name": "Giá cao trước", "id": "Gia:desc"},
-  {"name": "Giá thấp trước", "id": "Gia:asc"}
+  {"name": "Mới nhất", "id": "CreateDate:desc"},
+  {"name": "Cũ nhất", "id": "CreateDate:asc"},
+  {"name": "Giá cao trước", "id": "Price:desc"},
+  {"name": "Giá thấp trước", "id": "Price:asc"}
 ];
 List PRODUCTTYPES = [
   {"name": "Bán", "id": 1},

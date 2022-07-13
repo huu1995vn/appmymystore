@@ -50,14 +50,23 @@ class _ProductPageState extends State<ProductPage> {
     if (paramsSearch["OrderBy"] != null && paramsSearch["OrderBy"].length > 0) {
       body["orderBy"] = paramsSearch["OrderBy"].toString().trim();
     }
+    if (nPaging == 1) {
+      setState(() {
+        listData = null;
+      });
+    }
     ResponseModel res = await DaiLyXeApiBLL_APIGets().product(body);
     List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
         res.data, (val) => ProductModel.fromJson(val));
     if (mounted) {
       setState(() {
-        totalItems =
-            (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
-        listData;
+        if (nPaging == 1 && (list.isEmpty)) {
+          totalItems = 0;
+        }
+        if (list.isNotEmpty) {
+          totalItems = list[0].rxtotalrow;
+        }
+        listData ??= [];
         if (paging == 1) {
           listData = list;
         } else {

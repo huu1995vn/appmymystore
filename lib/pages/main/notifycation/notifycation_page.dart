@@ -36,15 +36,17 @@ class _NotifycationPageState extends State<NotifycationPage> {
       return;
 
     nPaging = nPaging ?? 1;
-    Map<String, dynamic> params = {
-      "p": nPaging,
-      "n": kItemOnPage
-    };
+    Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
     ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
     List<dynamic> data = res.data;
     List<NewsModel> list = data.map((val) => NewsModel.fromJson(val)).toList();
     setState(() {
-      totalItems = (nPaging == 1 && list.isEmpty) ? 0 : list[0].rxtotalrow;
+      if (nPaging == 1 && (list.isEmpty)) {
+        totalItems = 0;
+      }
+      if (list.isNotEmpty) {
+        totalItems = list[0].rxtotalrow;
+      }
       listData ??= [];
       if (nPaging == 1) {
         listData = list;

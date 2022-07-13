@@ -42,6 +42,7 @@ class _ListBrandWidgetState extends State<ListBrandWidget>
                 title: item["name"]),
           );
         },
+        noFound: Container(),
         key: UniqueKey(),
         scrollDirection: Axis.horizontal,
         // padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),

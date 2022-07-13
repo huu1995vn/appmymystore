@@ -83,16 +83,16 @@ List<Categorie> PRODUCTREVIEWSTATUS = [
 
 List PRICES = [
   {"name": "0 - 500 triệu", "id": 0},
-  {"name": "500 - 1 tỷ", "id": 0},
-  {"name": "1tỷ - 5tỷ", "id": 0},
-  {"name": "hơn 5tỷ", "id": 0}
+  {"name": "500 - 1 tỷ", "id": 1},
+  {"name": "1tỷ - 5tỷ", "id": 2},
+  {"name": "hơn 5tỷ", "id": 3}
 ];
 
 List SORTS = [
-  {"name": "Mới nhất", "id": "CreateDate:desc"},
-  {"name": "Cũ nhất", "id": "CreateDate:asc"},
-  {"name": "Giá cao trước", "id": "Price:desc"},
-  {"name": "Giá thấp trước", "id": "Price:asc"}
+  {"name": "Mới nhất", "id": "CreateDate DESC"},
+  {"name": "Cũ nhất", "id": "CreateDate ASC"},
+  {"name": "Giá cao trước", "id": "Price DESC"},
+  {"name": "Giá thấp trước", "id": "Price ASC"}
 ];
 List PRODUCTTYPES = [
   {"name": "Bán", "id": 1},

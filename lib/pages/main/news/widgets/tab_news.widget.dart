@@ -55,8 +55,12 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
         List<NewsModel> list = CommonMethods.convertToList<NewsModel>(
             res.data, (val) => NewsModel.fromJson(val));
         setState(() {
-          totalItems =
-              (nPaging == 1 && list.isEmpty) ? 0 : list[0].rxtotalrow;
+          if (nPaging == 1 && (list.isEmpty)) {
+            totalItems = 0;
+          }
+          if (list.isNotEmpty) {
+            totalItems = list[0].rxtotalrow;
+          }
           listData ??= [];
           if (nPaging == 1) {
             listData = list;

@@ -52,8 +52,13 @@ class _HomePageState extends State<HomePage>
     List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
         res.data, (val) => ProductModel.fromJson(val));
     setState(() {
-      totalItems = (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
-      listData;
+      if (nPaging == 1 && (list.isEmpty)) {
+        totalItems = 0;
+      }
+      if (list.isNotEmpty) {
+        totalItems = list[0].rxtotalrow;
+      }
+      listData ??= [];
       if (nPaging == 1) {
         listData = list;
       } else {

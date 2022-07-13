@@ -15,6 +15,10 @@ class MasterDataService {
       int versionMasterdata =
           int.parse(StorageService.get(StorageKeys.version_masterdata) ?? "0");
       dynamic masterdata = StorageService.get(StorageKeys.masterdata);
+      if(masterdata is String)
+      {
+        masterdata = null;
+      }
       if (masterdata != null &&
           versionMasterdata != null &&
           CommonConfig.version_masterdata <= versionMasterdata) {
@@ -39,7 +43,9 @@ class MasterDataService {
       data["productstate"] = PRODUCTSTATES;
 
       
-    } catch (e) {}
+    } catch (e) {
+
+    }
     return res;
   }
 

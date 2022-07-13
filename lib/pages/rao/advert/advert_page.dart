@@ -39,17 +39,18 @@ class _AdvertPageState extends State<AdvertPage> {
 
     try {
       nPaging = nPaging ?? 1;
-      Map<String, dynamic> params = {
-        "p": nPaging,
-        "n": kItemOnPage
-      };
+      Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
       ResponseModel res = await DaiLyXeApiBLL_APIUser().advert(params);
       if (res.status > 0) {
         List<AdvertModel> list = CommonMethods.convertToList<AdvertModel>(
             res.data, (val) => AdvertModel.fromJson(val));
         setState(() {
-          totalItems =
-              (nPaging == 1 && list.isEmpty) ? 0 : list[0].rxtotalrow;
+          if (nPaging == 1 && (list.isEmpty)) {
+            totalItems = 0;
+          }
+          if (list.isNotEmpty) {
+            totalItems = list[0].rxtotalrow;
+          }
           listData ??= [];
           if (nPaging == 1) {
             listData = list;

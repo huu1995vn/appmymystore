@@ -57,8 +57,12 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
         List<ReviewModel> list = CommonMethods.convertToList<ReviewModel>(
             res.data, (val) => ReviewModel.fromJson(val));
         setState(() {
-          totalItems =
-              (nPaging == 1 && list.isEmpty) ? 0 : list[0].rxtotalrow;
+          if (nPaging == 1 && (list.isEmpty)) {
+            totalItems = 0;
+          }
+          if (list.isNotEmpty) {
+            totalItems = list[0].rxtotalrow;
+          }
           listData ??= [];
           if (nPaging == 1) {
             listData = list;

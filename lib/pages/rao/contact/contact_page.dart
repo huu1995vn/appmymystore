@@ -39,17 +39,18 @@ class _ContactPageState extends State<ContactPage> {
 
     try {
       nPaging = nPaging ?? 1;
-      Map<String, dynamic> params = {
-        "p": nPaging,
-        "n": kItemOnPage
-      };
+      Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
       ResponseModel res = await DaiLyXeApiBLL_APIUser().contact(params);
       if (res.status > 0) {
         List<ContactModel> list = CommonMethods.convertToList<ContactModel>(
             res.data, (val) => ContactModel.fromJson(val));
         setState(() {
-          totalItems =
-              (nPaging == 1 && list.isEmpty) ? 0 : list[0].rxtotalrow;
+          if (nPaging == 1 && (list.isEmpty)) {
+            totalItems = 0;
+          }
+          if (list.isNotEmpty) {
+            totalItems = list[0].rxtotalrow;
+          }
           listData ??= [];
           if (nPaging == 1) {
             listData = list;

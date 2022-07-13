@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
 
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -50,7 +49,7 @@ class _ContactPageState extends State<ContactPage> {
             res.data, (val) => ContactModel.fromJson(val));
         setState(() {
           totalItems =
-              (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
+              (nPaging == 1 && list.isEmpty) ? 0 : list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
             listData = list;

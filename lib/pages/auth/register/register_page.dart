@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
+import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -102,9 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 RxInput(user!.fullname!,
                     labelText: "fullname".tr(),
                     icon: const Icon(AppIcons.user_1),
-                    onChanged: (v) => {
-                          user!.fullname = v
-                        },
+                    onChanged: (v) => {user!.fullname = v},
                     validator: Validators.compose([
                       Validators.required("notempty.fullname.text".tr()),
                     ])),
@@ -112,9 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     keyboardType: TextInputType.number,
                     labelText: "phone".tr(),
                     icon: const Icon(AppIcons.phone_handset),
-                    onChanged: (v) => {
-                          user!.phone = v
-                        },
+                    onChanged: (v) => {user!.phone = v},
                     validator: (v) {
                       if (v == null || !v.isNotEmpty) {
                         return "notempty.phone.text".tr();
@@ -129,9 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   isPassword: true,
                   labelText: "password.text".tr(),
                   icon: const Icon(AppIcons.lock_1),
-                  onChanged: (v) => {
-                     user!.password = v
-                  },
+                  onChanged: (v) => {user!.password = v},
                   validator: Validators.compose([
                     Validators.required("notempty.password.text".tr()),
                     Validators.patternString(
@@ -169,11 +164,20 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> _onRegister() async {
-    try {      
+    try {
       await AuthService.checkPhone(user!.phone, isExist: false);
-      bool res = await CommonNavigates.openOtpVerificationDialog(context, user!.phone!, false);
-      //api đăng ký
-      CommonMethods.showToast("Đăng ký thành công");
+      bool checkOtp = await CommonNavigates.openOtpVerificationDialog(
+          context, user!.phone!, false);
+      if (checkOtp) {
+        var res =
+            await DaiLyXeApiBLL_APIAnonymous().insertuser(user!.toInsert());
+        if (res.status > 0) {
+          CommonMethods.showDialogCongratulations(
+              context, "message.str043".tr());
+        } else {
+          CommonMethods.showToast(res.message);
+        }
+      }
     } catch (e) {
       CommonMethods.showToast(e.toString());
     }

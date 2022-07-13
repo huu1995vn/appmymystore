@@ -91,11 +91,10 @@ class _MyPageState extends State<MyPage> {
     Size size = MediaQuery.of(context).size;
     SizeConfig.init(size);
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-
+      resizeToAvoidBottomInset: false,
       body: PageView(
         controller: _pageController,
-        children: <Widget> [
+        children: <Widget>[
           HomePage(),
           NewsPage(),
           NotifycationPage(),
@@ -106,15 +105,11 @@ class _MyPageState extends State<MyPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if(CommonMethods.isLogin)
-          {
+          if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
-          }
-          else
-          {
+          } else {
             CommonMethods.showToast("Vui lòng đăng nhập trước");
           }
-
         },
         child: const Icon(
           Icons.add,

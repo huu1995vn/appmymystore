@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -34,8 +33,9 @@ class _AdvertPageState extends State<AdvertPage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   loadData(nPaging) async {
-    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length) {
       return;
+    }
 
     try {
       nPaging = nPaging ?? 1;
@@ -49,7 +49,7 @@ class _AdvertPageState extends State<AdvertPage> {
             res.data, (val) => AdvertModel.fromJson(val));
         setState(() {
           totalItems =
-              (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
+              (nPaging == 1 && list.isEmpty) ? 0 : list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
             listData = list;

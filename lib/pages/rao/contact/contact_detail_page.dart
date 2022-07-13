@@ -140,6 +140,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                                     if (!(data!.cityid > 0)) {
                                       return "notempty.text".tr();
                                     }
+                                    return null;
                                   }),
                               rxSelectInput(
                                   context, "district", data!.districtid,
@@ -155,6 +156,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                                     if (!(data!.districtid > 0)) {
                                       return "notempty.text".tr();
                                     }
+                                    return null;
                                   }),
                               rxTextInput(context, data!.address,
                                   labelText: "address".tr(),

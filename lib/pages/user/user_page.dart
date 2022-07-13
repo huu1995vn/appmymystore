@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty, non_constant_identifier_names
 
-import 'dart:convert';
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -216,8 +215,8 @@ class _UserPageState extends State<UserPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: <Widget>[
-                                  _CustomRadioButton("male".tr(), 1),
-                                  _CustomRadioButton("female".tr(), 0),
+                                  CustomRadioButton("male".tr(), 1),
+                                  CustomRadioButton("female".tr(), 0),
                                 ],
                               ),
                             )
@@ -238,7 +237,7 @@ class _UserPageState extends State<UserPage> {
         ]);
   }
 
-  Widget _CustomRadioButton(String text, dynamic value) {
+  Widget CustomRadioButton(String text, dynamic value) {
     return OutlinedButton(
       onPressed: () {
         setState(() {

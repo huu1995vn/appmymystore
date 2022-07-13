@@ -235,9 +235,8 @@ class DaiLyXeApiBLL_APIAnonymous extends DaiLyXeApiBLL_Basic {
   }
 
   //anonymous
-  Future<ResponseModel> insertuser() async {
+  Future<ResponseModel> insertuser(Map<String, dynamic> body) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
-    Map<String, dynamic> body = {};
     return await post(body, queryParameters, "insertuser");
   }
 }

@@ -1,15 +1,12 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable
 
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/rx_scaffold.dart';
 import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 class AdvertDetailPage extends StatefulWidget {

@@ -34,7 +34,7 @@
     "fullname": "@:enter.text @.lower:fullname",
     "lastname": "@:enter.text @.lower:lastname",
     "address": "@:enter.text @.lower:address",
-    "point":"@:enter.text @.lower:point.text",
+    "point": "@:enter.text @.lower:point.text",
     "other": "@:enter.text {}"
   },
   "data": "Dữ liệu",
@@ -291,7 +291,7 @@
     "to": "@:from.text {} - {}",
     "other": "@:from.text {}"
   },
-  "to":  {
+  "to": {
     "text": "Đến",
     "day": "Đến ngày",
     "other": "@:to.text {}"
@@ -492,7 +492,8 @@
     "str039": "Thời gian bắt đầu phải nhỏ hơn kết thúc dự kiến",
     "str040": "Thời gian dự định kết thúc phải lớn hơn thời gian bắt đầu",
     "str041": "Bạn đã có tài khoản? ",
-    "str042":"Vui lòng chọn file đính kèm",
+    "str042": "Vui lòng chọn file đính kèm",
+    "str043": "Chúc mừng bạn đã trở thành thành viên của RaoXe",
     "alert001": "Chức năng này cần <b style='color:green'>xác thực số điện thoại</b>",
     "alert002": "Bạn có chắc chắn muốn <b>xóa tin</b> này?",
     "alert003": "Bạn có chắc chắn muốn <b>xóa tài khoản</b> này?",
@@ -502,5 +503,5 @@
     "alert007": "Bạn có muốn <b>tiếp tục</b> tin chưa hoàn thành trước đó?"
 
   }
-  
+
 }

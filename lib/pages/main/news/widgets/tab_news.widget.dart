@@ -1,7 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, must_be_immutable
 
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -25,12 +24,9 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
         AutomaticKeepAliveClientMixin<TabNewsWidget> {
   @override
   bool get wantKeepAlive => true;
-
   List<dynamic>? listData;
   int paging = 1;
   int totalItems = 0;
-  final GlobalKey<FormState> _key = GlobalKey<FormState>();
-
   @override
   void initState() {
     super.initState();
@@ -43,8 +39,9 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
   }
 
   Future loadData([nPaging = 1]) async {
-    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length) {
       return;
+    }
 
     try {
       nPaging = nPaging ?? 1;
@@ -59,7 +56,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
             res.data, (val) => NewsModel.fromJson(val));
         setState(() {
           totalItems =
-              (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
+              (nPaging == 1 && list.isEmpty) ? 0 : list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
             listData = list;

@@ -44,7 +44,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
     List<dynamic> data = res.data;
     List<NewsModel> list = data.map((val) => NewsModel.fromJson(val)).toList();
     setState(() {
-      totalItems = (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
+      totalItems = (nPaging == 1 && list.isEmpty) ? 0 : list[0].rxtotalrow;
       listData ??= [];
       if (nPaging == 1) {
         listData = list;

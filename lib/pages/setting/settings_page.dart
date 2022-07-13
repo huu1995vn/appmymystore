@@ -6,8 +6,6 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_scaffold.dart';
-import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/services/api_token.service.dart';

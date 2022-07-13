@@ -75,7 +75,7 @@ class ReviewState extends State<RxReview> {
                 key: Key("review".tr()),
                 onRefresh: loadData,
                 noFound: Container()),
-          GestureDetector(
+          if (listData != null) GestureDetector(
             onTap: () {
               viewAll();
             },

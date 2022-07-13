@@ -54,12 +54,6 @@ class RxListViewState extends State<RxCustomScrollView>
     }
   }
 
-  Future<void> onNextScroll() async {
-    if (widget.onNextScroll != null) {
-      await widget.onNextScroll!();
-    }
-  }
-
   Future<void> onRefresh() async {
     if (widget.onRefresh != null) {
       await widget.onRefresh!();
@@ -69,11 +63,12 @@ class RxListViewState extends State<RxCustomScrollView>
   _scrollListener() async {
     try {
       var triggerFetchMoreSize =
-          scrollController.position.maxScrollExtent - SizeConfig.screenHeight;
-      if (scrollController.position.pixels > triggerFetchMoreSize) {
-        if (mounted) setState(() => isLoading = true);
-        if (!isLoading) await onNextScroll();
-        if (mounted) setState(() => isLoading = false);
+          scrollController.position.maxScrollExtent - (SizeConfig.screenHeight/3);
+      if (widget.onNextScroll != null && !isLoading &&
+          scrollController.position.pixels > triggerFetchMoreSize) {
+        isLoading = true;
+        await widget.onNextScroll!();
+        isLoading = false;
       }
     } catch (e) {
       CommonMethods.wirtePrint(e);

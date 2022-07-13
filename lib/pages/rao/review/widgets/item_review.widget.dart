@@ -1,4 +1,4 @@
-// ignore_for_file: unrelated_type_equality_checks
+// ignore_for_file: unrelated_type_equality_checks, import_of_legacy_library_into_null_safe
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
@@ -42,15 +42,24 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                     ),
                   ],
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: RatingBar.readOnly(
-                  filledColor: AppColors.yellow,
-                  size: 15,
-                  initialRating: 5,
-                  emptyIcon: AppIcons.star_1,
-                  filledIcon: AppIcons.star_1,
-                )) ,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RatingBar.readOnly(
+                      filledColor: AppColors.yellow,
+                      size: 15,
+                      initialRating: 5,
+                      emptyIcon: AppIcons.star_1,
+                      filledIcon: AppIcons.star_1,
+                    ),
+                    Text(
+                        widget.item.status == 2
+                            ? widget.item.reject ?? "error"
+                            : "",
+                        style: const TextStyle(color: AppColors.danger).italic.size(12))
+                  ],
+                ),
                 Text(widget.item.rxtimeago, style: kTextTimeStyle),
               ],
             ),
@@ -64,19 +73,25 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                   color: AppColors.grey, // <-- Red color provided to below Row
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      RxImage(
-                        widget.item.rximg,
-                        width: 39,
-                        height: 39,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(kDefaultPadding),
-                        child: Text(
-                          widget.item.name!,
-                          style: const TextStyle().size(12),
-                        ),
-                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RxImage(
+                            widget.item.rximg,
+                            width: 39,
+                            height: 39,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(kDefaultPadding),
+                            child: Text(
+                              widget.item.name!,
+                              style: const TextStyle().size(12),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

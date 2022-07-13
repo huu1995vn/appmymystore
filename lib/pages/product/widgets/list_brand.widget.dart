@@ -24,13 +24,13 @@ class _ListBrandWidgetState extends State<ListBrandWidget>
   Widget build(BuildContext context) {
     super.build(context);
     return SizedBox(
-      height: 45,
+      height: 50,
       child: RxListView(
         data,
         (context, index) {
           var item = data[index];
           return Container(
-            height: 35,
+            height: 25,
             margin: const EdgeInsets.only(right: 10),
             child: RxRoundedButton(
                 color: widget.value == item["id"]

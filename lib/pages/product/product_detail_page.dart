@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison
+// ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison, import_of_legacy_library_into_null_safe
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -193,7 +193,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              data!.fullname!,
+                              data!.fullname ?? "NaN",
                               style: const TextStyle(
                                 color: AppColors.black50,
                               ).bold.size(12),
@@ -206,7 +206,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   size: 13,
                                 ),
                                 Text(
-                                  data!.address!,
+                                  data!.address ?? "NaN",
                                   style: const TextStyle(
                                     color: AppColors.black50,
                                   ).size(12),

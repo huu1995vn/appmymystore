@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, import_of_legacy_library_into_null_safe
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +24,11 @@ class ReviewAllDialog extends StatefulWidget {
 }
 
 class _ReviewAllDialogState extends State<ReviewAllDialog> {
-  @override
   bool get wantKeepAlive => true;
 
   List<dynamic>? listData;
   int paging = 1;
   int totalItems = 0;
-  final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -44,8 +42,9 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
   }
 
   Future loadData([nPaging = 1]) async {
-    if (nPaging > 1 && listData != null && totalItems! <= listData!.length)
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length) {
       return;
+    }
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> body = {
@@ -59,7 +58,7 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
             res.data, (val) => ReviewModel.fromJson(val));
         setState(() {
           totalItems =
-              (nPaging == 1 && list.length == 0) ? 0 : list[0].rxtotalrow;
+              (nPaging == 1 && list.isEmpty) ? 0 : list[0].rxtotalrow;
           listData ??= [];
           if (nPaging == 1) {
             listData = list;
@@ -144,7 +143,7 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
       RatingBar.readOnly(
         filledColor: AppColors.yellow,
         size: 15,
-        initialRating: CommonMethods.convertToDouble(rating ?? 0.0),
+        initialRating: CommonMethods.convertToDouble(rating),
         filledIcon: AppIcons.star_1,
         emptyIcon: AppIcons.star_1,
       ),

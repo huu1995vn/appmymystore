@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, import_of_legacy_library_into_null_safe
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +82,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(widget.product.name! ?? "NAN",
+                          Text(widget.product.name!,
                               style: kTextHeaderStyle.copyWith(
                                   color: AppColors.black).size(17)),
                           Padding(
@@ -136,6 +136,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                                         review.comment!.isEmpty)) {
                                       return "notempty.text".tr();
                                     }
+                                    return null;
                                   },
                                 )),
                           )

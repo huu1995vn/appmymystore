@@ -33,8 +33,9 @@ class _FavoritePageState extends State<FavoritePage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   loadData([nPaging = 1]) async {
-    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length) {
       return;
+    }
 
     try {
       nPaging = nPaging ?? 1;
@@ -76,20 +77,19 @@ class _FavoritePageState extends State<FavoritePage> {
     if (mounted) scrollController.dispose();
   }
 
-  onDelete(int index) async {
-    try {
-      var item = listData![index];
-      CommonMethods.onFavorite([item!.id], !item!.isfavorite);
-      listData!.removeAt(index);
-    } catch (e) {
-      CommonMethods.showDialogError(context, e);
-    }
-  }
+  // onDelete(int index) async {
+  //   try {
+  //     var item = listData![index];
+  //     CommonMethods.onFavorite([item!.id], !item!.isfavorite);
+  //     listData!.removeAt(index);
+  //   } catch (e) {
+  //     CommonMethods.showDialogError(context, e);
+  //   }
+  // }
 
-  onDetail([int index = -1]) async {
-    ProductModel item = index > 0 ? listData![index] : ProductModel();
-    CommonNavigates.toFavoritePage(context, item: item);
-  }
+  // onDetail([int index = -1]) async {
+  //   CommonNavigates.toFavoritePage(context, id: item.id);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -114,13 +114,15 @@ class _FavoritePageState extends State<FavoritePage> {
         slivers: <Widget>[
           RxSliverList(listData, (BuildContext context, int index) {
             ProductModel item = listData![index];
-            return ItemProductWidget(item, onTap: () => {onDetail(index)});
+            return ItemProductWidget(item,
+                onTap: () =>
+                    {CommonNavigates.toFavoritePage(context, id: item.id)});
           })
         ],
       ),
-      persistentFooterButtons: [
-        RxPrimaryButton(onTap: onDetail, text: "add.text".tr())
-      ],
+      // persistentFooterButtons: [
+      //   RxPrimaryButton(onTap: onDetail, text: "add.text".tr())
+      // ],
     );
   }
 }

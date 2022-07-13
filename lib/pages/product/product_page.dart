@@ -40,12 +40,19 @@ class _ProductPageState extends State<ProductPage> {
       // ignore: curly_braces_in_flow_control_structures
       return;
     paging = nPaging ?? 1;
-    var params = Map<String, dynamic>.from(paramsSearch);
-    params["p"] = paging;
-    params["n"] = kItemOnPage;
-    ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);   
+    var body = <String, dynamic>{};
+    body["p"] = paging;
+    body["n"] = kItemOnPage;
+    if (paramsSearch["s"] != null && paramsSearch["s"].length > 0) {
+      body["s"] = paramsSearch["s"].toString().trim();
+    }
+    body["filter"] = getFilter();
+    if (paramsSearch["OrderBy"] != null && paramsSearch["OrderBy"].length > 0) {
+      body["orderBy"] = paramsSearch["OrderBy"].toString().trim();
+    }
+    ResponseModel res = await DaiLyXeApiBLL_APIGets().product(body);
     List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
-            res.data, (val) => ProductModel.fromJson(val));
+        res.data, (val) => ProductModel.fromJson(val));
     if (mounted) {
       setState(() {
         totalItems =
@@ -78,9 +85,34 @@ class _ProductPageState extends State<ProductPage> {
 
   _onBrandChange(v) {
     setState(() {
-      paramsSearch["brand"] = v;
+      paramsSearch["BrandId"] = v;
       loadData();
     });
+  }
+
+  Map<String, dynamic> getFilter() {
+    Map<String, dynamic> filter = <String, dynamic>{};
+    List<String> keyfilters = [
+      "BrandId",
+      "State",
+      "CityId",
+      "ProductTypeId",
+      "FuelType",
+      "Year",
+      "Seat",
+      "Door",
+      "Price"
+    ];
+    for (var key in keyfilters) {
+      var value = paramsSearch[key];
+      if(key=="Price")
+      {
+        value = value.toString().split(",").map((e) => e*kStepPrice).toList().join(",");
+      }
+      if (value == null) continue;
+      filter[key] = value;
+    }
+    return filter;
   }
 
   @override
@@ -104,7 +136,7 @@ class _ProductPageState extends State<ProductPage> {
             SliverToBoxAdapter(
                 child: ListBrandWidget(
                     onPressed: (v) => {_onBrandChange(v)},
-                    value: paramsSearch["brand"])),
+                    value: paramsSearch["BrandId"])),
             RxSliverList(listData, (BuildContext context, int index) {
               var item = listData![index];
               return ItemProductWidget(listData![index], onTap: () {

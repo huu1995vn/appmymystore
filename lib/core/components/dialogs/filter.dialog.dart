@@ -34,7 +34,7 @@ class _FilterDialogState extends State<FilterDialog> {
   initState() {
     super.initState();
     setState(() {
-      searchParams = Map<String, dynamic>.from(widget.searchParams ?? {});
+      searchParams = Map<String, dynamic>.from(widget.searchParams);
       _currentRangeValues = price;
     });
   }
@@ -42,7 +42,7 @@ class _FilterDialogState extends State<FilterDialog> {
   RangeValues get price {
     List<double> prices = [];
     try {
-      prices = (searchParams["price"] ?? "")
+      prices = (searchParams["Price"] ?? "")
           .toString()
           .split(",")
           .map((s) => double.parse(s))
@@ -53,9 +53,9 @@ class _FilterDialogState extends State<FilterDialog> {
     double start = 0;
     double end = 100;
     if (prices.length > 0) {
-      start = prices[0] ?? 0.0;
+      start = prices[0];
       if (prices.length == 2) {
-        end = prices[1] ?? 100.0;
+        end = prices[1];
       }
     }
     if (start > end) {
@@ -73,10 +73,10 @@ class _FilterDialogState extends State<FilterDialog> {
   set price(RangeValues value) {
     int start = value.start.round();
     int end = value.end.round();
-    if (start == 0 && end == 100 && searchParams.containsKey("price")) {
-      searchParams.remove("price");
+    if (start == 0 && end == 100 && searchParams.containsKey("Price")) {
+      searchParams.remove("Price");
     } else {
-      searchParams["price"] = "$start,$end";
+      searchParams["Price"] = "$start,$end";
     }
     setState(() {
       _currentRangeValues = value;
@@ -91,14 +91,14 @@ class _FilterDialogState extends State<FilterDialog> {
       {bool Function(dynamic)? fnWhere, Function()? afterChange}) async {
     List data = MasterDataService.data[type];
     if (fnWhere != null) {
-      data = data.where(fnWhere!).toList();
+      data = data.where(fnWhere).toList();
     }
     var res = await showSearch(
         context: context, delegate: RxSelectDelegate(data: data, value: id));
     if (res != null) {
       setState(() {
         searchParams[type] = res;
-        if (afterChange != null) afterChange!();
+        if (afterChange != null) afterChange();
       });
     }
   }
@@ -150,9 +150,9 @@ class _FilterDialogState extends State<FilterDialog> {
                     title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: map<Widget>(
-                          MasterDataService.data["productype"],
+                          MasterDataService.data["producttype"],
                           (index, item) {
-                            return _radioButton(item["name"], item["id"]);
+                            return _radioButton("ProductTypeId", item["name"], item["id"]);
                           },
                         ).toList()),
                   ),
@@ -161,9 +161,9 @@ class _FilterDialogState extends State<FilterDialog> {
                 Card(
                   child: Column(
                     children: [
-                      _selectInput("brand", title: "Hãng xe"),
-                      _selectInput("city", title: "Vị trí"),
-                      _selectInput("sort", title: "Sắp xếp"),
+                      _selectInput("BrandId", "brand", title: "Hãng xe"),
+                      _selectInput("CityId","city", title: "Vị trí"),
+                      _selectInput("OrderBy" ,"sort", title: "Sắp xếp"),
                       Padding(
                         padding: const EdgeInsets.only(
                             top: kDefaultPadding, left: kDefaultPadding * 1.5),
@@ -172,13 +172,13 @@ class _FilterDialogState extends State<FilterDialog> {
                             Text("Giá từ "),
                             Text(
                                 CommonMethods.formatNumber(
-                                    (_currentRangeValues.start * 20000000)
+                                    (_currentRangeValues.start * kStepPrice)
                                         .round()),
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             Text(' đến '),
                             Text(
                                 CommonMethods.formatNumber(
-                                        (_currentRangeValues.end * 20000000)
+                                        (_currentRangeValues.end * kStepPrice)
                                             .round()) +
                                     (_currentRangeValues.end == 100 ? "+" : ""),
                                 style: TextStyle(fontWeight: FontWeight.bold)),
@@ -202,10 +202,10 @@ class _FilterDialogState extends State<FilterDialog> {
                 Card(
                     child: Column(
                   children: [
-                    _selectInput("producstate", title: "Tình trạng"),
-                    _selectInput("fueltype", title: "Nhiên liệu"),
-                    _selectInput("madein", title: "Năm sản xuất"),
-                    _selectInput("color", title: "Màu sắc"),
+                    _selectInput("State", "productstate", title: "Tình trạng"),
+                    _selectInput("FuelTypeId", "fueltype", title: "Nhiên liệu"),
+                    _selectInput("MadeInId", "madein", title: "Năm sản xuất"),
+                    _selectInput("ColorId", "color", title: "Màu sắc"),
                   ],
                 )),
               ],
@@ -231,19 +231,19 @@ class _FilterDialogState extends State<FilterDialog> {
     );
   }
 
-  Widget _radioButton(String text, int value) {
-    return Container(
+  Widget _radioButton(String type,String text, int value) {
+    return SizedBox(
         width: SizeConfig.screenWidth / 2.5,
         child: OutlinedButton(
           onPressed: () {
             setState(() {
-              searchParams["productype"] = value;
+              searchParams[type] = value;
             });
           },
           child: Text(
             text,
             style: TextStyle(
-              color: (searchParams["productype"] == value)
+              color: (searchParams[type] == value)
                   ? AppColors.primary
                   : AppColors.black,
             ),
@@ -252,7 +252,7 @@ class _FilterDialogState extends State<FilterDialog> {
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 side: BorderSide(
-                  color: (searchParams["productype"] == value)
+                  color: (searchParams[type] == value)
                       ? AppColors.primary
                       : AppColors.black,
                 ))),
@@ -261,13 +261,14 @@ class _FilterDialogState extends State<FilterDialog> {
   }
 
   Widget _selectInput(
+    String key,
     String type, {
     String? title,
     String hintText = "Chọn lọc",
     bool Function(dynamic)? fnWhere,
     dynamic Function()? afterChange,
   }) {
-    var name = CommonMethods.getNameMasterById(type, searchParams[type]);
+    var name = CommonMethods.getNameMasterById(type, searchParams[key]);
     return ListTile(
       title: Text(
         title ?? type.tr(),
@@ -277,7 +278,7 @@ class _FilterDialogState extends State<FilterDialog> {
           style: TextStyle(
               color:
                   name != null && name.length > 0 ? AppColors.primary : null)),
-      onTap: () => _onSelect(type, searchParams[type],
+      onTap: () => _onSelect(type, searchParams[key],
           fnWhere: fnWhere, afterChange: afterChange),
       trailing: Icon(AppIcons.chevron_right),
     );

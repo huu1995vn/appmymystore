@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-
+const kStepPrice = 20000000;
 const TOKEN_SECURITY_KEY = "SDGD\$E^&Ư#RBSDGFGJ*IY^&ÉDQQWRWF#\$%#SGSAS";
 const kPrimaryColor = Color(0xFFFF1031);
 const kWhite = Colors.white;

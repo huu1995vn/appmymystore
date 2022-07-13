@@ -35,8 +35,8 @@ class MasterDataService {
       //extends local
       data["price"] = PRICES;
       data["sort"] = SORTS;
-      data["productype"] = PRODUCTTYPES;
-      data["producstate"] = PRODUCTSTATES;
+      data["producttype"] = PRODUCTTYPES;
+      data["productstate"] = PRODUCTSTATES;
 
       
     } catch (e) {}

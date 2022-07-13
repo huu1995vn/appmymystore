@@ -213,7 +213,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: map<Widget>(
-                                      MasterDataService.data["productype"],
+                                      MasterDataService.data["producttype"],
                                       (index, item) {
                                         return _radioProductType(
                                             item["name"], item["id"]);
@@ -464,7 +464,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   child: Column(
                                 children: [
                                   rxSelectInput(
-                                      context, "producstate", data!.state,
+                                      context, "productstate", data!.state,
                                       labelText: "Tình trạng",
                                       afterChange: (v) => {
                                             setState(() {

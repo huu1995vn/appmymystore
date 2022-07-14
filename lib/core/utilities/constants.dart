@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+
 const kStepPrice = 20000000;
 const TOKEN_SECURITY_KEY = "SDGD\$E^&Ư#RBSDGFGJ*IY^&ÉDQQWRWF#\$%#SGSAS";
 const kPrimaryColor = Color(0xFFFF1031);
@@ -101,6 +102,21 @@ List PRODUCTTYPES = [
 List PRODUCTSTATES = [
   {"name": "Mới", "id": 1},
   {"name": "Đã sử dụng", "id": 2},
+];
+
+List PRODUCTDOORS = [
+  {"name": "2 Cửa", "id": 2},
+  {"name": "4 Cửa", "id": 4},
+];
+
+List PRODUCTSEATS = [
+  {"name": "1 Chỗ", "id": 1},
+  {"name": "2 Chỗ", "id": 2},
+  {"name": "4 Chỗ", "id": 4},
+  {"name": "5 Chỗ", "id": 5},
+  {"name": "6 Chỗ", "id": 6},
+  {"name": "7 Chỗ", "id": 7},
+  {"name": "9 Chỗ", "id": 9},
 ];
 
 class RxParttern {

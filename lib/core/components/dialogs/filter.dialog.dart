@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
+import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
@@ -87,7 +88,7 @@ class _FilterDialogState extends State<FilterDialog> {
     CommonNavigates.goBack(context, searchParams);
   }
 
-  _onSelect(String key ,String type, int id,
+  _onSelect(String key, String type, int id,
       {bool Function(dynamic)? fnWhere, Function()? afterChange}) async {
     List data = MasterDataService.data[type];
     if (fnWhere != null) {
@@ -119,8 +120,7 @@ class _FilterDialogState extends State<FilterDialog> {
           ),
           centerTitle: true,
           title: Text('Bộ lọc',
-              style: kTextHeaderStyle.copyWith(
-                  color: AppColors.black)),
+              style: kTextHeaderStyle.copyWith(color: AppColors.black)),
           backgroundColor: AppColors.grey,
           elevation: 0.0,
           actions: <Widget>[
@@ -138,13 +138,12 @@ class _FilterDialogState extends State<FilterDialog> {
         ),
         body: RxWrapper(
           body: SingleChildScrollView(
-            child:
-             Column(
+            child: Column(
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               // mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                _header("BẠN MUỐN"),
+                _header("youwant".tr()),
                 Card(
                   child: ListTile(
                     title: Row(
@@ -152,18 +151,19 @@ class _FilterDialogState extends State<FilterDialog> {
                         children: map<Widget>(
                           MasterDataService.data["producttype"],
                           (index, item) {
-                            return _radioButton("ProductTypeId", item["name"], item["id"]);
+                            return _radioButton(
+                                "ProductTypeId", item["name"], item["id"]);
                           },
                         ).toList()),
                   ),
                 ),
-                _header("THÔNG TIN CHUNG"),
+                _header("generalinfor".tr()),
                 Card(
                   child: Column(
                     children: [
-                      _selectInput("BrandId", "brand", title: "Hãng xe"),
-                      _selectInput("CityId","city", title: "Vị trí"),
-                      _selectInput("OrderBy" ,"sort", title: "Sắp xếp"),
+                      _selectInput("BrandId", "brand", title: "brand".tr()),
+                      _selectInput("CityId", "city", title: "Vị trí"),
+                      _selectInput("OrderBy", "sort", title: "Sắp xếp"),
                       Padding(
                         padding: const EdgeInsets.only(
                             top: kDefaultPadding, left: kDefaultPadding * 1.5),
@@ -198,7 +198,7 @@ class _FilterDialogState extends State<FilterDialog> {
                     ],
                   ),
                 ),
-                _header("THÔNG SỐ KỸ THUẬT"),
+                _header("specifications".tr()),
                 Card(
                     child: Column(
                   children: [
@@ -206,6 +206,24 @@ class _FilterDialogState extends State<FilterDialog> {
                     _selectInput("FuelTypeId", "fueltype", title: "Nhiên liệu"),
                     _selectInput("MadeInId", "madein", title: "Năm sản xuất"),
                     _selectInput("ColorId", "color", title: "Màu sắc"),
+                    _selectInput("Door", "productdoor", title: "Số cửa"),
+                    _selectInput("Seat", "productseat", title: "Số chỗ"),
+                    ListTile(
+                      title: Text('year'.tr(), style: kTextTitleStyle),
+                      subtitle: RxInput(
+                        keyboardType: TextInputType.number,
+                        searchParams["Year"]?.toString() ?? "",
+                        onChanged: (v) {
+                          setState(() {
+                            searchParams["Year"] =
+                                CommonMethods.convertToInt32(v);
+                          });
+                        },
+                        hintText: "year".tr(),
+                        style:
+                            const TextStyle(color: AppColors.black50).size(13),
+                      ),
+                    ),
                   ],
                 )),
               ],
@@ -225,13 +243,13 @@ class _FilterDialogState extends State<FilterDialog> {
       padding: const EdgeInsets.all(kDefaultPadding)
           .copyWith(left: kDefaultPadding / 2),
       child: Text(
-        header,
+        header.toUpperCase(),
         style: TextStyle().bold,
       ),
     );
   }
 
-  Widget _radioButton(String type,String text, int value) {
+  Widget _radioButton(String type, String text, int value) {
     return SizedBox(
         width: SizeConfig.screenWidth / 2.5,
         child: OutlinedButton(

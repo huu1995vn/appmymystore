@@ -15,8 +15,7 @@ class MasterDataService {
       int versionMasterdata =
           int.parse(StorageService.get(StorageKeys.version_masterdata) ?? "0");
       dynamic masterdata = StorageService.get(StorageKeys.masterdata);
-      if(masterdata is String)
-      {
+      if (masterdata is String) {
         masterdata = null;
       }
       if (masterdata != null &&
@@ -28,8 +27,8 @@ class MasterDataService {
         var api = await DaiLyXeApiBLL_APIGets().getMasterData();
         if (api.status > 0) {
           for (var key in api.data.keys) {
-             data[key] = jsonDecode(api.data[key]); 
-             }
+            data[key] = jsonDecode(api.data[key]);
+          }
           await StorageService.set(StorageKeys.masterdata, data);
           await StorageService.set(StorageKeys.version_masterdata,
               CommonConfig.version_masterdata.toString());
@@ -41,11 +40,9 @@ class MasterDataService {
       data["sort"] = SORTS;
       data["producttype"] = PRODUCTTYPES;
       data["productstate"] = PRODUCTSTATES;
-
-      
-    } catch (e) {
-
-    }
+      data["productdoor"] = PRODUCTDOORS;
+      data["productseat"] = PRODUCTSEATS;
+    } catch (e) {}
     return res;
   }
 

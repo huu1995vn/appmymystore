@@ -1,4 +1,10 @@
 {
+  "state": "State",
+  "download": "Download",
+  "negotiate": "Negotiate",
+  "youwant": "You want",
+  "generalinfor": "General information",
+  "specifications": "Specifications",
   "failedaction": "Failed action",
   "madein": "Made in",
   "km": "Number of kilometers traveled",

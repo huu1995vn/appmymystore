@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -207,7 +205,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             // mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
-                              _header(title: "BẠN MUỐN"),
+                              _header(title: "youwant".tr().toUpperCase()),
                               ListTile(
                                 title: Row(
                                     mainAxisAlignment:
@@ -226,7 +224,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   children: [
                                     rxSelectInput(
                                         context, "brand", data!.brandid,
-                                        labelText: "Hãng xe",
+                                        labelText: "brand".tr(),
                                         afterChange: (v) => {
                                               setState(() {
                                                 data!.brandid = CommonMethods
@@ -241,7 +239,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         }),
                                     rxSelectInput(
                                         context, "model", data!.modelid,
-                                        labelText: "Dòng xe",
+                                        labelText: "model".tr(),
                                         afterChange: (v) => {
                                               setState(() {
                                                 data!.modelid = CommonMethods
@@ -258,7 +256,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         }),
                                     rxSelectInput(
                                         context, "bodytype", data!.bodytypeid,
-                                        labelText: "Loại xe",
+                                        labelText: "bodytype".tr(),
                                         afterChange: (v) => {
                                               setState(() {
                                                 data!.bodytypeid = CommonMethods
@@ -280,7 +278,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                     data!.price! > 0)
                                                 ? CommonMethods.formatNumber(
                                                     data!.price)
-                                                : "Thỏa thuận",
+                                                : "negotiate".tr(),
                                             style: kTextPriceStyle.size(13),
                                           )
                                         ],
@@ -308,7 +306,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                          text: "TIÊU ĐỀ ",
+                                          text: "title".tr(),
                                           style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
@@ -345,7 +343,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                          text: "MÔ TẢ CHI TIẾT ",
+                                          text: "description".tr(),
                                           style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
@@ -385,7 +383,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                            text: "HÌNH ẢNH ",
+                                            text: "image".tr(),
                                             style: TextStyle(
                                                     color: Theme.of(context)
                                                         .textTheme
@@ -413,7 +411,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                       .color),
                                             ),
                                             TextSpan(
-                                                text: " Tải ảnh",
+                                                text: " ${"download".tr()}",
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .textTheme
@@ -459,13 +457,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       }),
                                 ),
                               )),
-                              _header(title: "THÔNG SỐ KỸ THUẬT"),
+                              _header(title: "pecifications".tr()),
                               Card(
                                   child: Column(
                                 children: [
                                   rxSelectInput(
                                       context, "productstate", data!.state,
-                                      labelText: "Tình trạng",
+                                      labelText: "state".tr(),
                                       afterChange: (v) => {
                                             setState(() {
                                               data!.state = v;
@@ -480,7 +478,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     context,
                                     "fueltype",
                                     data!.fueltypeid,
-                                    labelText: "Nhiên liệu",
+                                    labelText: "fueltype".tr(),
                                     afterChange: (v) => {
                                       setState(() {
                                         data!.fueltypeid = v;
@@ -489,19 +487,54 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   ),
                                   rxSelectInput(
                                       context, "madein", data!.madeinid,
-                                      labelText: "Nguồn gốc",
+                                      labelText: "madein".tr(),
                                       afterChange: (v) => {
                                             setState(() {
                                               data!.madeinid = v;
                                             })
                                           }),
-                                  rxSelectInput(context, "color", data!.colorid,
-                                      labelText: "Màu sắc",
+                                  rxSelectInput(
+                                      context, "productdoor", data!.door,
+                                      labelText: "door".tr(),
                                       afterChange: (v) => {
                                             setState(() {
-                                              data!.colorid = v;
+                                              data!.door = v;
                                             })
                                           }),
+                                  rxSelectInput(
+                                      context, "productseat", data!.seat,
+                                      labelText: "seat".tr(),
+                                      afterChange: (v) => {
+                                            setState(() {
+                                              data!.seat = v;
+                                            })
+                                          }),
+                                  rxSelectInput(
+                                      context, "productseat", data!.seat,
+                                      labelText: "seat".tr(),
+                                      afterChange: (v) => {
+                                            setState(() {
+                                              data!.seat = v;
+                                            })
+                                          }),
+                                  ListTile(
+                                    title: Text('year'.tr(),
+                                        style: kTextTitleStyle),
+                                    subtitle: RxInput(
+                                      keyboardType: TextInputType.number,
+                                      data!.year?.toString() ?? "",
+                                      onChanged: (v) {
+                                        setState(() {
+                                          data!.year =
+                                              CommonMethods.convertToInt32(v);
+                                        });
+                                      },
+                                      hintText: "year".tr(),
+                                      style: const TextStyle(
+                                              color: AppColors.black50)
+                                          .size(13),
+                                    ),
+                                  ),
                                 ],
                               )),
                               _header(
@@ -509,7 +542,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                          text: "LIÊN HỆ ",
+                                          text: "contact".tr(),
                                           style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme

@@ -50,26 +50,15 @@ class _MyPageState extends State<MyPage> {
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(notification.title ?? "",
-                          style: const TextStyle().bold),
-                      Text(notification.body ?? "")
-                    ],
-                  ),
-                  actions: <Widget>[
-                    ElevatedButton(
-                        child: Text(
-                          'close'.tr(),
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                        onPressed: () {
-                          CommonNavigates.pop(context, false);
-                        })
+                    content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(notification.title ?? "",
+                        style: const TextStyle().bold),
+                    Text(notification.body ?? "")
                   ],
-                ));
+                )));
       }
     });
   }

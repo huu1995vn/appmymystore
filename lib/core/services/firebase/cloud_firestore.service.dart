@@ -10,23 +10,25 @@ import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 class CloudFirestoreSerivce {
-  static Future<void> _pushTokens() async {
+  static Future<void> _pushUsers() async {
     CollectionReference fireStoreService =
-        FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.tokens);
+        FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.users);
     try {
-      String uid = InfoDeviceService.infoDevice.Identifier!;
-      Map<String, dynamic> data = {};
-      data["userid"] = APITokenService.userId;
-      data["token"] = FirebaseMessagingService.token;
-      data["uid"] = uid;
-      fireStoreService.doc(uid).set(data);
+      if (APITokenService.userId > 0) {
+        String uid = InfoDeviceService.infoDevice.Identifier!;
+        Map<String, dynamic> data = {};
+        data["userid"] = APITokenService.userId;
+        data["token"] = FirebaseMessagingService.token;
+        data["uid"] = uid;
+        fireStoreService.doc(APITokenService.userId.toString()).set(data);
+      }
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }
   }
 
   static init() async {
-    _pushTokens();
+    _pushUsers();
     await CloudFirestoreSerivce.configs();
     await CloudFirestoreSerivce.banners();
   }

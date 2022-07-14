@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
         return main!;
       }
     } catch (e) {}
-    return main!;//const ErrorPage(message: "Vui lòng trở lại sau");
+    return main!; //const ErrorPage(message: "Vui lòng trở lại sau");
   }
 
   @override
@@ -93,13 +93,10 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
-          
         ),
-         ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (_) => UserProvider(),
-          
         ),
-       
       ],
       child: Consumer<ThemeProvider>(
         child: const MyPage(),
@@ -116,7 +113,6 @@ class _MyAppState extends State<MyApp> {
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
                 .copyWith(
                     secondary: AppColors.primary, brightness: Brightness.dark),
-            
           ),
           themeMode: themeProvider.selectedThemeMode,
           home: SplashScreen(
@@ -141,7 +137,8 @@ class AfterSplash extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Welcome In SplashScreen Package", style: kTextHeaderStyle),
+          title: const Text("Welcome In SplashScreen Package",
+              style: kTextHeaderStyle),
           automaticallyImplyLeading: false),
       body: const Center(
         child: Text(

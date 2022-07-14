@@ -156,6 +156,6 @@ abstract class FormStyle {
 
 class NAMEFIREBASEDATABASE {
   static String configs = "configs";
-  static String tokens = "tokens";
   static String banners = "banners";
+  static String users = "users";
 }

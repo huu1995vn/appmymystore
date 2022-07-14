@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_null_comparison
+// ignore_for_file: prefer_const_constructors, unnecessary_null_comparison, use_build_context_synchronously
 
 import 'dart:async';
 
@@ -42,23 +42,31 @@ class _MyPageState extends State<MyPage> {
   }
 
   initApp() {
-    FirebaseMessagingService.streamMessage.stream.listen((notification) {
-      if (notification != null) {
+    FirebaseMessagingService.streamMessage.stream.listen((message) async {
+      if (message != null) {
         setState(() {
           _totalNotifications++;
         });
-        showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                    content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(notification.title ?? "",
-                        style: const TextStyle().bold),
-                    Text(notification.body ?? "")
-                  ],
-                )));
+        var res = await CommonMethods.showConfirmDialog(
+            context, message.body.toString(),
+            title: message.title);
+        if (res != null && res && message.data != null) {
+          String action = message.data!["action"].toString().toLowerCase();
+          int? id = message.data!["id"] != null
+              ? CommonMethods.convertToInt32(message.data!["id"])
+              : null;
+          switch (action) {
+            case "product":
+              CommonNavigates.toProductPage(context, id: id);
+              break;
+            case "my-product":
+              CommonNavigates.toMyProductPage(context, id: id);
+              break;
+            case "news":
+              CommonNavigates.toNewsPage(context, id: id);
+              break;
+          }
+        }
       }
     });
   }

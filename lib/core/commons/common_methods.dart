@@ -5,6 +5,7 @@ import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:material_dialogs/material_dialogs.dart';
@@ -161,26 +162,53 @@ class CommonMethods {
         maskType: EasyLoadingMaskType.black);
   }
 
-  static showDialog(BuildContext context, String pmsg,
+  static Future<bool> showConfirmDialog(BuildContext context, String content,
+      {String? title}) async {
+    return await showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(title ?? ""),
+            content: Text(
+              content,
+              style: const TextStyle().size(12),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(
+                  "cancel".tr().toUpperCase(),
+                  style: const TextStyle(color: AppColors.black50),
+                ),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text("ok".tr().toUpperCase()),
+              )
+            ],
+          );
+        });
+  }
+
+  static materialDialog(BuildContext context, String pmsg,
       {String? title, List<Widget>? actions, Color? color = AppColors.white}) {
-    Dialogs.materialDialog(
+    return Dialogs.materialDialog(
         msg: pmsg,
         title: title ?? "notification".tr(),
         context: context,
         actions: actions ??
             [
-              RxRoundedButton(
-                  onPressed: () {
-                    CommonNavigates.goBack(context);
-                  },
-                  title: "Done",
-                  color: color ?? AppColors.primary)
+              TextButton(
+                onPressed: () => CommonNavigates.goBack(context),
+                child: Text("ok".tr().toUpperCase()),
+              )
             ]);
   }
 
   static void showDialogInfo(BuildContext context, String pmsg,
       {List<Widget>? actions}) {
-    showDialog(context, pmsg,
+    materialDialog(context, pmsg,
         title: "notification.text".tr(),
         actions: actions,
         color: AppColors.info);
@@ -188,19 +216,19 @@ class CommonMethods {
 
   static void showDialogError(BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) {
-    showDialog(context, pmsg.toString(),
+    materialDialog(context, pmsg.toString(),
         title: "error.text".tr(), actions: actions, color: AppColors.error);
   }
 
   static void showDialogSuccess(BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) {
-    showDialog(context, pmsg.toString(),
+    materialDialog(context, pmsg.toString(),
         title: "success.text".tr(), actions: actions, color: AppColors.success);
   }
 
   static void showDialogWarning(BuildContext context, Object pmsg,
       {List<Widget>? actions}) {
-    showDialog(context, pmsg.toString(),
+    materialDialog(context, pmsg.toString(),
         title: "warning".tr(), actions: actions, color: AppColors.warning);
   }
 

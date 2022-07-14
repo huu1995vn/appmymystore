@@ -16,7 +16,7 @@
   "hello": "Welcome to\napp RaoXe",
   "concat": "Concat",
   "start": "Start",
-  "unfiltered": "Unfiltered",
+  "filter": "Filter",
   "verified": "Verified",
   "notverified": "Not authenticated",
   "verifynow": "Verify now",

@@ -473,7 +473,7 @@ Widget rxTextInput(BuildContext context, String? value,
 Widget rxSelectInput(BuildContext context, String type, dynamic id,
     {Widget? title,
     String? labelText,
-    String hintText = "Chọn lọc",
+    String? hintText,
     bool isBorder = false,
     bool Function(dynamic)? fnWhere,
     dynamic Function(dynamic)? afterChange,
@@ -500,7 +500,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
     subtitle: RxInput(name,
         isBorder: isBorder,
         readOnly: true,
-        hintText: hintText,
+        hintText: hintText ?? "choose.text".tr(),
         style: TextStyle(
                 color:
                     name != null && name.length > 0 ? AppColors.primary : null)
@@ -538,7 +538,7 @@ Widget RxBuildItemReview(ReviewModel item) {
               Padding(
                 padding: const EdgeInsets.all(5),
                 child: Text(
-                  item.username ?? "NAN",
+                  item.username ?? "NaN",
                   style: const TextStyle().size(12),
                 ),
               ),

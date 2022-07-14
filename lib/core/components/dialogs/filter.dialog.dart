@@ -119,7 +119,7 @@ class _FilterDialogState extends State<FilterDialog> {
             color: AppColors.black, //change your color here
           ),
           centerTitle: true,
-          title: Text('Bộ lọc',
+          title: Text("filter".tr(),
               style: kTextHeaderStyle.copyWith(color: AppColors.black)),
           backgroundColor: AppColors.grey,
           elevation: 0.0,
@@ -129,9 +129,9 @@ class _FilterDialogState extends State<FilterDialog> {
                 child: Padding(
                   padding: const EdgeInsets.all(kDefaultPadding),
                   child: Center(
-                      child: Text(
-                    "unfiltered".tr(),
-                    style: TextStyle(color: AppColors.primary),
+                      child: Icon(
+                    AppIcons.delete,
+                    color: AppColors.primary,
                   )),
                 )),
           ],
@@ -282,7 +282,7 @@ class _FilterDialogState extends State<FilterDialog> {
     String key,
     String type, {
     String? title,
-    String hintText = "Chọn lọc",
+    String? hintText,
     bool Function(dynamic)? fnWhere,
     dynamic Function()? afterChange,
   }) {
@@ -292,7 +292,10 @@ class _FilterDialogState extends State<FilterDialog> {
         title ?? type.tr(),
         style: styleTitle,
       ),
-      subtitle: Text(name != null && name.length > 0 ? name : hintText,
+      subtitle: Text(
+          name != null && name.length > 0
+              ? name
+              : (hintText ?? "choose.text".tr()),
           style: TextStyle(
               color:
                   name != null && name.length > 0 ? AppColors.primary : null)),

@@ -636,7 +636,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     return Card(
       child: ListTile(
         leading: RxAvatarImage(data!.rximguser, size: 40),
-        title: Text(data!.fullname ?? "NAN", style: const TextStyle().bold),
+        title: Text(data!.fullname ?? "NaN", style: const TextStyle().bold),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -645,18 +645,18 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  data!.phone ?? "NAN",
+                  data!.phone ?? "NaN",
                   style: const TextStyle(color: AppColors.primary).size(12),
                 ),
                 if (data!.cityid != null || data!.cityid! > 0)
                   Text(
-                    data!.cityname ?? "NAN",
+                    data!.cityname ?? "NaN",
                     style: const TextStyle().size(12),
                   ),
               ],
             ),
             Text(
-              data!.address ?? "Vui lòng chọn địa chỉ",
+              data!.address ?? "NaN",
               style: const TextStyle().italic.size(12),
             )
           ],

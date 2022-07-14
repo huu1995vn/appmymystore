@@ -69,7 +69,7 @@ class NewsModel extends Entity {
       return CommonMethods.timeagoFormat(
           CommonMethods.convertToDateTime(publishdate));
     } catch (e) {
-      return "NAN";
+      return "NaN";
     }
   }
 

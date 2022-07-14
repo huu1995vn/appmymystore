@@ -36,7 +36,7 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                     Padding(
                       padding: const EdgeInsets.all(5),
                       child: Text(
-                        widget.item.username ?? "NAN",
+                        widget.item.username ?? "NaN",
                         style: const TextStyle().size(12),
                       ),
                     ),
@@ -57,7 +57,9 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                         widget.item.status == 2
                             ? widget.item.reject ?? "error"
                             : "",
-                        style: const TextStyle(color: AppColors.danger).italic.size(12))
+                        style: const TextStyle(color: AppColors.danger)
+                            .italic
+                            .size(12))
                   ],
                 ),
                 Text(widget.item.rxtimeago, style: kTextTimeStyle),

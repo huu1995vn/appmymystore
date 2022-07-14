@@ -73,7 +73,8 @@ dependencies:
   debounce_throttle: #Used for debounce
   flutter_slidable: #Used for action item
   photo_view: #Used for show gallery
-  
+  share_plus: #Used for share
+
 dev_dependencies:
   build_runner: # Used for code generation libraries
   json_serializable: # Used for code generation libraries

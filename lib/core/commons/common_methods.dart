@@ -16,6 +16,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, utf8;
@@ -27,6 +28,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../pipes/timeago/timeago.dart' as timeago;
 import '../pipes/short_currency.dart' as shortCurrency;
 import 'package:path/path.dart' as p;
+import 'package:share_plus/share_plus.dart';
 
 class CommonMethods {
   static String getExtension(File file) {
@@ -471,4 +473,53 @@ class CommonMethods {
     } catch (e) {}
     return false;
   }
+
+  static Future<void> share(String linkShare, {String? subject}) async {
+    await Share.share(linkShare, subject: subject);
+  }
+
+  //# build link dynamic
+  static buildDynamicLink(String deepLink, [bool hasFl = false]) {
+    if (deepLink == null) return "";
+    try {
+      //link: deeplink
+      //apn: The package name of the Android app to use to open the link.
+      //ibi: The bundle ID of the iOS app to use to open the link.
+      //afl == ifl: The link to open when the app isn't installed.
+      //&isi=${Variables.appStoreID}
+      if (hasFl) {
+        return '${CommonConfig.hostDynamicLinks}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&afl=$deepLink&ifl=$deepLink&isi=${CommonConfig.appStoreID}&efr=1';
+      } else {
+        return '${CommonConfig.hostDynamicLinks}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&isi=${CommonConfig.appStoreID}&efr=1';
+      }
+    } catch (error) {}
+    return "";
+  }
+
+  static String linkProduct(int id, String rewriteUrl) {
+    try {
+      rewriteUrl = rewriteUrl.convertrUrlPrefix();
+      String rewriteLink =
+          'https://dailyxe.com.vn/rao-xe/$rewriteUrl-${id}r.html';
+      return rewriteLink;
+    } catch (error) {}
+    return "";
+  }
+
+  static String linkNews(int id, String rewriteUrl) {
+    try {
+      rewriteUrl = rewriteUrl.convertrUrlPrefix();
+      String rewriteLink =
+          'https://dailyxe.com.vn/tin-tuc/$rewriteUrl-${id}d.html';
+      return rewriteLink;
+    } catch (error) {}
+    return "";
+  }
+
+  static String buildDynamicLink_Product(ProductModel product) {
+    String deepLink = linkProduct(product.id, product.name!);
+    return buildDynamicLink(deepLink);
+  }
+  //# build end link dynamic
+
 }

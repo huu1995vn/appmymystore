@@ -86,6 +86,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         height: 400);
   }
 
+  _onShare() {
+    CommonMethods.share(data!.linkshare);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,7 +130,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                           tooltip: 'Share',
                           onPressed: () {
-                            // onSetting(context);
+                            _onShare();
                           },
                         ),
                       ],
@@ -285,7 +289,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             ),
           ),
         )),
-
         Card(
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
@@ -321,7 +324,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             ),
           ),
         ),
-        
         Card(
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
@@ -371,6 +373,4 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       ],
     );
   }
-
-  
 }

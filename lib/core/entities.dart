@@ -308,6 +308,10 @@ class ProductModel extends Entity {
     return state == 1 ? "new".tr() : "old".tr();
   }
 
+  String get linkshare {
+    return CommonMethods.buildDynamicLink_Product(this);
+  }
+
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
@@ -703,11 +707,11 @@ class ReviewModel extends Entity {
 
 @JsonSerializable()
 class ConfigModel extends Entity {
-  String? apiDaiLyXe;  
-  String? apiDaiLyXeSufix;  
-  String? apiDrive;  
-  int? version;  
-  ConfigModel();  
+  String? apiDaiLyXe;
+  String? apiDaiLyXeSufix;
+  String? apiDrive;
+  int? version;
+  ConfigModel();
   ConfigModel clone() => ConfigModel.fromJson(toJson());
   factory ConfigModel.fromJson(Map<String, dynamic> json) {
     return _$ConfigModelFromJson(json);
@@ -717,9 +721,9 @@ class ConfigModel extends Entity {
 
 @JsonSerializable()
 class BannerModel extends Entity {
-  String img = IMAGE_NOT_FOUND;  
-  String? herf;  
-  BannerModel();  
+  String img = IMAGE_NOT_FOUND;
+  String? herf;
+  BannerModel();
   BannerModel clone() => BannerModel.fromJson(toJson());
   factory BannerModel.fromJson(Map<String, dynamic> json) {
     return _$BannerModelFromJson(json);

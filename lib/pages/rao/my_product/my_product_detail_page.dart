@@ -67,7 +67,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         setState(() {
           isNotFound = true;
         });
-        CommonMethods.showToast(res.message);
+        CommonMethods.showToast(context, res.message);
       }
     }
   }
@@ -100,7 +100,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       body["ids"] = [widget.id];
       ResponseModel res = await DaiLyXeApiBLL_APIUser().productuptop(body);
       if (res.status > 0) {
-        CommonMethods.showToast("update.success".tr());
+        CommonMethods.showToast(context, "update.success".tr());
       } else {
         CommonMethods.showDialogError(context, res.message);
       }
@@ -122,7 +122,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         return;
       }
     } else {
-      CommonMethods.showToast(res.message);
+      CommonMethods.showToast(context, res.message);
     }
 
     ContactModel contact = await showSearch(
@@ -599,7 +599,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
           name: data!.name!);
       if (idFiles.isEmpty) {
-        CommonMethods.showToast("message.str042".tr());
+        CommonMethods.showToast(context, "message.str042".tr());
         return;
       }
       if (idFiles.isNotEmpty) {
@@ -620,7 +620,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         if (!(dataClone!.id > 0)) {
           CommonNavigates.goBack(context);
         }
-        CommonMethods.showToast(
+        CommonMethods.showToast(context,
             dataClone!.id > 0 ? "update.success".tr() : "create.success".tr());
       } else {
         CommonMethods.showDialogError(context, res.message);

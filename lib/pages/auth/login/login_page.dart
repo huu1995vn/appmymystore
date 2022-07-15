@@ -204,11 +204,11 @@ class _LoginPageState extends State<LoginPage> {
 
   _onLoginBiometrics() async {
     if (tokenbiometrics == null || usl == null) {
-      CommonMethods.showToast("Chức năng này chưa bật");
+      CommonMethods.showToast(context, "Chức năng này chưa bật");
     } else {
       bool authBiometric = await AuthService.authBiometric();
       if (!authBiometric) {
-        CommonMethods.showToast("Thiết bị không khả dụng");
+        CommonMethods.showToast(context, "Thiết bị không khả dụng");
       }
       _onLogin(username, usl!["password"]!);
     }

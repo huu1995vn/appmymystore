@@ -39,10 +39,10 @@ class _DashboardPageState extends State<DashboardPage> {
         });
         Provider.of<UserProvider>(context, listen: false).setUserModel(user);
       } else {
-        CommonMethods.showToast(res.message);
+        CommonMethods.showToast(context, res.message);
       }
     } catch (e) {
-      CommonMethods.showToast(e.toString());
+      CommonMethods.showToast(context, e.toString());
     }
   }
 

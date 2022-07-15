@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison, import_of_legacy_library_into_null_safe
+// ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison, import_of_legacy_library_into_null_safe, use_build_context_synchronously
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +57,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           setState(() {
             isNotFound = true;
           });
-          CommonMethods.showToast(res.message);
+          CommonMethods.showToast(context, res.message);
         }
       }
     } catch (e) {
@@ -67,7 +67,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   _onFavorite() async {
     try {
-      var res = await CommonMethods.onFavorite([data!.id], !data!.isfavorite);
+      var res = await CommonMethods.onFavorite(
+          context, [data!.id], !data!.isfavorite);
       setState(() {
         data = data;
       });
@@ -78,7 +79,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   _onReview() async {
     if (!CommonMethods.isLogin) {
-      CommonMethods.showToast("please.login".tr());
+      CommonMethods.showToast(context, "please.login".tr());
       return;
     }
     await CommonNavigates.showDialogBottomSheet(

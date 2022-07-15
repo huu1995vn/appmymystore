@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable
 
-
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -41,7 +40,7 @@ class _AdvertDetailPageState extends State<AdvertDetailPage> {
             data = AdvertModel.fromJson(res.data);
           });
         } else {
-          CommonMethods.showToast(res.message);
+          CommonMethods.showToast(context, res.message);
         }
       }
     } catch (e) {

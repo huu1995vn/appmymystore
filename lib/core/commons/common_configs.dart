@@ -12,7 +12,7 @@ enum Environment {
 
 class CommonConfig {
   //system
-  static List<BannerModel> banners = <BannerModel>[];
+  static List<AdsModel> ads = <AdsModel>[];
   static UserModel user = UserModel();
   static bool isDark = false;
   static Map deviceInfo = {};

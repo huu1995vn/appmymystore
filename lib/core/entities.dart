@@ -720,15 +720,16 @@ class ConfigModel extends Entity {
 }
 
 @JsonSerializable()
-class BannerModel extends Entity {
+class AdsModel extends Entity {
   String img = IMAGE_NOT_FOUND;
   String? herf;
-  BannerModel();
-  BannerModel clone() => BannerModel.fromJson(toJson());
-  factory BannerModel.fromJson(Map<String, dynamic> json) {
-    return _$BannerModelFromJson(json);
+  String? content;
+  AdsModel();
+  AdsModel clone() => AdsModel.fromJson(toJson());
+  factory AdsModel.fromJson(Map<String, dynamic> json) {
+    return _$AdsModelFromJson(json);
   }
-  Map<String, dynamic> toJson() => _$BannerModelToJson(this);
+  Map<String, dynamic> toJson() => _$AdsModelToJson(this);
 }
 
 class AppTheme {

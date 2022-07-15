@@ -115,7 +115,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           setState(() => {password = v})
                         },
                     validator: Validators.compose([
-                      Validators.required("notempty.password.text".tr()),                      
+                      Validators.required("notempty.password.text".tr()),
                     ])),
                 RxInput(passwordAgain,
                     isPassword: true,
@@ -152,10 +152,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       bool res =
           await CommonNavigates.openOtpVerificationDialog(context, phone, true);
       if (res != null) {
-        CommonMethods.showToast("Thay đổi password thành công");
+        CommonMethods.showToast(context, "Thay đổi password thành công");
       }
     } catch (e) {
-      CommonMethods.showToast(e.toString());
+      CommonMethods.showToast(context, e.toString());
     }
   }
   //#end function main

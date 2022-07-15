@@ -62,7 +62,9 @@ class RxWebView extends StatefulWidget {
   String? url;
   String? title;
   String? javaScriptString;
-  RxWebView({super.key, this.url, this.title, this.javaScriptString});
+  String? html;
+  RxWebView(
+      {super.key, this.url, this.title, this.javaScriptString, this.html});
   @override
   RxWebViewState createState() => RxWebViewState();
 }
@@ -106,6 +108,9 @@ class RxWebViewState extends State<RxWebView> {
               },
               onWebViewCreated: (WebViewController webViewController) {
                 _webViewController = webViewController;
+                if (widget.html != null && widget.url == null) {
+                  _webViewController!.loadHtmlString(widget.html!);
+                }
               },
             ),
             isLoading

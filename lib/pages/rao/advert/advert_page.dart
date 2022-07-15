@@ -60,7 +60,7 @@ class _AdvertPageState extends State<AdvertPage> {
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast(res.message);
+        CommonMethods.showToast(context, res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());

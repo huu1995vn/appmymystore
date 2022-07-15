@@ -155,11 +155,12 @@ class CommonMethods {
     return utf8.fuse(base64).decode(text);
   }
 
-  static showToast(String pmsg) {
-    EasyLoading.showToast(pmsg,
-        duration: const Duration(seconds: 3),
-        toastPosition: EasyLoadingToastPosition.bottom,
-        maskType: EasyLoadingMaskType.black);
+  static showToast(context, String pmsg) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Triggering event: awesome_event'),
+      ),
+    );
   }
 
   static Future<bool> showConfirmDialog(BuildContext context, String content,
@@ -357,31 +358,34 @@ class CommonMethods {
     return "not.update".tr();
   }
 
-  static Future<T?> openWebView<T>(context, String url, {String? title}) async {
+  static Future<T?> openWebView<T>(context,
+      {String? url, String? title, String? html}) async {
     if (CommonMethods.isMobile()) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => RxWebView(url: url, title: title)));
+              builder: (context) => RxWebView(
+                  url: url, html: html, title: title ?? "content".tr())));
     } else {
-      return CommonMethods.launchURL(url);
+      return CommonMethods.launchURL(url!);
     }
   }
 
   static Future<T?> openWebViewTermsAndCondition<T>(context) async {
-    return openWebView(
-        context, CommonConfig.linkContent["dieuKhoan"].toString(),
+    return openWebView(context,
+        url: CommonConfig.linkContent["dieuKhoan"].toString(),
         title: "termsandcondition".tr());
   }
 
   static Future<T?> openWebViewPolicy<T>(context) async {
-    return openWebView(
-        context, CommonConfig.linkContent["chinhSach"].toString(),
+    return openWebView(context,
+        url: CommonConfig.linkContent["chinhSach"].toString(),
         title: "policy".tr());
   }
 
   static Future<T?> openWebViewFeedBack<T>(context) async {
-    return openWebView(context, CommonConfig.linkContent["feedBack"].toString(),
+    return openWebView(context,
+        url: CommonConfig.linkContent["feedBack"].toString(),
         title: "feedback".tr());
   }
 
@@ -482,10 +486,10 @@ class CommonMethods {
     }
   }
 
-  static Future<bool> onFavorite(List<int> ids, bool status) async {
+  static Future<bool> onFavorite(context, List<int> ids, bool status) async {
     try {
       if (!CommonMethods.isLogin) {
-        CommonMethods.showToast("please.login".tr());
+        CommonMethods.showToast(context, "please.login".tr());
         return false;
       }
       ResponseModel res =
@@ -496,7 +500,7 @@ class CommonMethods {
             : StorageService.deleteFavorite(ids);
         return true;
       } else {
-        CommonMethods.showToast(res.message);
+        CommonMethods.showToast(context, res.message);
       }
     } catch (e) {}
     return false;

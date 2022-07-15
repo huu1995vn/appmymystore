@@ -60,7 +60,7 @@ class _ContactPageState extends State<ContactPage> {
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast(res.message);
+        CommonMethods.showToast(context, res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -93,7 +93,7 @@ class _ContactPageState extends State<ContactPage> {
         listData!.removeAt(index);
       });
     } else {
-      CommonMethods.showToast(res.message);
+      CommonMethods.showToast(context, res.message);
     }
   }
 

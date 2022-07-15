@@ -51,7 +51,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
       if (res.status > 0) {
         CommonMethods.showDialogSuccess(context, "Đánh giá thành công");
       } else {
-        CommonMethods.showToast(res.message);
+        CommonMethods.showToast(context, res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -83,8 +83,9 @@ class _ReviewDialogState extends State<ReviewDialog> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(widget.product.name!,
-                              style: kTextHeaderStyle.copyWith(
-                                  color: AppColors.black).size(17)),
+                              style: kTextHeaderStyle
+                                  .copyWith(color: AppColors.black)
+                                  .size(17)),
                           Padding(
                             padding: const EdgeInsets.all(kDefaultPadding),
                             child: RatingBar(
@@ -92,7 +93,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                               size: 39,
                               initialRating: 5,
                               onRatingChanged: (_) {
-                                review.ratingvalue =_.round();
+                                review.ratingvalue = _.round();
                               },
                               emptyIcon: AppIcons.star_1,
                               filledIcon: AppIcons.star_1,

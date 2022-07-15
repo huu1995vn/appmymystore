@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage>
   onFavorite(int index) async {
     ProductModel item = listData![index];
     try {
-      await CommonMethods.onFavorite([item.id], !item.isfavorite);
+      await CommonMethods.onFavorite(context, [item.id], !item.isfavorite);
       setState(() {
         listData![index] = item;
       });
@@ -103,7 +103,13 @@ class _HomePageState extends State<HomePage>
         slivers: <Widget>[
           SliverToBoxAdapter(
               child: Column(children: [
-            RxImages(data: CommonConfig.banners.map((e) => e.img!).toList()),
+            RxImages(
+              data: CommonConfig.ads.map((e) => e.img).toList(),
+              onTap: (i) => {
+                CommonMethods.openWebView(context,
+                    html: CommonConfig.ads[i].content)
+              },
+            ),
             _buildTitle("new".tr(), () {
               CommonNavigates.toProductPage(context);
             }),

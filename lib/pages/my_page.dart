@@ -105,7 +105,7 @@ class _MyPageState extends State<MyPage> {
           if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
           } else {
-            CommonMethods.showToast("Vui lòng đăng nhập trước");
+            CommonMethods.showToast(context, "Vui lòng đăng nhập trước");
           }
         },
         child: const Icon(

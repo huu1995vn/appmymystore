@@ -21,7 +21,7 @@ class ItemAdvertWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () async {},
         child: SizedBox(
-          height: SizeConfig.screenWidth / 4.5,
+          height: SizeConfig.screenWidth / 4.3,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

@@ -62,7 +62,8 @@ initializeApp() async {
   APITokenService.init();
   await AuthService.autologin();
   await CloudFirestoreSerivce.init();
-  await FirebaseInAppMessagingService.init();
+  await CloudFirestoreSerivce.init();
+  FirebaseInAppMessagingService.init();
 }
 
 class MyApp extends StatefulWidget {

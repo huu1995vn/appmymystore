@@ -6,13 +6,9 @@ import 'package:raoxe/core/commons/common_methods.dart';
 class FirebaseInAppMessagingService {
   static FirebaseInAppMessaging fiam = FirebaseInAppMessaging.instance;
 
-  static init() async {
-    await FirebaseInAppMessagingService.fiam.triggerEvent("app_launch");
-    await FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
-    await FirebaseInAppMessagingService.fiam.triggerEvent("app_start");
-    await FirebaseInAppMessagingService.fiam
-        .triggerEvent("open_app"); // remove bỏ khi intro
-    await FirebaseInAppMessagingService.fiam.triggerEvent("frist_app");
+  static init() {
+    fiam.setMessagesSuppressed(false);
+    fiam.setAutomaticDataCollectionEnabled(true);
   }
 
   static triggerEvent(String event) async {

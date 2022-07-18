@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -157,7 +158,7 @@ class _ContactPageState extends State<ContactPage> {
         ],
       ),
       persistentFooterButtons: [
-        RxPrimaryButton(onTap: onDetail, text: "add.text".tr())
+        RxPrimaryButton(onTap: onDetail, icon: Icon(AppIcons.plus_circle), text: "add.text".tr())
       ],
     );
   }

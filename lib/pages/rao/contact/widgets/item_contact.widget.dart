@@ -57,6 +57,7 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
                     child: Icon(AppIcons.map_marker,
                         size: 30, color: Colors.blue[500])),
                 title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       widget.item.fullname ?? "",

@@ -89,7 +89,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           _card(
                             child: ListTile(
-                              title: Text("adv".tr()),
+                              title: Text("ads".tr()),
                               leading: Icon(
                                 AppIcons.cart,
                                 color: AppColors.yellow,
@@ -101,7 +101,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           _card(
                             child: ListTile(
-                              title: Text("Favorite"),
+                              title: Text("favorite".tr()),
                               leading: Icon(
                                 AppIcons.heart_1,
                                 color: AppColors.red,

@@ -141,10 +141,10 @@ class AfterSplash extends StatelessWidget {
           title: const Text("Welcome In SplashScreen Package",
               style: kTextHeaderStyle),
           automaticallyImplyLeading: false),
-      body: const Center(
+      body: Center(
         child: Text(
-          "Done!",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+          "done".tr(),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
         ),
       ),
     );

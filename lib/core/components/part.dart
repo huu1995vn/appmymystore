@@ -401,12 +401,15 @@ class RxRoundedButton extends StatelessWidget {
 }
 
 class RxPrimaryButton extends RxButton {
-  const RxPrimaryButton({super.key, required this.onTap, required this.text})
+  const RxPrimaryButton(
+      {super.key, required this.onTap, required this.text, this.icon})
       : super(onTap: onTap, text: text);
   @override
   final GestureTapCallback onTap;
   @override
   final String text;
+  @override
+  final Widget? icon;
 }
 
 class RxButton extends StatelessWidget {

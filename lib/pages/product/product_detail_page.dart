@@ -99,7 +99,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     }
     await CommonNavigates.showDialogBottomSheet(
         context, ReportDialog(product: data!),
-        height: 480);
+        height: 420);
   }
   @override
   Widget build(BuildContext context) {

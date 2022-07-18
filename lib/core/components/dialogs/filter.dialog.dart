@@ -233,7 +233,7 @@ class _FilterDialogState extends State<FilterDialog> {
         persistentFooterButtons: [
           RxPrimaryButton(
             onTap: _onDone,
-            text: "Done",
+            text: "done".tr(),
           ),
         ]);
   }

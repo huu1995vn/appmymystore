@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_cast
 
-
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -20,6 +19,7 @@ class _NewsPageState extends State<NewsPage> {
   void initState() {
     super.initState();
   }
+
   List<Widget> tabs = CATEGORIES
       .map((item) => Tab(
             child: Text(item.categoryname),
@@ -39,10 +39,13 @@ class _NewsPageState extends State<NewsPage> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              title: Center(
-                child: Text("news.text".tr(),
-                    style: kTextHeaderStyle.copyWith(color: AppColors.white)),
-              ),
+              centerTitle: true,
+              title: Text("news.text".tr(),
+                  style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+              backgroundColor: AppColors.grey,
+              floating: true,
+              automaticallyImplyLeading: false,
+              elevation: 0.0,
             ),
             SliverPersistentHeader(
               pinned: true,

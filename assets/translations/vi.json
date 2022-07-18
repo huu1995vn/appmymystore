@@ -360,8 +360,8 @@
   "welcome": "Chào mừng bạn đến với RaoXe",
   "version": "Phiên bản",
   "content": "Nội dung",
-  "contactadv": "Liên hệ từ quảng cáo",
-  "adv": "Quảng cáo",
+  "contactads": "Liên hệ từ quảng cáo",
+  "ads": "Quảng cáo",
   "buypoint": "Mua point",
   "discount": "Giảm giá",
   "amount": "Thành tiền ",
@@ -415,7 +415,7 @@
   "momowallet": "Ví MoMo",
   "detail": {
     "text": "Chi tiết",
-    "adv": "@:detail.text quảng cáo",
+    "ads": "@:detail.text quảng cáo",
     "historypoint": "@:detail.text lịch sử mua point",
     "other": "@:detail.text {}"
   },

@@ -12,7 +12,7 @@ enum Environment {
 
 class CommonConfig {
   //system
-  static List<BannerModel> banners = <BannerModel>[];
+  static List<AdsModel> ads = <AdsModel>[];
   static UserModel user = UserModel();
   static bool isDark = false;
   static Map deviceInfo = {};
@@ -26,6 +26,7 @@ class CommonConfig {
   static String apiDriveSufix = "/";
   static String uriPrefixDynamicLink = "https://raoxe.page.link";
   static String apiHost = "https://dailyxe.com.vn";
+  static String hostDynamicLinks = "https://raoxe.page.link";
   static String appStoreID = "1486119532";
   static bool haveCacheImage = true;
   static int version_masterdata = 1;

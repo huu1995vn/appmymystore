@@ -28,7 +28,7 @@ class _SettingsPageState extends State<SettingsPage> {
   _onBiometric(bool v) async {
     bool authBiometric = await AuthService.authBiometric();
     if (!authBiometric) {
-      CommonMethods.showToast("failedaction".tr());
+      CommonMethods.showToast(context, "failedaction".tr());
     }
     if (v) {
       await StorageService.set(StorageKeys.biometrics, APITokenService.token);
@@ -116,7 +116,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                   title: "Clear cache".tr(),
                                   onTap: () {
                                     RxSearchDelegate.cacheapiSearch = {};
-                                    CommonMethods.showToast("success".tr());
+                                    CommonMethods.showToast(
+                                        context, "success".tr());
                                   }),
                               RxBuildItem(
                                   title: "termsandcondition".tr(),
@@ -150,7 +151,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       ))))
         ],
       ),
-      
     );
   }
 }

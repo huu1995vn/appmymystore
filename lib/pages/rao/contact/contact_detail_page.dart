@@ -44,7 +44,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
             data = ContactModel.fromJson(res.data);
           });
         } else {
-          CommonMethods.showToast(res.message);
+          CommonMethods.showToast(context, res.message);
         }
       }
     } catch (e) {
@@ -64,13 +64,13 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
           setState(() {
             data = dataClone;
           });
-          CommonMethods.showToast("update.success".tr());
+          CommonMethods.showToast(context, "update.success".tr());
         } else {
           CommonNavigates.goBack(context);
-          CommonMethods.showToast("create.success".tr());
+          CommonMethods.showToast(context, "create.success".tr());
         }
       } else {
-        CommonMethods.showToast(res.message);
+        CommonMethods.showToast(context, res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());

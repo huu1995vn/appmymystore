@@ -69,7 +69,7 @@ class NewsModel extends Entity {
       return CommonMethods.timeagoFormat(
           CommonMethods.convertToDateTime(publishdate));
     } catch (e) {
-      return "NAN";
+      return "NaN";
     }
   }
 
@@ -306,6 +306,10 @@ class ProductModel extends Entity {
 
   String get statename {
     return state == 1 ? "new".tr() : "old".tr();
+  }
+
+  String get linkshare {
+    return CommonMethods.buildDynamicLink_Product(this);
   }
 
   ProductModel();
@@ -703,11 +707,11 @@ class ReviewModel extends Entity {
 
 @JsonSerializable()
 class ConfigModel extends Entity {
-  String? apiDaiLyXe;  
-  String? apiDaiLyXeSufix;  
-  String? apiDrive;  
-  int? version;  
-  ConfigModel();  
+  String? apiDaiLyXe;
+  String? apiDaiLyXeSufix;
+  String? apiDrive;
+  int? version;
+  ConfigModel();
   ConfigModel clone() => ConfigModel.fromJson(toJson());
   factory ConfigModel.fromJson(Map<String, dynamic> json) {
     return _$ConfigModelFromJson(json);
@@ -716,15 +720,16 @@ class ConfigModel extends Entity {
 }
 
 @JsonSerializable()
-class BannerModel extends Entity {
-  String img = IMAGE_NOT_FOUND;  
-  String? herf;  
-  BannerModel();  
-  BannerModel clone() => BannerModel.fromJson(toJson());
-  factory BannerModel.fromJson(Map<String, dynamic> json) {
-    return _$BannerModelFromJson(json);
+class AdsModel extends Entity {
+  String img = IMAGE_NOT_FOUND;
+  String? herf;
+  String? content;
+  AdsModel();
+  AdsModel clone() => AdsModel.fromJson(toJson());
+  factory AdsModel.fromJson(Map<String, dynamic> json) {
+    return _$AdsModelFromJson(json);
   }
-  Map<String, dynamic> toJson() => _$BannerModelToJson(this);
+  Map<String, dynamic> toJson() => _$AdsModelToJson(this);
 }
 
 class AppTheme {

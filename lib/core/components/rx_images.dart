@@ -10,7 +10,8 @@ import 'package:raoxe/core/utilities/size_config.dart';
 
 class RxImages extends StatefulWidget {
   final List<String> data;
-  const RxImages({super.key, required this.data});
+  final void Function(int)? onTap;
+  const RxImages({super.key, required this.data, this.onTap});
   @override
   State<RxImages> createState() => _RxImagesState();
 }
@@ -43,49 +44,49 @@ class _RxImagesState extends State<RxImages>
     super.build(context);
     if (widget.data == null && widget.data.isNotEmpty) {
       return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: RxCardSkeleton());
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: RxCardSkeleton());
     } else {
       return Stack(children: [
-            CarouselSlider(
-                items: _items(),
-                options: CarouselOptions(
-                  viewportFraction: 1.0,
-                  aspectRatio: 1.5,
-                  onPageChanged: (index, carouselPageChangedReason) {
-                    if (!mounted) return;
-                    setState(() {
-                      _current = index;
-                    });
+        CarouselSlider(
+            items: _items(),
+            options: CarouselOptions(
+              viewportFraction: 1.0,
+              aspectRatio: 1.5,
+              onPageChanged: (index, carouselPageChangedReason) {
+                if (!mounted) return;
+                setState(() {
+                  _current = index;
+                });
+              },
+            )),
+        Positioned(
+            bottom: 0.0,
+            left: 0.0,
+            child: Container(
+              width: SizeConfig.screenWidth,
+              padding: const EdgeInsets.all(20),
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: map<Widget>(
+                  widget.data,
+                  (index, url) {
+                    return Container(
+                      width: 8.0,
+                      height: 8.0,
+                      margin: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _current == index
+                              ? const Color.fromRGBO(0, 0, 0, 0.9)
+                              : const Color.fromRGBO(0, 0, 0, 0.4)),
+                    );
                   },
-                )),
-            Positioned(
-                bottom: 0.0,
-                left: 0.0,
-                child: Container(
-                  width: SizeConfig.screenWidth,
-                  padding: const EdgeInsets.all(20),
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: map<Widget>(
-                      widget.data,
-                      (index, url) {
-                        return Container(
-                          width: 8.0,
-                          height: 8.0,
-                          margin: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: _current == index
-                                  ? const Color.fromRGBO(0, 0, 0, 0.9)
-                                  : const Color.fromRGBO(0, 0, 0, 0.4)),
-                        );
-                      },
-                    ),
-                  ),
-                )),
-          ]);
+                ),
+              ),
+            )),
+      ]);
     }
   }
 
@@ -93,32 +94,36 @@ class _RxImagesState extends State<RxImages>
     return map<Widget>(
       widget.data,
       (index, i) {
-        return Stack(children: <Widget>[
-          RxImage(widget.data[index]),
-          Positioned(
-            bottom: 0.0,
-            left: 0.0,
-            right: 0.0,
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color.fromARGB(200, 0, 0, 0),
-                    Color.fromARGB(0, 0, 0, 0)
-                  ],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
+        return GestureDetector(
+            onTap: () => {
+                  if (widget.onTap != null) {widget.onTap!(index)}
+                },
+            child: Stack(children: <Widget>[
+              RxImage(widget.data[index]),
+              Positioned(
+                bottom: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color.fromARGB(200, 0, 0, 0),
+                        Color.fromARGB(0, 0, 0, 0)
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 20.0),
+                  child: Text(
+                    '',
+                    style: const TextStyle().bold,
+                  ),
                 ),
               ),
-              padding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: Text(
-                '',
-                style: const TextStyle().bold,
-              ),
-            ),
-          ),
-        ]);
+            ]));
       },
     ).toList();
   }

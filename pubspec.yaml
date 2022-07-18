@@ -48,6 +48,7 @@ dependencies:
   firebase_messaging: # Used for receiving notifications in the app
   firebase_dynamic_links: # Use the Firebase Dynamic Links API. (ANDROID/IOS)
   firebase_auth: # Used for send otp
+  firebase_in_app_messaging: # Used for send message ads
   cloud_firestore: # Used for firestore
   universal_platform: # Used for check platform  
   device_info_plus: # Used for device info  
@@ -73,7 +74,8 @@ dependencies:
   debounce_throttle: #Used for debounce
   flutter_slidable: #Used for action item
   photo_view: #Used for show gallery
-  
+  share_plus: #Used for share
+
 dev_dependencies:
   build_runner: # Used for code generation libraries
   json_serializable: # Used for code generation libraries

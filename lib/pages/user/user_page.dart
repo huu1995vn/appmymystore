@@ -52,10 +52,10 @@ class _UserPageState extends State<UserPage> {
 
         Provider.of<UserProvider>(context, listen: false).setUserModel(user);
       } else {
-        CommonMethods.showToast(res.message);
+        CommonMethods.showToast(context, res.message);
       }
     } catch (e) {
-      CommonMethods.showToast(e.toString());
+      CommonMethods.showToast(context, e.toString());
     }
   }
 
@@ -67,8 +67,8 @@ class _UserPageState extends State<UserPage> {
       if (file == null) return;
       CommonMethods.lockScreen();
       if (file != null) {
-        int fileId = await FileService
-            .uploadImage(file, idFile: -1, name: data!.fullname!);
+        int fileId = await FileService.uploadImage(file,
+            idFile: -1, name: data!.fullname!);
         // ignore: curly_braces_in_flow_control_structures
         if (data!.img != fileId) {
           var dataClone = data!.clone();
@@ -81,7 +81,7 @@ class _UserPageState extends State<UserPage> {
               APITokenService.img = fileId;
             });
           } else {
-            CommonMethods.showToast(res.message);
+            CommonMethods.showToast(context, res.message);
           }
           Provider.of<UserProvider>(context, listen: false)
               .setData(img: fileId);
@@ -105,7 +105,7 @@ class _UserPageState extends State<UserPage> {
           data = dataClone;
         });
       } else {
-        CommonMethods.showToast(res.message);
+        CommonMethods.showToast(context, res.message);
       }
       Provider.of<UserProvider>(context, listen: false).setUserModel(dataClone);
     } catch (e) {
@@ -187,28 +187,28 @@ class _UserPageState extends State<UserPage> {
                                 ),
                               ),
                               subtitle: DateTimePicker(
-                                dateHintText: "birthday".tr(),
-                                style: TextStyle(
-                                        color: data!.birthdate != null &&
-                                                data!.birthdate!
-                                                        .toString()
-                                                        .length >
-                                                    0
-                                            ? AppColors.primary
-                                            : null)
-                                    .size(13),
-                                locale: Locale("vi"),
-                                initialValue: CommonMethods.convertToDateTime(
-                                        data!.birthdate!)
-                                    .toString(),
-                                dateMask: 'dd-MM-yyyy',
-                                firstDate: DateTime(1977),
-                                lastDate: DateTime(2100),
-                                onChanged: (value) => {data!.birthdate = value},
-                                validator: Validators.compose([
-                                  Validators.required("birthday.text".tr()),
-                                ])
-                              ),
+                                  dateHintText: "birthday".tr(),
+                                  style: TextStyle(
+                                          color: data!.birthdate != null &&
+                                                  data!.birthdate!
+                                                          .toString()
+                                                          .length >
+                                                      0
+                                              ? AppColors.primary
+                                              : null)
+                                      .size(13),
+                                  locale: Locale("vi"),
+                                  initialValue: CommonMethods.convertToDateTime(
+                                          data!.birthdate!)
+                                      .toString(),
+                                  dateMask: 'dd-MM-yyyy',
+                                  firstDate: DateTime(1977),
+                                  lastDate: DateTime(2100),
+                                  onChanged: (value) =>
+                                      {data!.birthdate = value},
+                                  validator: Validators.compose([
+                                    Validators.required("birthday.text".tr()),
+                                  ])),
                             ),
                             ListTile(
                               title: Row(

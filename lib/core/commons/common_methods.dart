@@ -5,6 +5,7 @@ import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:material_dialogs/material_dialogs.dart';
@@ -16,6 +17,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, utf8;
@@ -27,6 +29,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../pipes/timeago/timeago.dart' as timeago;
 import '../pipes/short_currency.dart' as shortCurrency;
 import 'package:path/path.dart' as p;
+import 'package:share_plus/share_plus.dart';
 
 class CommonMethods {
   static String getExtension(File file) {
@@ -152,33 +155,61 @@ class CommonMethods {
     return utf8.fuse(base64).decode(text);
   }
 
-  static showToast(String pmsg) {
-    EasyLoading.showToast(pmsg,
-        duration: const Duration(seconds: 3),
-        toastPosition: EasyLoadingToastPosition.bottom,
-        maskType: EasyLoadingMaskType.black);
+  static showToast(context, String pmsg) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Triggering event: awesome_event'),
+      ),
+    );
   }
 
-  static showDialog(BuildContext context, String pmsg,
+  static Future<bool> showConfirmDialog(BuildContext context, String content,
+      {String? title}) async {
+    return await showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(title ?? ""),
+            content: Text(
+              content,
+              style: const TextStyle().size(12),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(
+                  "cancel".tr().toUpperCase(),
+                  style: const TextStyle(color: AppColors.black50),
+                ),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text("ok".tr().toUpperCase()),
+              )
+            ],
+          );
+        });
+  }
+
+  static materialDialog(BuildContext context, String pmsg,
       {String? title, List<Widget>? actions, Color? color = AppColors.white}) {
-    Dialogs.materialDialog(
+    return Dialogs.materialDialog(
         msg: pmsg,
         title: title ?? "notification".tr(),
         context: context,
         actions: actions ??
             [
-              RxRoundedButton(
-                  onPressed: () {
-                    CommonNavigates.goBack(context);
-                  },
-                  title: "Done",
-                  color: color ?? AppColors.primary)
+              TextButton(
+                onPressed: () => CommonNavigates.goBack(context),
+                child: Text("ok".tr().toUpperCase()),
+              )
             ]);
   }
 
   static void showDialogInfo(BuildContext context, String pmsg,
       {List<Widget>? actions}) {
-    showDialog(context, pmsg,
+    materialDialog(context, pmsg,
         title: "notification.text".tr(),
         actions: actions,
         color: AppColors.info);
@@ -186,19 +217,19 @@ class CommonMethods {
 
   static void showDialogError(BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) {
-    showDialog(context, pmsg.toString(),
+    materialDialog(context, pmsg.toString(),
         title: "error.text".tr(), actions: actions, color: AppColors.error);
   }
 
   static void showDialogSuccess(BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) {
-    showDialog(context, pmsg.toString(),
+    materialDialog(context, pmsg.toString(),
         title: "success.text".tr(), actions: actions, color: AppColors.success);
   }
 
   static void showDialogWarning(BuildContext context, Object pmsg,
       {List<Widget>? actions}) {
-    showDialog(context, pmsg.toString(),
+    materialDialog(context, pmsg.toString(),
         title: "warning".tr(), actions: actions, color: AppColors.warning);
   }
 
@@ -327,31 +358,34 @@ class CommonMethods {
     return "not.update".tr();
   }
 
-  static Future<T?> openWebView<T>(context, String url, {String? title}) async {
+  static Future<T?> openWebView<T>(context,
+      {String? url, String? title, String? html}) async {
     if (CommonMethods.isMobile()) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => RxWebView(url: url, title: title)));
+              builder: (context) => RxWebView(
+                  url: url, html: html, title: title ?? "content".tr())));
     } else {
-      return CommonMethods.launchURL(url);
+      return CommonMethods.launchURL(url!);
     }
   }
 
   static Future<T?> openWebViewTermsAndCondition<T>(context) async {
-    return openWebView(
-        context, CommonConfig.linkContent["dieuKhoan"].toString(),
+    return openWebView(context,
+        url: CommonConfig.linkContent["dieuKhoan"].toString(),
         title: "termsandcondition".tr());
   }
 
   static Future<T?> openWebViewPolicy<T>(context) async {
-    return openWebView(
-        context, CommonConfig.linkContent["chinhSach"].toString(),
+    return openWebView(context,
+        url: CommonConfig.linkContent["chinhSach"].toString(),
         title: "policy".tr());
   }
 
   static Future<T?> openWebViewFeedBack<T>(context) async {
-    return openWebView(context, CommonConfig.linkContent["feedBack"].toString(),
+    return openWebView(context,
+        url: CommonConfig.linkContent["feedBack"].toString(),
         title: "feedback".tr());
   }
 
@@ -452,10 +486,10 @@ class CommonMethods {
     }
   }
 
-  static Future<bool> onFavorite(List<int> ids, bool status) async {
+  static Future<bool> onFavorite(context, List<int> ids, bool status) async {
     try {
       if (!CommonMethods.isLogin) {
-        CommonMethods.showToast("please.login".tr());
+        CommonMethods.showToast(context, "please.login".tr());
         return false;
       }
       ResponseModel res =
@@ -466,9 +500,58 @@ class CommonMethods {
             : StorageService.deleteFavorite(ids);
         return true;
       } else {
-        CommonMethods.showToast(res.message);
+        CommonMethods.showToast(context, res.message);
       }
     } catch (e) {}
     return false;
   }
+
+  static Future<void> share(String linkShare, {String? subject}) async {
+    await Share.share(linkShare, subject: subject);
+  }
+
+  //# build link dynamic
+  static buildDynamicLink(String deepLink, [bool hasFl = false]) {
+    if (deepLink == null) return "";
+    try {
+      //link: deeplink
+      //apn: The package name of the Android app to use to open the link.
+      //ibi: The bundle ID of the iOS app to use to open the link.
+      //afl == ifl: The link to open when the app isn't installed.
+      //&isi=${Variables.appStoreID}
+      if (hasFl) {
+        return '${CommonConfig.hostDynamicLinks}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&afl=$deepLink&ifl=$deepLink&isi=${CommonConfig.appStoreID}&efr=1';
+      } else {
+        return '${CommonConfig.hostDynamicLinks}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&isi=${CommonConfig.appStoreID}&efr=1';
+      }
+    } catch (error) {}
+    return "";
+  }
+
+  static String linkProduct(int id, String rewriteUrl) {
+    try {
+      rewriteUrl = rewriteUrl.convertrUrlPrefix();
+      String rewriteLink =
+          'https://dailyxe.com.vn/rao-xe/$rewriteUrl-${id}r.html';
+      return rewriteLink;
+    } catch (error) {}
+    return "";
+  }
+
+  static String linkNews(int id, String rewriteUrl) {
+    try {
+      rewriteUrl = rewriteUrl.convertrUrlPrefix();
+      String rewriteLink =
+          'https://dailyxe.com.vn/tin-tuc/$rewriteUrl-${id}d.html';
+      return rewriteLink;
+    } catch (error) {}
+    return "";
+  }
+
+  static String buildDynamicLink_Product(ProductModel product) {
+    String deepLink = linkProduct(product.id, product.name!);
+    return buildDynamicLink(deepLink);
+  }
+  //# build end link dynamic
+
 }

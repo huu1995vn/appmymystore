@@ -10,25 +10,27 @@ import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 class CloudFirestoreSerivce {
-  static Future<void> _pushTokens() async {
+  static Future<void> _pushUsers() async {
     CollectionReference fireStoreService =
-        FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.tokens);
+        FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.users);
     try {
-      String uid = InfoDeviceService.infoDevice.Identifier!;
-      Map<String, dynamic> data = {};
-      data["userid"] = APITokenService.userId;
-      data["token"] = FirebaseMessagingService.token;
-      data["uid"] = uid;
-      fireStoreService.doc(uid).set(data);
+      if (APITokenService.userId > 0) {
+        String uid = InfoDeviceService.infoDevice.Identifier!;
+        Map<String, dynamic> data = {};
+        data["userid"] = APITokenService.userId;
+        data["token"] = FirebaseMessagingService.token;
+        data["uid"] = uid;
+        fireStoreService.doc(APITokenService.userId.toString()).set(data);
+      }
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }
   }
 
   static init() async {
-    _pushTokens();
+    _pushUsers();
     await CloudFirestoreSerivce.configs();
-    await CloudFirestoreSerivce.banners();
+    await CloudFirestoreSerivce.ads();
   }
 
   static Future<void> configs() async {
@@ -48,18 +50,15 @@ class CloudFirestoreSerivce {
     } catch (e) {}
   }
 
-  static Future<void> banners() async {
+  static Future<void> ads() async {
     try {
       CollectionReference fireStoreService =
-          FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.banners);
+          FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.ads);
       var value = await fireStoreService.get();
-      if (value.docs != null && value.docs.isNotEmpty) {
-        CommonConfig.banners = value.docs.map((i) {
-          dynamic _item = i.data();
-          BannerModel item = BannerModel();
-          item.img = _item["img"];
-          item.herf = _item["herf"];
-          return item;
+      if (value.docs.isNotEmpty) {
+        CommonConfig.ads = value.docs.map((i) {
+          dynamic item = i.data();
+          return AdsModel.fromJson(item);
         }).toList();
       }
     } catch (e) {}

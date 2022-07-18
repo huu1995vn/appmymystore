@@ -552,6 +552,10 @@ class CommonMethods {
     String deepLink = linkProduct(product.id, product.name!);
     return buildDynamicLink(deepLink);
   }
+
+  static void call(String phone) {
+    launchUrl(Uri.parse("tel://$phone"));
+  }
   //# build end link dynamic
 
 }

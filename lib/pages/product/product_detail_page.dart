@@ -152,7 +152,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       persistentFooterButtons: [
         if (data != null)
           RxButton(
-              onTap: () => {},
+              onTap: () => {CommonMethods.call(data!.phone!)},
               icon: Icon(AppIcons.phone_handset),
               color: AppColors.info,
               text: "call".tr())

@@ -64,30 +64,34 @@ class ReviewState extends State<RxReview> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.only(top: 10),
-        child: Column(children: <Widget>[
-          if (listData != null)
-            RxListView(listData, (context, index) {
-              var item = listData![index];
-              return RxBuildItemReview(item);
-            },
-                key: Key("review".tr()),
-                onRefresh: loadData,
-                noFound: Container()),
-          if (listData != null) GestureDetector(
-            onTap: () {
-              viewAll();
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: kDefaultPadding),
-              child: Text(
-                "${"all".tr()} ${totalItems > 0 ? "($totalItems)" : ""}",
-                style: const TextStyle(
-                    color: Colors.blue, fontWeight: FontWeight.w500),
-              ),
-            ),
-          )
-        ]));
+    return (listData == null || listData!.length == 0)
+        ? Container()
+        : Card(
+            child: Container(
+                padding: const EdgeInsets.only(top: 10),
+                child: Column(children: <Widget>[
+                  if (listData != null)
+                    RxListView(listData, (context, index) {
+                      var item = listData![index];
+                      return RxBuildItemReview(item);
+                    },
+                        key: Key("review".tr()),
+                        onRefresh: loadData,
+                        noFound: Container()),
+                  if (listData != null)
+                    GestureDetector(
+                      onTap: () {
+                        viewAll();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: kDefaultPadding),
+                        child: Text(
+                          "${"all".tr()} ${totalItems > 0 ? "($totalItems)" : ""}",
+                          style: const TextStyle(
+                              color: Colors.blue, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    )
+                ])));
   }
 }

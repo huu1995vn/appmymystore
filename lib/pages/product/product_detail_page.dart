@@ -279,6 +279,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         6, // any number you need (It works as the rows for the textarea)
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
+                    enabled:false
                   ),
                 )
               ],
@@ -367,7 +368,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             ),
           ),
         ),
-        Card(child: RxReview(data!))
+         RxReview(data!)
       ],
     );
   }

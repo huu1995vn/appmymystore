@@ -372,6 +372,34 @@ Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
       'username': instance.username,
     };
 
+ReportModel _$ReportModelFromJson(Map<String, dynamic> json) => ReportModel()
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..id = json['id'] as int
+  ..userid = json['userid'] as int
+  ..productid = json['productid'] as int
+  ..reporttypeid = json['reporttypeid'] as int
+  ..note = json['note'] as String?
+  ..createdate = json['createdate'] == null
+      ? null
+      : DateTime.parse(json['createdate'] as String)
+  ..status = json['status'] as int
+  ..reject = json['reject'] as String?;
+
+Map<String, dynamic> _$ReportModelToJson(ReportModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'id': instance.id,
+      'userid': instance.userid,
+      'productid': instance.productid,
+      'reporttypeid': instance.reporttypeid,
+      'note': instance.note,
+      'createdate': instance.createdate?.toIso8601String(),
+      'status': instance.status,
+      'reject': instance.reject,
+    };
+
 ConfigModel _$ConfigModelFromJson(Map<String, dynamic> json) => ConfigModel()
   ..TotalRow = json['TotalRow']
   ..RowIndex = json['RowIndex']

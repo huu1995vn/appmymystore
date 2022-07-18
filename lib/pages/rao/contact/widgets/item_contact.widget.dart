@@ -1,5 +1,6 @@
 // ignore_for_file: unrelated_type_equality_checks
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:raoxe/app_icons.dart';
@@ -12,9 +13,10 @@ class ItemContactWidget extends StatefulWidget {
   final ContactModel item;
   final void Function()? onTap;
   final void Function(BuildContext)? onDelete;
+  final void Function(BuildContext)? onDefault;
 
   const ItemContactWidget(this.item,
-      {super.key, this.onTap, this.onDelete});
+      {super.key, this.onTap, this.onDelete, this.onDefault});
   @override
   State<ItemContactWidget> createState() => _ItemContactWidgetState();
 }
@@ -35,7 +37,14 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
               backgroundColor: AppColors.danger,
               foregroundColor: Colors.white,
               icon: AppIcons.trash_1,
-              label: 'Delete',
+              label: 'delete.text'.tr(),
+            ),
+            SlidableAction(
+              onPressed: widget.onDefault,
+              backgroundColor: AppColors.info,
+              foregroundColor: Colors.white,
+              icon: AppIcons.checkmark_cicle,
+              label: 'default'.tr(),
             ),
           ],
         ),
@@ -47,10 +56,17 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
                 leading: RxCircleAvatar(
                     child: Icon(AppIcons.map_marker,
                         size: 30, color: Colors.blue[500])),
-                title: Text(
-                  widget.item.fullname ?? "",
-                  overflow: TextOverflow.ellipsis,
-                  // style: TextStyle(FontWeight.normal),
+                title: Row(
+                  children: [
+                    Text(
+                      widget.item.fullname ?? "",
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                   if(widget.item.isdefault) Text(
+                      "default".tr(),
+                      style: const TextStyle(color: AppColors.info),
+                    )
+                  ],
                 ),
                 // isThreeLine: true,
                 subtitle: Column(

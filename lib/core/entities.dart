@@ -706,6 +706,36 @@ class ReviewModel extends Entity {
 }
 
 @JsonSerializable()
+class ReportModel extends Entity {
+  int id = 0;
+  int userid = APITokenService.userId;
+  int productid = 0;
+  int reporttypeid = 0;
+  String? note;
+  DateTime? createdate;
+  int status = 1;
+  String? reject;
+  ReportModel();
+  String get rxtimeago {
+    return CommonMethods.timeagoFormat(createdate);
+  }
+
+  factory ReportModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["userid"] =
+        CommonMethods.convertToInt32(json["userid"], APITokenService.userId);
+    json["productid"] = CommonMethods.convertToInt32(json["productid"]);
+    json["reporttypeid"] = CommonMethods.convertToInt32(json["reporttypeid"]);
+    json["status"] = CommonMethods.convertToInt32(json["status"], 1);
+    json["createdate"] =
+        CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
+    return _$ReportModelFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$ReportModelToJson(this);
+}
+
+@JsonSerializable()
 class ConfigModel extends Entity {
   String? apiDaiLyXe;
   String? apiDaiLyXeSufix;

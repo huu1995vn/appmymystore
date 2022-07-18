@@ -3,15 +3,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:rating_bar/rating_bar.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class ReportDialog extends StatefulWidget {
@@ -25,9 +24,8 @@ class ReportDialog extends StatefulWidget {
 }
 
 class _ReportDialogState extends State<ReportDialog> {
-  int value = -1;
   bool showText = false;
-
+  List<dynamic> reporttype = <dynamic>[];
   @override
   void initState() {
     super.initState();
@@ -37,12 +35,13 @@ class _ReportDialogState extends State<ReportDialog> {
   TextStyle styleTitle =
       kTextHeaderStyle.copyWith(fontSize: 15, fontWeight: FontWeight.normal);
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
-  ReviewModel review = ReviewModel();
+  ReportModel report = ReportModel();
   late AutoScrollController scrollController = AutoScrollController();
 
   loadData() {
     setState(() {
-      review.productid = widget.product.id;
+      report.productid = widget.product.id;
+      reporttype = MasterDataService.data["reporttype"] ?? <dynamic>[];
     });
   }
 
@@ -50,7 +49,8 @@ class _ReportDialogState extends State<ReportDialog> {
     try {
       Map<String, dynamic> body = {
         "id": widget.product.id,
-        "comment": review.comment,
+        "note": report.note,
+        "type": report.reporttypeid
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().reportpost(body);
       if (res.status > 0) {
@@ -89,53 +89,42 @@ class _ReportDialogState extends State<ReportDialog> {
                           child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          for (int i = 0; i < REPORTS.length; i++)
+                          for (int i = 0; i < reporttype.length; i++)
                             ListTile(
                                 title: Text(
-                                  REPORTS[i],
+                                  reporttype[i]["name"],
                                 ),
                                 leading: Radio(
-                                  value: i,
-                                  groupValue: value,
+                                  value: reporttype[i]["id"],
+                                  groupValue: report.reporttypeid,
                                   onChanged: ((v) {
                                     setState(() {
-                                      value = v as int;
-                                      review.comment = REPORTS[value as int];
-                                      showText = false;
+                                      report.reporttypeid = v as int;
+                                      showText = report.reporttypeid == 1;
+                                      if (report.reporttypeid == 1) {
+                                        Future.delayed(
+                                            const Duration(milliseconds: 100),
+                                            () {
+                                          scrollController.jumpTo(
+                                              scrollController
+                                                  .position.maxScrollExtent);
+                                        });
+                                      }
                                     });
                                   }),
                                 )),
-                          ListTile(
-                              title: Text(
-                                "Lý do khác",
-                              ),
-                              leading: Radio(
-                                value: 9999,
-                                groupValue: value,
-                                onChanged: ((v) {
-                                  setState(() {
-                                    value = v as int;
-                                    showText = true;
-                                    Future.delayed(const Duration(milliseconds: 100), () {
-                                      scrollController.jumpTo(scrollController
-                                          .position.maxScrollExtent);
-                                    });
-                                  });
-                                }),
-                              )),
                           if (showText)
                             Padding(
                                 padding: kEdgeInsetsPadding,
                                 child: TextFormField(
                                   showCursor: true,
-                                  key: const Key("review"),
-                                  initialValue: review.comment,
+                                  key: const Key("report"),
+                                  initialValue: report.note,
                                   minLines:
                                       6, // any number you need (It works as the rows for the textarea)
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
-                                  onChanged: (value) =>
-                                      {review.comment = value},
+                                  onChanged: (value) => {report.note = value},
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     hintText: "enter.text".tr(),
@@ -144,8 +133,8 @@ class _ReportDialogState extends State<ReportDialog> {
                                   maxLengthEnforcement:
                                       MaxLengthEnforcement.none,
                                   validator: (value) {
-                                    if ((review.comment == null ||
-                                        review.comment!.isEmpty)) {
+                                    if ((report.note == null ||
+                                        report.note!.isEmpty)) {
                                       return "notempty.text".tr();
                                     }
                                     return null;

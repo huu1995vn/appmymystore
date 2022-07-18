@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -97,6 +97,19 @@ class _ContactPageState extends State<ContactPage> {
     }
   }
 
+  onDefault(int index) async {
+    var item = listData![index];
+    Map<String, dynamic> body = {
+      "id": [item.id]
+    };
+    ResponseModel res = await DaiLyXeApiBLL_APIUser().contactdefault(body);
+    if (res.status > 0) {
+      loadData();
+    } else {
+      CommonMethods.showToast(context, res.message);
+    }
+  }
+
   onDetail([int index = -1]) async {
     ContactModel item = index > 0 ? listData![index] : ContactModel();
     CommonNavigates.toContactPage(context,
@@ -138,7 +151,8 @@ class _ContactPageState extends State<ContactPage> {
             ContactModel item = listData![index];
             return ItemContactWidget(item,
                 onTap: () => {onDetail(index)},
-                onDelete: (context) => onDelete(index));
+                onDelete: (context) => onDelete(index),
+                onDefault: (context) => onDefault(index));
           })
         ],
       ),

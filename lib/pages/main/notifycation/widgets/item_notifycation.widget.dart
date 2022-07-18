@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/entities.dart';
@@ -24,7 +25,7 @@ class ItemNotifycationWidget extends StatelessWidget {
             backgroundColor: AppColors.danger,
             foregroundColor: Colors.white,
             icon: AppIcons.trash_1,
-            label: 'Delete',
+            label: 'delete.text'.tr(),
           ),
         ],
       ),

@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -218,7 +219,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       },
                                     ).toList()),
                               ),
-                              _header(title: "THÔNG TIN XE"),
+                              _header(title: "generalinfor".tr()),
                               Card(
                                 child: Column(
                                   children: [
@@ -330,6 +331,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   initialValue: data!.name,
                                   keyboardType: TextInputType.multiline,
                                   onChanged: (value) => {data!.name = value},
+                                  decoration: InputDecoration(
+                                    hintText: "enter.text".tr(),
+                                  ),
                                   validator: (value) {
                                     if ((data!.name == null ||
                                         data!.name!.isEmpty)) {
@@ -369,9 +373,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       6, // any number you need (It works as the rows for the textarea)
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
-                                  onChanged: (value) => {
-                                    data!.des = value
-                                    },
+                                  onChanged: (value) => {data!.des = value},
+                                  decoration: InputDecoration(
+                                    hintText: "enter.text".tr(),
+                                  ),
+                                  maxLength: 1500,
+                                  maxLengthEnforcement:
+                                      MaxLengthEnforcement.none,
                                   validator: (value) {
                                     if ((data!.des == null ||
                                         data!.des!.isEmpty)) {
@@ -459,7 +467,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       }),
                                 ),
                               )),
-                              _header(title: "pecifications".tr()),
+                              _header(title: "specifications".tr()),
                               Card(
                                   child: Column(
                                 children: [

@@ -648,18 +648,18 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
               children: [
                 Text(
                   data!.phone ?? "NaN",
-                  style: const TextStyle(color: AppColors.primary).size(12),
+                  style: const TextStyle(color: AppColors.primary),
                 ),
                 if (data!.cityid != null || data!.cityid! > 0)
                   Text(
                     data!.cityname ?? "NaN",
-                    style: const TextStyle().size(12),
+                    style: const TextStyle(),
                   ),
               ],
             ),
             Text(
               data!.address ?? "NaN",
-              style: const TextStyle().italic.size(12),
+              style: const TextStyle().italic,
             )
           ],
         ),

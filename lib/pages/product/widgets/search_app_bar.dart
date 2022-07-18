@@ -132,8 +132,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                                   child: Text(
                                 numFillter >= 9 ? "9+" : numFillter.toString(),
                                 style: const TextStyle(color: AppColors.primary800)
-                                    .bold
-                                    .size(12),
+                                    .bold,
                               ))),
                         )),
                 ],

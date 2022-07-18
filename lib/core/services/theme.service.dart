@@ -23,8 +23,14 @@ class ThemeService {
       primarySwatch: getMaterialColorFromColor(primaryColor),
       textTheme: GoogleFonts.latoTextTheme(
           ThemeData(brightness: isDark ? Brightness.dark : Brightness.light)
-              .textTheme),
-      iconTheme: IconThemeData(size: 19, color: isDark ?  AppColors.white : AppColors.blackLight),
+              .textTheme
+              .copyWith(
+                bodyText1: const TextStyle(fontSize: 16.0),
+                bodyText2: const TextStyle(fontSize: 13.0),
+                button: const TextStyle(fontSize: 13.0),
+              )),
+      iconTheme: IconThemeData(
+          size: 19, color: isDark ? AppColors.white : AppColors.blackLight),
       appBarTheme: AppBarTheme(
         elevation: 0,
         backgroundColor: primaryColor,

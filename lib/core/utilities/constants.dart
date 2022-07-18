@@ -118,7 +118,7 @@ List PRODUCTSEATS = [
   {"name": "7 Chỗ", "id": 7},
   {"name": "9 Chỗ", "id": 9},
 ];
-
+List REPORTS = ["Lừa đảo", "Trùng lặp", "Xe đã bán", "Không liên lạc được", "Thông tin không đúng thực tế"];
 class RxParttern {
   //[Update]
   static String password =

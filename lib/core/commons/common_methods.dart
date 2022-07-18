@@ -157,8 +157,8 @@ class CommonMethods {
 
   static showToast(context, String pmsg) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Triggering event: awesome_event'),
+      SnackBar(
+        content: Text(pmsg),
       ),
     );
   }
@@ -173,7 +173,7 @@ class CommonMethods {
             title: Text(title ?? ""),
             content: Text(
               content,
-              style: const TextStyle().size(12),
+              style: const TextStyle(),
             ),
             actions: <Widget>[
               TextButton(

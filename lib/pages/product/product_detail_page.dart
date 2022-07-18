@@ -6,6 +6,7 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/report.dialog.dart';
 import 'package:raoxe/core/components/dialogs/review.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
@@ -90,7 +91,16 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   _onShare() {
     CommonMethods.share(data!.linkshare);
   }
-
+  _onReport() async
+  {
+    if (!CommonMethods.isLogin) {
+      CommonMethods.showToast(context, "please.login".tr());
+      return;
+    }
+    await CommonNavigates.showDialogBottomSheet(
+        context, ReportDialog(product: data!),
+        height: 480);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,16 +151,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 )),
       persistentFooterButtons: [
         if (data != null)
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: kSizeHeight,
-              decoration: kBoxDecorationStyle.copyWith(
-                  borderRadius: BorderRadius.circular(5)),
-              alignment: Alignment.center,
-              child: Icon(AppIcons.phone_handset, color: AppColors.white),
-            ),
-          ),
+          RxButton(
+              onTap: () => {},
+              icon: Icon(AppIcons.phone_handset),
+              color: AppColors.info,
+              text: "call".tr())
       ],
     );
   }
@@ -196,12 +201,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       RxAvatarImage(data!.rximguser, size: 40),
                       Column(
                           mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               data!.fullname ?? "NaN",
                               style: const TextStyle(
                                 color: AppColors.black50,
-                              ).bold.size(12),
+                              ).bold,
                             ),
                             Row(
                               children: [
@@ -211,10 +217,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   size: 13,
                                 ),
                                 Text(
-                                  data!.address ?? "NaN",
+                                  data!.cityname ?? "NaN",
                                   style: const TextStyle(
                                     color: AppColors.black50,
-                                  ).size(12),
+                                  ),
                                 ),
                               ],
                             )
@@ -279,13 +285,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   padding: const EdgeInsets.only(
                       left: kDefaultPadding, right: kDefaultPadding),
                   child: TextFormField(
-                    initialValue: data!.des,
-                    minLines:
-                        6, // any number you need (It works as the rows for the textarea)
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    enabled:false
-                  ),
+                      initialValue: data!.des,
+                      minLines:
+                          6, // any number you need (It works as the rows for the textarea)
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      enabled: false),
                 )
               ],
             ),
@@ -349,29 +354,40 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     Text(
                       "message.str012".tr(),
                     ),
-                    ElevatedButton.icon(
-                        onPressed: () {
-                          // onReport(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: AppColors.grey,
-                          minimumSize: const Size.fromHeight(36), // NEW
-                        ),
+                    RxButton(
+                        onTap: _onReport,
                         icon: Icon(
                           AppIcons.warning,
-                          color: AppColors.yellow,
                         ),
-                        label: Text(
-                          "report.text".tr().toUpperCase(),
-                          style: TextStyle(color: AppColors.yellow).bold,
-                        )),
+                        color: AppColors.black50,
+                        text: "report.text".tr().toUpperCase())
                   ],
                 ))
               ],
             ),
           ),
         ),
-         RxReview(data!)
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Row(
+              children: [
+                Icon(
+                  AppIcons.map_1,
+                  color: AppColors.black50,
+                ),
+                Padding(padding: const EdgeInsets.only(right: 10)),
+                Text(
+                  data!.address ?? "NaN",
+                  style: const TextStyle(
+                    color: AppColors.black50,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        RxReview(data!)
       ],
     );
   }

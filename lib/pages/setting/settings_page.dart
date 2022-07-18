@@ -145,7 +145,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                           Text(
                             "${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
-                            style: TextStyle().italic.size(12),
+                            style: TextStyle().italic,
                           )
                         ],
                       ))))

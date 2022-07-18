@@ -63,8 +63,7 @@ class ItemProductWidget extends StatelessWidget {
                                     child: Text(
                                   lenimg >= 9 ? "9+" : lenimg.toString(),
                                   style: const TextStyle(color: AppColors.white)
-                                      .bold
-                                      .size(12),
+                                      .bold,
                                 ))),
                           ),
                         ),
@@ -107,7 +106,7 @@ class ItemProductWidget extends StatelessWidget {
                                   item.cityname ?? "Tp.HCM",
                                   style: const TextStyle(
                                     color: AppColors.black50,
-                                  ).bold.size(12),
+                                  ).bold,
                                 ),
                                 GestureDetector(
                                   onTap: onFavorite,

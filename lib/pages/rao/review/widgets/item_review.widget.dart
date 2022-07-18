@@ -37,7 +37,7 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                       padding: const EdgeInsets.all(5),
                       child: Text(
                         widget.item.username ?? "NaN",
-                        style: const TextStyle().size(12),
+                        style: const TextStyle(),
                       ),
                     ),
                   ],
@@ -58,8 +58,7 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                             ? widget.item.reject ?? "error"
                             : "",
                         style: const TextStyle(color: AppColors.danger)
-                            .italic
-                            .size(12))
+                            .italic)
                   ],
                 ),
                 Text(widget.item.rxtimeago, style: kTextTimeStyle),
@@ -89,7 +88,7 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                             padding: const EdgeInsets.all(kDefaultPadding),
                             child: Text(
                               widget.item.name!,
-                              style: const TextStyle().size(12),
+                              style: const TextStyle(),
                             ),
                           ),
                         ],

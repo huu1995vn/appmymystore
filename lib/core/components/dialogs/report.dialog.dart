@@ -12,18 +12,22 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:rating_bar/rating_bar.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
-class ReviewDialog extends StatefulWidget {
-  const ReviewDialog({
+class ReportDialog extends StatefulWidget {
+  const ReportDialog({
     super.key,
     required this.product,
   });
   final ProductModel product;
   @override
-  State<ReviewDialog> createState() => _ReviewDialogState();
+  State<ReportDialog> createState() => _ReportDialogState();
 }
 
-class _ReviewDialogState extends State<ReviewDialog> {
+class _ReportDialogState extends State<ReportDialog> {
+  int value = -1;
+  bool showText = false;
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +38,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
       kTextHeaderStyle.copyWith(fontSize: 15, fontWeight: FontWeight.normal);
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
   ReviewModel review = ReviewModel();
+  late AutoScrollController scrollController = AutoScrollController();
 
   loadData() {
     setState(() {
@@ -46,9 +51,8 @@ class _ReviewDialogState extends State<ReviewDialog> {
       Map<String, dynamic> body = {
         "id": widget.product.id,
         "comment": review.comment,
-        "ratingvalue": review.ratingvalue
       };
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().reviewpost(body);
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().reportpost(body);
       if (res.status > 0) {
         CommonMethods.showDialogSuccess(context, "success".tr());
       } else {
@@ -64,6 +68,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: CustomScrollView(
+        controller: scrollController,
         slivers: <Widget>[
           SliverAppBar(
             iconTheme: IconThemeData(
@@ -80,48 +85,46 @@ class _ReviewDialogState extends State<ReviewDialog> {
                   padding: const EdgeInsets.all(kDefaultPadding),
                   child: Form(
                       key: _keyValidationForm,
-                      child: Column(
+                      child: Card(
+                          child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(widget.product.name!,
-                              style: kTextHeaderStyle
-                                  .copyWith(color: AppColors.black)
-                                  .size(17)),
-                          Padding(
-                            padding: const EdgeInsets.all(kDefaultPadding),
-                            child: RatingBar(
-                              filledColor: AppColors.yellow,
-                              size: 39,
-                              initialRating: 5,
-                              onRatingChanged: (_) {
-                                review.ratingvalue = _.round();
-                              },
-                              emptyIcon: AppIcons.star_1,
-                              filledIcon: AppIcons.star_1,
-                            ),
-                          ),
-                          _header(
-                            header: RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: "review".tr(),
-                                      style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1!
-                                                  .color)
-                                          .bold),
-                                  const TextSpan(
-                                      text: "*",
-                                      style:
-                                          TextStyle(color: AppColors.primary)),
-                                ],
+                          for (int i = 0; i < REPORTS.length; i++)
+                            ListTile(
+                                title: Text(
+                                  REPORTS[i],
+                                ),
+                                leading: Radio(
+                                  value: i,
+                                  groupValue: value,
+                                  onChanged: ((v) {
+                                    setState(() {
+                                      value = v as int;
+                                      review.comment = REPORTS[value as int];
+                                      showText = false;
+                                    });
+                                  }),
+                                )),
+                          ListTile(
+                              title: Text(
+                                "Lý do khác",
                               ),
-                            ),
-                          ),
-                          Card(
-                            child: Padding(
+                              leading: Radio(
+                                value: 9999,
+                                groupValue: value,
+                                onChanged: ((v) {
+                                  setState(() {
+                                    value = v as int;
+                                    showText = true;
+                                    Future.delayed(const Duration(milliseconds: 100), () {
+                                      scrollController.jumpTo(scrollController
+                                          .position.maxScrollExtent);
+                                    });
+                                  });
+                                }),
+                              )),
+                          if (showText)
+                            Padding(
                                 padding: kEdgeInsetsPadding,
                                 child: TextFormField(
                                   showCursor: true,
@@ -148,9 +151,8 @@ class _ReviewDialogState extends State<ReviewDialog> {
                                     return null;
                                   },
                                 )),
-                          )
                         ],
-                      ))))
+                      )))))
         ],
       ),
       persistentFooterButtons: [

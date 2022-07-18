@@ -151,22 +151,22 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 text: "continue".tr().toUpperCase()),
             _createAccountLabel(context),
-            Center(
-                child: Padding(
-              padding: const EdgeInsets.all(kDefaultPadding),
-              child: Ink(
-                decoration: const ShapeDecoration(
-                  shape: CircleBorder(),
-                  color: Colors.teal,
-                ),
-                child: IconButton(
-                  iconSize: 59,
-                  icon: const Icon(AppIcons.fingerprint),
-                  color: AppColors.black50,
-                  onPressed: _onLoginBiometrics,
-                ),
-              ),
-            ))
+            // Center(
+            //     child: Padding(
+            //   padding: const EdgeInsets.all(kDefaultPadding),
+            //   child: Ink(
+            //     decoration: const ShapeDecoration(
+            //       shape: CircleBorder(),
+            //       color: Colors.teal,
+            //     ),
+            //     child: IconButton(
+            //       iconSize: 59,
+            //       icon: const Icon(AppIcons.fingerprint),
+            //       color: AppColors.black50,
+            //       onPressed: _onLoginBiometrics,
+            //     ),
+            //   ),
+            // ))
           ],
         ),
       ),

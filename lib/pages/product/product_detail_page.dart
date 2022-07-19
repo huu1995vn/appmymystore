@@ -354,13 +354,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     Text(
                       "message.str012".tr(),
                     ),
-                    RxButton(
-                        onTap: _onReport,
-                        icon: Icon(
-                          AppIcons.warning,
-                        ),
-                        color: AppColors.black50,
-                        text: "report.text".tr().toUpperCase())
+                    
+                    Padding(
+                      padding: const EdgeInsets.only(top: kDefaultPadding),
+                      child: RxButton(
+                          onTap: _onReport,
+                          icon: Icon(
+                            AppIcons.warning,
+                          ),
+                          color: AppColors.black50,
+                          text: "report.text".tr().toUpperCase()),
+                    )
                   ],
                 ))
               ],

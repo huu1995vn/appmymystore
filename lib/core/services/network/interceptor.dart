@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 
 class DioInterceptors extends InterceptorsWrapper {
@@ -24,7 +25,9 @@ class DioInterceptors extends InterceptorsWrapper {
       'DeviceName': InfoDeviceService.infoDevice.DeviceName,
       'OSName': InfoDeviceService.infoDevice.OSName,
       'Location':
-          "${InfoDeviceService.infoDevice.Position?.latitude},${InfoDeviceService.infoDevice.Position?.longitude}"
+          "${InfoDeviceService.infoDevice.Position?.latitude},${InfoDeviceService.infoDevice.Position?.longitude}",
+      'FCM': FirebaseMessagingService.token,
+
     });
     return options;
   }

@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_null_comparison, use_build_context_synchronously
 
 import 'dart:async';
-
-import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
@@ -10,8 +8,8 @@ import 'package:raoxe/core/components/index.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/services/firebase/firebase_in_app_messaging_service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'main/index.dart';
 
@@ -26,6 +24,14 @@ class _MyPageState extends State<MyPage> {
   late int _totalNotifications;
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
+    }
+  }
+
   @override
   void initState() {
     _totalNotifications = 0;

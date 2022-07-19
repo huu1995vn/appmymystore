@@ -181,21 +181,21 @@ class _HomePageState extends State<HomePage>
 _buildTitle(String header, void Function()? onTap) {
   return Padding(
     padding:
-        const EdgeInsets.only(right: kDefaultPadding, left: kDefaultPadding),
+        const EdgeInsets.all(kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(header.toUpperCase(),
-          style: const TextStyle(color: AppColors.primary).bold),
+          style: const TextStyle().bold),
       GestureDetector(
         onTap: onTap,
         child: Ink(
-          decoration: const ShapeDecoration(
-            color: AppColors.grayDark,
-            shape: CircleBorder(),
-          ),
+          // decoration: const ShapeDecoration(
+          //   color: AppColors.grayDark,
+          //   shape: CircleBorder(),
+          // ),
           child: const Icon(
             AppIcons.chevron_right,
-            size: 30,
-            color: AppColors.primary,
+            // size: 30,
+            color: AppColors.black50,
           ),
         ),
       )

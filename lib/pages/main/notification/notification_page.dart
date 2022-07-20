@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
@@ -37,7 +38,7 @@ class _NotificationPageState extends State<NotificationPage> {
 
     nPaging = nPaging ?? 1;
     Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
-    ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
+    ResponseModel res = await DaiLyXeApiBLL_APIUser().notification(params);
     List<dynamic> data = res.data;
     List<NotificationModel> list = data.map((val) => NotificationModel.fromJson(val)).toList();
     setState(() {
@@ -96,8 +97,11 @@ class _NotificationPageState extends State<NotificationPage> {
           onRefresh: onRefresh,
           slivers: <Widget>[
             RxSliverList(listData, (BuildContext context, int index) {
+              NotificationModel item = listData![index];
               return ItemNotificationWidget(listData![index],
-                  onDelete: (context) => {_onDelete(index)});
+                  onDelete: (context) => {_onDelete(index)}, onTap: () {
+            CommonNavigates.toNotificationPage(context, item: item);
+          },);
             })
           ],
         ));

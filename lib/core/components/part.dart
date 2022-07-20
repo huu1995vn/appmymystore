@@ -83,8 +83,13 @@ class RxWebViewState extends State<RxWebView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title ?? "", style: kTextHeaderStyle),
+          iconTheme:
+              const IconThemeData(color: AppColors.black //change your color here
+                  ),
           centerTitle: true,
+          title: Text(widget.title ?? "",
+              style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+          backgroundColor: AppColors.grey,
           elevation: 0.0,
         ),
         body: Stack(

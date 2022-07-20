@@ -163,7 +163,7 @@ class CommonMethods {
     );
   }
 
-  static Future<bool> showConfirmDialog(BuildContext context, String content,
+  static Future<bool> showConfirmDialog(BuildContext context, String? content,
       {String? title}) async {
     return await showDialog(
         context: context,
@@ -171,10 +171,10 @@ class CommonMethods {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(title ?? ""),
-            content: Text(
+            content: content!=null? Text(
               content,
               style: const TextStyle(),
-            ),
+            ):Container(),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),

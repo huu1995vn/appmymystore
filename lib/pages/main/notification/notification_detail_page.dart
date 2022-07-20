@@ -31,7 +31,7 @@ class NotificationDetailPageState extends State<NotificationDetailPage> {
         _data = widget.item;
       });
     } else {
-      ResponseModel res = await DaiLyXeApiBLL_APIGets().newsbyid(widget.id!);
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().notificationbyid(widget.id!);
       if (res.status > 0) {
         _data = NotificationModel.fromJson(res.data);
       } else {

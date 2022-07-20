@@ -81,7 +81,7 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       child: Scaffold(
           appBar: AppBar(
-             iconTheme: IconThemeData(
+             iconTheme: const IconThemeData(
               color: AppColors.black //change your color here
             ),
             centerTitle: true,

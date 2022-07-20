@@ -61,7 +61,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
           _totalNotifications++;
         });
         var res = await CommonMethods.showConfirmDialog(
-            context, message.body.toString(),
+            context, message.body,
             title: message.title);
         if (res != null && res && message.data != null) {
           String action = message.data!["action"].toString().toLowerCase();

@@ -105,6 +105,9 @@ class NotificationModel extends Entity {
     required this.message,
     required this.createdate,
   });
+  String get rxtimeago {
+    return CommonMethods.timeagoFormat(createdate);
+  }
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);

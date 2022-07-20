@@ -8,7 +8,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class ItemNotificationWidget extends StatelessWidget {
   final NotificationModel itemNotification;
   final void Function(BuildContext)? onDelete;
-  const ItemNotificationWidget(this.itemNotification, {super.key, this.onDelete});
+  final void Function()? onTap;
+  const ItemNotificationWidget(this.itemNotification,
+      {super.key, this.onDelete, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +35,16 @@ class ItemNotificationWidget extends StatelessWidget {
       // The child of the Slidable is what the user sees when the
       // component is not dragged.
       child: ListTile(
+        onTap: onTap,
         title: Text(
-          itemNotification.message,
+          itemNotification.subject,
           overflow: TextOverflow.ellipsis,
           // style: TextStyle(FontWeight.normal),
         ),
         leading: const CircleAvatar(
             backgroundColor: AppColors.grayDark,
-            child: Icon(AppIcons.alarm,
-                color: AppColors.primary800, size: 30)),
-        // subtitle: Text(itemNotification.publishdate),
+            child: Icon(AppIcons.alarm, color: AppColors.primary800, size: 30)),
+        subtitle: Text(itemNotification.rxtimeago),
       ),
     );
   }

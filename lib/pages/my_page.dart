@@ -7,6 +7,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/lifecyclewatcherstate.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_in_app_messaging_service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
@@ -20,17 +21,10 @@ class MyPage extends StatefulWidget {
   State<MyPage> createState() => _MyPageState();
 }
 
-class _MyPageState extends State<MyPage> {
+class _MyPageState extends LifecycleWatcherState<MyPage> {
   late int _totalNotifications;
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
-    }
-  }
 
   @override
   void initState() {
@@ -43,8 +37,21 @@ class _MyPageState extends State<MyPage> {
             });
 
     initApp();
-
     super.initState();
+  }
+
+  @override
+  void onDetached() {}
+
+  @override
+  void onInactive() {}
+
+  @override
+  void onPaused() {}
+
+  @override
+  void onResumed() {
+    FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
   }
 
   initApp() {

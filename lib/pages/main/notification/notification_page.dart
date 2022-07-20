@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
@@ -37,25 +38,35 @@ class _NotificationPageState extends State<NotificationPage> {
       return;
 
     nPaging = nPaging ?? 1;
+
     Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
     ResponseModel res = await DaiLyXeApiBLL_APIUser().notification(params);
-    List<dynamic> data = res.data;
-    List<NotificationModel> list = data.map((val) => NotificationModel.fromJson(val)).toList();
-    setState(() {
-      if (nPaging == 1 && (list.isEmpty)) {
-        totalItems = 0;
-      }
-      if (list.isNotEmpty) {
-        totalItems = list[0].rxtotalrow;
-      }
-      listData ??= [];
+    if (res.status > 0) {
+      List<NotificationModel> list = CommonMethods.convertToList<NotificationModel>(
+        res.data, (val) => NotificationModel.fromJson(val));
+      setState(() {
+        if (nPaging == 1 && (list.isEmpty)) {
+          totalItems = 0;
+        }
+        if (list.isNotEmpty) {
+          totalItems = list[0].rxtotalrow;
+        }
+        listData ??= [];
+        if (nPaging == 1) {
+          listData = list;
+        } else {
+          listData = (listData! + list);
+        }
+      });
+      paging = nPaging;
+    } else {
       if (nPaging == 1) {
-        listData = list;
-      } else {
-        listData = (listData! + list);
+        setState(() {
+          listData = null;
+          totalItems = 0;
+        });
       }
-    });
-    paging = nPaging;
+    }
   }
 
   Future<dynamic> onNextPage() async {
@@ -98,10 +109,13 @@ class _NotificationPageState extends State<NotificationPage> {
           slivers: <Widget>[
             RxSliverList(listData, (BuildContext context, int index) {
               NotificationModel item = listData![index];
-              return ItemNotificationWidget(listData![index],
-                  onDelete: (context) => {_onDelete(index)}, onTap: () {
-            CommonNavigates.toNotificationPage(context, item: item);
-          },);
+              return ItemNotificationWidget(
+                listData![index],
+                onDelete: (context) => {_onDelete(index)},
+                onTap: () {
+                  CommonNavigates.toNotificationPage(context, item: item);
+                },
+              );
             })
           ],
         ));

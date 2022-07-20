@@ -5,10 +5,10 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class ItemNotifycationWidget extends StatelessWidget {
-  final NewsModel itemNews;
+class ItemNotificationWidget extends StatelessWidget {
+  final NotificationModel itemNotification;
   final void Function(BuildContext)? onDelete;
-  const ItemNotifycationWidget(this.itemNews, {super.key, this.onDelete});
+  const ItemNotificationWidget(this.itemNotification, {super.key, this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class ItemNotifycationWidget extends StatelessWidget {
       // component is not dragged.
       child: ListTile(
         title: Text(
-          itemNews.desc,
+          itemNotification.message,
           overflow: TextOverflow.ellipsis,
           // style: TextStyle(FontWeight.normal),
         ),
@@ -42,7 +42,7 @@ class ItemNotifycationWidget extends StatelessWidget {
             backgroundColor: AppColors.grayDark,
             child: Icon(AppIcons.alarm,
                 color: AppColors.primary800, size: 30)),
-        subtitle: Text(itemNews.publishdate),
+        // subtitle: Text(itemNotification.publishdate),
       ),
     );
   }

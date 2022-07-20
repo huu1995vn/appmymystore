@@ -78,6 +78,10 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
             case "news":
               CommonNavigates.toNewsPage(context, id: id);
               break;
+            default:
+              CommonNavigates.toNotificationPage(context, id: id);
+              break;
+
           }
         }
       }
@@ -107,7 +111,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         children: <Widget>[
           HomePage(),
           NewsPage(),
-          NotifycationPage(),
+          NotificationPage(),
           DashboardPage(),
         ],
         physics: const NeverScrollableScrollPhysics(),

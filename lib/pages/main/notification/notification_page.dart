@@ -8,17 +8,17 @@ import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/pages/main/notifycation/widgets/item_notifycation.widget.dart';
+import 'package:raoxe/pages/main/notification/widgets/item_notification.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-class NotifycationPage extends StatefulWidget {
-  const NotifycationPage({Key? key}) : super(key: key);
+class NotificationPage extends StatefulWidget {
+  const NotificationPage({Key? key}) : super(key: key);
 
   @override
-  State<NotifycationPage> createState() => _NotifycationPageState();
+  State<NotificationPage> createState() => _NotificationPageState();
 }
 
-class _NotifycationPageState extends State<NotifycationPage> {
+class _NotificationPageState extends State<NotificationPage> {
   @override
   void initState() {
     super.initState();
@@ -27,7 +27,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
 
   int paging = 1;
   int totalItems = 0;
-  List<NewsModel>? listData;
+  List<NotificationModel>? listData;
   AutoScrollController scrollController = AutoScrollController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
@@ -39,7 +39,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
     Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
     ResponseModel res = await DaiLyXeApiBLL_APIGets().news(params);
     List<dynamic> data = res.data;
-    List<NewsModel> list = data.map((val) => NewsModel.fromJson(val)).toList();
+    List<NotificationModel> list = data.map((val) => NotificationModel.fromJson(val)).toList();
     setState(() {
       if (nPaging == 1 && (list.isEmpty)) {
         totalItems = 0;
@@ -96,7 +96,7 @@ class _NotifycationPageState extends State<NotifycationPage> {
           onRefresh: onRefresh,
           slivers: <Widget>[
             RxSliverList(listData, (BuildContext context, int index) {
-              return ItemNotifycationWidget(listData![index],
+              return ItemNotificationWidget(listData![index],
                   onDelete: (context) => {_onDelete(index)});
             })
           ],

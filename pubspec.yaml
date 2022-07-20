@@ -56,7 +56,7 @@ dependencies:
   geolocator: # Used for get geolocator
   encrypt: # Used for encrypt ASE token
   crypto: # Used for encrypt md5
-  material_dialogs: # Used for show dialogs notifycation
+  material_dialogs: # Used for show dialogs notification
   flutter_easyloading: # Used for show loading
   webview_flutter: # Used for show webviewx
   url_launcher: # Used for open url

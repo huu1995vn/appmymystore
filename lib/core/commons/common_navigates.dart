@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:raoxe/core/components/dialogs/confirm_otp.dialog.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/pages/main/notification/notification_detail_page.dart';
+import 'package:raoxe/pages/my_page.dart';
 import 'package:raoxe/pages/rao/advert/advert_detail_page.dart';
 import 'package:raoxe/pages/rao/advert/advert_page.dart';
 import 'package:raoxe/pages/auth/forgot_password/forgot_password_page.dart';
@@ -36,6 +38,7 @@ class CommonNavigates {
     '/my-product': (context) => const MyProductPage(),
     '/advert': (context) => const AdvertPage(),
     '/news': (context) => const NewsPage(),
+    '/notification': (context) => const NotificationPage(),
     '/contact': (context) => const ContactPage(),
     '/review': (context) => const ReviewPage(),
     '/favorite': (context) => const FavoritePage(),
@@ -127,7 +130,27 @@ class CommonNavigates {
           CupertinoPageRoute(
               builder: (context) => NewsDetailPage(id: id, item: item)));
     } else {
-      return await Navigator.pushNamed(context, "/news");
+      return await Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const MyPage(indexTab: 1)),
+              (Route<dynamic> route) => route.isFirst);
+    }
+  }
+
+    static Future toNotificationPage(BuildContext context,
+      {int? id, NotificationModel? item}) async {
+    if ((id != null && id > 0) || item != null) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => NotificationDetailPage(id: id, item: item)));
+    } else {
+      return await Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const MyPage(indexTab: 2)),
+              (Route<dynamic> route) => route.isFirst);
     }
   }
 

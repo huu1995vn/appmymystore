@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, empty_catches
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 
@@ -24,8 +25,8 @@ class NotificationDetailPageState extends State<NotificationDetailPage> {
   // String title = "";
   NotificationModel? data;
   loadData() async {
-    NotificationModel? _data;
-
+    try {
+      NotificationModel? _data;
     if (widget.item != null) {
       setState(() {
         _data = widget.item;
@@ -41,8 +42,21 @@ class NotificationDetailPageState extends State<NotificationDetailPage> {
     setState(() {
       data = _data;
     });
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
+    }
+    
   }
-
+  updateReady()
+  async {
+    try {
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().notificationready([widget.id!]);
+      if (res.status > 0) {
+        widget.item!.status = 2;
+      } 
+    } catch (e) {
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return RxWebView(

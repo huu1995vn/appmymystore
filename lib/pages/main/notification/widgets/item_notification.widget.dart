@@ -6,10 +6,10 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ItemNotificationWidget extends StatelessWidget {
-  final NotificationModel itemNotification;
+  final NotificationModel item;
   final void Function(BuildContext)? onDelete;
   final void Function()? onTap;
-  const ItemNotificationWidget(this.itemNotification,
+  const ItemNotificationWidget(this.item,
       {super.key, this.onDelete, this.onTap});
 
   @override
@@ -37,14 +37,13 @@ class ItemNotificationWidget extends StatelessWidget {
       child: ListTile(
         onTap: onTap,
         title: Text(
-          itemNotification.subject,
+          item.subject,
           overflow: TextOverflow.ellipsis,
-          // style: TextStyle(FontWeight.normal),
         ),
-        leading: const CircleAvatar(
+        leading: CircleAvatar(
             backgroundColor: AppColors.grayDark,
-            child: Icon(AppIcons.alarm, color: AppColors.primary800, size: 30)),
-        subtitle: Text(itemNotification.rxtimeago),
+            child: Icon(AppIcons.alarm, color: (item.status !=1 ? null: AppColors.primary800), size: 30)),
+        subtitle: Text(item.rxtimeago),
       ),
     );
   }

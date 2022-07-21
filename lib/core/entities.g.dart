@@ -64,7 +64,9 @@ NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['createdate'] as String),
     )
       ..TotalRow = json['TotalRow']
-      ..RowIndex = json['RowIndex'];
+      ..RowIndex = json['RowIndex']
+      ..status = json['status'] as int
+      ..unready = json['unready'] as int;
 
 Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
     <String, dynamic>{
@@ -74,7 +76,9 @@ Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
       'notificationtypeid': instance.notificationtypeid,
       'subject': instance.subject,
       'message': instance.message,
+      'status': instance.status,
       'createdate': instance.createdate?.toIso8601String(),
+      'unready': instance.unready,
     };
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel()

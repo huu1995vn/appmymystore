@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/enviroments/prod.dart';

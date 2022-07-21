@@ -133,7 +133,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                   CommonNavigates.toContactPage(context),
                               // subtitle: Text("Sổ địa chỉ"),
                             ),
-                          ),
+                          )
+                        
                         ],
                       ),
                     )

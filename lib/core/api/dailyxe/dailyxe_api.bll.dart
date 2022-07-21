@@ -205,6 +205,14 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "notification/$id");
   }
 
+  Future<ResponseModel> notificationready(List<int> ids) async {
+    Map<String, dynamic> body = {
+      "ids": ids,
+      "status": 2
+    };
+    return await post(body, null, "notification/status");
+  }
+
   Future<ResponseModel> contactbyid(dynamic id) async {
     Map<String, dynamic> body = {};
     return await post(body, null, "contact/$id");

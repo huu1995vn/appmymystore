@@ -3,9 +3,11 @@
 import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:material_dialogs/material_dialogs.dart';
@@ -17,6 +19,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
@@ -171,10 +174,12 @@ class CommonMethods {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(title ?? ""),
-            content: content!=null? Text(
-              content,
-              style: const TextStyle(),
-            ):Container(),
+            content: content != null
+                ? Text(
+                    content,
+                    style: const TextStyle(),
+                  )
+                : Container(),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
@@ -551,6 +556,70 @@ class CommonMethods {
   static String buildDynamicLink_Product(ProductModel product) {
     String deepLink = linkProduct(product.id, product.name!);
     return buildDynamicLink(deepLink);
+  }
+
+  static Future<Uri> createDynamicLink(String uriPrefix,
+      {bool short = false, bool shareApp = false}) async {
+    DynamicLinkParameters parameters;
+    if (shareApp) {
+      parameters = DynamicLinkParameters(
+          uriPrefix: CommonConfig.hostDynamicLinks,
+          link: Uri.parse(uriPrefix),
+          androidParameters: AndroidParameters(
+            packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,
+            // minimumVersion: 16,
+          ),
+          // dynamicLinkParametersOptions: DynamicLinkParametersOptions(
+          //   shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short,
+          // ),
+          iosParameters: IOSParameters(
+              bundleId: InfoDeviceService.infoDevice.PackageInfo.packageName,
+              appStoreId: CommonConfig.appStoreID
+              // minimumVersion: '16',
+              ));
+    } else {
+      parameters = DynamicLinkParameters(
+          uriPrefix: CommonConfig.hostDynamicLinks,
+          link: Uri.parse(uriPrefix),
+          androidParameters: AndroidParameters(
+            packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,
+            // minimumVersion: 16,
+          ),
+          // dynamicLinkParametersOptions: DynamicLinkParametersOptions(
+          //   shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short,
+          // ),
+          iosParameters: IOSParameters(
+              bundleId: InfoDeviceService.infoDevice.PackageInfo.packageName,
+              appStoreId: CommonConfig.appStoreID
+              // minimumVersion: '16',
+              ));
+    }
+
+    Uri url;
+    if (short) {
+      final ShortDynamicLink shortLink =
+          await DynamicLinkService.dynamicLinks.buildShortLink(parameters);
+      url = shortLink.shortUrl;
+    } else {
+      url = await DynamicLinkService.dynamicLinks.buildLink(parameters);
+    }
+    return url;
+  }
+
+  static String deepLinkInstallWithDomain() {
+    try {
+      String rewriteLink =
+          'https://dailyxe.com.vn/rao-xe?appinstall=${generateMd5("d@i${APITokenService.userId}")}';
+      return rewriteLink;
+    } catch (error) {}
+    return "";
+  }
+
+  static copy(BuildContext context, String noiDung) {
+    Clipboard.setData(ClipboardData(text: noiDung)).then((_) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Copied to your clipboard !')));
+    });
   }
 
   static void call(String phone) {

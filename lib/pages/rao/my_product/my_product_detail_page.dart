@@ -71,8 +71,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     if (_data!.usercontactid <= 0) {
       lContacts = await _loadContact();
       if (lContacts.isEmpty || lContacts.length == 0) {
-        CommonMethods.showToast(context, "Không tồn tại thông tin liên lạc");
+        CommonMethods.showToast(context, "Vui lòng tạo thông tin liên lạc trước khi tạo tin");
         CommonNavigates.goBack(context);
+        return;
       }
       ContactModel contact =
           lContacts.firstWhere((element) => element.isdefault == true) ??

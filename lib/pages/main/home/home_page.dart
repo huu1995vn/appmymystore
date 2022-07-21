@@ -37,13 +37,13 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    loadData(paging);
+    loadData();
   }
 
   int paging = 1;
   int totalItems = 0;
   List<ProductModel>? listData;
-  loadData(nPaging) async {
+  loadData([nPaging = 1]) async {
     if (nPaging > 1 && listData != null && totalItems <= listData!.length)
       return;
     nPaging = nPaging ?? 1;
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage>
   }
 
   Future<dynamic> onRefresh() async {
-    return await loadData(1);
+    return await loadData();
   }
 
   onFavorite(int index) async {

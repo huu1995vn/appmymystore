@@ -73,7 +73,7 @@ class _ContactPageState extends State<ContactPage> {
   }
 
   Future<dynamic> onRefresh() async {
-    return await loadData(1);
+    return await loadData();
   }
 
   @override

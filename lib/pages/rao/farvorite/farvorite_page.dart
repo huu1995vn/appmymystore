@@ -72,7 +72,7 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   Future<dynamic> onRefresh() async {
-    return await loadData(1);
+    return await loadData();
   }
 
   @override

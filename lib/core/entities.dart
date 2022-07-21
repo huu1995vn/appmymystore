@@ -319,6 +319,16 @@ class ProductModel extends Entity {
     return CommonMethods.buildDynamicLink_Product(this);
   }
 
+  setcontact(ContactModel contact) {
+    this.address = contact.address;
+    this.cityid = contact.cityid;
+    this.cityname = contact.cityname;
+    this.districtid = contact.districtid;
+    this.phone = contact.phone;
+    this.fullname = contact.fullname;
+    this.usercontactid = contact.id;
+  }
+
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);

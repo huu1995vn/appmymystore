@@ -42,7 +42,7 @@ class ItemNotificationWidget extends StatelessWidget {
         ),
         leading: CircleAvatar(
             backgroundColor: AppColors.grayDark,
-            child: Icon(AppIcons.alarm, color: (item.status !=1 ? null: AppColors.primary800), size: 30)),
+            child: Icon(AppIcons.alarm, color: (item.status !=1 ? AppColors.black50: AppColors.primary800), size: 30)),
         subtitle: Text(item.rxtimeago),
       ),
     );

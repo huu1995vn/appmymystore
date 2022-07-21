@@ -144,13 +144,13 @@ class CommonNavigates {
   }
 
   static Future toNotificationPage(BuildContext context,
-      {int? id, NotificationModel? item}) async {
+      {int? id, NotificationModel? item, void Function(NotificationModel)? onChanged}) async {
     if ((id != null && id > 0) || item != null) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
               builder: (context) =>
-                  NotificationDetailPage(id: id, item: item)));
+                  NotificationDetailPage(id: id, item: item, onChanged: onChanged)));
     } else {
       return await Navigator.pushAndRemoveUntil(
           context,

@@ -24,7 +24,7 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   void initState() {
     super.initState();
-    loadData(paging);
+    loadData();
   }
 
   int paging = 1;
@@ -33,15 +33,16 @@ class _NotificationPageState extends State<NotificationPage> {
   AutoScrollController scrollController = AutoScrollController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  loadData(nPaging) async {
+  loadData([nPaging = 1]) async {
     if (nPaging > 1 && listData != null && totalItems <= listData!.length)
       return;
     nPaging = nPaging ?? 1;
     Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
     ResponseModel res = await DaiLyXeApiBLL_APIUser().notification(params);
     if (res.status > 0) {
-      List<NotificationModel> list = CommonMethods.convertToList<NotificationModel>(
-        res.data, (val) => NotificationModel.fromJson(val));
+      List<NotificationModel> list =
+          CommonMethods.convertToList<NotificationModel>(
+              res.data, (val) => NotificationModel.fromJson(val));
       setState(() {
         if (nPaging == 1 && (list.isEmpty)) {
           totalItems = 0;
@@ -57,13 +58,12 @@ class _NotificationPageState extends State<NotificationPage> {
         }
       });
       paging = nPaging;
-    } else {
-      if (nPaging == 1) {
-        setState(() {
-          listData = null;
-          totalItems = 0;
-        });
-      }
+    }
+    if ((res.data == null || res.data.length == 0) && nPaging == 1) {
+      setState(() {
+        listData = [];
+        totalItems = 0;
+      });
     }
   }
 
@@ -72,7 +72,7 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   Future<dynamic> onRefresh() async {
-    return await loadData(1);
+    return await loadData();
   }
 
   _onDelete(index) {
@@ -111,7 +111,13 @@ class _NotificationPageState extends State<NotificationPage> {
                 listData![index],
                 onDelete: (context) => {_onDelete(index)},
                 onTap: () {
-                  CommonNavigates.toNotificationPage(context, item: item);
+                  CommonNavigates.toNotificationPage(context,
+                      item: item,
+                      onChanged: (v) => {
+                            setState(() {
+                              listData![index] = v;
+                            })
+                          });
                 },
               );
             })

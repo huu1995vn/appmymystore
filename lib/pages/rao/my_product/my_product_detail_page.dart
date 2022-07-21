@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,6 @@ class MyProductDetailPage extends StatefulWidget {
   final int? id;
   final ProductModel? item;
   final void Function(ProductModel)? onChanged;
-
   const MyProductDetailPage({super.key, this.id, this.item, this.onChanged});
 
   @override
@@ -35,6 +34,7 @@ class MyProductDetailPage extends StatefulWidget {
 }
 
 class _MyProductDetailPageState extends State<MyProductDetailPage> {
+  List<ContactModel> lContacts = [];
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
   AutoScrollController scrollController = AutoScrollController();
   TextStyle styleTitle =
@@ -52,17 +52,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   bool isNotFound = false;
   List<String> imgs = <String>[];
   loadData() async {
+    ProductModel? _data;
     if (widget.item != null) {
-      setState(() {
-        data = widget.item!;
-        imgs = data!.rximglist;
-      });
+      _data = widget.item!;
     } else {
       ResponseModel res = await DaiLyXeApiBLL_APIGets().productbyid(widget.id!);
       if (res.status > 0) {
         setState(() {
-          data = ProductModel.fromJson(res.data);
-          imgs = data!.rximglist;
+          _data = ProductModel.fromJson(res.data);
         });
       } else {
         setState(() {
@@ -71,6 +68,22 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         CommonMethods.showToast(context, res.message);
       }
     }
+    if (_data!.usercontactid <= 0) {
+      lContacts = await _loadContact();
+      if (lContacts.isEmpty || lContacts.length == 0) {
+        CommonMethods.showToast(context, "Không tồn tại thông tin liên lạc");
+        CommonNavigates.goBack(context);
+      }
+      ContactModel contact =
+          lContacts.firstWhere((element) => element.isdefault == true) ??
+              lContacts[0];
+      _data!.setcontact(contact);
+    }
+
+    setState(() {
+      data = _data;
+      imgs = _data!.rximglist;
+    });
   }
 
   bool get isLike {
@@ -111,13 +124,25 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     CommonMethods.unlockScreen();
   }
 
+  _loadContact() async {
+    ResponseModel res =
+        await DaiLyXeApiBLL_APIUser().contact(<String, dynamic>{});
+    if (res.status > 0) {
+      return CommonMethods.convertToList<ContactModel>(
+          res.data, (val) => ContactModel.fromJson(val));
+    } else {
+      CommonMethods.showToast(context, res.message);
+    }
+    return [];
+  }
+
   _onAddress() async {
     ResponseModel res =
         await DaiLyXeApiBLL_APIUser().contact(<String, dynamic>{});
     if (res.status > 0) {
       list = CommonMethods.convertToList<ContactModel>(
           res.data, (val) => ContactModel.fromJson(val));
-      if (list.length == 0) {
+      if (list.isEmpty) {
         CommonMethods.showDialogWarning(
             context, "Vui lòng tạo địa chỉ trước khi tạo tin");
         return;
@@ -160,14 +185,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                         CommonNavigates.goBack(context, item);
                       }));
             }));
-    setState(() {
-      data!.address = contact.address;
-      data!.cityid = contact.cityid;
-      data!.districtid = contact.districtid;
-      data!.phone = contact.phone;
-      data!.fullname = contact.fullname;
-      data!.usercontactid = contact.id;
-    });
+    if (contact != null) {
+      setState(() {
+        data!.setcontact(contact);
+      });
+    }
   }
 
   @override
@@ -519,12 +541,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                               data!.seat = v;
                                             })
                                           }),
-                                  rxSelectInput(
-                                      context, "productseat", data!.seat,
-                                      labelText: "seat".tr(),
+                                  rxSelectInput(context, "color", data!.colorid,
+                                      labelText: "color".tr(),
                                       afterChange: (v) => {
                                             setState(() {
-                                              data!.seat = v;
+                                              data!.colorid = v;
                                             })
                                           }),
                                   ListTile(

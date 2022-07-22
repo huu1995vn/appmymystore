@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable, use_build_context_synchronously
 
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
@@ -12,8 +12,8 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/news/widgets/item_news.widget.dart';
 
 class TabNewsWidget extends StatefulWidget {
-  dynamic categorie;
-  TabNewsWidget({this.categorie = 1});
+  dynamic parentid;
+  TabNewsWidget({this.parentid = 1});
   @override
   State<TabNewsWidget> createState() => _TabNewsWidgetPageState();
 }
@@ -46,7 +46,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> params = {
-        "id": widget.categorie, // cái này là lại ParentIdList === tin tức mới
+        "parentid": widget.parentid, // cái này là lại ParentIdList === tin tức mới
         "p": nPaging,
         "n": kItemOnPage
       };

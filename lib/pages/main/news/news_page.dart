@@ -27,7 +27,7 @@ class _NewsPageState extends State<NewsPage> {
       .toList();
   List<Widget> tabviews = CATEGORIES
       .map(
-        (item) => TabNewsWidget(categorie: item.id),
+        (item) => TabNewsWidget(parentid: item.id),
       )
       .toList();
   @override

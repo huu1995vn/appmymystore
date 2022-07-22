@@ -60,6 +60,7 @@ class NewsModel extends Entity {
   late String webresourceid;
   late String webresourcename;
   late String webresourceurl;
+  late String authorname;
   String get rxlink {
     return CommonMethods.buildUrlNews(id, prefixUrl: prefix, rewriteUrl: url);
   }

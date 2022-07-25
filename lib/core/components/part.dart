@@ -76,6 +76,9 @@ class RxWebViewState extends State<RxWebView> {
   @override
   void initState() {
     super.initState();
+    if (widget.html != null) {
+      isLoading = false;
+    }
     // Enable virtual display.
   }
 
@@ -83,9 +86,9 @@ class RxWebViewState extends State<RxWebView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme:
-              const IconThemeData(color: AppColors.black //change your color here
-                  ),
+          iconTheme: const IconThemeData(
+              color: AppColors.black //change your color here
+              ),
           centerTitle: true,
           title: Text(widget.title ?? "",
               style: kTextHeaderStyle.copyWith(color: AppColors.black)),
@@ -99,7 +102,7 @@ class RxWebViewState extends State<RxWebView> {
               initialUrl: widget.url,
               javascriptMode: JavascriptMode.unrestricted,
               onProgress: (progress) {
-                if (progress > 20) {
+                if (widget.html != null && progress > 20) {
                   if (_webViewController != null &&
                       widget.javaScriptString != null) {
                     _webViewController!.runJavascript(widget.javaScriptString!);

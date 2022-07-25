@@ -100,20 +100,22 @@ class AuthService {
     bool isAuthenticated = false;
     //check if device supports biometrics authentication.
     bool isBiometricSupported = await _localAuthentication.isDeviceSupported();
+    if(!isBiometricSupported)
+    {
+      throw "message.str045".tr();
+    }
     //check if user has enabled biometrics.
-    //check
     bool canCheckBiometrics = await _localAuthentication.canCheckBiometrics;
-
+    if(!canCheckBiometrics)
+    {
+      throw "message.str046".tr();
+    }
     //if device supports biometrics and user has enabled biometrics, then authenticate.
     if (isBiometricSupported && canCheckBiometrics) {
-      try {
-        isAuthenticated = await _localAuthentication.authenticate(
-            localizedReason: 'Scan your fingerprint to authenticate',
-            options: const AuthenticationOptions(
-                biometricOnly: true, useErrorDialogs: true, stickyAuth: true));
-      } on PlatformException catch (e) {
-        CommonMethods.wirtePrint(e);
-      }
+      isAuthenticated = await _localAuthentication.authenticate(
+          localizedReason: 'Scan your fingerprint to authenticate',
+          options: const AuthenticationOptions(
+              biometricOnly: true, useErrorDialogs: true, stickyAuth: true));
     }
     return isAuthenticated;
   }

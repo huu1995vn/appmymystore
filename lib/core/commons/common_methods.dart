@@ -197,10 +197,14 @@ class CommonMethods {
         });
   }
 
-  static materialDialog(BuildContext context, String pmsg,
+  static materialDialog(BuildContext context, dynamic pmsg,
       {String? title, List<Widget>? actions, Color? color = AppColors.white}) {
+            String message = pmsg.toString();
+    try {
+      message = pmsg.message ?? message;
+    } catch (e) {}
     return Dialogs.materialDialog(
-        msg: pmsg,
+        msg: message,
         title: title ?? "notification".tr(),
         context: context,
         actions: actions ??
@@ -220,21 +224,22 @@ class CommonMethods {
         color: AppColors.info);
   }
 
-  static void showDialogError(BuildContext context, Object pmsg,
+  static void showDialogError(BuildContext context, dynamic pmsg,
       {String? title, List<Widget>? actions}) {
-    materialDialog(context, pmsg.toString(),
+
+    materialDialog(context, pmsg,
         title: "error.text".tr(), actions: actions, color: AppColors.error);
   }
 
   static void showDialogSuccess(BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) {
-    materialDialog(context, pmsg.toString(),
+    materialDialog(context, pmsg,
         title: "success.text".tr(), actions: actions, color: AppColors.success);
   }
 
   static void showDialogWarning(BuildContext context, Object pmsg,
       {List<Widget>? actions}) {
-    materialDialog(context, pmsg.toString(),
+    materialDialog(context, pmsg,
         title: "warning".tr(), actions: actions, color: AppColors.warning);
   }
 

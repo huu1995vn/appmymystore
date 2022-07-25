@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,8 +7,10 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
+import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
@@ -21,21 +23,23 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  // bool authBiometric = false;
-  // _onBiometric(bool v) async {
-  //   bool authBiometric = await AuthService.authBiometric();
-  //   if (!authBiometric) {
-  //     CommonMethods.showToast(context, "failedaction".tr());
-  //   }
-  //   if (v) {
-  //     await StorageService.set(StorageKeys.biometrics, APITokenService.token);
-  //   } else {
-  //     StorageService.deleteItem(StorageKeys.biometrics);
-  //   }
-  //   setState(() {
-  //     authBiometric = v;
-  //   });
-  // }
+  bool authBiometric = false;
+  _onBiometric(bool v) async {
+    try {
+      await AuthService.authBiometric();    
+      if (v) {
+        await StorageService.set(StorageKeys.biometrics, APITokenService.token);
+      } else {
+        StorageService.deleteItem(StorageKeys.biometrics);
+      }
+      setState(() {
+        authBiometric = v;
+      });
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
+    }
+  }
+
   late String link;
   @override
   void initState() {
@@ -57,6 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
       link = Uri.decodeFull(uri.toString() + "&efr=1");
     });
   }
+
   _onShare() async {
     CommonMethods.lockScreen();
     try {
@@ -68,6 +73,7 @@ class _SettingsPageState extends State<SettingsPage> {
     }
     CommonMethods.unlockScreen();
   }
+
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
@@ -128,18 +134,18 @@ class _SettingsPageState extends State<SettingsPage> {
                                   activeColor: Colors.red,
                                 ),
                               ),
-                              // RxBuildItem(
-                              //     icon: const Icon(AppIcons.fingerprint),
-                              //     title: "Đăng nhập bằng sinh trắc học",
-                              //     trailing: Switch(
-                              //       value: authBiometric,
-                              //       onChanged: _onBiometric,
-                              //       activeTrackColor: Colors.red[200],
-                              //       activeColor: Colors.red,
-                              //     ),
-                              //     onTap: () {
-                              //       // _authenticateWithBiometrics();
-                              //     }),
+                              RxBuildItem(
+                                  icon: const Icon(AppIcons.fingerprint),
+                                  title: "Đăng nhập bằng sinh trắc học",
+                                  trailing: Switch(
+                                    value: authBiometric,
+                                    onChanged: _onBiometric,
+                                    activeTrackColor: Colors.red[200],
+                                    activeColor: Colors.red,
+                                  ),
+                                  onTap: () {
+                                    // _authenticateWithBiometrics();
+                                  }),
                               // RxBuildItem(
                               //     title: "Clear cache".tr(),
                               //     onTap: () {
@@ -148,11 +154,10 @@ class _SettingsPageState extends State<SettingsPage> {
                               //           context, "success".tr());
                               //     }),
                               RxBuildItem(
-                                icon: const Icon(AppIcons.share_1),
-                                title: "share".tr(),
-                                trailing: Icon(AppIcons.keyboard_arrow_right),
-                                onTap: _onShare
-                              ),
+                                  icon: const Icon(AppIcons.share_1),
+                                  title: "share".tr(),
+                                  trailing: Icon(AppIcons.keyboard_arrow_right),
+                                  onTap: _onShare),
                               RxBuildItem(
                                   title: "termsandcondition".tr(),
                                   onTap: () {

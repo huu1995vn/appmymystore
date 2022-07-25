@@ -37,7 +37,7 @@ class _NotificationPageState extends State<NotificationPage> {
     if (nPaging > 1 && listData != null && totalItems <= listData!.length)
       return;
     nPaging = nPaging ?? 1;
-    Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
+    Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage, "orderBy": "CreateDate DESC"};
     ResponseModel res = await DaiLyXeApiBLL_APIUser().notification(params);
     if (res.status > 0) {
       List<NotificationModel> list =

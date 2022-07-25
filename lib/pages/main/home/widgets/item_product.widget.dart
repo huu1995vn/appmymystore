@@ -103,10 +103,8 @@ class ItemProductWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  item.cityname ?? "Tp.HCM",
-                                  style: const TextStyle(
-                                    color: AppColors.black50,
-                                  ).bold,
+                                  item.cityname ?? "NaN",
+                                  style: kTextSubTitleStyle,
                                 ),
                                 GestureDetector(
                                   onTap: onFavorite,

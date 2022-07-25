@@ -81,16 +81,14 @@ class ItemMyProductWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    item.name ?? "",
+                                    item.name ?? "NaN",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        // fontSize: 36,
-                                        ),
+                                    
                                   ),
                                   Text(
                                     CommonMethods.formatNumber(
-                                        item.price ?? "4000000"),
+                                        item.price ?? "NaN"),
                                     style: const TextStyle(
                                       color: AppColors.primary,
                                     ).bold,
@@ -103,10 +101,8 @@ class ItemMyProductWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  item.cityname ?? "Tp.HCM",
-                                  style: const TextStyle(
-                                    color: AppColors.black50,
-                                  ).bold,
+                                  item.cityname ?? "NaN",
+                                  style: kTextSubTitleStyle,
                                 ),
                                 
                               ],

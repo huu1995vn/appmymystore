@@ -112,7 +112,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     CommonMethods.lockScreen();
     try {
       Map<String, dynamic> body = <String, dynamic>{};
-      body["ids"] = [widget.id];
+      body["ids"] = [data!.id];
       ResponseModel res = await DaiLyXeApiBLL_APIUser().productuptop(body);
       if (res.status > 0) {
         CommonMethods.showToast(context, "update.success".tr());

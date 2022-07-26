@@ -29,13 +29,15 @@ class _LoginPageState extends State<LoginPage> {
     loadData();
   }
 
-  String? tokenbiometrics;
-  dynamic usl;
+  bool isLoginBio = false;
+  Map<String, dynamic> userlogin = {};
+
   loadData() {
+    userlogin = StorageService.get(StorageKeys.userlogin);
     setState(() {
-      tokenbiometrics = StorageService.get(StorageKeys.biometrics);
-      usl = StorageService.get(StorageKeys.userlogin);
-      if (usl != null) username = usl!["username"];
+      if (userlogin != null) {
+        username = userlogin["username"];
+      }
     });
   }
 
@@ -151,22 +153,22 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 text: "continue".tr().toUpperCase()),
             _createAccountLabel(context),
-            // Center(
-            //     child: Padding(
-            //   padding: const EdgeInsets.all(kDefaultPadding),
-            //   child: Ink(
-            //     decoration: const ShapeDecoration(
-            //       shape: CircleBorder(),
-            //       color: Colors.teal,
-            //     ),
-            //     child: IconButton(
-            //       iconSize: 59,
-            //       icon: const Icon(AppIcons.fingerprint),
-            //       color: AppColors.black50,
-            //       onPressed: _onLoginBiometrics,
-            //     ),
-            //   ),
-            // ))
+            Center(
+                child: Padding(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: Ink(
+                decoration: const ShapeDecoration(
+                  shape: CircleBorder(),
+                  color: Colors.teal,
+                ),
+                child: IconButton(
+                  iconSize: 59,
+                  icon: const Icon(AppIcons.fingerprint),
+                  color: AppColors.black50,
+                  onPressed: _onLoginBiometric,
+                ),
+              ),
+            ))
           ],
         ),
       ),
@@ -202,15 +204,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _onLoginBiometrics() async {
-    if (tokenbiometrics == null || usl == null) {
-      CommonMethods.showToast(context, "Chức năng này chưa bật");
-    } else {
-      bool authBiometric = await AuthService.authBiometric();
-      if (!authBiometric) {
-        CommonMethods.showToast(context, "Thiết bị không khả dụng");
+  _onLoginBiometric() async {
+    try {
+      String userbio = StorageService.get(StorageKeys.biometric);
+      isLoginBio = userbio == username;
+      if (!isLoginBio && userlogin == null) {
+        CommonMethods.showToast(context, "message.str046".tr());
+      } else {
+        await AuthService.authBiometric();
+        _onLogin(username, userlogin["password"]!);
       }
-      _onLogin(username, usl!["password"]!);
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
     }
   }
 

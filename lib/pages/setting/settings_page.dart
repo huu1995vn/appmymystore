@@ -7,6 +7,7 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
@@ -25,12 +26,14 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   bool authBiometric = false;
   _onBiometric(bool v) async {
+    final userProvider = Provider.of<UserProvider>(context);
     try {
-      await AuthService.authBiometric();    
+      await AuthService.authBiometric();
       if (v) {
-        await StorageService.set(StorageKeys.biometrics, APITokenService.token);
+        await StorageService.set(
+            StorageKeys.biometric, userProvider.user.username);
       } else {
-        StorageService.deleteItem(StorageKeys.biometrics);
+        StorageService.deleteItem(StorageKeys.biometric);
       }
       setState(() {
         authBiometric = v;
@@ -77,6 +80,10 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
+    authBiometric =
+        StorageService.get(StorageKeys.biometric) == userProvider.user.username;
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: CustomScrollView(

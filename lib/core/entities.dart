@@ -129,13 +129,13 @@ class NotificationModel extends Entity {
 @JsonSerializable()
 class UserModel extends Entity {
   int id = APITokenService.userId;
-  int img = APITokenService.img;
+  int img = -1;
   int cityid = 0;
   int districtid = 0;
   String? username;
   String? password;
   String? identitynumber;
-  String? fullname = APITokenService.fullname;
+  String? fullname = "Nguyễn Văn A";
   String? jobtitle;
   int gender = 1;
   String? birthdate;

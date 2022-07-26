@@ -34,7 +34,8 @@ NewsModel _$NewsModelFromJson(Map<String, dynamic> json) => NewsModel()
   ..url = json['url'] as String
   ..webresourceid = json['webresourceid'] as String
   ..webresourcename = json['webresourcename'] as String
-  ..webresourceurl = json['webresourceurl'] as String;
+  ..webresourceurl = json['webresourceurl'] as String
+  ..authorname = json['authorname'] as String;
 
 Map<String, dynamic> _$NewsModelToJson(NewsModel instance) => <String, dynamic>{
       'TotalRow': instance.TotalRow,
@@ -51,6 +52,7 @@ Map<String, dynamic> _$NewsModelToJson(NewsModel instance) => <String, dynamic>{
       'webresourceid': instance.webresourceid,
       'webresourcename': instance.webresourcename,
       'webresourceurl': instance.webresourceurl,
+      'authorname': instance.authorname,
     };
 
 NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>

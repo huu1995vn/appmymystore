@@ -12,7 +12,6 @@ import 'package:raoxe/core/components/dialogs/address.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -78,7 +77,6 @@ class _UserPageState extends State<UserPage> {
           if (res.status > 0) {
             setState(() {
               data = dataClone;
-              APITokenService.img = fileId;
             });
           } else {
             CommonMethods.showToast(context, res.message);

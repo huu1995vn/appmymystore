@@ -12,6 +12,7 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:raoxe/core/utilities/size_config.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Image.asset(
             LOGORAOXECOLORIMAGE,
-            width: 150,
+            width: 200,
           ),
           Text(
             'Welcome to back',
@@ -153,21 +154,31 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       )),
                 )),
-            RxPrimaryButton(
-                onTap: () {
-                  _onLogin(username, password);
-                },
-                text: "continue".tr().toUpperCase()),
-            Center(
-                child: Padding(
-              padding: const EdgeInsets.all(kDefaultPadding),
-              child: IconButton(
-                iconSize: 59,
-                icon: const Icon(AppIcons.fingerprint),
-                color: AppColors.black50,
-                onPressed: _onLoginBiometric,
-              ),
-            )),
+            Row(
+              children: [
+                Expanded(
+                    child: RxPrimaryButton(
+                        onTap: () {
+                          _onLogin(username, password);
+                        },
+                        text: "continue".tr().toUpperCase())),
+                const Padding(padding: EdgeInsets.only(right: 10)),
+                Ink(
+                  height: kSizeHeight,
+                  decoration: const ShapeDecoration(
+                    color: AppColors.grayDark,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                  ),
+                  child: IconButton(
+                    // iconSize: 59,
+                    icon: const Icon(AppIcons.fingerprint),
+                    color: AppColors.black50,
+                    onPressed: _onLoginBiometric,
+                  ),
+                )
+              ],
+            )
 
             // ,
           ],
@@ -190,14 +201,10 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Text(
               "message.str036".tr(),
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
             Text(
               "registnow".tr(),
-              style: const TextStyle(
-                  color: AppColors.primary500,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
+              style: const TextStyle(color: AppColors.primary500).bold,
             ),
           ],
         ),
@@ -207,6 +214,10 @@ class _LoginPageState extends State<LoginPage> {
 
   _onLoginBiometric() async {
     try {
+      if (!CommonMethods.checkStringPhone(username)) {
+        throw "invalid.phone".tr();
+      }
+
       String userbio = StorageService.get(StorageKeys.biometric);
       isLoginBio = userbio == username;
       if (!isLoginBio && userlogin == null) {

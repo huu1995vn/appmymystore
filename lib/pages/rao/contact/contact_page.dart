@@ -112,7 +112,7 @@ class _ContactPageState extends State<ContactPage> {
   }
 
   onDetail([int index = -1]) async {
-    ContactModel item = index > 0 ? listData![index] : ContactModel();
+    ContactModel item = index >= 0 ? listData![index] : ContactModel();
     CommonNavigates.toContactPage(context,
         item: item,
         onChanged: (v) => {

@@ -11,6 +11,7 @@ import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -43,15 +44,26 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return RxScaffold(
-        key: keyLogin,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
+    return Scaffold(
+      key: keyLogin,
+      appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: AppColors.black, //change your color here
         ),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [_header(), _body()]));
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _header(),
+        _body(),
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: _createAccountLabel(context),
+          ),
+        ),
+      ]),
+    );
   }
 
   Widget _header() {
@@ -60,16 +72,12 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         children: [
           Image.asset(
-            LOGORAOXEWHITEIMAGE,
+            LOGORAOXECOLORIMAGE,
             width: 150,
           ),
-          const Text(
+          Text(
             'Welcome to back',
-            style: TextStyle(
-              color: AppColors.white,
-              // fontSize: 45,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle().italic,
           ),
         ],
       ),
@@ -77,9 +85,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _body() {
-    return Expanded(
-        child: RxWrapper(
-            body: SingleChildScrollView(
+    return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: Column(
@@ -152,27 +158,22 @@ class _LoginPageState extends State<LoginPage> {
                   _onLogin(username, password);
                 },
                 text: "continue".tr().toUpperCase()),
-            _createAccountLabel(context),
             Center(
                 child: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
-              child: Ink(
-                decoration: const ShapeDecoration(
-                  shape: CircleBorder(),
-                  color: Colors.teal,
-                ),
-                child: IconButton(
-                  iconSize: 59,
-                  icon: const Icon(AppIcons.fingerprint),
-                  color: AppColors.black50,
-                  onPressed: _onLoginBiometric,
-                ),
+              child: IconButton(
+                iconSize: 59,
+                icon: const Icon(AppIcons.fingerprint),
+                color: AppColors.black50,
+                onPressed: _onLoginBiometric,
               ),
-            ))
+            )),
+
+            // ,
           ],
         ),
       ),
-    )));
+    );
   }
 
   _toRegister() async {

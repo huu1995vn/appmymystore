@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Image.asset(
             LOGORAOXECOLORIMAGE,
-            width: 200,
+            width: 180,
           ),
           Text(
             'Welcome to back',
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _body() {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.all(kDefaultPadding * 3),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -220,11 +220,11 @@ class _LoginPageState extends State<LoginPage> {
 
       String userbio = StorageService.get(StorageKeys.biometric);
       isLoginBio = userbio == username;
-      if (!isLoginBio && userlogin == null) {
-        CommonMethods.showToast(context, "message.str046".tr());
-      } else {
+      if (isLoginBio && userlogin != null) {
         await AuthService.authBiometric();
         _onLogin(username, userlogin["password"]!);
+      } else {
+        throw "message.str046".tr();
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e);

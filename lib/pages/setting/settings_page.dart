@@ -26,7 +26,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   bool authBiometric = false;
   _onBiometric(bool v) async {
-    final userProvider = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       await AuthService.authBiometric();
       if (v) {

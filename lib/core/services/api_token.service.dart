@@ -96,6 +96,7 @@ class APITokenService {
   static bool logout() {
     try {
       StorageService.deleteItem(StorageKeys.dataLogin);
+      StorageService.listFavorite = [];
       token = "";      
       return true;
     } catch (e) {

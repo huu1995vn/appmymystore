@@ -1,4 +1,12 @@
 {
+  "product": {
+    "thesame":{
+      "post": "Rao with the same poster",
+      "brand": "Rao with the same brand",
+      "price": "Rao equivalent price"
+    },
+    "text": "Product"
+  },
   "title": "Title",
   "state": "State",
   "download": "Download",

@@ -1,4 +1,12 @@
 {
+  "product": {
+    "thesame":{
+      "post": "Tin cùng người đăng",
+      "brand": "Tin cùng thương hiệu",
+      "price": "Tin giá tương đương"
+    },
+    "text": "Sản phẩm"
+  },
   "title": "Tiêu đề",
   "state": "Tình trạng",
   "download": "Tải",

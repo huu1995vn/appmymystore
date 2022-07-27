@@ -397,12 +397,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
         ProductReview(data!),
-        _buildHeader("Tin cùng người đăng"),
+        _buildHeader("product.thesame.post".tr()),
         ProductRelated(
           data!,
           filter: {"UserId": data!.userid},
         ),
-        _buildHeader("Tin cùng thương hiệu"),
+        _buildHeader("product.thesame.brand".tr()),
         ProductRelated(
           data!,
           filter: {"BrandId": data!.brandid},

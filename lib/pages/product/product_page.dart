@@ -49,6 +49,8 @@ class _ProductPageState extends State<ProductPage> {
     body["filter"] = getFilter();
     if (paramsSearch["OrderBy"] != null && paramsSearch["OrderBy"].length > 0) {
       body["orderBy"] = paramsSearch["OrderBy"].toString().trim();
+    } else {
+      body["orderBy"] = "VerifyDate DESC";
     }
     if (nPaging == 1) {
       setState(() {

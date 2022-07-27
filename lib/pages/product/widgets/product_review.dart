@@ -12,15 +12,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
-class RxReview extends StatefulWidget {
-  const RxReview(this.item, {Key? key}) : super(key: key);
+class ProductReview extends StatefulWidget {
+  const ProductReview(this.item, {Key? key}) : super(key: key);
   final ProductModel item;
 
   @override
   ReviewState createState() => ReviewState();
 }
 
-class ReviewState extends State<RxReview> {
+class ReviewState extends State<ProductReview> {
   int totalItems = 0;
   List<ReviewModel>? listData;
   int userId = APITokenService.userId;

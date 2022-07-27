@@ -1,5 +1,6 @@
 // ignore_for_file: curly_braces_in_flow_control_structures, unnecessary_null_comparison, non_constant_identifier_names, empty_catches
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -77,8 +78,8 @@ class RxListViewState extends State<RxSliverList>
                       width: double.infinity,
                     ),
                   ),
-                  const Text(
-                    "Không tìm thấy data",
+                  Text(
+                    "notfound".tr(),
                     
                   ),
                 ],

@@ -114,7 +114,7 @@ class _RxDataListViewState extends State<RxListView>
   Widget _bodylist_notfound() {
     return Center(
         child: Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(kDefaultPadding),
       child: widget.noFound ??
           Center(
             child: Column(
@@ -128,8 +128,8 @@ class _RxDataListViewState extends State<RxListView>
                     width: double.infinity,
                   ),
                 ),
-                const Text(
-                  "Không tìm thấy data",
+                Text(
+                  "notfound".tr(),
                 ),
               ],
             ),

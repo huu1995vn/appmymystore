@@ -38,10 +38,10 @@ const TextStyle kTextTitleStyle = TextStyle(
   fontWeight: FontWeight.normal,
 );
 const TextStyle kTextSubTitleStyle = TextStyle(
-  fontSize: 12,
-  fontWeight: FontWeight.normal,
-  fontStyle: FontStyle.italic
-);
+    fontWeight: FontWeight.normal,
+    fontStyle: FontStyle.italic,
+    color: AppColors.black50,
+    fontSize: 12);
 const kTextPriceStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: AppColors.primary,
@@ -123,6 +123,7 @@ List PRODUCTSEATS = [
   {"name": "7 Chỗ", "id": 7},
   {"name": "9 Chỗ", "id": 9},
 ];
+
 class RxParttern {
   //[Update]
   static String password =

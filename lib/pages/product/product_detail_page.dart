@@ -11,7 +11,8 @@ import 'package:raoxe/core/components/dialogs/review.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_images.dart';
-import 'package:raoxe/core/components/rx_review.dart';
+import 'package:raoxe/pages/product/widgets/product_related.dart';
+import 'package:raoxe/pages/product/widgets/product_review.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -91,8 +92,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   _onShare() {
     CommonMethods.share(data!.linkshare);
   }
-  _onReport() async
-  {
+
+  _onReport() async {
     if (!CommonMethods.isLogin) {
       CommonMethods.showToast(context, "please.login".tr());
       return;
@@ -101,6 +102,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         context, ReportDialog(product: data!),
         height: 420);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -265,7 +267,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(CommonMethods.formatNumber(data!.price ?? "Liên hệ"),
+                    Text(
+                        CommonMethods.formatNumber(
+                            data!.price ?? "negotiate".tr()),
                         style: kTextPriceStyle),
                   ],
                 ),
@@ -354,7 +358,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     Text(
                       "message.str012".tr(),
                     ),
-                    
                     Padding(
                       padding: const EdgeInsets.only(top: kDefaultPadding),
                       child: RxButton(
@@ -381,18 +384,41 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   color: AppColors.black50,
                 ),
                 Padding(padding: const EdgeInsets.only(right: 10)),
-                Text(
+                Flexible(child: Text(
                   data!.address ?? "NaN",
                   style: const TextStyle(
                     color: AppColors.black50,
                   ),
-                ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                )),
               ],
             ),
           ),
         ),
-        RxReview(data!)
+        ProductReview(data!),
+        _buildHeader("Tin cùng người đăng"),
+        ProductRelated(
+          data!,
+          filter: {"UserId": data!.userid},
+        ),
+        _buildHeader("Tin cùng thương hiệu"),
+        ProductRelated(
+          data!,
+          filter: {"BrandId": data!.brandid},
+        )
       ],
+    );
+  }
+
+  Widget _buildHeader(String text) {
+    return Padding(
+      padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
+      child: Text(
+        text.toUpperCase(),
+        style:
+            TextStyle(color: Theme.of(context).textTheme.bodyText1!.color).bold,
+      ),
     );
   }
 }

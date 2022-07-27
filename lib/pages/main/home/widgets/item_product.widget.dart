@@ -30,8 +30,7 @@ class ItemProductWidget extends StatelessWidget {
                       topLeft: Radius.circular(kDefaultPadding)),
                   child: Stack(
                     children: <Widget>[
-                      RxImage(item.rximg,
-                          width: SizeConfig.screenWidth / 4),
+                      RxImage(item.rximg, width: SizeConfig.screenWidth / 4),
                       if (lenimg > 0)
                         Positioned(
                           top: 5,
@@ -102,19 +101,20 @@ class ItemProductWidget extends StatelessWidget {
                               // spacing: kDefaultPadding,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                Text(item.rxtimeago, style: kTextTimeStyle),
                                 Text(
                                   item.cityname ?? "NaN",
                                   style: kTextSubTitleStyle,
                                 ),
                                 GestureDetector(
-                                  onTap: onFavorite,
-                                  child: Icon(
-                                  AppIcons.heart_1,
-                                  color: item.isfavorite? AppColors.primary: null,
-                                  size: 19,
-                                )
-                                ),
-                                
+                                    onTap: onFavorite,
+                                    child: Icon(
+                                      AppIcons.heart_1,
+                                      color: item.isfavorite
+                                          ? AppColors.primary
+                                          : null,
+                                      size: 19,
+                                    )),
                               ],
                             ),
                           ],

@@ -47,7 +47,11 @@ class _HomePageState extends State<HomePage>
     if (nPaging > 1 && listData != null && totalItems <= listData!.length)
       return;
     nPaging = nPaging ?? 1;
-    Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
+    Map<String, dynamic> params = {
+      "p": nPaging,
+      "n": kItemOnPage,
+      "orderBy": "VerifyDate DESC"
+    };
     ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);
     List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
         res.data, (val) => ProductModel.fromJson(val));
@@ -180,11 +184,9 @@ class _HomePageState extends State<HomePage>
 
 _buildTitle(String header, void Function()? onTap) {
   return Padding(
-    padding:
-        const EdgeInsets.all(kDefaultPadding),
+    padding: const EdgeInsets.all(kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(header.toUpperCase(),
-          style: const TextStyle().bold),
+      Text(header.toUpperCase(), style: const TextStyle().bold),
       GestureDetector(
         onTap: onTap,
         child: Ink(

@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage>
             return ItemProductWidget(
               item,
               onTap: () {
-                CommonNavigates.toProductPage(context, id: item.id);
+                CommonNavigates.toProductPage(context, item: item);
               },
               onFavorite: () => {onFavorite(index)},
             );

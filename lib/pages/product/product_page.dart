@@ -156,7 +156,7 @@ class _ProductPageState extends State<ProductPage> {
             RxSliverList(listData, (BuildContext context, int index) {
               var item = listData![index];
               return ItemProductWidget(listData![index], onTap: () {
-                CommonNavigates.toProductPage(context, id: item.id);
+                CommonNavigates.toProductPage(context, item: item);
               });
             })
           ],

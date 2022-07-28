@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/rx_image.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
@@ -98,7 +98,9 @@ class ReviewState extends State<ProductRelated> {
         child: Card(
           margin: EdgeInsets.zero,
           child: InkWell(
-              onTap: () {},
+              onTap: () {
+                CommonNavigates.toProductPage(context, item: item);
+              },
               child: SizedBox(
                 width: (MediaQuery.of(context).size.width / 3 - 10),
                 child: ClipRRect(

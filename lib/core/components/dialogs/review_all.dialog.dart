@@ -48,11 +48,11 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> body = {
+        "r": widget.product.id,
         "p": nPaging,
-        "n": kItemOnPage,
-        "filter": {"Status": 1, "ProductId": widget.product}
+        "n": kItemOnPage
       };
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().review(body);
+      ResponseModel res = await DaiLyXeApiBLL_APIGets().review(body);
       if (res.status > 0) {
         List<ReviewModel> list = CommonMethods.convertToList<ReviewModel>(
             res.data, (val) => ReviewModel.fromJson(val));
@@ -84,7 +84,7 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
   }
 
   Future<dynamic> onRefresh() async {
-    return await loadData(1);
+    return await loadData();
   }
 
   @override

@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 3.0.1+1
 
 environment:
   sdk: '>=2.18.0-149.0.dev <3.0.0'
@@ -56,7 +56,7 @@ dependencies:
   geolocator: # Used for get geolocator
   encrypt: # Used for encrypt ASE token
   crypto: # Used for encrypt md5
-  material_dialogs: # Used for show dialogs notifycation
+  material_dialogs: # Used for show dialogs notification
   flutter_easyloading: # Used for show loading
   webview_flutter: # Used for show webviewx
   url_launcher: # Used for open url
@@ -67,7 +67,6 @@ dependencies:
   flutter_skeleton: #Used for skeleton
   pin_code_fields: #Used for pin_code
   carousel_slider: #Used for show banner
-  # multi_image_picker: #Used for open gallery
   image_picker: #Used for open camera
   date_time_picker: #Used for open date picker
   local_auth: #Used for auth device

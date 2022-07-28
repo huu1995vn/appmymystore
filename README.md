@@ -17,3 +17,5 @@ flutter clean
 
 ## code generation libraries
 flutter pub run build_runner watch --delete-conflicting-outputs
+## Fix auth not sync/clone: username alow access source
+git remote set-url origin https://[username]@dev.azure.com/gianhangvn/DailyXe/_git/RaoXe

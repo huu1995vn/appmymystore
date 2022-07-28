@@ -11,7 +11,6 @@ import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
-import 'package:raoxe/core/services/firebase/firebase_in_app_messaging_service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
@@ -62,8 +61,6 @@ initializeApp() async {
   APITokenService.init();
   await AuthService.autologin();
   await CloudFirestoreSerivce.init();
-  await CloudFirestoreSerivce.init();
-  FirebaseInAppMessagingService.init();
 }
 
 class MyApp extends StatefulWidget {
@@ -142,10 +139,10 @@ class AfterSplash extends StatelessWidget {
           title: const Text("Welcome In SplashScreen Package",
               style: kTextHeaderStyle),
           automaticallyImplyLeading: false),
-      body: const Center(
+      body: Center(
         child: Text(
-          "Done!",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+          "done".tr(),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
         ),
       ),
     );

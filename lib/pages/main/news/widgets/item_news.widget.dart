@@ -9,62 +9,74 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
 class ItemNewsWidget extends StatelessWidget {
-  final NewsModel itemNews;
+  final NewsModel item;
   void Function()? onTap;
-  ItemNewsWidget(this.itemNews, {super.key, this.onTap});
+  ItemNewsWidget(this.item, {super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: GestureDetector(
-      onTap: onTap,
-      child: SizedBox(
-        height: SizeConfig.screenWidth / 4.5,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(kDefaultPadding),
-                  topLeft: Radius.circular(kDefaultPadding)),
-              child:
-                  RxImage(itemNews.rximg, width: SizeConfig.screenWidth / 4.5),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(kDefaultPadding),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(5.0),
+            child: InkWell(
+                onTap: onTap,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        itemNews.name,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          itemNews.webresourcename,
-                          style: const TextStyle(
-                            color: AppColors.yellow,
-                          ).italic,
+                    SizedBox(
+                        width: SizeConfig.screenWidth,
+                        height: SizeConfig.screenWidth * 0.5,
+                        child: RxImage(
+                          item.rximg,
+                          fit: BoxFit.cover,
+                        )),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              alignment: Alignment.centerLeft,
+                              child: Text(item.webresourcename,
+                                  style:
+                                      const TextStyle(color: AppColors.yellow)
+                                          .bold,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                            Container(
+                                margin: const EdgeInsets.only(bottom: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                child: Icon(Icons.fiber_manual_record,
+                                    size: 5, color: Colors.grey[500])),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              alignment: Alignment.centerLeft,
+                              child:
+                                  Text(item.rxtimeago, style: kTextTimeStyle),
+                            ),
+                          ],
                         ),
-                        Text(itemNews.rxtimeago,
-                            style: kTextTimeStyle),
-                        
-                      ],
+                        Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              item.name,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle().bold
+                            )),
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 10),
+                          alignment: Alignment.centerLeft,
+                          child: Text(item.desc,style: const TextStyle(fontSize: 12).italic,
+                              maxLines: 3, overflow: TextOverflow.ellipsis),
+                        ),
+                      ]),
                     )
                   ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ));
+                ))));
   }
 }

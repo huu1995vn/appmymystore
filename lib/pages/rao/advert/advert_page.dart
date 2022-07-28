@@ -32,7 +32,7 @@ class _AdvertPageState extends State<AdvertPage> {
   AutoScrollController scrollController = AutoScrollController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  loadData(nPaging) async {
+  loadData([nPaging=1]) async {
     if (nPaging > 1 && listData != null && totalItems <= listData!.length) {
       return;
     }
@@ -72,7 +72,7 @@ class _AdvertPageState extends State<AdvertPage> {
   }
 
   Future<dynamic> onRefresh() async {
-    return await loadData(1);
+    return await loadData();
   }
 
   @override
@@ -92,12 +92,12 @@ class _AdvertPageState extends State<AdvertPage> {
               color: AppColors.black, //change your color here
             ),
             centerTitle: true,
-            title: Text('adv'.tr(),
+            title: Text('ads'.tr(),
                 style: kTextHeaderStyle.copyWith(color: AppColors.black)),
             elevation: 0.0,
             backgroundColor: AppColors.grey,
           ),
-          key: const Key("LAdv"),
+          key: const Key("LAds"),
           controller: scrollController,
           onNextScroll: onNextPage,
           onRefresh: onRefresh,

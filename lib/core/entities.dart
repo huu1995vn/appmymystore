@@ -60,6 +60,7 @@ class NewsModel extends Entity {
   late String webresourceid;
   late String webresourcename;
   late String webresourceurl;
+  late String authorname;
   String get rxlink {
     return CommonMethods.buildUrlNews(id, prefixUrl: prefix, rewriteUrl: url);
   }
@@ -97,7 +98,9 @@ class NotificationModel extends Entity {
   int notificationtypeid = 1;
   String subject;
   String message;
+  int status = 1;
   DateTime? createdate;
+  int unready = 0;
   NotificationModel({
     required this.id,
     required this.notificationtypeid,
@@ -105,9 +108,14 @@ class NotificationModel extends Entity {
     required this.message,
     required this.createdate,
   });
+  String get rxtimeago {
+    return CommonMethods.timeagoFormat(createdate);
+  }
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["status"] = CommonMethods.convertToInt32(json["status"]);
+    json["unready"] = CommonMethods.convertToInt32(json["unready"]);
     json["notificationtypeid"] =
         CommonMethods.convertToInt32(json["notificationtypeid"]);
     json["createdate"] =
@@ -121,13 +129,13 @@ class NotificationModel extends Entity {
 @JsonSerializable()
 class UserModel extends Entity {
   int id = APITokenService.userId;
-  int img = APITokenService.img;
+  int img = -1;
   int cityid = 0;
   int districtid = 0;
   String? username;
   String? password;
   String? identitynumber;
-  String? fullname = APITokenService.fullname;
+  String? fullname = "Nguyễn Văn A";
   String? jobtitle;
   int gender = 1;
   String? birthdate;
@@ -310,6 +318,16 @@ class ProductModel extends Entity {
 
   String get linkshare {
     return CommonMethods.buildDynamicLink_Product(this);
+  }
+
+  setcontact(ContactModel contact) {
+    this.address = contact.address;
+    this.cityid = contact.cityid;
+    this.cityname = contact.cityname;
+    this.districtid = contact.districtid;
+    this.phone = contact.phone;
+    this.fullname = contact.fullname;
+    this.usercontactid = contact.id;
   }
 
   ProductModel();
@@ -703,6 +721,36 @@ class ReviewModel extends Entity {
   }
 
   Map<String, dynamic> toJson() => _$ReviewModelToJson(this);
+}
+
+@JsonSerializable()
+class ReportModel extends Entity {
+  int id = 0;
+  int userid = APITokenService.userId;
+  int productid = 0;
+  int reporttypeid = 0;
+  String? note;
+  DateTime? createdate;
+  int status = 1;
+  String? reject;
+  ReportModel();
+  String get rxtimeago {
+    return CommonMethods.timeagoFormat(createdate);
+  }
+
+  factory ReportModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["userid"] =
+        CommonMethods.convertToInt32(json["userid"], APITokenService.userId);
+    json["productid"] = CommonMethods.convertToInt32(json["productid"]);
+    json["reporttypeid"] = CommonMethods.convertToInt32(json["reporttypeid"]);
+    json["status"] = CommonMethods.convertToInt32(json["status"], 1);
+    json["createdate"] =
+        CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
+    return _$ReportModelFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$ReportModelToJson(this);
 }
 
 @JsonSerializable()

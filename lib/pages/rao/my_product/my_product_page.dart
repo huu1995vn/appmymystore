@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
@@ -53,9 +54,13 @@ class _MyProductPageState extends State<MyProductPage> {
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
-                  title: Text("manager.raoxe".tr(), style: kTextHeaderStyle),
-                  elevation: 0.0,
+                  iconTheme: IconThemeData(
+                    color: AppColors.black, //change your color here
+                  ),
                   centerTitle: true,
+                  title: Text("manager.raoxe".tr(), style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+                  elevation: 0.0,
+                  backgroundColor: AppColors.grey,
                 ),
                 SliverPersistentHeader(
                   pinned: true,
@@ -84,11 +89,13 @@ class _MyProductPageState extends State<MyProductPage> {
         ),
         persistentFooterButtons: [
           RxPrimaryButton(
-              onTap: () => {
+             onTap: () => {
                     CommonNavigates.toMyProductPage(context,
                         item: ProductModel(), onChanged: (v) => {loadData()})
                   },
+              icon: Icon(AppIcons.plus_circle),
               text: "add.text".tr())
-        ]);
+        ]
+        );
   }
 }

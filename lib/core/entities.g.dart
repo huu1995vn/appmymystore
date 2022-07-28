@@ -34,7 +34,8 @@ NewsModel _$NewsModelFromJson(Map<String, dynamic> json) => NewsModel()
   ..url = json['url'] as String
   ..webresourceid = json['webresourceid'] as String
   ..webresourcename = json['webresourcename'] as String
-  ..webresourceurl = json['webresourceurl'] as String;
+  ..webresourceurl = json['webresourceurl'] as String
+  ..authorname = json['authorname'] as String;
 
 Map<String, dynamic> _$NewsModelToJson(NewsModel instance) => <String, dynamic>{
       'TotalRow': instance.TotalRow,
@@ -51,6 +52,7 @@ Map<String, dynamic> _$NewsModelToJson(NewsModel instance) => <String, dynamic>{
       'webresourceid': instance.webresourceid,
       'webresourcename': instance.webresourcename,
       'webresourceurl': instance.webresourceurl,
+      'authorname': instance.authorname,
     };
 
 NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
@@ -64,7 +66,9 @@ NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['createdate'] as String),
     )
       ..TotalRow = json['TotalRow']
-      ..RowIndex = json['RowIndex'];
+      ..RowIndex = json['RowIndex']
+      ..status = json['status'] as int
+      ..unready = json['unready'] as int;
 
 Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
     <String, dynamic>{
@@ -74,7 +78,9 @@ Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
       'notificationtypeid': instance.notificationtypeid,
       'subject': instance.subject,
       'message': instance.message,
+      'status': instance.status,
       'createdate': instance.createdate?.toIso8601String(),
+      'unready': instance.unready,
     };
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel()
@@ -370,6 +376,34 @@ Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
       'img': instance.img,
       'imguser': instance.imguser,
       'username': instance.username,
+    };
+
+ReportModel _$ReportModelFromJson(Map<String, dynamic> json) => ReportModel()
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..id = json['id'] as int
+  ..userid = json['userid'] as int
+  ..productid = json['productid'] as int
+  ..reporttypeid = json['reporttypeid'] as int
+  ..note = json['note'] as String?
+  ..createdate = json['createdate'] == null
+      ? null
+      : DateTime.parse(json['createdate'] as String)
+  ..status = json['status'] as int
+  ..reject = json['reject'] as String?;
+
+Map<String, dynamic> _$ReportModelToJson(ReportModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'id': instance.id,
+      'userid': instance.userid,
+      'productid': instance.productid,
+      'reporttypeid': instance.reporttypeid,
+      'note': instance.note,
+      'createdate': instance.createdate?.toIso8601String(),
+      'status': instance.status,
+      'reject': instance.reject,
     };
 
 ConfigModel _$ConfigModelFromJson(Map<String, dynamic> json) => ConfigModel()

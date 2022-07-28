@@ -37,17 +37,21 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    loadData(paging);
+    loadData();
   }
 
   int paging = 1;
   int totalItems = 0;
   List<ProductModel>? listData;
-  loadData(nPaging) async {
+  loadData([nPaging = 1]) async {
     if (nPaging > 1 && listData != null && totalItems <= listData!.length)
       return;
     nPaging = nPaging ?? 1;
-    Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
+    Map<String, dynamic> params = {
+      "p": nPaging,
+      "n": kItemOnPage,
+      "orderBy": "VerifyDate DESC"
+    };
     ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);
     List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
         res.data, (val) => ProductModel.fromJson(val));
@@ -73,7 +77,7 @@ class _HomePageState extends State<HomePage>
   }
 
   Future<dynamic> onRefresh() async {
-    return await loadData(1);
+    return await loadData();
   }
 
   onFavorite(int index) async {
@@ -180,22 +184,20 @@ class _HomePageState extends State<HomePage>
 
 _buildTitle(String header, void Function()? onTap) {
   return Padding(
-    padding:
-        const EdgeInsets.only(right: kDefaultPadding, left: kDefaultPadding),
+    padding: const EdgeInsets.all(kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(header.toUpperCase(),
-          style: const TextStyle(color: AppColors.primary).bold),
+      Text(header.toUpperCase(), style: const TextStyle().bold),
       GestureDetector(
         onTap: onTap,
         child: Ink(
-          decoration: const ShapeDecoration(
-            color: AppColors.grayDark,
-            shape: CircleBorder(),
-          ),
+          // decoration: const ShapeDecoration(
+          //   color: AppColors.grayDark,
+          //   shape: CircleBorder(),
+          // ),
           child: const Icon(
             AppIcons.chevron_right,
-            size: 30,
-            color: AppColors.primary,
+            // size: 30,
+            color: AppColors.black50,
           ),
         ),
       )

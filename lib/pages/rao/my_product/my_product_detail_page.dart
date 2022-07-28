@@ -1,7 +1,8 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -26,7 +27,6 @@ class MyProductDetailPage extends StatefulWidget {
   final int? id;
   final ProductModel? item;
   final void Function(ProductModel)? onChanged;
-
   const MyProductDetailPage({super.key, this.id, this.item, this.onChanged});
 
   @override
@@ -34,6 +34,7 @@ class MyProductDetailPage extends StatefulWidget {
 }
 
 class _MyProductDetailPageState extends State<MyProductDetailPage> {
+  List<ContactModel> lContacts = [];
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
   AutoScrollController scrollController = AutoScrollController();
   TextStyle styleTitle =
@@ -51,17 +52,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   bool isNotFound = false;
   List<String> imgs = <String>[];
   loadData() async {
+    ProductModel? _data;
     if (widget.item != null) {
-      setState(() {
-        data = widget.item!;
-        imgs = data!.rximglist;
-      });
+      _data = widget.item!;
     } else {
       ResponseModel res = await DaiLyXeApiBLL_APIGets().productbyid(widget.id!);
       if (res.status > 0) {
         setState(() {
-          data = ProductModel.fromJson(res.data);
-          imgs = data!.rximglist;
+          _data = ProductModel.fromJson(res.data);
         });
       } else {
         setState(() {
@@ -70,6 +68,23 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         CommonMethods.showToast(context, res.message);
       }
     }
+    if (_data!.usercontactid <= 0) {
+      lContacts = await _loadContact();
+      if (lContacts.isEmpty || lContacts.length == 0) {
+        CommonMethods.showToast(context, "Vui lòng tạo thông tin liên lạc trước khi tạo tin");
+        CommonNavigates.goBack(context);
+        return;
+      }
+      ContactModel contact =
+          lContacts.firstWhere((element) => element.isdefault == true) ??
+              lContacts[0];
+      _data!.setcontact(contact);
+    }
+
+    setState(() {
+      data = _data;
+      imgs = _data!.rximglist;
+    });
   }
 
   bool get isLike {
@@ -97,7 +112,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     CommonMethods.lockScreen();
     try {
       Map<String, dynamic> body = <String, dynamic>{};
-      body["ids"] = [widget.id];
+      body["ids"] = [data!.id];
       ResponseModel res = await DaiLyXeApiBLL_APIUser().productuptop(body);
       if (res.status > 0) {
         CommonMethods.showToast(context, "update.success".tr());
@@ -110,13 +125,25 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     CommonMethods.unlockScreen();
   }
 
+  _loadContact() async {
+    ResponseModel res =
+        await DaiLyXeApiBLL_APIUser().contact(<String, dynamic>{});
+    if (res.status > 0) {
+      return CommonMethods.convertToList<ContactModel>(
+          res.data, (val) => ContactModel.fromJson(val));
+    } else {
+      CommonMethods.showToast(context, res.message);
+    }
+    return [];
+  }
+
   _onAddress() async {
     ResponseModel res =
         await DaiLyXeApiBLL_APIUser().contact(<String, dynamic>{});
     if (res.status > 0) {
       list = CommonMethods.convertToList<ContactModel>(
           res.data, (val) => ContactModel.fromJson(val));
-      if (list.length == 0) {
+      if (list.isEmpty) {
         CommonMethods.showDialogWarning(
             context, "Vui lòng tạo địa chỉ trước khi tạo tin");
         return;
@@ -159,14 +186,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                         CommonNavigates.goBack(context, item);
                       }));
             }));
-    setState(() {
-      data!.address = contact.address;
-      data!.cityid = contact.cityid;
-      data!.districtid = contact.districtid;
-      data!.phone = contact.phone;
-      data!.fullname = contact.fullname;
-      data!.usercontactid = contact.id;
-    });
+    if (contact != null) {
+      setState(() {
+        data!.setcontact(contact);
+      });
+    }
   }
 
   @override
@@ -218,7 +242,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       },
                                     ).toList()),
                               ),
-                              _header(title: "THÔNG TIN XE"),
+                              _header(title: "generalinfor".tr()),
                               Card(
                                 child: Column(
                                   children: [
@@ -330,6 +354,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   initialValue: data!.name,
                                   keyboardType: TextInputType.multiline,
                                   onChanged: (value) => {data!.name = value},
+                                  decoration: InputDecoration(
+                                    hintText: "enter.text".tr(),
+                                  ),
                                   validator: (value) {
                                     if ((data!.name == null ||
                                         data!.name!.isEmpty)) {
@@ -370,6 +397,12 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
                                   onChanged: (value) => {data!.des = value},
+                                  decoration: InputDecoration(
+                                    hintText: "enter.text".tr(),
+                                  ),
+                                  maxLength: 1500,
+                                  maxLengthEnforcement:
+                                      MaxLengthEnforcement.none,
                                   validator: (value) {
                                     if ((data!.des == null ||
                                         data!.des!.isEmpty)) {
@@ -457,7 +490,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       }),
                                 ),
                               )),
-                              _header(title: "pecifications".tr()),
+                              _header(title: "specifications".tr()),
                               Card(
                                   child: Column(
                                 children: [
@@ -509,12 +542,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                               data!.seat = v;
                                             })
                                           }),
-                                  rxSelectInput(
-                                      context, "productseat", data!.seat,
-                                      labelText: "seat".tr(),
+                                  rxSelectInput(context, "color", data!.colorid,
+                                      labelText: "color".tr(),
                                       afterChange: (v) => {
                                             setState(() {
-                                              data!.seat = v;
+                                              data!.colorid = v;
                                             })
                                           }),
                                   ListTile(
@@ -646,18 +678,18 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
               children: [
                 Text(
                   data!.phone ?? "NaN",
-                  style: const TextStyle(color: AppColors.primary).size(12),
+                  style: const TextStyle(color: AppColors.primary),
                 ),
                 if (data!.cityid != null || data!.cityid! > 0)
                   Text(
                     data!.cityname ?? "NaN",
-                    style: const TextStyle().size(12),
+                    style: const TextStyle(),
                   ),
               ],
             ),
             Text(
               data!.address ?? "NaN",
-              style: const TextStyle().italic.size(12),
+              style: const TextStyle().italic,
             )
           ],
         ),

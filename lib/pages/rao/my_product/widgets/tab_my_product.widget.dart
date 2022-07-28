@@ -85,7 +85,7 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
   }
 
   Future<dynamic> onRefresh() async {
-    return await loadData(1);
+    return await loadData();
   }
 
   @override

@@ -2,7 +2,6 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 // import 'package:raoxe/core/commons/common_navigates.dart';
@@ -19,7 +18,7 @@ class AuthService {
     try {
       var res = await DaiLyXeApiBLL_APIAuth().login(username, password);
       if (res.status > 0) {
-        await APITokenService.loginByData(res.data);
+        await APITokenService.login(res.data);
         if (APITokenService.isValid) {
           StorageService.set(StorageKeys.userlogin,
               <String, String>{"username": username, "password": password});
@@ -40,7 +39,7 @@ class AuthService {
     if (APITokenService.token != null) {
       var res = await DaiLyXeApiBLL_APIAuth().autologin();
       if (res.status > 0) {
-        APITokenService.loginByData(res.data);
+        APITokenService.login(res.data);
       }
       return res.status == 1;
     }
@@ -100,20 +99,22 @@ class AuthService {
     bool isAuthenticated = false;
     //check if device supports biometrics authentication.
     bool isBiometricSupported = await _localAuthentication.isDeviceSupported();
+    if(!isBiometricSupported)
+    {
+      throw "message.str045".tr();
+    }
     //check if user has enabled biometrics.
-    //check
     bool canCheckBiometrics = await _localAuthentication.canCheckBiometrics;
-
+    if(!canCheckBiometrics)
+    {
+      throw "message.str046".tr();
+    }
     //if device supports biometrics and user has enabled biometrics, then authenticate.
     if (isBiometricSupported && canCheckBiometrics) {
-      try {
-        isAuthenticated = await _localAuthentication.authenticate(
-            localizedReason: 'Scan your fingerprint to authenticate',
-            options: const AuthenticationOptions(
-                biometricOnly: true, useErrorDialogs: true, stickyAuth: true));
-      } on PlatformException catch (e) {
-        CommonMethods.wirtePrint(e);
-      }
+      isAuthenticated = await _localAuthentication.authenticate(
+          localizedReason: 'Scan your fingerprint to authenticate',
+          options: const AuthenticationOptions(
+              biometricOnly: true, useErrorDialogs: true, stickyAuth: true));
     }
     return isAuthenticated;
   }

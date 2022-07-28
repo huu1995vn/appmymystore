@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, must_be_immutable, import_of_legacy_library_into_null_safe
+// ignore_for_file: non_constant_identifier_names, must_be_immutable, import_of_legacy_library_into_null_safe, overridden_fields
 
 import 'dart:io';
 
@@ -76,6 +76,9 @@ class RxWebViewState extends State<RxWebView> {
   @override
   void initState() {
     super.initState();
+    if (widget.html != null) {
+      isLoading = false;
+    }
     // Enable virtual display.
   }
 
@@ -83,8 +86,13 @@ class RxWebViewState extends State<RxWebView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title ?? "", style: kTextHeaderStyle),
+          iconTheme: const IconThemeData(
+              color: AppColors.black //change your color here
+              ),
           centerTitle: true,
+          title: Text(widget.title ?? "",
+              style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+          backgroundColor: AppColors.grey,
           elevation: 0.0,
         ),
         body: Stack(
@@ -94,7 +102,7 @@ class RxWebViewState extends State<RxWebView> {
               initialUrl: widget.url,
               javascriptMode: JavascriptMode.unrestricted,
               onProgress: (progress) {
-                if (progress > 20) {
+                if (widget.html != null && progress > 20) {
                   if (_webViewController != null &&
                       widget.javaScriptString != null) {
                     _webViewController!.runJavascript(widget.javaScriptString!);
@@ -400,35 +408,61 @@ class RxRoundedButton extends StatelessWidget {
   }
 }
 
-class RxPrimaryButton extends StatelessWidget {
-  const RxPrimaryButton({
+class RxPrimaryButton extends RxButton {
+  const RxPrimaryButton(
+      {super.key, required this.onTap, required this.text, this.icon})
+      : super(onTap: onTap, text: text);
+  @override
+  final GestureTapCallback onTap;
+  @override
+  final String text;
+  @override
+  final Widget? icon;
+}
+
+class RxButton extends StatelessWidget {
+  const RxButton({
     Key? key,
     required this.onTap,
     required this.text,
+    this.color,
+    this.icon,
   }) : super(key: key);
 
   final GestureTapCallback onTap;
   final String text;
+  final Color? color;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
+    return SizedBox(
         width: double.infinity,
         height: kSizeHeight,
-        decoration: kBoxDecorationStyle.copyWith(
-            borderRadius: BorderRadius.circular(5)),
-        alignment: Alignment.center,
-        child: Text(
-          text,
-          style: const TextStyle(
-            color: kWhite,
-            fontSize: 16,
-          ),
-        ),
-      ),
-    );
+        child: icon == null
+            ? ElevatedButton(
+                onPressed: onTap,
+                style: ElevatedButton.styleFrom(
+                    primary: color //elevated btton background color
+                    ),
+                child: Text(text,
+                    style: const TextStyle(
+                      color: kWhite,
+                      fontSize: 16,
+                    )),
+              )
+            : ElevatedButton.icon(
+                onPressed: onTap,
+                icon: icon!, //icon data for elevated button
+                label: Text(text,
+                    style: const TextStyle(
+                      color: kWhite,
+                      fontSize: 16,
+                    )), //label text
+                style: ElevatedButton.styleFrom(
+                    primary: color //elevated btton background color
+                    ),
+              ));
   }
 }
 
@@ -544,7 +578,7 @@ Widget RxBuildItemReview(ReviewModel item) {
                 padding: const EdgeInsets.all(5),
                 child: Text(
                   item.username ?? "NaN",
-                  style: const TextStyle().size(12),
+                  style: const TextStyle(),
                 ),
               ),
             ],

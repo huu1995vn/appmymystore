@@ -1,13 +1,13 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
@@ -26,23 +26,64 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   bool authBiometric = false;
   _onBiometric(bool v) async {
-    bool authBiometric = await AuthService.authBiometric();
-    if (!authBiometric) {
-      CommonMethods.showToast(context, "failedaction".tr());
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      await AuthService.authBiometric();
+      if (v) {
+        await StorageService.set(
+            StorageKeys.biometric, userProvider.user.username);
+      } else {
+        StorageService.deleteItem(StorageKeys.biometric);
+      }
+      setState(() {
+        authBiometric = v;
+      });
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
     }
-    if (v) {
-      await StorageService.set(StorageKeys.biometrics, APITokenService.token);
-    } else {
-      StorageService.deleteItem(StorageKeys.biometrics);
-    }
+  }
+
+  late String link;
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  loadData() async {
+    String linkDeepLinkInstallWithDomain =
+        CommonMethods.deepLinkInstallWithDomain();
+    Uri uri =
+        await CommonMethods.createDynamicLink(linkDeepLinkInstallWithDomain);
     setState(() {
-      authBiometric = v;
+      link = Uri.decodeFull(uri.toString() + "&efr=1");
     });
+  }
+
+  _onShare() async {
+    CommonMethods.lockScreen();
+    try {
+      if (link.isNotNullEmpty) {
+        await CommonMethods.share(link);
+      }
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
+    }
+    CommonMethods.unlockScreen();
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
+    authBiometric =
+        StorageService.get(StorageKeys.biometric) == userProvider.user.username;
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: CustomScrollView(
@@ -112,13 +153,18 @@ class _SettingsPageState extends State<SettingsPage> {
                                   onTap: () {
                                     // _authenticateWithBiometrics();
                                   }),
+                              // RxBuildItem(
+                              //     title: "Clear cache".tr(),
+                              //     onTap: () {
+                              //       RxSearchDelegate.cacheapiSearch = {};
+                              //       CommonMethods.showToast(
+                              //           context, "success".tr());
+                              //     }),
                               RxBuildItem(
-                                  title: "Clear cache".tr(),
-                                  onTap: () {
-                                    RxSearchDelegate.cacheapiSearch = {};
-                                    CommonMethods.showToast(
-                                        context, "success".tr());
-                                  }),
+                                  icon: const Icon(AppIcons.share_1),
+                                  title: "share".tr(),
+                                  trailing: Icon(AppIcons.keyboard_arrow_right),
+                                  onTap: _onShare),
                               RxBuildItem(
                                   title: "termsandcondition".tr(),
                                   onTap: () {
@@ -145,7 +191,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                           Text(
                             "${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
-                            style: TextStyle().italic.size(12),
+                            style: TextStyle().italic,
                           )
                         ],
                       ))))

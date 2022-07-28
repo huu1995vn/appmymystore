@@ -37,6 +37,11 @@ const TextStyle kTextTitleStyle = TextStyle(
   fontSize: 15,
   fontWeight: FontWeight.normal,
 );
+const TextStyle kTextSubTitleStyle = TextStyle(
+    fontWeight: FontWeight.normal,
+    fontStyle: FontStyle.italic,
+    color: AppColors.black50,
+    fontSize: 12);
 const kTextPriceStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: AppColors.primary,

@@ -68,8 +68,9 @@ class StorageKeys {
   static const String masterdata = 'msd';
   static const String version_masterdata = 'vmsd';
   static const String text_search = 'text_search';
-  static const String biometrics = 'biometrics';
+  static const String biometric = 'biometric';
   static const String userlogin = 'usl';
   static const String favorite = 'fv';
+  static const String token = 'token';
 
 }

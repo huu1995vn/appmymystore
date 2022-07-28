@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/aes.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -15,22 +14,6 @@ class APITokenService {
   static dynamic userId;
   static bool isExpired = false;
   static bool isValid = false;
-  static String fullname = "";
-  static int img = -1;
-  static String phone = "";
-
-  static UserModel toUser() {
-    UserModel user = UserModel();
-    user.fullname = fullname;
-    user.id = userId;
-    user.img = img;
-
-    return user;
-  }
-
-  static String get rximg {
-    return CommonMethods.buildUrlHinhDaiDien(img, rewriteUrl: fullname);
-  }
 
   static String get getTokenDefaultString {
     String token = "";
@@ -90,16 +73,14 @@ class APITokenService {
     return pText.replaceAll('+', '_').replaceAll('/', '-').split("=")[0];
   }
 
-  static Future<bool> loginByData(String pData) async {
+  static Future<bool> login(String pData) async {
     bool res = false;
     try {
-      await StorageService.set(StorageKeys.dataLogin, pData);
       String dataBase64 = convertBase64FromUrl(pData);
       Map data = json.decode(AESService.decrypt(dataBase64));
       if ((data["token"] as String).isNotNullEmpty) {
-        token = data["token"];
-        fullname = data["fullname"];
-        img = int.parse(data["img"] ?? "0");
+        token = data["token"];  
+        await StorageService.set(StorageKeys.token, pData);      
         res = true;
       }
       Timer(Duration.zero, () async {
@@ -115,9 +96,8 @@ class APITokenService {
   static bool logout() {
     try {
       StorageService.deleteItem(StorageKeys.dataLogin);
-      token = "";
-      fullname = "";
-      img = 0;
+      StorageService.listFavorite = [];
+      token = "";      
       return true;
     } catch (e) {
       CommonMethods.wirtePrint(e);
@@ -130,7 +110,7 @@ class APITokenService {
     try {
       String pData = StorageService.get(StorageKeys.dataLogin);
       if (pData.isNotNullEmpty) {
-        loginByData(pData);
+        login(pData);
       }
     } catch (e) {}
   }

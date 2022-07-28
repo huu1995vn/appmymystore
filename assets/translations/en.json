@@ -1,4 +1,13 @@
 {
+  "product": {
+    "thesame":{
+      "post": "Rao with the same poster",
+      "brand": "Rao with the same brand",
+      "price": "Rao equivalent price"
+    },
+    "text": "Product"
+  },
+  "title": "Title",
   "state": "State",
   "download": "Download",
   "negotiate": "Negotiate",
@@ -360,8 +369,8 @@
   "welcome": "Welcome to RaoXe",
   "version": "Version",
   "content": "Content",
-  "contactadv": "Contact from adv",
-  "adv": "Adv",
+  "contactads": "Contact from ads",
+  "ads": "Ads",
   "buypoint": "Buy points",
   "discount": "Discount",
   "amount": "Amount",
@@ -415,7 +424,7 @@
   "momowallet": "MoMo wallet",
   "detail": {
     "text": "Detail",
-    "adv": "Advertisement @.lower:detail.text",
+    "ads": "Advertisement @.lower:detail.text",
     "historypoint": "@:detail.text history of buying points",
     "other": "@:detail.text {}"
   },
@@ -463,7 +472,7 @@
     "p003": "Your time is not enough to pin top, you need to add <b>{} point </b> to give enough time. Do you want to change now?",
     "p008": "You are awarded {} points from activating the referral code {}",
     "p009": "Unable to send authentication code in {}. Due to abnormal activity detected",
-    "p010": "You have {} left to advance to rank {}",
+    "p010": "You have {} left to adsance to rank {}",
     "p011": "Update new version {}?",
     "p012": "Current version {}",
     "p013": "Found {} results matching keyword \"{}\"",
@@ -502,6 +511,10 @@
     "str041": "Already register? ",
     "str042": "Please select attachment",
     "str043": "Congratulations on becoming a member of RaoXe",
+    "str044": "Please create contact information before creating a story",
+    "str045": "Device does not support biometric authentication",
+    "str046": "The app doesn't have biometrics enabled",
+
     "alert001": "This function needs <b style='color:green'>verify phone number</b>",
     "alert002": "Are you sure you want to <b>delete</b> this message?",
     "alert003": "Are you sure you want to <b>delete</b> this account?",

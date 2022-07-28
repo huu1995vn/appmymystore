@@ -12,15 +12,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
-class RxReview extends StatefulWidget {
-  const RxReview(this.item, {Key? key}) : super(key: key);
+class ProductReview extends StatefulWidget {
+  const ProductReview(this.item, {Key? key}) : super(key: key);
   final ProductModel item;
 
   @override
   ReviewState createState() => ReviewState();
 }
 
-class ReviewState extends State<RxReview> {
+class ReviewState extends State<ProductReview> {
   int totalItems = 0;
   List<ReviewModel>? listData;
   int userId = APITokenService.userId;
@@ -64,30 +64,34 @@ class ReviewState extends State<RxReview> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.only(top: 10),
-        child: Column(children: <Widget>[
-          if (listData != null)
-            RxListView(listData, (context, index) {
-              var item = listData![index];
-              return RxBuildItemReview(item);
-            },
-                key: Key("review".tr()),
-                onRefresh: loadData,
-                noFound: Container()),
-          if (listData != null) GestureDetector(
-            onTap: () {
-              viewAll();
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: kDefaultPadding),
-              child: Text(
-                "${"all".tr()} ${totalItems > 0 ? "($totalItems)" : ""}",
-                style: const TextStyle(
-                    color: Colors.blue, fontWeight: FontWeight.w500),
-              ),
-            ),
-          )
-        ]));
+    return (listData == null || listData!.length == 0)
+        ? Container()
+        : Card(
+            child: Container(
+                padding: const EdgeInsets.only(top: 10),
+                child: Column(children: <Widget>[
+                  if (listData != null)
+                    RxListView(listData, (context, index) {
+                      var item = listData![index];
+                      return RxBuildItemReview(item);
+                    },
+                        key: Key("review".tr()),
+                        onRefresh: loadData,
+                        noFound: Container()),
+                  if (listData != null)
+                    GestureDetector(
+                      onTap: () {
+                        viewAll();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: kDefaultPadding),
+                        child: Text(
+                          "${"all".tr()} ${totalItems > 0 ? "($totalItems)" : ""}",
+                          style: const TextStyle(
+                              color: Colors.blue, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    )
+                ])));
   }
 }

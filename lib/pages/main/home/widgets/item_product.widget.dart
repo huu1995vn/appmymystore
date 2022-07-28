@@ -30,8 +30,7 @@ class ItemProductWidget extends StatelessWidget {
                       topLeft: Radius.circular(kDefaultPadding)),
                   child: Stack(
                     children: <Widget>[
-                      RxImage(item.rximg,
-                          width: SizeConfig.screenWidth / 4),
+                      RxImage(item.rximg, width: SizeConfig.screenWidth / 4),
                       if (lenimg > 0)
                         Positioned(
                           top: 5,
@@ -63,8 +62,7 @@ class ItemProductWidget extends StatelessWidget {
                                     child: Text(
                                   lenimg >= 9 ? "9+" : lenimg.toString(),
                                   style: const TextStyle(color: AppColors.white)
-                                      .bold
-                                      .size(12),
+                                      .bold,
                                 ))),
                           ),
                         ),
@@ -103,21 +101,20 @@ class ItemProductWidget extends StatelessWidget {
                               // spacing: kDefaultPadding,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                Text(item.rxtimeago, style: kTextTimeStyle),
                                 Text(
-                                  item.cityname ?? "Tp.HCM",
-                                  style: const TextStyle(
-                                    color: AppColors.black50,
-                                  ).bold.size(12),
+                                  item.cityname ?? "NaN",
+                                  style: kTextSubTitleStyle,
                                 ),
                                 GestureDetector(
-                                  onTap: onFavorite,
-                                  child: Icon(
-                                  AppIcons.heart_1,
-                                  color: item.isfavorite? AppColors.primary: null,
-                                  size: 19,
-                                )
-                                ),
-                                
+                                    onTap: onFavorite,
+                                    child: Icon(
+                                      AppIcons.heart_1,
+                                      color: item.isfavorite
+                                          ? AppColors.primary
+                                          : null,
+                                      size: 19,
+                                    )),
                               ],
                             ),
                           ],

@@ -1,4 +1,13 @@
 {
+  "product": {
+    "thesame":{
+      "post": "Tin cùng người đăng",
+      "brand": "Tin cùng thương hiệu",
+      "price": "Tin giá tương đương"
+    },
+    "text": "Sản phẩm"
+  },
+  "title": "Tiêu đề",
   "state": "Tình trạng",
   "download": "Tải",
   "negotiate": "Thương lượng",
@@ -359,8 +368,8 @@
   "welcome": "Chào mừng bạn đến với RaoXe",
   "version": "Phiên bản",
   "content": "Nội dung",
-  "contactadv": "Liên hệ từ quảng cáo",
-  "adv": "Quảng cáo",
+  "contactads": "Liên hệ từ quảng cáo",
+  "ads": "Quảng cáo",
   "buypoint": "Mua point",
   "discount": "Giảm giá",
   "amount": "Thành tiền ",
@@ -414,7 +423,7 @@
   "momowallet": "Ví MoMo",
   "detail": {
     "text": "Chi tiết",
-    "adv": "@:detail.text quảng cáo",
+    "ads": "@:detail.text quảng cáo",
     "historypoint": "@:detail.text lịch sử mua point",
     "other": "@:detail.text {}"
   },
@@ -500,6 +509,10 @@
     "str041": "Bạn đã có tài khoản? ",
     "str042": "Vui lòng chọn file đính kèm",
     "str043": "Chúc mừng bạn đã trở thành thành viên của RaoXe",
+    "str044": "Vui lòng tạo thông tin liên lạc trước khi tạo tin",
+    "str045": "Thiết bị không hỗ trợ xác thực sinh trắc học",
+    "str046": "Ứng dụng chưa bật sinh trắc học",
+
     "alert001": "Chức năng này cần <b style='color:green'>xác thực số điện thoại</b>",
     "alert002": "Bạn có chắc chắn muốn <b>xóa tin</b> này?",
     "alert003": "Bạn có chắc chắn muốn <b>xóa tài khoản</b> này?",

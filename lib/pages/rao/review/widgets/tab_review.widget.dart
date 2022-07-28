@@ -84,7 +84,7 @@ class _TabReviewWidgetPageState extends State<TabReviewWidget>
   }
 
   Future<dynamic> onRefresh() async {
-    return await loadData(1);
+    return await loadData();
   }
 
   @override

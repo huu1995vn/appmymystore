@@ -3,27 +3,29 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:rating_bar/rating_bar.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
-class ReviewDialog extends StatefulWidget {
-  const ReviewDialog({
+class ReportDialog extends StatefulWidget {
+  const ReportDialog({
     super.key,
     required this.product,
   });
   final ProductModel product;
   @override
-  State<ReviewDialog> createState() => _ReviewDialogState();
+  State<ReportDialog> createState() => _ReportDialogState();
 }
 
-class _ReviewDialogState extends State<ReviewDialog> {
+class _ReportDialogState extends State<ReportDialog> {
+  bool showText = false;
+  List<dynamic> reporttype = <dynamic>[];
   @override
   void initState() {
     super.initState();
@@ -33,11 +35,13 @@ class _ReviewDialogState extends State<ReviewDialog> {
   TextStyle styleTitle =
       kTextHeaderStyle.copyWith(fontSize: 15, fontWeight: FontWeight.normal);
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
-  ReviewModel review = ReviewModel();
+  ReportModel report = ReportModel();
+  late AutoScrollController scrollController = AutoScrollController();
 
   loadData() {
     setState(() {
-      review.productid = widget.product.id;
+      report.productid = widget.product.id;
+      reporttype = MasterDataService.data["reporttype"] ?? <dynamic>[];
     });
   }
 
@@ -45,10 +49,10 @@ class _ReviewDialogState extends State<ReviewDialog> {
     try {
       Map<String, dynamic> body = {
         "id": widget.product.id,
-        "comment": review.comment,
-        "ratingvalue": review.ratingvalue
+        "note": report.note,
+        "type": report.reporttypeid
       };
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().reviewpost(body);
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().reportpost(body);
       if (res.status > 0) {
         CommonMethods.showDialogSuccess(context, "success".tr());
       } else {
@@ -64,6 +68,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: CustomScrollView(
+        controller: scrollController,
         slivers: <Widget>[
           SliverAppBar(
             iconTheme: IconThemeData(
@@ -80,59 +85,46 @@ class _ReviewDialogState extends State<ReviewDialog> {
                   padding: const EdgeInsets.all(kDefaultPadding),
                   child: Form(
                       key: _keyValidationForm,
-                      child: Column(
+                      child: Card(
+                          child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(widget.product.name!,
-                              style: kTextHeaderStyle
-                                  .copyWith(color: AppColors.black)
-                                  .size(17)),
-                          Padding(
-                            padding: const EdgeInsets.all(kDefaultPadding),
-                            child: RatingBar(
-                              filledColor: AppColors.yellow,
-                              size: 39,
-                              initialRating: 5,
-                              onRatingChanged: (_) {
-                                review.ratingvalue = _.round();
-                              },
-                              emptyIcon: AppIcons.star_1,
-                              filledIcon: AppIcons.star_1,
-                            ),
-                          ),
-                          _header(
-                            header: RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: "review".tr(),
-                                      style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1!
-                                                  .color)
-                                          .bold),
-                                  const TextSpan(
-                                      text: "*",
-                                      style:
-                                          TextStyle(color: AppColors.primary)),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Card(
-                            child: Padding(
+                          for (int i = 0; i < reporttype.length; i++)
+                            ListTile(
+                                title: Text(
+                                  reporttype[i]["name"],
+                                ),
+                                leading: Radio(
+                                  value: reporttype[i]["id"],
+                                  groupValue: report.reporttypeid,
+                                  onChanged: ((v) {
+                                    setState(() {
+                                      report.reporttypeid = v as int;
+                                      showText = report.reporttypeid == 1;
+                                      if (report.reporttypeid == 1) {
+                                        Future.delayed(
+                                            const Duration(milliseconds: 100),
+                                            () {
+                                          scrollController.jumpTo(
+                                              scrollController
+                                                  .position.maxScrollExtent);
+                                        });
+                                      }
+                                    });
+                                  }),
+                                )),
+                          if (showText)
+                            Padding(
                                 padding: kEdgeInsetsPadding,
                                 child: TextFormField(
                                   showCursor: true,
-                                  key: const Key("review"),
-                                  initialValue: review.comment,
+                                  key: const Key("report"),
+                                  initialValue: report.note,
                                   minLines:
                                       6, // any number you need (It works as the rows for the textarea)
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
-                                  onChanged: (value) =>
-                                      {review.comment = value},
+                                  onChanged: (value) => {report.note = value},
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     hintText: "enter.text".tr(),
@@ -141,16 +133,15 @@ class _ReviewDialogState extends State<ReviewDialog> {
                                   maxLengthEnforcement:
                                       MaxLengthEnforcement.none,
                                   validator: (value) {
-                                    if ((review.comment == null ||
-                                        review.comment!.isEmpty)) {
+                                    if ((report.note == null ||
+                                        report.note!.isEmpty)) {
                                       return "notempty.text".tr();
                                     }
                                     return null;
                                   },
                                 )),
-                          )
                         ],
-                      ))))
+                      )))))
         ],
       ),
       persistentFooterButtons: [

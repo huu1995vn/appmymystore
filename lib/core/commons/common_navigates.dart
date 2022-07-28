@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:raoxe/core/components/dialogs/confirm_otp.dialog.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/pages/main/notification/notification_detail_page.dart';
+import 'package:raoxe/pages/my_page.dart';
 import 'package:raoxe/pages/rao/advert/advert_detail_page.dart';
 import 'package:raoxe/pages/rao/advert/advert_page.dart';
 import 'package:raoxe/pages/auth/forgot_password/forgot_password_page.dart';
@@ -36,9 +38,10 @@ class CommonNavigates {
     '/my-product': (context) => const MyProductPage(),
     '/advert': (context) => const AdvertPage(),
     '/news': (context) => const NewsPage(),
+    '/notification': (context) => const NotificationPage(),
     '/contact': (context) => const ContactPage(),
     '/review': (context) => const ReviewPage(),
-    '/favorite': (context) => const FavoritePage(),
+    '/favorite': (context) => const FavoritePage()
 
     // '/search': (context) => SearchPage(),
   };
@@ -60,24 +63,30 @@ class CommonNavigates {
   }
 
   static Future toMyProductPage(BuildContext context,
-      {int? id, ProductModel? item, void Function(ProductModel)? onChanged}) async {
+      {int? id,
+      ProductModel? item,
+      void Function(ProductModel)? onChanged}) async {
     if ((id != null && id > 0) || item != null) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => MyProductDetailPage(id: id, item: item, onChanged: onChanged)));
+              builder: (context) => MyProductDetailPage(
+                  id: id, item: item, onChanged: onChanged)));
     } else {
       return await Navigator.pushNamed(context, "/my-product");
     }
   }
 
   static Future toContactPage(BuildContext context,
-      {int? id, ContactModel? item, void Function(ContactModel)? onChanged}) async {
+      {int? id,
+      ContactModel? item,
+      void Function(ContactModel)? onChanged}) async {
     if ((id != null && id > 0) || item != null) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => ContactDetailPage(id: id, item: item, onChanged: onChanged)));
+              builder: (context) =>
+                  ContactDetailPage(id: id, item: item, onChanged: onChanged)));
     } else {
       return await Navigator.pushNamed(context, "/contact");
     }
@@ -97,7 +106,7 @@ class CommonNavigates {
 
   static Future toFavoritePage(BuildContext context,
       {int? id, ProductModel? item}) async {
-    if (id != null && id > 0 || item!=null) {
+    if (id != null && id > 0 || item != null) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
@@ -107,13 +116,12 @@ class CommonNavigates {
     }
   }
 
-  static Future toReviewPage(BuildContext context,
-      {ReviewModel? item}) async {
+  static Future toReviewPage(BuildContext context, {ReviewModel? item}) async {
     if (item != null) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => ProductDetailPage(id: item.productid )));
+              builder: (context) => ProductDetailPage(id: item.productid)));
     } else {
       return await Navigator.pushNamed(context, "/review");
     }
@@ -127,7 +135,28 @@ class CommonNavigates {
           CupertinoPageRoute(
               builder: (context) => NewsDetailPage(id: id, item: item)));
     } else {
-      return await Navigator.pushNamed(context, "/news");
+      return await Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => const MyPage(indexTab: 1)),
+          (Route<dynamic> route) => route.isFirst);
+    }
+  }
+
+  static Future toNotificationPage(BuildContext context,
+      {int? id, NotificationModel? item, void Function(NotificationModel)? onChanged}) async {
+    if ((id != null && id > 0) || item != null) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) =>
+                  NotificationDetailPage(id: id, item: item, onChanged: onChanged)));
+    } else {
+      return await Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => const MyPage(indexTab: 2)),
+          (Route<dynamic> route) => route.isFirst);
     }
   }
 
@@ -180,11 +209,12 @@ class CommonNavigates {
         fullscreenDialog: true));
   }
 
-   static Future openOtpVerificationDialog(BuildContext context, String phone, bool isExist) async {
-    return await Navigator.of(context).push(MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) {
-          return OtpVerificationDialog(phone: phone, isExist: isExist);
-        }));
+  static Future openOtpVerificationDialog(
+      BuildContext context, String phone, bool isExist) async {
+    return await Navigator.of(context)
+        .push(MaterialPageRoute<dynamic>(builder: (BuildContext context) {
+      return OtpVerificationDialog(phone: phone, isExist: isExist);
+    }));
   }
 
   static Future openSelect(BuildContext context, Widget child,

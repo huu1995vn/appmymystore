@@ -6,11 +6,13 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/report.dialog.dart';
 import 'package:raoxe/core/components/dialogs/review.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_images.dart';
-import 'package:raoxe/core/components/rx_review.dart';
+import 'package:raoxe/pages/product/widgets/product_related.dart';
+import 'package:raoxe/pages/product/widgets/product_review.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -91,6 +93,16 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     CommonMethods.share(data!.linkshare);
   }
 
+  _onReport() async {
+    if (!CommonMethods.isLogin) {
+      CommonMethods.showToast(context, "please.login".tr());
+      return;
+    }
+    await CommonNavigates.showDialogBottomSheet(
+        context, ReportDialog(product: data!),
+        height: 420);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,16 +153,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 )),
       persistentFooterButtons: [
         if (data != null)
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: kSizeHeight,
-              decoration: kBoxDecorationStyle.copyWith(
-                  borderRadius: BorderRadius.circular(5)),
-              alignment: Alignment.center,
-              child: Icon(AppIcons.phone_handset, color: AppColors.white),
-            ),
-          ),
+          RxButton(
+              onTap: () => {CommonMethods.call(data!.phone!)},
+              icon: Icon(AppIcons.phone_handset),
+              color: AppColors.info,
+              text: "call".tr())
       ],
     );
   }
@@ -196,12 +203,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       RxAvatarImage(data!.rximguser, size: 40),
                       Column(
                           mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               data!.fullname ?? "NaN",
                               style: const TextStyle(
                                 color: AppColors.black50,
-                              ).bold.size(12),
+                              ).bold,
                             ),
                             Row(
                               children: [
@@ -211,10 +219,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   size: 13,
                                 ),
                                 Text(
-                                  data!.address ?? "NaN",
+                                  data!.cityname ?? "NaN",
                                   style: const TextStyle(
                                     color: AppColors.black50,
-                                  ).size(12),
+                                  ),
                                 ),
                               ],
                             )
@@ -259,7 +267,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(CommonMethods.formatNumber(data!.price ?? "Liên hệ"),
+                    Text(
+                        CommonMethods.formatNumber(
+                            data!.price ?? "negotiate".tr()),
                         style: kTextPriceStyle),
                   ],
                 ),
@@ -279,12 +289,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   padding: const EdgeInsets.only(
                       left: kDefaultPadding, right: kDefaultPadding),
                   child: TextFormField(
-                    initialValue: data!.des,
-                    minLines:
-                        6, // any number you need (It works as the rows for the textarea)
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                  ),
+                      initialValue: data!.des,
+                      minLines:
+                          6, // any number you need (It works as the rows for the textarea)
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      enabled: false),
                 )
               ],
             ),
@@ -348,30 +358,67 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     Text(
                       "message.str012".tr(),
                     ),
-                    ElevatedButton.icon(
-                        onPressed: () {
-                          // onReport(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: AppColors.grey,
-                          minimumSize: const Size.fromHeight(36), // NEW
-                        ),
-                        icon: Icon(
-                          AppIcons.warning,
-                          color: AppColors.yellow,
-                        ),
-                        label: Text(
-                          "report.text".tr().toUpperCase(),
-                          style: TextStyle(color: AppColors.yellow).bold,
-                        )),
+                    Padding(
+                      padding: const EdgeInsets.only(top: kDefaultPadding),
+                      child: RxButton(
+                          onTap: _onReport,
+                          icon: Icon(
+                            AppIcons.warning,
+                          ),
+                          color: AppColors.black50,
+                          text: "report.text".tr().toUpperCase()),
+                    )
                   ],
                 ))
               ],
             ),
           ),
         ),
-        Card(child: RxReview(data!))
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Row(
+              children: [
+                Icon(
+                  AppIcons.map_1,
+                  color: AppColors.black50,
+                ),
+                Padding(padding: const EdgeInsets.only(right: 10)),
+                Flexible(child: Text(
+                  data!.address ?? "NaN",
+                  style: const TextStyle(
+                    color: AppColors.black50,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                )),
+              ],
+            ),
+          ),
+        ),
+        ProductReview(data!),
+        _buildHeader("product.thesame.post".tr()),
+        ProductRelated(
+          data!,
+          filter: {"UserId": data!.userid},
+        ),
+        _buildHeader("product.thesame.brand".tr()),
+        ProductRelated(
+          data!,
+          filter: {"BrandId": data!.brandid},
+        )
       ],
+    );
+  }
+
+  Widget _buildHeader(String text) {
+    return Padding(
+      padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
+      child: Text(
+        text.toUpperCase(),
+        style:
+            TextStyle(color: Theme.of(context).textTheme.bodyText1!.color).bold,
+      ),
     );
   }
 }

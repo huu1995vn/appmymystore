@@ -6,14 +6,11 @@ import 'package:raoxe/core/commons/common_methods.dart';
 class FirebaseInAppMessagingService {
   static FirebaseInAppMessaging fiam = FirebaseInAppMessaging.instance;
 
-  static init() {
-    fiam.setMessagesSuppressed(false);
-    fiam.setAutomaticDataCollectionEnabled(true);
-  }
+  static init() async {}
 
   static triggerEvent(String event) async {
     if (CommonMethods.isMobile()) {
-      await FirebaseInAppMessagingService.fiam.triggerEvent(event);
+      FirebaseInAppMessagingService.fiam.triggerEvent(event);
     }
   }
 

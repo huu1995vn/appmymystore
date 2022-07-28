@@ -11,6 +11,8 @@ import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:raoxe/core/utilities/size_config.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -29,27 +31,41 @@ class _LoginPageState extends State<LoginPage> {
     loadData();
   }
 
-  String? tokenbiometrics;
-  dynamic usl;
+  bool isLoginBio = false;
+  Map<String, dynamic> userlogin = {};
+
   loadData() {
+    userlogin = StorageService.get(StorageKeys.userlogin);
     setState(() {
-      tokenbiometrics = StorageService.get(StorageKeys.biometrics);
-      usl = StorageService.get(StorageKeys.userlogin);
-      if (usl != null) username = usl!["username"];
+      if (userlogin != null) {
+        username = userlogin["username"];
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return RxScaffold(
-        key: keyLogin,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      key: keyLogin,
+      appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: AppColors.black, //change your color here
         ),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [_header(), _body()]));
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _header(),
+        _body(),
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: _createAccountLabel(context),
+          ),
+        ),
+      ]),
+    );
   }
 
   Widget _header() {
@@ -58,16 +74,12 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         children: [
           Image.asset(
-            LOGORAOXEWHITEIMAGE,
-            width: 150,
+            LOGORAOXECOLORIMAGE,
+            width: 180,
           ),
-          const Text(
+          Text(
             'Welcome to back',
-            style: TextStyle(
-              color: AppColors.white,
-              // fontSize: 45,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle().italic,
           ),
         ],
       ),
@@ -75,11 +87,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _body() {
-    return Expanded(
-        child: RxWrapper(
-            body: SingleChildScrollView(
+    return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.all(kDefaultPadding * 3),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -145,32 +155,37 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       )),
                 )),
-            RxPrimaryButton(
-                onTap: () {
-                  _onLogin(username, password);
-                },
-                text: "continue".tr().toUpperCase()),
-            _createAccountLabel(context),
-            Center(
-                child: Padding(
-              padding: const EdgeInsets.all(kDefaultPadding),
-              child: Ink(
-                decoration: const ShapeDecoration(
-                  shape: CircleBorder(),
-                  color: Colors.teal,
-                ),
-                child: IconButton(
-                  iconSize: 59,
-                  icon: const Icon(AppIcons.fingerprint),
-                  color: AppColors.black50,
-                  onPressed: _onLoginBiometrics,
-                ),
-              ),
-            ))
+            Row(
+              children: [
+                Expanded(
+                    child: RxPrimaryButton(
+                        onTap: () {
+                          _onLogin(username, password);
+                        },
+                        text: "continue".tr().toUpperCase())),
+                const Padding(padding: EdgeInsets.only(right: 10)),
+                Ink(
+                  height: kSizeHeight,
+                  decoration: const ShapeDecoration(
+                    color: AppColors.grayDark,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                  ),
+                  child: IconButton(
+                    // iconSize: 59,
+                    icon: const Icon(AppIcons.fingerprint),
+                    color: AppColors.black50,
+                    onPressed: _onLoginBiometric,
+                  ),
+                )
+              ],
+            )
+
+            // ,
           ],
         ),
       ),
-    )));
+    );
   }
 
   _toRegister() async {
@@ -187,14 +202,10 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Text(
               "message.str036".tr(),
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
             Text(
               "registnow".tr(),
-              style: const TextStyle(
-                  color: AppColors.primary500,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
+              style: const TextStyle(color: AppColors.primary500).bold,
             ),
           ],
         ),
@@ -202,15 +213,22 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _onLoginBiometrics() async {
-    if (tokenbiometrics == null || usl == null) {
-      CommonMethods.showToast(context, "Chức năng này chưa bật");
-    } else {
-      bool authBiometric = await AuthService.authBiometric();
-      if (!authBiometric) {
-        CommonMethods.showToast(context, "Thiết bị không khả dụng");
+  _onLoginBiometric() async {
+    try {
+      if (!CommonMethods.checkStringPhone(username)) {
+        throw "invalid.phone".tr();
       }
-      _onLogin(username, usl!["password"]!);
+
+      String userbio = StorageService.get(StorageKeys.biometric);
+      isLoginBio = userbio == username;
+      if (isLoginBio && userlogin != null) {
+        await AuthService.authBiometric();
+        _onLogin(username, userlogin["password"]!);
+      } else {
+        throw "message.str046".tr();
+      }
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
     }
   }
 

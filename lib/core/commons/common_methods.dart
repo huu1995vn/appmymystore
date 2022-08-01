@@ -80,18 +80,17 @@ class CommonMethods {
       LocationPermission permission;
       permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied &&
-          StorageService.get("isOpened") != null) {
+          StorageService.get("isOpened") == null) {
         await StorageService.set("isOpened", "true");
         permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.deniedForever) {
-          Future.error('Location Not Available');
-          return null;
-        }
+      }
+      if (permission == LocationPermission.deniedForever) {
+        Future.error('Location Not Available');
       } else {
         return await Geolocator.getCurrentPosition();
       }
     } catch (e) {
-      return null;
+      Future.error(e);
     }
     return null;
   }
@@ -199,7 +198,7 @@ class CommonMethods {
 
   static materialDialog(BuildContext context, dynamic pmsg,
       {String? title, List<Widget>? actions, Color? color = AppColors.white}) {
-            String message = pmsg.toString();
+    String message = pmsg.toString();
     try {
       message = pmsg.message ?? message;
     } catch (e) {}
@@ -226,7 +225,6 @@ class CommonMethods {
 
   static void showDialogError(BuildContext context, dynamic pmsg,
       {String? title, List<Widget>? actions}) {
-
     materialDialog(context, pmsg,
         title: "error.text".tr(), actions: actions, color: AppColors.error);
   }
@@ -630,6 +628,7 @@ class CommonMethods {
   static void call(String phone) {
     launchUrl(Uri.parse("tel://$phone"));
   }
+
   //# build end link dynamic
 
 }

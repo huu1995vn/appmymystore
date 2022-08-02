@@ -240,9 +240,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         if (res.status > 0) {
           CommonMethods.unlockScreen();
           await CommonMethods.showConfirmDialog(context, "delete.success".tr());
-          if (!(data!.id > 0)) {
-            CommonNavigates.goBack(context, ProductModel());
-          }
+          CommonNavigates.goBack(context, ProductModel());
         } else {
           CommonMethods.showDialogError(context, res.message);
         }
@@ -650,10 +648,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                 ),
                               ),
                               _contact(),
-                             if(data!=null && data!.id > 0) Center(
-                                  child: RxRoundedButton(
-                                      onPressed: _onDelete,
-                                      title: "delete.text".tr()))
+                              if (data != null && data!.id > 0)
+                                Center(
+                                    child: RxRoundedButton(
+                                        onPressed: _onDelete,
+                                        title: "delete.text".tr()))
                             ],
                           )),
                     ))

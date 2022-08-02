@@ -395,7 +395,8 @@
     "str010": "Device does not support biometric authentication",
     "str011": "The app doesn't have biometrics enabled",
     "str012": "Login account in another device",
-    "str013": "Contact information has not been created"
+    "str013": "Contact information has not been created",
+    "alert01": "Are you sure you want to delete?"
 
   }
 }

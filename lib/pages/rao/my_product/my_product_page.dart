@@ -47,6 +47,10 @@ class _MyProductPageState extends State<MyProductPage> {
     var res = await CommonNavigates.toMyProductPage(context,
         item: ProductModel(), onChanged: (v) => {loadData()});
     if (res != null) {
+      setState(() {
+      tabs = [];
+      tabviews = [];
+    });
       loadData();
     }
   }

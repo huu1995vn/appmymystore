@@ -191,6 +191,68 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     }
   }
 
+  _onSave() async {
+    CommonMethods.lockScreen();
+    try {
+      List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
+          name: data!.name!);
+      if (idFiles.isEmpty) {
+        CommonMethods.showToast(context, "message.str007".tr());
+        return;
+      }
+      if (idFiles.isNotEmpty) {
+        setState(() {
+          data!.imglist = idFiles.join(',');
+          data!.img = idFiles[0];
+        });
+      }
+      ProductModel dataClone = data!.clone();
+
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().productsavedata(
+          data!.id > 0 ? dataClone.toUpdate() : dataClone.toInsert());
+      if (res.status > 0) {
+        if (widget.onChanged != null) {
+          widget.onChanged!(dataClone!);
+        }
+        CommonMethods.unlockScreen();
+        await CommonMethods.showConfirmDialog(context,
+            dataClone!.id > 0 ? "update.success".tr() : "create.success".tr());
+        if (!(data!.id > 0)) {
+          CommonNavigates.goBack(context, dataClone);
+        }
+      } else {
+        CommonMethods.showDialogError(context, res.message);
+      }
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
+    }
+    CommonMethods.unlockScreen();
+  }
+
+  _onDelete() async {
+    var res =
+        await CommonMethods.showConfirmDialog(context, "message.alert01".tr());
+    if (res) {
+      CommonMethods.lockScreen();
+      try {
+        ResponseModel res =
+            await DaiLyXeApiBLL_APIUser().productdelete([data!.id]);
+        if (res.status > 0) {
+          CommonMethods.unlockScreen();
+          await CommonMethods.showConfirmDialog(context, "delete.success".tr());
+          if (!(data!.id > 0)) {
+            CommonNavigates.goBack(context, ProductModel());
+          }
+        } else {
+          CommonMethods.showDialogError(context, res.message);
+        }
+      } catch (e) {
+        CommonMethods.showDialogError(context, e);
+      }
+      CommonMethods.unlockScreen();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -587,7 +649,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   ),
                                 ),
                               ),
-                              _contact()
+                              _contact(),
+                              Center(
+                                  child: RxRoundedButton(
+                                      onPressed: _onDelete,
+                                      title: "delete.text".tr()))
                             ],
                           )),
                     ))
@@ -621,43 +687,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             ))
       ],
     );
-  }
-
-  _onSave() async {
-    CommonMethods.lockScreen();
-    try {
-      List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
-          name: data!.name!);
-      if (idFiles.isEmpty) {
-        CommonMethods.showToast(context, "message.str007".tr());
-        return;
-      }
-      if (idFiles.isNotEmpty) {
-        setState(() {
-          data!.imglist = idFiles.join(',');
-          data!.img = idFiles[0];
-        });
-      }
-      ProductModel dataClone = data!.clone();
-
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().productsavedata(
-          data!.id > 0 ? dataClone.toUpdate() : dataClone.toInsert());
-      if (res.status > 0) {
-        if (widget.onChanged != null) {
-          widget.onChanged!(dataClone!);
-        }
-        CommonMethods.unlockScreen();
-        await CommonMethods.showConfirmDialog(context, dataClone!.id > 0 ? "update.success".tr() : "create.success".tr());
-        if (!(data!.id > 0)) {
-          CommonNavigates.goBack(context, dataClone);
-        }       
-      } else {
-        CommonMethods.showDialogError(context, res.message);
-      }
-    } catch (e) {
-      CommonMethods.showDialogError(context, e);
-    }
-    CommonMethods.unlockScreen();
   }
 
   Widget _contact() {
@@ -727,7 +756,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
               child: Opacity(
                 opacity: 0.7,
                 child: GestureDetector(
-                  onTap: onDelete,
+                  onTap: _onDelete,
                   child: Container(
                     decoration: const BoxDecoration(
                       color: AppColors.black,

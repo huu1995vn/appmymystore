@@ -1,7 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, must_be_immutable, use_build_context_synchronously
 
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -86,10 +85,6 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
   }
 
   Future<dynamic> onRefresh() async {
-    return await loadData();
-  }
-
-   Future<dynamic> onDetail() async {
     return await loadData();
   }
 

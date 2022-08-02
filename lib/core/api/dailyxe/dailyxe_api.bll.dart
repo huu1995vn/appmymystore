@@ -179,6 +179,11 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "product/savedata");
   }
 
+  Future<ResponseModel> productdelete(List<int> ids) async {
+    Map<String, dynamic> body = {"ids": ids};
+    return await post(body, null, "product/delete");
+  }
+
   Future<ResponseModel> productuptop(Map<String, dynamic> body) async {
     return await post(body, null, "product/uptop");
   }
@@ -206,10 +211,7 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
   }
 
   Future<ResponseModel> notificationready(List<int> ids) async {
-    Map<String, dynamic> body = {
-      "ids": ids,
-      "status": 2
-    };
+    Map<String, dynamic> body = {"ids": ids, "status": 2};
     return await post(body, null, "notification/status");
   }
 

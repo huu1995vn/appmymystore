@@ -646,6 +646,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         if (widget.onChanged != null) {
           widget.onChanged!(dataClone!);
         }
+        CommonMethods.unlockScreen();
         await CommonMethods.showConfirmDialog(context, dataClone!.id > 0 ? "update.success".tr() : "create.success".tr());
         if (!(data!.id > 0)) {
           CommonNavigates.goBack(context, dataClone);

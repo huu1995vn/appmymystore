@@ -200,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "message.str036".tr(),
+              "message.str005".tr(),
             ),
             Text(
               "registnow".tr(),
@@ -224,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
         await AuthService.authBiometric();
         _onLogin(username, userlogin["password"]!);
       } else {
-        throw "message.str046".tr();
+        throw "message.str011".tr();
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e);

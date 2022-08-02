@@ -237,7 +237,7 @@ Widget RxLoginAccountLabel(context) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'message.str041'.tr(),
+            'message.str006'.tr(),
             style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
           Text(

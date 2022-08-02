@@ -356,7 +356,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Text(
-                      "message.str012".tr(),
+                      "message.str001".tr(),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: kDefaultPadding),

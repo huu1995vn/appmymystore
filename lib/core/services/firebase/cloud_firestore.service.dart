@@ -24,7 +24,7 @@ class CloudFirestoreSerivce {
           if (doc["DeviceId"]!=null && doc["DeviceId"] != uid) {
             try {
                CommonMethods.showConfirmDialog(
-                    context, "message.str047".tr())
+                    context, "message.str012".tr())
                 .then((value) => AuthService.logout(context));
             } catch (e) {
               AuthService.logout(context);

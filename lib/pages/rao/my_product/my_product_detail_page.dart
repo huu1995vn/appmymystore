@@ -631,7 +631,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
           name: data!.name!);
       if (idFiles.isEmpty) {
-        CommonMethods.showToast(context, "message.str042".tr());
+        CommonMethods.showToast(context, "message.str007".tr());
         return;
       }
       if (idFiles.isNotEmpty) {

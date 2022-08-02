@@ -74,7 +74,7 @@ class AuthService {
       }
     }
     if (status >= 2) {
-      throw "message.str014".tr();
+      throw "message.str002".tr();
     }
   }
 
@@ -101,13 +101,13 @@ class AuthService {
     bool isBiometricSupported = await _localAuthentication.isDeviceSupported();
     if(!isBiometricSupported)
     {
-      throw "message.str045".tr();
+      throw "message.str010".tr();
     }
     //check if user has enabled biometrics.
     bool canCheckBiometrics = await _localAuthentication.canCheckBiometrics;
     if(!canCheckBiometrics)
     {
-      throw "message.str046".tr();
+      throw "message.str011".tr();
     }
     //if device supports biometrics and user has enabled biometrics, then authenticate.
     if (isBiometricSupported && canCheckBiometrics) {

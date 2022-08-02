@@ -130,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   validator: Validators.compose([
                     Validators.required("notempty.password.text".tr()),
                     Validators.patternString(
-                        RxParttern.password, "message.str017".tr())
+                        RxParttern.password, "message.str004".tr())
                   ]),
                 ),
                 RxInput(
@@ -173,7 +173,7 @@ class _RegisterPageState extends State<RegisterPage> {
             await DaiLyXeApiBLL_APIAnonymous().insertuser(user!.toInsert());
         if (res.status > 0) {
           CommonMethods.showDialogCongratulations(
-              context, "message.str043".tr());
+              context, "message.str008".tr());
         } else {
           CommonMethods.showToast(context, res.message);
         }

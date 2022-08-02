@@ -197,12 +197,12 @@ class CommonMethods {
   }
 
   static materialDialog(BuildContext context, dynamic pmsg,
-      {String? title, List<Widget>? actions, Color? color = AppColors.white}) {
+      {String? title, List<Widget>? actions, Color? color = AppColors.white}) async {
     String message = pmsg.toString();
     try {
       message = pmsg.message ?? message;
     } catch (e) {}
-    return Dialogs.materialDialog(
+    return await Dialogs.materialDialog(
         msg: message,
         title: title ?? "notification".tr(),
         context: context,
@@ -215,35 +215,35 @@ class CommonMethods {
             ]);
   }
 
-  static void showDialogInfo(BuildContext context, String pmsg,
-      {List<Widget>? actions}) {
-    materialDialog(context, pmsg,
+  static Future<void> showDialogInfo(BuildContext context, String pmsg,
+      {List<Widget>? actions}) async {
+    return await  materialDialog(context, pmsg,
         title: "notification.text".tr(),
         actions: actions,
         color: AppColors.info);
   }
 
-  static void showDialogError(BuildContext context, dynamic pmsg,
-      {String? title, List<Widget>? actions}) {
-    materialDialog(context, pmsg,
+  static Future<void> showDialogError(BuildContext context, dynamic pmsg,
+      {String? title, List<Widget>? actions}) async {
+    return await materialDialog(context, pmsg,
         title: "error.text".tr(), actions: actions, color: AppColors.error);
   }
 
-  static void showDialogSuccess(BuildContext context, Object pmsg,
-      {String? title, List<Widget>? actions}) {
-    materialDialog(context, pmsg,
+  static Future<void> showDialogSuccess(BuildContext context, Object pmsg,
+      {String? title, List<Widget>? actions}) async {
+    return await materialDialog(context, pmsg,
         title: "success.text".tr(), actions: actions, color: AppColors.success);
   }
 
-  static void showDialogWarning(BuildContext context, Object pmsg,
-      {List<Widget>? actions}) {
-    materialDialog(context, pmsg,
+  static Future<void> showDialogWarning(BuildContext context, Object pmsg,
+      {List<Widget>? actions}) async {
+    return await materialDialog(context, pmsg,
         title: "warning".tr(), actions: actions, color: AppColors.warning);
   }
 
-  static void showDialogCongratulations(BuildContext context, Object pmsg,
-      {String? title, List<Widget>? actions}) {
-    Dialogs.materialDialog(
+  static Future<void> showDialogCongratulations(BuildContext context, Object pmsg,
+      {String? title, List<Widget>? actions}) async {
+    return await Dialogs.materialDialog(
         color: AppColors.white,
         msg: pmsg.toString(),
         title: "congratulations".tr(),

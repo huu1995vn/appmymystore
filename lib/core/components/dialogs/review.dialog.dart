@@ -50,7 +50,8 @@ class _ReviewDialogState extends State<ReviewDialog> {
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().reviewpost(body);
       if (res.status > 0) {
-        CommonMethods.showDialogSuccess(context, "success".tr());
+        await CommonMethods.showConfirmDialog(context, "success".tr());
+        CommonNavigates.goBack(context);
       } else {
         CommonMethods.showToast(context, res.message);
       }

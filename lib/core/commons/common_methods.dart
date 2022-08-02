@@ -172,7 +172,7 @@ class CommonMethods {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(title ?? ""),
+            title: Text(title ?? "notification".tr()),
             content: content != null
                 ? Text(
                     content,

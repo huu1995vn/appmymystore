@@ -157,7 +157,7 @@ class CommonMethods {
     return utf8.fuse(base64).decode(text);
   }
 
-  static showToast(context, String pmsg) {
+  static showToast(context, String pmsg){
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(pmsg),

@@ -12,7 +12,6 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

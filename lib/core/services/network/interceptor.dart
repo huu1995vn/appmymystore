@@ -26,7 +26,7 @@ class DioInterceptors extends InterceptorsWrapper {
       'OSName': InfoDeviceService.infoDevice.OSName,
       'Location':
           "${InfoDeviceService.infoDevice.Position?.latitude},${InfoDeviceService.infoDevice.Position?.longitude}",
-      'FCM': FirebaseMessagingService.token,
+      'FCMToken': FirebaseMessagingService.token,
 
     });
     return options;

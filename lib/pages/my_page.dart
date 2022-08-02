@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/lifecyclewatcherstate.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_in_app_messaging_service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
@@ -39,6 +40,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
 
     initApp();
     super.initState();
+    CloudFirestoreSerivce.subcriptuser(context);
   }
 
   @override

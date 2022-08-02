@@ -17,7 +17,6 @@ import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/services/theme.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -116,33 +115,11 @@ class _MyAppState extends State<MyApp> {
           themeMode: themeProvider.selectedThemeMode,
           home: SplashScreen(
             navigateAfterFuture: loadFromFuture(home),
-            // seconds: 3,
-            // navigateAfterSeconds: home,
             imageBackground: const AssetImage('assets/splash.png'),
             loaderColor: Colors.red,
           ),
           routes: CommonNavigates.routers,
           builder: EasyLoading.init(),
-        ),
-      ),
-    );
-  }
-}
-
-class AfterSplash extends StatelessWidget {
-  const AfterSplash({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: const Text("Welcome In SplashScreen Package",
-              style: kTextHeaderStyle),
-          automaticallyImplyLeading: false),
-      body: Center(
-        child: Text(
-          "done".tr(),
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
         ),
       ),
     );

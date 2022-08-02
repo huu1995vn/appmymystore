@@ -1,34 +1,42 @@
 // ignore_for_file: empty_catches
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
+import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 class CloudFirestoreSerivce {
-  static Future<void> _pushUsers() async {
-    CollectionReference fireStoreService =
-        FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.users);
-    try {
-      if (APITokenService.userId > 0) {
-        String uid = InfoDeviceService.infoDevice.Identifier!;
-        Map<String, dynamic> data = {};
-        data["userid"] = APITokenService.userId;
-        data["token"] = FirebaseMessagingService.token;
-        data["uid"] = uid;
-        fireStoreService.doc(APITokenService.userId.toString()).set(data);
-      }
-    } catch (e) {
-      CommonMethods.wirtePrint(e);
+  static subcriptuser(BuildContext context) {
+    if (APITokenService.userId != null && APITokenService.userId > 0) {
+      FirebaseFirestore.instance
+          .collection(NAMEFIREBASEDATABASE.users)
+          .doc(APITokenService.userId.toString())
+          .snapshots()
+          .listen((doc) {
+        if (doc.exists) {
+          String uid = InfoDeviceService.infoDevice.Identifier!;
+          if (doc["DeviceId"]!=null && doc["DeviceId"] != uid) {
+            try {
+               CommonMethods.showConfirmDialog(
+                    context, "Tài khoản đăng nhập ở thiết bị khác")
+                .then((value) => AuthService.logout(context));
+            } catch (e) {
+              AuthService.logout(context);
+            }
+           
+          }
+        }
+      });
     }
   }
 
+
   static init() async {
-    _pushUsers();
     await CloudFirestoreSerivce.configs();
     await CloudFirestoreSerivce.ads();
   }

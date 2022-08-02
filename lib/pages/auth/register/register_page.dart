@@ -50,7 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: user == null
           ? Expanded(
               child: Center(
-              child: Text("notfound".tr()),
+              child: Text("nodatafound".tr()),
             ))
           : SingleChildScrollView(
               child: Padding(

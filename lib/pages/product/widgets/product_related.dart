@@ -84,7 +84,7 @@ class ReviewState extends State<ProductRelated> {
               return _buildItem(item);
             },
             key: Key("review".tr()),
-            noFound: Center(child: Text("notfound".tr())),
+            noFound: Center(child: Text("nodatafound".tr())),
             scrollDirection: Axis.horizontal,
           ),
         )

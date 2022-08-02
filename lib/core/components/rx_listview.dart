@@ -129,7 +129,7 @@ class _RxDataListViewState extends State<RxListView>
                   ),
                 ),
                 Text(
-                  "notfound".tr(),
+                  "nodatafound".tr(),
                 ),
               ],
             ),

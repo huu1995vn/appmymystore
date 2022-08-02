@@ -193,7 +193,7 @@
   },
   "pintop": "Pintop",
   "account": "Tài khoản",
-  "notfound": "Không tìm thấy dữ liệu",
+  "nodatafound": "Không tìm thấy dữ liệu",
   "request": {
     "text": "Yêu cầu",
     "deleteaccount": "@:request.text xóa tài khoản",

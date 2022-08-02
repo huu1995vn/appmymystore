@@ -194,7 +194,7 @@
   },
   "pintop": "Pintop",
   "account": "Account",
-  "notfound": "Not Found",
+  "nodatafound": "No data found",
   "request": {
     "text": "Request",
     "deleteaccount": "@:request.text to delete account",

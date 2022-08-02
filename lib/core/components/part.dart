@@ -218,7 +218,7 @@ Widget RxNoFound({required String urlImage, String? message}) {
           height: 10,
         ),
         Text(
-          message ?? "notfound".tr(),
+          message ?? "nodatafound".tr(),
           textAlign: TextAlign.center,
         ),
       ],

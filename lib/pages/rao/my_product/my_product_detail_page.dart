@@ -623,7 +623,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       },
                                       hintText: "year".tr(),
                                       style: const TextStyle(
-                                              color: AppColors.black50)
+                                              color: AppColors.primary)
                                           .size(13),
                                     ),
                                   ),
@@ -650,7 +650,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                 ),
                               ),
                               _contact(),
-                              Center(
+                             if(data!=null && data!.id > 0) Center(
                                   child: RxRoundedButton(
                                       onPressed: _onDelete,
                                       title: "delete.text".tr()))

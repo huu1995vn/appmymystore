@@ -646,12 +646,10 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         if (widget.onChanged != null) {
           widget.onChanged!(dataClone!);
         }
-
-        if (!(dataClone!.id > 0)) {
-          CommonNavigates.goBack(context);
-        }
-        CommonMethods.showToast(context,
-            dataClone!.id > 0 ? "update.success".tr() : "create.success".tr());
+        await CommonMethods.showConfirmDialog(context, dataClone!.id > 0 ? "update.success".tr() : "create.success".tr());
+        if (!(data!.id > 0)) {
+          CommonNavigates.goBack(context, dataClone);
+        }       
       } else {
         CommonMethods.showDialogError(context, res.message);
       }

@@ -43,6 +43,13 @@ class _MyProductPageState extends State<MyProductPage> {
   }
 
   int itemselect = 1;
+  Future<dynamic> onAdd() async {
+    var res = await CommonNavigates.toMyProductPage(context,
+        item: ProductModel(), onChanged: (v) => {loadData()});
+    if (res != null) {
+      loadData();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +65,8 @@ class _MyProductPageState extends State<MyProductPage> {
                     color: AppColors.black, //change your color here
                   ),
                   centerTitle: true,
-                  title: Text("manager.raoxe".tr(), style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+                  title: Text("manager.raoxe".tr(),
+                      style: kTextHeaderStyle.copyWith(color: AppColors.black)),
                   elevation: 0.0,
                   backgroundColor: AppColors.grey,
                 ),
@@ -89,13 +97,9 @@ class _MyProductPageState extends State<MyProductPage> {
         ),
         persistentFooterButtons: [
           RxPrimaryButton(
-             onTap: () => {
-                    CommonNavigates.toMyProductPage(context,
-                        item: ProductModel(), onChanged: (v) => {loadData()})
-                  },
+              onTap: onAdd,
               icon: Icon(AppIcons.plus_circle),
               text: "add.text".tr())
-        ]
-        );
+        ]);
   }
 }

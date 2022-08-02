@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable, use_build_context_synchronously
 
 import 'dart:async';
 import 'dart:convert';
@@ -43,8 +43,9 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
   }
 
   Future loadData([nPaging = 1]) async {
-    if (nPaging > 1 && listData != null && totalItems! <= listData!.length)
+    if (nPaging > 1 && listData != null && totalItems! <= listData!.length) {
       return;
+    }
 
     try {
       nPaging = nPaging ?? 1;
@@ -85,6 +86,10 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
   }
 
   Future<dynamic> onRefresh() async {
+    return await loadData();
+  }
+
+   Future<dynamic> onDetail() async {
     return await loadData();
   }
 

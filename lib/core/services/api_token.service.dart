@@ -80,7 +80,7 @@ class APITokenService {
       Map data = json.decode(AESService.decrypt(dataBase64));
       if ((data["token"] as String).isNotNullEmpty) {
         token = data["token"];  
-        await StorageService.set(StorageKeys.token, pData);      
+        await StorageService.set(StorageKeys.dataLogin, pData);      
         res = true;
       }
       Timer(Duration.zero, () async {

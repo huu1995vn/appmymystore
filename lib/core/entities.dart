@@ -258,7 +258,7 @@ class UserModel extends Entity {
 @JsonSerializable()
 class ProductModel extends Entity {
   int id = 0;
-  int userid = CommonConfig.user.id;
+  int userid = APITokenService.userId;
   int usercontactid = 0;
   int brandid = 0;
   int modelid = 0;
@@ -300,12 +300,12 @@ class ProductModel extends Entity {
   String? colorname;
   String? fueltypename;
   String? fullname;
-  int imguser = CommonConfig.user.img;
-  int? cityid = CommonConfig.user.cityid;
-  int? districtid = CommonConfig.user.districtid;
+  int imguser = -1;
+  int? cityid = -1;
+  int? districtid = -1;
   String? districtname;
-  String? address = CommonConfig.user.address;
-  String? phone = CommonConfig.user.phone;
+  String? address = "";
+  String? phone = "";
   String? reject;
   String? username;
   bool get isfavorite {

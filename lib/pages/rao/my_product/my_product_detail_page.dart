@@ -3,7 +3,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -14,7 +13,6 @@ import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_image.dart';
 import 'package:raoxe/core/components/rx_input.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -71,7 +69,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     if (_data!.usercontactid <= 0) {
       lContacts = await _loadContact();
       if (lContacts.isEmpty || lContacts.length == 0) {
-        CommonMethods.showToast(context, "Vui lòng tạo thông tin liên lạc trước khi tạo tin");
+        CommonMethods.showToast(context, "message.str013".tr());
         CommonNavigates.goBack(context);
         return;
       }
@@ -664,7 +662,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   }
 
   Widget _contact() {
-    final userProvider = Provider.of<UserProvider>(context);
     return Card(
       child: ListTile(
         leading: RxAvatarImage(data!.rximguser, size: 40),

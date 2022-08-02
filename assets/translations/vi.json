@@ -394,7 +394,9 @@
     "str009": "Vui lòng tạo thông tin liên lạc trước khi tạo tin",
     "str010": "Thiết bị không hỗ trợ xác thực sinh trắc học",
     "str011": "Ứng dụng chưa bật sinh trắc học",
-    "str012": "Tài khoản đăng nhập ở thiết bị khác"
+    "str012": "Tài khoản đăng nhập ở thiết bị khác",
+    "str013": "Thông tin liên lạc chưa đc tạo"
+
   }
 
 }

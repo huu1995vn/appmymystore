@@ -63,6 +63,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   }
 
   initApp() {
+    Provider.of<NotificationProvider>(context, listen: false).getNotification();
     FirebaseMessagingService.streamMessage.stream.listen((message) async {
       if (message != null) {
         var res = await CommonMethods.showConfirmDialog(

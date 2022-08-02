@@ -101,7 +101,7 @@ class NotificationModel extends Entity {
   String message;
   int status = 1;
   DateTime? createdate;
-  int unready = 0;
+  int unread = 0;
   NotificationModel({
     required this.id,
     required this.notificationtypeid,
@@ -116,7 +116,7 @@ class NotificationModel extends Entity {
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
     json["id"] = CommonMethods.convertToInt32(json["id"]);
     json["status"] = CommonMethods.convertToInt32(json["status"]);
-    json["unready"] = CommonMethods.convertToInt32(json["unready"]);
+    json["unread"] = CommonMethods.convertToInt32(json["unread"]);
     json["notificationtypeid"] =
         CommonMethods.convertToInt32(json["notificationtypeid"]);
     json["createdate"] =

@@ -12,7 +12,6 @@ class NotificationProvider with ChangeNotifier {
     Map<String, dynamic> params = {
       "p": 1,
       "n": 1,
-      "orderBy": "CreateDate DESC"
     };
     ResponseModel res = await DaiLyXeApiBLL_APIUser().notification(params);
     if (res.status > 0) {
@@ -20,7 +19,7 @@ class NotificationProvider with ChangeNotifier {
         List<NotificationModel> list =
             CommonMethods.convertToList<NotificationModel>(
                 res.data, (val) => NotificationModel.fromJson(val));
-        setNotification(list[0].unready);
+        setNotification(list[0].unread);
       }
     }
   }

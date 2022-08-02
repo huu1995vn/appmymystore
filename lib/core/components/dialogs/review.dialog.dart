@@ -135,7 +135,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                                       {review.comment = value},
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    hintText: "enter.text".tr(),
+                                    hintText: "please.enter".tr(),
                                   ),
                                   maxLength: 500,
                                   maxLengthEnforcement:

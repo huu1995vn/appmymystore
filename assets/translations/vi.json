@@ -32,7 +32,9 @@
   "please": {
     "text": "Vui lòng",
     "loginagain": "@:please.text đăng nhập lại",   
-    "login": "@:please.text đăng nhập"
+    "login": "@:please.text đăng nhập",
+    "enter": "@:please.text @.lower:enter"
+
   },
   "dealer": "Đại lý",
   "choose": {

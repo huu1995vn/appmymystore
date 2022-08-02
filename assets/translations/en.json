@@ -1,6 +1,6 @@
 {
   "product": {
-    "thesame":{
+    "thesame": {
       "post": "Rao with the same poster",
       "brand": "Rao with the same brand",
       "price": "Rao equivalent price"
@@ -28,11 +28,13 @@
   "unconfirmed": "Unconfirmed",
   "verifynow": "Verify now",
   "registnow": "Register now",
-  "enter": "Enter",  
+  "enter": "Enter",
   "please": {
     "text": "Please",
-    "loginagain": "@:please.text login again",    
-    "login": "@:please.text login"
+    "loginagain": "@:please.text login again",
+    "login": "@:please.text login",
+    "enter": "@:please.text @.lower:enter"
+
   },
   "dealer": "Showroom",
   "choose": {
@@ -333,7 +335,7 @@
   "discount": "Discount",
   "amount": "Amount",
   "status": "Status",
-  "raoxe": "Rao", 
+  "raoxe": "Rao",
   "notification": "Notification",
   "call": "Call",
   "sell": "Sell",
@@ -385,8 +387,8 @@
     "str001": "This article has been moderated. If you have a problem, please report a violation",
     "str002": "Account does not exist or is locked",
     "str003": "Default data cannot be deleted",
-    "str004": "Password must be at least 8 characters including at least 1 uppercase letter",      
-    "str005": "Don't have an account? ",    
+    "str004": "Password must be at least 8 characters including at least 1 uppercase letter",
+    "str005": "Don't have an account? ",
     "str006": "Already register? ",
     "str007": "Please select attachment",
     "str008": "Congratulations on becoming a member of RaoXe",

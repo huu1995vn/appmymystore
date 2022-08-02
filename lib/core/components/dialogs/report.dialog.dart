@@ -127,7 +127,7 @@ class _ReportDialogState extends State<ReportDialog> {
                                   onChanged: (value) => {report.note = value},
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    hintText: "enter.text".tr(),
+                                    hintText: "please.enter".tr(),
                                   ),
                                   maxLength: 500,
                                   maxLengthEnforcement:

@@ -355,7 +355,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   keyboardType: TextInputType.multiline,
                                   onChanged: (value) => {data!.name = value},
                                   decoration: InputDecoration(
-                                    hintText: "enter.text".tr(),
+                                    hintText: "please.enter".tr(),
                                   ),
                                   validator: (value) {
                                     if ((data!.name == null ||
@@ -398,7 +398,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   maxLines: null,
                                   onChanged: (value) => {data!.des = value},
                                   decoration: InputDecoration(
-                                    hintText: "enter.text".tr(),
+                                    hintText: "please.enter".tr(),
                                   ),
                                   maxLength: 1500,
                                   maxLengthEnforcement:

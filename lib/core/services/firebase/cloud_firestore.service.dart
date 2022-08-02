@@ -1,6 +1,7 @@
 // ignore_for_file: empty_catches
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -23,7 +24,7 @@ class CloudFirestoreSerivce {
           if (doc["DeviceId"]!=null && doc["DeviceId"] != uid) {
             try {
                CommonMethods.showConfirmDialog(
-                    context, "Tài khoản đăng nhập ở thiết bị khác")
+                    context, "message.str047".tr())
                 .then((value) => AuthService.logout(context));
             } catch (e) {
               AuthService.logout(context);

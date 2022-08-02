@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_null_comparison, use_build_context_synchronously
 
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
@@ -130,7 +131,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
           if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
           } else {
-            CommonMethods.showToast(context, "Vui lòng đăng nhập trước");
+            CommonMethods.showToast(context, "please.login".tr());
           }
         },
         child: const Icon(

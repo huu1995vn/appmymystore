@@ -514,7 +514,7 @@
     "str044": "Please create contact information before creating a story",
     "str045": "Device does not support biometric authentication",
     "str046": "The app doesn't have biometrics enabled",
-
+    "str047": "Login account in another device",
     "alert001": "This function needs <b style='color:green'>verify phone number</b>",
     "alert002": "Are you sure you want to <b>delete</b> this message?",
     "alert003": "Are you sure you want to <b>delete</b> this account?",

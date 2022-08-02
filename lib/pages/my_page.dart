@@ -116,7 +116,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   @override
   Widget build(BuildContext context) {
     final notificationProvider =
-        Provider.of<NotificationProvider>(context, listen: false);
+        Provider.of<NotificationProvider>(context, listen: true);
 
     CommonMethods.versionCheck(context);
     Size size = MediaQuery.of(context).size;

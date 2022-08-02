@@ -1,10 +1,12 @@
-// ignore_for_file: prefer_const_constructors, empty_catches
+// ignore_for_file: prefer_const_constructors, empty_catches, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/providers/notification_provider.dart';
 
 class NotificationDetailPage extends StatefulWidget {
   final int? id;
@@ -36,7 +38,7 @@ class NotificationDetailPageState extends State<NotificationDetailPage> {
             await DaiLyXeApiBLL_APIUser().notificationbyid(widget.id!);
         if (res.status > 0) {
           _data = NotificationModel.fromJson(res.data);
-        } 
+        }
       }
 
       setState(() {
@@ -54,6 +56,8 @@ class NotificationDetailPageState extends State<NotificationDetailPage> {
       ResponseModel res =
           await DaiLyXeApiBLL_APIUser().notificationready([data.id!]);
       if (res.status > 0) {
+        Provider.of<NotificationProvider>(context, listen: false)
+            .readeNotification();
         data.status = 2;
         if (widget.onChanged != null) {
           widget.onChanged!(data);

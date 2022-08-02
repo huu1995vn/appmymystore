@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/providers/notification_provider.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
@@ -95,6 +96,10 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => NotificationProvider(),
+        ),
+        
       ],
       child: Consumer<ThemeProvider>(
         child: const MyPage(),

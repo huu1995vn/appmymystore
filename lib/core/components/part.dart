@@ -76,10 +76,7 @@ class RxWebViewState extends State<RxWebView> {
   @override
   void initState() {
     super.initState();
-    if (widget.html != null) {
-      isLoading = false;
-    }
-    // Enable virtual display.
+   
   }
 
   @override
@@ -102,15 +99,16 @@ class RxWebViewState extends State<RxWebView> {
               initialUrl: widget.url,
               javascriptMode: JavascriptMode.unrestricted,
               onProgress: (progress) {
-                if (widget.html != null && progress > 20) {
-                  if (_webViewController != null &&
-                      widget.javaScriptString != null) {
-                    _webViewController!.runJavascript(widget.javaScriptString!);
-                  }
+                if (progress > 20) {
                   if (isLoading) {
                     setState(() {
                       isLoading = false;
                     });
+                  }
+                  if (isLoading &&
+                      _webViewController != null &&
+                      widget.javaScriptString != null) {
+                    _webViewController!.runJavascript(widget.javaScriptString!);
                   }
                 }
               },

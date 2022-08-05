@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -9,6 +10,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/providers/notification_provider.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/notification/widgets/item_notification.widget.dart';
@@ -49,6 +51,11 @@ class _NotificationPageState extends State<NotificationPage> {
         List<NotificationModel> list =
             CommonMethods.convertToList<NotificationModel>(
                 res.data, (val) => NotificationModel.fromJson(val));
+        if (list.length > 0) {
+          Provider.of<NotificationProvider>(context, listen: false)
+              .setNotification(list[0].unread);
+        }
+
         setState(() {
           if (nPaging == 1 && (list.isEmpty)) {
             totalItems = 0;
@@ -90,6 +97,10 @@ class _NotificationPageState extends State<NotificationPage> {
         ResponseModel res = await DaiLyXeApiBLL_APIUser()
             .notificationdelete([listData![index].id]);
         if (res.status > 0) {
+          if (listData![index].status == 1) {
+            Provider.of<NotificationProvider>(context, listen: false)
+                .minusNotification();
+          }
           setState(() {
             listData!.removeAt(index);
           });
@@ -110,6 +121,25 @@ class _NotificationPageState extends State<NotificationPage> {
         List<int> ids = listData!.map((e) => e.id).toList();
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().notificationdelete(ids);
+        if (res.status > 0) {
+          loadData();
+        } else {
+          CommonMethods.showToast(context, res.message);
+        }
+        //Call api gọi api xóa
+
+      } catch (e) {
+        CommonMethods.showDialogError(context, e);
+      }
+    }
+  }
+
+  _onSeen() async {
+    if (listData != null && listData!.length > 0) {
+      try {
+        List<int> ids = listData!.map((e) => e.id).toList();
+        ResponseModel res =
+            await DaiLyXeApiBLL_APIUser().notificationready(ids);
         if (res.status > 0) {
           loadData();
         } else {

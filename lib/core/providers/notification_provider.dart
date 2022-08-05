@@ -24,7 +24,7 @@ class NotificationProvider with ChangeNotifier {
     }
   }
 
-  readeNotification() {
+  minusNotification() {
     if (numNotification > 0) {
       numNotification--;
       setNotification(numNotification);

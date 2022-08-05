@@ -57,7 +57,7 @@ class NotificationDetailPageState extends State<NotificationDetailPage> {
           await DaiLyXeApiBLL_APIUser().notificationready([data.id!]);
       if (res.status > 0) {
         Provider.of<NotificationProvider>(context, listen: false)
-            .readeNotification();
+            .minusNotification();
         data.status = 2;
         if (widget.onChanged != null) {
           widget.onChanged!(data);

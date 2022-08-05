@@ -38,8 +38,8 @@ class ItemProductWidget extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              border: Border.all(color: AppColors.white50),
-                              color: AppColors.black50,
+                              border: Border.all(color: AppColors.black50),
+                              color: AppColors.grey,
                             ),
                             child: SizedBox(
                                 height: 15, width: 20, child: Container()),
@@ -52,8 +52,8 @@ class ItemProductWidget extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              border: Border.all(color: AppColors.white50),
-                              color: AppColors.blackLight,
+                              border: Border.all(color: AppColors.black50),
+                              color: AppColors.grey,
                             ),
                             child: SizedBox(
                                 height: 15,
@@ -61,8 +61,8 @@ class ItemProductWidget extends StatelessWidget {
                                 child: Center(
                                     child: Text(
                                   lenimg >= 9 ? "9+" : lenimg.toString(),
-                                  style: const TextStyle(color: AppColors.white)
-                                      .bold,
+                                  style: kTextSubTitleStyle.copyWith(fontStyle: FontStyle.normal),
+                                  //     .bold,
                                 ))),
                           ),
                         ),

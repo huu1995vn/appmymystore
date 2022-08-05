@@ -38,8 +38,8 @@ class ItemMyProductWidget extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              border: Border.all(color: AppColors.white50),
-                              color: AppColors.black50,
+                              border: Border.all(color: AppColors.black50),
+                              color: AppColors.grey,
                             ),
                             child: SizedBox(
                                 height: 15, width: 20, child: Container()),
@@ -52,8 +52,8 @@ class ItemMyProductWidget extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              border: Border.all(color: AppColors.white50),
-                              color: AppColors.black,
+                              border: Border.all(color: AppColors.black50),
+                              color: AppColors.grey,
                             ),
                             child: SizedBox(
                                 height: 15,
@@ -61,8 +61,7 @@ class ItemMyProductWidget extends StatelessWidget {
                                 child: Center(
                                     child: Text(
                                   lenimg >= 9 ? "9+" : lenimg.toString(),
-                                  style: const TextStyle(color: AppColors.white)
-                                      .bold,
+                                  style: kTextSubTitleStyle.copyWith(fontStyle: FontStyle.normal),
                                 ))),
                           ),
                         ),
@@ -84,7 +83,6 @@ class ItemMyProductWidget extends StatelessWidget {
                                     item.name ?? "NaN",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    
                                   ),
                                   Text(
                                     CommonMethods.formatNumber(
@@ -104,7 +102,6 @@ class ItemMyProductWidget extends StatelessWidget {
                                   item.cityname ?? "NaN",
                                   style: kTextSubTitleStyle,
                                 ),
-                                
                               ],
                             ),
                           ],

@@ -9,7 +9,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/pages/rao/my_product/widgets/item_my_product.widget.dart';
+import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 
 class TabMyProductWidget extends StatefulWidget {
   dynamic status;
@@ -96,7 +96,7 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
       listData,
       (context, index) {
         var item = listData![index];
-        return ItemMyProductWidget(item,
+        return ItemProductWidget(item,
             onTap: () => {
                   CommonNavigates.toMyProductPage(context,
                       item: item,

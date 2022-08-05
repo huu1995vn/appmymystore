@@ -197,7 +197,7 @@ class CommonMethods {
   }
 
   static materialDialog(BuildContext context, dynamic pmsg,
-      {String? title, List<Widget>? actions, Color? color = AppColors.white}) async {
+      {String? title, List<Widget>? actions, Color? color}) async {
     String message = pmsg.toString();
     try {
       message = pmsg.message ?? message;
@@ -225,20 +225,17 @@ class CommonMethods {
 
   static Future<void> showDialogError(BuildContext context, dynamic pmsg,
       {String? title, List<Widget>? actions}) async {
-    return await materialDialog(context, pmsg,
-        title: "error.text".tr(), actions: actions, color: AppColors.error);
+    return await materialDialog(context, pmsg,  actions: actions, color: AppColors.error);
   }
 
   static Future<void> showDialogSuccess(BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) async {
-    return await materialDialog(context, pmsg,
-        title: "success.text".tr(), actions: actions, color: AppColors.success);
+    return await materialDialog(context, pmsg, actions: actions, color: AppColors.success);
   }
 
   static Future<void> showDialogWarning(BuildContext context, Object pmsg,
       {List<Widget>? actions}) async {
-    return await materialDialog(context, pmsg,
-        title: "warning".tr(), actions: actions, color: AppColors.warning);
+    return await materialDialog(context, pmsg, actions: actions, color: AppColors.warning);
   }
 
   static Future<void> showDialogCongratulations(BuildContext context, Object pmsg,

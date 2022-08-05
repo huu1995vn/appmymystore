@@ -1,8 +1,8 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
@@ -94,6 +94,10 @@ class ItemProductWidget extends StatelessWidget {
                                       color: AppColors.primary,
                                     ).bold,
                                   ),
+                                  if(item.status > 2 && item.reject!=null) Text(
+                                    item.reject!,
+                                    style: kTextSubTitleStyle.copyWith(color: AppColors.danger),
+                                  ),
                                 ],
                               ),
                             ),
@@ -106,7 +110,7 @@ class ItemProductWidget extends StatelessWidget {
                                   item.cityname ?? "NaN",
                                   style: kTextSubTitleStyle,
                                 ),
-                                GestureDetector(
+                               if(item.userid!=APITokenService.userId) GestureDetector(
                                     onTap: onFavorite,
                                     child: Icon(
                                       AppIcons.heart_1,

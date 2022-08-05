@@ -26,8 +26,8 @@ class ItemProductWidget extends StatelessWidget {
             children: <Widget>[
               ClipRRect(
                   borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(kDefaultPadding),
-                      topLeft: Radius.circular(kDefaultPadding)),
+                      bottomLeft: Radius.circular(5),
+                      topLeft: Radius.circular(5)),
                   child: Stack(
                     children: <Widget>[
                       RxImage(item.rximg, width: SizeConfig.screenWidth / 4),
@@ -61,7 +61,7 @@ class ItemProductWidget extends StatelessWidget {
                                 child: Center(
                                     child: Text(
                                   lenimg >= 9 ? "9+" : lenimg.toString(),
-                                  style: kTextSubTitleStyle.copyWith(fontStyle: FontStyle.normal),
+                                  style: kTextSubTitleStyle.copyWith(fontStyle: FontStyle.normal, color: AppColors.black),
                                   //     .bold,
                                 ))),
                           ),

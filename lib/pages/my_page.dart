@@ -139,7 +139,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        // backgroundColor: AppColors.white50,
+        backgroundColor: Theme.of(context).cardColor,
         onPressed: () {
           if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
@@ -148,11 +148,11 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
           }
         },
         shape: RoundedRectangleBorder(
-            side: BorderSide(width: 4, color: AppColors.white),
+            side: BorderSide(width: 1, color: Theme.of(context).cardColor),
             borderRadius: BorderRadius.circular(100)),
         child: Icon(
           Icons.add,
-          color: Colors.white,
+          color: AppColors.primary,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

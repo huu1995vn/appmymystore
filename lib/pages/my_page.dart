@@ -71,6 +71,9 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
             title: message.title);
         Provider.of<NotificationProvider>(context, listen: false)
             .getNotification();
+        if (message.data!["code"] == "{{anotherlogin}}") {
+          return;
+        }
         if (res != null && res && message.data != null) {
           String action = message.data!["action"].toString().toLowerCase();
           int? id = message.data!["id"] != null

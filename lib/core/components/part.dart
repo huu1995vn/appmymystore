@@ -76,7 +76,6 @@ class RxWebViewState extends State<RxWebView> {
   @override
   void initState() {
     super.initState();
-   
   }
 
   @override
@@ -115,7 +114,15 @@ class RxWebViewState extends State<RxWebView> {
               onWebViewCreated: (WebViewController webViewController) {
                 _webViewController = webViewController;
                 if (widget.html != null && widget.url == null) {
-                  _webViewController!.loadHtmlString(widget.html!);
+                  _webViewController!.loadHtmlString("""<!DOCTYPE html>
+                    <html>
+                      <head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+                      <body style='"margin: 0; padding: 0;'>
+                        <div>
+                          ${widget.html}
+                        </div>
+                      </body>
+                    </html>""");
                 }
               },
             ),

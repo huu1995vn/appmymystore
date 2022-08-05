@@ -66,14 +66,15 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     Provider.of<NotificationProvider>(context, listen: false).getNotification();
     FirebaseMessagingService.streamMessage.stream.listen((message) async {
       if (message != null) {
+        if (message.data!["code"] == "{{anotherlogin}}") {
+          return;
+        }
         var res = await CommonMethods.showConfirmDialog(
             context, message.body ?? "",
             title: message.title);
         Provider.of<NotificationProvider>(context, listen: false)
             .getNotification();
-        if (message.data!["code"] == "{{anotherlogin}}") {
-          return;
-        }
+
         if (res != null && res && message.data != null) {
           String action = message.data!["action"].toString().toLowerCase();
           int? id = message.data!["id"] != null

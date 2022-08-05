@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -34,36 +35,44 @@ class _NotificationPageState extends State<NotificationPage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   loadData([nPaging = 1]) async {
-    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
-      return;
-    nPaging = nPaging ?? 1;
-    Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage, "orderBy": "CreateDate DESC"};
-    ResponseModel res = await DaiLyXeApiBLL_APIUser().notification(params);
-    if (res.status > 0) {
-      List<NotificationModel> list =
-          CommonMethods.convertToList<NotificationModel>(
-              res.data, (val) => NotificationModel.fromJson(val));
-      setState(() {
-        if (nPaging == 1 && (list.isEmpty)) {
+    try {
+      if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+        return;
+      nPaging = nPaging ?? 1;
+      Map<String, dynamic> params = {
+        "p": nPaging,
+        "n": kItemOnPage,
+        "orderBy": "CreateDate DESC"
+      };
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().notification(params);
+      if (res.status > 0) {
+        List<NotificationModel> list =
+            CommonMethods.convertToList<NotificationModel>(
+                res.data, (val) => NotificationModel.fromJson(val));
+        setState(() {
+          if (nPaging == 1 && (list.isEmpty)) {
+            totalItems = 0;
+          }
+          if (list.isNotEmpty) {
+            totalItems = list[0].rxtotalrow;
+          }
+          listData ??= [];
+          if (nPaging == 1) {
+            listData = list;
+          } else {
+            listData = (listData! + list);
+          }
+        });
+        paging = nPaging;
+      }
+      if ((res.data == null || res.data.length == 0) && nPaging == 1) {
+        setState(() {
+          listData = [];
           totalItems = 0;
-        }
-        if (list.isNotEmpty) {
-          totalItems = list[0].rxtotalrow;
-        }
-        listData ??= [];
-        if (nPaging == 1) {
-          listData = list;
-        } else {
-          listData = (listData! + list);
-        }
-      });
-      paging = nPaging;
-    }
-    if ((res.data == null || res.data.length == 0) && nPaging == 1) {
-      setState(() {
-        listData = [];
-        totalItems = 0;
-      });
+        });
+      }
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
     }
   }
 
@@ -75,11 +84,43 @@ class _NotificationPageState extends State<NotificationPage> {
     return await loadData();
   }
 
-  _onDelete(index) {
-    //Call api gọi api xóa
-    setState(() {
-      listData!.removeAt(index);
-    });
+  _onDelete(index) async {
+    if (listData != null && listData!.length > 0) {
+      try {
+        ResponseModel res = await DaiLyXeApiBLL_APIUser()
+            .notificationdelete([listData![index].id]);
+        if (res.status > 0) {
+          setState(() {
+            listData!.removeAt(index);
+          });
+        } else {
+          CommonMethods.showToast(context, res.message);
+        }
+        //Call api gọi api xóa
+
+      } catch (e) {
+        CommonMethods.showDialogError(context, e);
+      }
+    }
+  }
+
+  _onDeleteAll() async {
+    if (listData != null && listData!.length > 0) {
+      try {
+        List<int> ids = listData!.map((e) => e.id).toList();
+        ResponseModel res =
+            await DaiLyXeApiBLL_APIUser().notificationdelete(ids);
+        if (res.status > 0) {
+          loadData();
+        } else {
+          CommonMethods.showToast(context, res.message);
+        }
+        //Call api gọi api xóa
+
+      } catch (e) {
+        CommonMethods.showDialogError(context, e);
+      }
+    }
   }
 
   @override
@@ -99,6 +140,27 @@ class _NotificationPageState extends State<NotificationPage> {
             floating: true,
             automaticallyImplyLeading: false,
             elevation: 0.0,
+            actions: <Widget>[
+              PopupMenuButton(
+                icon: Icon(Icons.more_vert),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 0,
+                    child: TextButton.icon(
+                        onPressed: _onDeleteAll,
+                        icon: Icon(AppIcons.delete),
+                        label: Text("delete.text".tr())),
+                  ),
+                  PopupMenuItem(
+                    value: 0,
+                    child: TextButton.icon(
+                        onPressed: _onDeleteAll,
+                        icon: Icon(AppIcons.eye_1),
+                        label: Text("seen".tr())),
+                  ),
+                ],
+              )
+            ],
           ),
           key: const Key("LNoti"),
           controller: scrollController,

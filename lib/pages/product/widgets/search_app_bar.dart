@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
@@ -100,8 +101,8 @@ class _SearchAppBarState extends State<SearchAppBar> {
                 controller: controller,
                 textAlignVertical: TextAlignVertical.center,
                 onChanged: (_) => setState(() {}),
-                decoration: const InputDecoration(
-                  hintText: 'Nhập từ khóa tìm kiếm',
+                decoration: InputDecoration(
+                  hintText: "message.str014".tr(),
                   // hintStyle: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.5)),
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
@@ -131,8 +132,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                               child: Center(
                                   child: Text(
                                 numFillter >= 9 ? "9+" : numFillter.toString(),
-                                style: const TextStyle(color: AppColors.primary800)
-                                    .bold,
+                                style: kTextSubTitleStyle.copyWith(color: AppColors.primary).normal,
                               ))),
                         )),
                 ],

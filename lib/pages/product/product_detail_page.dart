@@ -384,7 +384,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   color: AppColors.black50,
                 ),
                 Padding(padding: const EdgeInsets.only(right: 10)),
-                Flexible(child: Text(
+                Flexible(
+                    child: Text(
                   data!.address ?? "NaN",
                   style: const TextStyle(
                     color: AppColors.black50,
@@ -397,28 +398,34 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
         ProductReview(data!),
-        _buildHeader("product.thesame.post".tr()),
-        ProductRelated(
-          data!,
-          filter: {"UserId": data!.userid},
-        ),
-        _buildHeader("product.thesame.brand".tr()),
+       
+        Padding(
+            padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "product.thesame.brand".tr().toUpperCase(),
+                  style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyText1!.color)
+                      .bold,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    CommonNavigates.toProductPage(context,
+                        paramsSearch: {"BrandId": data!.brandid});
+                  },
+                  child: Text("seemore".tr(),
+                      style:
+                          TextStyle(color: Theme.of(context).iconTheme.color)),
+                ),
+              ],
+            )),
         ProductRelated(
           data!,
           filter: {"BrandId": data!.brandid},
         )
       ],
-    );
-  }
-
-  Widget _buildHeader(String text) {
-    return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
-      child: Text(
-        text.toUpperCase(),
-        style:
-            TextStyle(color: Theme.of(context).textTheme.bodyText1!.color).bold,
-      ),
     );
   }
 }

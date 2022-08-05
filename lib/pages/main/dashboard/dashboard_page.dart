@@ -168,8 +168,7 @@ class _DashboardPageState extends State<DashboardPage> {
           },
           child: Icon(
             AppIcons.cog_1,
-            color: Theme.of(context).textTheme.bodyText1!.color,
-            // size: 19,
+            // color: Theme.of(context).textTheme.bodyText1!.color,
           )),
       onTap: () => {},
     );

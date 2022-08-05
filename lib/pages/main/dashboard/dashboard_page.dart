@@ -80,7 +80,6 @@ class _DashboardPageState extends State<DashboardPage> {
                               title: Text("manager.raoxe".tr()),
                               leading: Icon(
                                 AppIcons.car,
-                                color: AppColors.primary,
                               ),
                               onTap: () =>
                                   CommonNavigates.toMyProductPage(context),
@@ -92,7 +91,6 @@ class _DashboardPageState extends State<DashboardPage> {
                               title: Text("ads".tr()),
                               leading: Icon(
                                 AppIcons.cart,
-                                color: AppColors.yellow,
                               ),
                               onTap: () =>
                                   CommonNavigates.toAdvertPage(context),
@@ -104,7 +102,6 @@ class _DashboardPageState extends State<DashboardPage> {
                               title: Text("favorite".tr()),
                               leading: Icon(
                                 AppIcons.heart_1,
-                                color: AppColors.red,
                               ),
                               onTap: () =>
                                   CommonNavigates.toFavoritePage(context),
@@ -115,7 +112,6 @@ class _DashboardPageState extends State<DashboardPage> {
                               title: Text("review".tr()),
                               leading: Icon(
                                 AppIcons.star_1,
-                                color: AppColors.yellow,
                               ),
                               onTap: () =>
                                   CommonNavigates.toReviewPage(context),
@@ -127,7 +123,6 @@ class _DashboardPageState extends State<DashboardPage> {
                               title: Text("address".tr()),
                               leading: Icon(
                                 AppIcons.map_marker,
-                                color: AppColors.info,
                               ),
                               onTap: () =>
                                   CommonNavigates.toContactPage(context),

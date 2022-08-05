@@ -105,6 +105,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   onUpTop() async {
     if (data!.status != 2) {
+      CommonMethods.showToast(context, "message.str015".tr());
       return;
     }
     CommonMethods.lockScreen();

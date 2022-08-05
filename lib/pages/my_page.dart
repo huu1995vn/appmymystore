@@ -18,6 +18,7 @@ import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_in_app_messaging_service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'main/index.dart';
 
@@ -29,13 +30,11 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends LifecycleWatcherState<MyPage> {
-  late int _totalNotifications;
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
 
   @override
   void initState() {
-    _totalNotifications = 0;
     Timer(
         Duration(seconds: 0),
         () => {
@@ -129,16 +128,18 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
       resizeToAvoidBottomInset: false,
       body: PageView(
         controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        onPageChanged: (value) => {onPressedTab(value)},
+        // ignore: prefer_const_literals_to_create_immutables
         children: <Widget>[
           HomePage(),
           NewsPage(),
           NotificationPage(),
           DashboardPage(),
         ],
-        physics: const NeverScrollableScrollPhysics(),
-        onPageChanged: (value) => {onPressedTab(value)},
       ),
       floatingActionButton: FloatingActionButton(
+        // backgroundColor: AppColors.white50,
         onPressed: () {
           if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
@@ -146,7 +147,10 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
             CommonMethods.showToast(context, "please.login".tr());
           }
         },
-        child: const Icon(
+        shape: RoundedRectangleBorder(
+            side: BorderSide(width: 4, color: AppColors.white),
+            borderRadius: BorderRadius.circular(100)),
+        child: Icon(
           Icons.add,
           color: Colors.white,
         ),

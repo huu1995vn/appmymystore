@@ -132,7 +132,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                               child: Center(
                                   child: Text(
                                 numFillter >= 9 ? "9+" : numFillter.toString(),
-                                style: kTextSubTitleStyle.copyWith(color: AppColors.primary).normal,
+                                style: kTextSubTitleStyle.copyWith(color: AppColors.primary, fontStyle: FontStyle.normal),
                               ))),
                         )),
                 ],

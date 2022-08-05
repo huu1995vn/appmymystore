@@ -178,15 +178,20 @@ class _NotificationPageState extends State<NotificationPage> {
                     value: 0,
                     child: TextButton.icon(
                         onPressed: _onDeleteAll,
-                        icon: Icon(AppIcons.delete),
-                        label: Text("delete.text".tr())),
+                        icon: Icon(
+                          AppIcons.delete,
+                          color: AppColors.black50,
+                        ),
+                        label: Text("delete.text".tr(),
+                            style: TextStyle(color: AppColors.black50))),
                   ),
                   PopupMenuItem(
                     value: 0,
                     child: TextButton.icon(
-                        onPressed: _onDeleteAll,
-                        icon: Icon(AppIcons.eye_1),
-                        label: Text("seen".tr())),
+                        onPressed: _onSeen,
+                        icon: Icon(AppIcons.eye_1, color: AppColors.black50),
+                        label: Text("seen".tr(),
+                            style: TextStyle(color: AppColors.black50))),
                   ),
                 ],
               )

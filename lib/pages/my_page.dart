@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
-import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -12,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/lifecyclewatcherstate.dart';
 import 'package:raoxe/core/providers/notification_provider.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
@@ -48,7 +46,9 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   }
 
   @override
-  void onDetached() {}
+  void onDetached() {
+
+  }
 
   @override
   void onInactive() {}
@@ -62,13 +62,13 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   }
 
   initApp() {
-    Provider.of<NotificationProvider>(context, listen: false).getNotification();
+    Provider.of<NotificationProvider>(context, listen: false).getNotification();   
     FirebaseMessagingService.streamMessage.stream.listen((message) async {
       if (message != null) {
         if (message.data!["code"] == "{{anotherlogin}}") {
           return;
         }
-        var res = await CommonMethods.showConfirmDialog(
+        var res = message.isBackgournd || await CommonMethods.showConfirmDialog(
             context, message.body ?? "",
             title: message.title);
         Provider.of<NotificationProvider>(context, listen: false)

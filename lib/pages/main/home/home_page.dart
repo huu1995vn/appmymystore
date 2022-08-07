@@ -55,20 +55,21 @@ class _HomePageState extends State<HomePage>
     ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);
     List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
         res.data, (val) => ProductModel.fromJson(val));
-    setState(() {
-      if (nPaging == 1 && (list.isEmpty)) {
-        totalItems = 0;
-      }
-      if (list.isNotEmpty) {
-        totalItems = list[0].rxtotalrow;
-      }
-      listData ??= [];
-      if (nPaging == 1) {
-        listData = list;
-      } else {
-        listData = (listData! + list);
-      }
-    });
+    if (mounted)
+      setState(() {
+        if (nPaging == 1 && (list.isEmpty)) {
+          totalItems = 0;
+        }
+        if (list.isNotEmpty) {
+          totalItems = list[0].rxtotalrow;
+        }
+        listData ??= [];
+        if (nPaging == 1) {
+          listData = list;
+        } else {
+          listData = (listData! + list);
+        }
+      });
     paging = nPaging;
   }
 

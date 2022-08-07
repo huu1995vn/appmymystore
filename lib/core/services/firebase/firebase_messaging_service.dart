@@ -11,28 +11,32 @@ class PushNotification {
     this.title,
     this.body,
     this.data,
+    this.isBackgournd = false
   });
 
   String? title;
   String? body;
   Map<String, dynamic>? data;
+  bool isBackgournd = false;
 }
 
 Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // print("Handling a background message: ${message.messageId}");
+  if (kDebugMode) {
+    print("Handling a background message: ${message.messageId}");
+  }
 }
-
 class FirebaseMessagingService {
   static StreamController<PushNotification> streamMessage = StreamController<
       PushNotification>.broadcast(); // 2. Instantiate Firebase Messaging
   static String? token;
   static FirebaseMessaging? _messaging;
   // For handling notification when the app is in terminated state
-  static toNotification(RemoteMessage initialMessage) {
+  static convertNotification(RemoteMessage initialMessage, [bool isBackgournd = false]) {
     return PushNotification(
       title: initialMessage.notification?.title,
       body: initialMessage.notification?.body,
       data: initialMessage.data,
+      isBackgournd: isBackgournd
     );
   }
 
@@ -54,12 +58,17 @@ class FirebaseMessagingService {
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       // Add the following line
-      FirebaseMessaging.onBackgroundMessage(
-          _firebaseMessagingBackgroundHandler);
+      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
       // For handling the received notifications
       FirebaseMessaging.onMessage.listen((RemoteMessage initialMessage) {
         if (initialMessage != null) {
-          streamMessage.add(toNotification(initialMessage));
+          streamMessage.add(convertNotification(initialMessage));
+        }
+      });
+      FirebaseMessaging.onMessageOpenedApp
+          .listen((RemoteMessage initialMessage) {
+        if (initialMessage != null) {
+          streamMessage.add(convertNotification(initialMessage, true));
         }
       });
       // For handling notification when the app is in terminated state
@@ -67,7 +76,7 @@ class FirebaseMessagingService {
           await FirebaseMessaging.instance.getInitialMessage();
 
       if (initialMessage != null) {
-        streamMessage.add(toNotification(initialMessage));
+        streamMessage.add(convertNotification(initialMessage));
       }
     } else {
       if (kDebugMode) {

@@ -23,7 +23,6 @@ class CommonConfig {
   static String apiRaoXeSufix = "/";
   static String apiDrive = "http://cdn.dailyxe.info";
   static String apiDriveSufix = "/";
-  static String uriPrefixDynamicLink = "https://raoxe.page.link";
   static String apiHost = "https://dailyxe.com.vn";
   static String hostDynamicLinks = "https://raoxe.page.link";
   static String appStoreID = "1486119532";
@@ -49,6 +48,8 @@ class CommonConfig {
     CommonConfig.apiRaoXeSufix =
         _config["apiHostSufixRaoXe"] ?? CommonConfig.apiRaoXeSufix;
     CommonConfig.apiDrive = _config["apiDrive"] ?? CommonConfig.apiDrive;
+    CommonConfig.hostDynamicLinks =
+        _config["hostDynamicLinks"] ?? CommonConfig.hostDynamicLinks;
   }
 
   static Map<String, String> linkContent = {

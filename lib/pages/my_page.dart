@@ -46,9 +46,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   }
 
   @override
-  void onDetached() {
-
-  }
+  void onDetached() {}
 
   @override
   void onInactive() {}
@@ -62,15 +60,15 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   }
 
   initApp() {
-    Provider.of<NotificationProvider>(context, listen: false).getNotification();   
+    Provider.of<NotificationProvider>(context, listen: false).getNotification();
     FirebaseMessagingService.streamMessage.stream.listen((message) async {
       if (message != null) {
-        if (message.data!["code"] == "{{anotherlogin}}") {
+        if (message.data!["code"].toString().contains("anotherlogin")) {
           return;
         }
-        var res = message.isBackgournd || await CommonMethods.showConfirmDialog(
-            context, message.body ?? "",
-            title: message.title);
+        var res = message.isBackgournd ||
+            await CommonMethods.showConfirmDialog(context, message.body ?? "",
+                title: message.title);
         Provider.of<NotificationProvider>(context, listen: false)
             .getNotification();
 

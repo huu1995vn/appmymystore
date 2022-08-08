@@ -10,22 +10,23 @@ class DynamicLinkService {
   static FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
   static Future<Uri> createDynamicLink(String link) async {
-      final DynamicLinkParameters parameters = DynamicLinkParameters(
-        uriPrefix: CommonConfig.uriPrefixDynamicLink,
-        link: Uri.parse(link),
-        androidParameters: AndroidParameters(
-          packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,
-          minimumVersion: 1,
-        ),
-        iosParameters: IOSParameters(
-          bundleId: InfoDeviceService.infoDevice.PackageInfo.packageName,
-          minimumVersion: '1',
-          appStoreId: CommonConfig.appStoreID,
-        ),
-      );
-      final ShortDynamicLink shortLink = await FirebaseDynamicLinks.instance.buildShortLink(parameters);
-      final Uri shortUrl = shortLink.shortUrl;
-      return shortUrl;
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: CommonConfig.hostDynamicLinks,
+      link: Uri.parse(link),
+      androidParameters: AndroidParameters(
+        packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,
+        minimumVersion: 1,
+      ),
+      iosParameters: IOSParameters(
+        bundleId: InfoDeviceService.infoDevice.PackageInfo.packageName,
+        minimumVersion: '1',
+        appStoreId: CommonConfig.appStoreID,
+      ),
+    );
+    final ShortDynamicLink shortLink =
+        await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+    final Uri shortUrl = shortLink.shortUrl;
+    return shortUrl;
   }
 
   static _deepLink(context, Uri uriLink) {
@@ -33,29 +34,28 @@ class DynamicLinkService {
     if (uriLink.query.isNotNullEmpty) {
       deepLink += '?${uriLink.query}';
     }
-   
+
     var resInfo = _getInfoRewriteLinkWithDomain(deepLink);
     if (resInfo != null) {
       switch (resInfo["typePage"]) {
         case "rm":
-          CommonNavigates.toProductPage(context, id: int.parse(resInfo["id"].toString()));
+          CommonNavigates.toProductPage(context,
+              id: int.parse(resInfo["id"].toString()));
           break;
       }
     }
   }
-
- 
 
   static _getInfoRewriteLinkWithDomain(String linkRewriteWithDomain) {
     try {
       String regexString = r"-(\d+)(\w)\.html"; // not r'/api/\w+/\d+/' !!!
       RegExp regExp = RegExp(regexString);
       var matches = regExp.firstMatch(linkRewriteWithDomain);
-      return {"id": int.parse(matches!.group(1).toString()), "typePage": matches.group(2)};
+      return {
+        "id": int.parse(matches!.group(1).toString()),
+        "typePage": matches.group(2)
+      };
     } catch (e) {}
     return null;
   }
-
-
-  
 }

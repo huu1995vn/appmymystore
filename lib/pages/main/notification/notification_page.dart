@@ -125,6 +125,7 @@ class _NotificationPageState extends State<NotificationPage> {
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().notificationdelete(ids);
         if (res.status > 0) {
+          CommonMethods.showToast(context, "success".tr());
           loadData();
         } else {
           CommonMethods.showToast(context, res.message);
@@ -144,6 +145,7 @@ class _NotificationPageState extends State<NotificationPage> {
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().notificationready(ids);
         if (res.status > 0) {
+          CommonMethods.showToast(context, "success".tr());
           loadData();
         } else {
           CommonMethods.showToast(context, res.message);
@@ -180,7 +182,10 @@ class _NotificationPageState extends State<NotificationPage> {
                   PopupMenuItem(
                     value: 0,
                     child: TextButton.icon(
-                        onPressed: _onDeleteAll,
+                        onPressed: () {
+                          CommonNavigates.goBack(context);
+                          _onDeleteAll();
+                        },
                         icon: Icon(
                           AppIcons.delete,
                           color: AppColors.black50,
@@ -191,7 +196,10 @@ class _NotificationPageState extends State<NotificationPage> {
                   PopupMenuItem(
                     value: 0,
                     child: TextButton.icon(
-                        onPressed: _onSeen,
+                        onPressed: () {
+                          CommonNavigates.goBack(context);
+                          _onSeen();
+                        },
                         icon: Icon(AppIcons.eye_1, color: AppColors.black50),
                         label: Text("seen".tr(),
                             style: TextStyle(color: AppColors.black50))),

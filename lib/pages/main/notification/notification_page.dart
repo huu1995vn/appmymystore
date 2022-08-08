@@ -178,14 +178,25 @@ class _NotificationPageState extends State<NotificationPage> {
             actions: <Widget>[
               PopupMenuButton(
                 icon: Icon(Icons.more_vert),
+                onSelected: ((value) {
+                  CommonNavigates.goBack(context);
+                  switch (value) {
+                    case 0:
+                      _onDeleteAll();
+
+                      break;
+                    case 1:
+                      _onSeen();
+
+                      break;
+                    default:
+                  }
+                }),
                 itemBuilder: (context) => [
                   PopupMenuItem(
                     value: 0,
                     child: TextButton.icon(
-                        onPressed: () {
-                          CommonNavigates.goBack(context);
-                          _onDeleteAll();
-                        },
+                        onPressed: () {},
                         icon: Icon(
                           AppIcons.delete,
                           color: AppColors.black50,
@@ -196,10 +207,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   PopupMenuItem(
                     value: 0,
                     child: TextButton.icon(
-                        onPressed: () {
-                          CommonNavigates.goBack(context);
-                          _onSeen();
-                        },
+                        onPressed: () {},
                         icon: Icon(AppIcons.eye_1, color: AppColors.black50),
                         label: Text("seen".tr(),
                             style: TextStyle(color: AppColors.black50))),

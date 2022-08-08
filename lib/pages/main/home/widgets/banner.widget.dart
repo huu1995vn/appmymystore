@@ -30,13 +30,13 @@ class _BannerWidgetState extends State<BannerWidget> {
     try {
       ResponseModel res = await DaiLyXeApiBLL_APISite().getBanner();
       if (res.data == null) return;
-      List<BannerModel> list = CommonMethods.convertToList<BannerModel>(
+      list = CommonMethods.convertToList<BannerModel>(
           json.decode(res.data), (val) => BannerModel.fromJson(val));
     } catch (e) {
       print(e);
     }
     setState(() {
-      listData = list ?? [];
+      listData = list;
     });
   }
 

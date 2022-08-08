@@ -21,25 +21,21 @@ class CloudFirestoreSerivce {
           .listen((doc) {
         if (doc.exists) {
           String uid = InfoDeviceService.infoDevice.Identifier!;
-          if (doc["DeviceId"]!=null && doc["DeviceId"] != uid) {
+          if (doc["DeviceId"] != null && doc["DeviceId"] != uid) {
             try {
-               CommonMethods.showConfirmDialog(
-                    context, "message.str012".tr())
-                .then((value) => AuthService.logout(context));
+              CommonMethods.showConfirmDialog(context, "message.str012".tr())
+                  .then((value) => AuthService.logout(context));
             } catch (e) {
               AuthService.logout(context);
             }
-           
           }
         }
       });
     }
   }
 
-
   static init() async {
     await CloudFirestoreSerivce.configs();
-    await CloudFirestoreSerivce.ads();
   }
 
   static Future<void> configs() async {
@@ -55,20 +51,6 @@ class CloudFirestoreSerivce {
         CommonConfig.apiDrive = item["apiDrive"] ?? CommonConfig.apiDrive;
         CommonConfig.version_masterdata =
             item["version_masterdata"] ?? CommonConfig.version_masterdata;
-      }
-    } catch (e) {}
-  }
-
-  static Future<void> ads() async {
-    try {
-      CollectionReference fireStoreService =
-          FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.ads);
-      var value = await fireStoreService.get();
-      if (value.docs.isNotEmpty) {
-        CommonConfig.ads = value.docs.map((i) {
-          dynamic item = i.data();
-          return AdsModel.fromJson(item);
-        }).toList();
       }
     } catch (e) {}
   }

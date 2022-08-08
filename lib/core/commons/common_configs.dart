@@ -12,7 +12,6 @@ enum Environment {
 
 class CommonConfig {
   //system
-  static List<AdsModel> ads = <AdsModel>[];
   static bool isDark = false;
   static Map deviceInfo = {};
   static String languageCode = "vi";

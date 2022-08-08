@@ -142,6 +142,17 @@ class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
   }
 }
 
+class DaiLyXeApiBLL_APISite extends DaiLyXeApiBLL_Basic {
+  DaiLyXeApiBLL_APISite() {
+    apiDAL = DaiLyXeApiDAL();
+    apiDAL.controllerName = "site/banner";
+  }
+  //gets
+  Future<ResponseModel> getBanner() async {
+    return await get(null, "raoxebanner");
+  }
+}
+
 class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
   DaiLyXeApiBLL_APIUser() {
     apiDAL = DaiLyXeApiDAL();

@@ -17,6 +17,7 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:raoxe/pages/main/home/widgets/banner.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'widgets/item_product.widget.dart';
 
@@ -108,13 +109,7 @@ class _HomePageState extends State<HomePage>
         slivers: <Widget>[
           SliverToBoxAdapter(
               child: Column(children: [
-            RxImages(
-              data: CommonConfig.ads.map((e) => e.img).toList(),
-              onTap: (i) => {
-                CommonMethods.openWebView(context,
-                    html: CommonConfig.ads[i].content)
-              },
-            ),
+            const BannerWidget(),
             _buildTitle("new".tr(), () {
               CommonNavigates.toProductPage(context);
             }),

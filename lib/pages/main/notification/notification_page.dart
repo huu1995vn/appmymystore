@@ -117,6 +117,9 @@ class _NotificationPageState extends State<NotificationPage> {
 
   _onDeleteAll() async {
     if (listData != null && listData!.length > 0) {
+      var res = await CommonMethods.showConfirmDialog(
+          context, "message.alert01".tr());
+      if (!res) return;
       try {
         List<int> ids = listData!.map((e) => e.id).toList();
         ResponseModel res =

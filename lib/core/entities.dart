@@ -3,7 +3,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
@@ -769,16 +768,19 @@ class ConfigModel extends Entity {
 }
 
 @JsonSerializable()
-class AdsModel extends Entity {
-  String img = IMAGE_NOT_FOUND;
-  String? herf;
-  String? content;
-  AdsModel();
-  AdsModel clone() => AdsModel.fromJson(toJson());
-  factory AdsModel.fromJson(Map<String, dynamic> json) {
-    return _$AdsModelFromJson(json);
+class BannerModel extends Entity {
+  int id = -1;
+  String src = IMAGE_NOT_FOUND;
+  String? link;
+  String? des;
+  String? title;
+  int? no;
+  BannerModel();
+  BannerModel clone() => BannerModel.fromJson(toJson());
+  factory BannerModel.fromJson(Map<String, dynamic> json) {
+    return _$BannerModelFromJson(json);
   }
-  Map<String, dynamic> toJson() => _$AdsModelToJson(this);
+  Map<String, dynamic> toJson() => _$BannerModelToJson(this);
 }
 
 class AppTheme {

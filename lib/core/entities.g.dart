@@ -424,17 +424,24 @@ Map<String, dynamic> _$ConfigModelToJson(ConfigModel instance) =>
       'version': instance.version,
     };
 
-AdsModel _$AdsModelFromJson(Map<String, dynamic> json) => AdsModel()
+BannerModel _$BannerModelFromJson(Map<String, dynamic> json) => BannerModel()
   ..TotalRow = json['TotalRow']
   ..RowIndex = json['RowIndex']
-  ..img = json['img'] as String
-  ..herf = json['herf'] as String?
-  ..content = json['content'] as String?;
+  ..id = json['id'] as int
+  ..src = json['src'] as String
+  ..link = json['link'] as String?
+  ..title = json['title'] as String?
+  ..des = json['des'] as String?
+  ..no = json['no'] as int?;
 
-Map<String, dynamic> _$AdsModelToJson(AdsModel instance) => <String, dynamic>{
+Map<String, dynamic> _$BannerModelToJson(BannerModel instance) =>
+    <String, dynamic>{
       'TotalRow': instance.TotalRow,
       'RowIndex': instance.RowIndex,
-      'img': instance.img,
-      'herf': instance.herf,
-      'content': instance.content,
+      'id': instance.id,
+      'src': instance.src,
+      'link': instance.link,
+      'des': instance.des,
+      'title': instance.title,
+      'no': instance.no,
     };

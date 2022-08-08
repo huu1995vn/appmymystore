@@ -24,27 +24,30 @@ class _BannerWidgetState extends State<BannerWidget> {
 
   int paging = 1;
   int totalItems = 0;
-  List<dynamic> listData = [];
+  List<BannerModel> listData = [];
   loadData([nPaging = 1]) async {
+    List<BannerModel> list = [];
     try {
       ResponseModel res = await DaiLyXeApiBLL_APISite().getBanner();
       if (res.data == null) return;
-      setState(() {
-        listData = json.decode(res.data) ?? [];
-      });
+      List<BannerModel> list = CommonMethods.convertToList<BannerModel>(
+          json.decode(res.data), (val) => BannerModel.fromJson(val));
     } catch (e) {
       print(e);
     }
+    setState(() {
+      listData = list ?? [];
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return RxImages(
-      data: listData.map((e) => e["src"].toString()).toList(),
+      data: listData.map((e) => e.src.toString()).toList(),
       onTap: (i) {
         var item = listData[i];
-        if (item["link"] != null && CommonMethods.isURl(item["link"])) {
-          CommonMethods.launchURL(item["link"]);
+        if (item.link != null && CommonMethods.isURl(item.link!)) {
+          CommonMethods.launchURL(item.link!);
         }
       },
     );

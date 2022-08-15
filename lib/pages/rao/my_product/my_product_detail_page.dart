@@ -10,6 +10,7 @@ import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
 import 'package:raoxe/core/components/dialogs/photo_view.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_image.dart';
 import 'package:raoxe/core/components/rx_input.dart';
 import 'package:raoxe/core/entities.dart';
@@ -664,15 +665,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             height: kSizeHeight,
             child: Row(
               children: [
-                IconButton(
-                  icon: const Icon(
-                    AppIcons.arrow_up_circle,
-                  ),
-                  tooltip: 'UpTop',
-                  onPressed: () {
-                    onUpTop();
-                  },
-                ),
+                RxIconButton(icon: AppIcons.arrow_up, onTap: onUpTop),
+                const SizedBox(width: kDefaultPadding),
                 SizedBox(
                   width: SizeConfig.screenWidth * 0.8,
                   child: RxPrimaryButton(

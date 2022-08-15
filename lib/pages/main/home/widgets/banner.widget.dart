@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/components/rx_slider.dart';
 import 'package:raoxe/core/entities.dart';
 
 class BannerWidget extends StatefulWidget {
@@ -42,14 +43,14 @@ class _BannerWidgetState extends State<BannerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return RxImages(
-      data: listData.map((e) => e.src.toString()).toList(),
+    return RxSlider(
       onTap: (i) {
         var item = listData[i];
         if (item.link != null && CommonMethods.isURl(item.link!)) {
           CommonMethods.launchURL(item.link!);
         }
       },
+      items: listData.map((e) => e.src.toString()).toList(),
     );
   }
 }

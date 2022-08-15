@@ -9,6 +9,7 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_images.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
@@ -150,22 +151,8 @@ class _HomePageState extends State<HomePage>
       ),
       actions: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(right: kDefaultPadding),
-          child: GestureDetector(
-              onTap: () {},
-              child: Ink(
-                decoration: const ShapeDecoration(
-                  color: AppColors.grayDark,
-                  shape: CircleBorder(),
-                ),
-                child: IconButton(
-                  iconSize: 17,
-                  icon: const Icon(AppIcons.magnifier),
-                  color: AppColors.primary,
-                  onPressed: () => {_onSearch()},
-                ),
-              )),
-        )
+            padding: const EdgeInsets.only(right: kDefaultPadding),
+            child: RxIconButton(onTap: _onSearch, icon: AppIcons.magnifier))
       ],
     );
   }
@@ -183,20 +170,8 @@ _buildTitle(String header, void Function()? onTap) {
     padding: const EdgeInsets.all(kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(header.toUpperCase(), style: const TextStyle().bold),
-      GestureDetector(
-        onTap: onTap,
-        child: Ink(
-          // decoration: const ShapeDecoration(
-          //   color: AppColors.grayDark,
-          //   shape: CircleBorder(),
-          // ),
-          child: const Icon(
-            AppIcons.chevron_right,
-            // size: 30,
-            color: AppColors.black50,
-          ),
-        ),
-      )
+      RxIconButton(onTap: onTap, icon: AppIcons.chevron_right)
+      
     ]),
   );
 }

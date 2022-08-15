@@ -10,6 +10,7 @@ import 'package:raoxe/core/components/dialogs/report.dialog.dart';
 import 'package:raoxe/core/components/dialogs/review.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_images.dart';
 import 'package:raoxe/pages/product/widgets/product_related.dart';
 import 'package:raoxe/pages/product/widgets/product_review.dart';
@@ -129,23 +130,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       elevation: 0.0,
                       backgroundColor: AppColors.grey,
                       actions: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            AppIcons.heart_1,
-                            color: data!.isfavorite ? AppColors.primary : null,
-                          ),
-                          onPressed: _onFavorite,
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.share,
-                            color: AppColors.black50,
-                          ),
-                          tooltip: 'Share',
-                          onPressed: () {
-                            _onShare();
-                          },
-                        ),
+                        RxIconButton(
+                            icon: AppIcons.heart_1,
+                            onTap: _onFavorite,
+                            colorIcon: data!.isfavorite
+                                ? AppColors.primary
+                                : AppColors.secondary),
+                        SizedBox(width: kDefaultPadding),
+                        RxIconButton(
+                          icon: AppIcons.share_1,
+                          onTap: _onShare,
+                        )
                       ],
                     ),
                     SliverToBoxAdapter(child: _buildDetail())
@@ -398,7 +393,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
         ProductReview(data!),
-       
         Padding(
             padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
             child: Row(
@@ -410,15 +404,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           color: Theme.of(context).textTheme.bodyText1!.color)
                       .bold,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    CommonNavigates.toProductPage(context,
-                        paramsSearch: {"BrandId": data!.brandid});
-                  },
-                  child: Text("seemore".tr(),
-                      style:
-                          TextStyle(color: Theme.of(context).iconTheme.color)),
-                ),
+                RxIconButton(
+                    icon: AppIcons.chevron_right,
+                    onTap: () {
+                      CommonNavigates.toProductPage(context,
+                          paramsSearch: {"BrandId": data!.brandid});
+                    })
               ],
             )),
         ProductRelated(

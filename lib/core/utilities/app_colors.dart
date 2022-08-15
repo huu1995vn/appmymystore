@@ -17,6 +17,7 @@ class AppColors {
   static const Color primary700 = Color(0xFFD32F2F);
   static const Color primary800 = Color(0xFFC62828);
   static const Color primary900 = Color(0xFFB71C1C);
+  static const Color secondary = Color(0xFF2B2B2B);
   static const Color yellow = Color.fromARGB(214, 255, 196, 0);
   static const Color blue = Colors.blue;
   static const Color danger = Color(0xFFB71C1C);

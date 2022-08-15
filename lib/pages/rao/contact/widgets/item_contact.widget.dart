@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
@@ -53,9 +54,7 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
         // component is not dragged.
         child: Card(
             child: ListTile(
-                leading: RxCircleAvatar(
-                    child: Icon(AppIcons.map_marker,
-                        size: 30, color: Colors.blue[500])),
+                leading: RxIconButton(icon: AppIcons.map_marker, colorIcon: AppColors.blue, size: 45,),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/components/index.dart';
+import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -61,7 +62,9 @@ class ItemProductWidget extends StatelessWidget {
                                 child: Center(
                                     child: Text(
                                   lenimg >= 9 ? "9+" : lenimg.toString(),
-                                  style: kTextSubTitleStyle.copyWith(fontStyle: FontStyle.normal, color: AppColors.black),
+                                  style: kTextSubTitleStyle.copyWith(
+                                      fontStyle: FontStyle.normal,
+                                      color: AppColors.black),
                                   //     .bold,
                                 ))),
                           ),
@@ -94,10 +97,12 @@ class ItemProductWidget extends StatelessWidget {
                                       color: AppColors.primary,
                                     ).bold,
                                   ),
-                                  if(item.status > 2 && item.reject!=null) Text(
-                                    item.reject!,
-                                    style: kTextSubTitleStyle.copyWith(color: AppColors.danger),
-                                  ),
+                                  if (item.status > 2 && item.reject != null)
+                                    Text(
+                                      item.reject!,
+                                      style: kTextSubTitleStyle.copyWith(
+                                          color: AppColors.danger),
+                                    ),
                                 ],
                               ),
                             ),
@@ -110,15 +115,14 @@ class ItemProductWidget extends StatelessWidget {
                                   item.cityname ?? "NaN",
                                   style: kTextSubTitleStyle,
                                 ),
-                               if(item.userid!=APITokenService.userId) GestureDetector(
+                                if (item.userid != APITokenService.userId)
+                                  RxIconButton(
+                                    icon: AppIcons.heart_1,
                                     onTap: onFavorite,
-                                    child: Icon(
-                                      AppIcons.heart_1,
-                                      color: item.isfavorite
-                                          ? AppColors.primary
-                                          : null,
-                                      size: 19,
-                                    )),
+                                    colorIcon: item.isfavorite
+                                        ? AppColors.primary
+                                        : AppColors.secondary,
+                                  )
                               ],
                             ),
                           ],

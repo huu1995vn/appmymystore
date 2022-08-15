@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -34,18 +35,9 @@ class UserTopWidget extends StatelessWidget {
                       // backgroundColor: Colors.white,
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: GestureDetector(
-                          onTap: onUpload,
-                          child: const CircleAvatar(
-                            backgroundColor: AppColors.grey,
-                            radius: 20.0,
-                            child: Icon(
-                              AppIcons.camera_1,
-                              size: 20.0,
-                              color: Color(0xFF404040),
-                            ),
-                          ),
-                        ),
+                        child: 
+                        RxIconButton(icon: AppIcons.camera_1, onTap: onUpload, size: 40,)
+                        
                       ),
                       radius: 60.0,
                       backgroundImage: RxImageProvider(data!.rximg),

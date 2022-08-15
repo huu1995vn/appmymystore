@@ -8,6 +8,7 @@ import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -129,7 +130,6 @@ class _DashboardPageState extends State<DashboardPage> {
                               // subtitle: Text("Sổ địa chỉ"),
                             ),
                           )
-                        
                         ],
                       ),
                     )
@@ -162,15 +162,11 @@ class _DashboardPageState extends State<DashboardPage> {
               fontSize: 19,
             ),
           )),
-      trailing: InkWell(
+      trailing: RxIconButton(
+          icon: AppIcons.cog_1,
           onTap: () {
             CommonNavigates.toSettingsPage(context);
-          },
-          child: Icon(
-            AppIcons.cog_1,
-            // color: Theme.of(context).textTheme.bodyText1!.color,
-          )),
-      onTap: () => {},
+          }),
     );
   }
 }

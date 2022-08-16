@@ -153,10 +153,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           await CommonNavigates.openOtpVerificationDialog(context, phone, true);
       if (res != null) {
         // ignore: use_build_context_synchronously
-        CommonMethods.showToast(context, "success".tr());
+        CommonMethods.showToast( "success".tr());
       }
     } catch (e) {
-      CommonMethods.showToast(context, e.toString());
+      CommonMethods.showToast( e.toString());
     }
   }
   //#end function main

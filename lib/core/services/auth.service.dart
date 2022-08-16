@@ -29,7 +29,7 @@ class AuthService {
               (Route<dynamic> route) => route.isFirst);
         }
       } else {
-        CommonMethods.showToast(context, res.message);
+        CommonMethods.showToast( res.message);
       }
     } catch (e) {}
     CommonMethods.unlockScreen();

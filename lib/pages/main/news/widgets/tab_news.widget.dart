@@ -70,7 +70,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast(context, res.message);
+        CommonMethods.showToast( res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());

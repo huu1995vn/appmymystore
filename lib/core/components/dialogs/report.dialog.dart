@@ -57,7 +57,7 @@ class _ReportDialogState extends State<ReportDialog> {
         await CommonMethods.showDialogSuccess(context, "success".tr(), title: "report".tr());
         CommonNavigates.goBack(context);
       } else {
-        CommonMethods.showToast(context, res.message);
+        CommonMethods.showToast( res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());

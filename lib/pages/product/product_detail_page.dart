@@ -60,7 +60,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           setState(() {
             isNotFound = true;
           });
-          CommonMethods.showToast(context, res.message);
+          CommonMethods.showToast( res.message);
         }
       }
     } catch (e) {
@@ -82,7 +82,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   _onReview() async {
     if (!CommonMethods.isLogin) {
-      CommonMethods.showToast(context, "please.login".tr());
+      CommonMethods.showToast( "please.login".tr());
       return;
     }
     await CommonNavigates.showDialogBottomSheet(
@@ -96,7 +96,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   _onReport() async {
     if (!CommonMethods.isLogin) {
-      CommonMethods.showToast(context, "please.login".tr());
+      CommonMethods.showToast( "please.login".tr());
       return;
     }
     await CommonNavigates.showDialogBottomSheet(

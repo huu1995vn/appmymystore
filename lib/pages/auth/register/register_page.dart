@@ -175,11 +175,11 @@ class _RegisterPageState extends State<RegisterPage> {
           CommonMethods.showDialogCongratulations(
               context, "message.str008".tr());
         } else {
-          CommonMethods.showToast(context, res.message);
+          CommonMethods.showToast( res.message);
         }
       }
     } catch (e) {
-      CommonMethods.showToast(context, e.toString());
+      CommonMethods.showToast( e.toString());
     }
   }
 }

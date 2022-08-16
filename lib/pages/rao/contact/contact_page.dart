@@ -61,7 +61,7 @@ class _ContactPageState extends State<ContactPage> {
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast(context, res.message);
+        CommonMethods.showToast( res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -94,7 +94,7 @@ class _ContactPageState extends State<ContactPage> {
         listData!.removeAt(index);
       });
     } else {
-      CommonMethods.showToast(context, res.message);
+      CommonMethods.showToast( res.message);
     }
   }
 
@@ -107,7 +107,7 @@ class _ContactPageState extends State<ContactPage> {
     if (res.status > 0) {
       loadData();
     } else {
-      CommonMethods.showToast(context, res.message);
+      CommonMethods.showToast( res.message);
     }
   }
 

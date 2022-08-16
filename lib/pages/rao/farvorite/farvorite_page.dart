@@ -60,7 +60,7 @@ class _FavoritePageState extends State<FavoritePage> {
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast(context, res.message);
+        CommonMethods.showToast( res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());

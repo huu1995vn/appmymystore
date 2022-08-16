@@ -53,7 +53,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
         await CommonMethods.showDialogSuccess(context, "success".tr(), title: "review".tr());
         CommonNavigates.goBack(context);
       } else {
-        CommonMethods.showToast(context, res.message);
+        CommonMethods.showToast( res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());

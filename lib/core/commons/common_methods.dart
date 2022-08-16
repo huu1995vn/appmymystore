@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:new_version/new_version.dart';
@@ -157,11 +158,15 @@ class CommonMethods {
     return utf8.fuse(base64).decode(text);
   }
 
-  static showToast(context, String pmsg){
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(pmsg),
-      ),
+  static showToast(String pmsg){
+    Fluttertoast.showToast(
+        msg: pmsg, //message to show toast
+        toastLength: Toast.LENGTH_LONG, //duration for message to show
+        gravity: ToastGravity.CENTER, //where you want to show, top, bottom
+        timeInSecForIosWeb: 1, //for iOS only
+        //backgroundColor: Colors.red, //background Color for message
+        textColor: Colors.white, //message text color
+        fontSize: 16.0 //message font size
     );
   }
 
@@ -494,7 +499,7 @@ class CommonMethods {
   static Future<bool> onFavorite(context, List<int> ids, bool status) async {
     try {
       if (!CommonMethods.isLogin) {
-        CommonMethods.showToast(context, "please.login".tr());
+        CommonMethods.showToast( "please.login".tr());
         return false;
       }
       ResponseModel res =
@@ -505,7 +510,7 @@ class CommonMethods {
             : StorageService.deleteFavorite(ids);
         return true;
       } else {
-        CommonMethods.showToast(context, res.message);
+        CommonMethods.showToast( res.message);
       }
     } catch (e) {}
     return false;

@@ -114,7 +114,7 @@ class _NotificationPageState extends State<NotificationPage> {
             listData!.removeAt(index);
           });
         } else {
-          CommonMethods.showToast(context, res.message);
+          CommonMethods.showToast( res.message);
         }
         //Call api gọi api xóa
 
@@ -134,10 +134,10 @@ class _NotificationPageState extends State<NotificationPage> {
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().notificationdelete(ids);
         if (res.status > 0) {
-          CommonMethods.showToast(context, "success".tr());
+          CommonMethods.showToast( "success".tr());
           loadData();
         } else {
-          CommonMethods.showToast(context, res.message);
+          CommonMethods.showToast( res.message);
         }
         //Call api gọi api xóa
 
@@ -154,10 +154,10 @@ class _NotificationPageState extends State<NotificationPage> {
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().notificationready(ids);
         if (res.status > 0) {
-          CommonMethods.showToast(context, "success".tr());
+          CommonMethods.showToast( "success".tr());
           loadData();
         } else {
-          CommonMethods.showToast(context, res.message);
+          CommonMethods.showToast( res.message);
         }
         //Call api gọi api xóa
 

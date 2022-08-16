@@ -51,10 +51,10 @@ class _UserPageState extends State<UserPage> {
 
         Provider.of<UserProvider>(context, listen: false).setUserModel(user);
       } else {
-        CommonMethods.showToast(context, res.message);
+        CommonMethods.showToast( res.message);
       }
     } catch (e) {
-      CommonMethods.showToast(context, e.toString());
+      CommonMethods.showToast( e.toString());
     }
   }
 
@@ -79,7 +79,7 @@ class _UserPageState extends State<UserPage> {
               data = dataClone;
             });
           } else {
-            CommonMethods.showToast(context, res.message);
+            CommonMethods.showToast( res.message);
           }
           Provider.of<UserProvider>(context, listen: false)
               .setData(img: fileId);
@@ -103,7 +103,7 @@ class _UserPageState extends State<UserPage> {
           data = dataClone;
         });
       } else {
-        CommonMethods.showToast(context, res.message);
+        CommonMethods.showToast( res.message);
       }
       Provider.of<UserProvider>(context, listen: false).setUserModel(dataClone);
     } catch (e) {

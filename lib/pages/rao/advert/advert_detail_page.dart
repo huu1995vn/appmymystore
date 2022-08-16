@@ -40,7 +40,7 @@ class _AdvertDetailPageState extends State<AdvertDetailPage> {
             data = AdvertModel.fromJson(res.data);
           });
         } else {
-          CommonMethods.showToast(context, res.message);
+          CommonMethods.showToast( res.message);
         }
       }
     } catch (e) {

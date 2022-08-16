@@ -64,13 +64,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         setState(() {
           isNotFound = true;
         });
-        CommonMethods.showToast(context, res.message);
+        CommonMethods.showToast( res.message);
       }
     }
     if (_data!.usercontactid <= 0) {
       lContacts = await _loadContact();
       if (lContacts.isEmpty || lContacts.length == 0) {
-        CommonMethods.showToast(context, "message.str013".tr());
+        CommonMethods.showToast( "message.str013".tr());
         CommonNavigates.goBack(context);
         return;
       }
@@ -106,7 +106,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   onUpTop() async {
     if (data!.status != 2) {
-      CommonMethods.showToast(context, "message.str015".tr());
+      CommonMethods.showToast( "message.str015".tr());
       return;
     }
     CommonMethods.lockScreen();
@@ -115,7 +115,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       body["ids"] = [data!.id];
       ResponseModel res = await DaiLyXeApiBLL_APIUser().productuptop(body);
       if (res.status > 0) {
-        CommonMethods.showToast(context, "update.success".tr());
+        CommonMethods.showToast( "update.success".tr());
       } else {
         CommonMethods.showDialogError(context, res.message);
       }
@@ -132,7 +132,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       return CommonMethods.convertToList<ContactModel>(
           res.data, (val) => ContactModel.fromJson(val));
     } else {
-      CommonMethods.showToast(context, res.message);
+      CommonMethods.showToast( res.message);
     }
     return [];
   }
@@ -149,7 +149,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         return;
       }
     } else {
-      CommonMethods.showToast(context, res.message);
+      CommonMethods.showToast( res.message);
     }
 
     ContactModel contact = await showSearch(
@@ -199,7 +199,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
           name: data!.name!);
       if (idFiles.isEmpty) {
-        CommonMethods.showToast(context, "message.str007".tr());
+        CommonMethods.showToast( "message.str007".tr());
         return;
       }
       if (idFiles.isNotEmpty) {

@@ -97,7 +97,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
     DynamicLinkService.dynamicLinks.onLink.listen((dynamicLinkData) {
       // Navigator.pushNamed(context, dynamicLinkData.link.path);
-      CommonMethods.showToast(context, dynamicLinkData.link.path);
+      CommonMethods.showToast( dynamicLinkData.link.path);
     }).onError((error) {
       CommonMethods.wirtePrint('onLink error');
     });
@@ -142,7 +142,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
           if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
           } else {
-            CommonMethods.showToast(context, "please.login".tr());
+            CommonMethods.showToast( "please.login".tr());
           }
         },
         shape: RoundedRectangleBorder(

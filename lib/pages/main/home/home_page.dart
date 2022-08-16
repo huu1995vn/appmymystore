@@ -4,17 +4,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
-import 'package:raoxe/core/components/rx_images.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
@@ -152,7 +149,7 @@ class _HomePageState extends State<HomePage>
       actions: <Widget>[
         Padding(
             padding: const EdgeInsets.only(right: kDefaultPadding),
-            child: RxIconButton(onTap: _onSearch, icon: AppIcons.magnifier))
+            child: RxIconButton(onTap: _onSearch, icon: AppIcons.magnifier, size: 40,))
       ],
     );
   }

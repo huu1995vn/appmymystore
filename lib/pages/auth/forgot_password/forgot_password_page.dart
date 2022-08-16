@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
@@ -152,7 +152,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       bool res =
           await CommonNavigates.openOtpVerificationDialog(context, phone, true);
       if (res != null) {
-        CommonMethods.showToast(context, "Thay đổi password thành công");
+        // ignore: use_build_context_synchronously
+        CommonMethods.showToast(context, "success".tr());
       }
     } catch (e) {
       CommonMethods.showToast(context, e.toString());

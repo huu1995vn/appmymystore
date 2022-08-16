@@ -53,7 +53,7 @@ class CommonMethods {
     }
   }
 
-  static get isLogin {
+  static bool get isLogin {
     return APITokenService.token != null && APITokenService.token.isNotEmpty;
   }
 

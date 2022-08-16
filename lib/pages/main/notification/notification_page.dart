@@ -8,6 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
+import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/notification_provider.dart';
@@ -37,6 +38,16 @@ class _NotificationPageState extends State<NotificationPage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   loadData([nPaging = 1]) async {
+    if (!CommonMethods.isLogin) {
+      Provider.of<NotificationProvider>(context, listen: false)
+          .setNotification(0);
+      setState(() {
+        listData = [];
+        totalItems = 0;
+      });
+
+      return;
+    }
     try {
       if (nPaging > 1 && listData != null && totalItems <= listData!.length)
         return;
@@ -50,11 +61,9 @@ class _NotificationPageState extends State<NotificationPage> {
       if (res.status > 0) {
         List<NotificationModel> list =
             CommonMethods.convertToList<NotificationModel>(
-                res.data, (val) => NotificationModel.fromJson(val));
-        if (list.length > 0) {
-          Provider.of<NotificationProvider>(context, listen: false)
-              .setNotification(list[0].unread);
-        }
+                res.data ?? [], (val) => NotificationModel.fromJson(val));
+        Provider.of<NotificationProvider>(context, listen: false)
+            .setNotification(list.isNotEmpty ? list[0].unread : 0);
 
         setState(() {
           if (nPaging == 1 && (list.isEmpty)) {
@@ -176,43 +185,13 @@ class _NotificationPageState extends State<NotificationPage> {
             automaticallyImplyLeading: false,
             elevation: 0.0,
             actions: <Widget>[
-              PopupMenuButton(
-                icon: Icon(Icons.more_vert),
-                onSelected: ((value) {
-                  CommonNavigates.goBack(context);
-                  switch (value) {
-                    case 0:
-                      _onDeleteAll();
-
-                      break;
-                    case 1:
-                      _onSeen();
-
-                      break;
-                    default:
-                  }
-                }),
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: 0,
-                    child: TextButton.icon(
-                        onPressed: () {},
-                        icon: Icon(
-                          AppIcons.delete,
-                          color: AppColors.black50,
-                        ),
-                        label: Text("delete.text".tr(),
-                            style: TextStyle(color: AppColors.black50))),
-                  ),
-                  PopupMenuItem(
-                    value: 0,
-                    child: TextButton.icon(
-                        onPressed: () {},
-                        icon: Icon(AppIcons.eye_1, color: AppColors.black50),
-                        label: Text("seen".tr(),
-                            style: TextStyle(color: AppColors.black50))),
-                  ),
-                ],
+              RxIconButton(icon: AppIcons.delete, onTap: _onDeleteAll),
+              SizedBox(
+                width: kDefaultPadding,
+              ),
+              RxIconButton(icon: AppIcons.eye_1, onTap: _onSeen),
+              SizedBox(
+                width: kDefaultPadding,
               )
             ],
           ),

@@ -9,7 +9,7 @@ class RxIconButton extends StatelessWidget {
       required this.icon,
       this.onTap,
       this.size = 30,
-      this.colorIcon = AppColors.secondary})
+      this.colorIcon = AppColors.grey})
       : super(key: key);
   bool isEnable = false;
   GestureTapCallback? onTap;
@@ -30,7 +30,7 @@ class RxIconButton extends StatelessWidget {
                     // border: Border.all(color: AppColors.secondary.withOpacity(0.01)),
                     boxShadow: [
                       BoxShadow(
-                          color: AppColors.secondary.withOpacity(0.15),
+                          color: AppColors.grey.withOpacity(0.15),
                           blurRadius: 5,
                           offset: const Offset(0, 5))
                     ]),

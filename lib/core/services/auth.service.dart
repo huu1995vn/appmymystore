@@ -20,7 +20,7 @@ class AuthService {
       if (res.status > 0) {
         await APITokenService.login(res.data);
         if (APITokenService.isValid) {
-          StorageService.set(StorageKeys.userlogin,
+          await StorageService.set(StorageKeys.userlogin,
               <String, String>{"username": username, "password": password});
           Navigator.pushAndRemoveUntil(
               context,

@@ -67,9 +67,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             ),
             Text("forgot.password".tr(),
                 style: const TextStyle(color: AppColors.white)),
-            if (phone != null)
-              Text(phone,
-                  style: kTextHeaderStyle.copyWith(color: AppColors.white))
+            // if (phone != null)
+            //   Text(phone,
+            //       style: kTextHeaderStyle.copyWith(color: AppColors.white))
           ],
         ),
       ),

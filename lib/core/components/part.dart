@@ -236,23 +236,26 @@ Widget RxLoginAccountLabel(context) {
     onTap: () {
       CommonNavigates.toLoginPage(context);
     },
-    child: Container(
-      alignment: Alignment.bottomCenter,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            'message.str006'.tr(),
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-          ),
-          Text(
-            "login".tr(),
-            style: const TextStyle(
-                color: AppColors.primary500,
-                fontSize: 13,
-                fontWeight: FontWeight.w600),
-          ),
-        ],
+    child: Padding(
+      padding: const EdgeInsets.all(kDefaultPadding),
+      child: Container(
+        alignment: Alignment.bottomCenter,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'message.str006'.tr(),
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+            ),
+            Text(
+              "login".tr(),
+              style: const TextStyle(
+                  color: AppColors.primary500,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
       ),
     ),
   );

@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
             Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(kDefaultPadding),
                   child: GestureDetector(
                       onTap: _onForgotPassword,
                       child: RichText(

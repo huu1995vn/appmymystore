@@ -20,8 +20,10 @@ flutter pub run build_runner watch --delete-conflicting-outputs
 ## Fix auth not sync/clone: username alow access source
 git remote set-url origin https://[username]@dev.azure.com/gianhangvn/DailyXe/_git/RaoXe
 ## Generate SHA-1
-Mac keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+Mac: keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
 
-Windows keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore 
+Windows: keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore 
 
-Linux keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+Linux: keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+
+=> to folder android: gradle signingReport

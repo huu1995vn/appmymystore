@@ -113,8 +113,9 @@ class _NotificationPageState extends State<NotificationPage> {
           setState(() {
             listData!.removeAt(index);
           });
+          CommonMethods.showToast("success".tr());
         } else {
-          CommonMethods.showToast( res.message);
+          CommonMethods.showToast(res.message);
         }
         //Call api gọi api xóa
 
@@ -134,10 +135,10 @@ class _NotificationPageState extends State<NotificationPage> {
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().notificationdelete(ids);
         if (res.status > 0) {
-          CommonMethods.showToast( "success".tr());
+          CommonMethods.showToast("success".tr());
           loadData();
         } else {
-          CommonMethods.showToast( res.message);
+          CommonMethods.showToast(res.message);
         }
         //Call api gọi api xóa
 
@@ -154,10 +155,10 @@ class _NotificationPageState extends State<NotificationPage> {
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().notificationready(ids);
         if (res.status > 0) {
-          CommonMethods.showToast( "success".tr());
+          CommonMethods.showToast("success".tr());
           loadData();
         } else {
-          CommonMethods.showToast( res.message);
+          CommonMethods.showToast(res.message);
         }
         //Call api gọi api xóa
 
@@ -185,11 +186,11 @@ class _NotificationPageState extends State<NotificationPage> {
             automaticallyImplyLeading: false,
             elevation: 0.0,
             actions: <Widget>[
-              RxIconButton(icon: AppIcons.delete, onTap: _onDeleteAll),
+              RxIconButton(icon: AppIcons.delete, onTap: _onDeleteAll, size: 40,),
               SizedBox(
                 width: kDefaultPadding,
               ),
-              RxIconButton(icon: AppIcons.eye_1, onTap: _onSeen),
+              RxIconButton(icon: AppIcons.eye_1, onTap: _onSeen, size: 40),
               SizedBox(
                 width: kDefaultPadding,
               )

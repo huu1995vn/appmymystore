@@ -162,11 +162,11 @@ class CommonMethods {
     Fluttertoast.showToast(
         msg: pmsg, //message to show toast
         toastLength: Toast.LENGTH_LONG, //duration for message to show
-        gravity: ToastGravity.CENTER, //where you want to show, top, bottom
+        gravity: ToastGravity.BOTTOM, //where you want to show, top, bottom
         timeInSecForIosWeb: 1, //for iOS only
-        //backgroundColor: Colors.red, //background Color for message
+        backgroundColor: AppColors.secondary.withOpacity(0.7), //background Color for message
         textColor: Colors.white, //message text color
-        fontSize: 16.0 //message font size
+        fontSize: 12.0 //message font size
     );
   }
 

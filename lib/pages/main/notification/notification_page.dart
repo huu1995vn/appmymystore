@@ -186,7 +186,7 @@ class _NotificationPageState extends State<NotificationPage> {
             automaticallyImplyLeading: false,
             elevation: 0.0,
             actions: <Widget>[
-              RxIconButton(icon: AppIcons.delete, onTap: _onDeleteAll, size: 40,),
+              RxIconButton(icon: AppIcons.delete_forever, onTap: _onDeleteAll, size: 40,),
               SizedBox(
                 width: kDefaultPadding,
               ),

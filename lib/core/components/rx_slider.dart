@@ -2,8 +2,10 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/size_config.dart';
 
 class ActiveDot extends StatelessWidget {
   const ActiveDot({super.key});
@@ -66,7 +68,7 @@ class _RxSliderState extends State<RxSlider> {
           options: CarouselOptions(
             autoPlayInterval: const Duration(seconds: 5),
             autoPlay: true,
-            height: 180,
+            height: 270,
             autoPlayCurve: Curves.fastLinearToSlowEaseIn,
             autoPlayAnimationDuration: const Duration(seconds: 2),
             viewportFraction: 1,

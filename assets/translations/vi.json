@@ -206,7 +206,7 @@
     "accountorpassword": "Tài khoản hoặc mật khẩu @.lower:invalid.text",
     "code": "@:code @.lower:invalid.text",
     "password": {
-      "again": "@:password.again @.lower:invalid.text",
+      "again": "Mật khẩu nhập lại @.lower:invalid.text",
       "text": "@:password.text @.lower:invalid.text"
     },
     "info": {

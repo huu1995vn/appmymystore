@@ -206,7 +206,7 @@
     "accountorpassword": "@:invalid.text account or password",
     "code": "@:invalid.text @.lower:code",
     "password": {
-      "again": "@:invalid.text @.lower:password.again",
+      "again": "@:invalid.text password again",
       "text": "@:invalid.text @.lower:password.text"
     },
     "info": {

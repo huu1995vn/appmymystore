@@ -11,6 +11,7 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 
@@ -39,10 +40,10 @@ class _DashboardPageState extends State<DashboardPage> {
         });
         Provider.of<UserProvider>(context, listen: false).setUserModel(user);
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
-      CommonMethods.showToast( e.toString());
+      CommonMethods.showToast(e.toString());
     }
   }
 
@@ -127,6 +128,15 @@ class _DashboardPageState extends State<DashboardPage> {
                               onTap: () =>
                                   CommonNavigates.toContactPage(context),
                               // subtitle: Text("Sổ địa chỉ"),
+                            ),
+                          ),
+                          _card(
+                            child: ListTile(
+                              title: Text('logout'.tr()),
+                              leading: Icon(
+                                AppIcons.exit,
+                              ),
+                              onTap: () => AuthService.logout(context),
                             ),
                           )
                         ],

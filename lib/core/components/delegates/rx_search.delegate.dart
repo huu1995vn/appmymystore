@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, unnecessary_null_comparison
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -73,7 +73,7 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
         ),
-        child: query == null || query.length == 0
+        child: query == null || query.isEmpty
             ? Padding(
                 padding: const EdgeInsets.all(kDefaultPadding),
                 child: Wrap(
@@ -168,10 +168,10 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
           var res = await DaiLyXeApiBLL_APIGets().suggest(query);
           if (res.status > 0) {
             final data = res.data as List;
-            list = data.length > 0
+            list = data.isNotEmpty
                 ? data.map((e) => jsonDecode(e["Data"])["TuKhoa"]).toList()
                 : [];
-            if (list.length > 0) {
+            if (list.isNotEmpty) {
               RxSearchDelegate.cacheapiSearch[query] = list;
             }
           }

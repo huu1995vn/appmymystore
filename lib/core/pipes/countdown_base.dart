@@ -1,3 +1,5 @@
+// ignore_for_file: null_check_always_fails
+
 import "dart:async";
 
 class CountDown {
@@ -19,8 +21,8 @@ class CountDown {
     _refresh = refresh;
     _everyTick = everyTick;
 
-    this._duration = duration;
-    _controller = new StreamController<Duration>(onListen: _onListen, onPause: _onPause, onResume: _onResume, onCancel: _onCancel);
+    _duration = duration;
+    _controller = StreamController<Duration>(onListen: _onListen, onPause: _onPause, onResume: _onResume, onCancel: _onCancel);
   }
 
   Stream<Duration> get stream => _controller.stream;
@@ -29,8 +31,8 @@ class CountDown {
   /// invoke when the first subscriber has subscribe and not before to avoid leak of memory
   _onListen() {
     // reference point
-    _begin = new DateTime.now();
-    _timer = new Timer.periodic(_refresh, _tick);
+    _begin = DateTime.now();
+    _timer = Timer.periodic(_refresh, _tick);
   }
 
   /// the remaining time is set at '_refresh' ms accurate
@@ -42,13 +44,13 @@ class CountDown {
 
   /// ...restart the timer with the new duration
   _onResume() {
-    _begin = new DateTime.now();
+    _begin = DateTime.now();
 
-    _duration = this.remainingTime;
+    _duration = remainingTime;
     isPaused = false;
 
     //  lance le timer
-    _timer = new Timer.periodic(_refresh, _tick);
+    _timer = Timer.periodic(_refresh, _tick);
   }
 
   _onCancel() {
@@ -62,17 +64,16 @@ class CountDown {
 
   void _tick(Timer timer) {
     counter++;
-    Duration alreadyConsumed = new DateTime.now().difference(_begin);
-    this.remainingTime = this._duration - alreadyConsumed;
-    if (this.remainingTime.isNegative) {
+    Duration alreadyConsumed = DateTime.now().difference(_begin);
+    remainingTime = _duration - alreadyConsumed;
+    if (remainingTime.isNegative) {
       timer.cancel();
       timer = null!;
       // tell the onDone's subscriber that it's finish
-      _controller.close();
     } else {
       // here we can control the frequency of sending data
       if (counter % _everyTick == 0) {
-        _controller.add(this.remainingTime);
+        _controller.add(remainingTime);
         counter = 0;
       }
     }

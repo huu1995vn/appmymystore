@@ -11,7 +11,6 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 

@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
@@ -152,7 +152,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       bool res =
           await CommonNavigates.openOtpVerificationDialog(context, phone, true);
       if (res != null) {
-        // ignore: use_build_context_synchronously
         CommonMethods.showToast( "success".tr());
       }
     } catch (e) {

@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison
+// ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, no_leading_underscores_for_local_identifiers
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +69,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     }
     if (_data!.usercontactid <= 0) {
       lContacts = await _loadContact();
-      if (lContacts.isEmpty || lContacts.length == 0) {
+      if (lContacts.isEmpty || lContacts.isEmpty) {
         CommonMethods.showToast( "message.str013".tr());
         CommonNavigates.goBack(context);
         return;
@@ -97,7 +97,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     }
     var limg =
         await FileService.getMultiImagePicker(context, maxImages: maxImages);
-    if (limg.length > 0) {
+    if (limg.isNotEmpty) {
       setState(() {
         imgs.addAll(limg);
       });
@@ -214,11 +214,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
           data!.id > 0 ? dataClone.toUpdate() : dataClone.toInsert());
       if (res.status > 0) {
         if (widget.onChanged != null) {
-          widget.onChanged!(dataClone!);
+          widget.onChanged!(dataClone);
         }
         CommonMethods.unlockScreen();
         await CommonMethods.showConfirmDialog(context,
-            dataClone!.id > 0 ? "update.success".tr() : "create.success".tr());
+            dataClone.id > 0 ? "update.success".tr() : "create.success".tr());
         if (!(data!.id > 0)) {
           CommonNavigates.goBack(context, dataClone);
         }
@@ -320,6 +320,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           if (!(data!.brandid > 0)) {
                                             return "notempty.text".tr();
                                           }
+                                          return null;
                                         }),
                                     rxSelectInput(
                                         context, "model", data!.modelid,
@@ -337,6 +338,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           if (!(data!.modelid > 0)) {
                                             return "notempty.text".tr();
                                           }
+                                          return null;
                                         }),
                                     rxSelectInput(
                                         context, "bodytype", data!.bodytypeid,
@@ -351,6 +353,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           if (!(data!.bodytypeid > 0)) {
                                             return "notempty.text".tr();
                                           }
+                                          return null;
                                         }),
                                     ListTile(
                                       title: Row(
@@ -422,6 +425,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         data!.name!.isEmpty)) {
                                       return "notempty.text".tr();
                                     }
+                                    return null;
                                   },
                                 ),
                               )),
@@ -468,6 +472,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         data!.des!.isEmpty)) {
                                       return "notempty.text".tr();
                                     }
+                                    return null;
                                   },
                                 ),
                               )),
@@ -566,6 +571,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         if (!(data!.state > 0)) {
                                           return "notempty.text".tr();
                                         }
+                                        return null;
                                       }),
                                   rxSelectInput(
                                     context,
@@ -720,7 +726,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   Widget _itemImage(int index,
       {void Function()? onDelete, void Function()? onShowPhoTo}) {
     String img = imgs[index];
-    bool showPlus = index == 7 && imgs!.length > 8;
+    bool showPlus = index == 7 && imgs.length > 8;
     return Stack(
       fit: StackFit.expand,
       children: [

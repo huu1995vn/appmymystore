@@ -157,7 +157,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
-  Widget _listTitle(String title, dynamic? subtitle, {Widget? leading}) {
+  Widget _listTitle(String title, dynamic subtitle, {Widget? leading}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Row(
@@ -169,7 +169,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
           Text(
             (subtitle is int
-                    ? (subtitle > 0 ? subtitle?.toString() : null)
+                    ? (subtitle > 0 ? subtitle.toString() : null)
                     : subtitle?.toString()) ??
                 "not.update".tr(),
             style: TextStyle().italic.copyWith(color: AppColors.black50),

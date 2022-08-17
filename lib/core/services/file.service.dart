@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages, unnecessary_null_comparison
+// ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages, unnecessary_null_comparison, null_check_always_fails
 
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
@@ -10,7 +10,6 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:universal_platform/universal_platform.dart';
-import 'package:path_provider/path_provider.dart';
 
 class FileService {
   static Future<int> uploadImage(File f,

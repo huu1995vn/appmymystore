@@ -8,7 +8,6 @@ import 'package:raoxe/core/components/delegates/rx_search.delegate.dart';
 import 'package:raoxe/core/components/dialogs/filter.dialog.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
 
 class SearchAppBar extends StatefulWidget {
   const SearchAppBar({

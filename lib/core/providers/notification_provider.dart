@@ -7,7 +7,7 @@ class NotificationProvider with ChangeNotifier {
   int numNotification = 0;
   static UserModel localuser = UserModel();
 
-  NotificationProvider() {}
+  NotificationProvider();
   getNotification() async {
     Map<String, dynamic> params = {
       "p": 1,

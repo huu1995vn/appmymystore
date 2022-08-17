@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable, unused_field
 
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
@@ -42,8 +42,9 @@ class _TabReviewWidgetPageState extends State<TabReviewWidget>
   }
 
   Future loadData([nPaging = 1]) async {
-    if (nPaging > 1 && listData != null && totalItems! <= listData!.length)
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length) {
       return;
+    }
 
     try {
       nPaging = nPaging ?? 1;

@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches, no_leading_underscores_for_local_identifiers, depend_on_referenced_packages, library_prefixes
+// ignore_for_file: empty_catches, no_leading_underscores_for_local_identifiers, depend_on_referenced_packages, library_prefixes, unnecessary_null_comparison, non_constant_identifier_names
 
 import 'dart:io';
 import 'package:crypto/crypto.dart';
@@ -129,7 +129,7 @@ class CommonMethods {
   }
 
   static DateTime? convertToDateTime(String date,
-      [String? newPattern, DateTime? valuedefault = null]) {
+      [String? newPattern, DateTime? valuedefault]) {
     try {
       return DateFormat(newPattern ?? "MM/dd/yyyy").parse(date);
     } catch (e) {}
@@ -623,7 +623,7 @@ class CommonMethods {
   static copy(BuildContext context, String noiDung) {
     Clipboard.setData(ClipboardData(text: noiDung)).then((_) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Copied to your clipboard !')));
+          .showSnackBar(const SnackBar(content: Text('Copied to your clipboard !')));
     });
   }
 

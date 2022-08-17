@@ -7,7 +7,7 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
 class RxSliverList extends StatefulWidget {
-  final dynamic? data;
+  final dynamic data;
   final Widget Function(BuildContext, int) itemBuilder;
   final Widget? noFound;
   final Widget? awaiting;

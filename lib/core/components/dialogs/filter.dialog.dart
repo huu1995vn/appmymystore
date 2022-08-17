@@ -7,7 +7,6 @@ import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_wrapper.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';

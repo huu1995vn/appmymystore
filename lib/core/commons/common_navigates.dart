@@ -189,7 +189,7 @@ class CommonNavigates {
     return await Navigator.pushNamed(context, "/user");
   }
 
-  static goBack(BuildContext context, [dynamic? result]) {
+  static goBack(BuildContext context, [dynamic result]) {
     if (result != null) {
       return Navigator.pop(context, result);
     } else {

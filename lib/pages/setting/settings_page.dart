@@ -60,7 +60,7 @@ class _SettingsPageState extends State<SettingsPage> {
     Uri uri =
         await CommonMethods.createDynamicLink(linkDeepLinkInstallWithDomain);
     setState(() {
-      link = Uri.decodeFull(uri.toString() + "&efr=1");
+      link = Uri.decodeFull("$uri&efr=1");
     });
   }
 

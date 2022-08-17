@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, must_be_immutable, import_of_legacy_library_into_null_safe, overridden_fields
+// ignore_for_file: non_constant_identifier_names, must_be_immutable, import_of_legacy_library_into_null_safe, overridden_fields, empty_catches, unnecessary_null_comparison
 
 import 'dart:io';
 
@@ -180,8 +180,8 @@ Widget RxCardSkeleton(
       style: SkeletonStyle(
         backgroundColor:
             CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
-        isShowAvatar: isShowAvatar ?? true,
-        isCircleAvatar: isCircleAvatar ?? false,
+        isShowAvatar: isShowAvatar,
+        isCircleAvatar: isCircleAvatar,
         borderRadius:
             BorderRadius.all(Radius.circular(isBorderRadius ? 20.0 : 0)),
         padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
@@ -199,8 +199,8 @@ Widget RxCardListSkeleton(
     style: SkeletonStyle(
       backgroundColor:
           CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
-      isShowAvatar: isShowAvatar ?? true,
-      isCircleAvatar: isCircleAvatar ?? false,
+      isShowAvatar: isShowAvatar,
+      isCircleAvatar: isCircleAvatar,
       barCount: barCount,
     ),
   );
@@ -403,7 +403,7 @@ class RxRoundedButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        side: BorderSide(width: 2.0, color: color!),
+        side: BorderSide(width: 2.0, color: color),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius ?? kDefaultPadding),
         ),
@@ -508,7 +508,7 @@ Widget rxTextInput(BuildContext context, String? value,
         hintText: hintText,
         onTap: onTap,
         style: TextStyle(
-                color: value != null && value.length > 0
+                color: value != null && value.isNotEmpty
                     ? AppColors.primary
                     : null)
             .size(13),
@@ -550,7 +550,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
         hintText: hintText ?? "choose.text".tr(),
         style: TextStyle(
                 color:
-                    name != null && name.length > 0 ? AppColors.primary : null)
+                    name != null && name.isNotEmpty ? AppColors.primary : null)
             .size(13),
         validator: validator, onTap: () {
       _onSelect(context, type, id, fnWhere: fnWhere, afterChange: afterChange);
@@ -562,12 +562,12 @@ _onSelect(BuildContext context, String type, dynamic id,
     {bool Function(dynamic)? fnWhere, Function(dynamic)? afterChange}) async {
   List data = MasterDataService.data[type];
   if (fnWhere != null) {
-    data = data.where(fnWhere!).toList();
+    data = data.where(fnWhere).toList();
   }
   var res = await showSearch(
       context: context, delegate: RxSelectDelegate(data: data, value: id));
   if (res != null) {
-    if (afterChange != null) afterChange!(res);
+    if (afterChange != null) afterChange(res);
   }
 }
 

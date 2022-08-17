@@ -97,6 +97,7 @@ class _ContactDialogState extends State<ContactDialog> {
                                 if (!(contact.cityid > 0)) {
                                   return "notempty.text".tr();
                                 }
+                                return null;
                               }),
                           rxSelectInput(context, "district", contact.districtid,
                               fnWhere: (item) {
@@ -111,6 +112,7 @@ class _ContactDialogState extends State<ContactDialog> {
                                 if (!(contact.districtid > 0)) {
                                   return "notempty.text".tr();
                                 }
+                                return null;
                               }),
                           rxTextInput(context, contact.address,
                               labelText: "address".tr(),

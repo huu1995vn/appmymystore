@@ -45,7 +45,7 @@ class _InputTextState extends State<RxInput> {
   @override
   void initState() {
     super.initState();
-    if (mounted && widget.value != input.text) input.text = widget.value! ?? "";
+    if (mounted && widget.value != input.text) input.text = widget.value ?? "";
   }
 
   @override
@@ -54,7 +54,7 @@ class _InputTextState extends State<RxInput> {
     if (widget.value != oldWidget.value) {
       Future.delayed(Duration.zero, () {
         if (mounted && widget.value != input.text)
-          input.text = widget.value! ?? "";
+          input.text = widget.value ?? "";
       });
     }
   }

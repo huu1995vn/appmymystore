@@ -36,7 +36,7 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
                     Padding(
                       padding: const EdgeInsets.all(5),
                       child: Text(
-                        widget.item.username ?? "NaN",
+                        widget.item.username ?? 'NaN',
                         style: const TextStyle(),
                       ),
                     ),

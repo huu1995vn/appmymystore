@@ -101,7 +101,7 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   _onDelete(index) async {
-    if (listData != null && listData!.length > 0) {
+    if (listData != null && listData!.isNotEmpty) {
       try {
         ResponseModel res = await DaiLyXeApiBLL_APIUser()
             .notificationdelete([listData![index].id]);
@@ -126,7 +126,7 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   _onDeleteAll() async {
-    if (listData != null && listData!.length > 0) {
+    if (listData != null && listData!.isNotEmpty) {
       var res = await CommonMethods.showConfirmDialog(
           context, "message.alert01".tr());
       if (!res) return;
@@ -149,7 +149,7 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   _onSeen() async {
-    if (listData != null && listData!.length > 0) {
+    if (listData != null && listData!.isNotEmpty) {
       try {
         List<int> ids = listData!.map((e) => e.id).toList();
         ResponseModel res =

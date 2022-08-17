@@ -38,7 +38,7 @@ class _PhotoViewDialogState extends State<PhotoViewDialog> {
           initialPage = imgs!.length;
         }
       });
-      if (imgs!.length == 0) {
+      if (imgs!.isEmpty) {
         CommonNavigates.goBack(context);
       }
     }

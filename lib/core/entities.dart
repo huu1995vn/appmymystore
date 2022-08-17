@@ -321,13 +321,13 @@ class ProductModel extends Entity {
   }
 
   setcontact(ContactModel contact) {
-    this.address = contact.address;
-    this.cityid = contact.cityid;
-    this.cityname = contact.cityname;
-    this.districtid = contact.districtid;
-    this.phone = contact.phone;
-    this.fullname = contact.fullname;
-    this.usercontactid = contact.id;
+    address = contact.address;
+    cityid = contact.cityid;
+    cityname = contact.cityname;
+    districtid = contact.districtid;
+    phone = contact.phone;
+    fullname = contact.fullname;
+    usercontactid = contact.id;
   }
 
   ProductModel();
@@ -621,6 +621,7 @@ class ContactModel extends Entity {
   ContactModel clone() => ContactModel.fromJson(toJson());
   ContactModel();
   bool get rxisdefault {
+    // ignore: unrelated_type_equality_checks
     return isdefault == "true" || isdefault == 1;
   }
 

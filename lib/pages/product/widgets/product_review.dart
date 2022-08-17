@@ -38,7 +38,7 @@ class ReviewState extends State<ProductReview> {
         List<ReviewModel> list = CommonMethods.convertToList<ReviewModel>(
             res.data, (val) => ReviewModel.fromJson(val));
         setState(() {
-          totalItems = (list.length == 0) ? 0 : list[0].rxtotalrow;
+          totalItems = (list.isEmpty) ? 0 : list[0].rxtotalrow;
           listData = list;
         });
         return;
@@ -64,7 +64,7 @@ class ReviewState extends State<ProductReview> {
 
   @override
   Widget build(BuildContext context) {
-    return (listData == null || listData!.length == 0)
+    return (listData == null || listData!.isEmpty)
         ? Container()
         : Card(
             child: Container(

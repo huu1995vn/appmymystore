@@ -6,7 +6,7 @@ class UserProvider with ChangeNotifier {
   UserModel user = UserModel();
   static UserModel localuser = UserModel();
 
-  UserProvider() {}
+  UserProvider();
   setData({String? fullname, int? img, int? id}) {
     user.fullname = fullname ?? "Nguyễn Văn A";
     user.img = img ?? -1;

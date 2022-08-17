@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, must_be_immutable, use_build_context_synchronously
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable, use_build_context_synchronously, unused_field
 
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
@@ -42,7 +42,7 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
   }
 
   Future loadData([nPaging = 1]) async {
-    if (nPaging > 1 && listData != null && totalItems! <= listData!.length) {
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length) {
       return;
     }
 

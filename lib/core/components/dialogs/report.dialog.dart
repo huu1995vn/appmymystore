@@ -10,7 +10,6 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class ReportDialog extends StatefulWidget {
@@ -157,24 +156,4 @@ class _ReportDialogState extends State<ReportDialog> {
     );
   }
 
-  Widget _header({String? title, Widget? header, Widget? action}) {
-    return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding)
-          .copyWith(left: kDefaultPadding / 2),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          header ??
-              Text(
-                title!,
-                style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyText1!.color)
-                    .bold,
-              ),
-          if (action != null) action
-        ],
-      ),
-    );
-  }
 }

@@ -76,7 +76,7 @@ class ReviewState extends State<ProductRelated> {
     return Column(
       children: [
         SizedBox(
-          height: (listData != null && listData!.length == 0) ? 50 : 200,
+          height: (listData != null && listData!.isEmpty) ? 50 : 200,
           child: RxListView(
             listData,
             (context, index) {

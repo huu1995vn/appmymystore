@@ -164,6 +164,5 @@ class _ProductPageState extends State<ProductPage> {
           onNextScroll: onNextPage,
           onRefresh: onRefresh,
         ));
-    ;
   }
 }

@@ -39,9 +39,11 @@ void configLoading() {
   EasyLoading.instance
     ..displayDuration = const Duration(milliseconds: 2000)
     ..indicatorType = EasyLoadingIndicatorType.ring
-    ..indicatorSize = 45.0
-    ..radius = 10.0
-    ..maskColor = Colors.black.withOpacity(0.5)
+    ..loadingStyle = EasyLoadingStyle.light
+    // ..maskType = EasyLoadingMaskType.black
+    // ..indicatorSize = 45.0
+    // ..radius = 10.0
+    // ..maskColor = Colors.black.withOpacity(0.5)
     ..userInteractions = true
     ..dismissOnTap = false;
 }

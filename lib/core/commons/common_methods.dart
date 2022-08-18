@@ -77,23 +77,7 @@ class CommonMethods {
   }
 
   static Future<Position?> getPosition() async {
-    // try {
-    //   LocationPermission permission;
-    //   permission = await Geolocator.checkPermission();
-    //   if (permission == LocationPermission.denied &&
-    //       StorageService.get("isOpened") == null) {
-    //     await StorageService.set("isOpened", "true");
-    //     permission = await Geolocator.requestPermission();
-    //   }
-    //   if (permission == LocationPermission.deniedForever) {
-    //     Future.error('Location Not Available');
-    //   } else {
-    //     return await Geolocator.getCurrentPosition();
-    //   }
-    // } catch (e) {
-    //   Future.error(e);
-    // }
-    // return null;
+    
     LocationPermission permission;
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {

@@ -8,6 +8,7 @@ import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/rx_slider.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 
 class BannerWidget extends StatefulWidget {
   const BannerWidget({super.key});
@@ -36,6 +37,14 @@ class _BannerWidgetState extends State<BannerWidget> {
     } catch (e) {
       if (kDebugMode) {
         print(e);
+      }
+    }
+    if (list.isEmpty || list.isEmpty) {
+      for (var element in kBanners) {
+        BannerModel item = BannerModel();
+        item.src = CommonMethods.buildUrlImage(int.parse(element),
+                rewriteUrl: "banner-raoxe");
+        list.add(item);
       }
     }
     setState(() {

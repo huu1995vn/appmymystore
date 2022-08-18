@@ -43,7 +43,7 @@ void configLoading() {
     // ..maskType = EasyLoadingMaskType.black
     // ..indicatorSize = 45.0
     // ..radius = 10.0
-    // ..maskColor = Colors.black.withOpacity(0.5)
+    ..maskColor = Colors.black.withOpacity(0.5)
     ..userInteractions = true
     ..dismissOnTap = false;
 }

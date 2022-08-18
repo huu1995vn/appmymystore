@@ -28,7 +28,7 @@
                 "--flavor",
                 "prod",
                 "--no-sound-null-safety",
-                "--release"
+                // "--release"
             ]
 		},
 	]

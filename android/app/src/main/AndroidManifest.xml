@@ -23,6 +23,14 @@
                 <action android:name="FLUTTER_NOTIFICATION_CLICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <!-- Deep Links -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="dailyxe.com.vn" android:scheme="https" android:pathPrefix="/rao-xe" />
+            </intent-filter>
+
 
         </activity>
         <!-- Don't delete the meta-data below.

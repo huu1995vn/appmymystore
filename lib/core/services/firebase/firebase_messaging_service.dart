@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, empty_catches
 
 import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -7,12 +7,8 @@ import 'package:flutter/material.dart';
 
 //model
 class PushNotification {
-  PushNotification({
-    this.title,
-    this.body,
-    this.data,
-    this.isBackgournd = false
-  });
+  PushNotification(
+      {this.title, this.body, this.data, this.isBackgournd = false});
 
   String? title;
   String? body;
@@ -25,19 +21,20 @@ Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     print("Handling a background message: ${message.messageId}");
   }
 }
+
 class FirebaseMessagingService {
   static StreamController<PushNotification> streamMessage = StreamController<
       PushNotification>.broadcast(); // 2. Instantiate Firebase Messaging
   static String? token;
   static FirebaseMessaging? _messaging;
   // For handling notification when the app is in terminated state
-  static convertNotification(RemoteMessage initialMessage, [bool isBackgournd = false]) {
+  static convertNotification(RemoteMessage initialMessage,
+      [bool isBackgournd = false]) {
     return PushNotification(
-      title: initialMessage.notification?.title,
-      body: initialMessage.notification?.body,
-      data: initialMessage.data,
-      isBackgournd: isBackgournd
-    );
+        title: initialMessage.notification?.title,
+        body: initialMessage.notification?.body,
+        data: initialMessage.data,
+        isBackgournd: isBackgournd);
   }
 
   static init() async {
@@ -58,7 +55,8 @@ class FirebaseMessagingService {
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       // Add the following line
-      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+      FirebaseMessaging.onBackgroundMessage(
+          _firebaseMessagingBackgroundHandler);
       // For handling the received notifications
       FirebaseMessaging.onMessage.listen((RemoteMessage initialMessage) {
         if (initialMessage != null) {

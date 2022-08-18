@@ -77,23 +77,34 @@ class CommonMethods {
   }
 
   static Future<Position?> getPosition() async {
-    try {
-      LocationPermission permission;
-      permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied &&
-          StorageService.get("isOpened") == null) {
-        await StorageService.set("isOpened", "true");
-        permission = await Geolocator.requestPermission();
-      }
+    // try {
+    //   LocationPermission permission;
+    //   permission = await Geolocator.checkPermission();
+    //   if (permission == LocationPermission.denied &&
+    //       StorageService.get("isOpened") == null) {
+    //     await StorageService.set("isOpened", "true");
+    //     permission = await Geolocator.requestPermission();
+    //   }
+    //   if (permission == LocationPermission.deniedForever) {
+    //     Future.error('Location Not Available');
+    //   } else {
+    //     return await Geolocator.getCurrentPosition();
+    //   }
+    // } catch (e) {
+    //   Future.error(e);
+    // }
+    // return null;
+    LocationPermission permission;
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.deniedForever) {
-        Future.error('Location Not Available');
-      } else {
-        return await Geolocator.getCurrentPosition();
+        return Future.error('Location Not Available');
       }
-    } catch (e) {
-      Future.error(e);
+    } else {      
+      return null;
     }
-    return null;
+    return await Geolocator.getCurrentPosition();
   }
 
   static int convertToInt32(dynamic pNumber, [int valuedefault = 0]) {

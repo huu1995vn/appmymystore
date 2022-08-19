@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, must_be_immutable, import_of_legacy_library_into_null_safe, overridden_fields, empty_catches, unnecessary_null_comparison
 
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,7 +21,7 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:rating_bar/rating_bar.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webviewx/webviewx.dart';
 
 class RxDivider extends Divider {
   const RxDivider({super.key, double indent = 20})
@@ -72,14 +73,18 @@ class RxWebView extends StatefulWidget {
 class RxWebViewState extends State<RxWebView> {
   final _key = UniqueKey();
   bool isLoading = true;
-  WebViewController? _webViewController;
+  WebViewXController? _webViewController;
   @override
   void initState() {
     super.initState();
   }
 
+  Size get screenSize => MediaQuery.of(context).size;
+
   @override
   Widget build(BuildContext context) {
+    bool ishtml = widget.html != null && widget.url == null;
+
     return Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(
@@ -93,44 +98,53 @@ class RxWebViewState extends State<RxWebView> {
         ),
         body: Stack(
           children: <Widget>[
-            WebView(
+            WebViewX(
               key: _key,
-              initialUrl: widget.url,
+              initialContent: ishtml ? widget.html! : widget.url!,
+              initialSourceType: ishtml ? SourceType.html : SourceType.url,
               javascriptMode: JavascriptMode.unrestricted,
-              onProgress: (progress) {
-                if (progress > 20) {
-                  if (isLoading) {
-                    setState(() {
-                      isLoading = false;
-                    });
-                  }
-                  if (isLoading &&
-                      _webViewController != null &&
-                      widget.javaScriptString != null) {
-                    _webViewController!.runJavascript(widget.javaScriptString!);
-                  }
-                }
+              height: screenSize.height,
+              width: screenSize.width,
+              onWebViewCreated: (controller) => _webViewController = controller,
+              jsContent: {
+                EmbeddedJsContent(
+                  js: widget.javaScriptString ?? "function testPlatformIndependentMethod() { console.log('Hi from JS') }",
+                ),
               },
-              onWebViewCreated: (WebViewController webViewController) {
-                _webViewController = webViewController;
-                if (widget.html != null && widget.url == null) {
-                  _webViewController!.loadHtmlString("""<!DOCTYPE html>
-                    <html>
-                      <head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
-                      <body style='"margin: 0; padding: 0;'>
-                        <div>
-                          ${widget.html}
-                        </div>
-                      </body>
-                    </html>""");
-                }
-              },
+              // onProgress: (progress) {
+              //   if (progress > 20) {
+              //     if (isLoading) {
+              //       setState(() {
+              //         isLoading = false;
+              //       });
+              //     }
+              //     if (isLoading &&
+              //         _webViewController != null &&
+              //         widget.javaScriptString != null) {
+              //       _webViewController!.runJavascript(widget.javaScriptString!);
+              //     }
+              //   }
+              // },
+              // onWebViewCreated: (WebViewController webViewController) {
+              //   _webViewController = webViewController;
+              //   if (widget.html != null && widget.url == null) {
+              //     _webViewController!.loadHtmlString("""<!DOCTYPE html>
+              //       <html>
+              //         <head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+              //         <body style='"margin: 0; padding: 0;'>
+              //           <div>
+              //             ${widget.html}
+              //           </div>
+              //         </body>
+              //       </html>""");
+              //   }
+              // },
             ),
-            isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Stack(),
+            // isLoading
+            //     ? const Center(
+            //         child: CircularProgressIndicator(),
+            //       )
+            //     : Stack(),
           ],
         ));
   }

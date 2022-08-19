@@ -58,7 +58,8 @@ dependencies:
   crypto: # Used for encrypt md5
   material_dialogs: # Used for show dialogs notification
   flutter_easyloading: # Used for show loading
-  webview_flutter: 3.0.4 # Used for show webviewx
+  flutter_webview_plugin:
+    git: https://github.com/nuc134r/flutter_webview_plugin.git
   url_launcher: # Used for open url
   json_annotation: # Used for code generation libraries
   scroll_to_index: #This package provides the scroll to index mechanism for fixed/variable row height for Flutter scrollable widget.

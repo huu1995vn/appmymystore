@@ -93,6 +93,7 @@ class ReviewState extends State<ProductRelated> {
   Widget build(BuildContext context) {
     final scrollDirection = widget.scrollDirection ?? Axis.horizontal;
     return Column(
+      mainAxisSize: MainAxisSize.max, 
       children: [
         Padding(
             padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
@@ -114,9 +115,7 @@ class ReviewState extends State<ProductRelated> {
                       })
               ],
             )),
-        SizedBox(
-          height: scrollDirection == Axis.horizontal ? ((listData != null && listData!.isEmpty) ? 50 : 200) : SizeConfig.screenHeight,
-          child: RxListView(
+        RxListView(
             listData,
             (context, index) {
               var item = listData![index];
@@ -128,7 +127,6 @@ class ReviewState extends State<ProductRelated> {
             noFound: Center(child: Text("nodatafound".tr())),
             scrollDirection: scrollDirection,
           ),
-        ),
         (scrollDirection != Axis.horizontal &&
                 listData != null &&
                 totalItems > listData!.length)

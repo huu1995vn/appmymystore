@@ -60,7 +60,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           setState(() {
             isNotFound = true;
           });
-          CommonMethods.showToast( res.message);
+          CommonMethods.showToast(res.message);
         }
       }
     } catch (e) {
@@ -82,7 +82,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   _onReview() async {
     if (!CommonMethods.isLogin) {
-      CommonMethods.showToast( "please.login".tr());
+      CommonMethods.showToast("please.login".tr());
       return;
     }
     await CommonNavigates.showDialogBottomSheet(
@@ -96,7 +96,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   _onReport() async {
     if (!CommonMethods.isLogin) {
-      CommonMethods.showToast( "please.login".tr());
+      CommonMethods.showToast("please.login".tr());
       return;
     }
     await CommonNavigates.showDialogBottomSheet(
@@ -196,32 +196,37 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       RxAvatarImage(data!.rximguser, size: 40),
-                      Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              data!.fullname ?? "NaN",
-                              style: const TextStyle(
-                                color: AppColors.black50,
-                              ).bold,
-                            ),
-                            Row(
+                      GestureDetector(
+                          onTap: () {
+                            CommonNavigates.toUserPage(context,
+                                id: data!.userid);
+                          },
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(
-                                  AppIcons.map_marker,
-                                  color: AppColors.black50,
-                                  size: 13,
-                                ),
                                 Text(
-                                  data!.cityname ?? "NaN",
+                                  data!.fullname ?? "NaN",
                                   style: const TextStyle(
                                     color: AppColors.black50,
-                                  ),
+                                  ).bold,
                                 ),
-                              ],
-                            )
-                          ]),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      AppIcons.map_marker,
+                                      color: AppColors.black50,
+                                      size: 13,
+                                    ),
+                                    Text(
+                                      data!.cityname ?? "NaN",
+                                      style: const TextStyle(
+                                        color: AppColors.black50,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ])),
                     ],
                   ),
                   Column(
@@ -393,29 +398,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
         ProductReview(data!),
-        Padding(
-            padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "product.thesame.brand".tr().toUpperCase(),
-                  style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color)
-                      .bold,
-                ),
-                RxIconButton(
-                    icon: AppIcons.chevron_right,
-                    onTap: () {
-                      CommonNavigates.toProductPage(context,
-                          paramsSearch: {"BrandId": data!.brandid});
-                    })
-              ],
-            )),
         ProductRelated(
-          data!,
-          filter: {"BrandId": data!.brandid},
-        )
+            title: "product.thesame.brand".tr(),
+            filter: {"BrandId": data!.brandid},
+            notids: [data!.id])
       ],
     );
   }

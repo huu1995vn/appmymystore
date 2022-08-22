@@ -185,8 +185,16 @@ class CommonNavigates {
     return await Navigator.pushNamed(context, "/settings");
   }
 
-  static Future toUserPage(BuildContext context) async {
-    return await Navigator.pushNamed(context, "/user");
+  static Future toUserPage(BuildContext context, {int? id}) async {
+     if ((id != null && id > 0) ) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) =>
+                  UserPage(id: id)));
+    } else {
+      return await Navigator.pushNamed(context, "/user");
+    }
   }
 
   static goBack(BuildContext context, [dynamic result]) {
@@ -223,7 +231,7 @@ class CommonNavigates {
   }
 
   static Future showDialogBottomSheet(BuildContext context, Widget child,
-      {double height = 0.95}) async {
+      {double height = 420}) async {
     return showModalBottomSheet(
         context: context,
         isDismissible: true,

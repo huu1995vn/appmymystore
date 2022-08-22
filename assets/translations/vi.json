@@ -3,7 +3,8 @@
     "thesame":{
       "post": "Tin cùng người đăng",
       "brand": "Tin cùng thương hiệu",
-      "price": "Tin giá tương đương"
+      "price": "Tin giá tương đương",
+      "user": "Tin cùng người đăng"
     },
     "text": "Sản phẩm"
   },

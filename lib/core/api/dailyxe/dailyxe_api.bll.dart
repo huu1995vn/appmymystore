@@ -83,7 +83,11 @@ class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
     Map<String, dynamic> body = {};
     return await post(body, null, "masterdata");
   }
-
+   Future<ResponseModel> getuserbyid(int id) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = {};
+    return await post(body, queryParameters, "user/$id");
+  }
   Future<ResponseModel> statsuser(Map<String, dynamic> body) async {
     return await post(body, null, "statususer");
   }
@@ -159,11 +163,7 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     apiDAL.controllerName = "apiraoxe/user";
   }
 
-  Future<ResponseModel> getuser() async {
-    Map<String, dynamic> queryParameters = <String, dynamic>{};
-    Map<String, dynamic> body = {};
-    return await post(body, queryParameters, "${APITokenService.userId}");
-  }
+ 
 
   Future<ResponseModel> updateuser(Map<String, dynamic> body) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};

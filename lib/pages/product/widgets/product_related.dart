@@ -1,27 +1,37 @@
-// ignore_for_file: empty_catches
+// ignore_for_file: empty_catches, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_image.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:raoxe/core/utilities/size_config.dart';
+import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 
 class ProductRelated extends StatefulWidget {
-  const ProductRelated(this.item, {Key? key, this.filter}) : super(key: key);
-  final ProductModel item;
+  const ProductRelated(
+      {super.key, this.filter, this.notids, this.title, this.scrollDirection});
+  final List<int>? notids;
   final Map<String, dynamic>? filter;
-
+  final String? title;
+  final Axis? scrollDirection;
   @override
   ReviewState createState() => ReviewState();
 }
 
 class ReviewState extends State<ProductRelated> {
   int totalItems = 0;
+  int paging = 1;
   List<ProductModel>? listData;
   int userId = APITokenService.userId;
   @override
@@ -36,11 +46,14 @@ class ReviewState extends State<ProductRelated> {
       body["p"] = 1;
       body["n"] = kItemOnPage;
       body["filter"] = widget.filter ?? {};
-      body["filter"]["NotIds"] = widget.item.id;
+      if (widget.notids != null) {
+        body["filter"]["NotIds"] = widget.notids;
+      }
       body["orderBy"] = "VerifyDate DESC";
 
       if (nPaging == 1) {
         setState(() {
+          paging = nPaging;
           listData = null;
         });
       }
@@ -56,15 +69,20 @@ class ReviewState extends State<ProductRelated> {
             totalItems = list[0].rxtotalrow;
           }
           listData = list ?? [];
+          paging = nPaging;
         });
       }
     } catch (e) {
       setState(() {
+        paging = 1;
+
         totalItems = 0;
         listData = [];
       });
     }
   }
+
+  _onNext() {}
 
   @override
   void dispose() {
@@ -73,21 +91,49 @@ class ReviewState extends State<ProductRelated> {
 
   @override
   Widget build(BuildContext context) {
+    final scrollDirection = widget.scrollDirection ?? Axis.horizontal;
     return Column(
       children: [
+        Padding(
+            padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  (widget.title ?? "NaN").toUpperCase(),
+                  style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyText1!.color)
+                      .bold,
+                ),
+                if (scrollDirection == Axis.horizontal)
+                  RxIconButton(
+                      icon: AppIcons.chevron_right,
+                      onTap: () {
+                        CommonNavigates.toProductPage(context,
+                            paramsSearch: widget.filter);
+                      })
+              ],
+            )),
         SizedBox(
-          height: (listData != null && listData!.isEmpty) ? 50 : 200,
+          height: scrollDirection == Axis.horizontal ? ((listData != null && listData!.isEmpty) ? 50 : 200) : SizeConfig.screenHeight,
           child: RxListView(
             listData,
             (context, index) {
               var item = listData![index];
-              return _buildItem(item);
+              return scrollDirection == Axis.horizontal
+                  ? _buildItem(item)
+                  : ItemProductWidget(item);
             },
-            key: Key("review".tr()),
+            key: UniqueKey(),
             noFound: Center(child: Text("nodatafound".tr())),
-            scrollDirection: Axis.horizontal,
+            scrollDirection: scrollDirection,
           ),
-        )
+        ),
+        (scrollDirection != Axis.horizontal &&
+                listData != null &&
+                totalItems > listData!.length)
+            ? RxRoundedButton(onPressed: _onNext, title: "seemore".tr(), color: AppColors.info,)
+            : Container()
       ],
     );
   }

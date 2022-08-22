@@ -11,6 +11,7 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
@@ -32,7 +33,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   loadData() async {
     try {
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().getuser();
+      ResponseModel res = await DaiLyXeApiBLL_APIGets().getuserbyid(APITokenService.userId);
       if (res.status > 0) {
         UserModel user = UserModel.fromJson(res.data);
         setState(() {

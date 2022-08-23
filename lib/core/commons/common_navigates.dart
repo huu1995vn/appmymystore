@@ -21,6 +21,7 @@ import 'package:raoxe/pages/rao/my_product/my_product_detail_page.dart';
 import 'package:raoxe/pages/rao/my_product/my_product_page.dart';
 import 'package:raoxe/pages/product/product_detail_page.dart';
 import 'package:raoxe/pages/product/product_page.dart';
+import 'package:raoxe/pages/rao/point/point_page.dart';
 import 'package:raoxe/pages/rao/review/review_page.dart';
 import 'package:raoxe/pages/setting/settings_page.dart';
 import 'package:raoxe/pages/user/user_page.dart';
@@ -41,7 +42,8 @@ class CommonNavigates {
     '/notification': (context) => const NotificationPage(),
     '/contact': (context) => const ContactPage(),
     '/review': (context) => const ReviewPage(),
-    '/favorite': (context) => const FavoritePage()
+    '/favorite': (context) => const FavoritePage(),
+    '/point': (context) => const PointPage()
 
     // '/search': (context) => SearchPage(),
   };
@@ -159,6 +161,11 @@ class CommonNavigates {
           (Route<dynamic> route) => route.isFirst);
     }
   }
+
+   static Future toPointPage(BuildContext context) async {
+    return await Navigator.pushNamed(context, "/point");
+  }
+
 
   static Future toLoginPage(BuildContext context,
       {bool isReplace = true}) async {

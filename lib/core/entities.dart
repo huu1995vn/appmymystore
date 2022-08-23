@@ -8,6 +8,7 @@ import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
+import 'package:raoxe/data/ranktypes.dart';
 
 /// This allows the class to access private members in
 /// the generated file called *.g.dart, where the star denotes the source file name.
@@ -784,6 +785,44 @@ class BannerModel extends Entity {
   Map<String, dynamic> toJson() => _$BannerModelToJson(this);
 }
 
+@JsonSerializable()
+class RankTypeModel {
+  String name= "";
+  String validThru;
+  int point = 0;
+  int id = -1;
+  int discount = 0;
+  int promotion = 0;
+  String des = "";
+  RankTypeModel(this.name, this.validThru, this.des,
+      this.id, this.point);
+
+  RankTypeModel clone() => RankTypeModel.fromJson(toJson());
+  factory RankTypeModel.fromJson(Map<String, dynamic> json) {
+    return _$RankTypeModelFromJson(json);
+  }
+  Map<String, dynamic> toJson() => _$RankTypeModelToJson(this);
+}
+
+@JsonSerializable()
+class PointModel {
+  int currentpoint =0;
+  int usedpoint = 0;
+  int ranktypeid = 1;
+  int totalpoint = 0;
+  RankTypeModel get  ranktype {
+    return rRankTypes.firstWhere((element) => element.id == ranktypeid);
+  }
+  PointModel(this.currentpoint, this.usedpoint, this.ranktypeid,
+      this.totalpoint);
+
+  PointModel clone() => PointModel.fromJson(toJson());
+  factory PointModel.fromJson(Map<String, dynamic> json) {
+    return _$PointModelFromJson(json);
+  }
+  Map<String, dynamic> toJson() => _$PointModelToJson(this);
+}
+
 class AppTheme {
   ThemeMode mode;
   String title;
@@ -807,4 +846,38 @@ class SuggestionModel {
   bool isLocal = true;
   String text;
   SuggestionModel({required this.text, required this.isLocal});
+}
+
+class HistoryPoint {
+  final String name;
+  final String id;
+  final String eventName;
+  final double ammountChange;
+  final bool income;
+  final String date;
+
+  HistoryPoint(this.name, this.id, this.eventName,
+      this.ammountChange, this.income, this.date);
+}
+
+class CardRankTypeModel {
+  String name;
+  bool transfer;
+  String des;
+  int id;
+  int point;
+  Color bgColor;
+  Color fontColor;
+  String validThru;
+
+  CardRankTypeModel(
+    this.name,
+    this.validThru,
+    this.transfer,
+    this.des,
+    this.id,
+    this.point,
+    this.bgColor,
+    this.fontColor,
+  );
 }

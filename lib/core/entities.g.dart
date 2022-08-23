@@ -430,8 +430,8 @@ BannerModel _$BannerModelFromJson(Map<String, dynamic> json) => BannerModel()
   ..id = json['id'] as int
   ..src = json['src'] as String
   ..link = json['link'] as String?
-  ..title = json['title'] as String?
   ..des = json['des'] as String?
+  ..title = json['title'] as String?
   ..no = json['no'] as int?;
 
 Map<String, dynamic> _$BannerModelToJson(BannerModel instance) =>
@@ -444,4 +444,41 @@ Map<String, dynamic> _$BannerModelToJson(BannerModel instance) =>
       'des': instance.des,
       'title': instance.title,
       'no': instance.no,
+    };
+
+RankTypeModel _$RankTypeModelFromJson(Map<String, dynamic> json) =>
+    RankTypeModel(
+      json['name'] as String,
+      json['validThru'] as String,
+      json['des'] as String,
+      json['id'] as int,
+      json['point'] as int,
+    )
+      ..discount = json['discount'] as int
+      ..promotion = json['promotion'] as int;
+
+Map<String, dynamic> _$RankTypeModelToJson(RankTypeModel instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'validThru': instance.validThru,
+      'point': instance.point,
+      'id': instance.id,
+      'discount': instance.discount,
+      'promotion': instance.promotion,
+      'des': instance.des,
+    };
+
+PointModel _$PointModelFromJson(Map<String, dynamic> json) => PointModel(
+      json['currentpoint'] as int,
+      json['usedpoint'] as int,
+      json['ranktypeid'] as int,
+      json['totalpoint'] as int,
+    );
+
+Map<String, dynamic> _$PointModelToJson(PointModel instance) =>
+    <String, dynamic>{
+      'currentpoint': instance.currentpoint,
+      'usedpoint': instance.usedpoint,
+      'ranktypeid': instance.ranktypeid,
+      'totalpoint': instance.totalpoint,
     };

@@ -131,6 +131,18 @@ class _DashboardPageState extends State<DashboardPage> {
                               // subtitle: Text("Sổ địa chỉ"),
                             ),
                           ),
+
+                          _card(
+                            child: ListTile(
+                              title: Text("point"),
+                              leading: Icon(
+                                AppIcons.pointer_up,
+                              ),
+                              onTap: () =>
+                                  CommonNavigates.toPointPage(context),
+                              // subtitle: Text("Sổ địa chỉ"),
+                            ),
+                          ),
                           _card(
                             child: ListTile(
                               title: Text('logout'.tr()),

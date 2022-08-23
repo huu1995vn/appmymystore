@@ -17,12 +17,15 @@ class RankTypeDialog extends StatefulWidget {
   State<RankTypeDialog> createState() => _RankTypeDialogState();
 }
 
-class _RankTypeDialogState extends State<RankTypeDialog> {
+class _RankTypeDialogState extends State<RankTypeDialog>
+    with TickerProviderStateMixin {
   List<RankTypeModel> data = rRankTypes;
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: data.length, vsync: this);
   }
 
   TextStyle styleTitle =
@@ -30,94 +33,65 @@ class _RankTypeDialogState extends State<RankTypeDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(width: 2, color: Colors.grey.shade500))),
-          height: 70,
-          child: TabBar(
-            indicator: BoxDecoration(color: Colors.grey[100]),
-            tabs: [
-              for (RankTypeModel item in data)
-                Tab(
-                  icon: Icon(
-                    AppIcons.polymer,
-                    size: 30,
+    return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(80.0), // here the desired height
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            bottom: TabBar(
+              labelColor: Colors.black,
+              controller: _tabController,
+              indicator: BoxDecoration(color: Colors.grey[100]),
+              tabs: [
+                for (RankTypeModel item in data)
+                  Tab(
+                    icon: Icon(
+                      AppIcons.polymer,
+                      size: 30,
+                    ),
+                    text: item.name,
                   ),
-                  text: item.name,
-                ),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 170,
-          child: TabBarView(
-            children: <Widget>[
-              for (var i = 0; i < data.length; i++)
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    // mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      if (i == 0) Text("message.str037".tr()),
-                      if (i != 0)
-                        Text(
-                          "message.p014".tr(args: [data[i].name]),
-                          style: const TextStyle().bold,
-                        ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      if (i != 0)
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.check_circle,
-                              color: Colors.green,
-                            ),
-                            Text(
-                              "discount".tr(),
-                            ),
-                            Text(
-                              CommonMethods.formatNumber(data[i].discount) +
-                                  "%",
-                              style: const TextStyle().bold,
-                            ),
-                          ],
-                        ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      if (i != 0)
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.check_circle,
-                              color: Colors.green,
-                            ),
-                            const Text(
-                              "Cần tích lũy: ",
-                            ),
-                            Text(
-                              CommonMethods.formatNumber(data[i].point) +
-                                  " point",
-                              style: const TextStyle().bold,
-                            ),
-                          ],
-                        ),
-                    ],
+              ],
+            ),
+          )),
+      body: TabBarView(
+        controller: _tabController,
+        children: <Widget>[
+          for (var i = 0; i < data.length; i++)
+            Container(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: Column(
+                // mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  ListTile(
+                    title: Text(
+                      "discount".tr(),
+                    ),
+                    subtitle: Text(
+                      "${CommonMethods.formatNumber(data[i].discount)} %",
+                      style: const TextStyle().bold,
+                    ),
                   ),
-                )
-            ],
-          ),
-        )
-      ],
+                  if (i != 0)
+                    ListTile(
+                      title: Text(
+                        "Cần tích lũy",
+                      ),
+                      subtitle: Text(
+                        "${CommonMethods.formatNumber(data[i].point)} point",
+                        style: const TextStyle().bold,
+                      ),
+                    ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                ],
+              ),
+            )
+        ],
+      ),
     );
   }
 }

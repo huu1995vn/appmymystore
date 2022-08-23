@@ -23,7 +23,7 @@ class CardPointBuild extends StatefulWidget {
 class _CardPointBuildState extends State<CardPointBuild> {
   _onInfo()
   {
-    CommonNavigates.showDialogBottomSheet(context, const RankTypeDialog());
+    CommonNavigates.showDialogBottomSheet(context, const RankTypeDialog(), height: 250);
   }
   @override
   Widget build(BuildContext context) {

@@ -794,6 +794,25 @@ class RankTypeModel {
   int discount = 0;
   int promotion = 0;
   String des = "";
+  Color get color {
+    var bgColor = Colors.yellow.shade50;
+    switch (id) {
+      case 1:
+        bgColor = Colors.yellow.shade50;
+        break;
+      case 2:
+        bgColor = Colors.brown.shade400;
+        break;
+      case 3:
+        bgColor = Colors.grey.shade400;
+        break;
+      case 4:
+        bgColor = Colors.yellow.shade600;
+        break;
+      default:
+    }
+    return bgColor;
+  }
   RankTypeModel(this.name, this.validThru, this.des,
       this.id, this.point);
 

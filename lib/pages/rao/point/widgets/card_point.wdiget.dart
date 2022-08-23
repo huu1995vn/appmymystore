@@ -28,25 +28,10 @@ class _CardPointBuildState extends State<CardPointBuild> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    Color bgColor = AppColors.black50;
     PointModel data = widget.data;
     RankTypeModel rantype = data.ranktype;
     Color fontColor = AppColors.black;
-    switch (data.ranktypeid) {
-      case 1:
-        bgColor = Colors.yellow.shade50;
-        break;
-      case 2:
-        bgColor = Colors.brown.shade400;
-        break;
-      case 3:
-        bgColor = Colors.grey.shade400;
-        break;
-      case 4:
-        bgColor = Colors.yellow.shade600;
-        break;
-      default:
-    }
+    Color bgColor = data.ranktype.color;
     return Container(
       height: 200,
       // width: size.width * 0.8,

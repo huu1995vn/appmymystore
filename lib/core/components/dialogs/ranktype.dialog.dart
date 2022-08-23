@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/data/ranktypes.dart';
@@ -42,13 +43,14 @@ class _RankTypeDialogState extends State<RankTypeDialog>
             bottom: TabBar(
               labelColor: Colors.black,
               controller: _tabController,
-              indicator: BoxDecoration(color: Colors.grey[100]),
+              indicator: BoxDecoration(color: AppColors.grayDark),
               tabs: [
                 for (RankTypeModel item in data)
                   Tab(
                     icon: Icon(
-                      AppIcons.polymer,
+                      AppIcons.diamond,
                       size: 30,
+                      color: item.color,
                     ),
                     text: item.name,
                   ),

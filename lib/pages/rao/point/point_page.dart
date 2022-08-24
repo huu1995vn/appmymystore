@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -22,7 +21,6 @@ class _PointPageState extends State<PointPage> {
   dispose() {
     super.dispose();
   }
-
   int currentIndex = 1;
   DateTime today = DateTime(
     2021,
@@ -30,36 +28,19 @@ class _PointPageState extends State<PointPage> {
     25,
     12,
   );
-
-  //! fake today - only for debug, use DateTime.now() instead.
-  //TODO change fake today to DateTime.now()
   int _sortValue = 0;
-
-  int _cardIndex = 0;
-
-  bool _bottomNavBarVisible = true;
-  int _transferIndex = 0;
-  String _nameRankType = "Member";
-  int _cardNumberTransfer = 7065447803090891;
-  int _balanceTransfer = 0;
-  Color _bgColorTransfer = Colors.white;
-  Color _fontColorTransfer = Colors.black;
-
   bool _isGoUpVisible = false;
   final ScrollController _lvController = ScrollController();
   final int _lvDefaultMax = 10;
   int _lvCurrentMax = 10;
   List<HistoryPoint> _filtredHistoryPoints = [];
   List<HistoryPoint> _historyPoints = [];
-  final TextEditingController _ibanController = TextEditingController();
-  final TextEditingController _ammountController = TextEditingController();
-  final _ibanGlobalKey = GlobalKey<FormState>();
-  final _ammountGlobalKey = GlobalKey<FormState>();
   PointModel data = PointModel(1000, 0, 1, 1000);
   @override
   void initState() {
     super.initState();
     _lvController.addListener(listenScrolling);
+    _onFilter();
   }
 
   _getMoreHistoryPoints() {
@@ -88,31 +69,11 @@ class _PointPageState extends State<PointPage> {
     }
   }
 
-  void _bottomBarVisibility(
-    bool enabled,
-    String name,
-    int id,
-    int point,
-    Color bgColor,
-    Color fontColor,
-  ) {
-    setState(() {
-      _bottomNavBarVisible = enabled;
-      _nameRankType = name;
-      _cardNumberTransfer = id;
-      _balanceTransfer = point;
-      _bgColorTransfer = bgColor;
-      _fontColorTransfer = fontColor;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (_bottomNavBarVisible == true) {
-      _onFilter();
-    }
+    
     var size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -180,6 +141,7 @@ class _PointPageState extends State<PointPage> {
                               setState(
                                 () {
                                   _sortValue = value!;
+                                  _onFilter();
                                 },
                               );
                             },
@@ -254,9 +216,6 @@ class _PointPageState extends State<PointPage> {
 
   void _onFilter() {
     _historyPoints = [];
-
-    //TODO add max value for sort and connect rHistoryPoints to database
-
     rHistoryPoints.sort((b, a) => a.date.compareTo(b.date));
     if (_sortValue == 0) {
       _filtredHistoryPoints = rHistoryPoints

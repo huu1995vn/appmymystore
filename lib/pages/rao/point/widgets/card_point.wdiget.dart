@@ -157,18 +157,10 @@ class _CardPointBuildState extends State<CardPointBuild> {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: size.width * 0.05,
-                  vertical: size.height * 0.015,
-                ),
-                child: InkWell(
-                  onTap: _onInfo,
-                  child: RxIconButton(
+              child: RxIconButton(
                     icon: AppIcons.question_circle,
+                    onTap: _onInfo,
                   ),
-                ),
-              ),
             ),
           ],
         ),

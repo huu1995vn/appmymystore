@@ -21,6 +21,7 @@ class _PointPageState extends State<PointPage> {
   dispose() {
     super.dispose();
   }
+
   int currentIndex = 1;
   DateTime today = DateTime(
     2021,
@@ -67,151 +68,6 @@ class _PointPageState extends State<PointPage> {
         _isGoUpVisible = false;
       });
     }
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    
-    var size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: AppColors.black, //change your color here
-        ),
-        centerTitle: true,
-        title: Text('Point',
-            style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-        backgroundColor: AppColors.grey,
-        elevation: 0.0,
-      ),
-      key: const Key("LPoint"),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(kDefaultPadding),
-          child: Stack(
-            children: [
-              ListView(
-                controller: _lvController,
-                children: <Widget>[
-                  CardPointBuild(
-                    data: data,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'POINT HISTORY',
-                        style: kTextTitleStyle.bold,
-                      ),
-                      DropdownButtonHideUnderline(
-                          // build filter options
-                          child: DropdownButton(
-                            value: _sortValue,
-                            items: const [
-                              DropdownMenuItem(
-                                value: 0,
-                                child: Text(
-                                  "Today",
-                                  style: kTextSubTitleStyle,
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: 1,
-                                child: Text(
-                                  "Yesterday",
-                                  style: kTextSubTitleStyle,
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                  value: 2,
-                                  child: Text(
-                                    "Last 7 days",
-                                  style: kTextSubTitleStyle,
-                                  )),
-                              DropdownMenuItem(
-                                value: 3,
-                                child: Text(
-                                  "Last 30 days",
-                                  style: kTextSubTitleStyle,
-                                ),
-                              ),
-                            ],
-                            onChanged: (int? value) {
-                              setState(
-                                () {
-                                  _sortValue = value!;
-                                  _onFilter();
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                    ],
-                  ),
-                  Card(
-                    child: ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: _historyPoints.isNotEmpty
-                          ? _historyPoints.length < _filtredHistoryPoints.length
-                              ? _historyPoints.length + 1
-                              : _historyPoints.length
-                          : 1,
-                      itemBuilder: (BuildContext ctxt, int index) {
-                        if (index == _historyPoints.length &&
-                            index < _filtredHistoryPoints.length) {
-                          return Center(
-                            child: Container(
-                              height: size.height * 0.1,
-                              width: size.width * 0.2,
-                              margin: const EdgeInsets.all(5),
-                              child: const CircularProgressIndicator(
-                                strokeWidth: 2.0,
-                                valueColor: AlwaysStoppedAnimation(Colors.white),
-                              ),
-                            ),
-                          );
-                        } else {
-                          // build rHistoryPoints
-                          return _historyPoints.isNotEmpty
-                              ? buildHistoryPoint(
-                                  _historyPoints[index].eventName,
-                                  _historyPoints[index].ammountChange,
-                                  _historyPoints[index].income,
-                                  _historyPoints[index].date,
-                                  size,
-                                )
-                              : Align(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      top: size.height * 0.01,
-                                      left: size.width * 0.05,
-                                      right: size.width * 0.05,
-                                    ),
-                                    child: Column(children: [
-                                      Text(
-                                        "Woops! \n We couldn't find anything with this filter",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: size.height * 0.02,
-                                        ),
-                                      ),
-                                      const Divider(),
-                                    ]),
-                                  ),
-                                );
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ),
-             ],
-          ),
-        ),
-      ),
-    );
   }
 
   void _onFilter() {
@@ -296,5 +152,148 @@ class _PointPageState extends State<PointPage> {
       _historyPoints.add(_filtredHistoryPoints[i]);
     }
   }
-}
 
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: AppColors.black, //change your color here
+        ),
+        centerTitle: true,
+        title: Text('Point',
+            style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+        backgroundColor: AppColors.grey,
+        elevation: 0.0,
+      ),
+      key: const Key("LPoint"),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(kDefaultPadding),
+          child: Stack(
+            children: [
+              ListView(
+                controller: _lvController,
+                children: <Widget>[
+                  CardPointBuild(
+                    data: data,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'POINT HISTORY',
+                        style: kTextTitleStyle.bold,
+                      ),
+                      DropdownButtonHideUnderline(
+                        // build filter options
+                        child: DropdownButton(
+                          value: _sortValue,
+                          items: const [
+                            DropdownMenuItem(
+                              value: 0,
+                              child: Text(
+                                "Today",
+                                style: kTextSubTitleStyle,
+                              ),
+                            ),
+                            DropdownMenuItem(
+                              value: 1,
+                              child: Text(
+                                "Yesterday",
+                                style: kTextSubTitleStyle,
+                              ),
+                            ),
+                            DropdownMenuItem(
+                                value: 2,
+                                child: Text(
+                                  "Last 7 days",
+                                  style: kTextSubTitleStyle,
+                                )),
+                            DropdownMenuItem(
+                              value: 3,
+                              child: Text(
+                                "Last 30 days",
+                                style: kTextSubTitleStyle,
+                              ),
+                            ),
+                          ],
+                          onChanged: (int? value) {
+                            setState(
+                              () {
+                                _sortValue = value!;
+                                _onFilter();
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Card(
+                    child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: _historyPoints.isNotEmpty
+                          ? _historyPoints.length < _filtredHistoryPoints.length
+                              ? _historyPoints.length + 1
+                              : _historyPoints.length
+                          : 1,
+                      itemBuilder: (BuildContext ctxt, int index) {
+                        if (index == _historyPoints.length &&
+                            index < _filtredHistoryPoints.length) {
+                          return Center(
+                            child: Container(
+                              height: size.height * 0.1,
+                              width: size.width * 0.2,
+                              margin: const EdgeInsets.all(5),
+                              child: const CircularProgressIndicator(
+                                strokeWidth: 2.0,
+                                valueColor:
+                                    AlwaysStoppedAnimation(Colors.white),
+                              ),
+                            ),
+                          );
+                        } else {
+                          // build rHistoryPoints
+                          return _historyPoints.isNotEmpty
+                              ? buildHistoryPoint(
+                                  _historyPoints[index].eventName,
+                                  _historyPoints[index].ammountChange,
+                                  _historyPoints[index].income,
+                                  _historyPoints[index].date,
+                                  size,
+                                )
+                              : Align(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      top: size.height * 0.01,
+                                      left: size.width * 0.05,
+                                      right: size.width * 0.05,
+                                    ),
+                                    child: Column(children: [
+                                      Text(
+                                        "Woops! \n We couldn't find anything with this filter",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: size.height * 0.02,
+                                        ),
+                                      ),
+                                      const Divider(),
+                                    ]),
+                                  ),
+                                );
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

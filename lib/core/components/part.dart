@@ -102,7 +102,7 @@ class RxWebViewState extends State<RxWebView> {
                 _controller = controller;
               },
               onProgressChanged: (controller, progress) {
-                if (progress > 20) {
+                if (progress > 30) {
                   if (isLoading) {
                     setState(() {
                       isLoading = false;

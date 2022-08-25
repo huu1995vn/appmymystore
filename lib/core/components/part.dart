@@ -75,6 +75,7 @@ class RxWebViewState extends State<RxWebView> {
   @override
   void initState() {
     super.initState();
+    if (Platform.isAndroid) WebView.platform = AndroidWebView();
   }
 
   Size get screenSize => MediaQuery.of(context).size;

@@ -95,48 +95,49 @@ class RxWebViewState extends State<RxWebView> {
         ),
         body: Stack(
           children: <Widget>[
-            widget.html!=null && widget.html!.length >0 ? InAppWebView(
-              key: _key,
-              initialData: InAppWebViewInitialData(data: widget.html!),
-              onWebViewCreated: (InAppWebViewController controller) {
-                _controller = controller;
-              },
-              onProgressChanged: (controller, progress) {
-                if (progress > 30) {
-                  if (isLoading) {
-                    setState(() {
-                      isLoading = false;
-                    });
-                    if (_controller != null &&
-                        widget.javaScriptString != null) {
-                      _controller.evaluateJavascript(
-                          source: widget.javaScriptString!);
-                    }
-                  }
-                }
-              },
-            ):
-            InAppWebView(
-              key: _key,
-              initialUrlRequest: URLRequest(url: Uri.parse(widget.url!)),
-              onWebViewCreated: (InAppWebViewController controller) {
-                _controller = controller;
-              },
-              onProgressChanged: (controller, progress) {
-                if (progress > 20) {
-                  if (isLoading) {
-                    setState(() {
-                      isLoading = false;
-                    });
-                    if (_controller != null &&
-                        widget.javaScriptString != null) {
-                      _controller.evaluateJavascript(
-                          source: widget.javaScriptString!);
-                    }
-                  }
-                }
-              },
-            ),
+            widget.html != null && widget.html!.length > 0
+                ? InAppWebView(
+                    key: _key,
+                    initialData: InAppWebViewInitialData(data: widget.html!),
+                    onWebViewCreated: (InAppWebViewController controller) {
+                      _controller = controller;
+                    },
+                    onProgressChanged: (controller, progress) {
+                      if (progress > 20) {
+                        if (isLoading) {
+                          setState(() {
+                            isLoading = false;
+                          });
+                        }
+                        if (_controller != null &&
+                            widget.javaScriptString != null) {
+                          _controller.evaluateJavascript(
+                              source: widget.javaScriptString!);
+                        }
+                      }
+                    },
+                  )
+                : InAppWebView(
+                    key: _key,
+                    initialUrlRequest: URLRequest(url: Uri.parse(widget.url!)),
+                    onWebViewCreated: (InAppWebViewController controller) {
+                      _controller = controller;
+                    },
+                    onProgressChanged: (controller, progress) {
+                      if (progress > 20) {
+                        if (isLoading) {
+                          setState(() {
+                            isLoading = false;
+                          });
+                        }
+                        if (_controller != null &&
+                            widget.javaScriptString != null) {
+                          _controller.evaluateJavascript(
+                              source: widget.javaScriptString!);
+                        }
+                      }
+                    },
+                  ),
             isLoading
                 ? const Center(
                     child: CircularProgressIndicator(),

@@ -12,6 +12,7 @@ import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
+import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
@@ -53,6 +54,7 @@ initializeApp() async {
   await StorageService.init();
   await InfoDeviceService.init();
   await Firebase.initializeApp();
+  await FirebaseAuthService.signInAnonymously();
   await EasyLocalization.ensureInitialized();
   await FirebaseMessagingService.init();
   APITokenService.init();

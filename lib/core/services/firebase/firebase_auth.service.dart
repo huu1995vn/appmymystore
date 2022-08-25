@@ -5,6 +5,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 
 class FirebaseAuthService {
+  static signInAnonymously() async {
+    try {
+      final userCredential = await FirebaseAuth.instance.signInAnonymously();
+      CommonMethods.wirtePrint("Signed in with temporary account.");
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case "operation-not-allowed":
+          CommonMethods.wirtePrint("Anonymous auth hasn't been enabled for this project.");
+          break;
+        default:
+          CommonMethods.wirtePrint("Unknown error.");
+      }
+    }
+  }
+
   static _convertNumberPhoneWithCountryCode(String number,
       {String code = "+84"}) {
     String numberCode = number;
@@ -44,7 +59,6 @@ class FirebaseAuthService {
         timeout: Duration(seconds: CommonConfig.timeVerify * 60),
         verificationFailed: (FirebaseAuthException ex) {
           fnError(ex.message!);
-
         },
         codeSent: (String verificationId, int? resend) {
           verify[phoneNumber] = verificationId;

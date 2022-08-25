@@ -34,7 +34,7 @@ class DioInterceptors extends InterceptorsWrapper {
 
   String _getToken(RequestOptions options) {
     String path = options.path.toLowerCase();
-    return path.indexOf("apiraoxe/user/") > 0 || path.indexOf("/autologin") > 0
+    return path.indexOf("apiraoxe/user/") > 0 || path.indexOf("/autologin") > 0 || path.indexOf("/logout") > 0
         ? APITokenService.token
         : APITokenService.getTokenDefaultString;
   }

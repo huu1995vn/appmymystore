@@ -987,13 +987,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
-  pointer_interceptor:
-    dependency: transitive
-    description:
-      name: pointer_interceptor
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.3+2"
   pointycastle:
     dependency: transitive
     description:
@@ -1392,7 +1385,7 @@ packages:
     source: hosted
     version: "2.2.0"
   webview_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: webview_flutter
       url: "https://pub.dartlang.org"
@@ -1419,13 +1412,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.3"
-  webviewx:
-    dependency: "direct main"
-    description:
-      name: webviewx
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.1"
   win32:
     dependency: transitive
     description:

@@ -98,7 +98,7 @@ class RxWebViewState extends State<RxWebView> {
           children: <Widget>[
             WebView(
               key: _key,
-              initialUrl: widget.url,
+              initialUrl: widget.url ?? Uri.encodeFull(widget.url!),
               javascriptMode: JavascriptMode.unrestricted,
               onProgress: (progress) {
                 if (progress > 20) {

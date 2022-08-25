@@ -36,7 +36,7 @@ class AuthService {
   }
 
   static Future<bool> autologin() async {
-    if (APITokenService.token != null) {
+    if (APITokenService.token != null && APITokenService.token.isNotEmpty) {
       var res = await DaiLyXeApiBLL_APIAuth().autologin();
       if (res.status > 0) {
         APITokenService.login(res.data);

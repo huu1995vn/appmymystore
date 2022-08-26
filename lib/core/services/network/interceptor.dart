@@ -19,14 +19,14 @@ class DioInterceptors extends InterceptorsWrapper {
 
   _addHeaders(RequestOptions options) {
     options.headers.addAll({
-      'Authorization': _getToken(options),
-      'IPAddress': InfoDeviceService.infoDevice.IpAddress,
-      'DeviceId': InfoDeviceService.infoDevice.Identifier,
-      'DeviceName': InfoDeviceService.infoDevice.DeviceName,
-      'OSName': InfoDeviceService.infoDevice.OSName,
+      'Authorization': convertValueHeader(_getToken(options)),
+      'IPAddress': convertValueHeader(InfoDeviceService.infoDevice.IpAddress),
+      'DeviceId': convertValueHeader(InfoDeviceService.infoDevice.Identifier),
+      'DeviceName': convertValueHeader(InfoDeviceService.infoDevice.DeviceName),
+      'OSName': convertValueHeader(InfoDeviceService.infoDevice.OSName),
       'Location':
-          "${InfoDeviceService.infoDevice.Position?.latitude},${InfoDeviceService.infoDevice.Position?.longitude}",
-      'FCMToken': FirebaseMessagingService.token,
+          convertValueHeader("${InfoDeviceService.infoDevice.Position?.latitude},${InfoDeviceService.infoDevice.Position?.longitude}"),
+      'FCMToken': convertValueHeader(FirebaseMessagingService.token),
 
     });
     return options;
@@ -49,4 +49,10 @@ class DioInterceptors extends InterceptorsWrapper {
   Future onError(DioError dioError, ErrorInterceptorHandler handler) async {
     return super.onError(dioError, handler);
   }
+
+  convertValueHeader(value)
+  {
+        return Uri.encodeComponent(value.toString());
+
+  } 
 }

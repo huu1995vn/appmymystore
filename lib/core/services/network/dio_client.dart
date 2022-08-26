@@ -38,7 +38,8 @@ class DioClient {
       // final performanceInterceptor = DioFirebasePerformanceInterceptor();
       // dio.interceptors.add(performanceInterceptor);
       dio.interceptors.add(DioInterceptors(dio));
-  
+      
+
       switch (strMethod) {
         case "POST":
           res = await dio.post(path,
@@ -48,7 +49,7 @@ class DioClient {
           res = await dio.put(path,
               data: body, queryParameters: queryParameters, options: options);
           break;
-        case"DELETE":
+        case "DELETE":
           res = await dio.delete(path,
               queryParameters: queryParameters, options: options);
           break;

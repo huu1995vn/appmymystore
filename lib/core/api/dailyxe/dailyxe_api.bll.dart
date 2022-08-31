@@ -222,6 +222,15 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     return await post(body, null, "advert/$id");
   }
 
+  Future<ResponseModel> vehiclecontact(Map<String, dynamic> body) async {
+    return await post(body, null, "vehiclecontact");
+  }
+
+  Future<ResponseModel> vehiclecontactbyid(dynamic id) async {
+    Map<String, dynamic> body = {};
+    return await post(body, null, "vehiclecontact/$id");
+  }
+
   Future<ResponseModel> contact(Map<String, dynamic> body) async {
     return await post(body, null, "contact");
   }

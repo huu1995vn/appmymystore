@@ -608,6 +608,44 @@ class AdvertModel extends Entity {
 }
 
 @JsonSerializable()
+class VehicleContactModel extends Entity {
+  int id = 0;
+  String? code;
+  int userid = 0;
+  int vehiclecontacttypeid = 0;
+  String? userfullname;
+  String? userphone;
+  String? useremail;
+  String? phone;
+  String? email;
+  String? name;
+  String? address;
+  String? vehiclename;
+  String? subject;
+  String? message;
+  String? url;
+  String? ipaddress;
+  String? browsername;
+  String? browserdetail;
+  String? keywordsearch;
+  int status = 1;
+  DateTime? createdate;
+
+  VehicleContactModel();
+  factory VehicleContactModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["userid"] = CommonMethods.convertToInt32(json["userid"]);
+    json["vehiclecontacttypeid"] =
+        CommonMethods.convertToInt32(json["vehiclecontacttypeid"]);
+    json["createdate"] =
+        CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
+    return _$VehicleContactModelFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$VehicleContactModelToJson(this);
+}
+
+@JsonSerializable()
 class ContactModel extends Entity {
   int id = 0;
   int userid = APITokenService.userId;
@@ -787,7 +825,7 @@ class BannerModel extends Entity {
 
 @JsonSerializable()
 class RankTypeModel {
-  String name= "";
+  String name = "";
   String validThru;
   int point = 0;
   int id = -1;
@@ -813,8 +851,8 @@ class RankTypeModel {
     }
     return bgColor;
   }
-  RankTypeModel(this.name, this.validThru, this.des,
-      this.id, this.point);
+
+  RankTypeModel(this.name, this.validThru, this.des, this.id, this.point);
 
   RankTypeModel clone() => RankTypeModel.fromJson(toJson());
   factory RankTypeModel.fromJson(Map<String, dynamic> json) {
@@ -825,15 +863,16 @@ class RankTypeModel {
 
 @JsonSerializable()
 class PointModel {
-  int currentpoint =0;
+  int currentpoint = 0;
   int usedpoint = 0;
   int ranktypeid = 1;
   int totalpoint = 0;
-  RankTypeModel get  ranktype {
+  RankTypeModel get ranktype {
     return rRankTypes.firstWhere((element) => element.id == ranktypeid);
   }
-  PointModel(this.currentpoint, this.usedpoint, this.ranktypeid,
-      this.totalpoint);
+
+  PointModel(
+      this.currentpoint, this.usedpoint, this.ranktypeid, this.totalpoint);
 
   PointModel clone() => PointModel.fromJson(toJson());
   factory PointModel.fromJson(Map<String, dynamic> json) {
@@ -875,8 +914,8 @@ class HistoryPoint {
   final bool income;
   final String date;
 
-  HistoryPoint(this.name, this.id, this.eventName,
-      this.ammountChange, this.income, this.date);
+  HistoryPoint(this.name, this.id, this.eventName, this.ammountChange,
+      this.income, this.date);
 }
 
 class CardRankTypeModel {

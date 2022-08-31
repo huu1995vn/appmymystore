@@ -23,6 +23,8 @@ import 'package:raoxe/pages/product/product_detail_page.dart';
 import 'package:raoxe/pages/product/product_page.dart';
 import 'package:raoxe/pages/rao/point/point_page.dart';
 import 'package:raoxe/pages/rao/review/review_page.dart';
+import 'package:raoxe/pages/rao/vehiclecontact/vehiclecontact_detail_page.dart';
+import 'package:raoxe/pages/rao/vehiclecontact/vehiclecontact_page.dart';
 import 'package:raoxe/pages/setting/settings_page.dart';
 import 'package:raoxe/pages/user/user_page.dart';
 
@@ -38,6 +40,7 @@ class CommonNavigates {
     '/product': (context) => ProductPage(),
     '/my-product': (context) => const MyProductPage(),
     '/advert': (context) => const AdvertPage(),
+    '/vehiclecontact': (context) => const VehicleContactPage(),
     '/news': (context) => const NewsPage(),
     '/notification': (context) => const NotificationPage(),
     '/contact': (context) => const ContactPage(),
@@ -106,6 +109,19 @@ class CommonNavigates {
     }
   }
 
+  static Future toVehicleContactPage(BuildContext context,
+      {int? id, VehicleContactModel? item}) async {
+    if (id != null && id > 0) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) =>
+                  VehicleContactDetailPage(id: id, item: item)));
+    } else {
+      return await Navigator.pushNamed(context, "/vehiclecontact");
+    }
+  }
+
   static Future toFavoritePage(BuildContext context,
       {int? id, ProductModel? item}) async {
     if (id != null && id > 0 || item != null) {
@@ -146,13 +162,15 @@ class CommonNavigates {
   }
 
   static Future toNotificationPage(BuildContext context,
-      {int? id, NotificationModel? item, void Function(NotificationModel)? onChanged}) async {
+      {int? id,
+      NotificationModel? item,
+      void Function(NotificationModel)? onChanged}) async {
     if ((id != null && id > 0) || item != null) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) =>
-                  NotificationDetailPage(id: id, item: item, onChanged: onChanged)));
+              builder: (context) => NotificationDetailPage(
+                  id: id, item: item, onChanged: onChanged)));
     } else {
       return await Navigator.pushAndRemoveUntil(
           context,
@@ -162,10 +180,9 @@ class CommonNavigates {
     }
   }
 
-   static Future toPointPage(BuildContext context) async {
+  static Future toPointPage(BuildContext context) async {
     return await Navigator.pushNamed(context, "/point");
   }
-
 
   static Future toLoginPage(BuildContext context,
       {bool isReplace = true}) async {
@@ -193,12 +210,9 @@ class CommonNavigates {
   }
 
   static Future toUserPage(BuildContext context, {int? id}) async {
-     if ((id != null && id > 0) ) {
+    if ((id != null && id > 0)) {
       return await Navigator.push(
-          context,
-          CupertinoPageRoute(
-              builder: (context) =>
-                  UserPage(id: id)));
+          context, CupertinoPageRoute(builder: (context) => UserPage(id: id)));
     } else {
       return await Navigator.pushNamed(context, "/user");
     }

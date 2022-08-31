@@ -33,7 +33,8 @@ class _DashboardPageState extends State<DashboardPage> {
 
   loadData() async {
     try {
-      ResponseModel res = await DaiLyXeApiBLL_APIGets().getuserbyid(APITokenService.userId);
+      ResponseModel res =
+          await DaiLyXeApiBLL_APIGets().getuserbyid(APITokenService.userId);
       if (res.status > 0) {
         UserModel user = UserModel.fromJson(res.data);
         setState(() {
@@ -97,6 +98,16 @@ class _DashboardPageState extends State<DashboardPage> {
                               onTap: () =>
                                   CommonNavigates.toAdvertPage(context),
                               // subtitle: Text("Quản lý danh sách quảng cáo"),
+                            ),
+                          ),
+                          _card(
+                            child: ListTile(
+                              title: Text("contact".tr()),
+                              leading: Icon(
+                                AppIcons.email,
+                              ),
+                              onTap: () =>
+                                  CommonNavigates.toVehicleContactPage(context),
                             ),
                           ),
                           _card(

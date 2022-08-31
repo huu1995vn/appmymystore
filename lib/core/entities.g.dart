@@ -306,6 +306,62 @@ Map<String, dynamic> _$AdvertModelToJson(AdvertModel instance) =>
       'adminname': instance.adminname,
     };
 
+VehicleContactModel _$VehicleContactModelFromJson(Map<String, dynamic> json) =>
+    VehicleContactModel()
+      ..TotalRow = json['TotalRow']
+      ..RowIndex = json['RowIndex']
+      ..id = json['id'] as int
+      ..code = json['code'] as String?
+      ..userid = json['userid'] as int
+      ..vehiclecontacttypeid = json['vehiclecontacttypeid'] as int
+      ..userfullname = json['userfullname'] as String?
+      ..userphone = json['userphone'] as String?
+      ..useremail = json['useremail'] as String?
+      ..phone = json['phone'] as String?
+      ..email = json['email'] as String?
+      ..name = json['name'] as String?
+      ..address = json['address'] as String?
+      ..vehiclename = json['vehiclename'] as String?
+      ..subject = json['subject'] as String?
+      ..message = json['message'] as String?
+      ..url = json['url'] as String?
+      ..ipaddress = json['ipaddress'] as String?
+      ..browsername = json['browsername'] as String?
+      ..browserdetail = json['browserdetail'] as String?
+      ..keywordsearch = json['keywordsearch'] as String?
+      ..status = json['status'] as int
+      ..createdate = json['createdate'] == null
+          ? null
+          : DateTime.parse(json['createdate'] as String);
+
+Map<String, dynamic> _$VehicleContactModelToJson(
+        VehicleContactModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'id': instance.id,
+      'code': instance.code,
+      'userid': instance.userid,
+      'vehiclecontacttypeid': instance.vehiclecontacttypeid,
+      'userfullname': instance.userfullname,
+      'userphone': instance.userphone,
+      'useremail': instance.useremail,
+      'phone': instance.phone,
+      'email': instance.email,
+      'name': instance.name,
+      'address': instance.address,
+      'vehiclename': instance.vehiclename,
+      'subject': instance.subject,
+      'message': instance.message,
+      'url': instance.url,
+      'ipaddress': instance.ipaddress,
+      'browsername': instance.browsername,
+      'browserdetail': instance.browserdetail,
+      'keywordsearch': instance.keywordsearch,
+      'status': instance.status,
+      'createdate': instance.createdate?.toIso8601String(),
+    };
+
 ContactModel _$ContactModelFromJson(Map<String, dynamic> json) => ContactModel()
   ..TotalRow = json['TotalRow']
   ..RowIndex = json['RowIndex']

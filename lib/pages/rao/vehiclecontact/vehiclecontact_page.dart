@@ -93,7 +93,7 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
               color: AppColors.black, //change your color here
             ),
             centerTitle: true,
-            title: Text('vehiclecontact'.tr(),
+            title: Text('contact'.tr(),
                 style: kTextHeaderStyle.copyWith(color: AppColors.black)),
             elevation: 0.0,
             backgroundColor: AppColors.grey,

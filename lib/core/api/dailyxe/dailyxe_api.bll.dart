@@ -83,11 +83,13 @@ class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
     Map<String, dynamic> body = {};
     return await post(body, null, "masterdata");
   }
-   Future<ResponseModel> getuserbyid(int id) async {
+
+  Future<ResponseModel> getuserbyid(int id) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     Map<String, dynamic> body = {};
     return await post(body, queryParameters, "user/$id");
   }
+
   Future<ResponseModel> statsuser(Map<String, dynamic> body) async {
     return await post(body, null, "statususer");
   }
@@ -163,18 +165,30 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     apiDAL.controllerName = "apiraoxe/user";
   }
 
- 
-
   Future<ResponseModel> updateuser(Map<String, dynamic> body) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     return await post(body, queryParameters, "update");
   }
 
-  Future<ResponseModel> updateavatar(int img) async {
+  Future<ResponseModel> updateavatar(int bImg) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     Map<String, dynamic> body = <String, dynamic>{};
-    body["img"] = img;
+    body["img"] = bImg;
     return await post(body, queryParameters, "UpdateAvatar");
+  }
+
+  Future<ResponseModel> updatephone(String nPhone) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = <String, dynamic>{};
+    body["phone"] = nPhone;
+    return await post(body, queryParameters, "UpdatePhone");
+  }
+
+  Future<ResponseModel> updateemail(String nEmail) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = <String, dynamic>{};
+    body["email"] = nEmail;
+    return await post(body, queryParameters, "UpdateEmail");
   }
 
   Future<ResponseModel> product(Map<String, dynamic> body) async {
@@ -293,5 +307,15 @@ class DaiLyXeApiBLL_APIAnonymous extends DaiLyXeApiBLL_Basic {
   Future<ResponseModel> insertuser(Map<String, dynamic> body) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     return await post(body, queryParameters, "insertuser");
+  }
+
+  Future<ResponseModel> forgotpassword(
+      String nUserName, String nPassword) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = <String, dynamic>{
+      "username": nUserName,
+      "password": nPassword
+    };
+    return await post(body, queryParameters, "forgotpassword");
   }
 }

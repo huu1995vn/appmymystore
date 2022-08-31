@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
+import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -149,13 +150,19 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Future onForgotPassword() async {
     try {
       await AuthService.checkPhone(phone, isExist: true);
-      bool res =
+      bool checkOtp =
           await CommonNavigates.openOtpVerificationDialog(context, phone, true);
-      if (res != null) {
-        CommonMethods.showToast( "success".tr());
+      if (checkOtp) {
+        var res =
+            await DaiLyXeApiBLL_APIAnonymous().forgotpassword(phone, password);
+        if (res.status > 0) {
+          CommonMethods.showToast("success".tr());
+        } else {
+          CommonMethods.showToast(res.message);
+        }
       }
     } catch (e) {
-      CommonMethods.showToast( e.toString());
+      CommonMethods.showToast(e.toString());
     }
   }
   //#end function main

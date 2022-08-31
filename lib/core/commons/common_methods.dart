@@ -77,7 +77,6 @@ class CommonMethods {
   }
 
   static Future<Position?> getPosition() async {
-    
     LocationPermission permission;
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -85,7 +84,7 @@ class CommonMethods {
       if (permission == LocationPermission.deniedForever) {
         return Future.error('Location Not Available');
       }
-    } else {      
+    } else {
       return null;
     }
     return await Geolocator.getCurrentPosition();
@@ -153,16 +152,17 @@ class CommonMethods {
     return utf8.fuse(base64).decode(text);
   }
 
-  static showToast(String pmsg){
+  static showToast(String pmsg) {
     Fluttertoast.showToast(
         msg: pmsg, //message to show toast
         toastLength: Toast.LENGTH_LONG, //duration for message to show
         gravity: ToastGravity.BOTTOM, //where you want to show, top, bottom
         timeInSecForIosWeb: 1, //for iOS only
-        backgroundColor: AppColors.secondary.withOpacity(0.7), //background Color for message
+        backgroundColor:
+            AppColors.secondary.withOpacity(0.7), //background Color for message
         textColor: Colors.white, //message text color
         fontSize: 12.0 //message font size
-    );
+        );
   }
 
   static Future<bool> showConfirmDialog(BuildContext context, String? content,
@@ -217,7 +217,7 @@ class CommonMethods {
 
   static Future<void> showDialogInfo(BuildContext context, String pmsg,
       {List<Widget>? actions}) async {
-    return await  materialDialog(context, pmsg,
+    return await materialDialog(context, pmsg,
         title: "notification.text".tr(),
         actions: actions,
         color: AppColors.info);
@@ -225,20 +225,24 @@ class CommonMethods {
 
   static Future<void> showDialogError(BuildContext context, dynamic pmsg,
       {String? title, List<Widget>? actions}) async {
-    return await materialDialog(context, pmsg,  actions: actions, color: AppColors.error);
+    return await materialDialog(context, pmsg,
+        actions: actions, color: AppColors.error);
   }
 
   static Future<void> showDialogSuccess(BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) async {
-    return await materialDialog(context, pmsg, actions: actions, color: AppColors.success);
+    return await materialDialog(context, pmsg,
+        actions: actions, color: AppColors.success);
   }
 
   static Future<void> showDialogWarning(BuildContext context, Object pmsg,
       {List<Widget>? actions}) async {
-    return await materialDialog(context, pmsg, actions: actions, color: AppColors.warning);
+    return await materialDialog(context, pmsg,
+        actions: actions, color: AppColors.warning);
   }
 
-  static Future<void> showDialogCongratulations(BuildContext context, Object pmsg,
+  static Future<void> showDialogCongratulations(
+      BuildContext context, Object pmsg,
       {String? title, List<Widget>? actions}) async {
     return await Dialogs.materialDialog(
         color: AppColors.white,
@@ -494,7 +498,7 @@ class CommonMethods {
   static Future<bool> onFavorite(context, List<int> ids, bool status) async {
     try {
       if (!CommonMethods.isLogin) {
-        CommonMethods.showToast( "please.login".tr());
+        CommonMethods.showToast("please.login".tr());
         return false;
       }
       ResponseModel res =
@@ -505,7 +509,7 @@ class CommonMethods {
             : StorageService.deleteFavorite(ids);
         return true;
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {}
     return false;
@@ -617,8 +621,8 @@ class CommonMethods {
 
   static copy(BuildContext context, String noiDung) {
     Clipboard.setData(ClipboardData(text: noiDung)).then((_) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Copied to your clipboard !')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Copied to your clipboard !')));
     });
   }
 

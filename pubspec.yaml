@@ -75,7 +75,6 @@ dependencies:
   photo_view: #Used for show gallery
   share_plus: #Used for share
   fluttertoast: #Used for toast
-  salomon_bottom_bar:
   
 dev_dependencies:
   build_runner: # Used for code generation libraries

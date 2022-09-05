@@ -28,9 +28,8 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
-      loadData();
-    });
+
+    loadData();
   }
 
   int paging = 1;
@@ -41,11 +40,13 @@ class _NotificationPageState extends State<NotificationPage> {
 
   loadData([nPaging = 1]) async {
     if (!CommonMethods.isLogin) {
-      Provider.of<NotificationProvider>(context, listen: false)
-          .setNotification(0);
-      setState(() {
-        listData = [];
-        totalItems = 0;
+      Future.delayed(Duration.zero, () {
+        Provider.of<NotificationProvider>(context, listen: false)
+            .setNotification(0);
+        setState(() {
+          listData = [];
+          totalItems = 0;
+        });
       });
 
       return;

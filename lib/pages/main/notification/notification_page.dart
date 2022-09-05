@@ -28,7 +28,9 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   void initState() {
     super.initState();
-    loadData();
+    Future.delayed(Duration.zero, () {
+      loadData();
+    });
   }
 
   int paging = 1;
@@ -186,7 +188,11 @@ class _NotificationPageState extends State<NotificationPage> {
             automaticallyImplyLeading: false,
             elevation: 0.0,
             actions: <Widget>[
-              RxIconButton(icon: AppIcons.delete_forever, onTap: _onDeleteAll, size: 40,),
+              RxIconButton(
+                icon: AppIcons.delete_forever,
+                onTap: _onDeleteAll,
+                size: 40,
+              ),
               SizedBox(
                 width: kDefaultPadding,
               ),

@@ -110,7 +110,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       backgroundColor: Colors.transparent,
       body: isNotFound
           ? Expanded(child: Center(child: Text("not.found".tr())))
-          : (data == null
+          : ((data == null || data!.id <= 0)
               ? Center(
                   child: CircularProgressIndicator(),
                 )

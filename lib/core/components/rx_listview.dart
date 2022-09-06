@@ -95,20 +95,23 @@ class _RxDataListViewState extends State<RxListView>
   }
 
   Widget _bodylist_awaiting() {
-    return ListView.builder(
-        key: PageStorageKey(widget.key),
-        shrinkWrap: true,
-        controller: widget.scrollController != null ? null : _scrollController,
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: widget.scrollDirection ?? Axis.vertical,
-        itemCount: kItemOnPage,
-        padding: widget.padding ?? const EdgeInsets.all(kDefaultPadding),
-        itemBuilder: (context, index) {
-          return Padding(
-              padding: kEdgeInsetsPadding,
-              child: widget.awaiting ??
-                  RxCardSkeleton(barCount: 3, isShowAvatar: false));
-        });
+    return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.1,
+        child: ListView.builder(
+            key: UniqueKey(),
+            shrinkWrap: true,
+            controller:
+                widget.scrollController != null ? null : _scrollController,
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: widget.scrollDirection ?? Axis.vertical,
+            itemCount: kItemOnPage,
+            padding: widget.padding ?? const EdgeInsets.all(kDefaultPadding),
+            itemBuilder: (context, index) {
+              return Padding(
+                  padding: kEdgeInsetsPadding,
+                  child: widget.awaiting ??
+                      RxCardSkeleton(barCount: 3, isShowAvatar: false));
+            }));
   }
 
   Widget _bodylist_notfound() {

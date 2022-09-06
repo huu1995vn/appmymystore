@@ -53,7 +53,7 @@ class _ReportDialogState extends State<ReportDialog> {
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().reportpost(body);
       if (res.status > 0) {
-        await CommonMethods.showDialogSuccess(context, "success".tr(), title: "report".tr());
+        CommonMethods.showToast("success".tr());
         CommonNavigates.goBack(context);
       } else {
         CommonMethods.showToast( res.message);

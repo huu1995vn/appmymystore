@@ -43,7 +43,7 @@ class CloudFirestoreSerivce {
           FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.configs);
       var value = await fireStoreService.get();
       if (value.docs != null && value.docs.isNotEmpty) {
-        dynamic item = value.docs[0].data()!;
+        dynamic item = value.docs[0].data()!;      
         CommonConfig.apiDaiLyXe = item["apiDaiLyXe"] ?? CommonConfig.apiDaiLyXe;
         CommonConfig.apiDaiLyXeSufix =
             item["apiDaiLyXeSufix"] ?? CommonConfig.apiDaiLyXeSufix;

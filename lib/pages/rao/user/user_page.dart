@@ -15,7 +15,7 @@ import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/product/widgets/product_related.dart';
-import 'package:raoxe/pages/user/dialogs/info.dialog.dart';
+import 'package:raoxe/pages/rao/user/dialogs/info.dialog.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key, this.id});

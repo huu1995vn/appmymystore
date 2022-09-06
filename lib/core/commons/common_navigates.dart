@@ -26,7 +26,7 @@ import 'package:raoxe/pages/rao/review/review_page.dart';
 import 'package:raoxe/pages/rao/vehiclecontact/vehiclecontact_detail_page.dart';
 import 'package:raoxe/pages/rao/vehiclecontact/vehiclecontact_page.dart';
 import 'package:raoxe/pages/setting/settings_page.dart';
-import 'package:raoxe/pages/user/user_page.dart';
+import 'package:raoxe/pages/rao/user/user_page.dart';
 
 class CommonNavigates {
   static Map<String, Widget Function(BuildContext)> routers =

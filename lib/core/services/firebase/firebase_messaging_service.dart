@@ -56,8 +56,11 @@ class FirebaseMessagingService {
     _messaging = FirebaseMessaging.instance;
     // 3. On iOS, this helps to take the user permissions
     NotificationSettings settings = await _messaging!.requestPermission(
-      alert: true,
+       alert: true,
+      announcement: false,
       badge: true,
+      carPlay: false,
+      criticalAlert: false,
       provisional: false,
       sound: true,
     );

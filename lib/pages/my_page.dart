@@ -69,7 +69,6 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         var res = !message.isBackgournd;
         Provider.of<NotificationProvider>(context, listen: false)
             .getNotification();
-
         if (res != null && res && message.data != null) {
           String action = message.data!["action"].toString().toLowerCase();
           int? id = message.data!["id"] != null

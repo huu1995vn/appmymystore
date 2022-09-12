@@ -63,19 +63,19 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     Provider.of<NotificationProvider>(context, listen: false).getNotification();
     FirebaseMessagingService.streamMessage.stream.listen((message) async {
       if (message != null) {
-        if (message.data!["code"].toString().contains("anotherlogin")) {
-          return;
-        }
         Provider.of<NotificationProvider>(context, listen: false)
             .getNotification();
-        if (!message.isBackgournd != null &&
-            !message.isBackgournd &&
-            message.data != null) {
-          if (message.data!["link"] != null) {
-            String link = message.data!["link"].toString().toLowerCase();
-            CommonMethods.launchURL(link);
-            return;
-          }
+        if (message.isBackgournd && message.data!["link"] != null) {
+          String link = message.data!["link"].toString().toLowerCase();
+          CommonMethods.launchURL(link);
+          return;
+        }
+        if (message.data!["code"] != null &&
+            message.data!["code"].toString().contains("anotherlogin")) {
+          return;
+        }
+
+        if (message.isBackgournd && message.data != null) {
           String action = message.data!["action"].toString().toLowerCase();
 
           int? id = message.data!["id"] != null

@@ -66,9 +66,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         if (message.data!["code"].toString().contains("anotherlogin")) {
           return;
         }
-        var res = message.isBackgournd ||
-            await CommonMethods.showConfirmDialog(context, message.body ?? "",
-                title: message.title);
+        var res = !message.isBackgournd;
         Provider.of<NotificationProvider>(context, listen: false)
             .getNotification();
 

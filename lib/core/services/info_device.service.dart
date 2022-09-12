@@ -22,6 +22,11 @@ class InfoDevice {
         'latitude': Position?.latitude,
         'longitude': Position?.longitude,
       };
+ String get location
+  {
+    if(InfoDeviceService.infoDevice.Position?.latitude == null && InfoDeviceService.infoDevice.Position?.longitude ==null ) return "";
+    return  "${InfoDeviceService.infoDevice.Position?.latitude??"NaN"},${InfoDeviceService.infoDevice.Position?.longitude??"NaN"}";
+  }
 }
 
 class InfoDeviceService {

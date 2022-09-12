@@ -66,11 +66,18 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         if (message.data!["code"].toString().contains("anotherlogin")) {
           return;
         }
-        var res = !message.isBackgournd;
         Provider.of<NotificationProvider>(context, listen: false)
             .getNotification();
-        if (res != null && res && message.data != null) {
+        if (!message.isBackgournd != null &&
+            !message.isBackgournd &&
+            message.data != null) {
+          if (message.data!["link"] != null) {
+            String link = message.data!["link"].toString().toLowerCase();
+            CommonMethods.launchURL(link);
+            return;
+          }
           String action = message.data!["action"].toString().toLowerCase();
+
           int? id = message.data!["id"] != null
               ? CommonMethods.convertToInt32(message.data!["id"])
               : null;
@@ -94,7 +101,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
     DynamicLinkService.dynamicLinks.onLink.listen((dynamicLinkData) {
       // Navigator.pushNamed(context, dynamicLinkData.link.path);
-      CommonMethods.showToast( dynamicLinkData.link.path);
+      CommonMethods.showToast(dynamicLinkData.link.path);
     }).onError((error) {
       CommonMethods.wirtePrint('onLink error');
     });
@@ -139,7 +146,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
           if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
           } else {
-            CommonMethods.showToast( "please.login".tr());
+            CommonMethods.showToast("please.login".tr());
           }
         },
         shape: RoundedRectangleBorder(

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 
 //model
 class PushNotification {
@@ -38,8 +39,15 @@ class FirebaseMessagingService {
   }
 
   static init() async {
-    token = await FirebaseMessaging.instance.getToken();
-    registerNotification();
+    try {
+       token = await FirebaseMessaging.instance.getToken();
+       registerNotification();
+    }
+    catch(e)
+    {
+      CommonMethods.wirtePrint(e);
+    }
+   
   }
 
   static registerNotification() async {

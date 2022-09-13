@@ -77,9 +77,8 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
 
         if (message.isBackgournd && message.data != null) {
           String action = message.data!["action"].toString().toLowerCase();
-
           int? id = message.data!["id"] != null
-              ? CommonMethods.convertToInt32(message.data!["id"])
+              ? CommonMethods.convertToInt32(message.data!["id"] ?? message.data!["Id"])
               : null;
           switch (action) {
             case "product":

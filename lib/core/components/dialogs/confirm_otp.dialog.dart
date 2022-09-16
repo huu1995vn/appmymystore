@@ -9,6 +9,7 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -18,7 +19,8 @@ class OtpVerificationDialog extends StatefulWidget {
   final String phone;
   final bool isExist;
 
-  const OtpVerificationDialog({super.key, required this.phone, required this.isExist});
+  const OtpVerificationDialog(
+      {super.key, required this.phone, required this.isExist});
   @override
   State<OtpVerificationDialog> createState() => _OtpVerificationDialogState();
 }
@@ -31,7 +33,8 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
   Future sendOTP(
       void Function(Object) fnError, void Function() fnSuccess) async {
     try {
-      await AuthService.sendOTPPhone(widget.phone, widget.isExist, fnError, fnSuccess);
+      await AuthService.sendOTPPhone(
+          widget.phone, widget.isExist, fnError, fnSuccess);
     } catch (error) {
       CommonMethods.showDialogError(context, error.toString());
     }
@@ -146,6 +149,13 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
             key: _formKey,
             child: Column(
               children: <Widget>[
+                // Align(
+                //     alignment: Alignment.topRight,
+                //     child: RxIconButton(
+                //       onTap: () => {CommonNavigates.goBack(context)},
+                //       icon: AppIcons.close,
+                //       size: 40,
+                //     )),
                 const Text(
                   "Enter valid recieved OTP",
                   style: kTextHeaderStyle,
@@ -178,7 +188,22 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
                   width: 0.0,
                   height: 20.0,
                 ),
-                RxPrimaryButton(onTap: _submit, text: "Verify OTP")
+                RxPrimaryButton(onTap: _submit, text: "Verify OTP"),
+                Padding(
+                  padding: const EdgeInsets.all(kDefaultPadding),
+                  child: InkWell(
+                      onTap: () => {CommonNavigates.goBack(context)},
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "cancel".tr(),
+                            style: const TextStyle(color: AppColors.black)
+                                .size(13),
+                          ),
+                        ],
+                      )),
+                ),
               ],
             ),
           ),

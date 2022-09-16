@@ -5,10 +5,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:flutter/material.dart';
+import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/lifecyclewatcherstate.dart';
 import 'package:raoxe/core/providers/notification_provider.dart';
@@ -18,6 +20,7 @@ import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_in_app_messaging_service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'main/index.dart';
 
@@ -77,31 +80,23 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         }
 
         if (message.isBackgournd && message.data != null) {
-          String action = message.data!["action"].toString().toLowerCase();
-          int? id = message.data!["id"] != null
-              ? CommonMethods.convertToInt32(
-                  message.data!["id"] ?? message.data!["Id"])
-              : null;
-          switch (action) {
-            case "product":
-              CommonNavigates.toProductPage(context, id: id);
-              break;
-            case "my-product":
-              CommonNavigates.toMyProductPage(context, id: id);
-              break;
-            case "news":
-              CommonNavigates.toNewsPage(context, id: id);
-              break;
-            default:
-              CommonNavigates.toNotificationPage(context, id: id);
-              break;
-          }
+          onDetailNotification(message);
         } else {
           if (message != null) {
-            showSimpleNotification(Text(message.title!),
-                subtitle: Text(message.body!),
-                background: Colors.cyan.shade700,
-                duration: Duration(seconds: 2));
+            showSimpleNotification(
+              Text(message.title!, style: TextStyle(color: AppColors.black)),
+              leading: RxAvatarImage(ICON, size: 40),
+              subtitle: Text(message.body!,
+                  style: TextStyle(color: AppColors.black50)),
+              background: AppColors.white,
+              duration: Duration(seconds: 3),
+              trailing: GestureDetector(
+                  onTap: () {
+                    onDetailNotification(message);
+                  },
+                  child: Text("detail".tr(),
+                      style: TextStyle(color: AppColors.info))),
+            );
           }
         }
       }
@@ -113,6 +108,28 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     }).onError((error) {
       CommonMethods.wirtePrint('onLink error');
     });
+  }
+
+  onDetailNotification(message) {
+    String action = message.data!["action"].toString().toLowerCase();
+    int? id = message.data!["id"] != null
+        ? CommonMethods.convertToInt32(
+            message.data!["id"] ?? message.data!["Id"])
+        : null;
+    switch (action) {
+      case "product":
+        CommonNavigates.toProductPage(context, id: id);
+        break;
+      case "my-product":
+        CommonNavigates.toMyProductPage(context, id: id);
+        break;
+      case "news":
+        CommonNavigates.toNewsPage(context, id: id);
+        break;
+      default:
+        CommonNavigates.toNotificationPage(context, id: id);
+        break;
+    }
   }
 
   onPressedTab(int index) {

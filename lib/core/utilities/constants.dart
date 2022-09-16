@@ -64,6 +64,8 @@ const BGBANNER = "assets/images/bg/bg-banner.png";
 const NOTFOUNDDATA = "assets/images/img-screen/no-data.png";
 const EMPTYDATA = "assets/images/img-screen/empty-data.png";
 const BGOTP = "assets/images/img-screen/otp.png";
+const ICON = "assets/icon.png";
+
 const String IMAGE_NOT_FOUND =
     "https://cdn.gianhangvn.com/image/hinh-anh-khong-ton-tai.jpg";
 const List<String> kBanners = ["84748", "84749", "84750"];

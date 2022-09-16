@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/providers/notification_provider.dart';
@@ -98,34 +99,36 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) => NotificationProvider(),
         ),
-        
       ],
       child: Consumer<ThemeProvider>(
-        child: const MyPage(),
-        builder: (c, themeProvider, home) => MaterialApp(
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          color: Colors.transparent,
-          debugShowCheckedModeBanner: false,
-          theme: ThemeService.main(),
-          darkTheme: ThemeService.main(
-            isDark: true,
-          ).copyWith(
-            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
-                .copyWith(
-                    secondary: AppColors.primary, brightness: Brightness.dark),
-          ),
-          themeMode: themeProvider.selectedThemeMode,
-          home: SplashScreen(
-            navigateAfterFuture: loadFromFuture(home),
-            imageBackground: const AssetImage('assets/splash.png'),
-            loaderColor: Colors.red,
-          ),
-          routes: CommonNavigates.routers,
-          builder: EasyLoading.init(),
-        ),
-      ),
+          child: const MyPage(),
+          builder: (c, themeProvider, home) => OverlaySupport(
+                child: MaterialApp(
+                  localizationsDelegates: context.localizationDelegates,
+                  supportedLocales: context.supportedLocales,
+                  locale: context.locale,
+                  color: Colors.transparent,
+                  debugShowCheckedModeBanner: false,
+                  theme: ThemeService.main(),
+                  darkTheme: ThemeService.main(
+                    isDark: true,
+                  ).copyWith(
+                    colorScheme:
+                        ColorScheme.fromSwatch(primarySwatch: Colors.red)
+                            .copyWith(
+                                secondary: AppColors.primary,
+                                brightness: Brightness.dark),
+                  ),
+                  themeMode: themeProvider.selectedThemeMode,
+                  home: SplashScreen(
+                    navigateAfterFuture: loadFromFuture(home),
+                    imageBackground: const AssetImage('assets/splash.png'),
+                    loaderColor: Colors.red,
+                  ),
+                  routes: CommonNavigates.routers,
+                  builder: EasyLoading.init(),
+                ),
+              )),
     );
   }
 }

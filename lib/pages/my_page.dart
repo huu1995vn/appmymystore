@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -78,7 +79,8 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         if (message.isBackgournd && message.data != null) {
           String action = message.data!["action"].toString().toLowerCase();
           int? id = message.data!["id"] != null
-              ? CommonMethods.convertToInt32(message.data!["id"] ?? message.data!["Id"])
+              ? CommonMethods.convertToInt32(
+                  message.data!["id"] ?? message.data!["Id"])
               : null;
           switch (action) {
             case "product":
@@ -93,6 +95,13 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
             default:
               CommonNavigates.toNotificationPage(context, id: id);
               break;
+          }
+        } else {
+          if (message != null) {
+            showSimpleNotification(Text(message.title!),
+                subtitle: Text(message.body!),
+                background: Colors.cyan.shade700,
+                duration: Duration(seconds: 2));
           }
         }
       }

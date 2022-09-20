@@ -2,6 +2,7 @@
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.dal.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
+import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 
 class DaiLyXeApiBLL_Basic {
   DaiLyXeApiDAL apiDAL = DaiLyXeApiDAL();
@@ -294,7 +295,7 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
   }
 
   Future<ResponseModel> reviewpost(Map<String, dynamic> body) async {
-    return await post(body, body, "review/post");
+    return await post(body, null, "review/post");
   }
 
   Future<ResponseModel> reviewdelete(Map<String, dynamic> body) async {
@@ -302,7 +303,13 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
   }
 
   Future<ResponseModel> reportpost(Map<String, dynamic> body) async {
-    return await post(body, body, "report/post");
+    return await post(body, null, "report/post");
+  }
+  Future<ResponseModel> topics() async {
+    Map<String, dynamic> body = {
+      "token": FirebaseMessagingService.token
+    };
+    return await post(body, null, "topics");
   }
 }
 

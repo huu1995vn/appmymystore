@@ -3,8 +3,10 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/services/aes.service.dart';
+import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
@@ -79,8 +81,10 @@ class APITokenService {
       String dataBase64 = convertBase64FromUrl(pData);
       Map data = json.decode(AESService.decrypt(dataBase64));
       if ((data["token"] as String).isNotNullEmpty) {
-        token = data["token"];  
-        await StorageService.set(StorageKeys.dataLogin, pData);      
+        token = data["token"];
+        await StorageService.set(StorageKeys.dataLogin, pData);
+        var topic = "user${APITokenService.userId}";
+        _subscribeFromTopicUser(topic);
         res = true;
       }
       Timer(Duration.zero, () async {
@@ -93,11 +97,25 @@ class APITokenService {
     return res;
   }
 
+  static _subscribeFromTopicUser(topic) {
+    if (topic != null) FirebaseMessagingService.subscribeToTopic(topic);
+    DaiLyXeApiBLL_APIUser().topics().then((value) {
+      try {
+        value.data["res"]["topics"].forEach((key, value) {
+          if (topic == null || key != topic) {
+            FirebaseMessagingService.unsubscribeFromTopic(key);
+          }
+        });
+      } catch (e) {}
+    });
+  }
+
   static bool logout() {
     try {
+      _subscribeFromTopicUser(null);
       StorageService.deleteItem(StorageKeys.dataLogin);
       StorageService.listFavorite = [];
-      token = "";      
+      token = "";
       return true;
     } catch (e) {
       CommonMethods.wirtePrint(e);

@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, empty_catches, no_leading_underscores_for_local_identifiers
 
+import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -22,6 +23,7 @@ class AuthService {
         if (APITokenService.isValid) {
           await StorageService.set(StorageKeys.userlogin,
               <String, String>{"username": username, "password": password});
+          
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
@@ -29,7 +31,7 @@ class AuthService {
               (Route<dynamic> route) => route.isFirst);
         }
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {}
     CommonMethods.unlockScreen();
@@ -99,14 +101,12 @@ class AuthService {
     bool isAuthenticated = false;
     //check if device supports biometrics authentication.
     bool isBiometricSupported = await _localAuthentication.isDeviceSupported();
-    if(!isBiometricSupported)
-    {
+    if (!isBiometricSupported) {
       throw "message.str010".tr();
     }
     //check if user has enabled biometrics.
     bool canCheckBiometrics = await _localAuthentication.canCheckBiometrics;
-    if(!canCheckBiometrics)
-    {
+    if (!canCheckBiometrics) {
       throw "message.str011".tr();
     }
     //if device supports biometrics and user has enabled biometrics, then authenticate.

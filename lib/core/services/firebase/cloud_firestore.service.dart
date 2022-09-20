@@ -21,12 +21,8 @@ class CloudFirestoreSerivce {
         if (doc.exists) {
           String uid = InfoDeviceService.infoDevice.Identifier!;
           if (doc["DeviceId"] != null && doc["DeviceId"] != uid) {
-            try {
-              CommonMethods.showConfirmDialog(context, "message.str012".tr())
-                  .then((value) => AuthService.logout(context));
-            } catch (e) {
-              AuthService.logout(context);
-            }
+            AuthService.logout(context);
+            CommonMethods.showToast("message.str012".tr());
           }
         }
       });
@@ -43,7 +39,7 @@ class CloudFirestoreSerivce {
           FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.configs);
       var value = await fireStoreService.get();
       if (value.docs != null && value.docs.isNotEmpty) {
-        dynamic item = value.docs[0].data()!;      
+        dynamic item = value.docs[0].data()!;
         CommonConfig.apiDaiLyXe = item["apiDaiLyXe"] ?? CommonConfig.apiDaiLyXe;
         CommonConfig.apiDaiLyXeSufix =
             item["apiDaiLyXeSufix"] ?? CommonConfig.apiDaiLyXeSufix;

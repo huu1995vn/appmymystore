@@ -40,14 +40,11 @@ class FirebaseMessagingService {
 
   static init() async {
     try {
-       token = await FirebaseMessaging.instance.getToken();
-       registerNotification();
-    }
-    catch(e)
-    {
+      token = await FirebaseMessaging.instance.getToken();
+      registerNotification();
+    } catch (e) {
       CommonMethods.wirtePrint(e);
     }
-   
   }
 
   static registerNotification() async {
@@ -56,7 +53,7 @@ class FirebaseMessagingService {
     _messaging = FirebaseMessaging.instance;
     // 3. On iOS, this helps to take the user permissions
     NotificationSettings settings = await _messaging!.requestPermission(
-       alert: true,
+      alert: true,
       announcement: false,
       badge: true,
       carPlay: false,
@@ -92,6 +89,14 @@ class FirebaseMessagingService {
         print('User declined or has not accepted permission');
       }
     }
+  }
+
+  static subscribeToTopic(String topic) async {
+    return await FirebaseMessaging.instance.subscribeToTopic(topic);
+  }
+
+  static unsubscribeFromTopic(String topic) async {
+    return await FirebaseMessaging.instance.unsubscribeFromTopic(topic);
   }
 
   static processLinkToPage(pathRedirect, BuildContext context) async {

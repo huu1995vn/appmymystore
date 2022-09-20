@@ -13,6 +13,7 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
+import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 
@@ -40,6 +41,7 @@ class _DashboardPageState extends State<DashboardPage> {
         setState(() {
           data = user;
         });
+        FirebaseMessagingService.subscribeToTopic("user${user.id}");
         Provider.of<UserProvider>(context, listen: false).setUserModel(user);
       } else {
         CommonMethods.showToast(res.message);

@@ -57,14 +57,16 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
     _timer = Timer.periodic(
       oneSec,
       (Timer timer) {
-        if (expiredTime == 0) {
-          setState(() {
-            timer.cancel();
-          });
-        } else {
-          setState(() {
-            expiredTime--;
-          });
+        if (mounted) {
+          if (expiredTime == 0) {
+            setState(() {
+              timer.cancel();
+            });
+          } else {
+            setState(() {
+              expiredTime--;
+            });
+          }
         }
       },
     );
@@ -102,6 +104,7 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
     if (code != null && code.length == 6) {
       bool res = await verifyOTP();
       if (res) {
+        CommonMethods.showToast("success".tr());
         CommonNavigates.goBack(context, res);
       }
     }

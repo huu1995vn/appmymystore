@@ -271,7 +271,7 @@ class ProductModel extends Entity {
   int img = 0;
   String? imglist;
   String? name;
-  String? des;
+  String? desc;
   int? price;
   int? year;
   int? seat;
@@ -489,7 +489,7 @@ class ProductModel extends Entity {
           img,
           imglist,
           name,
-          des,
+          desc,
           price,
           year,
           seat,
@@ -538,7 +538,7 @@ class ProductModel extends Entity {
           img,
           imglist,
           name,
-          des,
+          desc,
           price,
           year,
           seat,
@@ -705,7 +705,7 @@ class ReviewModel extends Entity {
   int productid = 0;
   String? comment;
   String? name;
-  String? des;
+  String? desc;
   String? price;
   int reviewcount = 0;
   int ratingvalue = 5;
@@ -812,7 +812,7 @@ class BannerModel extends Entity {
   int id = -1;
   String src = IMAGE_NOT_FOUND;
   String? link;
-  String? des;
+  String? desc;
   String? title;
   int? no;
   BannerModel();
@@ -831,7 +831,7 @@ class RankTypeModel {
   int id = -1;
   int discount = 0;
   int promotion = 0;
-  String des = "";
+  String desc = "";
   Color get color {
     var bgColor = Colors.yellow.shade50;
     switch (id) {
@@ -852,7 +852,7 @@ class RankTypeModel {
     return bgColor;
   }
 
-  RankTypeModel(this.name, this.validThru, this.des, this.id, this.point);
+  RankTypeModel(this.name, this.validThru, this.desc, this.id, this.point);
 
   RankTypeModel clone() => RankTypeModel.fromJson(toJson());
   factory RankTypeModel.fromJson(Map<String, dynamic> json) {
@@ -921,7 +921,7 @@ class HistoryPoint {
 class CardRankTypeModel {
   String name;
   bool transfer;
-  String des;
+  String desc;
   int id;
   int point;
   Color bgColor;
@@ -932,7 +932,7 @@ class CardRankTypeModel {
     this.name,
     this.validThru,
     this.transfer,
-    this.des,
+    this.desc,
     this.id,
     this.point,
     this.bgColor,

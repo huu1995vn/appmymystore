@@ -454,13 +454,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                 padding: kEdgeInsetsPadding,
                                 child: TextFormField(
                                   showCursor: true,
-                                  key: const Key("des"),
-                                  initialValue: data!.des,
+                                  key: const Key("desc"),
+                                  initialValue: data!.desc,
                                   minLines:
                                       6, // any number you need (It works as the rows for the textarea)
                                   keyboardType: TextInputType.multiline,
                                   maxLines: null,
-                                  onChanged: (value) => {data!.des = value},
+                                  onChanged: (value) => {data!.desc = value},
                                   decoration: InputDecoration(
                                     hintText: "please.enter".tr(),
                                   ),
@@ -468,8 +468,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   maxLengthEnforcement:
                                       MaxLengthEnforcement.none,
                                   validator: (value) {
-                                    if ((data!.des == null ||
-                                        data!.des!.isEmpty)) {
+                                    if ((data!.desc == null ||
+                                        data!.desc!.isEmpty)) {
                                       return "notempty.text".tr();
                                     }
                                     return null;

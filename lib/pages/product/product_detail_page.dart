@@ -289,7 +289,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   padding: const EdgeInsets.only(
                       left: kDefaultPadding, right: kDefaultPadding),
                   child: TextFormField(
-                      initialValue: data!.des,
+                      initialValue: data!.desc,
                       minLines:
                           6, // any number you need (It works as the rows for the textarea)
                       keyboardType: TextInputType.multiline,

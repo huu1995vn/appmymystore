@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 
 //model
 class PushNotification {
@@ -41,6 +42,9 @@ class FirebaseMessagingService {
   static init() async {
     try {
       token = await FirebaseMessaging.instance.getToken();
+      FirebaseMessaging.instance.onTokenRefresh.listen((token) {
+        token = token;
+      });
       registerNotification();
     } catch (e) {
       CommonMethods.wirtePrint(e);
@@ -94,8 +98,12 @@ class FirebaseMessagingService {
   static refeshToken() async {
     try {
       await FirebaseMessaging.instance.deleteToken();
-      await FirebaseMessaging.instance.getToken();
-    } catch (e) {}
+      token = await FirebaseMessaging.instance.getToken();
+      CloudFirestoreSerivce.setdevice();
+
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+    }
   }
 
   static subscribeToTopic(String topic) async {

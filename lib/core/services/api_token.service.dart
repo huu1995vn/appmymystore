@@ -98,7 +98,7 @@ class APITokenService {
     return res;
   }
 
-  static _unsubscribeAlltopic(topic) {
+  static unsubscribeAlltopic(topic) {
     DaiLyXeApiBLL_APIUser().topics().then((value) {
       try {
         value.data["res"]["topics"].forEach((key, value) {
@@ -110,9 +110,9 @@ class APITokenService {
     });
   }
 
-  static bool logout() {
+  static Future<bool> logout() async {
     try {
-      FirebaseMessagingService.refeshToken();
+      await FirebaseMessagingService.refeshToken();
       StorageService.deleteItem(StorageKeys.dataLogin);
       StorageService.listFavorite = [];
       token = "";

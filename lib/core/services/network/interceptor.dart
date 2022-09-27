@@ -20,18 +20,17 @@ class DioInterceptors extends InterceptorsWrapper {
   }
 
   _addHeaders(RequestOptions options) {
-    var InfoDevice = {
+    var infoDevice = {
       'IPAddress': InfoDeviceService.infoDevice.IpAddress,
       'DeviceId': InfoDeviceService.infoDevice.Identifier,
       'DeviceName': InfoDeviceService.infoDevice.DeviceName,
       'OSName': InfoDeviceService.infoDevice.OSName,
       'Location': InfoDeviceService.infoDevice.location,
       'FCMToken': FirebaseMessagingService.token,
-
     };
     options.headers.addAll({
       'Authorization': _getToken(options),
-      'InfoDevice': CommonMethods.encodeBase64Utf8(jsonEncode(InfoDevice))
+      'InfoDevice': CommonMethods.encodeBase64Utf8(jsonEncode(infoDevice))
     });
     return options;
   }

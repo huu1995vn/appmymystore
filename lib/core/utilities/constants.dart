@@ -164,4 +164,5 @@ abstract class FormStyle {
 class NAMEFIREBASEDATABASE {
   static String configs = "configs";
   static String users = "users";
+  static String devices = "devices";
 }

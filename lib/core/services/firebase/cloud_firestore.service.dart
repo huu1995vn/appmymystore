@@ -7,6 +7,7 @@ import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
+import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
@@ -27,6 +28,25 @@ class CloudFirestoreSerivce {
         }
       });
     }
+  }
+
+  static setdevice({bool isOnline = true}) {
+    try {
+      var infoDevice = {
+        'IPAddress': InfoDeviceService.infoDevice.IpAddress,
+        'DeviceId': InfoDeviceService.infoDevice.Identifier,
+        'DeviceName': InfoDeviceService.infoDevice.DeviceName,
+        'OSName': InfoDeviceService.infoDevice.OSName,
+        'Location': InfoDeviceService.infoDevice.location,
+        'FCMToken': FirebaseMessagingService.token,
+        'UserId': APITokenService.userId ?? "",
+        'Online': isOnline
+      };
+      FirebaseFirestore.instance
+          .collection(NAMEFIREBASEDATABASE.devices)
+          .doc(InfoDeviceService.infoDevice.Identifier)
+          .set(infoDevice);
+    } catch (e) {}
   }
 
   static init() async {

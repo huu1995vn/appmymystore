@@ -50,7 +50,6 @@ class AuthService {
 
   static Future logout(context) async {
     CommonMethods.lockScreen();
-
     try {
       await APITokenService.logout();
       Navigator.pushAndRemoveUntil(

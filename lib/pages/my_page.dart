@@ -47,10 +47,13 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     initApp();
     super.initState();
     CloudFirestoreSerivce.subcriptuser(context);
+    CloudFirestoreSerivce.setdevice(isOnline: true);
   }
 
   @override
-  void onDetached() {}
+  void onDetached() {
+    CloudFirestoreSerivce.setdevice(isOnline: false);
+  }
 
   @override
   void onInactive() {}
@@ -61,12 +64,14 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   @override
   void onResumed() {
     FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
-  }  
+  }
+
   StreamSubscription<PushNotification>? submess;
   initApp() {
     Provider.of<NotificationProvider>(context, listen: false).getNotification();
     if (mounted) {
-      submess = FirebaseMessagingService.streamMessage.stream.listen((message) async {
+      submess =
+          FirebaseMessagingService.streamMessage.stream.listen((message) async {
         if (message != null) {
           Provider.of<NotificationProvider>(context, listen: false)
               .getNotification();
@@ -144,11 +149,13 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     });
     if (_pageController.hasClients) _pageController.jumpToPage(index);
   }
+
   @override
   void dispose() {
     submess!.cancel();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final notificationProvider =

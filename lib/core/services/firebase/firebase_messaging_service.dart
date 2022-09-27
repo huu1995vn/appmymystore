@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 
 //model
 class PushNotification {
@@ -98,6 +99,8 @@ class FirebaseMessagingService {
     try {
       await FirebaseMessaging.instance.deleteToken();
       token = await FirebaseMessaging.instance.getToken();
+      CloudFirestoreSerivce.setdevice();
+
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }

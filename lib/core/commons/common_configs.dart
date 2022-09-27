@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/enviroments/prod.dart';
 import 'package:raoxe/enviroments/dev.dart';
@@ -37,14 +38,14 @@ class CommonConfig {
       case Environment.prod:
         _config = configProd;
         break;
-    }
+    }   
     CommonConfig.env = _config["env"];
     CommonConfig.apiDaiLyXe = _config["apiDaiLyXe"] ?? CommonConfig.apiDaiLyXe;
     CommonConfig.apiDaiLyXeSufix =
         _config["apiDaiLyXeSufix"] ?? CommonConfig.apiDaiLyXeSufix;
     CommonConfig.apiRaoXe = _config["apiRaoXe"] ?? CommonConfig.apiRaoXe;
     CommonConfig.apiRaoXeSufix =
-        _config["apiHostSufixRaoXe"] ?? CommonConfig.apiRaoXeSufix;
+        _config["apiRaoXeSufix"] ?? CommonConfig.apiRaoXeSufix;
     CommonConfig.apiDrive = _config["apiDrive"] ?? CommonConfig.apiDrive;
     CommonConfig.hostDynamicLinks =
         _config["hostDynamicLinks"] ?? CommonConfig.hostDynamicLinks;

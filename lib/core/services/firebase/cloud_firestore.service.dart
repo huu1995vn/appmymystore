@@ -49,23 +49,23 @@ class CloudFirestoreSerivce {
   }
 
   static init() async {
-    await CloudFirestoreSerivce.configs();
+    // await CloudFirestoreSerivce.configs();
   }
 
   static Future<void> configs() async {
-    try {
-      CollectionReference fireStoreService =
-          FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.configs);
-      var value = await fireStoreService.get();
-      if (value.docs != null && value.docs.isNotEmpty) {
-        dynamic item = value.docs[0].data()!;
-        CommonConfig.apiDaiLyXe = item["apiDaiLyXe"] ?? CommonConfig.apiDaiLyXe;
-        CommonConfig.apiDaiLyXeSufix =
-            item["apiDaiLyXeSufix"] ?? CommonConfig.apiDaiLyXeSufix;
-        CommonConfig.apiDrive = item["apiDrive"] ?? CommonConfig.apiDrive;
-        CommonConfig.version_masterdata =
-            item["version_masterdata"] ?? CommonConfig.version_masterdata;
-      }
-    } catch (e) {}
+    // try {
+    //   CollectionReference fireStoreService =
+    //       FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.configs);
+    //   var value = await fireStoreService.get();
+    //   if (value.docs != null && value.docs.isNotEmpty) {
+    //     dynamic item = value.docs[0].data()!;
+    //     CommonConfig.apiDaiLyXe = item["apiDaiLyXe"] ?? CommonConfig.apiDaiLyXe;
+    //     CommonConfig.apiDaiLyXeSufix =
+    //         item["apiDaiLyXeSufix"] ?? CommonConfig.apiDaiLyXeSufix;
+    //     CommonConfig.apiDrive = item["apiDrive"] ?? CommonConfig.apiDrive;
+    //     CommonConfig.version_masterdata =
+    //         item["version_masterdata"] ?? CommonConfig.version_masterdata;
+    //   }
+    // } catch (e) {}
   }
 }

@@ -49,6 +49,7 @@ dependencies:
   firebase_dynamic_links: # Use the Firebase Dynamic Links API. (ANDROID/IOS)
   firebase_auth: # Used for send otp
   firebase_in_app_messaging: # Used for send message ads
+  firebase_remote_config: # Remote config
   cloud_firestore: # Used for firestore
   universal_platform: # Used for check platform  
   device_info_plus: 3.2.4 # Used for device info  

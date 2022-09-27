@@ -1,6 +1,7 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe, empty_catches
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -15,6 +16,7 @@ import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
+import 'package:raoxe/core/services/firebase/remote_config.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
@@ -120,10 +122,19 @@ class _MyAppState extends State<MyApp> {
                                 brightness: Brightness.dark),
                   ),
                   themeMode: themeProvider.selectedThemeMode,
-                  home: SplashScreen(
-                    navigateAfterFuture: loadFromFuture(home),
-                    imageBackground: const AssetImage('assets/splash.png'),
-                    loaderColor: Colors.red,
+                  home: FutureBuilder<FirebaseRemoteConfig>(
+                    future: RemoteConfigSerivce.init(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<FirebaseRemoteConfig> snapshot) {
+                      return snapshot.hasData
+                          ? SplashScreen(
+                              navigateAfterFuture: loadFromFuture(home),
+                              imageBackground:
+                                  const AssetImage('assets/splash.png'),
+                              loaderColor: Colors.red,
+                            )
+                          : Container();
+                    },
                   ),
                   routes: CommonNavigates.routers,
                   builder: EasyLoading.init(),

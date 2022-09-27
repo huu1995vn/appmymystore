@@ -61,53 +61,55 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   @override
   void onResumed() {
     FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
-  }
-
+  }  
+  StreamSubscription<PushNotification>? submess;
   initApp() {
     Provider.of<NotificationProvider>(context, listen: false).getNotification();
-    FirebaseMessagingService.streamMessage.stream.listen((message) async {
-      if (message != null) {
-        Provider.of<NotificationProvider>(context, listen: false)
-            .getNotification();
-        if (message.isBackgournd && message.data!["link"] != null) {
-          String link = message.data!["link"].toString().toLowerCase();
-          CommonMethods.launchURL(link);
-          return;
-        }
-        if (message.data!["code"] != null &&
-            message.data!["code"].toString().contains("anotherlogin")) {
-          return;
-        }
+    if (mounted) {
+      submess = FirebaseMessagingService.streamMessage.stream.listen((message) async {
+        if (message != null) {
+          Provider.of<NotificationProvider>(context, listen: false)
+              .getNotification();
+          if (message.isBackgournd && message.data!["link"] != null) {
+            String link = message.data!["link"].toString().toLowerCase();
+            CommonMethods.launchURL(link);
+            return;
+          }
+          if (message.data!["code"] != null &&
+              message.data!["code"].toString().contains("anotherlogin")) {
+            return;
+          }
 
-        if (message.isBackgournd && message.data != null) {
-          onDetailNotification(message);
-        } else {
-          if (message != null) {
-            showSimpleNotification(
-              Text(message.title!, style: TextStyle(color: AppColors.black)),
-              leading: RxAvatarImage(ICON, size: 40),
-              subtitle: Text(message.body!,
-                  style: TextStyle(color: AppColors.black50)),
-              background: AppColors.white,
-              duration: Duration(seconds: 3),
-              trailing: GestureDetector(
-                  onTap: () {
-                    onDetailNotification(message);
-                  },
-                  child: Text("detail".tr(),
-                      style: TextStyle(color: AppColors.info))),
-            );
+          if (message.isBackgournd && message.data != null) {
+            onDetailNotification(message);
+          } else {
+            if (message != null) {
+              showSimpleNotification(
+                Text(message.title!, style: TextStyle(color: AppColors.black)),
+                leading: RxAvatarImage(ICON, size: 40),
+                subtitle: Text(message.body!,
+                    style: TextStyle(color: AppColors.black50)),
+                background: AppColors.white,
+                duration: Duration(seconds: 3),
+                trailing: GestureDetector(
+                    onTap: () {
+                      onDetailNotification(message);
+                    },
+                    child: Text("detail".tr(),
+                        style: TextStyle(color: AppColors.info))),
+              );
+            }
           }
         }
-      }
-    });
-    FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
-    DynamicLinkService.dynamicLinks.onLink.listen((dynamicLinkData) {
-      // Navigator.pushNamed(context, dynamicLinkData.link.path);
-      CommonMethods.showToast(dynamicLinkData.link.path);
-    }).onError((error) {
-      CommonMethods.wirtePrint('onLink error');
-    });
+      });
+      FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
+      DynamicLinkService.dynamicLinks.onLink.listen((dynamicLinkData) {
+        // Navigator.pushNamed(context, dynamicLinkData.link.path);
+        CommonMethods.showToast(dynamicLinkData.link.path);
+      }).onError((error) {
+        CommonMethods.wirtePrint('onLink error');
+      });
+    }
   }
 
   onDetailNotification(message) {
@@ -142,7 +144,11 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     });
     if (_pageController.hasClients) _pageController.jumpToPage(index);
   }
-
+  @override
+  void dispose() {
+    submess!.cancel();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final notificationProvider =

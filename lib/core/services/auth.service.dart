@@ -23,7 +23,7 @@ class AuthService {
         if (APITokenService.isValid) {
           await StorageService.set(StorageKeys.userlogin,
               <String, String>{"username": username, "password": password});
-          
+
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
@@ -49,12 +49,17 @@ class AuthService {
   }
 
   static Future logout(context) async {
-    APITokenService.logout();
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (BuildContext context) => const MyPage(indexTab: 3)),
-        (Route<dynamic> route) => route.isFirst);
+    CommonMethods.lockScreen();
+
+    try {
+      await APITokenService.logout();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => const MyPage(indexTab: 3)),
+          (Route<dynamic> route) => route.isFirst);
+    } catch (e) {}
+    CommonMethods.unlockScreen();
   }
 
   static Future checkPhone(phone, {bool isExist = false}) async {

@@ -52,7 +52,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
 
   @override
   void onDetached() {
-    CloudFirestoreSerivce.setdevice(isOnline: false);
+    // CloudFirestoreSerivce.setdevice(isOnline: false);
   }
 
   @override

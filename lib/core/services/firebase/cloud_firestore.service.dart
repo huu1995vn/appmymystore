@@ -39,8 +39,7 @@ class CloudFirestoreSerivce {
         'OSName': InfoDeviceService.infoDevice.OSName,
         'Location': InfoDeviceService.infoDevice.location,
         'FCMToken': FirebaseMessagingService.token,
-        'UserId': APITokenService.userId ?? "",
-        'Online': isOnline
+        'UserId': APITokenService.userId ?? ""
       };
       FirebaseFirestore.instance
           .collection(NAMEFIREBASEDATABASE.devices)

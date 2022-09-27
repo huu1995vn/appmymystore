@@ -6,7 +6,7 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 
 const kStepPrice = 20000000;
 const TOKEN_SECURITY_KEY = "SDGD\$E^&Ư#RBSDGFGJ*IY^&ÉDQQWRWF#\$%#SGSAS";
-const kPrimaryColor = Color(0xFFFF1031);
+const kPrimaryColor = Color.fromRGBO(182, 40, 49, 1);
 const kWhite = Colors.white;
 const kTextColor = Color(0xFF707070);
 const kTextLightColor = Color(0xFF949098);

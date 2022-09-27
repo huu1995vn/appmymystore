@@ -133,14 +133,11 @@ class _HomePageState extends State<HomePage>
       floating: true,
       automaticallyImplyLeading: false,
       elevation: 0.0,
-      backgroundColor: Colors.transparent,
+      backgroundColor: kPrimaryColor,
       leading: Container(child: null),
       title: Container(
         alignment: Alignment.center,
-        child: Image.asset(
-          theme.selectedThemeMode.name == "dark"
-              ? LOGORAOXEWHITEIMAGE
-              : LOGORAOXECOLORIMAGE,
+        child: Image.asset(LOGORAOXEWHITEIMAGE,
           fit: BoxFit.contain,
           alignment: Alignment.center,
           height: 35,
@@ -149,7 +146,7 @@ class _HomePageState extends State<HomePage>
       actions: <Widget>[
         Padding(
             padding: const EdgeInsets.only(right: kDefaultPadding),
-            child: RxIconButton(onTap: _onSearch, icon: AppIcons.magnifier, size: 40,))
+            child: RxIconButton(onTap: _onSearch, icon: AppIcons.magnifier, size: 40, color: Colors.transparent, colorIcon: Colors.white,))
       ],
     );
   }

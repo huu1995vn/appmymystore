@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/services/aes.service.dart';
@@ -84,7 +85,7 @@ class APITokenService {
         token = data["token"];
         await StorageService.set(StorageKeys.dataLogin, pData);
         var topic = "user${APITokenService.userId}";
-        _subscribeFromTopicUser(topic);
+        FirebaseMessagingService.subscribeToTopic(topic);
         res = true;
       }
       Timer(Duration.zero, () async {
@@ -97,8 +98,7 @@ class APITokenService {
     return res;
   }
 
-  static _subscribeFromTopicUser(topic) {
-    if (topic != null) FirebaseMessagingService.subscribeToTopic(topic);
+  static _unsubscribeAlltopic(topic) {
     DaiLyXeApiBLL_APIUser().topics().then((value) {
       try {
         value.data["res"]["topics"].forEach((key, value) {
@@ -112,7 +112,7 @@ class APITokenService {
 
   static bool logout() {
     try {
-      _subscribeFromTopicUser(null);
+      FirebaseMessagingService.refeshToken();
       StorageService.deleteItem(StorageKeys.dataLogin);
       StorageService.listFavorite = [];
       token = "";

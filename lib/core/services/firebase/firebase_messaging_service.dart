@@ -91,6 +91,13 @@ class FirebaseMessagingService {
     }
   }
 
+  static refeshToken() async {
+    try {
+      await FirebaseMessaging.instance.deleteToken();
+      await FirebaseMessaging.instance.getToken();
+    } catch (e) {}
+  }
+
   static subscribeToTopic(String topic) async {
     return await FirebaseMessaging.instance.subscribeToTopic(topic);
   }

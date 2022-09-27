@@ -5,6 +5,10 @@ import 'package:raoxe/core/commons/common_configs.dart';
 class RemoteConfigSerivce {
   static FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
   static Future<FirebaseRemoteConfig> init() async {
+    await remoteConfig.setConfigSettings(RemoteConfigSettings(
+      fetchTimeout: const Duration(seconds: 10),
+      minimumFetchInterval: Duration.zero,
+    ));
     await remoteConfig.fetchAndActivate();
     var configs = remoteConfig.getAll();
     if (configs["apiDaiLyXe"] != null) {
@@ -26,6 +30,7 @@ class RemoteConfigSerivce {
       CommonConfig.hostDynamicLinks =
           remoteConfig.getString("hostDynamicLinks");
     }
+
     return remoteConfig;
   }
 }

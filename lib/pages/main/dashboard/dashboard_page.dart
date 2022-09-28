@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,8 +13,6 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
-import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -53,40 +50,54 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: data == null
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar(
-                  expandedHeight: 150,
-                  flexibleSpace: Center(
-                    child: Text(
-                      "Dashboard",
-                      style: kTextHeaderStyle.size(39),
+        body: data == null
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : NestedScrollView(
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverAppBar(
+                      centerTitle: true,
+                      title: Text("Mở rộng"),
+                      elevation: 0.0,
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            AuthService.logout(context);
+                          },
+                          child: Text(
+                            "Đăng xuất",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      ],
                     ),
-                  ),
-                  backgroundColor: Colors.transparent,
-                  automaticallyImplyLeading: false,
-                  centerTitle: true,
-                ),
-                SliverToBoxAdapter(
-                    child: Column(
+                  ];
+                },
+                body: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(kDefaultPadding),
+                    Container(
+                        color: Colors.white,
+                        margin: EdgeInsets.only(bottom: 5, top: 5),
+                        child: Column(children: [_top()])),
+                    Container(
+                      color: Colors.white,
+                      margin: EdgeInsets.only(bottom: 5),
                       child: Column(
                         children: [
-                          _top(),
                           _card(
                             child: ListTile(
                               title: Text("manager.raoxe".tr()),
                               leading: Icon(
-                                AppIcons.car,
+                                AppIcons.bullhorn,
                               ),
                               onTap: () =>
                                   CommonNavigates.toMyProductPage(context),
+                              trailing: Icon(
+                                AppIcons.keyboard_arrow_right,
+                              ),
                               // subtitle: Text("Quản lý danh sách tin rao"),
                             ),
                           ),
@@ -94,10 +105,13 @@ class _DashboardPageState extends State<DashboardPage> {
                             child: ListTile(
                               title: Text("ads".tr()),
                               leading: Icon(
-                                AppIcons.cart,
+                                AppIcons.rss_feed,
                               ),
                               onTap: () =>
                                   CommonNavigates.toAdvertPage(context),
+                              trailing: Icon(
+                                AppIcons.keyboard_arrow_right,
+                              ),
                               // subtitle: Text("Quản lý danh sách quảng cáo"),
                             ),
                           ),
@@ -105,10 +119,13 @@ class _DashboardPageState extends State<DashboardPage> {
                             child: ListTile(
                               title: Text("contact".tr()),
                               leading: Icon(
-                                AppIcons.email,
+                                AppIcons.envelope,
                               ),
                               onTap: () =>
                                   CommonNavigates.toVehicleContactPage(context),
+                              trailing: Icon(
+                                AppIcons.keyboard_arrow_right,
+                              ),
                             ),
                           ),
                           _card(
@@ -119,6 +136,9 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                               onTap: () =>
                                   CommonNavigates.toFavoritePage(context),
+                              trailing: Icon(
+                                AppIcons.keyboard_arrow_right,
+                              ),
                             ),
                           ),
                           _card(
@@ -129,6 +149,9 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                               onTap: () =>
                                   CommonNavigates.toReviewPage(context),
+                              trailing: Icon(
+                                AppIcons.keyboard_arrow_right,
+                              ),
                               // subtitle: Text("Danh sách đánh giá"),
                             ),
                           ),
@@ -140,66 +163,67 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                               onTap: () =>
                                   CommonNavigates.toContactPage(context),
+                              trailing: Icon(
+                                AppIcons.keyboard_arrow_right,
+                              ),
                               // subtitle: Text("Sổ địa chỉ"),
                             ),
                           ),
-                          // _card(
-                          //   child: ListTile(
-                          //     title: Text("Point"),
-                          //     leading: Icon(
-                          //       AppIcons.pointer_up,
-                          //     ),
-                          //     onTap: () =>
-                          //         CommonNavigates.toPointPage(context),
-                          //     // subtitle: Text("Sổ địa chỉ"),
-                          //   ),
-                          // ),
-                          _card(
-                            child: ListTile(
-                              title: Text('logout'.tr()),
-                              leading: Icon(
-                                AppIcons.exit,
-                              ),
-                              onTap: () => AuthService.logout(context),
-                            ),
-                          )
                         ],
                       ),
-                    )
+                    ),
+                    Container(
+                        color: Colors.white,
+                        margin: EdgeInsets.only(bottom: 5),
+                        child: Column(children: [
+                          _card(
+                            child: ListTile(
+                              title: Text("Cài đặt"),
+                              leading: Icon(
+                                AppIcons.cog_1,
+                              ),
+                              onTap: () =>
+                                  CommonNavigates.toSettingsPage(context),
+                              trailing: Icon(
+                                AppIcons.keyboard_arrow_right,
+                              ),
+                              // subtitle: Text("Danh sách đánh giá"),
+                            ),
+                          )
+                        ])),
                   ],
-                ))
-              ],
-            ),
-    );
+                )));
   }
 
   Widget _card({Widget? child}) {
-    return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(kDefaultPadding),
+    return Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: (Colors.grey[200])!, width: 1),
+          ),
         ),
         child: child);
   }
 
   Widget _top() {
     final userProvider = Provider.of<UserProvider>(context);
-    return ListTile(
-      leading: RxAvatarImage(userProvider.user.rximg!, size: 40),
-      title: InkWell(
-          onTap: () {
-            CommonNavigates.toUserPage(context);
-          },
-          child: Text(
-            userProvider.user.fullname!,
-            style: const TextStyle(
-              fontSize: 19,
-            ),
-          )),
-      trailing: RxIconButton(
-          icon: AppIcons.cog_1,
-          onTap: () {
-            CommonNavigates.toSettingsPage(context);
-          }),
-    );
+    return Container(
+        padding: EdgeInsets.only(top: 10, bottom: 10),
+        child: ListTile(
+          leading: RxAvatarImage(userProvider.user.rximg!, size: 60),
+          title: InkWell(
+              onTap: () {
+                CommonNavigates.toUserPage(context);
+              },
+              child: Text(
+                userProvider.user.fullname!,
+                style: const TextStyle(
+                  fontSize: 19,
+                ),
+              )),
+          trailing: RxIconButton(
+            icon: AppIcons.keyboard_arrow_right,
+          ),
+        ));
   }
 }

@@ -72,15 +72,10 @@ class _UserPageState extends State<UserPage> {
             )
           : CustomScrollView(
               slivers: <Widget>[
-                SliverAppBar(
-                  iconTheme: IconThemeData(
-                    color: AppColors.black, //change your color here
-                  ),
+                SliverAppBar( 
                   centerTitle: true,
-                  title: Text("personalinformation".tr(),
-                      style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-                  elevation: 0.0,
-                  backgroundColor: AppColors.grey,
+                  title: Text("personalinformation".tr()),
+                  elevation: 0.0, 
                 ),
                 SliverToBoxAdapter(
                     child: Column(

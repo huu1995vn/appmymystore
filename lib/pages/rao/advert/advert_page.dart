@@ -87,15 +87,10 @@ class _AdvertPageState extends State<AdvertPage> {
         backgroundColor: Colors.transparent,
         key: _key,
         body: RxCustomScrollView(
-          appBar: SliverAppBar(
-            iconTheme: IconThemeData(
-              color: AppColors.black, //change your color here
-            ),
+          appBar: SliverAppBar( 
             centerTitle: true,
-            title: Text('ads'.tr(),
-                style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+            title: Text('ads'.tr()),
             elevation: 0.0,
-            backgroundColor: AppColors.grey,
           ),
           key: const Key("LAds"),
           controller: scrollController,

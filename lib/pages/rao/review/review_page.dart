@@ -50,9 +50,9 @@ class _ReviewPageState extends State<ReviewPage> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                title: Text("review".tr(), style: kTextHeaderStyle),
-                elevation: 0.0,
                 centerTitle: true,
+                title: Text("review".tr()),
+                elevation: 0.0, 
               ),
               SliverPersistentHeader(
                 pinned: true,

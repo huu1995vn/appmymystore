@@ -24,7 +24,7 @@ class ItemNewsWidget extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(
                         width: SizeConfig.screenWidth,
-                        height: SizeConfig.screenWidth * 0.5,
+                        height: SizeConfig.screenWidth * 0.566,
                         child: RxImage(
                           item.rximg,
                           fit: BoxFit.cover,
@@ -33,29 +33,23 @@ class ItemNewsWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       child: Column(children: <Widget>[
                         Row(
-                          children: <Widget>[
-                            
+                          children: <Widget>[  
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
                               alignment: Alignment.centerLeft,
                               child: Text(item.webresourcename,
-                                  style:
-                                      const TextStyle(color: AppColors.yellow)
-                                          .bold,
+                                  style: const TextStyle(color: AppColors.orange),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis),
                             ),
                             Container(
                                 margin: const EdgeInsets.only(bottom: 10),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                child: Icon(Icons.fiber_manual_record,
-                                    size: 5, color: Colors.grey[500])),
+                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                child: Icon(Icons.fiber_manual_record, size: 5, color: Colors.grey[500])),
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
                               alignment: Alignment.centerLeft,
-                              child:
-                                  Text(item.rxtimeago, style: kTextTimeStyle),
+                              child: Text(item.rxtimeago, style: kTextTimeStyle),
                             ),
                           ],
                         ),
@@ -66,12 +60,12 @@ class ItemNewsWidget extends StatelessWidget {
                               item.name,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle().bold
+                              style: const TextStyle(fontSize: 18).bold
                             )),
                         Container(
                           margin: const EdgeInsets.only(bottom: 10),
                           alignment: Alignment.centerLeft,
-                          child: Text(item.desc,style: const TextStyle(fontSize: 12).italic,
+                          child: Text(item.desc,style: const TextStyle(fontSize: 15, color: Colors.grey),
                               maxLines: 3, overflow: TextOverflow.ellipsis),
                         ),
                       ]),

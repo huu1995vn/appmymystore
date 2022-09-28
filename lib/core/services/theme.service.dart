@@ -13,7 +13,7 @@ class ThemeService {
         border: InputBorder.none,
       ),
       brightness: isDark ? Brightness.dark : Brightness.light,
-      primaryColor: primaryColor,
+      primaryColor: isDark ? AppColors.black : primaryColor,
       scaffoldBackgroundColor: isDark ? Colors.black : AppColors.grey,
       cardColor: isDark ? AppColors.blackLight : AppColors.white,
       dividerColor: isDark

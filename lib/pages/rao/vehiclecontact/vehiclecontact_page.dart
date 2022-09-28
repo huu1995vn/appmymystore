@@ -88,15 +88,10 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
         backgroundColor: Colors.transparent,
         key: _key,
         body: RxCustomScrollView(
-          appBar: SliverAppBar(
-            iconTheme: IconThemeData(
-              color: AppColors.black, //change your color here
-            ),
+          appBar: SliverAppBar( 
             centerTitle: true,
-            title: Text('contact'.tr(),
-                style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-            elevation: 0.0,
-            backgroundColor: AppColors.grey,
+            title: Text('contact'.tr()),
+            elevation: 0.0, 
           ),
           key: const Key("LVehicleContact"),
           controller: scrollController,

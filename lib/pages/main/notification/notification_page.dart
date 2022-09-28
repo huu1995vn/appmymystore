@@ -177,30 +177,20 @@ class _NotificationPageState extends State<NotificationPage> {
         backgroundColor: Colors.transparent,
         key: _key,
         body: RxCustomScrollView(
-          appBar: SliverAppBar(
-            iconTheme: IconThemeData(
-              color: AppColors.black, //change your color here
-            ),
+          appBar: SliverAppBar( 
             centerTitle: true,
-            title: Text('notification.text'.tr(),
-                style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-            backgroundColor: AppColors.grey,
-            floating: true,
-            automaticallyImplyLeading: false,
+            title: Text('notification.text'.tr()),   
             elevation: 0.0,
             actions: <Widget>[
               RxIconButton(
-                icon: AppIcons.delete_forever,
+                icon: AppIcons.delete,
                 onTap: _onDeleteAll,
                 size: 40,
+                color: Colors.transparent, colorIcon: Colors.white
               ),
-              SizedBox(
-                width: kDefaultPadding,
-              ),
-              RxIconButton(icon: AppIcons.eye_1, onTap: _onSeen, size: 40),
-              SizedBox(
-                width: kDefaultPadding,
-              )
+              SizedBox(width: kDefaultPadding),
+              RxIconButton(icon: AppIcons.playlist_add_check, onTap: _onSeen, size: 40, color: Colors.transparent, colorIcon: Colors.white),
+              SizedBox(width: kDefaultPadding)
             ],
           ),
           key: const Key("LNoti"),

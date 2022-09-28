@@ -64,15 +64,10 @@ class _MyProductPageState extends State<MyProductPage> {
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
-                SliverAppBar(
-                  iconTheme: IconThemeData(
-                    color: AppColors.black, //change your color here
-                  ),
+                SliverAppBar( 
                   centerTitle: true,
-                  title: Text("manager.raoxe".tr(),
-                      style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-                  elevation: 0.0,
-                  backgroundColor: AppColors.grey,
+                  title: Text("manager.raoxe".tr()),
+                  elevation: 0.0, 
                 ),
                 SliverPersistentHeader(
                   pinned: true,

@@ -133,14 +133,9 @@ class _ContactPageState extends State<ContactPage> {
       backgroundColor: Colors.transparent,
       key: _key,
       body: RxCustomScrollView(
-        appBar: SliverAppBar(
-          iconTheme: IconThemeData(
-            color: AppColors.black, //change your color here
-          ),
+        appBar: SliverAppBar( 
           centerTitle: true,
-          title: Text('address'.tr(),
-              style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-          backgroundColor: AppColors.grey,
+          title: Text('address'.tr()), 
           elevation: 0.0,
         ),
         key: const Key("LContact"),

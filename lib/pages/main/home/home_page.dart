@@ -17,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/pages/main/home/widgets/banner.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import '../../../core/commons/common_configs.dart';
+import '../../../core/utilities/app_colors.dart';
 import 'widgets/item_product.widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -97,7 +99,7 @@ class _HomePageState extends State<HomePage>
     super.build(context);
 
     return Scaffold(
-      key: _homeKey,
+      key: _homeKey,  
       body: RxCustomScrollView(
         key: const Key("lHome"),
         controller: scrollController,
@@ -130,12 +132,12 @@ class _HomePageState extends State<HomePage>
   SliverAppBar _appBar() {
     final theme = Provider.of<ThemeProvider>(context);
     return SliverAppBar(
-      floating: true,
+      floating: true, 
       automaticallyImplyLeading: false,
-      elevation: 0.0,
-      backgroundColor: kPrimaryColor,
+      elevation: 0.0, 
+      // backgroundColor: CommonConfig.isDark ? Colors.black : kPrimaryColor,
       leading: Container(child: null),
-      title: Container(
+      title: Container( 
         alignment: Alignment.center,
         child: Image.asset(LOGORAOXEWHITEIMAGE,
           fit: BoxFit.contain,

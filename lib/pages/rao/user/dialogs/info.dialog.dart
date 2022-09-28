@@ -126,13 +126,9 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
               )
             : CustomScrollView(
                 slivers: <Widget>[
-                  SliverAppBar(
-                    iconTheme: IconThemeData(
-                      color: AppColors.black, //change your color here
-                    ),
+                  SliverAppBar( 
                     expandedHeight: 250.0,
-                    flexibleSpace: Avatar(),
-                    backgroundColor: Colors.transparent,
+                    flexibleSpace: Avatar(), 
                   ),
                   SliverToBoxAdapter(
                       child: Padding(

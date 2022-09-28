@@ -87,23 +87,13 @@ class _SettingsPageState extends State<SettingsPage> {
       backgroundColor: Colors.transparent,
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-            iconTheme: IconThemeData(
-              color: AppColors.black, //change your color here
-            ),
-            title: Text(
-              'setting'.tr(),
-              style: kTextHeaderStyle.copyWith(color: AppColors.black),
-            ),
-            centerTitle: true,
-            backgroundColor: AppColors.grayDark,
+          SliverAppBar( 
+            title: Text('setting'.tr()), 
+            centerTitle: true, 
             elevation: 0.0,
           ),
           SliverFillRemaining(
-              child: Card(
-                  child: Padding(
-                      padding: const EdgeInsets.all(kDefaultPadding),
-                      child: Column(
+              child:   Column(
                         children: [
                           Expanded(
                               child: ListView(
@@ -193,7 +183,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             style: TextStyle().italic,
                           )
                         ],
-                      ))))
+                      ))
         ],
       ),
     );

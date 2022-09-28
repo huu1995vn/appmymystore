@@ -40,9 +40,7 @@ class _NewsPageState extends State<NewsPage> {
           return <Widget>[
             SliverAppBar(
               centerTitle: true,
-              title: Text("news.text".tr(),
-                  style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-              backgroundColor: AppColors.grey,
+              title: Text("news.text".tr()), 
               floating: true,
               automaticallyImplyLeading: false,
               elevation: 0.0,

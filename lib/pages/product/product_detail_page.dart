@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -107,7 +108,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.grey[200],
         body: isNotFound
             ? Expanded(child: Center(child: Text("not.found".tr())))
             : ((data == null || data!.id <= 0)
@@ -123,7 +124,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         elevation: 0.0,
                         actions: <Widget>[
                           RxIconButton(
-                              icon: AppIcons.bookmark_1,
+                              icon: data!.isfavorite ? FontAwesomeIcons.solidBookmark :  FontAwesomeIcons.bookmark,
                               onTap: _onFavorite,
                               size: 40,
                               color: Colors.transparent,
@@ -132,7 +133,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   : AppColors.white),
                           SizedBox(width: kDefaultPadding),
                           RxIconButton(
-                            icon: AppIcons.share_1,
+                            icon: FontAwesomeIcons.solidShareFromSquare,
                             size: 40,
                             color: Colors.transparent,
                             colorIcon: AppColors.white,
@@ -322,26 +323,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   height: 5,
                 ),
                 _listTitle("model".tr(), data!.modelname,
-                    leading:
-                        Icon(AppIcons.turned_in_not, color: AppColors.primary)),
+                    leading: FaIcon(FontAwesomeIcons.car, color: AppColors.primary)),
                 _listTitle("bodytype".tr(), data!.bodytypename,
-                    leading: Icon(AppIcons.directions_car,
+                    leading: FaIcon(FontAwesomeIcons.carSide,
                         color: AppColors.primary)),
                 _listTitle("color".tr(), data!.colorname,
-                    leading: Icon(AppIcons.format_color_fill,
-                        color: AppColors.primary)),
+                    leading: FaIcon(FontAwesomeIcons.palette,color: AppColors.primary)),
                 _listTitle("seat".tr(), data!.seat,
                     leading: Icon(AppIcons.airline_seat_legroom_normal,
                         color: AppColors.primary)),
                 _listTitle("fueltype".tr(), data!.fueltypename,
-                    leading: Icon(AppIcons.opacity, color: AppColors.primary)),
+                    leading: FaIcon(FontAwesomeIcons.gasPump, color: AppColors.primary)),
                 _listTitle("year".tr(), data!.year,
-                    leading: Icon(AppIcons.timer, color: AppColors.primary)),
+                    leading: FaIcon(FontAwesomeIcons.calendar, color: AppColors.primary)),
                 _listTitle("madein".tr(), data!.madeinname,
-                    leading: Icon(AppIcons.vpn_lock, color: AppColors.primary)),
-                _listTitle("status".tr(), data!.statename,
-                    leading: Icon(AppIcons.brightness_low,
-                        color: AppColors.primary)),
+                    leading: FaIcon(FontAwesomeIcons.circleInfo, color: AppColors.primary)), 
               ],
             ),
           ),
@@ -458,11 +454,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         RatingBar.readOnly(
                             filledColor: AppColors.yellow,
                             size: 30,
-                            initialRating: data!.ratingvalue,
+                            //initialRating: data!.ratingvalue,
+                            initialRating: 2.5,
                             isHalfAllowed: true,
-                            emptyIcon: AppIcons.star_1,
-                            filledIcon: AppIcons.star_2,
-                            halfFilledIcon: AppIcons.star_half),
+                            emptyIcon: FontAwesomeIcons.star,
+                            filledIcon: FontAwesomeIcons.solidStar,
+                            halfFilledIcon: FontAwesomeIcons.starHalfStroke,),
                       ],
                     ),
                     SizedBox(

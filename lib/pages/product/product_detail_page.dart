@@ -270,40 +270,35 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                     Row(
                       children: [
-                        Icon(
-                          AppIcons.map_1,
-                          color: AppColors.black50,
-                          size: 13,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Flexible(
-                            child: Text(data!.address ?? "NaN",
-                                style: TextStyle(
-                                    fontSize: 13, color: AppColors.black50)))
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          AppIcons.clock_1,
-                          color: AppColors.black50,
-                          size: 13,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
                         Text(data!.rxtimeago,
                             style: TextStyle(
                                 fontSize: 13, color: AppColors.black50)),
                       ],
-                    )
+                    ),
                   ],
                 ),
+              ),
+            )),
+        Container(
+            color: Colors.white,
+            margin: EdgeInsets.only(bottom: 5),
+            child: Padding(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: Row(
+                children: [
+                  Icon(
+                    AppIcons.map_1,
+                    color: AppColors.black50,
+                    size: 13,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Flexible(
+                      child: Text(data!.address ?? "NaN",
+                          style: TextStyle(
+                              fontSize: 13, color: AppColors.black50)))
+                ],
               ),
             )),
         Container(
@@ -463,7 +458,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         RatingBar.readOnly(
                             filledColor: AppColors.yellow,
                             size: 30,
-                            initialRating: data!.ratingvalue, 
+                            initialRating: data!.ratingvalue,
                             isHalfAllowed: true,
                             emptyIcon: AppIcons.star_1,
                             filledIcon: AppIcons.star_2,
@@ -473,9 +468,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [ 
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       RxButton(
                         icon: Icon(AppIcons.edit),
                         color: Colors.blue,

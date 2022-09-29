@@ -112,7 +112,7 @@ class _UserPageState extends State<UserPage> {
                             ),
                           ),
                           ProductRelated(
-                            title: "product.thesame.post".tr,
+                            title: "news.post".tr,
                             filter: {"UserId": id},
                             scrollDirection: Axis.vertical,
                           )

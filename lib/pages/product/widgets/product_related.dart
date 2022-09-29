@@ -124,7 +124,7 @@ class ReviewState extends State<ProductRelated> {
                 : ItemProductWidget(item);
           },
           key: UniqueKey(),
-          noFound: Center(child: Text("nodatafound".tr)),
+          noFound: Center(child: Text("no.found".tr)),
           scrollDirection: scrollDirection,
         ),
         (scrollDirection != Axis.horizontal &&

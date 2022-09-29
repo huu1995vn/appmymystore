@@ -79,7 +79,7 @@ class RxListViewState extends State<RxSliverList>
                     ),
                   ),
                   Text(
-                    "nodatafound".tr,
+                    "no.found".tr,
                   ),
                 ],
               ),

@@ -50,7 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: user == null
           ? Expanded(
               child: Center(
-              child: Text("nodatafound".tr),
+              child: Text("no.found".tr),
             ))
           : SingleChildScrollView(
               child: Padding(
@@ -114,11 +114,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     onChanged: (v) => {user!.phone = v},
                     validator: (v) {
                       if (v == null || !v.isNotEmpty) {
-                        return "notempty.phone".tr;
+                        return "notempty.password".tr;
                       } else {
                         return CommonMethods.checkStringPhone(v)
                             ? null
-                            : "invalid.phone".tr;
+                            : throw "invalid.phone".tr;
+                        ;
                       }
                     }),
                 RxInput(

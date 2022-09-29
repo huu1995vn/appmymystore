@@ -126,7 +126,8 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                                     } else {
                                       return CommonMethods.checkStringPhone(v)
                                           ? null
-                                          : "invalid.phone".tr;
+                                          : throw "invalid.phone".tr;
+                                      ;
                                     }
                                   }),
                               rxSelectInput(context, "city", data!.cityid,

@@ -112,7 +112,6 @@ flutter:
     - assets/images/icons/
     - assets/images/intro/
     - assets/css/dailyxe.css
-    - assets/translations/
   fonts:
   - family: AppIcons
     fonts:

@@ -156,7 +156,7 @@ class _FilterDialogState extends State<FilterDialog> {
                         ).toList()),
                   ),
                 ),
-                _header("generalinfor".tr),
+                _header("general.info".tr),
                 Card(
                   child: Column(
                     children: [

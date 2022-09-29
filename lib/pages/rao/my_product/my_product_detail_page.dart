@@ -302,7 +302,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       },
                                     ).toList()),
                               ),
-                              _header(title: "generalinfor".tr),
+                              _header(title: "general.info".tr),
                               Card(
                                 child: Column(
                                   children: [

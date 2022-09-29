@@ -115,9 +115,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     onChanged: (v) => {
                           setState(() => {password = v})
                         },
-                    validator: Validators.compose([
-                      Validators.required("notempty.password".tr),
-                    ])),
+                    validator: Validators.compose(
+                        [Validators.required("notempty.password".tr)])),
                 RxInput(passwordAgain,
                     isPassword: true,
                     labelText: "password.again".tr,

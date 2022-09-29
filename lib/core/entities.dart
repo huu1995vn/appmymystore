@@ -408,7 +408,7 @@ class ProductModel extends Entity {
 
   String get rxprice {
     try {
-      return NumberFormat.decimalPattern().format(price);
+      return CommonMethods.formatShortCurrency(price);
     } catch (e) {
       return "Liên hệ";
     }

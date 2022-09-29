@@ -48,9 +48,9 @@ class _MyProductPageState extends State<MyProductPage> {
         item: ProductModel(), onChanged: (v) => {loadData()});
     if (res != null) {
       setState(() {
-      tabs = [];
-      tabviews = [];
-    });
+        tabs = [];
+        tabviews = [];
+      });
       loadData();
     }
   }
@@ -58,41 +58,39 @@ class _MyProductPageState extends State<MyProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.grey[200],
         body: DefaultTabController(
           length: tabs.length,
           child: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar( 
-                  centerTitle: true,
-                  title: Text("manager.raoxe".tr()),
-                  elevation: 0.0, 
-                ),
-                SliverPersistentHeader(
-                  pinned: true,
-                  delegate: RxSliverAppBarTabDelegate(
-                    child: PreferredSize(
-                      preferredSize: Size.fromHeight(45.0),
-                      child: Container(
-                        color: Colors.white,
-                        child: TabBar(
-                          isScrollable: true,
-                          labelColor: AppColors.primary,
-                          unselectedLabelColor: AppColors.black50,
-                          indicatorColor: AppColors.primary,
-                          tabs: tabs,
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return <Widget>[
+                  SliverAppBar(
+                    centerTitle: true,
+                    title: Text("manager.raoxe".tr()),
+                    elevation: 0.0,
+                  ),
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: RxSliverAppBarTabDelegate(
+                      child: PreferredSize(
+                        preferredSize: Size.fromHeight(45.0),
+                        child: Container(
+                          color: Colors.white,
+                          child: TabBar(
+                            isScrollable: true,
+                            labelColor: AppColors.primary,
+                            unselectedLabelColor: AppColors.black50,
+                            indicatorColor: AppColors.primary,
+                            tabs: tabs,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ];
-            },
-            body: TabBarView(
-              children: tabviews,
-            ),
-          ),
+                ];
+              },
+              body: TabBarView(children: tabviews)),
         ),
         persistentFooterButtons: [
           RxPrimaryButton(

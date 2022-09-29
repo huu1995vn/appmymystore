@@ -69,6 +69,7 @@ class ItemProductWidget extends StatelessWidget {
                               lenimg >= 9 ? "9+" : lenimg.toString(),
                               style: kTextSubTitleStyle.copyWith(
                                   fontStyle: FontStyle.normal,
+                                  fontSize: 12,
                                   color: AppColors.black),
                               //     .bold,
                             ))),
@@ -93,19 +94,40 @@ class ItemProductWidget extends StatelessWidget {
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 16,
                                     ),
                                   ),
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text(
-                                    CommonMethods.formatShortCurrency(
-                                        item.price),
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      color: AppColors.primary,
-                                    ).bold,
+                                  Row(
+                                    children: [
+                                      Text(
+                                        CommonMethods.formatShortCurrency(
+                                            item.price),
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          color: AppColors.primary,
+                                        ).bold,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            color: item!.state == 1
+                                                ? Colors.blue
+                                                : Colors.yellow,
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 4),
+                                          child: Text(item!.statename,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: item!.state == 1 ? Colors.white : Colors.black)))
+                                    ],
                                   ),
                                   if (item.status > 2 && item.reject != null)
                                     Text(
@@ -143,12 +165,12 @@ class ItemProductWidget extends StatelessWidget {
                                 if (item.userid != APITokenService.userId)
                                   RxIconButton(
                                     icon: item.isfavorite
-                                        ? FontAwesomeIcons.solidHeart
-                                        : FontAwesomeIcons.heart,
+                                        ? FontAwesomeIcons.solidBookmark
+                                        : FontAwesomeIcons.bookmark,
                                     onTap: onFavorite,
-                                    size: 40,
+                                    size: 35,
                                     colorIcon: item.isfavorite
-                                        ? AppColors.orange
+                                        ? AppColors.yellow
                                         : AppColors.secondary,
                                   )
                               ],

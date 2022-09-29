@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -108,94 +109,97 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[200],
-        body: isNotFound
-            ? Expanded(child: Center(child: Text("not.found".tr())))
-            : ((data == null || data!.id <= 0)
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : RxCustomScrollView(
-                    key: const Key("iProduct"),
-                    controller: scrollController,
-                    slivers: <Widget>[
-                      SliverAppBar(
-                        title: Text(data!.name ?? "updating".tr()),
-                        elevation: 0.0,
-                        actions: <Widget>[
-                          RxIconButton(
-                              icon: data!.isfavorite
-                                  ? FontAwesomeIcons.solidBookmark
-                                  : FontAwesomeIcons.bookmark,
-                              onTap: _onFavorite,
-                              size: 40,
-                              color: Colors.transparent,
-                              colorIcon: data!.isfavorite
-                                  ? AppColors.yellow
-                                  : AppColors.white),
-                          SizedBox(width: kDefaultPadding),
-                          RxIconButton(
-                            icon: FontAwesomeIcons.solidShareFromSquare,
-                            size: 40,
-                            color: Colors.transparent,
-                            colorIcon: AppColors.white,
-                            onTap: _onShare,
-                          ),
-                          SizedBox(width: kDefaultPadding),
-                        ],
-                      ),
-                      SliverToBoxAdapter(child: _buildDetail())
-                    ],
-                  )),
-        bottomNavigationBar: Container(
-            padding: EdgeInsets.all(0.0),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 6,
-                  child: GestureDetector(
-                      onTap: () => {CommonMethods.call(data!.phone!)},
-                      child: Container(
-                          height: 50,
-                          padding: EdgeInsets.all(10),
-                          color: Colors.green,
-                          alignment: Alignment.center,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                AppIcons.call,
-                                color: Colors.white,
-                                size: 25,
+            backgroundColor: Colors.grey[200],
+            body: isNotFound
+                ? Expanded(child: Center(child: Text("not.found".tr())))
+                : ((data == null || data!.id <= 0)
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : RxCustomScrollView(
+                        key: const Key("iProduct"),
+                        controller: scrollController,
+                        slivers: <Widget>[
+                          SliverAppBar(
+                            title: Text(data!.name ?? "updating".tr()),
+                            elevation: 0.0, 
+                            actions: <Widget>[
+                              RxIconButton(
+                                  icon: data!.isfavorite
+                                      ? FontAwesomeIcons.solidBookmark
+                                      : FontAwesomeIcons.bookmark,
+                                  onTap: _onFavorite,
+                                  size: 40,
+                                  color: Colors.transparent,
+                                  colorIcon: data!.isfavorite
+                                      ? AppColors.yellow
+                                      : AppColors.white),
+                              SizedBox(width: kDefaultPadding),
+                              RxIconButton(
+                                icon: FontAwesomeIcons.solidShareFromSquare,
+                                size: 40,
+                                color: Colors.transparent,
+                                colorIcon: AppColors.white,
+                                onTap: _onShare,
                               ),
                               SizedBox(width: kDefaultPadding),
-                              Text(
-                                "call".tr() + ": " + (data!.phone)!,
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white),
-                              )
                             ],
-                          ))),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: GestureDetector(
-                      onTap: () => {CommonMethods.chatZalo(data!.phone!)},
-                      child: Container(
-                          height: 50,
-                          padding: EdgeInsets.all(5),
-                          color: Colors.grey[100],
-                          alignment: Alignment.center,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(AppIcons.chat_1, color: Colors.grey[700]),
-                              Text("chatzalo".tr())
-                            ],
-                          ))),
-                ),
-              ],
-            )));
+                          ),
+                          SliverToBoxAdapter(child: _buildDetail())
+                        ],
+                      )),
+            bottomNavigationBar: Container(
+                padding: EdgeInsets.all(0.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 6,
+                      child: GestureDetector(
+                          onTap: () => {CommonMethods.call(data!.phone!)},
+                          child: Container(
+                              height: 50,
+                              padding: EdgeInsets.all(10),
+                              color: Colors.green,
+                              alignment: Alignment.center,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.phone,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                  SizedBox(width: kDefaultPadding),
+                                  Text(
+                                    "call".tr() + ": " + (data!.phone)!,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ))),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: GestureDetector(
+                          onTap: () => {CommonMethods.chatZalo(data!.phone!)},
+                          child: Container(
+                              height: 50,
+                              padding: EdgeInsets.all(5),
+                              color: Colors.grey[100],
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FaIcon(FontAwesomeIcons.comment,
+                                      color: Colors.grey[700]),
+                                  Text("chatzalo".tr())
+                                ],
+                              ))),
+                    ),
+                  ],
+                )));
   }
 
   Widget _listTitle(String title, dynamic subtitle, {Widget? leading}) {
@@ -242,15 +246,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         style: kTextHeaderStyle.copyWith(fontSize: 20),
                         maxLines: 2),
                     SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                            CommonMethods.formatNumber(
-                                data!.price ?? "negotiate".tr()),
-                            style: kTextPriceStyle.copyWith(fontSize: 18)),
+                        Text(data!.rxprice ?? "negotiate".tr(),
+                            style: kTextPriceStyle.copyWith(fontSize: 25)),
                         SizedBox(
                           width: 10,
                         ),
@@ -269,7 +271,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ],
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     Row(
                       children: [

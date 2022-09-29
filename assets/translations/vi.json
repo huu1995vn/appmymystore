@@ -1,6 +1,7 @@
 {
   "product": {
     "thesame":{
+      "suggest": "Gợi ý cho bạn",
       "post": "Tin đã đăng",
       "brand": "Tin cùng thương hiệu",
       "price": "Tin giá tương đương",
@@ -20,6 +21,7 @@
   "km": "Số Km đã đi",
   "color": "Màu sắc",
   "review": "Đánh giá",
+  "writereview": "Viết đánh giá",
   "favorite": "Yêu thích",
   "text-search": "Từ khóa tìm kiếm",
   "congratulations": "Chúc mừng",
@@ -340,6 +342,8 @@
   "raoxe": "Rao",
   "notification": "Thông báo",
   "call": "Gọi",
+  "callnow": "Gọi ngay",
+  "chatzalo": "Chat Zalo",
   "sell": "Mua",
   "buy": "Bán",
   "copylink": "Sao chép liên kết",

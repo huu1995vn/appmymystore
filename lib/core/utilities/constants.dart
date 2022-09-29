@@ -44,6 +44,7 @@ const TextStyle kTextSubTitleStyle = TextStyle(
     fontSize: 12);
 const kTextPriceStyle = TextStyle(
   fontWeight: FontWeight.bold,
+  fontSize: 20,
   color: AppColors.primary,
 );
 const kTextTimeStyle = TextStyle(

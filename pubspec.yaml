@@ -77,8 +77,8 @@ dependencies:
   share_plus: #Used for share
   fluttertoast: #Used for toast
   overlay_support: #Used for showSimpleNotification
-  font_awesome_flutter: #icon 
-  
+  font_awesome_flutter:  
+
 dev_dependencies:
   build_runner: # Used for code generation libraries
   json_serializable: # Used for code generation libraries

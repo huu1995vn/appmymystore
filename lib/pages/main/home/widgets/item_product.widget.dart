@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
+import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
@@ -17,7 +19,14 @@ class ItemProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int lenimg = item.rximglist.length;
-    return Card(
+    return Container(
+      padding: EdgeInsets.only(top: 10, bottom: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          bottom: BorderSide(width: 1, color: Colors.black12),
+        ),
+      ),
       child: GestureDetector(
         onTap: onTap,
         child: SizedBox(
@@ -25,52 +34,48 @@ class ItemProductWidget extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(5),
-                      topLeft: Radius.circular(5)),
-                  child: Stack(
-                    children: <Widget>[
-                      RxImage(item.rximg, width: SizeConfig.screenWidth / 4),
-                      if (lenimg > 0)
-                        Positioned(
-                          top: 5,
-                          right: 5,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              border: Border.all(color: AppColors.black50),
-                              color: AppColors.grey,
-                            ),
-                            child: SizedBox(
-                                height: 15, width: 20, child: Container()),
-                          ),
+              Stack(
+                children: <Widget>[
+                  RxImage(item.rximg, width: SizeConfig.screenWidth / 4),
+                  if (lenimg > 0)
+                    Positioned(
+                      top: 5,
+                      right: 5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          border: Border.all(color: AppColors.black50),
+                          color: AppColors.grey,
                         ),
-                      if (lenimg > 0)
-                        Positioned(
-                          top: 3,
-                          right: 3,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              border: Border.all(color: AppColors.black50),
-                              color: AppColors.grey,
-                            ),
-                            child: SizedBox(
-                                height: 15,
-                                width: 20,
-                                child: Center(
-                                    child: Text(
-                                  lenimg >= 9 ? "9+" : lenimg.toString(),
-                                  style: kTextSubTitleStyle.copyWith(
-                                      fontStyle: FontStyle.normal,
-                                      color: AppColors.black),
-                                  //     .bold,
-                                ))),
-                          ),
+                        child:
+                            SizedBox(height: 15, width: 20, child: Container()),
+                      ),
+                    ),
+                  if (lenimg > 0)
+                    Positioned(
+                      top: 3,
+                      right: 3,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          border: Border.all(color: AppColors.black50),
+                          color: AppColors.grey,
                         ),
-                    ],
-                  )),
+                        child: SizedBox(
+                            height: 15,
+                            width: 20,
+                            child: Center(
+                                child: Text(
+                              lenimg >= 9 ? "9+" : lenimg.toString(),
+                              style: kTextSubTitleStyle.copyWith(
+                                  fontStyle: FontStyle.normal,
+                                  color: AppColors.black),
+                              //     .bold,
+                            ))),
+                      ),
+                    ),
+                ],
+              ),
               Expanded(
                 child: Padding(
                     padding: kEdgeInsetsPadding,
@@ -88,12 +93,17 @@ class ItemProductWidget extends StatelessWidget {
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
-                                        // fontSize: 36,
-                                        ),
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
                                   ),
                                   Text(
-                                    item.rxprice,
+                                    CommonMethods.formatShortCurrency(
+                                        item.price),
                                     style: const TextStyle(
+                                      fontSize: 18,
                                       color: AppColors.primary,
                                     ).bold,
                                   ),
@@ -110,17 +120,35 @@ class ItemProductWidget extends StatelessWidget {
                               // spacing: kDefaultPadding,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(item.rxtimeago, style: kTextTimeStyle),
-                                Text(
-                                  item.cityname ?? "NaN",
-                                  style: kTextSubTitleStyle,
+                                Row(
+                                  children: [
+                                    Text(item.rxtimeago, style: kTextTimeStyle),
+                                    SizedBox(width: 7),
+                                    Container(
+                                      width: 3,
+                                      height: 3,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    SizedBox(width: 7),
+                                    Text(
+                                      item.cityname ?? "NaN",
+                                      style: kTextSubTitleStyle,
+                                    ),
+                                  ],
                                 ),
                                 if (item.userid != APITokenService.userId)
                                   RxIconButton(
-                                    icon: AppIcons.heart_1,
+                                    icon: item.isfavorite
+                                        ? FontAwesomeIcons.solidHeart
+                                        : FontAwesomeIcons.heart,
                                     onTap: onFavorite,
+                                    size: 40,
                                     colorIcon: item.isfavorite
-                                        ? AppColors.primary
+                                        ? AppColors.orange
                                         : AppColors.secondary,
                                   )
                               ],

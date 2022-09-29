@@ -124,7 +124,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         elevation: 0.0,
                         actions: <Widget>[
                           RxIconButton(
-                              icon: data!.isfavorite ? FontAwesomeIcons.solidBookmark :  FontAwesomeIcons.bookmark,
+                              icon: data!.isfavorite
+                                  ? FontAwesomeIcons.solidBookmark
+                                  : FontAwesomeIcons.bookmark,
                               onTap: _onFavorite,
                               size: 40,
                               color: Colors.transparent,
@@ -323,21 +325,26 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   height: 5,
                 ),
                 _listTitle("model".tr(), data!.modelname,
-                    leading: FaIcon(FontAwesomeIcons.car, color: AppColors.primary)),
+                    leading:
+                        FaIcon(FontAwesomeIcons.car, color: AppColors.primary)),
                 _listTitle("bodytype".tr(), data!.bodytypename,
                     leading: FaIcon(FontAwesomeIcons.carSide,
                         color: AppColors.primary)),
                 _listTitle("color".tr(), data!.colorname,
-                    leading: FaIcon(FontAwesomeIcons.palette,color: AppColors.primary)),
+                    leading: FaIcon(FontAwesomeIcons.palette,
+                        color: AppColors.primary)),
                 _listTitle("seat".tr(), data!.seat,
                     leading: Icon(AppIcons.airline_seat_legroom_normal,
                         color: AppColors.primary)),
                 _listTitle("fueltype".tr(), data!.fueltypename,
-                    leading: FaIcon(FontAwesomeIcons.gasPump, color: AppColors.primary)),
+                    leading: FaIcon(FontAwesomeIcons.gasPump,
+                        color: AppColors.primary)),
                 _listTitle("year".tr(), data!.year,
-                    leading: FaIcon(FontAwesomeIcons.calendar, color: AppColors.primary)),
+                    leading: FaIcon(FontAwesomeIcons.calendar,
+                        color: AppColors.primary)),
                 _listTitle("madein".tr(), data!.madeinname,
-                    leading: FaIcon(FontAwesomeIcons.circleInfo, color: AppColors.primary)), 
+                    leading: FaIcon(FontAwesomeIcons.circleInfo,
+                        color: AppColors.primary)),
               ],
             ),
           ),
@@ -420,6 +427,29 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               ])),
                     ],
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RxIconButton(
+                          icon: data!.isfavorite
+                              ? FontAwesomeIcons.solidBookmark
+                              : FontAwesomeIcons.bookmark,
+                          onTap: _onFavorite,
+                          size: 40,
+                          color: Colors.black45,
+                          colorIcon: data!.isfavorite
+                              ? AppColors.yellow
+                              : AppColors.white),
+                      SizedBox(width: kDefaultPadding),
+                      RxIconButton(
+                        icon: FontAwesomeIcons.solidShareFromSquare,
+                        size: 40,
+                        color: Colors.black45,
+                        colorIcon: AppColors.white,
+                        onTap: _onShare,
+                      ),
+                    ],
+                  )
                 ],
               )),
         ),
@@ -452,14 +482,16 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           width: 10,
                         ),
                         RatingBar.readOnly(
-                            filledColor: AppColors.yellow,
-                            size: 30,
-                            //initialRating: data!.ratingvalue,
-                            initialRating: 2.5,
-                            isHalfAllowed: true,
-                            emptyIcon: FontAwesomeIcons.star,
-                            filledIcon: FontAwesomeIcons.solidStar,
-                            halfFilledIcon: FontAwesomeIcons.starHalfStroke,),
+                          filledColor: AppColors.yellow,
+                          emptyColor: AppColors.yellow,
+                          size: 30,
+                          //initialRating: data!.ratingvalue,
+                          initialRating: 2.5,
+                          isHalfAllowed: true,
+                          emptyIcon: FontAwesomeIcons.star,
+                          filledIcon: FontAwesomeIcons.solidStar,
+                          halfFilledIcon: FontAwesomeIcons.starHalfStroke,
+                        ),
                       ],
                     ),
                     SizedBox(

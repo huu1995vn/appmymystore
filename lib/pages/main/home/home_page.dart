@@ -99,7 +99,8 @@ class _HomePageState extends State<HomePage>
     super.build(context);
 
     return Scaffold(
-      key: _homeKey,  
+      key: _homeKey,
+      backgroundColor: Colors.white,
       body: RxCustomScrollView(
         key: const Key("lHome"),
         controller: scrollController,
@@ -132,14 +133,15 @@ class _HomePageState extends State<HomePage>
   SliverAppBar _appBar() {
     final theme = Provider.of<ThemeProvider>(context);
     return SliverAppBar(
-      floating: true, 
+      floating: true,
       automaticallyImplyLeading: false,
-      elevation: 0.0, 
+      elevation: 0.0,
       // backgroundColor: CommonConfig.isDark ? Colors.black : kPrimaryColor,
       leading: Container(child: null),
-      title: Container( 
+      title: Container(
         alignment: Alignment.center,
-        child: Image.asset(LOGORAOXEWHITEIMAGE,
+        child: Image.asset(
+          LOGORAOXEWHITEIMAGE,
           fit: BoxFit.contain,
           alignment: Alignment.center,
           height: 35,
@@ -148,7 +150,13 @@ class _HomePageState extends State<HomePage>
       actions: <Widget>[
         Padding(
             padding: const EdgeInsets.only(right: kDefaultPadding),
-            child: RxIconButton(onTap: _onSearch, icon: AppIcons.magnifier, size: 40, color: Colors.transparent, colorIcon: Colors.white,))
+            child: RxIconButton(
+              onTap: _onSearch,
+              icon: AppIcons.magnifier,
+              size: 40,
+              color: Colors.transparent,
+              colorIcon: Colors.white,
+            ))
       ],
     );
   }
@@ -166,8 +174,12 @@ _buildTitle(String header, void Function()? onTap) {
     padding: const EdgeInsets.all(kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(header.toUpperCase(), style: const TextStyle().bold),
-      RxIconButton(onTap: onTap, icon: AppIcons.chevron_right)
-      
+      Row(
+        children: [
+          Text("seemore".tr(), style: const TextStyle().bold),
+          RxIconButton(onTap: onTap, icon: AppIcons.chevron_right)
+        ],
+      )
     ]),
   );
 }

@@ -30,7 +30,7 @@ class RxImage extends StatelessWidget {
         NOIMAGE,
         fit: fit,
         width: width,
-        height: height,
+        height: height, 
       );
     }
     if (CommonMethods.isURl(url)) {

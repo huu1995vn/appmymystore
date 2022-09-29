@@ -134,19 +134,19 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(
-            color: AppColors.black, //change your color here
-          ),
+        appBar: AppBar( 
           title: SearchAppBar(
             paramsSearch: paramsSearch ?? {},
             onChanged: _onChanged,
           ),
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
+          elevation: 0.0, 
         ),
         key: _key,
-        body: RxCustomScrollView(
+        backgroundColor: Colors.white,
+        body: Container(
+          padding: EdgeInsets.all(0),
+          child: RxCustomScrollView(
+          
           // ignore: prefer_const_literals_to_create_immutables
           slivers: [
             SliverToBoxAdapter(
@@ -163,6 +163,7 @@ class _ProductPageState extends State<ProductPage> {
           key: const Key("LProcduct"),
           onNextScroll: onNextPage,
           onRefresh: onRefresh,
-        ));
+        )
+        ) );
   }
 }

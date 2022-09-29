@@ -40,7 +40,6 @@ dependencies:
   dio:  # Used for call api
   provider:  # Used for custome theme
   localstorage: # Used for save local data
-  easy_localization: # Used for language
   flutter_launcher_icons: # Used for build icon
   splashscreen: # Used for splashscreen
   wc_form_validators: # Used for form validators

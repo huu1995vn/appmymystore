@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
@@ -60,7 +60,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   return <Widget>[
                     SliverAppBar(
                       centerTitle: true,
-                      title: Text("Mở rộng"),
+                      title: Text("expand".tr),
                       elevation: 0.0,
                       actions: <Widget>[
                         TextButton(
@@ -68,7 +68,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             AuthService.logout(context);
                           },
                           child: Text(
-                            "Đăng xuất",
+                            "logout".tr,
                             style: TextStyle(color: Colors.white),
                           ),
                         )
@@ -89,7 +89,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           _card(
                             child: ListTile(
-                              title: Text("manager.raoxe".tr()),
+                              title: Text("manager.raoxe".tr),
                               leading: Icon(
                                 AppIcons.bullhorn,
                               ),
@@ -103,7 +103,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           _card(
                             child: ListTile(
-                              title: Text("ads".tr()),
+                              title: Text("ads".tr),
                               leading: Icon(
                                 AppIcons.rss_feed,
                               ),
@@ -117,7 +117,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           _card(
                             child: ListTile(
-                              title: Text("contact".tr()),
+                              title: Text("contact".tr),
                               leading: Icon(
                                 AppIcons.envelope,
                               ),
@@ -130,7 +130,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           _card(
                             child: ListTile(
-                              title: Text("favorite".tr()),
+                              title: Text("favorite".tr),
                               leading: Icon(
                                 AppIcons.heart_1,
                               ),
@@ -143,7 +143,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           _card(
                             child: ListTile(
-                              title: Text("review".tr()),
+                              title: Text("review".tr),
                               leading: Icon(
                                 AppIcons.star_1,
                               ),
@@ -157,7 +157,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           _card(
                             child: ListTile(
-                              title: Text("address".tr()),
+                              title: Text("address".tr),
                               leading: Icon(
                                 AppIcons.map_marker,
                               ),
@@ -178,7 +178,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         child: Column(children: [
                           _card(
                             child: ListTile(
-                              title: Text("Cài đặt"),
+                              title: Text("setting".tr),
                               leading: Icon(
                                 AppIcons.cog_1,
                               ),

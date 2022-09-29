@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -48,9 +48,9 @@ class _MyProductPageState extends State<MyProductPage> {
         item: ProductModel(), onChanged: (v) => {loadData()});
     if (res != null) {
       setState(() {
-      tabs = [];
-      tabviews = [];
-    });
+        tabs = [];
+        tabviews = [];
+      });
       loadData();
     }
   }
@@ -64,10 +64,10 @@ class _MyProductPageState extends State<MyProductPage> {
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
-                SliverAppBar( 
+                SliverAppBar(
                   centerTitle: true,
-                  title: Text("manager.raoxe".tr()),
-                  elevation: 0.0, 
+                  title: Text("manager.raoxe".tr),
+                  elevation: 0.0,
                 ),
                 SliverPersistentHeader(
                   pinned: true,
@@ -96,9 +96,7 @@ class _MyProductPageState extends State<MyProductPage> {
         ),
         persistentFooterButtons: [
           RxPrimaryButton(
-              onTap: onAdd,
-              icon: Icon(AppIcons.plus_circle),
-              text: "add.text".tr())
+              onTap: onAdd, icon: Icon(AppIcons.plus_circle), text: "add".tr)
         ]);
   }
 }

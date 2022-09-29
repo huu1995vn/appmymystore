@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -47,8 +47,9 @@ class NewsDetailPageState extends State<NewsDetailPage> {
   Widget build(BuildContext context) {
     return RxWebView(
       url: initialUrl,
-      javaScriptString: '''document.querySelectorAll("section.header, section.get-info, section.footer-info, .breadcrumb, .navbar-custom, .navbar-bottom").forEach(e => e.remove());''',
-      title: "news.text".tr(),
+      javaScriptString:
+          '''document.querySelectorAll("section.header, section.get-info, section.footer-info, .breadcrumb, .navbar-custom, .navbar-bottom").forEach(e => e.remove());''',
+      title: "news".tr,
     );
   }
 }

@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, import_of_legacy_library_into_null_safe
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -72,7 +72,7 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -99,7 +99,7 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
             color: AppColors.black, //change your color here
           ),
           centerTitle: true,
-          title: Text('review'.tr(),
+          title: Text('review'.tr,
               style: kTextHeaderStyle.copyWith(color: AppColors.black)),
           backgroundColor: AppColors.grey,
           elevation: 0.0,

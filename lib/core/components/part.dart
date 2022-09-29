@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -235,7 +235,7 @@ Widget RxNoFound({required String urlImage, String? message}) {
           height: 10,
         ),
         Text(
-          message ?? "nodatafound".tr(),
+          message ?? "nodatafound".tr,
           textAlign: TextAlign.center,
         ),
       ],
@@ -256,11 +256,11 @@ Widget RxLoginAccountLabel(context) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'message.str006'.tr(),
+              'message.str006'.tr,
               style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
             Text(
-              "login".tr(),
+              "login".tr,
               style: const TextStyle(
                   color: AppColors.primary500,
                   fontSize: 13,
@@ -542,10 +542,10 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
     title: title ??
         RichText(
           text: TextSpan(
-            // text: lableText ?? type.tr(),
+            // text: lableText ?? type.tr,
             children: <TextSpan>[
               TextSpan(
-                  text: labelText ?? type.tr(),
+                  text: labelText ?? type.tr,
                   style: kTextTitleStyle.copyWith(
                       color: Theme.of(context).textTheme.bodyText1!.color)),
               if (validator != null)
@@ -559,7 +559,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
     subtitle: RxInput(name,
         isBorder: isBorder,
         readOnly: true,
-        hintText: hintText ?? "choose.text".tr(),
+        hintText: hintText ?? "choose".tr,
         style: TextStyle(
                 color:
                     name != null && name.isNotEmpty ? AppColors.primary : null)

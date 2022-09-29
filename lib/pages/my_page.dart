@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_null_comparison, use_build_context_synchronously
 
 import 'dart:async';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
@@ -99,7 +99,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
                     onTap: () {
                       onDetailNotification(message);
                     },
-                    child: Text("detail".tr(),
+                    child: Text("detail".tr,
                         style: TextStyle(color: AppColors.info))),
               );
             }
@@ -183,7 +183,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
           if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
           } else {
-            CommonMethods.showToast("please.login".tr());
+            CommonMethods.showToast("please.login".tr);
           }
         },
         shape: RoundedRectangleBorder(
@@ -203,14 +203,14 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               RxButtonBar(
-                icon: const Icon(AppIcons.bullhorn, size: 17), 
+                icon: const Icon(AppIcons.bullhorn, size: 17),
                 isEnable: _selectedIndex == 0,
                 onPressed: () {
                   onPressedTab(0);
                 },
               ),
               RxButtonBar(
-                icon: Icon(AppIcons.earth, size: 17), 
+                icon: Icon(AppIcons.earth, size: 17),
                 isEnable: _selectedIndex == 1,
                 onPressed: () {
                   onPressedTab(1);
@@ -221,7 +221,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
               ),
               Stack(children: <Widget>[
                 RxButtonBar(
-                  icon: Icon(AppIcons.alarm, size: 19), 
+                  icon: Icon(AppIcons.alarm, size: 19),
                   isEnable: _selectedIndex == 2,
                   onPressed: () {
                     onPressedTab(2);
@@ -253,7 +253,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
                   )
               ]),
               RxButtonBar(
-                icon: const Icon(AppIcons.more_horiz, size: 17), 
+                icon: const Icon(AppIcons.more_horiz, size: 17),
                 isEnable: _selectedIndex == 3,
                 onPressed: () {
                   onPressedTab(3);

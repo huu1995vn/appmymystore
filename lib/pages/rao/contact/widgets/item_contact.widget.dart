@@ -1,6 +1,6 @@
 // ignore_for_file: unrelated_type_equality_checks
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:raoxe/app_icons.dart';
@@ -37,14 +37,14 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
               backgroundColor: AppColors.danger,
               foregroundColor: Colors.white,
               icon: AppIcons.trash_1,
-              label: 'delete.text'.tr(),
+              label: 'delete.text'.tr,
             ),
             SlidableAction(
               onPressed: widget.onDefault,
               backgroundColor: AppColors.info,
               foregroundColor: Colors.white,
               icon: AppIcons.checkmark_cicle,
-              label: 'default'.tr(),
+              label: 'default'.tr,
             ),
           ],
         ),
@@ -53,7 +53,11 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
         // component is not dragged.
         child: Card(
             child: ListTile(
-                leading: RxIconButton(icon: AppIcons.map_marker, colorIcon: AppColors.blue, size: 45,),
+                leading: RxIconButton(
+                  icon: AppIcons.map_marker,
+                  colorIcon: AppColors.blue,
+                  size: 45,
+                ),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -61,10 +65,11 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
                       widget.item.fullname ?? "",
                       overflow: TextOverflow.ellipsis,
                     ),
-                   if(widget.item.isdefault) Text(
-                      "default".tr(),
-                      style: const TextStyle(color: AppColors.info),
-                    )
+                    if (widget.item.isdefault)
+                      Text(
+                        "default".tr,
+                        style: const TextStyle(color: AppColors.info),
+                      )
                   ],
                 ),
                 // isThreeLine: true,

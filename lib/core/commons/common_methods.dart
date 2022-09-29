@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:crypto/crypto.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:new_version/new_version.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -172,7 +173,7 @@ class CommonMethods {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(title ?? "notification".tr()),
+            title: Text(title ?? "notification".tr),
             content: content != null
                 ? Text(
                     content,
@@ -183,13 +184,13 @@ class CommonMethods {
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
                 child: Text(
-                  "cancel".tr().toUpperCase(),
+                  "cancel".tr.toUpperCase(),
                   style: const TextStyle(color: AppColors.black50),
                 ),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: Text("ok".tr().toUpperCase()),
+                child: Text("ok".tr.toUpperCase()),
               )
             ],
           );
@@ -204,13 +205,13 @@ class CommonMethods {
     } catch (e) {}
     return await Dialogs.materialDialog(
         msg: message,
-        title: title ?? "notification".tr(),
+        title: title ?? "notification".tr,
         context: context,
         actions: actions ??
             [
               TextButton(
                 onPressed: () => CommonNavigates.goBack(context),
-                child: Text("ok".tr().toUpperCase()),
+                child: Text("ok".tr.toUpperCase()),
               )
             ]);
   }
@@ -218,9 +219,7 @@ class CommonMethods {
   static Future<void> showDialogInfo(BuildContext context, String pmsg,
       {List<Widget>? actions}) async {
     return await materialDialog(context, pmsg,
-        title: "notification.text".tr(),
-        actions: actions,
-        color: AppColors.info);
+        title: "notification".tr, actions: actions, color: AppColors.info);
   }
 
   static Future<void> showDialogError(BuildContext context, dynamic pmsg,
@@ -247,13 +246,13 @@ class CommonMethods {
     return await Dialogs.materialDialog(
         color: AppColors.white,
         msg: pmsg.toString(),
-        title: "congratulations".tr(),
+        title: "congratulations".tr,
         lottieBuilder: Lottie.asset(
           'assets/congratulations.json',
           fit: BoxFit.contain,
         ),
         context: context,
-        actions: [RxPrimaryButton(onTap: () {}, text: "done".tr())]);
+        actions: [RxPrimaryButton(onTap: () {}, text: "done".tr)]);
   }
 
   static String buildUrlImage(int idHinh,
@@ -294,7 +293,7 @@ class CommonMethods {
 
   static lockScreen() {
     EasyLoading.show(
-        status: "${"awaiting".tr()}...", maskType: EasyLoadingMaskType.custom);
+        status: "${"awaiting".tr}...", maskType: EasyLoadingMaskType.custom);
   }
 
   static unlockScreen() {
@@ -327,11 +326,11 @@ class CommonMethods {
       d = date is DateTime ? date : DateTime.parse(date);
       return DateFormat(pattern).format(d);
     } catch (e) {}
-    return "not.update".tr();
+    return "not.update".tr;
   }
 
   static String timeagoFormat(DateTime? time) {
-    var strTimeAgo = "updating".tr();
+    var strTimeAgo = "updating".tr;
     if (time == null) return strTimeAgo;
     if (time.toString() == "") return strTimeAgo;
     try {
@@ -357,14 +356,14 @@ class CommonMethods {
     try {
       return shortCurrency.format(amount);
     } catch (e) {}
-    return "not.update".tr();
+    return "not.update".tr;
   }
 
   static formatNumber(dynamic amount) {
     try {
       return NumberFormat.decimalPattern().format(int.parse(amount.toString()));
     } catch (e) {}
-    return "not.update".tr();
+    return "not.update".tr;
   }
 
   static Future<T?> openWebView<T>(context,
@@ -374,7 +373,7 @@ class CommonMethods {
           context,
           CupertinoPageRoute(
               builder: (context) => RxWebView(
-                  url: url, html: html, title: title ?? "content".tr())));
+                  url: url, html: html, title: title ?? "content".tr)));
     } else {
       return CommonMethods.launchURL(url!);
     }
@@ -383,19 +382,19 @@ class CommonMethods {
   static Future<T?> openWebViewTermsAndCondition<T>(context) async {
     return openWebView(context,
         url: CommonConfig.linkContent["dieuKhoan"].toString(),
-        title: "termsandcondition".tr());
+        title: "termsandcondition".tr);
   }
 
   static Future<T?> openWebViewPolicy<T>(context) async {
     return openWebView(context,
         url: CommonConfig.linkContent["chinhSach"].toString(),
-        title: "policy".tr());
+        title: "policy".tr);
   }
 
   static Future<T?> openWebViewFeedBack<T>(context) async {
     return openWebView(context,
         url: CommonConfig.linkContent["feedBack"].toString(),
-        title: "feedback".tr());
+        title: "feedback".tr);
   }
 
   static versionCheck(context) async {
@@ -498,7 +497,7 @@ class CommonMethods {
   static Future<bool> onFavorite(context, List<int> ids, bool status) async {
     try {
       if (!CommonMethods.isLogin) {
-        CommonMethods.showToast("please.login".tr());
+        CommonMethods.showToast("please.login".tr);
         return false;
       }
       ResponseModel res =

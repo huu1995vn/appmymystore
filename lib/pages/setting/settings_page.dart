@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
@@ -21,6 +21,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  bool isVi = false;
+
   bool authBiometric = false;
   _onBiometric(bool v) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -45,6 +47,9 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
     loadData();
+    setState(() {
+      isVi = Get.locale == const Locale('vi', 'VN');
+    });
   }
 
   @override
@@ -86,7 +91,7 @@ class _SettingsPageState extends State<SettingsPage> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            title: Text('setting'.tr()),
+            title: Text('setting'.tr),
             centerTitle: true,
             elevation: 0.0,
           ),
@@ -99,7 +104,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
                   RxBuildItem(
                       icon: Icon(AppIcons.sun),
-                      title: "Dark mode",
+                      title: "darkmode".tr,
                       trailing: Switch(
                         value: ThemeService().isSavedDarkMode(),
                         onChanged: (value) {
@@ -113,22 +118,29 @@ class _SettingsPageState extends State<SettingsPage> {
                       }),
                   RxBuildItem(
                     icon: const Icon(AppIcons.text_format),
-                    title: context.locale.languageCode == "vi"
-                        ? "Việt Nam"
-                        : "English",
-                    trailing: Switch(
-                      value: context.locale.languageCode != "vi",
-                      onChanged: (value) {
-                        context.setLocale(
-                            value ? const Locale("en") : const Locale("vi"));
+                    title: "language".tr,
+                    trailing: DropdownButton(
+                      value: isVi,
+                      items: const [
+                        DropdownMenuItem(
+                            value: true, child: Text("Tiếng việt")),
+                        DropdownMenuItem(value: false, child: Text("English")),
+                      ],
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isVi = value ?? false;
+                        });
+                        if (value != null && value) {
+                          Get.updateLocale(const Locale('vi', 'VN'));
+                        } else {
+                          Get.updateLocale(const Locale('en', 'US'));
+                        }
                       },
-                      activeTrackColor: Colors.red[200],
-                      activeColor: Colors.red,
                     ),
                   ),
                   RxBuildItem(
                       icon: const Icon(AppIcons.fingerprint),
-                      title: "Đăng nhập bằng sinh trắc học",
+                      title: "message.str016".tr,
                       trailing: Switch(
                         value: authBiometric,
                         onChanged: _onBiometric,
@@ -139,42 +151,42 @@ class _SettingsPageState extends State<SettingsPage> {
                         // _authenticateWithBiometrics();
                       }),
                   // RxBuildItem(
-                  //     title: "Clear cache".tr(),
+                  //     title: "Clear cache".tr,
                   //     onTap: () {
                   //       RxSearchDelegate.cacheapiSearch = {};
                   //       CommonMethods.showToast(
-                  //           context, "success".tr());
+                  //           context, "success".tr);
                   //     }),
                   RxBuildItem(
                       icon: const Icon(AppIcons.share_1),
-                      title: "share".tr(),
+                      title: "share".tr,
                       trailing: Icon(AppIcons.keyboard_arrow_right),
                       onTap: _onShare),
                   RxBuildItem(
-                      title: "termsandcondition".tr(),
+                      title: "termsandcondition".tr,
                       onTap: () {
                         CommonMethods.openWebViewTermsAndCondition(context);
                       }),
                   RxBuildItem(
-                      title: "policy".tr(),
+                      title: "policy".tr,
                       onTap: () {
                         CommonMethods.openWebViewPolicy(context);
                       }),
                   RxBuildItem(
-                      title: "feedback".tr(),
+                      title: "feedback".tr,
                       onTap: () {
                         CommonMethods.openWebViewFeedBack(context);
                       }),
                 ],
               )),
               RxRoundedButton(
-                title: 'logout'.tr(),
+                title: 'logout'.tr,
                 onPressed: () {
                   AuthService.logout(context);
                 },
               ),
               Text(
-                "${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
+                "${"version".tr} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
                 style: TextStyle().italic,
               )
             ],

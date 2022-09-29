@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
@@ -92,7 +93,8 @@ class ItemProductWidget extends StatelessWidget {
                                         ),
                                   ),
                                   Text(
-                                    item.rxprice,
+                                    CommonMethods.formatShortCurrency(
+                                        item.price),
                                     style: const TextStyle(
                                       color: AppColors.primary,
                                     ).bold,

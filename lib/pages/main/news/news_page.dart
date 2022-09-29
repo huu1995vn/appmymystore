@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_cast
 
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -40,7 +40,7 @@ class _NewsPageState extends State<NewsPage> {
           return <Widget>[
             SliverAppBar(
               centerTitle: true,
-              title: Text("news.text".tr()), 
+              title: Text("news".tr),
               floating: true,
               automaticallyImplyLeading: false,
               elevation: 0.0,

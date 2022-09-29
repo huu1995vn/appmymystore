@@ -10,7 +10,7 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 // ignore: unused_import
 import 'package:raoxe/pages/auth/confirm_otp_page.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
@@ -66,7 +66,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               LOGORAOXEWHITEIMAGE,
               width: 150,
             ),
-            Text("forgot.password".tr(),
+            Text("forgot.password".tr,
                 style: const TextStyle(color: AppColors.white)),
             // if (phone != null)
             //   Text(phone,
@@ -94,36 +94,36 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               children: <Widget>[
                 RxInput(phone,
                     keyboardType: TextInputType.number,
-                    labelText: "phone".tr(),
+                    labelText: "phone".tr,
                     icon: const Icon(AppIcons.phone_handset),
                     onChanged: (v) => {
                           setState(() => {phone = v})
                         },
                     validator: (v) {
                       if (v == null || !v.isNotEmpty) {
-                        return "notempty.phone.text".tr();
+                        return "notempty.phone".tr;
                       } else {
                         return CommonMethods.checkStringPhone(v)
                             ? null
-                            : "invalid.phone".tr();
+                            : "invalid.phone".tr;
                       }
                     }),
                 RxInput(password,
                     isPassword: true,
-                    labelText: "password.new".tr(),
+                    labelText: "password.new".tr,
                     icon: const Icon(AppIcons.lock_1),
                     onChanged: (v) => {
                           setState(() => {password = v})
                         },
                     validator: Validators.compose([
-                      Validators.required("notempty.password.text".tr()),
+                      Validators.required("notempty.password".tr),
                     ])),
                 RxInput(passwordAgain,
                     isPassword: true,
-                    labelText: "password.again".tr(),
+                    labelText: "password.again".tr,
                     icon: const Icon(AppIcons.lock_1), validator: (value) {
                   if (value != null && value != password) {
-                    return "invalid.password.again".tr();
+                    return "invalid.password.again".tr;
                   } else {
                     return null;
                   }
@@ -134,7 +134,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         onForgotPassword();
                       }
                     },
-                    text: 'continue'.tr()),
+                    text: 'continue'.tr),
                 //button: login
                 RxLoginAccountLabel(context)
               ],
@@ -156,7 +156,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         var res =
             await DaiLyXeApiBLL_APIAnonymous().forgotpassword(phone, password);
         if (res.status > 0) {
-          CommonMethods.showToast("success".tr());
+          CommonMethods.showToast("success".tr);
         } else {
           CommonMethods.showToast(res.message);
         }

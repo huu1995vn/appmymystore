@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, no_leading_underscores_for_local_identifiers
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:raoxe/app_icons.dart';
@@ -64,13 +64,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         setState(() {
           isNotFound = true;
         });
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     }
     if (_data!.usercontactid <= 0) {
       lContacts = await _loadContact();
       if (lContacts.isEmpty || lContacts.isEmpty) {
-        CommonMethods.showToast( "message.str013".tr());
+        CommonMethods.showToast("message.str013".tr);
         CommonNavigates.goBack(context);
         return;
       }
@@ -106,7 +106,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   onUpTop() async {
     if (data!.status != 2) {
-      CommonMethods.showToast( "message.str015".tr());
+      CommonMethods.showToast("message.str015".tr);
       return;
     }
     CommonMethods.lockScreen();
@@ -115,7 +115,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       body["ids"] = [data!.id];
       ResponseModel res = await DaiLyXeApiBLL_APIUser().productuptop(body);
       if (res.status > 0) {
-        CommonMethods.showToast( "update.success".tr());
+        CommonMethods.showToast("update.success".tr);
       } else {
         CommonMethods.showDialogError(context, res.message);
       }
@@ -132,7 +132,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       return CommonMethods.convertToList<ContactModel>(
           res.data, (val) => ContactModel.fromJson(val));
     } else {
-      CommonMethods.showToast( res.message);
+      CommonMethods.showToast(res.message);
     }
     return [];
   }
@@ -149,7 +149,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         return;
       }
     } else {
-      CommonMethods.showToast( res.message);
+      CommonMethods.showToast(res.message);
     }
 
     ContactModel contact = await showSearch(
@@ -199,7 +199,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
           name: data!.name!);
       if (idFiles.isEmpty) {
-        CommonMethods.showToast( "message.str007".tr());
+        CommonMethods.showToast("message.str007".tr);
         return;
       }
       if (idFiles.isNotEmpty) {
@@ -218,7 +218,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         }
         CommonMethods.unlockScreen();
         await CommonMethods.showConfirmDialog(context,
-            dataClone.id > 0 ? "update.success".tr() : "create.success".tr());
+            dataClone.id > 0 ? "update.success".tr : "create.success".tr);
         if (!(data!.id > 0)) {
           CommonNavigates.goBack(context, dataClone);
         }
@@ -233,7 +233,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   _onDelete() async {
     var res =
-        await CommonMethods.showConfirmDialog(context, "message.alert01".tr());
+        await CommonMethods.showConfirmDialog(context, "message.alert01".tr);
     if (res) {
       CommonMethods.lockScreen();
       try {
@@ -241,7 +241,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             await DaiLyXeApiBLL_APIUser().productdelete([data!.id]);
         if (res.status > 0) {
           CommonMethods.unlockScreen();
-          await CommonMethods.showConfirmDialog(context, "delete.success".tr());
+          await CommonMethods.showConfirmDialog(context, "delete.success".tr);
           CommonNavigates.goBack(context, ProductModel());
         } else {
           CommonMethods.showDialogError(context, res.message);
@@ -258,7 +258,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: isNotFound
-          ? Expanded(child: Center(child: Text("not.found".tr())))
+          ? Expanded(child: Center(child: Text("not.found".tr)))
           : (data == null
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -289,7 +289,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             // mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
-                              _header(title: "youwant".tr().toUpperCase()),
+                              _header(title: "youwant".tr.toUpperCase()),
                               ListTile(
                                 title: Row(
                                     mainAxisAlignment:
@@ -302,13 +302,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       },
                                     ).toList()),
                               ),
-                              _header(title: "generalinfor".tr()),
+                              _header(title: "generalinfor".tr),
                               Card(
                                 child: Column(
                                   children: [
                                     rxSelectInput(
                                         context, "brand", data!.brandid,
-                                        labelText: "brand".tr(),
+                                        labelText: "brand".tr,
                                         afterChange: (v) => {
                                               setState(() {
                                                 data!.brandid = CommonMethods
@@ -318,13 +318,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                             },
                                         validator: (v) {
                                           if (!(data!.brandid > 0)) {
-                                            return "notempty.text".tr();
+                                            return "notempty".tr;
                                           }
                                           return null;
                                         }),
                                     rxSelectInput(
                                         context, "model", data!.modelid,
-                                        labelText: "model".tr(),
+                                        labelText: "model".tr,
                                         afterChange: (v) => {
                                               setState(() {
                                                 data!.modelid = CommonMethods
@@ -336,13 +336,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         },
                                         validator: (v) {
                                           if (!(data!.modelid > 0)) {
-                                            return "notempty.text".tr();
+                                            return "notempty".tr;
                                           }
                                           return null;
                                         }),
                                     rxSelectInput(
                                         context, "bodytype", data!.bodytypeid,
-                                        labelText: "bodytype".tr(),
+                                        labelText: "bodytype".tr,
                                         afterChange: (v) => {
                                               setState(() {
                                                 data!.bodytypeid = CommonMethods
@@ -351,21 +351,21 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                             },
                                         validator: (v) {
                                           if (!(data!.bodytypeid > 0)) {
-                                            return "notempty.text".tr();
+                                            return "notempty".tr;
                                           }
                                           return null;
                                         }),
                                     ListTile(
                                       title: Row(
                                         children: [
-                                          Text("${'price'.tr()}: ",
+                                          Text("${'price'.tr}: ",
                                               style: kTextTitleStyle),
                                           Text(
                                             (data!.price != null &&
                                                     data!.price! > 0)
                                                 ? CommonMethods.formatNumber(
                                                     data!.price)
-                                                : "negotiate".tr(),
+                                                : "negotiate".tr,
                                             style: kTextPriceStyle.size(13),
                                           )
                                         ],
@@ -379,7 +379,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                 CommonMethods.convertToInt32(v);
                                           });
                                         },
-                                        hintText: "price".tr(),
+                                        hintText: "price".tr,
                                         style: const TextStyle(
                                                 color: AppColors.black50)
                                             .size(13),
@@ -393,7 +393,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                          text: "title".tr(),
+                                          text: "title".tr,
                                           style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
@@ -418,12 +418,12 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   keyboardType: TextInputType.multiline,
                                   onChanged: (value) => {data!.name = value},
                                   decoration: InputDecoration(
-                                    hintText: "please.enter".tr(),
+                                    hintText: "please.enter".tr,
                                   ),
                                   validator: (value) {
                                     if ((data!.name == null ||
                                         data!.name!.isEmpty)) {
-                                      return "notempty.text".tr();
+                                      return "notempty".tr;
                                     }
                                     return null;
                                   },
@@ -434,7 +434,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                          text: "description".tr(),
+                                          text: "description".tr,
                                           style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
@@ -462,7 +462,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   maxLines: null,
                                   onChanged: (value) => {data!.desc = value},
                                   decoration: InputDecoration(
-                                    hintText: "please.enter".tr(),
+                                    hintText: "please.enter".tr,
                                   ),
                                   maxLength: 1500,
                                   maxLengthEnforcement:
@@ -470,7 +470,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   validator: (value) {
                                     if ((data!.desc == null ||
                                         data!.desc!.isEmpty)) {
-                                      return "notempty.text".tr();
+                                      return "notempty".tr;
                                     }
                                     return null;
                                   },
@@ -481,7 +481,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                            text: "image".tr(),
+                                            text: "image".tr,
                                             style: TextStyle(
                                                     color: Theme.of(context)
                                                         .textTheme
@@ -509,7 +509,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                       .color),
                                             ),
                                             TextSpan(
-                                                text: " ${"download".tr()}",
+                                                text: " ${"download".tr}",
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .textTheme
@@ -555,13 +555,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       }),
                                 ),
                               )),
-                              _header(title: "specifications".tr()),
+                              _header(title: "specifications".tr),
                               Card(
                                   child: Column(
                                 children: [
                                   rxSelectInput(
                                       context, "productstate", data!.state,
-                                      labelText: "state".tr(),
+                                      labelText: "state".tr,
                                       afterChange: (v) => {
                                             setState(() {
                                               data!.state = v;
@@ -569,7 +569,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           },
                                       validator: (v) {
                                         if (!(data!.state > 0)) {
-                                          return "notempty.text".tr();
+                                          return "notempty".tr;
                                         }
                                         return null;
                                       }),
@@ -577,7 +577,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     context,
                                     "fueltype",
                                     data!.fueltypeid,
-                                    labelText: "fueltype".tr(),
+                                    labelText: "fueltype".tr,
                                     afterChange: (v) => {
                                       setState(() {
                                         data!.fueltypeid = v;
@@ -586,7 +586,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   ),
                                   rxSelectInput(
                                       context, "madein", data!.madeinid,
-                                      labelText: "madein".tr(),
+                                      labelText: "madein".tr,
                                       afterChange: (v) => {
                                             setState(() {
                                               data!.madeinid = v;
@@ -594,7 +594,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           }),
                                   rxSelectInput(
                                       context, "productdoor", data!.door,
-                                      labelText: "door".tr(),
+                                      labelText: "door".tr,
                                       afterChange: (v) => {
                                             setState(() {
                                               data!.door = v;
@@ -602,22 +602,22 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           }),
                                   rxSelectInput(
                                       context, "productseat", data!.seat,
-                                      labelText: "seat".tr(),
+                                      labelText: "seat".tr,
                                       afterChange: (v) => {
                                             setState(() {
                                               data!.seat = v;
                                             })
                                           }),
                                   rxSelectInput(context, "color", data!.colorid,
-                                      labelText: "color".tr(),
+                                      labelText: "color".tr,
                                       afterChange: (v) => {
                                             setState(() {
                                               data!.colorid = v;
                                             })
                                           }),
                                   ListTile(
-                                    title: Text('year'.tr(),
-                                        style: kTextTitleStyle),
+                                    title:
+                                        Text('year'.tr, style: kTextTitleStyle),
                                     subtitle: RxInput(
                                       keyboardType: TextInputType.number,
                                       data!.year?.toString() ?? "",
@@ -627,7 +627,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                               CommonMethods.convertToInt32(v);
                                         });
                                       },
-                                      hintText: "year".tr(),
+                                      hintText: "year".tr,
                                       style: const TextStyle(
                                               color: AppColors.primary)
                                           .size(13),
@@ -640,7 +640,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                          text: "contact".tr(),
+                                          text: "contact".tr,
                                           style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
@@ -660,7 +660,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                 Center(
                                     child: RxRoundedButton(
                                         onPressed: _onDelete,
-                                        title: "delete.text".tr()))
+                                        title: "delete".tr))
                             ],
                           )),
                     ))
@@ -681,7 +681,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                           _onSave();
                         }
                       },
-                      text: "done".tr()),
+                      text: "done".tr),
                 ),
               ],
             ))

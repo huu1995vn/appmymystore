@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, empty_catches, no_leading_underscores_for_local_identifiers
 
 import 'dart:convert';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -66,21 +66,21 @@ class AuthService {
     //isExist == true: dùng cho quên mật khẩu
 
     if (!CommonMethods.checkStringPhone(phone)) {
-      throw "invalid.phone".tr();
+      throw "invalid.phone".tr;
     }
     var res = await DaiLyXeApiBLL_APIGets().statsuser({"phone": phone});
     int status = res.data;
     if (isExist) {
       if (status == -1) {
-        throw "notexist.account".tr();
+        throw "notexist.account".tr;
       }
     } else {
       if (status == 1) {
-        throw "exist.account".tr();
+        throw "exist.account".tr;
       }
     }
     if (status >= 2) {
-      throw "message.str002".tr();
+      throw "message.str002".tr;
     }
   }
 
@@ -106,12 +106,12 @@ class AuthService {
     //check if device supports biometrics authentication.
     bool isBiometricSupported = await _localAuthentication.isDeviceSupported();
     if (!isBiometricSupported) {
-      throw "message.str010".tr();
+      throw "message.str010".tr;
     }
     //check if user has enabled biometrics.
     bool canCheckBiometrics = await _localAuthentication.canCheckBiometrics;
     if (!canCheckBiometrics) {
-      throw "message.str011".tr();
+      throw "message.str011".tr;
     }
     //if device supports biometrics and user has enabled biometrics, then authenticate.
     if (isBiometricSupported && canCheckBiometrics) {

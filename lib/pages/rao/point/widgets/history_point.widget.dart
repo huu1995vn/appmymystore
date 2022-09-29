@@ -1,5 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
@@ -69,8 +70,7 @@ Widget buildHistoryPoint(
                             ),
                           )
                           .toString(),
-                          style: kTextSubTitleStyle,
-
+                      style: kTextSubTitleStyle,
                     ),
                   ],
                 ),
@@ -115,8 +115,8 @@ Widget buildHistoryPoint(
           const Align(
             alignment: Alignment.bottomCenter,
             child: Divider(
-              // color: Colors.white,
-            ),
+                // color: Colors.white,
+                ),
           ),
         ],
       ),

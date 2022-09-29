@@ -78,6 +78,7 @@ dependencies:
   overlay_support: #Used for showSimpleNotification
   get: #It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
   get_storage: #
+  intl : 
   
 dev_dependencies:
   build_runner: # Used for code generation libraries

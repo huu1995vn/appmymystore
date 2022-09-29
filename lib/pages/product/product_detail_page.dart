@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison, import_of_legacy_library_into_null_safe, use_build_context_synchronously
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -82,7 +82,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   _onReview() async {
     if (!CommonMethods.isLogin) {
-      CommonMethods.showToast("please.login".tr());
+      CommonMethods.showToast("please.login".tr);
       return;
     }
     await CommonNavigates.showDialogBottomSheet(
@@ -96,7 +96,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   _onReport() async {
     if (!CommonMethods.isLogin) {
-      CommonMethods.showToast("please.login".tr());
+      CommonMethods.showToast("please.login".tr);
       return;
     }
     await CommonNavigates.showDialogBottomSheet(
@@ -109,7 +109,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: isNotFound
-          ? Expanded(child: Center(child: Text("not.found".tr())))
+          ? Expanded(child: Center(child: Text("not.found".tr)))
           : ((data == null || data!.id <= 0)
               ? Center(
                   child: CircularProgressIndicator(),
@@ -152,7 +152,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               onTap: () => {CommonMethods.call(data!.phone!)},
               icon: Icon(AppIcons.phone_handset),
               color: AppColors.info,
-              text: "call".tr())
+              text: "call".tr)
       ],
     );
   }
@@ -171,7 +171,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             (subtitle is int
                     ? (subtitle > 0 ? subtitle.toString() : null)
                     : subtitle?.toString()) ??
-                "not.update".tr(),
+                "not.update".tr,
             style: TextStyle().italic.copyWith(color: AppColors.black50),
           )
         ],
@@ -242,7 +242,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       GestureDetector(
                           onTap: _onReview,
                           child: Text(
-                            "review".tr(),
+                            "review".tr,
                             style: const TextStyle(
                                     fontStyle: FontStyle.italic,
                                     color: AppColors.info)
@@ -269,7 +269,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   children: [
                     Text(
                         CommonMethods.formatNumber(
-                            data!.price ?? "negotiate".tr()),
+                            data!.price ?? "negotiate".tr),
                         style: kTextPriceStyle),
                   ],
                 ),
@@ -308,25 +308,25 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               // mainAxisSize: MainAxisSize.min,
               children: [
-                _listTitle("status".tr(), data!.statename,
+                _listTitle("status".tr, data!.statename,
                     leading: Icon(AppIcons.brightness_low,
                         color: AppColors.black50)),
-                _listTitle("madein".tr(), data!.madeinname,
+                _listTitle("madein".tr, data!.madeinname,
                     leading: Icon(AppIcons.vpn_lock, color: AppColors.black50)),
-                _listTitle("model".tr(), data!.modelname,
+                _listTitle("model".tr, data!.modelname,
                     leading:
                         Icon(AppIcons.turned_in_not, color: AppColors.black50)),
-                _listTitle("bodytype".tr(), data!.bodytypename,
+                _listTitle("bodytype".tr, data!.bodytypename,
                     leading: Icon(AppIcons.directions_car,
                         color: AppColors.black50)),
-                _listTitle("fueltype".tr(), data!.fueltypename,
+                _listTitle("fueltype".tr, data!.fueltypename,
                     leading: Icon(AppIcons.opacity, color: AppColors.black50)),
-                _listTitle("color".tr(), data!.colorname,
+                _listTitle("color".tr, data!.colorname,
                     leading: Icon(AppIcons.format_color_fill,
                         color: AppColors.black50)),
-                _listTitle("year".tr(), data!.year,
+                _listTitle("year".tr, data!.year,
                     leading: Icon(AppIcons.timer, color: AppColors.black50)),
-                _listTitle("seat".tr(), data!.seat,
+                _listTitle("seat".tr, data!.seat,
                     leading: Icon(
                       AppIcons.airline_seat_legroom_normal,
                       color: AppColors.black50,
@@ -356,7 +356,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Text(
-                      "message.str001".tr(),
+                      "message.str001".tr,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: kDefaultPadding),
@@ -366,7 +366,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             AppIcons.warning,
                           ),
                           color: AppColors.black50,
-                          text: "report.text".tr().toUpperCase()),
+                          text: "report".tr.toUpperCase()),
                     )
                   ],
                 ))
@@ -399,7 +399,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ),
         ProductReview(data!),
         ProductRelated(
-            title: "product.thesame.brand".tr(),
+            title: "product.thesame.brand".tr,
             filter: {"BrandId": data!.brandid},
             notids: [data!.id])
       ],

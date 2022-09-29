@@ -1,6 +1,6 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe, empty_catches
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,11 +35,7 @@ init() async {
   await initializeApp();
   configLoading();
   return runApp(
-    EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('vi')],
-        path:
-            'assets/translations', // <-- change the path of the translation files
-        child: const MyApp()),
+    const MyApp(),
   );
 }
 
@@ -62,7 +58,6 @@ initializeApp() async {
   await InfoDeviceService.init();
   await Firebase.initializeApp();
   await FirebaseAuthService.signInAnonymously();
-  await EasyLocalization.ensureInitialized();
   await FirebaseMessagingService.init();
   APITokenService.init();
   await AuthService.autologin();

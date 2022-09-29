@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
@@ -32,7 +32,7 @@ class _AdvertPageState extends State<AdvertPage> {
   AutoScrollController scrollController = AutoScrollController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  loadData([nPaging=1]) async {
+  loadData([nPaging = 1]) async {
     if (nPaging > 1 && listData != null && totalItems <= listData!.length) {
       return;
     }
@@ -60,7 +60,7 @@ class _AdvertPageState extends State<AdvertPage> {
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -87,9 +87,9 @@ class _AdvertPageState extends State<AdvertPage> {
         backgroundColor: Colors.transparent,
         key: _key,
         body: RxCustomScrollView(
-          appBar: SliverAppBar( 
+          appBar: SliverAppBar(
             centerTitle: true,
-            title: Text('ads'.tr()),
+            title: Text('ads'.tr),
             elevation: 0.0,
           ),
           key: const Key("LAds"),

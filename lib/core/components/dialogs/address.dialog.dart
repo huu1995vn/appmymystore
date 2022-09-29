@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -55,8 +55,7 @@ class _AddressDialogState extends State<AddressDialog> {
             ),
             centerTitle: true,
             title: Text("Địa chỉ",
-                style: kTextHeaderStyle.copyWith(
-                    color: AppColors.black)),
+                style: kTextHeaderStyle.copyWith(color: AppColors.black)),
             elevation: 0.0,
             backgroundColor: AppColors.grey,
           ),
@@ -77,7 +76,7 @@ class _AddressDialogState extends State<AddressDialog> {
                                   },
                               validator: (v) {
                                 if (!(contact.cityid > 0)) {
-                                  return "notempty.text".tr();
+                                  return "notempty".tr;
                                 }
                                 return null;
                               }),
@@ -92,15 +91,15 @@ class _AddressDialogState extends State<AddressDialog> {
                                   },
                               validator: (v) {
                                 if (!(contact.districtid > 0)) {
-                                  return "notempty.text".tr();
+                                  return "notempty".tr;
                                 }
                                 return null;
                               }),
                           rxTextInput(context, contact.address,
-                              labelText: "address".tr(),
+                              labelText: "address".tr,
                               onChanged: (v) => {contact.address = v},
                               validator: Validators.compose([
-                                Validators.required("notempty.text".tr()),
+                                Validators.required("notempty".tr),
                               ])),
                         ],
                       )))))
@@ -113,7 +112,7 @@ class _AddressDialogState extends State<AddressDialog> {
                 CommonNavigates.goBack(context, contact);
               }
             },
-            text: 'save'.tr())
+            text: 'save'.tr)
       ],
     );
   }

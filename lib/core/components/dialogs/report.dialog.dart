@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, import_of_legacy_library_into_null_safe
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -53,10 +53,10 @@ class _ReportDialogState extends State<ReportDialog> {
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().reportpost(body);
       if (res.status > 0) {
-        CommonMethods.showToast("success".tr());
+        CommonMethods.showToast("success".tr);
         CommonNavigates.goBack(context);
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -127,7 +127,7 @@ class _ReportDialogState extends State<ReportDialog> {
                                   onChanged: (value) => {report.note = value},
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    hintText: "please.enter".tr(),
+                                    hintText: "please.enter".tr,
                                   ),
                                   maxLength: 500,
                                   maxLengthEnforcement:
@@ -135,7 +135,7 @@ class _ReportDialogState extends State<ReportDialog> {
                                   validator: (value) {
                                     if ((report.note == null ||
                                         report.note!.isEmpty)) {
-                                      return "notempty.text".tr();
+                                      return "notempty".tr;
                                     }
                                     return null;
                                   },
@@ -151,9 +151,8 @@ class _ReportDialogState extends State<ReportDialog> {
                 onSave();
               }
             },
-            text: 'save'.tr())
+            text: 'save'.tr)
       ],
     );
   }
-
 }

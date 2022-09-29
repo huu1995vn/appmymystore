@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
@@ -116,7 +116,7 @@ class _NotificationPageState extends State<NotificationPage> {
           setState(() {
             listData!.removeAt(index);
           });
-          CommonMethods.showToast("success".tr());
+          CommonMethods.showToast("success".tr);
         } else {
           CommonMethods.showToast(res.message);
         }
@@ -130,15 +130,15 @@ class _NotificationPageState extends State<NotificationPage> {
 
   _onDeleteAll() async {
     if (listData != null && listData!.isNotEmpty) {
-      var res = await CommonMethods.showConfirmDialog(
-          context, "message.alert01".tr());
+      var res =
+          await CommonMethods.showConfirmDialog(context, "message.alert01".tr);
       if (!res) return;
       try {
         List<int> ids = listData!.map((e) => e.id).toList();
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().notificationdelete(ids);
         if (res.status > 0) {
-          CommonMethods.showToast("success".tr());
+          CommonMethods.showToast("success".tr);
           loadData();
         } else {
           CommonMethods.showToast(res.message);
@@ -158,7 +158,7 @@ class _NotificationPageState extends State<NotificationPage> {
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().notificationready(ids);
         if (res.status > 0) {
-          CommonMethods.showToast("success".tr());
+          CommonMethods.showToast("success".tr);
           loadData();
         } else {
           CommonMethods.showToast(res.message);
@@ -177,19 +177,24 @@ class _NotificationPageState extends State<NotificationPage> {
         backgroundColor: Colors.transparent,
         key: _key,
         body: RxCustomScrollView(
-          appBar: SliverAppBar( 
+          appBar: SliverAppBar(
             centerTitle: true,
-            title: Text('notification.text'.tr()),   
+            title: Text('notification.text'.tr),
             elevation: 0.0,
             actions: <Widget>[
               RxIconButton(
-                icon: AppIcons.delete,
-                onTap: _onDeleteAll,
-                size: 40,
-                color: Colors.transparent, colorIcon: Colors.white
-              ),
+                  icon: AppIcons.delete,
+                  onTap: _onDeleteAll,
+                  size: 40,
+                  color: Colors.transparent,
+                  colorIcon: Colors.white),
               SizedBox(width: kDefaultPadding),
-              RxIconButton(icon: AppIcons.playlist_add_check, onTap: _onSeen, size: 40, color: Colors.transparent, colorIcon: Colors.white),
+              RxIconButton(
+                  icon: AppIcons.playlist_add_check,
+                  onTap: _onSeen,
+                  size: 40,
+                  color: Colors.transparent,
+                  colorIcon: Colors.white),
               SizedBox(width: kDefaultPadding)
             ],
           ),

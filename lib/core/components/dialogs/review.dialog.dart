@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, import_of_legacy_library_into_null_safe
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:raoxe/app_icons.dart';
@@ -50,7 +50,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
       };
       ResponseModel res = await DaiLyXeApiBLL_APIUser().reviewpost(body);
       if (res.status > 0) {
-        CommonMethods.showToast("success".tr());
+        CommonMethods.showToast("success".tr);
         CommonNavigates.goBack(context);
       } else {
         CommonMethods.showToast(res.message);
@@ -106,7 +106,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: "review".tr(),
+                                      text: "review".tr,
                                       style: TextStyle(
                                               color: Theme.of(context)
                                                   .textTheme
@@ -136,7 +136,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                                       {review.comment = value},
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    hintText: "please.enter".tr(),
+                                    hintText: "please.enter".tr,
                                   ),
                                   maxLength: 500,
                                   maxLengthEnforcement:
@@ -144,7 +144,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                                   validator: (value) {
                                     if ((review.comment == null ||
                                         review.comment!.isEmpty)) {
-                                      return "notempty.text".tr();
+                                      return "notempty".tr;
                                     }
                                     return null;
                                   },
@@ -161,7 +161,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                 onSave();
               }
             },
-            text: 'save'.tr())
+            text: 'save'.tr)
       ],
     );
   }

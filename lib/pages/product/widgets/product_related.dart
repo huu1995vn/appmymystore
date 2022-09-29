@@ -10,7 +10,7 @@ import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_image.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -93,7 +93,7 @@ class ReviewState extends State<ProductRelated> {
   Widget build(BuildContext context) {
     final scrollDirection = widget.scrollDirection ?? Axis.horizontal;
     return Column(
-      mainAxisSize: MainAxisSize.max, 
+      mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
             padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
@@ -116,21 +116,25 @@ class ReviewState extends State<ProductRelated> {
               ],
             )),
         RxListView(
-            listData,
-            (context, index) {
-              var item = listData![index];
-              return scrollDirection == Axis.horizontal
-                  ? _buildItem(item)
-                  : ItemProductWidget(item);
-            },
-            key: UniqueKey(),
-            noFound: Center(child: Text("nodatafound".tr())),
-            scrollDirection: scrollDirection,
-          ),
+          listData,
+          (context, index) {
+            var item = listData![index];
+            return scrollDirection == Axis.horizontal
+                ? _buildItem(item)
+                : ItemProductWidget(item);
+          },
+          key: UniqueKey(),
+          noFound: Center(child: Text("nodatafound".tr)),
+          scrollDirection: scrollDirection,
+        ),
         (scrollDirection != Axis.horizontal &&
                 listData != null &&
                 totalItems > listData!.length)
-            ? RxRoundedButton(onPressed: _onNext, title: "seemore".tr(), color: AppColors.info,)
+            ? RxRoundedButton(
+                onPressed: _onNext,
+                title: "seemore".tr,
+                color: AppColors.info,
+              )
             : Container()
       ],
     );
@@ -179,7 +183,7 @@ class ReviewState extends State<ProductRelated> {
                                 padding: const EdgeInsets.all(5),
                                 child: Text(
                                     CommonMethods.formatNumber(
-                                        item.price ?? "negotiate".tr()),
+                                        item.price ?? "negotiate".tr),
                                     style: kTextPriceStyle),
                               ),
                               Padding(

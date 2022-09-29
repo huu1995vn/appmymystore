@@ -1,7 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
@@ -314,7 +315,7 @@ class ProductModel extends Entity {
   }
 
   String get statename {
-    return state == 1 ? "new".tr() : "old".tr();
+    return state == 1 ? "new".tr : "old".tr;
   }
 
   String get linkshare {

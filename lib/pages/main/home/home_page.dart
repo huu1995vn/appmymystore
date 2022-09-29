@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, curly_braces_in_flow_control_structures
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage>
     super.build(context);
 
     return Scaffold(
-      key: _homeKey,  
+      key: _homeKey,
       body: RxCustomScrollView(
         key: const Key("lHome"),
         controller: scrollController,
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(
               child: Column(children: [
             const BannerWidget(),
-            _buildTitle("new".tr(), () {
+            _buildTitle("new".tr, () {
               CommonNavigates.toProductPage(context);
             }),
           ])),
@@ -132,14 +132,15 @@ class _HomePageState extends State<HomePage>
   SliverAppBar _appBar() {
     final theme = Provider.of<ThemeProvider>(context);
     return SliverAppBar(
-      floating: true, 
+      floating: true,
       automaticallyImplyLeading: false,
-      elevation: 0.0, 
+      elevation: 0.0,
       // backgroundColor: CommonConfig.isDark ? Colors.black : kPrimaryColor,
       leading: Container(child: null),
-      title: Container( 
+      title: Container(
         alignment: Alignment.center,
-        child: Image.asset(LOGORAOXEWHITEIMAGE,
+        child: Image.asset(
+          LOGORAOXEWHITEIMAGE,
           fit: BoxFit.contain,
           alignment: Alignment.center,
           height: 35,
@@ -148,7 +149,13 @@ class _HomePageState extends State<HomePage>
       actions: <Widget>[
         Padding(
             padding: const EdgeInsets.only(right: kDefaultPadding),
-            child: RxIconButton(onTap: _onSearch, icon: AppIcons.magnifier, size: 40, color: Colors.transparent, colorIcon: Colors.white,))
+            child: RxIconButton(
+              onTap: _onSearch,
+              icon: AppIcons.magnifier,
+              size: 40,
+              color: Colors.transparent,
+              colorIcon: Colors.white,
+            ))
       ],
     );
   }
@@ -167,7 +174,6 @@ _buildTitle(String header, void Function()? onTap) {
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(header.toUpperCase(), style: const TextStyle().bold),
       RxIconButton(onTap: onTap, icon: AppIcons.chevron_right)
-      
     ]),
   );
 }

@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:raoxe/app_icons.dart';
@@ -104,7 +104,7 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
     if (code != null && code.length == 6) {
       bool res = await verifyOTP();
       if (res) {
-        CommonMethods.showToast("success".tr());
+        CommonMethods.showToast("success".tr);
         CommonNavigates.goBack(context, res);
       }
     }
@@ -177,7 +177,7 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  "sendcode".tr(),
+                                  "sendcode".tr,
                                   style: const TextStyle(color: AppColors.info)
                                       .size(13),
                                 ),
@@ -200,7 +200,7 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            "cancel".tr(),
+                            "cancel".tr,
                             style: const TextStyle(color: AppColors.black)
                                 .size(13),
                           ),

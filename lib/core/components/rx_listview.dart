@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
@@ -132,7 +132,7 @@ class _RxDataListViewState extends State<RxListView>
                   ),
                 ),
                 Text(
-                  "nodatafound".tr(),
+                  "nodatafound".tr,
                 ),
               ],
             ),

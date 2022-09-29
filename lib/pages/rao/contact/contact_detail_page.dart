@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, use_build_context_synchronously
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -44,7 +44,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
             data = ContactModel.fromJson(res.data);
           });
         } else {
-          CommonMethods.showToast( res.message);
+          CommonMethods.showToast(res.message);
         }
       }
     } catch (e) {
@@ -64,13 +64,13 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
           setState(() {
             data = dataClone;
           });
-          CommonMethods.showToast( "update.success".tr());
+          CommonMethods.showToast("update.success".tr);
         } else {
           CommonNavigates.goBack(context);
-          CommonMethods.showToast( "create.success".tr());
+          CommonMethods.showToast("create.success".tr);
         }
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -94,7 +94,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                       color: AppColors.black, //change your color here
                     ),
                     centerTitle: true,
-                    title: Text("info.concat".tr(),
+                    title: Text("info.concat".tr,
                         style:
                             kTextHeaderStyle.copyWith(color: AppColors.black)),
                     backgroundColor: AppColors.grey,
@@ -111,22 +111,22 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                             shrinkWrap: true,
                             children: <Widget>[
                               rxTextInput(context, data!.fullname,
-                                  labelText: "fullname".tr(),
+                                  labelText: "fullname".tr,
                                   onChanged: (v) => {data!.fullname = v},
                                   validator: Validators.compose([
-                                    Validators.required("notempty.text".tr()),
+                                    Validators.required("notempty".tr),
                                   ])),
                               rxTextInput(context, data!.phone,
-                                  labelText: "phone".tr(),
+                                  labelText: "phone".tr,
                                   keyboardType: TextInputType.number,
                                   onChanged: (v) => {data!.phone = v},
                                   validator: (v) {
                                     if (v == null || !v.isNotEmpty) {
-                                      return "notempty.text".tr();
+                                      return "notempty".tr;
                                     } else {
                                       return CommonMethods.checkStringPhone(v)
                                           ? null
-                                          : "invalid.phone".tr();
+                                          : "invalid.phone".tr;
                                     }
                                   }),
                               rxSelectInput(context, "city", data!.cityid,
@@ -138,7 +138,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                                       },
                                   validator: (v) {
                                     if (!(data!.cityid > 0)) {
-                                      return "notempty.text".tr();
+                                      return "notempty".tr;
                                     }
                                     return null;
                                   }),
@@ -154,15 +154,15 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                                       },
                                   validator: (v) {
                                     if (!(data!.districtid > 0)) {
-                                      return "notempty.text".tr();
+                                      return "notempty".tr;
                                     }
                                     return null;
                                   }),
                               rxTextInput(context, data!.address,
-                                  labelText: "address".tr(),
+                                  labelText: "address".tr,
                                   onChanged: (v) => {data!.address = v},
                                   validator: Validators.compose([
-                                    Validators.required("notempty.text".tr()),
+                                    Validators.required("notempty".tr),
                                   ])),
                             ],
                           )),
@@ -177,7 +177,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                   _onSave();
                 }
               },
-              text: 'save'.tr())
+              text: 'save'.tr)
         ]);
   }
 }

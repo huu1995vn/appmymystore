@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty, non_constant_identifier_names
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
@@ -72,10 +72,10 @@ class _UserPageState extends State<UserPage> {
             )
           : CustomScrollView(
               slivers: <Widget>[
-                SliverAppBar( 
+                SliverAppBar(
                   centerTitle: true,
-                  title: Text("personalinformation".tr()),
-                  elevation: 0.0, 
+                  title: Text("personalinformation".tr),
+                  elevation: 0.0,
                 ),
                 SliverToBoxAdapter(
                     child: Column(
@@ -112,7 +112,7 @@ class _UserPageState extends State<UserPage> {
                             ),
                           ),
                           ProductRelated(
-                            title: "product.thesame.post".tr(),
+                            title: "product.thesame.post".tr,
                             filter: {"UserId": id},
                             scrollDirection: Axis.vertical,
                           )

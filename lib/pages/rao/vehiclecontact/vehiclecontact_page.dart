@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
@@ -88,10 +88,10 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
         backgroundColor: Colors.transparent,
         key: _key,
         body: RxCustomScrollView(
-          appBar: SliverAppBar( 
+          appBar: SliverAppBar(
             centerTitle: true,
-            title: Text('contact'.tr()),
-            elevation: 0.0, 
+            title: Text('contact'.tr),
+            elevation: 0.0,
           ),
           key: const Key("LVehicleContact"),
           controller: scrollController,

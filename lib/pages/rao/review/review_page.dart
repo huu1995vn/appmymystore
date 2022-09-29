@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -51,8 +51,8 @@ class _ReviewPageState extends State<ReviewPage> {
             return <Widget>[
               SliverAppBar(
                 centerTitle: true,
-                title: Text("review".tr()),
-                elevation: 0.0, 
+                title: Text("review".tr),
+                elevation: 0.0,
               ),
               SliverPersistentHeader(
                 pinned: true,

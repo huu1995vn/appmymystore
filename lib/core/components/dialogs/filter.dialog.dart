@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty, unused_field
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -118,7 +118,7 @@ class _FilterDialogState extends State<FilterDialog> {
             color: AppColors.black, //change your color here
           ),
           centerTitle: true,
-          title: Text("filter".tr(),
+          title: Text("filter".tr,
               style: kTextHeaderStyle.copyWith(color: AppColors.black)),
           backgroundColor: AppColors.grey,
           elevation: 0.0,
@@ -142,7 +142,7 @@ class _FilterDialogState extends State<FilterDialog> {
               crossAxisAlignment: CrossAxisAlignment.start,
               // mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                _header("youwant".tr()),
+                _header("youwant".tr),
                 Card(
                   child: ListTile(
                     title: Row(
@@ -156,11 +156,11 @@ class _FilterDialogState extends State<FilterDialog> {
                         ).toList()),
                   ),
                 ),
-                _header("generalinfor".tr()),
+                _header("generalinfor".tr),
                 Card(
                   child: Column(
                     children: [
-                      _selectInput("BrandId", "brand", title: "brand".tr()),
+                      _selectInput("BrandId", "brand", title: "brand".tr),
                       _selectInput("CityId", "city", title: "Vị trí"),
                       _selectInput("OrderBy", "sort", title: "Sắp xếp"),
                       Padding(
@@ -197,7 +197,7 @@ class _FilterDialogState extends State<FilterDialog> {
                     ],
                   ),
                 ),
-                _header("specifications".tr()),
+                _header("specifications".tr),
                 Card(
                     child: Column(
                   children: [
@@ -208,7 +208,7 @@ class _FilterDialogState extends State<FilterDialog> {
                     _selectInput("Door", "productdoor", title: "Số cửa"),
                     _selectInput("Seat", "productseat", title: "Số chỗ"),
                     ListTile(
-                      title: Text('year'.tr(), style: kTextTitleStyle),
+                      title: Text('year'.tr, style: kTextTitleStyle),
                       subtitle: RxInput(
                         keyboardType: TextInputType.number,
                         searchParams["Year"]?.toString() ?? "",
@@ -218,7 +218,7 @@ class _FilterDialogState extends State<FilterDialog> {
                                 CommonMethods.convertToInt32(v);
                           });
                         },
-                        hintText: "year".tr(),
+                        hintText: "year".tr,
                         style:
                             const TextStyle(color: AppColors.black50).size(13),
                       ),
@@ -232,7 +232,7 @@ class _FilterDialogState extends State<FilterDialog> {
         persistentFooterButtons: [
           RxPrimaryButton(
             onTap: _onDone,
-            text: "done".tr(),
+            text: "done".tr,
           ),
         ]);
   }
@@ -288,13 +288,11 @@ class _FilterDialogState extends State<FilterDialog> {
     var name = CommonMethods.getNameMasterById(type, searchParams[key]);
     return ListTile(
       title: Text(
-        title ?? type.tr(),
+        title ?? type.tr,
         style: styleTitle,
       ),
       subtitle: Text(
-          name != null && name.length > 0
-              ? name
-              : (hintText ?? "choose.text".tr()),
+          name != null && name.length > 0 ? name : (hintText ?? "choose".tr),
           style: TextStyle(
               color:
                   name != null && name.length > 0 ? AppColors.primary : null)),

@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -81,11 +81,12 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       child: Scaffold(
           appBar: AppBar(
-             iconTheme: const IconThemeData(
-              color: AppColors.black //change your color here
-            ),
+            iconTheme: const IconThemeData(
+                color: AppColors.black //change your color here
+                ),
             centerTitle: true,
-            title: Text("Confirm your OTP", style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+            title: Text("Confirm your OTP",
+                style: kTextHeaderStyle.copyWith(color: AppColors.black)),
             backgroundColor: AppColors.grey,
             elevation: 0.0,
           ),
@@ -154,7 +155,7 @@ class ConfirmOtpPageState extends State<ConfirmOtpPage> {
                               ? CommonMethods.convertTimeDuration(
                                       seconds: expiredTime) +
                                   "s"
-                              : "expiredcode".tr(),
+                              : "expiredcode".tr,
                           style: TextStyle(
                             fontWeight: (expiredTime + 10 > 120)
                                 ? FontWeight.normal

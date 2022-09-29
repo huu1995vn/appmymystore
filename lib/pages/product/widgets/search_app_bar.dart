@@ -1,6 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
@@ -101,7 +101,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                 textAlignVertical: TextAlignVertical.center,
                 onChanged: (_) => setState(() {}),
                 decoration: InputDecoration(
-                  hintText: "message.str014".tr(),
+                  hintText: "message.str014".tr,
                   // hintStyle: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.5)),
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
@@ -131,7 +131,9 @@ class _SearchAppBarState extends State<SearchAppBar> {
                               child: Center(
                                   child: Text(
                                 numFillter >= 9 ? "9+" : numFillter.toString(),
-                                style: kTextSubTitleStyle.copyWith(color: AppColors.primary, fontStyle: FontStyle.normal),
+                                style: kTextSubTitleStyle.copyWith(
+                                    color: AppColors.primary,
+                                    fontStyle: FontStyle.normal),
                               ))),
                         )),
                 ],

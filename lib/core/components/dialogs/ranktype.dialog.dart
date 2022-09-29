@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, import_of_legacy_library_into_null_safe
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -69,7 +69,7 @@ class _RankTypeDialogState extends State<RankTypeDialog>
                 children: <Widget>[
                   ListTile(
                     title: Text(
-                      "discount".tr(),
+                      "discount".tr,
                     ),
                     subtitle: Text(
                       "${CommonMethods.formatNumber(data[i].discount)} %",

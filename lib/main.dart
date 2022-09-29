@@ -5,9 +5,11 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/lang/translation.service.dart';
 import 'package:raoxe/core/providers/notification_provider.dart';
 import 'package:raoxe/core/providers/theme_provider.dart';
 import 'package:raoxe/core/providers/user_provider.dart';
@@ -20,8 +22,10 @@ import 'package:raoxe/core/services/firebase/remote_config.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
-import 'package:raoxe/core/services/theme.service.dart';
+import 'package:raoxe/core/theme/theme.service.dart';
+import 'package:raoxe/core/theme/themes.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/logger_utils.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -105,23 +109,20 @@ class _MyAppState extends State<MyApp> {
       child: Consumer<ThemeProvider>(
           child: const MyPage(),
           builder: (c, themeProvider, home) => OverlaySupport(
-                child: MaterialApp(
-                  localizationsDelegates: context.localizationDelegates,
-                  supportedLocales: context.supportedLocales,
-                  locale: context.locale,
+                child: GetMaterialApp(
                   color: Colors.transparent,
-                  debugShowCheckedModeBanner: false,
-                  theme: ThemeService.main(),
-                  darkTheme: ThemeService.main(
-                    isDark: true,
-                  ).copyWith(
-                    colorScheme:
-                        ColorScheme.fromSwatch(primarySwatch: Colors.red)
-                            .copyWith(
-                                secondary: AppColors.primary,
-                                brightness: Brightness.dark),
-                  ),
-                  themeMode: themeProvider.selectedThemeMode,
+                  // debugShowCheckedModeBanner: false,
+                  // theme: ThemeService.main(),
+                  // darkTheme: ThemeService.main(
+                  //   isDark: true,
+                  // ).copyWith(
+                  //   colorScheme:
+                  //       ColorScheme.fromSwatch(primarySwatch: Colors.red)
+                  //           .copyWith(
+                  //               secondary: AppColors.primary,
+                  //               brightness: Brightness.dark),
+                  // ),
+                  // themeMode: themeProvider.selectedThemeMode,
                   home: FutureBuilder<FirebaseRemoteConfig>(
                     future: RemoteConfigSerivce.init(),
                     builder: (BuildContext context,
@@ -138,6 +139,17 @@ class _MyAppState extends State<MyApp> {
                   ),
                   routes: CommonNavigates.routers,
                   builder: EasyLoading.init(),
+                  debugShowCheckedModeBanner: false,
+                  enableLog: true,
+                  logWriterCallback: Logger.write,
+                  // initialRoute: AppPages.INITIAL,
+                  // getPages: AppPages.routes,
+                  locale: TranslationService.locale,
+                  fallbackLocale: TranslationService.fallbackLocale,
+                  translations: TranslationService(),
+                  theme: Themes().lightTheme,
+                  darkTheme: Themes().darkTheme,
+                  themeMode: ThemeService().getThemeMode(),
                 ),
               )),
     );

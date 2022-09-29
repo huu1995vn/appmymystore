@@ -178,7 +178,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.primary,
         onPressed: () {
           if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
@@ -186,12 +186,14 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
             CommonMethods.showToast("please.login".tr());
           }
         },
+        
         shape: RoundedRectangleBorder(
+          
             // side: BorderSide(width: 1, color: Theme.of(context).cardColor),
             borderRadius: BorderRadius.circular(100)),
         child: Icon(
           Icons.add,
-          color: AppColors.primary,
+          color: AppColors.white,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

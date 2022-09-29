@@ -12,7 +12,6 @@ import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/notification_provider.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/notification/widgets/item_notification.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -179,7 +178,7 @@ class _NotificationPageState extends State<NotificationPage> {
         body: RxCustomScrollView(
           appBar: SliverAppBar(
             centerTitle: true,
-            title: Text('notification.text'.tr),
+            title: Text('notification'.tr),
             elevation: 0.0,
             actions: <Widget>[
               RxIconButton(

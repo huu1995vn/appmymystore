@@ -27,7 +27,7 @@ class ItemNotificationWidget extends StatelessWidget {
             backgroundColor: AppColors.danger,
             foregroundColor: Colors.white,
             icon: AppIcons.trash_1,
-            label: 'delete.text'.tr,
+            label: 'delete'.tr,
           ),
         ],
       ),

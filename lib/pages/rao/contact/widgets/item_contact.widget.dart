@@ -37,7 +37,7 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
               backgroundColor: AppColors.danger,
               foregroundColor: Colors.white,
               icon: AppIcons.trash_1,
-              label: 'delete.text'.tr,
+              label: 'delete'.tr,
             ),
             SlidableAction(
               onPressed: widget.onDefault,

@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 
@@ -70,23 +71,23 @@ const String IMAGE_NOT_FOUND =
     "https://cdn.gianhangvn.com/image/hinh-anh-khong-ton-tai.jpg";
 const List<String> kBanners = ["84748", "84749", "84750"];
 List<Categorie> CATEGORIES = [
-  Categorie(id: 2, categoryname: "Tin tức mới"),
-  Categorie(id: 8, categoryname: "Nổi bật"),
-  Categorie(id: 3, categoryname: "Đánh giá xe"),
-  Categorie(id: 4, categoryname: "Tư vấn"),
-  Categorie(id: 5, categoryname: "Hình ảnh"),
+  Categorie(id: 2, categoryname: "news.new".tr),
+  Categorie(id: 8, categoryname: "highlight".tr),
+  Categorie(id: 3, categoryname: "vehicle.reviews".tr),
+  Categorie(id: 4, categoryname: "advise".tr),
+  Categorie(id: 5, categoryname: "image".tr),
 ];
 List<Categorie> PRODUCTSTATUS = [
-  Categorie(id: 1, categoryname: "Chờ duyệt"),
-  Categorie(id: 2, categoryname: "Đã duyệt"),
-  Categorie(id: 3, categoryname: "Không duyệt"),
-  Categorie(id: 4, categoryname: "Vi phạm"),
+  Categorie(id: 1, categoryname: "pending".tr),
+  Categorie(id: 2, categoryname: "approved".tr),
+  Categorie(id: 3, categoryname: "not.approved".tr),
+  Categorie(id: 4, categoryname: "violate".tr),
   // Categorie(id: 6, categoryname: "Videos"),
 ];
 
 List<Categorie> PRODUCTREVIEWSTATUS = [
-  Categorie(id: 1, categoryname: "Đã duyệt"),
-  Categorie(id: 2, categoryname: "Không duyệt"),
+  Categorie(id: 1, categoryname: "approved".tr),
+  Categorie(id: 2, categoryname: "not.approved".tr),
 ];
 
 List PRICES = [
@@ -97,14 +98,14 @@ List PRICES = [
 ];
 
 List SORTS = [
-  {"name": "Mới nhất", "id": "CreateDate DESC"},
-  {"name": "Cũ nhất", "id": "CreateDate ASC"},
-  {"name": "Giá cao trước", "id": "Price DESC"},
-  {"name": "Giá thấp trước", "id": "Price ASC"}
+  {"name": "latest".tr, "id": "CreateDate DESC"},
+  {"name": "oldest".tr, "id": "CreateDate ASC"},
+  {"name": "highpricefirst".tr, "id": "Price DESC"},
+  {"name": "lowpricefirst".tr, "id": "Price ASC"}
 ];
 List PRODUCTTYPES = [
-  {"name": "Bán", "id": 1},
-  {"name": "Mua", "id": 2},
+  {"name": "sell".tr, "id": 1},
+  {"name": "buy".tr, "id": 2},
 ];
 List PRODUCTSTATES = [
   {"name": "Mới", "id": 1},

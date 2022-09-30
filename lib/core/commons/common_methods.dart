@@ -629,6 +629,9 @@ class CommonMethods {
     launchUrl(Uri.parse("tel://$phone"));
   }
 
+  static void chatZalo(String phone) {
+    launchUrl(Uri.parse("https://zalo.me/$phone"));
+  }
   //# build end link dynamic
 
 }

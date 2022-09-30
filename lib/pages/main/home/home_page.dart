@@ -100,6 +100,10 @@ class _HomePageState extends State<HomePage>
 
     return Scaffold(
       key: _homeKey,
+<<<<<<< HEAD
+=======
+      backgroundColor: Colors.white,
+>>>>>>> 0498dceafad2ebd3fb54ad525dce6152642a8a65
       body: RxCustomScrollView(
         key: const Key("lHome"),
         controller: scrollController,
@@ -172,7 +176,16 @@ _buildTitle(String header, void Function()? onTap) {
     padding: const EdgeInsets.all(kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(header.toUpperCase(), style: const TextStyle().bold),
+<<<<<<< HEAD
       RxIconButton(onTap: onTap, icon: AppIcons.chevron_right)
+=======
+      Row(
+        children: [
+          Text("seemore".tr(), style: const TextStyle().bold),
+          RxIconButton(onTap: onTap, icon: AppIcons.chevron_right)
+        ],
+      )
+>>>>>>> 0498dceafad2ebd3fb54ad525dce6152642a8a65
     ]),
   );
 }

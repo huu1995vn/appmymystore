@@ -16,6 +16,7 @@ class ItemNewsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        margin: const EdgeInsets.only(bottom: 10),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(5.0),
             child: InkWell(

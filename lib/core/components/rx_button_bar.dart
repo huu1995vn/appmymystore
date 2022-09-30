@@ -9,7 +9,7 @@ class RxButtonBar extends StatelessWidget {
       required this.isEnable,
       required this.onPressed})
       : super(key: key);
-  Icon icon;
+  Widget icon;
   bool isEnable = false;
   final GestureTapCallback onPressed;
   @override

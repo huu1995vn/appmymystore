@@ -83,14 +83,9 @@ class RxWebViewState extends State<RxWebView> {
   Widget build(BuildContext context) {
     // bool ishtml = widget.html != null && widget.url == null;
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: const IconThemeData(
-              color: AppColors.black //change your color here
-              ),
+        appBar: AppBar( 
           centerTitle: true,
-          title: Text(widget.title ?? "",
-              style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-          backgroundColor: AppColors.grey,
+          title: Text(widget.title ?? ""), 
           elevation: 0.0,
         ),
         body: Stack(
@@ -456,8 +451,7 @@ class RxButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: double.infinity,
+    return SizedBox( 
         height: kSizeHeight,
         child: icon == null
             ? ElevatedButton(

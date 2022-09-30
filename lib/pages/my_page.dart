@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_null_comparison, use_build_context_synchronously
 
 import 'dart:async';
-import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
@@ -12,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/lifecyclewatcherstate.dart';
-import 'package:raoxe/core/providers/app_provider.dart';
+import 'package:raoxe/core/providers/notification_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
@@ -67,12 +68,13 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
 
   StreamSubscription<PushNotification>? submess;
   initApp() {
-    Provider.of<AppProvider>(context, listen: false).getNotification();
+    Provider.of<NotificationProvider>(context, listen: false).getNotification();
     if (mounted) {
       submess =
           FirebaseMessagingService.streamMessage.stream.listen((message) async {
         if (message != null) {
-          Provider.of<AppProvider>(context, listen: false).getNotification();
+          Provider.of<NotificationProvider>(context, listen: false)
+              .getNotification();
           if (message.isBackgournd && message.data!["link"] != null) {
             String link = message.data!["link"].toString().toLowerCase();
             CommonMethods.launchURL(link);
@@ -98,7 +100,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
                     onTap: () {
                       onDetailNotification(message);
                     },
-                    child: Text("detail".tr,
+                    child: Text("detail".tr(),
                         style: TextStyle(color: AppColors.info))),
               );
             }
@@ -157,7 +159,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   @override
   Widget build(BuildContext context) {
     final notificationProvider =
-        Provider.of<AppProvider>(context, listen: true);
+        Provider.of<NotificationProvider>(context, listen: true);
 
     CommonMethods.versionCheck(context);
     Size size = MediaQuery.of(context).size;
@@ -177,20 +179,21 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.primary,
         onPressed: () {
           if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
           } else {
-            CommonMethods.showToast("please.login".tr);
+            CommonMethods.showToast("please.login".tr());
           }
         },
         shape: RoundedRectangleBorder(
+
             // side: BorderSide(width: 1, color: Theme.of(context).cardColor),
             borderRadius: BorderRadius.circular(100)),
         child: Icon(
           Icons.add,
-          color: AppColors.primary,
+          color: AppColors.white,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -202,14 +205,14 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               RxButtonBar(
-                icon: const Icon(AppIcons.bullhorn, size: 17),
+                icon: FaIcon(FontAwesomeIcons.bullhorn),
                 isEnable: _selectedIndex == 0,
                 onPressed: () {
                   onPressedTab(0);
                 },
               ),
               RxButtonBar(
-                icon: Icon(AppIcons.earth, size: 17),
+                icon: FaIcon(FontAwesomeIcons.earth, size: 17),
                 isEnable: _selectedIndex == 1,
                 onPressed: () {
                   onPressedTab(1);
@@ -220,7 +223,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
               ),
               Stack(children: <Widget>[
                 RxButtonBar(
-                  icon: Icon(AppIcons.alarm, size: 19),
+                  icon: FaIcon(FontAwesomeIcons.bell, size: 19),
                   isEnable: _selectedIndex == 2,
                   onPressed: () {
                     onPressedTab(2);
@@ -252,7 +255,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
                   )
               ]),
               RxButtonBar(
-                icon: const Icon(AppIcons.more_horiz, size: 17),
+                icon: const FaIcon(FontAwesomeIcons.ellipsis, size: 17),
                 isEnable: _selectedIndex == 3,
                 onPressed: () {
                   onPressedTab(3);

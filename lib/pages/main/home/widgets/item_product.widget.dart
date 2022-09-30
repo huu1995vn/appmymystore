@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
+<<<<<<< HEAD
 import 'package:raoxe/core/commons/common_methods.dart';
+=======
+import 'package:raoxe/core/commons/index.dart';
+>>>>>>> 0498dceafad2ebd3fb54ad525dce6152642a8a65
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
@@ -18,7 +23,14 @@ class ItemProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int lenimg = item.rximglist.length;
-    return Card(
+    return Container(
+      padding: EdgeInsets.only(top: 10, bottom: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          bottom: BorderSide(width: 1, color: Colors.black12),
+        ),
+      ),
       child: GestureDetector(
         onTap: onTap,
         child: SizedBox(
@@ -26,52 +38,49 @@ class ItemProductWidget extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(5),
-                      topLeft: Radius.circular(5)),
-                  child: Stack(
-                    children: <Widget>[
-                      RxImage(item.rximg, width: SizeConfig.screenWidth / 4),
-                      if (lenimg > 0)
-                        Positioned(
-                          top: 5,
-                          right: 5,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              border: Border.all(color: AppColors.black50),
-                              color: AppColors.grey,
-                            ),
-                            child: SizedBox(
-                                height: 15, width: 20, child: Container()),
-                          ),
+              Stack(
+                children: <Widget>[
+                  RxImage(item.rximg, width: SizeConfig.screenWidth / 4),
+                  if (lenimg > 0)
+                    Positioned(
+                      top: 5,
+                      right: 5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          border: Border.all(color: AppColors.black50),
+                          color: AppColors.grey,
                         ),
-                      if (lenimg > 0)
-                        Positioned(
-                          top: 3,
-                          right: 3,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              border: Border.all(color: AppColors.black50),
-                              color: AppColors.grey,
-                            ),
-                            child: SizedBox(
-                                height: 15,
-                                width: 20,
-                                child: Center(
-                                    child: Text(
-                                  lenimg >= 9 ? "9+" : lenimg.toString(),
-                                  style: kTextSubTitleStyle.copyWith(
-                                      fontStyle: FontStyle.normal,
-                                      color: AppColors.black),
-                                  //     .bold,
-                                ))),
-                          ),
+                        child:
+                            SizedBox(height: 15, width: 20, child: Container()),
+                      ),
+                    ),
+                  if (lenimg > 0)
+                    Positioned(
+                      top: 3,
+                      right: 3,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          border: Border.all(color: AppColors.black50),
+                          color: AppColors.grey,
                         ),
-                    ],
-                  )),
+                        child: SizedBox(
+                            height: 15,
+                            width: 20,
+                            child: Center(
+                                child: Text(
+                              lenimg >= 9 ? "9+" : lenimg.toString(),
+                              style: kTextSubTitleStyle.copyWith(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12,
+                                  color: AppColors.black),
+                              //     .bold,
+                            ))),
+                      ),
+                    ),
+                ],
+              ),
               Expanded(
                 child: Padding(
                     padding: kEdgeInsetsPadding,
@@ -89,15 +98,49 @@ class ItemProductWidget extends StatelessWidget {
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
-                                        // fontSize: 36,
-                                        ),
+                                      fontSize: 16,
+                                    ),
                                   ),
+<<<<<<< HEAD
                                   Text(
                                     CommonMethods.formatShortCurrency(
                                         item.price),
                                     style: const TextStyle(
                                       color: AppColors.primary,
                                     ).bold,
+=======
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        CommonMethods.formatShortCurrency(
+                                            item.price),
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          color: AppColors.primary,
+                                        ).bold,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            color: item!.state == 1
+                                                ? Colors.blue
+                                                : Colors.yellow,
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 4),
+                                          child: Text(item!.statename,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: item!.state == 1 ? Colors.white : Colors.black)))
+                                    ],
+>>>>>>> 0498dceafad2ebd3fb54ad525dce6152642a8a65
                                   ),
                                   if (item.status > 2 && item.reject != null)
                                     Text(
@@ -112,17 +155,35 @@ class ItemProductWidget extends StatelessWidget {
                               // spacing: kDefaultPadding,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(item.rxtimeago, style: kTextTimeStyle),
-                                Text(
-                                  item.cityname ?? "NaN",
-                                  style: kTextSubTitleStyle,
+                                Row(
+                                  children: [
+                                    Text(item.rxtimeago, style: kTextTimeStyle),
+                                    SizedBox(width: 7),
+                                    Container(
+                                      width: 3,
+                                      height: 3,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    SizedBox(width: 7),
+                                    Text(
+                                      item.cityname ?? "NaN",
+                                      style: kTextSubTitleStyle,
+                                    ),
+                                  ],
                                 ),
                                 if (item.userid != APITokenService.userId)
                                   RxIconButton(
-                                    icon: AppIcons.heart_1,
+                                    icon: item.isfavorite
+                                        ? FontAwesomeIcons.solidBookmark
+                                        : FontAwesomeIcons.bookmark,
                                     onTap: onFavorite,
+                                    size: 35,
                                     colorIcon: item.isfavorite
-                                        ? AppColors.primary
+                                        ? AppColors.yellow
                                         : AppColors.secondary,
                                   )
                               ],

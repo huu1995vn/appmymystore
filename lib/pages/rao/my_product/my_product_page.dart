@@ -58,9 +58,11 @@ class _MyProductPageState extends State<MyProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.grey[200],
         body: DefaultTabController(
           length: tabs.length,
           child: NestedScrollView(
+<<<<<<< HEAD
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
@@ -82,17 +84,37 @@ class _MyProductPageState extends State<MyProductPage> {
                           unselectedLabelColor: AppColors.black50,
                           indicatorColor: AppColors.primary,
                           tabs: tabs,
+=======
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return <Widget>[
+                  SliverAppBar(
+                    centerTitle: true,
+                    title: Text("manager.raoxe".tr()),
+                    elevation: 0.0,
+                  ),
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: RxSliverAppBarTabDelegate(
+                      child: PreferredSize(
+                        preferredSize: Size.fromHeight(45.0),
+                        child: Container(
+                          color: Colors.white,
+                          child: TabBar(
+                            isScrollable: true,
+                            labelColor: AppColors.primary,
+                            unselectedLabelColor: AppColors.black50,
+                            indicatorColor: AppColors.primary,
+                            tabs: tabs,
+                          ),
+>>>>>>> 0498dceafad2ebd3fb54ad525dce6152642a8a65
                         ),
                       ),
                     ),
                   ),
-                ),
-              ];
-            },
-            body: TabBarView(
-              children: tabviews,
-            ),
-          ),
+                ];
+              },
+              body: TabBarView(children: tabviews)),
         ),
         persistentFooterButtons: [
           RxPrimaryButton(

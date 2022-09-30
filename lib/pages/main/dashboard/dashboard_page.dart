@@ -2,6 +2,7 @@
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -90,8 +91,8 @@ class _DashboardPageState extends State<DashboardPage> {
                           _card(
                             child: ListTile(
                               title: Text("manager.raoxe".tr),
-                              leading: Icon(
-                                AppIcons.bullhorn,
+                              leading: FaIcon(
+                                FontAwesomeIcons.bullhorn,
                               ),
                               onTap: () =>
                                   CommonNavigates.toMyProductPage(context),
@@ -104,8 +105,8 @@ class _DashboardPageState extends State<DashboardPage> {
                           _card(
                             child: ListTile(
                               title: Text("ads".tr),
-                              leading: Icon(
-                                AppIcons.rss_feed,
+                              leading: FaIcon(
+                                FontAwesomeIcons.rss,
                               ),
                               onTap: () =>
                                   CommonNavigates.toAdvertPage(context),
@@ -118,8 +119,8 @@ class _DashboardPageState extends State<DashboardPage> {
                           _card(
                             child: ListTile(
                               title: Text("contact".tr),
-                              leading: Icon(
-                                AppIcons.envelope,
+                              leading: FaIcon(
+                                FontAwesomeIcons.envelope,
                               ),
                               onTap: () =>
                                   CommonNavigates.toVehicleContactPage(context),
@@ -131,8 +132,8 @@ class _DashboardPageState extends State<DashboardPage> {
                           _card(
                             child: ListTile(
                               title: Text("favorite".tr),
-                              leading: Icon(
-                                AppIcons.heart_1,
+                              leading: FaIcon(
+                                FontAwesomeIcons.heart,
                               ),
                               onTap: () =>
                                   CommonNavigates.toFavoritePage(context),
@@ -144,8 +145,8 @@ class _DashboardPageState extends State<DashboardPage> {
                           _card(
                             child: ListTile(
                               title: Text("review".tr),
-                              leading: Icon(
-                                AppIcons.star_1,
+                              leading: FaIcon(
+                                FontAwesomeIcons.star,
                               ),
                               onTap: () =>
                                   CommonNavigates.toReviewPage(context),
@@ -158,8 +159,8 @@ class _DashboardPageState extends State<DashboardPage> {
                           _card(
                             child: ListTile(
                               title: Text("address".tr),
-                              leading: Icon(
-                                AppIcons.map_marker,
+                              leading: FaIcon(
+                                FontAwesomeIcons.mapPin,
                               ),
                               onTap: () =>
                                   CommonNavigates.toContactPage(context),
@@ -178,9 +179,9 @@ class _DashboardPageState extends State<DashboardPage> {
                         child: Column(children: [
                           _card(
                             child: ListTile(
-                              title: Text("setting".tr),
-                              leading: Icon(
-                                AppIcons.cog_1,
+                              title: Text("Cài đặt"),
+                              leading: FaIcon(
+                                FontAwesomeIcons.cog,
                               ),
                               onTap: () =>
                                   CommonNavigates.toSettingsPage(context),

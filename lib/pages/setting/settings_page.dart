@@ -7,6 +7,7 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:get/get.dart';
+import 'package:raoxe/core/lang/translation.service.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
@@ -22,8 +23,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool isVi = false;
-
+  String _selectedLang = TranslationService.locale!.languageCode;
   bool authBiometric = false;
   _onBiometric(bool v) async {
     final userProvider = Provider.of<AppProvider>(context, listen: false);
@@ -48,9 +48,6 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
     loadData();
-    setState(() {
-      isVi = Get.locale == const Locale('vi', 'VN');
-    });
   }
 
   @override
@@ -78,6 +75,17 @@ class _SettingsPageState extends State<SettingsPage> {
       CommonMethods.showDialogError(context, e);
     }
     CommonMethods.unlockScreen();
+  }
+
+  List<DropdownMenuItem<String>> _buildDropdownLangs() {
+    var list = <DropdownMenuItem<String>>[];
+    TranslationService.langs.forEach((key, value) {
+      list.add(DropdownMenuItem<String>(
+        value: key,
+        child: Text(value),
+      ));
+    });
+    return list;
   }
 
   @override
@@ -108,7 +116,9 @@ class _SettingsPageState extends State<SettingsPage> {
                       trailing: Switch(
                         value: ThemeService().isSavedDarkMode(),
                         onChanged: (value) {
-                          ThemeService().changeThemeMode();
+                          setState(() {
+                            ThemeService().changeThemeMode();
+                          });
                         },
                         activeTrackColor: Colors.red[200],
                         activeColor: Colors.red,
@@ -119,22 +129,13 @@ class _SettingsPageState extends State<SettingsPage> {
                   RxBuildItem(
                     icon: const Icon(AppIcons.text_format),
                     title: "language".tr,
-                    trailing: DropdownButton(
-                      value: isVi,
-                      items: const [
-                        DropdownMenuItem(
-                            value: true, child: Text("Tiếng việt")),
-                        DropdownMenuItem(value: false, child: Text("English")),
-                      ],
-                      onChanged: (bool? value) {
-                        setState(() {
-                          isVi = value ?? false;
-                        });
-                        if (value != null && value) {
-                          Get.updateLocale(const Locale('vi', 'VN'));
-                        } else {
-                          Get.updateLocale(const Locale('en', 'US'));
-                        }
+                    trailing: DropdownButton<String>(
+                      icon: Icon(Icons.arrow_drop_down),
+                      value: _selectedLang,
+                      items: _buildDropdownLangs(),
+                      onChanged: (value) {
+                        setState(() => _selectedLang = value!);
+                        TranslationService.changeLocale(value!);
                       },
                     ),
                   ),

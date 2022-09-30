@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
-<<<<<<< HEAD
-import 'package:raoxe/core/commons/common_methods.dart';
-=======
 import 'package:raoxe/core/commons/index.dart';
->>>>>>> 0498dceafad2ebd3fb54ad525dce6152642a8a65
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
@@ -101,14 +97,6 @@ class ItemProductWidget extends StatelessWidget {
                                       fontSize: 16,
                                     ),
                                   ),
-<<<<<<< HEAD
-                                  Text(
-                                    CommonMethods.formatShortCurrency(
-                                        item.price),
-                                    style: const TextStyle(
-                                      color: AppColors.primary,
-                                    ).bold,
-=======
                                   SizedBox(
                                     height: 5,
                                   ),
@@ -138,9 +126,10 @@ class ItemProductWidget extends StatelessWidget {
                                           child: Text(item!.statename,
                                               style: TextStyle(
                                                   fontSize: 12,
-                                                  color: item!.state == 1 ? Colors.white : Colors.black)))
+                                                  color: item!.state == 1
+                                                      ? Colors.white
+                                                      : Colors.black)))
                                     ],
->>>>>>> 0498dceafad2ebd3fb54ad525dce6152642a8a65
                                   ),
                                   if (item.status > 2 && item.reject != null)
                                     Text(

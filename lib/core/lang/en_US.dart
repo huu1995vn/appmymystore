@@ -1,4 +1,6 @@
 const Map<String, String> en_US = {
+  "callnow": "Call now",
+  "chatzalo": "Chat Zalo",
   "highpricefirst": "High price first",
   "lowpricefirst": "Low price first",
   "latest": "Latest",

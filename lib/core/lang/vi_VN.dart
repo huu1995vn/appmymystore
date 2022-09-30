@@ -1,4 +1,6 @@
 const Map<String, String> vi_VN = {
+  "callnow": "Gọi ngay",
+  "chatzalo": "Nhắn Zalo",
   "highpricefirst": "Giá cao trước",
   "lowpricefirst": "Giá thấp trước",
   "latest": "Mới nhất",

@@ -1,11 +1,10 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_null_comparison, use_build_context_synchronously
 
 import 'dart:async';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
-import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -13,7 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/lifecyclewatcherstate.dart';
-import 'package:raoxe/core/providers/notification_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
@@ -68,13 +68,12 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
 
   StreamSubscription<PushNotification>? submess;
   initApp() {
-    Provider.of<NotificationProvider>(context, listen: false).getNotification();
+    Provider.of<AppProvider>(context, listen: false).getNotification();
     if (mounted) {
       submess =
           FirebaseMessagingService.streamMessage.stream.listen((message) async {
         if (message != null) {
-          Provider.of<NotificationProvider>(context, listen: false)
-              .getNotification();
+          Provider.of<AppProvider>(context, listen: false).getNotification();
           if (message.isBackgournd && message.data!["link"] != null) {
             String link = message.data!["link"].toString().toLowerCase();
             CommonMethods.launchURL(link);
@@ -100,7 +99,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
                     onTap: () {
                       onDetailNotification(message);
                     },
-                    child: Text("detail".tr(),
+                    child: Text("detail".tr,
                         style: TextStyle(color: AppColors.info))),
               );
             }
@@ -158,8 +157,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
 
   @override
   Widget build(BuildContext context) {
-    final notificationProvider =
-        Provider.of<NotificationProvider>(context, listen: true);
+    final appProvider = Provider.of<AppProvider>(context, listen: true);
 
     CommonMethods.versionCheck(context);
     Size size = MediaQuery.of(context).size;
@@ -184,7 +182,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
           if (CommonMethods.isLogin) {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
           } else {
-            CommonMethods.showToast("please.login".tr());
+            CommonMethods.showToast("please.login".tr);
           }
         },
         shape: RoundedRectangleBorder(
@@ -229,7 +227,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
                     onPressedTab(2);
                   },
                 ),
-                if (notificationProvider.numNotification > 0)
+                if (appProvider.numNotification > 0)
                   Positioned(
                     right: 6,
                     top: 8,
@@ -244,7 +242,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
                         minHeight: 14,
                       ),
                       child: Text(
-                        '${notificationProvider.numNotification}',
+                        '${appProvider.numNotification}',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 8,

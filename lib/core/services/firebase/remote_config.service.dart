@@ -30,6 +30,10 @@ class RemoteConfigSerivce {
       CommonConfig.hostDynamicLinks =
           remoteConfig.getString("hostDynamicLinks");
     }
+    if (configs["version_masterdata"] != null) {
+      CommonConfig.version_masterdata =
+          int.parse(remoteConfig.getString("version_masterdata").toString());
+    }
 
     return remoteConfig;
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
@@ -20,8 +19,8 @@ class ItemProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     int lenimg = item.rximglist.length;
     return Container(
-      padding: EdgeInsets.only(top: 10, bottom: 10),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
           bottom: BorderSide(width: 1, color: Colors.black12),
@@ -97,7 +96,7 @@ class ItemProductWidget extends StatelessWidget {
                                       fontSize: 16,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Row(
@@ -110,7 +109,7 @@ class ItemProductWidget extends StatelessWidget {
                                           color: AppColors.primary,
                                         ).bold,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Container(
@@ -121,7 +120,7 @@ class ItemProductWidget extends StatelessWidget {
                                                 ? Colors.blue
                                                 : Colors.yellow,
                                           ),
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 10, vertical: 4),
                                           child: Text(item!.statename,
                                               style: TextStyle(
@@ -147,7 +146,7 @@ class ItemProductWidget extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(item.rxtimeago, style: kTextTimeStyle),
-                                    SizedBox(width: 7),
+                                    const SizedBox(width: 7),
                                     Container(
                                       width: 3,
                                       height: 3,
@@ -157,7 +156,7 @@ class ItemProductWidget extends StatelessWidget {
                                         color: Colors.grey,
                                       ),
                                     ),
-                                    SizedBox(width: 7),
+                                    const SizedBox(width: 7),
                                     Text(
                                       item.cityname ?? "NaN",
                                       style: kTextSubTitleStyle,

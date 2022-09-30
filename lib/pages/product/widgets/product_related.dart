@@ -46,7 +46,7 @@ class ReviewState extends State<ProductRelated> {
       body["n"] = kItemOnPage;
       body["filter"] = widget.filter ?? {};
       if (widget.notids != null) {
-        body["filter"]["NotIds"] = widget.notids;
+        body["filter"]["c"] = widget.notids;
       }
       body["orderBy"] = "VerifyDate DESC";
 

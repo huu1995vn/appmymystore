@@ -10,7 +10,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -49,7 +49,7 @@ class _UserPageState extends State<UserPage> {
           urlImage = data!.rximg;
         });
         if (isMyUser) {
-          Provider.of<UserProvider>(context, listen: false).setUserModel(user);
+          Provider.of<AppProvider>(context, listen: false).setUserModel(user);
         }
       } else {
         CommonMethods.showToast(res.message);
@@ -127,7 +127,7 @@ class _UserPageState extends State<UserPage> {
   }
 
   Widget _top() {
-    final userProvider = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<AppProvider>(context);
     return ListTile(
       leading: RxAvatarImage(isMyUser ? userProvider.user.rximg : data!.rximg,
           size: 40),

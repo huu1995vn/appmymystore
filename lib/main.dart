@@ -10,9 +10,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/lang/translation.service.dart';
-import 'package:raoxe/core/providers/notification_provider.dart';
-import 'package:raoxe/core/providers/theme_provider.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
@@ -92,18 +90,15 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => ThemeProvider(),
+          create: (_) => AppProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => UserProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => NotificationProvider(),
+          create: (_) => AppProvider(),
         ),
       ],
-      child: Consumer<ThemeProvider>(
+      child: Consumer<AppProvider>(
           child: const MyPage(),
-          builder: (c, themeProvider, home) => OverlaySupport(
+          builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
                   color: Colors.transparent,
                   // debugShowCheckedModeBanner: false,

@@ -10,7 +10,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 
@@ -38,7 +38,7 @@ class _DashboardPageState extends State<DashboardPage> {
         setState(() {
           data = user;
         });
-        Provider.of<UserProvider>(context, listen: false).setUserModel(user);
+        Provider.of<AppProvider>(context, listen: false).setUserModel(user);
       } else {
         CommonMethods.showToast(res.message);
       }
@@ -206,7 +206,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _top() {
-    final userProvider = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<AppProvider>(context);
     return Container(
         padding: EdgeInsets.only(top: 10, bottom: 10),
         child: ListTile(

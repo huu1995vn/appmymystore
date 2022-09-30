@@ -11,7 +11,7 @@ import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/theme_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
@@ -130,7 +130,6 @@ class _HomePageState extends State<HomePage>
   }
 
   SliverAppBar _appBar() {
-    final theme = Provider.of<ThemeProvider>(context);
     return SliverAppBar(
       floating: true,
       automaticallyImplyLeading: false,

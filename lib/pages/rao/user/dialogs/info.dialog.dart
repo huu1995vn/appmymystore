@@ -13,7 +13,7 @@ import 'package:raoxe/core/components/dialogs/address.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -69,8 +69,8 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
           } else {
             CommonMethods.showToast(res.message);
           }
-          Provider.of<UserProvider>(context, listen: false)
-              .setData(img: fileId);
+          Provider.of<AppProvider>(context, listen: false)
+              .setUserData(img: fileId);
         }
       }
     } catch (e) {
@@ -94,7 +94,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
       } else {
         CommonMethods.showToast(res.message);
       }
-      Provider.of<UserProvider>(context, listen: false).setUserModel(dataClone);
+      Provider.of<AppProvider>(context, listen: false).setUserModel(dataClone);
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }

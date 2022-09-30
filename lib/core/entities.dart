@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -302,12 +302,12 @@ class ProductModel extends Entity {
   String? colorname;
   String? fueltypename;
   String? fullname;
-  int imguser = UserProvider.localuser.img;
-  int? cityid = UserProvider.localuser.cityid;
-  int? districtid = UserProvider.localuser.districtid;
+  int imguser = AppProvider.localuser.img;
+  int? cityid = AppProvider.localuser.cityid;
+  int? districtid = AppProvider.localuser.districtid;
   String? districtname;
-  String? address = UserProvider.localuser.address;
-  String? phone = UserProvider.localuser.phone;
+  String? address = AppProvider.localuser.address;
+  String? phone = AppProvider.localuser.phone;
   String? reject;
   String? username;
   bool get isfavorite {

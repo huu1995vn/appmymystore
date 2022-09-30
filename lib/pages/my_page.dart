@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/lifecyclewatcherstate.dart';
-import 'package:raoxe/core/providers/notification_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
@@ -67,13 +67,12 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
 
   StreamSubscription<PushNotification>? submess;
   initApp() {
-    Provider.of<NotificationProvider>(context, listen: false).getNotification();
+    Provider.of<AppProvider>(context, listen: false).getNotification();
     if (mounted) {
       submess =
           FirebaseMessagingService.streamMessage.stream.listen((message) async {
         if (message != null) {
-          Provider.of<NotificationProvider>(context, listen: false)
-              .getNotification();
+          Provider.of<AppProvider>(context, listen: false).getNotification();
           if (message.isBackgournd && message.data!["link"] != null) {
             String link = message.data!["link"].toString().toLowerCase();
             CommonMethods.launchURL(link);
@@ -158,7 +157,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   @override
   Widget build(BuildContext context) {
     final notificationProvider =
-        Provider.of<NotificationProvider>(context, listen: true);
+        Provider.of<AppProvider>(context, listen: true);
 
     CommonMethods.versionCheck(context);
     Size size = MediaQuery.of(context).size;

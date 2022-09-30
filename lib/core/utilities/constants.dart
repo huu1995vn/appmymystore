@@ -108,23 +108,23 @@ List PRODUCTTYPES = [
   {"name": "buy".tr, "id": 2},
 ];
 List PRODUCTSTATES = [
-  {"name": "Mới", "id": 1},
-  {"name": "Đã sử dụng", "id": 2},
+  {"name": "new".tr, "id": 1},
+  {"name": "old".tr, "id": 2},
 ];
 
 List PRODUCTDOORS = [
-  {"name": "2 Cửa", "id": 2},
-  {"name": "4 Cửa", "id": 4},
+  {"name": "2 ${"seat".tr}", "id": 2},
+  {"name": "4 ${"seat".tr}", "id": 4},
 ];
 
 List PRODUCTSEATS = [
-  {"name": "1 Chỗ", "id": 1},
-  {"name": "2 Chỗ", "id": 2},
-  {"name": "4 Chỗ", "id": 4},
-  {"name": "5 Chỗ", "id": 5},
-  {"name": "6 Chỗ", "id": 6},
-  {"name": "7 Chỗ", "id": 7},
-  {"name": "9 Chỗ", "id": 9},
+  {"name": "1 ${"door".tr}", "id": 1},
+  {"name": "2 ${"door".tr}", "id": 2},
+  {"name": "4 ${"door".tr}", "id": 4},
+  {"name": "5 ${"door".tr}", "id": 5},
+  {"name": "6 ${"door".tr}", "id": 6},
+  {"name": "7 ${"door".tr}", "id": 7},
+  {"name": "9 ${"door".tr}", "id": 9},
 ];
 
 class RxParttern {

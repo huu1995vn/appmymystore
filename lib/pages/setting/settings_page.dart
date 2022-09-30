@@ -6,7 +6,7 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:get/get.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
@@ -25,7 +25,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   bool authBiometric = false;
   _onBiometric(bool v) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final userProvider = Provider.of<AppProvider>(context, listen: false);
     try {
       await AuthService.authBiometric();
       if (v) {
@@ -81,8 +81,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final theme = Provider.of<ThemeProvider>(context);
-    var userProvider = Provider.of<UserProvider>(context);
+    var userProvider = Provider.of<AppProvider>(context);
     authBiometric =
         StorageService.get(StorageKeys.biometric) == userProvider.user.username;
 

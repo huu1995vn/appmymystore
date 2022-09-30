@@ -9,13 +9,14 @@ Scaffold RxScaffold(
     PreferredSizeWidget? appBar,
     Widget? child,
     double? top,
+    Color? color,
     Decoration? decoration}) {
   return Scaffold(
     key: key,
     appBar: appBar,
+    backgroundColor: color ?? Colors.white,
     extendBodyBehindAppBar: true,
-    body: Container(
-      decoration: decoration ?? kBoxDecorationStyle,
+    body: Container( 
       width: double.infinity,
       height: SizeConfig.screenHeight,
       child: Padding(

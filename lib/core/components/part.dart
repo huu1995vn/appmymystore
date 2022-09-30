@@ -252,7 +252,7 @@ Widget RxLoginAccountLabel(context) {
           children: <Widget>[
             Text(
               'message.str006'.tr(),
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 13),
             ),
             Text(
               "login".tr(),
@@ -410,7 +410,7 @@ class RxRoundedButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        side: BorderSide(width: 2.0, color: color),
+        side: BorderSide(width: 1.0, color: color),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius ?? kDefaultPadding),
         ),

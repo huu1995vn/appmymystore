@@ -92,48 +92,56 @@ class ReviewState extends State<ProductRelated> {
   @override
   Widget build(BuildContext context) {
     final scrollDirection = widget.scrollDirection ?? Axis.horizontal;
-    return Column(
-      mainAxisSize: MainAxisSize.max, 
-      children: [
-        Padding(
-            padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  (widget.title ?? "NaN").toUpperCase(),
-                  style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color)
-                      .bold,
-                ),
-                if (scrollDirection == Axis.horizontal)
-                  RxIconButton(
-                      icon: AppIcons.chevron_right,
-                      onTap: () {
-                        CommonNavigates.toProductPage(context,
-                            paramsSearch: widget.filter);
-                      })
-              ],
-            )),
-        RxListView(
-            listData,
-            (context, index) {
-              var item = listData![index];
-              return scrollDirection == Axis.horizontal
-                  ? _buildItem(item)
-                  : ItemProductWidget(item);
-            },
-            key: UniqueKey(),
-            noFound: Center(child: Text("nodatafound".tr())),
-            scrollDirection: scrollDirection,
-          ),
-        (scrollDirection != Axis.horizontal &&
-                listData != null &&
-                totalItems > listData!.length)
-            ? RxRoundedButton(onPressed: _onNext, title: "seemore".tr(), color: AppColors.info,)
-            : Container()
-      ],
-    );
+    return Container(
+        color: Colors.white,
+        margin: EdgeInsets.only(bottom: 5),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+                padding:
+                    const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(widget.title ?? "NaN",
+                     style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                    ),
+                    if (scrollDirection == Axis.horizontal)
+                      RxIconButton(
+                          icon: AppIcons.chevron_right,
+                          onTap: () {
+                            CommonNavigates.toProductPage(context,
+                                paramsSearch: widget.filter);
+                          })
+                  ],
+                )),
+            RxListView(
+              listData,
+              (context, index) {
+                var item = listData![index];
+                return scrollDirection == Axis.horizontal
+                    ? _buildItem(item)
+                    : ItemProductWidget(item);
+              },
+              key: UniqueKey(),
+              noFound: Center(child: Text("nodatafound".tr())),
+              scrollDirection: scrollDirection,
+            ),
+            (scrollDirection != Axis.horizontal &&
+                    listData != null &&
+                    totalItems > listData!.length)
+                ? RxRoundedButton(
+                    onPressed: _onNext,
+                    title: "seemore".tr(),
+                    color: AppColors.info,
+                  )
+                : Container()
+          ],
+        ));
   }
 
   Widget _buildItem(ProductModel item) {

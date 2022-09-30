@@ -1,4 +1,4 @@
-{
+{ 
   "product": {
     "thesame":{
       "suggest": "Gợi ý cho bạn",
@@ -229,7 +229,7 @@
     "text": "Mật khẩu",
     "new": "@:password.text mới",
     "old": "@:password.text cũ",
-    "again": "@:password.text lại",
+    "again": "Nhập lại @:password.text",
     "other": "@:password.text {}"
   },
   "info": {

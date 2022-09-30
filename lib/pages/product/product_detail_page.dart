@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison, import_of_legacy_library_into_null_safe, use_build_context_synchronously
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart'; 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -487,8 +486,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           filledColor: AppColors.yellow,
                           emptyColor: AppColors.yellow,
                           size: 30,
-                          //initialRating: data!.ratingvalue,
-                          initialRating: 2.5,
+                          initialRating: data!.ratingvalue, 
                           isHalfAllowed: true,
                           emptyIcon: FontAwesomeIcons.star,
                           filledIcon: FontAwesomeIcons.solidStar,
@@ -554,6 +552,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ProductRelated(
             title: "product.thesame.suggest".tr(),
             filter: {"BrandId": data!.brandid},
+            scrollDirection: Axis.vertical,
             notids: [data!.id])
       ],
     );

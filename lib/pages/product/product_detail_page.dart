@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison, import_of_legacy_library_into_null_safe, use_build_context_synchronously
 
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -417,89 +418,63 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ],
               )),
         ),
-        Card(
-            child: SizedBox(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(kDefaultPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(data!.name ?? "",
-                    style: kTextHeaderStyle.copyWith(fontSize: 17),
-                    maxLines: 2),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Container(
+            color: Colors.white,
+            margin: EdgeInsets.only(bottom: 5),
+            child: Padding(
+                padding: const EdgeInsets.all(kDefaultPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                        CommonMethods.formatNumber(
-                            data!.price ?? "negotiate".tr),
-                        style: kTextPriceStyle),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      AppIcons.clock_1,
-                      color: AppColors.black50,
-                      size: 13,
+                    Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Text("rate".tr,
+                            style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold))),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(CommonMethods.convertToString(data!.ratingvalue),
+                            style: TextStyle(
+                                color: Colors.orange,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold)),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        RatingBar.readOnly(
+                          filledColor: AppColors.yellow,
+                          emptyColor: AppColors.yellow,
+                          size: 30,
+                          //initialRating: data!.ratingvalue,
+                          initialRating: 2.5,
+                          isHalfAllowed: true,
+                          emptyIcon: FontAwesomeIcons.star,
+                          filledIcon: FontAwesomeIcons.solidStar,
+                          halfFilledIcon: FontAwesomeIcons.starHalfStroke,
+                        ),
+                      ],
                     ),
-                    Text(data!.rxtimeago,
-                        style:
-                            TextStyle(fontSize: 13, color: AppColors.black50)),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      RxButton(
+                        icon: Icon(AppIcons.edit),
+                        color: Colors.blue,
+                        onTap: _onReview,
+                        text: "writereview".tr,
+                      ),
+                    ])
                   ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: kDefaultPadding, right: kDefaultPadding),
-                  child: TextFormField(
-                      initialValue: data!.desc,
-                      minLines:
-                          6, // any number you need (It works as the rows for the textarea)
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      enabled: false),
-                )
-              ],
-            ),
-          ),
-        )),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(kDefaultPadding),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisSize: MainAxisSize.min,
-              children: [
-                _listTitle("status".tr, data!.statename,
-                    leading: Icon(AppIcons.brightness_low,
-                        color: AppColors.black50)),
-                _listTitle("madein".tr, data!.madeinname,
-                    leading: Icon(AppIcons.vpn_lock, color: AppColors.black50)),
-                _listTitle("model".tr, data!.modelname,
-                    leading:
-                        Icon(AppIcons.turned_in_not, color: AppColors.black50)),
-                _listTitle("bodytype".tr, data!.bodytypename,
-                    leading: Icon(AppIcons.directions_car,
-                        color: AppColors.black50)),
-                _listTitle("fueltype".tr, data!.fueltypename,
-                    leading: Icon(AppIcons.opacity, color: AppColors.black50)),
-                _listTitle("color".tr, data!.colorname,
-                    leading: Icon(AppIcons.format_color_fill,
-                        color: AppColors.black50)),
-                _listTitle("year".tr, data!.year,
-                    leading: Icon(AppIcons.timer, color: AppColors.black50)),
-                _listTitle("seat".tr, data!.seat,
-                    leading: Icon(
-                      AppIcons.airline_seat_legroom_normal,
-                      color: AppColors.black50,
-                    ))
-              ],
-            ),
-          ),
-        ),
-        Card(
+                ))),
+        Container(
+          color: Colors.white,
+          margin: EdgeInsets.only(bottom: 5),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
             child: Row(
@@ -542,6 +517,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ProductRelated(
             title: "product.thesame.brand".tr,
             filter: {"BrandId": data!.brandid},
+            scrollDirection: Axis.vertical,
             notids: [data!.id])
       ],
     );

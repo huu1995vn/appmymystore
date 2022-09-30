@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
@@ -48,21 +49,23 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       key: keyLogin,
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.green, // <-- SEE HERE
+          statusBarIconBrightness:
+              Brightness.dark, //<-- For Android SEE HERE (dark icons)
+          statusBarBrightness:
+              Brightness.light, //<-- For iOS SEE HERE (dark icons)
+        ),
         iconTheme: const IconThemeData(
           color: AppColors.black, //change your color here
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      backgroundColor: AppColors.white,
+      body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         _header(),
-        _body(),
-        Flexible(
-          child: Padding(
-            padding: const EdgeInsets.all(kDefaultPadding),
-            child: _createAccountLabel(context),
-          ),
-        ),
+        _body(), 
       ]),
     );
   }
@@ -76,9 +79,15 @@ class _LoginPageState extends State<LoginPage> {
             LOGORAOXECOLORIMAGE,
             width: 180,
           ),
+          SizedBox(height: 30),
           Text(
-            'Welcome to back',
-            style: const TextStyle().italic,
+            "login".tr().toUpperCase(),
+            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          Text(
+            "welcome".tr(),
+            style: const TextStyle(fontSize: 16, color: Colors.black54),
           ),
         ],
       ),
@@ -95,22 +104,19 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color.fromRGBO(225, 95, 27, .3),
-                          blurRadius: 20,
-                          offset: Offset(0, 10))
-                    ]),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: Form(
+                    child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.black26)),
                   child: Column(
                     children: <Widget>[
                       Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(color: AppColors.grey))),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5), 
+                        decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.black26))),
                         child: RxInput(
                           username,
                           labelText: "phone".tr,
@@ -120,10 +126,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: const BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(color: AppColors.grey))),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 5),
                           child: RxInput(
                             password,
                             isPassword: true,
@@ -133,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                           )),
                     ],
                   ),
-                )),
+                ))),
             Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
@@ -154,6 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       )),
                 )),
+            SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
@@ -178,7 +183,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 )
               ],
-            )
+            ),
+            SizedBox(height: 30),
+            _createAccountLabel(context)
           ],
         ),
       ),
@@ -192,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel(context) {
     return GestureDetector(
       onTap: _toRegister,
-      child: Container(
+      child: Container( 
         alignment: Alignment.bottomCenter,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

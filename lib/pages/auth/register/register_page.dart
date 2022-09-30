@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -50,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: user == null
           ? Expanded(
               child: Center(
-              child: Text("no.found".tr),
+              child: Text("nodatafound".tr),
             ))
           : SingleChildScrollView(
               child: Padding(
@@ -72,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: [
             Image.asset(
-              LOGORAOXEWHITEIMAGE,
+              LOGORAOXECOLORIMAGE,
               width: 150,
             ),
             Text("regist".tr, style: const TextStyle(color: AppColors.white)),
@@ -114,12 +115,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     onChanged: (v) => {user!.phone = v},
                     validator: (v) {
                       if (v == null || !v.isNotEmpty) {
-                        return "notempty.password".tr;
+                        return "notempty.phone".tr;
                       } else {
                         return CommonMethods.checkStringPhone(v)
                             ? null
-                            : throw "invalid.phone".tr;
-                        ;
+                            : "invalid.phone".tr;
                       }
                     }),
                 RxInput(

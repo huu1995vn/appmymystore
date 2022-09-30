@@ -34,7 +34,6 @@ class RemoteConfigSerivce {
       CommonConfig.version_masterdata =
           int.parse(remoteConfig.getString("version_masterdata").toString());
     }
-
     return remoteConfig;
   }
 }

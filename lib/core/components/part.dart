@@ -83,9 +83,9 @@ class RxWebViewState extends State<RxWebView> {
   Widget build(BuildContext context) {
     // bool ishtml = widget.html != null && widget.url == null;
     return Scaffold(
-        appBar: AppBar( 
+        appBar: AppBar(
           centerTitle: true,
-          title: Text(widget.title ?? ""), 
+          title: Text(widget.title ?? ""),
           elevation: 0.0,
         ),
         body: Stack(
@@ -410,7 +410,7 @@ class RxRoundedButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        side: BorderSide(width: 2.0, color: color),
+        side: BorderSide(width: 1.0, color: color),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius ?? kDefaultPadding),
         ),
@@ -451,7 +451,7 @@ class RxButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox( 
+    return SizedBox(
         height: kSizeHeight,
         child: icon == null
             ? ElevatedButton(

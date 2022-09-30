@@ -142,7 +142,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   RxBuildItem(
                       icon: const Icon(AppIcons.fingerprint),
-                      title: "Đăng nhập bằng sinh trắc học",
+                      title: "login.biometrics".tr,
                       trailing: Switch(
                         value: authBiometric,
                         onChanged: _onBiometric,

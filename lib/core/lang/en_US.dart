@@ -1,4 +1,5 @@
 const Map<String, String> en_US = {
+  "login.biometrics": "Login with biometrics",
   "callnow": "Call now",
   "chatzalo": "Chat Zalo",
   "highpricefirst": "High price first",
@@ -292,6 +293,5 @@ const Map<String, String> en_US = {
   "message.str013": "Communication not created",
   "message.str014": "Enter search keywords",
   "message.str015": "Product not approved",
-  "message.str016": "Login with biometrics",
   "message.alert01": "Are you sure you want to delete?"
 };

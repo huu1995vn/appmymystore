@@ -179,7 +179,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         child: Column(children: [
                           _card(
                             child: ListTile(
-                              title: Text("Cài đặt"),
+                              title: Text("setting".tr),
                               leading: FaIcon(
                                 FontAwesomeIcons.cog,
                               ),

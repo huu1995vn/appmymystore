@@ -1,4 +1,5 @@
 const Map<String, String> vi_VN = {
+  "login.biometrics": "Đăng nhập bằng sinh trắc học",
   "callnow": "Gọi ngay",
   "chatzalo": "Nhắn Zalo",
   "highpricefirst": "Giá cao trước",
@@ -293,6 +294,5 @@ const Map<String, String> vi_VN = {
   "message.str013": "Thông tin liên lạc chưa được tạo",
   "message.str014": "Nhập từ khóa tìm kiếm",
   "message.str015": "Sản phẩm chưa được duyệt",
-  "message.str016": "Đăng nhập bằng sinh trắc học",
   "message.alert01": "Bạn có chắc muốn xóa?"
 };

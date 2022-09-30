@@ -104,11 +104,12 @@ class ReviewState extends State<ProductRelated> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(widget.title ?? "NaN",
-                     style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
+                    Text(
+                      widget.title ?? "NaN",
+                      style: TextStyle(
+                          color: Colors.grey[700],
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
                     ),
                     if (scrollDirection == Axis.horizontal)
                       RxIconButton(
@@ -125,7 +126,12 @@ class ReviewState extends State<ProductRelated> {
                 var item = listData![index];
                 return scrollDirection == Axis.horizontal
                     ? _buildItem(item)
-                    : ItemProductWidget(item);
+                    : ItemProductWidget(
+                        item,
+                        onTap: () {
+                          CommonNavigates.toProductPage(context, item: item);
+                        },
+                      );
               },
               key: UniqueKey(),
               noFound: Center(child: Text("nodatafound".tr())),

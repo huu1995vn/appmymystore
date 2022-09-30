@@ -1,4 +1,5 @@
 const Map<String, String> en_US = {
+  "writereview": "Write review",
   "login.biometrics": "Login with biometrics",
   "callnow": "Call now",
   "chatzalo": "Chat Zalo",

@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: AppColors.white,
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         _header(),
-        _body(), 
+        _body(),
       ]),
     );
   }
@@ -81,12 +81,12 @@ class _LoginPageState extends State<LoginPage> {
           ),
           SizedBox(height: 30),
           Text(
-            "login".tr().toUpperCase(),
+            "login".tr.toUpperCase(),
             style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
           Text(
-            "welcome".tr(),
+            "welcome".tr,
             style: const TextStyle(fontSize: 16, color: Colors.black54),
           ),
         ],
@@ -115,8 +115,11 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5), 
-                        decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.black26))),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(color: Colors.black26))),
                         child: RxInput(
                           username,
                           labelText: "phone".tr,
@@ -199,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel(context) {
     return GestureDetector(
       onTap: _toRegister,
-      child: Container( 
+      child: Container(
         alignment: Alignment.bottomCenter,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

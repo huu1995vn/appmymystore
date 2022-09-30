@@ -1,4 +1,5 @@
 const Map<String, String> vi_VN = {
+  "writereview": "Viết đánh giá",
   "login.biometrics": "Đăng nhập bằng sinh trắc học",
   "callnow": "Gọi ngay",
   "chatzalo": "Nhắn Zalo",

@@ -476,7 +476,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       children: [
                         Text(CommonMethods.convertToString(data!.ratingvalue),
                             style: TextStyle(
-                                color: Colors.orange,
+                                color: Colors.grey,
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold)),
                         SizedBox(

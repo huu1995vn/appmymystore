@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
@@ -52,6 +53,7 @@ void configLoading() {
 
 initializeApp() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   await StorageService.init();
   await InfoDeviceService.init();
   await Firebase.initializeApp();

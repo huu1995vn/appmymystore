@@ -15,7 +15,6 @@ import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 
 class ProductRelated extends StatefulWidget {

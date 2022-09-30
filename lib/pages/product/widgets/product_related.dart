@@ -120,7 +120,12 @@ class ReviewState extends State<ProductRelated> {
             var item = listData![index];
             return scrollDirection == Axis.horizontal
                 ? _buildItem(item)
-                : ItemProductWidget(item);
+                : ItemProductWidget(
+                    item,
+                    onTap: () {
+                      CommonNavigates.toProductPage(context, item: item);
+                    },
+                  );
           },
           key: UniqueKey(),
           noFound: Center(child: Text("no.found".tr)),
@@ -144,7 +149,7 @@ class ReviewState extends State<ProductRelated> {
         padding: const EdgeInsets.only(right: 10.0),
         child: Card(
           margin: EdgeInsets.zero,
-          child: InkWell(
+          child: GestureDetector(
               onTap: () {
                 CommonNavigates.toProductPage(context, item: item);
               },

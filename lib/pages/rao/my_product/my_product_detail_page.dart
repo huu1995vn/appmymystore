@@ -261,7 +261,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(CommonMethods.convertToString(data!.name)),
+        title: Text(
+            CommonMethods.convertToString(data!.name ?? "create.text".tr())),
         centerTitle: true,
         elevation: 0.0,
       ),

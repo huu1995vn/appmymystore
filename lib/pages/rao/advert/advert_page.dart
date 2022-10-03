@@ -32,7 +32,7 @@ class _AdvertPageState extends State<AdvertPage> {
   AutoScrollController scrollController = AutoScrollController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  loadData([nPaging=1]) async {
+  loadData([nPaging = 1]) async {
     if (nPaging > 1 && listData != null && totalItems <= listData!.length) {
       return;
     }
@@ -60,7 +60,7 @@ class _AdvertPageState extends State<AdvertPage> {
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -84,14 +84,13 @@ class _AdvertPageState extends State<AdvertPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('ads'.tr()),
+          elevation: 0.0,
+        ),
         key: _key,
         body: RxCustomScrollView(
-          appBar: SliverAppBar( 
-            centerTitle: true,
-            title: Text('ads'.tr()),
-            elevation: 0.0,
-          ),
           key: const Key("LAds"),
           controller: scrollController,
           onNextScroll: onNextPage,

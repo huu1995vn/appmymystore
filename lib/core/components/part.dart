@@ -489,38 +489,47 @@ Widget rxTextInput(BuildContext context, String? value,
     void Function(String)? onChanged,
     String? Function(String?)? validator,
     void Function()? onTap}) {
-  return ListTile(
-    title: title ??
-        RichText(
-          text: TextSpan(
-            children: <TextSpan>[
-              TextSpan(
-                  text: labelText ?? "",
-                  style: kTextTitleStyle.copyWith(
-                      color: Theme.of(context).textTheme.bodyText1!.color)),
-              if (validator != null)
-                const TextSpan(
-                    text: ' *',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: AppColors.primary)),
-            ],
-          ),
+  return Container(
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(width: 1.0, color: Colors.black12),
         ),
-    subtitle: RxInput(value ?? "",
-        readOnly: onTap != null,
-        isBorder: isBorder,
-        keyboardType: keyboardType,
-        onChanged: onChanged,
-        hintText: hintText,
-        onTap: onTap,
-        style: TextStyle(
-                color: value != null && value.isNotEmpty
-                    ? AppColors.primary
-                    : null)
-            .size(13),
-        validator: validator,
-        suffixIcon: const Icon(null)),
-  );
+      ),
+      child: ListTile(
+          title: title ??
+              RichText(
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: labelText ?? "",
+                        style: kTextTitleStyle.copyWith(
+                            fontSize: 12, color: Colors.black54)),
+                    if (validator != null)
+                      const TextSpan(
+                          text: ' *',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primary)),
+                  ],
+                ),
+              ),
+          subtitle: Container(
+            height: 35,
+            child: RxInput(value ?? "",
+                readOnly: onTap != null,
+                isBorder: isBorder,
+                keyboardType: keyboardType,
+                onChanged: onChanged,
+                hintText: hintText,
+                onTap: onTap,
+                style: TextStyle(
+                        color: value != null && value.isNotEmpty
+                            ? AppColors.black
+                            : null)
+                    .size(16),
+                validator: validator,
+                suffixIcon: const Icon(null)),
+          )));
 }
 
 Widget rxSelectInput(BuildContext context, String type, dynamic id,
@@ -558,7 +567,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
               ),
             ),
         subtitle: Container(
-          height: 27,
+          height: 35,
           child: RxInput(name,
               isBorder: isBorder,
               readOnly: true,

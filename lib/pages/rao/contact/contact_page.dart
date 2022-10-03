@@ -61,7 +61,7 @@ class _ContactPageState extends State<ContactPage> {
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -94,7 +94,7 @@ class _ContactPageState extends State<ContactPage> {
         listData!.removeAt(index);
       });
     } else {
-      CommonMethods.showToast( res.message);
+      CommonMethods.showToast(res.message);
     }
   }
 
@@ -107,7 +107,7 @@ class _ContactPageState extends State<ContactPage> {
     if (res.status > 0) {
       loadData();
     } else {
-      CommonMethods.showToast( res.message);
+      CommonMethods.showToast(res.message);
     }
   }
 
@@ -130,14 +130,13 @@ class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       key: _key,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('address'.tr()),
+        elevation: 0.0,
+      ),
       body: RxCustomScrollView(
-        appBar: SliverAppBar( 
-          centerTitle: true,
-          title: Text('address'.tr()), 
-          elevation: 0.0,
-        ),
         key: const Key("LContact"),
         controller: scrollController,
         onNextScroll: onNextPage,
@@ -153,7 +152,10 @@ class _ContactPageState extends State<ContactPage> {
         ],
       ),
       persistentFooterButtons: [
-        RxPrimaryButton(onTap: onDetail, icon: Icon(AppIcons.plus_circle), text: "add.text".tr())
+        RxPrimaryButton(
+            onTap: onDetail,
+            icon: Icon(AppIcons.plus_circle),
+            text: "add.text".tr())
       ],
     );
   }

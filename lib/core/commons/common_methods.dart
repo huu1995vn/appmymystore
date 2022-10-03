@@ -140,6 +140,10 @@ class CommonMethods {
     return valueDefault;
   }
 
+  static String formatPhoneNumber(dynamic phone) {
+    return phone.replaceAll(RegExp('[^0-9]'), '');
+  }
+
   static String generateMd5(String input) {
     return md5.convert(utf8.encode(input)).toString().toUpperCase();
   }
@@ -627,12 +631,13 @@ class CommonMethods {
   }
 
   static void call(String phone) {
+    phone = CommonMethods.formatPhoneNumber(phone);
     launchUrl(Uri.parse("tel://$phone"));
   }
 
   static void chatZalo(String phone) {
+    phone = CommonMethods.formatPhoneNumber(phone);
     launchUrl(Uri.parse("https://zalo.me/$phone"));
   }
   //# build end link dynamic
-
 }

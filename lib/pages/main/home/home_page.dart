@@ -171,15 +171,17 @@ class _HomePageState extends State<HomePage>
 
 _buildTitle(String header, void Function()? onTap) {
   return Padding(
-    padding: const EdgeInsets.all(kDefaultPadding),
+    padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(header.toUpperCase(), style: const TextStyle().bold),
-      Row(
-        children: [
-          Text("seemore".tr(), style: const TextStyle().bold),
-          RxIconButton(onTap: onTap, icon: AppIcons.chevron_right)
-        ],
-      )
+      GestureDetector(
+          onTap: onTap,
+          child: Row(
+            children: [
+              Text("seemore".tr(), style: const TextStyle().bold),
+              RxIconButton(icon: AppIcons.chevron_right)
+            ],
+          ))
     ]),
   );
 }

@@ -46,7 +46,6 @@ class _RegisterPageState extends State<RegisterPage> {
     return RxScaffold(
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.green, // <-- SEE HERE
             statusBarIconBrightness:
                 Brightness.dark, //<-- For Android SEE HERE (dark icons)
             statusBarBrightness:
@@ -204,7 +203,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ],
               ),
               SizedBox(height: 20),
-              RxLoginAccountLabel(context) 
+              RxLoginAccountLabel(context)
             ]));
   }
 

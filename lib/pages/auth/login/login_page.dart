@@ -50,11 +50,8 @@ class _LoginPageState extends State<LoginPage> {
       key: keyLogin,
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.green, // <-- SEE HERE
-          statusBarIconBrightness:
-              Brightness.dark, //<-- For Android SEE HERE (dark icons)
-          statusBarBrightness:
-              Brightness.light, //<-- For iOS SEE HERE (dark icons)
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
         ),
         iconTheme: const IconThemeData(
           color: AppColors.black, //change your color here
@@ -65,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: AppColors.white,
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         _header(),
-        _body(), 
+        _body(),
       ]),
     );
   }
@@ -115,8 +112,11 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5), 
-                        decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.black26))),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(color: Colors.black26))),
                         child: RxInput(
                           username,
                           labelText: "phone".tr(),
@@ -199,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel(context) {
     return GestureDetector(
       onTap: _toRegister,
-      child: Container( 
+      child: Container(
         alignment: Alignment.bottomCenter,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison, import_of_legacy_library_into_null_safe, use_build_context_synchronously
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -108,97 +108,97 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            backgroundColor: Colors.grey[200],
-            body: isNotFound
-                ? Expanded(child: Center(child: Text("not.found".tr())))
-                : ((data == null || data!.id <= 0)
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : RxCustomScrollView(
-                        key: const Key("iProduct"),
-                        controller: scrollController,
-                        slivers: <Widget>[
-                          SliverAppBar(
-                            title: Text(data!.name ?? "updating".tr()),
-                            elevation: 0.0, 
-                            actions: <Widget>[
-                              RxIconButton(
-                                  icon: data!.isfavorite
-                                      ? FontAwesomeIcons.solidBookmark
-                                      : FontAwesomeIcons.bookmark,
-                                  onTap: _onFavorite,
-                                  size: 40,
-                                  color: Colors.transparent,
-                                  colorIcon: data!.isfavorite
-                                      ? AppColors.yellow
-                                      : AppColors.white),
-                              SizedBox(width: kDefaultPadding),
-                              RxIconButton(
-                                icon: FontAwesomeIcons.solidShareFromSquare,
-                                size: 40,
-                                color: Colors.transparent,
-                                colorIcon: AppColors.white,
-                                onTap: _onShare,
+        backgroundColor: Colors.grey[200],
+        body: isNotFound
+            ? Expanded(child: Center(child: Text("not.found".tr())))
+            : ((data == null || data!.id <= 0)
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : RxCustomScrollView(
+                    key: const Key("iProduct"),
+                    controller: scrollController,
+                    slivers: <Widget>[
+                      SliverAppBar(
+                        title: Text(data!.name ?? "updating".tr()),
+                        elevation: 0.0,
+                        actions: <Widget>[
+                          RxIconButton(
+                              icon: data!.isfavorite
+                                  ? FontAwesomeIcons.solidBookmark
+                                  : FontAwesomeIcons.bookmark,
+                              onTap: _onFavorite,
+                              size: 40,
+                              color: Colors.transparent,
+                              colorIcon: data!.isfavorite
+                                  ? AppColors.yellow
+                                  : AppColors.white),
+                          SizedBox(width: kDefaultPadding),
+                          RxIconButton(
+                            icon: FontAwesomeIcons.solidShareFromSquare,
+                            size: 40,
+                            color: Colors.transparent,
+                            colorIcon: AppColors.white,
+                            onTap: _onShare,
+                          ),
+                          SizedBox(width: kDefaultPadding),
+                        ],
+                      ),
+                      SliverToBoxAdapter(child: _buildDetail())
+                    ],
+                  )),
+        bottomNavigationBar: Container(
+            padding: EdgeInsets.all(0.0),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: GestureDetector(
+                      onTap: () => {CommonMethods.call(data!.phone!)},
+                      child: Container(
+                          height: 50,
+                          padding: EdgeInsets.all(10),
+                          color: Colors.green,
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.phone,
+                                color: Colors.white,
+                                size: 20,
                               ),
                               SizedBox(width: kDefaultPadding),
-                            ],
-                          ),
-                          SliverToBoxAdapter(child: _buildDetail())
-                        ],
-                      )),
-            bottomNavigationBar: Container(
-                padding: EdgeInsets.all(0.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 6,
-                      child: GestureDetector(
-                          onTap: () => {CommonMethods.call(data!.phone!)},
-                          child: Container(
-                              height: 50,
-                              padding: EdgeInsets.all(10),
-                              color: Colors.green,
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.phone,
+                              Text(
+                                "call".tr() + ": " + (data!.phone)!,
+                                style: TextStyle(
+                                    fontSize: 20,
                                     color: Colors.white,
-                                    size: 20,
-                                  ),
-                                  SizedBox(width: kDefaultPadding),
-                                  Text(
-                                    "call".tr() + ": " + (data!.phone)!,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ))),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: GestureDetector(
-                          onTap: () => {CommonMethods.chatZalo(data!.phone!)},
-                          child: Container(
-                              height: 50,
-                              padding: EdgeInsets.all(5),
-                              color: Colors.grey[100],
-                              alignment: Alignment.center,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FaIcon(FontAwesomeIcons.comment,
-                                      color: Colors.grey[700]),
-                                  Text("chatzalo".tr())
-                                ],
-                              ))),
-                    ),
-                  ],
-                )));
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ))),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: GestureDetector(
+                      onTap: () => {CommonMethods.chatZalo(data!.phone!)},
+                      child: Container(
+                          height: 50,
+                          padding: EdgeInsets.all(5),
+                          color: Colors.grey[100],
+                          alignment: Alignment.center,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FaIcon(FontAwesomeIcons.comment,
+                                  color: Colors.grey[700]),
+                              Text("chatzalo".tr())
+                            ],
+                          ))),
+                ),
+              ],
+            )));
   }
 
   Widget _listTitle(String title, dynamic subtitle, {Widget? leading}) {
@@ -266,7 +266,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 horizontal: 10, vertical: 4),
                             child: Text(data!.statename,
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.white)))
+                                    fontSize: 15,
+                                    color: data!.state == 1
+                                        ? Colors.white
+                                        : Colors.black)))
                       ],
                     ),
                     SizedBox(
@@ -486,7 +489,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           filledColor: AppColors.yellow,
                           emptyColor: AppColors.yellow,
                           size: 30,
-                          initialRating: data!.ratingvalue, 
+                          initialRating: data!.ratingvalue,
                           isHalfAllowed: true,
                           emptyIcon: FontAwesomeIcons.star,
                           filledIcon: FontAwesomeIcons.solidStar,

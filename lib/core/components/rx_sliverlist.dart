@@ -80,7 +80,6 @@ class RxListViewState extends State<RxSliverList>
                   ),
                   Text(
                     "nodatafound".tr(),
-                    
                   ),
                 ],
               ),
@@ -100,7 +99,7 @@ class RxListViewState extends State<RxSliverList>
 
   Widget _bodylist() {
     return SliverPadding(
-        padding: const EdgeInsets.all(kDefaultPadding),
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
         sliver: widget.data == null
             ? _bodylist_awaiting()
             : widget.data.length == 0

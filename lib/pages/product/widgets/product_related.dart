@@ -18,6 +18,8 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 
+import '../../../core/commons/common_configs.dart';
+
 class ProductRelated extends StatefulWidget {
   const ProductRelated(
       {super.key, this.filter, this.notids, this.title, this.scrollDirection});
@@ -93,7 +95,7 @@ class ReviewState extends State<ProductRelated> {
   Widget build(BuildContext context) {
     final scrollDirection = widget.scrollDirection ?? Axis.horizontal;
     return Container(
-        color: Colors.white,
+        color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
         margin: EdgeInsets.only(bottom: 5),
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -107,7 +109,9 @@ class ReviewState extends State<ProductRelated> {
                     Text(
                       widget.title ?? "NaN",
                       style: TextStyle(
-                          color: Colors.grey[700],
+                          color: CommonConfig.isDark
+                              ? Colors.white
+                              : Colors.grey[700],
                           fontSize: 18,
                           fontWeight: FontWeight.bold),
                     ),

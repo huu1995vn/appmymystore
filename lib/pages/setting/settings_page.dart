@@ -16,6 +16,8 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 
+import '../../core/commons/common_configs.dart';
+
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
@@ -85,100 +87,105 @@ class _SettingsPageState extends State<SettingsPage> {
         StorageService.get(StorageKeys.biometric) == userProvider.user.username;
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: Text('setting'.tr()),
+        centerTitle: true,
+        elevation: 0.0,
+      ),
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-            title: Text('setting'.tr()),
-            centerTitle: true,
-            elevation: 0.0,
-          ),
           SliverFillRemaining(
               child: Column(
             children: [
-              Expanded(
+              Container(
+                  color:
+                      CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+                  margin: EdgeInsets.only(top: 6, bottom: 6),
                   child: ListView(
-                shrinkWrap: true,
-                children: [
-                  RxBuildItem(
-                      icon: FaIcon(FontAwesomeIcons.sun),
-                      title: "Dark mode",
-                      trailing: Switch(
-                        value: theme.selectedThemeMode.name == "dark",
-                        onChanged: (value) {
-                          theme.enableDarkMode(value);
-                        },
-                        activeTrackColor: Colors.red[200],
-                        activeColor: Colors.red,
-                      ),
-                      onTap: () {
-                        // _authenticateWithBiometrics();
-                      }),
-                  RxBuildItem(
-                    icon: const Icon(AppIcons.text_format),
-                    title: context.locale.languageCode == "vi"
-                        ? "Việt Nam"
-                        : "English",
-                    trailing: Switch(
-                      value: context.locale.languageCode != "vi",
-                      onChanged: (value) {
-                        context.setLocale(
-                            value ? const Locale("en") : const Locale("vi"));
-                      },
-                      activeTrackColor: Colors.red[200],
-                      activeColor: Colors.red,
-                    ),
-                  ),
-                  RxBuildItem(
-                      icon: const Icon(AppIcons.fingerprint),
-                      title: "Đăng nhập bằng sinh trắc học",
-                      trailing: Switch(
-                        value: authBiometric,
-                        onChanged: _onBiometric,
-                        activeTrackColor: Colors.red[200],
-                        activeColor: Colors.red,
-                      ),
-                      onTap: () {
-                        // _authenticateWithBiometrics();
-                      }),
-                  // RxBuildItem(
-                  //     title: "Clear cache".tr(),
-                  //     onTap: () {
-                  //       RxSearchDelegate.cacheapiSearch = {};
-                  //       CommonMethods.showToast(
-                  //           context, "success".tr());
-                  //     }),
-                  RxBuildItem(
-                      icon: const Icon(AppIcons.share_1),
-                      title: "share".tr(),
-                      trailing: Icon(AppIcons.keyboard_arrow_right),
-                      onTap: _onShare),
-                  RxBuildItem(
-                      title: "termsandcondition".tr(),
-                      onTap: () {
-                        CommonMethods.openWebViewTermsAndCondition(context);
-                      }),
-                  RxBuildItem(
-                      title: "policy".tr(),
-                      onTap: () {
-                        CommonMethods.openWebViewPolicy(context);
-                      }),
-                  RxBuildItem(
-                      title: "feedback".tr(),
-                      onTap: () {
-                        CommonMethods.openWebViewFeedBack(context);
-                      }),
-                ],
-              )),
-              RxRoundedButton(
-                title: 'logout'.tr(),
-                onPressed: () {
-                  AuthService.logout(context);
-                },
-              ),
-              Text(
-                "${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
-                style: TextStyle().italic,
+                    shrinkWrap: true,
+                    children: ListTile.divideTiles(
+                      //          <-- ListTile.divideTiles
+                      context: context,
+                      tiles: [
+                        RxBuildItem(
+                            icon: FaIcon(FontAwesomeIcons.moon),
+                            title: "Giao diện tối",
+                            trailing: Switch(
+                              value: theme.selectedThemeMode.name == "dark",
+                              onChanged: (value) {
+                                theme.enableDarkMode(value);
+                              },
+                              activeTrackColor: Colors.red[200],
+                              activeColor: Colors.red,
+                            ),
+                            onTap: () {
+                              // _authenticateWithBiometrics();
+                            }),
+                        RxBuildItem(
+                          icon: const FaIcon(FontAwesomeIcons.language),
+                          title: "English",
+                          trailing: Switch(
+                            value: context.locale.languageCode != "vi",
+                            onChanged: (value) {
+                              context.setLocale(value
+                                  ? const Locale("en")
+                                  : const Locale("vi"));
+                            },
+                            activeTrackColor: Colors.red[200],
+                            activeColor: Colors.red,
+                          ),
+                        ),
+                        RxBuildItem(
+                            icon: const FaIcon(FontAwesomeIcons.fingerprint),
+                            title: "Đăng nhập bằng sinh trắc học",
+                            trailing: Switch(
+                              value: authBiometric,
+                              onChanged: _onBiometric,
+                              activeTrackColor: Colors.red[200],
+                              activeColor: Colors.red,
+                            ),
+                            onTap: () {
+                              // _authenticateWithBiometrics();
+                            }),
+                        // RxBuildItem(
+                        //     title: "Clear cache".tr(),
+                        //     onTap: () {
+                        //       RxSearchDelegate.cacheapiSearch = {};
+                        //       CommonMethods.showToast(
+                        //           context, "success".tr());
+                        //     }),
+                        RxBuildItem(
+                            icon:
+                                const FaIcon(FontAwesomeIcons.shareFromSquare),
+                            title: "share".tr(),
+                            trailing: Icon(AppIcons.keyboard_arrow_right),
+                            onTap: _onShare),
+                        RxBuildItem(
+                            title: "termsandcondition".tr(),
+                            onTap: () {
+                              CommonMethods.openWebViewTermsAndCondition(
+                                  context);
+                            }),
+                        RxBuildItem(
+                            title: "policy".tr(),
+                            onTap: () {
+                              CommonMethods.openWebViewPolicy(context);
+                            }),
+                        RxBuildItem(
+                            title: "feedback".tr(),
+                            onTap: () {
+                              CommonMethods.openWebViewFeedBack(context);
+                            }),
+                      ],
+                    ).toList(),
+                  )),
+              Expanded(child: Container()),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
+                  style: TextStyle().italic,
+                ),
               )
             ],
           ))

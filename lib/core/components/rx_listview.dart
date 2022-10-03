@@ -7,6 +7,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
+import '../commons/common_configs.dart';
+import '../utilities/app_colors.dart';
+
 class RxListView extends StatefulWidget {
   final dynamic data;
   final Widget Function(BuildContext, int) itemBuilder;
@@ -142,7 +145,7 @@ class _RxDataListViewState extends State<RxListView>
 
   Widget _bodylist_main() {
     return Container(
-        color: Colors.white,
+        color: CommonConfig.isDark ? Colors.transparent : Colors.white,
         margin: const EdgeInsets.only(top: 6),
         child: ListView.builder(
           key: PageStorageKey(widget.key),

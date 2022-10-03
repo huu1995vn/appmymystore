@@ -22,6 +22,8 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:rating_bar/rating_bar.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
+import '../../core/commons/common_configs.dart';
+
 class ProductDetailPage extends StatefulWidget {
   final int? id;
   final ProductModel? item;
@@ -108,7 +110,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[200],
         body: isNotFound
             ? Expanded(child: Center(child: Text("not.found".tr())))
             : ((data == null || data!.id <= 0)
@@ -212,15 +213,18 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               width: 100,
               child: Text(
                 " $title: ",
-                style: kTextTitleStyle.copyWith(color: AppColors.black50),
+                style: kTextTitleStyle.copyWith(
+                    color:
+                        CommonConfig.isDark ? Colors.white : AppColors.black50),
               )),
           Text(
               (subtitle is int
                       ? (subtitle > 0 ? subtitle.toString() : null)
                       : subtitle?.toString()) ??
                   "not.update".tr(),
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold))
+              style: TextStyle(
+                  color: CommonConfig.isDark ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.bold))
         ],
       ),
     );
@@ -232,7 +236,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       children: <Widget>[
         RxImages(data: data!.rximglist),
         Container(
-            color: Colors.white,
+            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
             margin: EdgeInsets.only(bottom: 5),
             child: SizedBox(
               width: double.infinity,
@@ -279,7 +283,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       children: [
                         Text(data!.rxtimeago,
                             style: TextStyle(
-                                fontSize: 13, color: AppColors.black50)),
+                                fontSize: 13,
+                                color: CommonConfig.isDark
+                                    ? Colors.white
+                                    : AppColors.black50)),
                       ],
                     ),
                   ],
@@ -287,7 +294,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
             )),
         Container(
-            color: Colors.white,
+            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
@@ -295,7 +302,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 children: [
                   Icon(
                     AppIcons.map_1,
-                    color: AppColors.black50,
+                    color:
+                        CommonConfig.isDark ? Colors.white : AppColors.black50,
                     size: 13,
                   ),
                   SizedBox(
@@ -304,12 +312,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   Flexible(
                       child: Text(data!.address ?? "NaN",
                           style: TextStyle(
-                              fontSize: 13, color: AppColors.black50)))
+                              fontSize: 13,
+                              color: CommonConfig.isDark
+                                  ? Colors.white
+                                  : AppColors.black50)))
                 ],
               ),
             )),
         Container(
-          color: Colors.white,
+          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
@@ -322,7 +333,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     padding: EdgeInsets.all(5),
                     child: Text("specification".tr(),
                         style: TextStyle(
-                            color: Colors.grey[700],
+                            color: CommonConfig.isDark
+                                ? Colors.white
+                                : Colors.grey[700],
                             fontSize: 18,
                             fontWeight: FontWeight.bold))),
                 SizedBox(
@@ -354,7 +367,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
         Container(
-            color: Colors.white,
+            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding),
@@ -367,7 +380,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           padding: EdgeInsets.all(5),
                           child: Text("description".tr(),
                               style: TextStyle(
-                                  color: Colors.grey[700],
+                                  color: CommonConfig.isDark
+                                      ? Colors.white
+                                      : Colors.grey[700],
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold))),
                       TextFormField(
@@ -379,7 +394,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           enabled: false),
                     ]))),
         Container(
-          color: Colors.white,
+          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
@@ -405,9 +420,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               children: [
                                 Text(
                                   data!.fullname ?? "NaN",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 16,
-                                    color: AppColors.black50,
+                                    color: CommonConfig.isDark
+                                        ? Colors.white
+                                        : AppColors.black50,
                                   ).bold,
                                 ),
                                 SizedBox(
@@ -415,15 +432,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(
-                                      AppIcons.map_marker,
-                                      color: AppColors.black50,
-                                      size: 13,
-                                    ),
                                     Text(
                                       data!.cityname ?? "NaN",
-                                      style: const TextStyle(
-                                        color: AppColors.black50,
+                                      style: TextStyle(
+                                        color: CommonConfig.isDark
+                                            ? Colors.white
+                                            : AppColors.black50,
                                       ),
                                     ),
                                   ],
@@ -458,7 +472,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               )),
         ),
         Container(
-            color: Colors.white,
+            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding),
@@ -470,7 +484,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         padding: EdgeInsets.all(5),
                         child: Text("rate".tr(),
                             style: TextStyle(
-                                color: Colors.grey[700],
+                                color: CommonConfig.isDark
+                                    ? Colors.white
+                                    : Colors.grey[700],
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold))),
                     Row(
@@ -511,7 +527,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ],
                 ))),
         Container(
-          color: Colors.white,
+          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),

@@ -3,6 +3,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -21,6 +22,8 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+
+import '../../../core/commons/common_configs.dart';
 
 class MyProductDetailPage extends StatefulWidget {
   final int? id;
@@ -257,6 +260,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(CommonMethods.convertToString(data!.name)),
+        centerTitle: true,
+        elevation: 0.0,
+      ),
       body: isNotFound
           ? Expanded(child: Center(child: Text("not.found".tr())))
           : (data == null
@@ -267,11 +275,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                   key: const Key("iProduct"),
                   controller: scrollController,
                   slivers: <Widget>[
-                    SliverAppBar(
-                      title: Text(CommonMethods.convertToString(data!.name)),
-                      centerTitle: true,
-                      elevation: 0.0,
-                    ),
                     SliverToBoxAdapter(
                       child: Form(
                           key: _keyValidationForm,
@@ -282,7 +285,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                             children: <Widget>[
                               _header(title: "youwant".tr().toUpperCase()),
                               Container(
-                                color: Colors.white,
+                                color: CommonConfig.isDark
+                                    ? Colors.transparent
+                                    : Colors.white,
                                 child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -296,7 +301,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                               ),
                               _header(title: "generalinfor".tr()),
                               Container(
-                                color: Colors.white,
+                                color: CommonConfig.isDark
+                                    ? Colors.transparent
+                                    : Colors.white,
                                 margin: const EdgeInsets.only(bottom: 6),
                                 child: Column(
                                   children: [
@@ -383,47 +390,54 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                 ),
                               ),
                               Container(
-                                color: Colors.white,
+                                color: CommonConfig.isDark
+                                    ? Colors.transparent
+                                    : Colors.white,
                                 margin: const EdgeInsets.only(bottom: 6),
                                 child: Column(children: [
+                                  SizedBox(height: 10),
                                   ListTile(
-                                    title: RichText(
-                                        text: TextSpan(children: [
-                                      TextSpan(
-                                          text: "title".tr(),
-                                          style: const TextStyle(
-                                              color: Colors.black54)),
-                                      const TextSpan(
-                                          text: "*",
-                                          style: TextStyle(
-                                              color: AppColors.primary))
-                                    ])),
-                                    subtitle: TextFormField(
-                                      showCursor: true,
-                                      key: const Key("name"),
-                                      initialValue: data!.name,
-                                      keyboardType: TextInputType.multiline,
-                                      onChanged: (value) =>
-                                          {data!.name = value},
-                                      decoration: InputDecoration(
-                                        hintText: "please.enter".tr(),
-                                      ),
-                                      validator: (value) {
-                                        if ((data!.name == null ||
-                                            data!.name!.isEmpty)) {
-                                          return "notempty.text".tr();
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
+                                      title: RichText(
+                                          text: TextSpan(children: [
+                                        TextSpan(
+                                            text: "title".tr(),
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 12)),
+                                        const TextSpan(
+                                            text: "*",
+                                            style: TextStyle(
+                                                color: AppColors.primary))
+                                      ])),
+                                      subtitle: Container(
+                                        height: 30,
+                                        child: TextFormField(
+                                          showCursor: true,
+                                          key: const Key("name"),
+                                          initialValue: data!.name,
+                                          keyboardType: TextInputType.multiline,
+                                          onChanged: (value) =>
+                                              {data!.name = value},
+                                          decoration: InputDecoration(
+                                            hintText: "please.enter".tr(),
+                                          ),
+                                          validator: (value) {
+                                            if ((data!.name == null ||
+                                                data!.name!.isEmpty)) {
+                                              return "notempty.text".tr();
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      )),
                                   ListTile(
                                     title: RichText(
                                         text: TextSpan(children: [
                                       TextSpan(
                                           text: "description".tr(),
                                           style: const TextStyle(
-                                              color: Colors.black54)),
+                                              color: Colors.black54,
+                                              fontSize: 12)),
                                       const TextSpan(
                                           text: "*",
                                           style: TextStyle(
@@ -499,7 +513,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         ),
                                       ))),
                               Container(
-                                  color: Colors.white,
+                                  color: CommonConfig.isDark
+                                      ? Colors.transparent
+                                      : Colors.white,
                                   padding: const EdgeInsets.all(8),
                                   margin: const EdgeInsets.only(bottom: 6),
                                   child: Column(children: [
@@ -541,7 +557,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   ])),
                               _header(title: "specifications".tr()),
                               Container(
-                                  color: Colors.white,
+                                  color: CommonConfig.isDark
+                                      ? Colors.transparent
+                                      : Colors.white,
                                   margin: const EdgeInsets.only(bottom: 6),
                                   child: Column(
                                     children: [
@@ -642,7 +660,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                               _contact(),
                               if (data != null && data!.id > 0)
                                 Container(
-                                    color: Colors.white,
+                                    color: CommonConfig.isDark
+                                        ? Colors.transparent
+                                        : Colors.white,
                                     padding: EdgeInsets.all(kDefaultPadding),
                                     child: Row(
                                       children: [
@@ -658,24 +678,32 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                   ],
                 )),
       persistentFooterButtons: [
-        SizedBox(
-            height: kSizeHeight,
-            child: Row(
-              children: [
-                RxIconButton(icon: AppIcons.arrow_up, onTap: onUpTop),
-                const SizedBox(width: kDefaultPadding),
-                SizedBox(
-                  width: SizeConfig.screenWidth * 0.8,
-                  child: RxPrimaryButton(
-                      onTap: () {
-                        if (_keyValidationForm.currentState!.validate()) {
-                          _onSave();
-                        }
-                      },
-                      text: "save".tr()),
-                ),
-              ],
-            ))
+        Row(
+          children: [
+            Expanded(
+              flex: 7,
+              child: Container(
+                padding: const EdgeInsets.only(right: 5),
+                child: RxPrimaryButton(
+                    onTap: () {
+                      if (_keyValidationForm.currentState!.validate()) {
+                        _onSave();
+                      }
+                    },
+                    text: "save".tr()),
+              ),
+            ),
+            Expanded(
+                flex: 3,
+                child: Container(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: RxButton(
+                        color: Colors.green,
+                        icon: FaIcon(FontAwesomeIcons.arrowUp),
+                        onTap: onUpTop,
+                        text: "uptop.text".tr()))),
+          ],
+        )
       ],
     );
   }

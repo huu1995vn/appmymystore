@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/index.dart';
@@ -11,6 +14,8 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
+import '../../../../core/providers/theme_provider.dart';
+
 class ItemProductWidget extends StatelessWidget {
   final ProductModel item;
   final void Function()? onTap;
@@ -19,10 +24,12 @@ class ItemProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int lenimg = item.rximglist.length;
+    bool isDark =
+        Provider.of<ThemeProvider>(context).selectedThemeMode.name == 'dark';
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: Colors.transparent,
         border: Border(
           bottom: BorderSide(width: 1, color: Colors.black12),
         ),
@@ -150,7 +157,11 @@ class ItemProductWidget extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  Text(item.rxtimeago, style: kTextTimeStyle),
+                                  Text(item.rxtimeago,
+                                      style: kTextTimeStyle.copyWith(
+                                          color: isDark
+                                              ? Colors.white54
+                                              : Colors.grey)),
                                   SizedBox(width: 7),
                                   Container(
                                     width: 3,
@@ -163,7 +174,10 @@ class ItemProductWidget extends StatelessWidget {
                                   SizedBox(width: 7),
                                   Text(
                                     item.cityname ?? "NaN",
-                                    style: kTextSubTitleStyle,
+                                    style: kTextSubTitleStyle.copyWith(
+                                        color: isDark
+                                            ? Colors.white54
+                                            : Colors.grey),
                                   ),
                                 ],
                               ),

@@ -5,15 +5,18 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../commons/common_configs.dart';
+
 class ThemeService {
   static ThemeData main({bool isDark = false}) {
     Color primaryColor = AppColors.primary;
+    Color primaryColorDarkMode = AppColors.blackLight;
     return ThemeData(
       inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
       ),
       brightness: isDark ? Brightness.dark : Brightness.light,
-      primaryColor: isDark ? AppColors.black : primaryColor,
+      primaryColor: isDark ? AppColors.white : primaryColor,
       scaffoldBackgroundColor: isDark ? Colors.black : AppColors.grey,
       cardColor: isDark ? AppColors.blackLight : AppColors.white,
       dividerColor: isDark
@@ -29,14 +32,14 @@ class ThemeService {
                 bodyText2: const TextStyle(fontSize: 13.0),
                 button: const TextStyle(fontSize: 13.0),
               )),
-      iconTheme: IconThemeData(
-          size: 19, color: isDark ? AppColors.white : AppColors.blackLight),
+      iconTheme: const IconThemeData(size: 19, color: AppColors.white),
       appBarTheme: AppBarTheme(
-        elevation: 0,
-        backgroundColor: primaryColor,
-        systemOverlayStyle:
-            isDark ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
-      ),
+          elevation: 0,
+          iconTheme: const IconThemeData(
+            color: AppColors.white,
+          ),
+          backgroundColor: isDark ? primaryColorDarkMode : primaryColor,
+          systemOverlayStyle: SystemUiOverlayStyle.light),
     );
   }
 

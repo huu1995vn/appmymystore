@@ -114,12 +114,6 @@ class _MyAppState extends State<MyApp> {
                   theme: ThemeService.main(),
                   darkTheme: ThemeService.main(
                     isDark: true,
-                  ).copyWith(
-                    colorScheme:
-                        ColorScheme.fromSwatch(primarySwatch: Colors.red)
-                            .copyWith(
-                                secondary: AppColors.primary,
-                                brightness: Brightness.dark),
                   ),
                   themeMode: themeProvider.selectedThemeMode,
                   home: FutureBuilder<FirebaseRemoteConfig>(

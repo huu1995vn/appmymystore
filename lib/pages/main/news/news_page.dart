@@ -7,6 +7,8 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/news/widgets/tab_news.widget.dart';
 
+import '../../../core/commons/common_configs.dart';
+
 class NewsPage extends StatefulWidget {
   const NewsPage({Key? key}) : super(key: key);
 
@@ -43,11 +45,12 @@ class _NewsPageState extends State<NewsPage> {
                 bottom: PreferredSize(
                   preferredSize: Size.fromHeight(50),
                   child: ColoredBox(
-                    color: Colors.white,
+                    color: CommonConfig.isDark ? Colors.white10 : Colors.white,
                     child: TabBar(
                       isScrollable: true,
                       labelColor: AppColors.primary,
-                      unselectedLabelColor: AppColors.black,
+                      unselectedLabelColor:
+                          CommonConfig.isDark ? Colors.white : AppColors.black,
                       indicatorColor: Colors.red[800],
                       tabs: tabs,
                     ),

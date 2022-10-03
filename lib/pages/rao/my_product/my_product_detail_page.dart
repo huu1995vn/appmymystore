@@ -161,27 +161,28 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
               ContactModel item = list[index];
               return Card(
                   child: ListTile(
-                      leading: RxCircleAvatar(
+                      leading: const RxCircleAvatar(
+                          backgroundColor: Colors.grey,
                           child: Icon(AppIcons.map_marker,
-                              size: 30, color: Colors.blue[500])),
+                              size: 20, color: Colors.white)),
                       title: Text(
                         item.fullname ?? "",
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                         overflow: TextOverflow.ellipsis,
-                        // style: TextStyle(FontWeight.normal),
                       ),
-                      // isThreeLine: true,
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(item.phone ?? "",
-                              style: const TextStyle().italic),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(item.address ?? "",
-                              style: const TextStyle().italic),
+                          if (item.cityid != null || item.cityid! > 0)
+                            Text(
+                              item.cityname ?? "NaN",
+                              style: const TextStyle(color: AppColors.blue),
+                            ),
+                          Text(item.address ?? "", style: const TextStyle()),
                         ],
                       ),
+                      trailing: Text(item.phone ?? "",
+                          style: const TextStyle(fontSize: 16)),
                       onTap: () {
                         CommonNavigates.goBack(context, item);
                       }));
@@ -296,6 +297,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                               _header(title: "generalinfor".tr()),
                               Container(
                                 color: Colors.white,
+                                margin: const EdgeInsets.only(bottom: 6),
                                 child: Column(
                                   children: [
                                     rxSelectInput(
@@ -351,7 +353,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       title: Row(
                                         children: [
                                           Text("${'price'.tr()}: ",
-                                              style: kTextTitleStyle),
+                                              style: kTextTitleStyle.size(13)),
                                           Text(
                                             (data!.price != null &&
                                                     data!.price! > 0)
@@ -373,107 +375,93 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         },
                                         hintText: "price".tr(),
                                         style: const TextStyle(
-                                                color: AppColors.black50)
-                                            .size(13),
+                                                color: AppColors.black)
+                                            .size(16),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              _header(
-                                header: RichText(
-                                  text: TextSpan(
-                                    children: [
+                              Container(
+                                color: Colors.white,
+                                margin: const EdgeInsets.only(bottom: 6),
+                                child: Column(children: [
+                                  ListTile(
+                                    title: RichText(
+                                        text: TextSpan(children: [
                                       TextSpan(
                                           text: "title".tr(),
-                                          style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyText1!
-                                                      .color)
-                                              .bold),
+                                          style: const TextStyle(
+                                              color: Colors.black54)),
                                       const TextSpan(
                                           text: "*",
                                           style: TextStyle(
-                                              color: AppColors.primary)),
-                                    ],
+                                              color: AppColors.primary))
+                                    ])),
+                                    subtitle: TextFormField(
+                                      showCursor: true,
+                                      key: const Key("name"),
+                                      initialValue: data!.name,
+                                      keyboardType: TextInputType.multiline,
+                                      onChanged: (value) =>
+                                          {data!.name = value},
+                                      decoration: InputDecoration(
+                                        hintText: "please.enter".tr(),
+                                      ),
+                                      validator: (value) {
+                                        if ((data!.name == null ||
+                                            data!.name!.isEmpty)) {
+                                          return "notempty.text".tr();
+                                        }
+                                        return null;
+                                      },
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Card(
-                                  child: Padding(
-                                padding: kEdgeInsetsPadding,
-                                child: TextFormField(
-                                  showCursor: true,
-                                  key: const Key("name"),
-                                  initialValue: data!.name,
-                                  keyboardType: TextInputType.multiline,
-                                  onChanged: (value) => {data!.name = value},
-                                  decoration: InputDecoration(
-                                    hintText: "please.enter".tr(),
-                                  ),
-                                  validator: (value) {
-                                    if ((data!.name == null ||
-                                        data!.name!.isEmpty)) {
-                                      return "notempty.text".tr();
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              )),
-                              _header(
-                                header: RichText(
-                                  text: TextSpan(
-                                    children: [
+                                  ListTile(
+                                    title: RichText(
+                                        text: TextSpan(children: [
                                       TextSpan(
                                           text: "description".tr(),
-                                          style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyText1!
-                                                      .color)
-                                              .bold),
+                                          style: const TextStyle(
+                                              color: Colors.black54)),
                                       const TextSpan(
                                           text: "*",
                                           style: TextStyle(
-                                              color: AppColors.primary)),
-                                    ],
+                                              color: AppColors.primary))
+                                    ])),
+                                    subtitle: TextFormField(
+                                      showCursor: true,
+                                      key: const Key("desc"),
+                                      initialValue: data!.desc,
+                                      minLines:
+                                          6, // any number you need (It works as the rows for the textarea)
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: null,
+                                      onChanged: (value) =>
+                                          {data!.desc = value},
+                                      decoration: InputDecoration(
+                                        hintText: "please.enter".tr(),
+                                      ),
+                                      maxLength: 1500,
+                                      maxLengthEnforcement:
+                                          MaxLengthEnforcement.none,
+                                      validator: (value) {
+                                        if ((data!.desc == null ||
+                                            data!.desc!.isEmpty)) {
+                                          return "notempty.text".tr();
+                                        }
+                                        return null;
+                                      },
+                                    ),
                                   ),
-                                ),
+                                ]),
                               ),
-                              Card(
-                                  child: Padding(
-                                padding: kEdgeInsetsPadding,
-                                child: TextFormField(
-                                  showCursor: true,
-                                  key: const Key("desc"),
-                                  initialValue: data!.desc,
-                                  minLines:
-                                      6, // any number you need (It works as the rows for the textarea)
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: null,
-                                  onChanged: (value) => {data!.desc = value},
-                                  decoration: InputDecoration(
-                                    hintText: "please.enter".tr(),
-                                  ),
-                                  maxLength: 1500,
-                                  maxLengthEnforcement:
-                                      MaxLengthEnforcement.none,
-                                  validator: (value) {
-                                    if ((data!.desc == null ||
-                                        data!.desc!.isEmpty)) {
-                                      return "notempty.text".tr();
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              )),
                               _header(
                                   header: RichText(
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                            text: "image".tr(),
+                                            text: "image".tr().toUpperCase(),
                                             style: TextStyle(
                                                     color: Theme.of(context)
                                                         .textTheme
@@ -482,7 +470,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                 .bold),
                                         TextSpan(
                                             text:
-                                                "(${imgs.length}/$kMaxImages)",
+                                                " (${imgs.length}/$kMaxImages)",
                                             style: const TextStyle(
                                                 color: AppColors.primary)),
                                       ],
@@ -501,7 +489,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                       .color),
                                             ),
                                             TextSpan(
-                                                text: " ${"download".tr()}",
+                                                text: " ${"add.image".tr()}",
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .textTheme
@@ -510,149 +498,160 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           ],
                                         ),
                                       ))),
-                              Card(
-                                  child: Padding(
-                                padding: kEdgeInsetsPadding,
-                                child: SizedBox(
-                                  height: 180,
-                                  child: GridView.builder(
-                                      padding: const EdgeInsets.only(top: 0.0),
-                                      shrinkWrap: true,
-                                      itemCount:
-                                          imgs.length > 7 ? 7 : imgs.length,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 4),
-                                      itemBuilder: (context, index) {
-                                        return Card(
-                                            child: _itemImage(index,
-                                                onDelete: () => {},
-                                                onShowPhoTo: () => {
-                                                      CommonNavigates
-                                                          .openDialog(
-                                                              context,
-                                                              PhotoViewDialog(
-                                                                initialPage:
-                                                                    index,
-                                                                imgs: imgs,
-                                                                onDelete: (i) =>
-                                                                    {
-                                                                  setState(() {
-                                                                    imgs.removeAt(
-                                                                        i);
-                                                                  })
-                                                                },
-                                                              ))
-                                                    }));
-                                      }),
-                                ),
-                              )),
-                              _header(title: "specifications".tr()),
-                              Card(
-                                  child: Column(
-                                children: [
-                                  rxSelectInput(
-                                      context, "productstate", data!.state,
-                                      labelText: "state".tr(),
-                                      afterChange: (v) => {
-                                            setState(() {
-                                              data!.state = v;
-                                            })
-                                          },
-                                      validator: (v) {
-                                        if (!(data!.state > 0)) {
-                                          return "notempty.text".tr();
-                                        }
-                                        return null;
-                                      }),
-                                  rxSelectInput(
-                                    context,
-                                    "fueltype",
-                                    data!.fueltypeid,
-                                    labelText: "fueltype".tr(),
-                                    afterChange: (v) => {
-                                      setState(() {
-                                        data!.fueltypeid = v;
-                                      })
-                                    },
-                                  ),
-                                  rxSelectInput(
-                                      context, "madein", data!.madeinid,
-                                      labelText: "madein".tr(),
-                                      afterChange: (v) => {
-                                            setState(() {
-                                              data!.madeinid = v;
-                                            })
+                              Container(
+                                  color: Colors.white,
+                                  padding: const EdgeInsets.all(8),
+                                  margin: const EdgeInsets.only(bottom: 6),
+                                  child: Column(children: [
+                                    SizedBox(
+                                      height: 250,
+                                      child: GridView.builder(
+                                          padding:
+                                              const EdgeInsets.only(top: 0.0),
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              imgs.length > 7 ? 7 : imgs.length,
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 4),
+                                          itemBuilder: (context, index) {
+                                            return Card(
+                                                child: _itemImage(index,
+                                                    onDelete: () => {},
+                                                    onShowPhoTo: () => {
+                                                          CommonNavigates
+                                                              .openDialog(
+                                                                  context,
+                                                                  PhotoViewDialog(
+                                                                    initialPage:
+                                                                        index,
+                                                                    imgs: imgs,
+                                                                    onDelete:
+                                                                        (i) => {
+                                                                      setState(
+                                                                          () {
+                                                                        imgs.removeAt(
+                                                                            i);
+                                                                      })
+                                                                    },
+                                                                  ))
+                                                        }));
                                           }),
-                                  rxSelectInput(
-                                      context, "productdoor", data!.door,
-                                      labelText: "door".tr(),
-                                      afterChange: (v) => {
-                                            setState(() {
-                                              data!.door = v;
-                                            })
-                                          }),
-                                  rxSelectInput(
-                                      context, "productseat", data!.seat,
-                                      labelText: "seat".tr(),
-                                      afterChange: (v) => {
-                                            setState(() {
-                                              data!.seat = v;
-                                            })
-                                          }),
-                                  rxSelectInput(context, "color", data!.colorid,
-                                      labelText: "color".tr(),
-                                      afterChange: (v) => {
-                                            setState(() {
-                                              data!.colorid = v;
-                                            })
-                                          }),
-                                  ListTile(
-                                    title: Text('year'.tr(),
-                                        style: kTextTitleStyle),
-                                    subtitle: RxInput(
-                                      keyboardType: TextInputType.number,
-                                      data!.year?.toString() ?? "",
-                                      onChanged: (v) {
-                                        setState(() {
-                                          data!.year =
-                                              CommonMethods.convertToInt32(v);
-                                        });
-                                      },
-                                      hintText: "year".tr(),
-                                      style: const TextStyle(
-                                              color: AppColors.primary)
-                                          .size(13),
                                     ),
-                                  ),
-                                ],
-                              )),
+                                  ])),
+                              _header(title: "specifications".tr()),
+                              Container(
+                                  color: Colors.white,
+                                  margin: const EdgeInsets.only(bottom: 6),
+                                  child: Column(
+                                    children: [
+                                      rxSelectInput(
+                                          context, "productstate", data!.state,
+                                          labelText: "state".tr(),
+                                          afterChange: (v) => {
+                                                setState(() {
+                                                  data!.state = v;
+                                                })
+                                              },
+                                          validator: (v) {
+                                            if (!(data!.state > 0)) {
+                                              return "notempty.text".tr();
+                                            }
+                                            return null;
+                                          }),
+                                      rxSelectInput(
+                                        context,
+                                        "fueltype",
+                                        data!.fueltypeid,
+                                        labelText: "fueltype".tr(),
+                                        afterChange: (v) => {
+                                          setState(() {
+                                            data!.fueltypeid = v;
+                                          })
+                                        },
+                                      ),
+                                      rxSelectInput(
+                                          context, "madein", data!.madeinid,
+                                          labelText: "madein".tr(),
+                                          afterChange: (v) => {
+                                                setState(() {
+                                                  data!.madeinid = v;
+                                                })
+                                              }),
+                                      rxSelectInput(
+                                          context, "productdoor", data!.door,
+                                          labelText: "door".tr(),
+                                          afterChange: (v) => {
+                                                setState(() {
+                                                  data!.door = v;
+                                                })
+                                              }),
+                                      rxSelectInput(
+                                          context, "productseat", data!.seat,
+                                          labelText: "seat".tr(),
+                                          afterChange: (v) => {
+                                                setState(() {
+                                                  data!.seat = v;
+                                                })
+                                              }),
+                                      rxSelectInput(
+                                          context, "color", data!.colorid,
+                                          labelText: "color".tr(),
+                                          afterChange: (v) => {
+                                                setState(() {
+                                                  data!.colorid = v;
+                                                })
+                                              }),
+                                      ListTile(
+                                        title: Text('year'.tr(),
+                                            style: kTextTitleStyle),
+                                        subtitle: RxInput(
+                                          keyboardType: TextInputType.number,
+                                          data!.year?.toString() ?? "",
+                                          onChanged: (v) {
+                                            setState(() {
+                                              data!.year =
+                                                  CommonMethods.convertToInt32(
+                                                      v);
+                                            });
+                                          },
+                                          hintText: "year".tr(),
+                                          style: const TextStyle(
+                                                  color: AppColors.primary)
+                                              .size(16),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
                               _header(
                                 header: RichText(
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                          text: "contact".tr(),
+                                          text: "contact".tr().toUpperCase(),
                                           style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
                                                       .bodyText1!
                                                       .color)
                                               .bold),
-                                      const TextSpan(
-                                          text: "*",
-                                          style: TextStyle(
-                                              color: AppColors.primary)),
                                     ],
                                   ),
                                 ),
                               ),
                               _contact(),
                               if (data != null && data!.id > 0)
-                                Center(
-                                    child: RxRoundedButton(
-                                        onPressed: _onDelete,
-                                        title: "delete.text".tr()))
+                                Container(
+                                    color: Colors.white,
+                                    padding: EdgeInsets.all(kDefaultPadding),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                            child: RxRoundedButton(
+                                                onPressed: _onDelete,
+                                                title: "delete.text".tr()))
+                                      ],
+                                    ))
                             ],
                           )),
                     )
@@ -673,7 +672,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                           _onSave();
                         }
                       },
-                      text: "done".tr()),
+                      text: "save".tr()),
                 ),
               ],
             ))
@@ -682,9 +681,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   }
 
   Widget _contact() {
-    return Card(
+    return Container(
+      color: Colors.white,
+      margin: const EdgeInsets.only(bottom: 6),
       child: ListTile(
-        leading: RxAvatarImage(data!.rximguser, size: 40),
+        leading: RxAvatarImage(data!.rximguser, size: 50),
         title: Text(data!.fullname ?? "NaN", style: const TextStyle().bold),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -693,23 +694,24 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  data!.phone ?? "NaN",
-                  style: const TextStyle(color: AppColors.primary),
-                ),
                 if (data!.cityid != null || data!.cityid! > 0)
                   Text(
                     data!.cityname ?? "NaN",
-                    style: const TextStyle(),
+                    style: const TextStyle(color: AppColors.blue),
                   ),
+                Text(
+                  data!.phone ?? "NaN",
+                  style: const TextStyle(color: AppColors.black, fontSize: 16),
+                ),
               ],
             ),
             Text(
               data!.address ?? "NaN",
-              style: const TextStyle().italic,
+              style: const TextStyle(),
             )
           ],
         ),
+        trailing: const Icon(AppIcons.chevron_right),
         onTap: _onAddress,
       ),
     );
@@ -798,10 +800,12 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
           },
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith((states) {
-              return AppColors.white;
+              return (data!.producttypeid == value)
+                  ? AppColors.primary
+                  : AppColors.white;
             }),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(5),
                 side: BorderSide(
                   color: (data!.producttypeid == value)
                       ? AppColors.primary
@@ -812,7 +816,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             text,
             style: TextStyle(
               color: (data!.producttypeid == value)
-                  ? AppColors.primary
+                  ? AppColors.white
                   : AppColors.black,
             ),
           ),

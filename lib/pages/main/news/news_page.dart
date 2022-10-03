@@ -32,43 +32,29 @@ class _NewsPageState extends State<NewsPage> {
       .toList();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: DefaultTabController(
-      length: tabs.length,
-      child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              centerTitle: true,
-              title: Text("news.text".tr()), 
-              floating: true,
-              automaticallyImplyLeading: false,
-              elevation: 0.0,
-            ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: RxSliverAppBarTabDelegate(
-                child: PreferredSize(
-                  preferredSize: Size.fromHeight(45.0),
-                  child: Container(
+    return DefaultTabController(
+        length: tabs.length,
+        child: Scaffold(
+            appBar: AppBar(
+                centerTitle: true,
+                title: Text("news.text".tr()),
+                automaticallyImplyLeading: false,
+                elevation: 0.0,
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(50),
+                  child: ColoredBox(
                     color: Colors.white,
                     child: TabBar(
                       isScrollable: true,
                       labelColor: AppColors.primary,
-                      unselectedLabelColor: AppColors.black50,
-                      indicatorColor: AppColors.primary,
+                      unselectedLabelColor: AppColors.black,
+                      indicatorColor: Colors.red[800],
                       tabs: tabs,
                     ),
                   ),
-                ),
-              ),
-            ),
-          ];
-        },
-        body: TabBarView(
-          children: tabviews,
-        ),
-      ),
-    ));
+                )),
+            body: TabBarView(
+              children: tabviews,
+            )));
   }
 }

@@ -51,149 +51,140 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("Mở rộng"),
+          elevation: 0.0,
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                AuthService.logout(context);
+              },
+              child: Text(
+                "Đăng xuất",
+                style: TextStyle(color: Colors.white),
+              ),
+            )
+          ],
+        ),
         body: data == null
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : NestedScrollView(
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverAppBar(
-                      centerTitle: true,
-                      title: Text("Mở rộng"),
-                      elevation: 0.0,
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            AuthService.logout(context);
-                          },
-                          child: Text(
-                            "Đăng xuất",
-                            style: TextStyle(color: Colors.white),
+            : Column(
+                children: [
+                  Container(
+                      color: Colors.white,
+                      margin: EdgeInsets.only(bottom: 5, top: 5),
+                      child: Column(children: [_top()])),
+                  Container(
+                    color: Colors.white,
+                    margin: EdgeInsets.only(bottom: 5),
+                    child: Column(
+                      children: [
+                        _card(
+                          child: ListTile(
+                            title: Text("manager.raoxe".tr()),
+                            leading: FaIcon(
+                              FontAwesomeIcons.bullhorn,
+                            ),
+                            onTap: () =>
+                                CommonNavigates.toMyProductPage(context),
+                            trailing: Icon(
+                              AppIcons.keyboard_arrow_right,
+                            ),
+                            // subtitle: Text("Quản lý danh sách tin rao"),
                           ),
-                        )
+                        ),
+                        _card(
+                          child: ListTile(
+                            title: Text("ads".tr()),
+                            leading: FaIcon(
+                              FontAwesomeIcons.rss,
+                            ),
+                            onTap: () => CommonNavigates.toAdvertPage(context),
+                            trailing: Icon(
+                              AppIcons.keyboard_arrow_right,
+                            ),
+                            // subtitle: Text("Quản lý danh sách quảng cáo"),
+                          ),
+                        ),
+                        _card(
+                          child: ListTile(
+                            title: Text("contact".tr()),
+                            leading: FaIcon(
+                              FontAwesomeIcons.envelope,
+                            ),
+                            onTap: () =>
+                                CommonNavigates.toVehicleContactPage(context),
+                            trailing: Icon(
+                              AppIcons.keyboard_arrow_right,
+                            ),
+                          ),
+                        ),
+                        _card(
+                          child: ListTile(
+                            title: Text("favorite".tr()),
+                            leading: FaIcon(
+                              FontAwesomeIcons.heart,
+                            ),
+                            onTap: () =>
+                                CommonNavigates.toFavoritePage(context),
+                            trailing: Icon(
+                              AppIcons.keyboard_arrow_right,
+                            ),
+                          ),
+                        ),
+                        _card(
+                          child: ListTile(
+                            title: Text("review".tr()),
+                            leading: FaIcon(
+                              FontAwesomeIcons.star,
+                            ),
+                            onTap: () => CommonNavigates.toReviewPage(context),
+                            trailing: Icon(
+                              AppIcons.keyboard_arrow_right,
+                            ),
+                            // subtitle: Text("Danh sách đánh giá"),
+                          ),
+                        ),
+                        _card(
+                          child: ListTile(
+                            title: Text("address".tr()),
+                            leading: FaIcon(
+                              FontAwesomeIcons.mapPin,
+                            ),
+                            onTap: () => CommonNavigates.toContactPage(context),
+                            trailing: Icon(
+                              AppIcons.keyboard_arrow_right,
+                            ),
+                            // subtitle: Text("Sổ địa chỉ"),
+                          ),
+                        ),
                       ],
                     ),
-                  ];
-                },
-                body: Column(
-                  children: [
-                    Container(
-                        color: Colors.white,
-                        margin: EdgeInsets.only(bottom: 5, top: 5),
-                        child: Column(children: [_top()])),
-                    Container(
+                  ),
+                  Container(
                       color: Colors.white,
                       margin: EdgeInsets.only(bottom: 5),
-                      child: Column(
-                        children: [
-                          _card(
-                            child: ListTile(
-                              title: Text("manager.raoxe".tr()),
-                              leading: FaIcon(
-                                FontAwesomeIcons.bullhorn,
-                              ),
-                              onTap: () =>
-                                  CommonNavigates.toMyProductPage(context),
-                              trailing: Icon(
-                                AppIcons.keyboard_arrow_right,
-                              ),
-                              // subtitle: Text("Quản lý danh sách tin rao"),
+                      child: Column(children: [
+                        _card(
+                          child: ListTile(
+                            title: Text("Cài đặt"),
+                            leading: FaIcon(
+                              FontAwesomeIcons.cog,
                             ),
+                            onTap: () =>
+                                CommonNavigates.toSettingsPage(context),
+                            trailing: Icon(
+                              AppIcons.keyboard_arrow_right,
+                            ),
+                            // subtitle: Text("Danh sách đánh giá"),
                           ),
-                          _card(
-                            child: ListTile(
-                              title: Text("ads".tr()),
-                              leading: FaIcon(
-                                FontAwesomeIcons.rss,
-                              ),
-                              onTap: () =>
-                                  CommonNavigates.toAdvertPage(context),
-                              trailing: Icon(
-                                AppIcons.keyboard_arrow_right,
-                              ),
-                              // subtitle: Text("Quản lý danh sách quảng cáo"),
-                            ),
-                          ),
-                          _card(
-                            child: ListTile(
-                              title: Text("contact".tr()),
-                              leading: FaIcon(
-                                FontAwesomeIcons.envelope,
-                              ),
-                              onTap: () =>
-                                  CommonNavigates.toVehicleContactPage(context),
-                              trailing: Icon(
-                                AppIcons.keyboard_arrow_right,
-                              ),
-                            ),
-                          ),
-                          _card(
-                            child: ListTile(
-                              title: Text("favorite".tr()),
-                              leading: FaIcon(
-                                FontAwesomeIcons.heart,
-                              ),
-                              onTap: () =>
-                                  CommonNavigates.toFavoritePage(context),
-                              trailing: Icon(
-                                AppIcons.keyboard_arrow_right,
-                              ),
-                            ),
-                          ),
-                          _card(
-                            child: ListTile(
-                              title: Text("review".tr()),
-                              leading: FaIcon(
-                                FontAwesomeIcons.star,
-                              ),
-                              onTap: () =>
-                                  CommonNavigates.toReviewPage(context),
-                              trailing: Icon(
-                                AppIcons.keyboard_arrow_right,
-                              ),
-                              // subtitle: Text("Danh sách đánh giá"),
-                            ),
-                          ),
-                          _card(
-                            child: ListTile(
-                              title: Text("address".tr()),
-                              leading: FaIcon(
-                                FontAwesomeIcons.mapPin,
-                              ),
-                              onTap: () =>
-                                  CommonNavigates.toContactPage(context),
-                              trailing: Icon(
-                                AppIcons.keyboard_arrow_right,
-                              ),
-                              // subtitle: Text("Sổ địa chỉ"),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                        color: Colors.white,
-                        margin: EdgeInsets.only(bottom: 5),
-                        child: Column(children: [
-                          _card(
-                            child: ListTile(
-                              title: Text("Cài đặt"),
-                              leading: FaIcon(
-                                FontAwesomeIcons.cog,
-                              ),
-                              onTap: () =>
-                                  CommonNavigates.toSettingsPage(context),
-                              trailing: Icon(
-                                AppIcons.keyboard_arrow_right,
-                              ),
-                              // subtitle: Text("Danh sách đánh giá"),
-                            ),
-                          )
-                        ])),
-                  ],
-                )));
+                        )
+                      ])),
+                ],
+              ));
   }
 
   Widget _card({Widget? child}) {

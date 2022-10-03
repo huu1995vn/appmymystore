@@ -27,6 +27,7 @@
   "concat": "Concat",
   "start": "Start",
   "filter": "Filter",
+  "cancelfilter": "Cancel filter",
   "verified": "Verified",
   "unconfirmed": "Unconfirmed",
   "verifynow": "Verify now",

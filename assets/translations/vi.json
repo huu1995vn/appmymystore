@@ -28,6 +28,7 @@
   "concat": "Liên hệ",
   "start": "Bắt đầu",
   "filter": "Bộ lọc",
+  "cancelfilter": "Bỏ lọc",
   "verified": "Đã xác thực",
   "unconfirmed": "Chưa xác thực",
   "verifynow": "Xác thực ngay",

@@ -64,13 +64,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         setState(() {
           isNotFound = true;
         });
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     }
     if (_data!.usercontactid <= 0) {
       lContacts = await _loadContact();
       if (lContacts.isEmpty || lContacts.isEmpty) {
-        CommonMethods.showToast( "message.str013".tr());
+        CommonMethods.showToast("message.str013".tr());
         CommonNavigates.goBack(context);
         return;
       }
@@ -106,7 +106,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   onUpTop() async {
     if (data!.status != 2) {
-      CommonMethods.showToast( "message.str015".tr());
+      CommonMethods.showToast("message.str015".tr());
       return;
     }
     CommonMethods.lockScreen();
@@ -115,7 +115,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       body["ids"] = [data!.id];
       ResponseModel res = await DaiLyXeApiBLL_APIUser().productuptop(body);
       if (res.status > 0) {
-        CommonMethods.showToast( "update.success".tr());
+        CommonMethods.showToast("update.success".tr());
       } else {
         CommonMethods.showDialogError(context, res.message);
       }
@@ -132,7 +132,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       return CommonMethods.convertToList<ContactModel>(
           res.data, (val) => ContactModel.fromJson(val));
     } else {
-      CommonMethods.showToast( res.message);
+      CommonMethods.showToast(res.message);
     }
     return [];
   }
@@ -149,7 +149,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         return;
       }
     } else {
-      CommonMethods.showToast( res.message);
+      CommonMethods.showToast(res.message);
     }
 
     ContactModel contact = await showSearch(
@@ -199,7 +199,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
           name: data!.name!);
       if (idFiles.isEmpty) {
-        CommonMethods.showToast( "message.str007".tr());
+        CommonMethods.showToast("message.str007".tr());
         return;
       }
       if (idFiles.isNotEmpty) {
@@ -256,7 +256,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       body: isNotFound
           ? Expanded(child: Center(child: Text("not.found".tr())))
           : (data == null
@@ -268,20 +267,11 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                   controller: scrollController,
                   slivers: <Widget>[
                     SliverAppBar(
-                      iconTheme: const IconThemeData(
-                        color: AppColors.black, //change your color here
-                      ),
-                      title: Image.asset(
-                        LOGORAOXECOLORIMAGE,
-                        width: 100,
-                      ),
+                      title: Text(CommonMethods.convertToString(data!.name)),
                       centerTitle: true,
                       elevation: 0.0,
-                      backgroundColor: AppColors.grey,
                     ),
                     SliverToBoxAdapter(
-                        child: Padding(
-                      padding: const EdgeInsets.all(kDefaultPadding),
                       child: Form(
                           key: _keyValidationForm,
                           child: Column(
@@ -290,8 +280,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                             // mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               _header(title: "youwant".tr().toUpperCase()),
-                              ListTile(
-                                title: Row(
+                              Container(
+                                color: Colors.white,
+                                child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: map<Widget>(
@@ -303,7 +294,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     ).toList()),
                               ),
                               _header(title: "generalinfor".tr()),
-                              Card(
+                              Container(
+                                color: Colors.white,
                                 child: Column(
                                   children: [
                                     rxSelectInput(
@@ -663,7 +655,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         title: "delete.text".tr()))
                             ],
                           )),
-                    ))
+                    )
                   ],
                 )),
       persistentFooterButtons: [
@@ -776,15 +768,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   Widget _header({String? title, Widget? header, Widget? action}) {
     return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding)
-          .copyWith(left: kDefaultPadding / 2),
+      padding: const EdgeInsets.all(kDefaultPadding),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           header ??
               Text(
-                title!,
+                title!.toUpperCase(),
                 style: TextStyle(
                         color: Theme.of(context).textTheme.bodyText1!.color)
                     .bold,
@@ -796,8 +787,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   }
 
   Widget _radioProductType(String text, int value) {
-    return SizedBox(
-        width: SizeConfig.screenWidth / 2.4,
+    return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        width: (SizeConfig.screenWidth - 30) / 2,
         child: OutlinedButton(
           onPressed: () {
             setState(() {

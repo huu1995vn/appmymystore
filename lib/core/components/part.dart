@@ -83,9 +83,9 @@ class RxWebViewState extends State<RxWebView> {
   Widget build(BuildContext context) {
     // bool ishtml = widget.html != null && widget.url == null;
     return Scaffold(
-        appBar: AppBar( 
+        appBar: AppBar(
           centerTitle: true,
-          title: Text(widget.title ?? ""), 
+          title: Text(widget.title ?? ""),
           elevation: 0.0,
         ),
         body: Stack(
@@ -451,7 +451,7 @@ class RxButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox( 
+    return SizedBox(
         height: kSizeHeight,
         child: icon == null
             ? ElevatedButton(
@@ -532,36 +532,48 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
     dynamic Function(dynamic)? afterChange,
     String? Function(String?)? validator}) {
   var name = CommonMethods.getNameMasterById(type, id);
-  return ListTile(
-    title: title ??
-        RichText(
-          text: TextSpan(
-            // text: lableText ?? type.tr(),
-            children: <TextSpan>[
-              TextSpan(
-                  text: labelText ?? type.tr(),
-                  style: kTextTitleStyle.copyWith(
-                      color: Theme.of(context).textTheme.bodyText1!.color)),
-              if (validator != null)
-                const TextSpan(
-                    text: ' *',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: AppColors.primary)),
-            ],
-          ),
+  return Container(
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(width: 1.0, color: Colors.black12),
         ),
-    subtitle: RxInput(name,
-        isBorder: isBorder,
-        readOnly: true,
-        hintText: hintText ?? "choose.text".tr(),
-        style: TextStyle(
-                color:
-                    name != null && name.isNotEmpty ? AppColors.primary : null)
-            .size(13),
-        validator: validator, onTap: () {
-      _onSelect(context, type, id, fnWhere: fnWhere, afterChange: afterChange);
-    }, suffixIcon: const Icon(AppIcons.chevron_right)),
-  );
+      ),
+      child: ListTile(
+        title: title ??
+            RichText(
+              text: TextSpan(
+                // text: lableText ?? type.tr(),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: labelText ?? type.tr(),
+                      style: kTextTitleStyle.copyWith(
+                          fontSize: 12, color: Colors.black54)),
+                  if (validator != null)
+                    const TextSpan(
+                        text: ' *',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary)),
+                ],
+              ),
+            ),
+        subtitle: Container(
+          height: 27,
+          child: RxInput(name,
+              isBorder: isBorder,
+              readOnly: true,
+              hintText: hintText ?? "choose.text".tr(),
+              style: TextStyle(
+                  fontSize: 16,
+                  color:
+                      name != null && name.isNotEmpty ? AppColors.black : null),
+              validator: validator, onTap: () {
+            _onSelect(context, type, id,
+                fnWhere: fnWhere, afterChange: afterChange);
+          }),
+        ),
+        trailing: const Icon(AppIcons.chevron_right),
+      ));
 }
 
 _onSelect(BuildContext context, String type, dynamic id,

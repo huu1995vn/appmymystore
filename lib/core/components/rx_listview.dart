@@ -141,28 +141,33 @@ class _RxDataListViewState extends State<RxListView>
   }
 
   Widget _bodylist_main() {
-    return ListView.builder(
-      key: PageStorageKey(widget.key),
-      shrinkWrap: true,
-      controller: widget.scrollController != null ? null : _scrollController,
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: widget.scrollDirection ?? Axis.vertical,
-      itemCount: widget.onNextPage != null
-          ? (widget.data.length + 1)
-          : widget.data.length,
-      padding: widget.padding ?? const EdgeInsets.all(kDefaultPadding),
-      itemBuilder: (context, index) {
-        if (index >= widget.data.length) {
-          return _buildProgressIndicator();
-        } else {
-          return Column(
-            children: [
-              widget.itemBuilder(context, index),
-            ],
-          );
-        }
-      },
-    );
+    return Container(
+        color: Colors.white,
+        margin: const EdgeInsets.only(top: 6),
+        child: ListView.builder(
+          key: PageStorageKey(widget.key),
+          shrinkWrap: true,
+          controller:
+              widget.scrollController != null ? null : _scrollController,
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: widget.scrollDirection ?? Axis.vertical,
+          itemCount: widget.onNextPage != null
+              ? (widget.data.length + 1)
+              : widget.data.length,
+          padding: widget.padding ??
+              const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          itemBuilder: (context, index) {
+            if (index >= widget.data.length) {
+              return _buildProgressIndicator();
+            } else {
+              return Column(
+                children: [
+                  widget.itemBuilder(context, index),
+                ],
+              );
+            }
+          },
+        ));
   }
 
   Widget _bodylist(BuildContext context) {

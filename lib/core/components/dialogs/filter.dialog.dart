@@ -114,13 +114,8 @@ class _FilterDialogState extends State<FilterDialog> {
   Widget build(context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(
-            color: AppColors.black, //change your color here
-          ),
           centerTitle: true,
-          title: Text("filter".tr(),
-              style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-          backgroundColor: AppColors.grey,
+          title: Text("filter".tr()),
           elevation: 0.0,
           actions: <Widget>[
             GestureDetector(
@@ -128,119 +123,129 @@ class _FilterDialogState extends State<FilterDialog> {
                 child: Padding(
                   padding: const EdgeInsets.all(kDefaultPadding),
                   child: Center(
-                      child: Icon(
-                    AppIcons.delete,
-                    color: AppColors.primary,
-                  )),
+                    child: Text(
+                      "cancelfilter".tr(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 )),
           ],
         ),
-        body: RxWrapper(
-          body: SingleChildScrollView(
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                _header("youwant".tr()),
-                Card(
-                  child: ListTile(
-                    title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: map<Widget>(
-                          MasterDataService.data["producttype"],
-                          (index, item) {
-                            return _radioButton(
-                                "ProductTypeId", item["name"], item["id"]);
-                          },
-                        ).toList()),
-                  ),
-                ),
-                _header("generalinfor".tr()),
-                Card(
-                  child: Column(
-                    children: [
-                      _selectInput("BrandId", "brand", title: "brand".tr()),
-                      _selectInput("CityId", "city", title: "Vị trí"),
-                      _selectInput("OrderBy", "sort", title: "Sắp xếp"),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: kDefaultPadding, left: kDefaultPadding * 1.5),
-                        child: Row(
-                          children: [
-                            Text("Giá từ "),
-                            Text(
-                                CommonMethods.formatNumber(
-                                    (_currentRangeValues.start * kStepPrice)
-                                        .round()),
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text(' đến '),
-                            Text(
-                                CommonMethods.formatNumber(
-                                        (_currentRangeValues.end * kStepPrice)
-                                            .round()) +
-                                    (_currentRangeValues.end == 100 ? "+" : ""),
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                      ),
-                      RangeSlider(
-                        values: _currentRangeValues,
-                        max: 100,
-                        divisions: 100,
-                        onChanged: (RangeValues values) {
-                          setState(() {
-                            price = values;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                _header("specifications".tr()),
-                Card(
-                    child: Column(
+        body: SingleChildScrollView(
+            child: Container(
+          padding: EdgeInsets.all(0),
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              _header("youwant".tr()),
+              Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(5),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: map<Widget>(
+                      MasterDataService.data["producttype"],
+                      (index, item) {
+                        return _radioButton(
+                            "ProductTypeId", item["name"], item["id"]);
+                      },
+                    ).toList()),
+              ),
+              _header("generalinfor".tr()),
+              Container(
+                color: Colors.white,
+                child: Column(
                   children: [
-                    _selectInput("State", "productstate", title: "Tình trạng"),
-                    _selectInput("FuelTypeId", "fueltype", title: "Nhiên liệu"),
-                    _selectInput("MadeInId", "madein", title: "Năm sản xuất"),
-                    _selectInput("ColorId", "color", title: "Màu sắc"),
-                    _selectInput("Door", "productdoor", title: "Số cửa"),
-                    _selectInput("Seat", "productseat", title: "Số chỗ"),
-                    ListTile(
-                      title: Text('year'.tr(), style: kTextTitleStyle),
-                      subtitle: RxInput(
-                        keyboardType: TextInputType.number,
-                        searchParams["Year"]?.toString() ?? "",
-                        onChanged: (v) {
-                          setState(() {
-                            searchParams["Year"] =
-                                CommonMethods.convertToInt32(v);
-                          });
-                        },
-                        hintText: "year".tr(),
-                        style:
-                            const TextStyle(color: AppColors.black50).size(13),
+                    _selectInput("BrandId", "brand", title: "brand".tr()),
+                    _selectInput("CityId", "city", title: "Vị trí"),
+                    _selectInput("OrderBy", "sort", title: "Sắp xếp"),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: kDefaultPadding, left: kDefaultPadding * 1.5),
+                      child: Row(
+                        children: [
+                          Text("Giá từ "),
+                          Text(
+                              CommonMethods.formatNumber(
+                                  (_currentRangeValues.start * kStepPrice)
+                                      .round()),
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(' đến '),
+                          Text(
+                              CommonMethods.formatNumber(
+                                      (_currentRangeValues.end * kStepPrice)
+                                          .round()) +
+                                  (_currentRangeValues.end == 100 ? "+" : ""),
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
                       ),
                     ),
+                    RangeSlider(
+                      values: _currentRangeValues,
+                      max: 100,
+                      divisions: 100,
+                      onChanged: (RangeValues values) {
+                        setState(() {
+                          price = values;
+                        });
+                      },
+                    ),
                   ],
-                )),
-              ],
-            ),
+                ),
+              ),
+              _header("specifications".tr()),
+              Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      _selectInput("State", "productstate",
+                          title: "Tình trạng"),
+                      _selectInput("FuelTypeId", "fueltype",
+                          title: "Nhiên liệu"),
+                      _selectInput("MadeInId", "madein", title: "Năm sản xuất"),
+                      _selectInput("ColorId", "color", title: "Màu sắc"),
+                      _selectInput("Door", "productdoor", title: "Số cửa"),
+                      _selectInput("Seat", "productseat", title: "Số chỗ"),
+                      ListTile(
+                        title: Text('year'.tr(), style: kTextTitleStyle),
+                        subtitle: RxInput(
+                          keyboardType: TextInputType.number,
+                          searchParams["Year"]?.toString() ?? "",
+                          onChanged: (v) {
+                            setState(() {
+                              searchParams["Year"] =
+                                  CommonMethods.convertToInt32(v);
+                            });
+                          },
+                          hintText: "year".tr(),
+                          style: const TextStyle(color: AppColors.black50)
+                              .size(13),
+                        ),
+                      ),
+                    ],
+                  )),
+            ],
           ),
-        ),
+        )),
         persistentFooterButtons: [
-          RxPrimaryButton(
-            onTap: _onDone,
-            text: "done".tr(),
-          ),
+          Row(
+            children: [
+              Expanded(
+                child: RxPrimaryButton(
+                  onTap: _onDone,
+                  text: "apply".tr(),
+                ),
+              )
+            ],
+          )
         ]);
   }
 
   Widget _header(String header) {
     return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding)
-          .copyWith(left: kDefaultPadding / 2),
+      padding: const EdgeInsets.all(kDefaultPadding),
       child: Text(
         header.toUpperCase(),
         style: TextStyle().bold,
@@ -249,8 +254,9 @@ class _FilterDialogState extends State<FilterDialog> {
   }
 
   Widget _radioButton(String type, String text, int value) {
-    return SizedBox(
-        width: SizeConfig.screenWidth / 2.5,
+    return Container(
+        margin: EdgeInsets.symmetric(horizontal: 5),
+        width: (SizeConfig.screenWidth - 30) / 2,
         child: OutlinedButton(
           onPressed: () {
             setState(() {

@@ -13,7 +13,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
   List data;
   dynamic value;
   bool? ismultiple = false;
-  String pkey ;
+  String pkey;
   String pvalue;
   Widget Function(BuildContext, int)? itemBuilder;
   RxSelectDelegate(
@@ -71,46 +71,56 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
                 Expanded(
                     child: ListView.builder(
                   itemCount: suggestionList.length,
-                  itemBuilder: itemBuilder ?? (context, index) {
-                    var item = suggestionList[index];
-                    return ismultiple == true
-                        ? CheckboxListTile(                          
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            value: (value as List<int>).contains(item[pvalue]),
-                            title: Text(item[pkey]),
-                            onChanged: (v) {
-                              setState(() {
-                                if (v == true) {
-                                  (value as List<int>).add(item[pvalue]);
-                                } else {
-                                  (value as List<int>).remove(item[pvalue]);
-                                }
-                              });
-                            },
-                          )
-                        : RadioListTile(                          
-                            toggleable: true,
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            selected: item[pvalue] == value,
-                            value: item[pvalue],
-                            title: Text(item[pkey]),
-                            groupValue: value,
-                            onChanged: (v) {
-                              setState(() {
-                                value = v;
-                              });
-                            },
-                          );
-                  },
-                )),
-                if(itemBuilder == null) Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
-                  child: RxPrimaryButton(
-                      onTap: () {
-                        CommonNavigates.goBack(context, value);
+                  itemBuilder: itemBuilder ??
+                      (context, index) {
+                        var item = suggestionList[index];
+                        return ismultiple == true
+                            ? CheckboxListTile(
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
+                                value:
+                                    (value as List<int>).contains(item[pvalue]),
+                                title: Text(item[pkey]),
+                                onChanged: (v) {
+                                  setState(() {
+                                    if (v == true) {
+                                      (value as List<int>).add(item[pvalue]);
+                                    } else {
+                                      (value as List<int>).remove(item[pvalue]);
+                                    }
+                                  });
+                                },
+                              )
+                            : RadioListTile(
+                                toggleable: true,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
+                                selected: item[pvalue] == value,
+                                value: item[pvalue],
+                                title: Text(item[pkey]),
+                                groupValue: value,
+                                onChanged: (v) {
+                                  setState(() {
+                                    value = v;
+                                  });
+                                },
+                              );
                       },
-                      text: "ok".tr()),
-                )
+                )),
+                if (itemBuilder == null)
+                  Container(
+                      padding: const EdgeInsets.all(kDefaultPadding),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: RxPrimaryButton(
+                                onTap: () {
+                                  CommonNavigates.goBack(context, value);
+                                },
+                                text: "choose.text".tr()),
+                          )
+                        ],
+                      ))
               ]);
             }));
   }

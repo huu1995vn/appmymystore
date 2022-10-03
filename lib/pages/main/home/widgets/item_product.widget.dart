@@ -20,8 +20,8 @@ class ItemProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     int lenimg = item.rximglist.length;
     return Container(
-      padding: EdgeInsets.only(top: 10, bottom: 10),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
           bottom: BorderSide(width: 1, color: Colors.black12),

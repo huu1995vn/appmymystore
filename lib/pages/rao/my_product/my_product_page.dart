@@ -57,46 +57,32 @@ class _MyProductPageState extends State<MyProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.grey[200],
-        body: DefaultTabController(
-          length: tabs.length,
-          child: NestedScrollView(
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return <Widget>[
-                  SliverAppBar(
-                    centerTitle: true,
-                    title: Text("manager.raoxe".tr()),
-                    elevation: 0.0,
-                  ),
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: RxSliverAppBarTabDelegate(
-                      child: PreferredSize(
-                        preferredSize: Size.fromHeight(45.0),
-                        child: Container(
-                          color: Colors.white,
-                          child: TabBar(
-                            isScrollable: true,
-                            labelColor: AppColors.primary,
-                            unselectedLabelColor: AppColors.black50,
-                            indicatorColor: AppColors.primary,
-                            tabs: tabs,
-                          ),
-                        ),
+    return DefaultTabController(
+        length: tabs.length,
+        child: Scaffold(
+            appBar: AppBar(
+                centerTitle: true,
+                title: Text("manager.raoxe".tr()),
+                elevation: 0.0,
+                bottom: PreferredSize(
+                    preferredSize: Size.fromHeight(50),
+                    child: ColoredBox(
+                      color: Colors.white,
+                      child: TabBar(
+                        isScrollable: true,
+                        labelColor: Colors.red[900],
+                        labelPadding: EdgeInsets.symmetric(horizontal: 20.0),
+                        unselectedLabelColor: AppColors.black50,
+                        indicatorColor: Colors.red[800],
+                        tabs: tabs,
                       ),
-                    ),
-                  ),
-                ];
-              },
-              body: TabBarView(children: tabviews)),
-        ),
-        persistentFooterButtons: [
-          RxPrimaryButton(
-              onTap: onAdd,
-              icon: Icon(AppIcons.plus_circle),
-              text: "add.text".tr())
-        ]);
+                    ))),
+            body: TabBarView(children: tabviews),
+            persistentFooterButtons: [
+              RxPrimaryButton(
+                  onTap: onAdd,
+                  icon: Icon(AppIcons.plus_circle),
+                  text: "add.text".tr())
+            ]));
   }
 }

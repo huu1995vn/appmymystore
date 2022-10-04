@@ -545,7 +545,7 @@ class CommonMethods {
     try {
       rewriteUrl = rewriteUrl.convertrUrlPrefix();
       String rewriteLink =
-          '${CommonConfig.hostRaoXe}/rao-xe/$rewriteUrl-${id}r.html';
+          '${CommonConfig.hostRaoXe}/$rewriteUrl-${id}r.html';
       return rewriteLink;
     } catch (error) {}
     return "";
@@ -617,7 +617,7 @@ class CommonMethods {
   static String deepLinkInstallWithDomain() {
     try {
       String rewriteLink =
-          '${CommonConfig.apiRaoXe}/rao-xe?appinstall=${generateMd5("d@i${APITokenService.userId}")}';
+          '${CommonConfig.apiRaoXe}?appinstall=${generateMd5("d@i${APITokenService.userId}")}';
       return rewriteLink;
     } catch (error) {}
     return "";

@@ -23,13 +23,13 @@ class ItemProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int lenimg = item.rximglist.length;
-    // bool isDark = Get.isDarkMode;
+    bool isDark = Get.isDarkMode;
     return Card(
-        margin: const EdgeInsets.all(kDefaultPadding),
+        margin: EdgeInsets.zero,
         child: Container(
           // padding: const EdgeInsets.only(top: 10, bottom: 10),
           decoration: const BoxDecoration(
-            // color: Colors.transparent,
+            color: Colors.transparent,
             border: Border(
               bottom: BorderSide(width: 1, color: Colors.black12),
             ),
@@ -78,8 +78,8 @@ class ItemProductWidget extends StatelessWidget {
                                 lenimg >= 9 ? "9+" : lenimg.toString(),
                                 style: kTextSubTitleStyle.copyWith(
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 12,
-                                    color: AppColors.black),
+                                    fontSize: 12
+                                  ),
                                 //     .bold,
                               ))),
                         ),
@@ -101,7 +101,7 @@ class ItemProductWidget extends StatelessWidget {
                                     GestureDetector(
                                       onTap: onTap,
                                       child: Text(
-                                        item.name ?? "KKKK",
+                                        item.name ?? "",
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(

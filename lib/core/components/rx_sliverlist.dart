@@ -101,7 +101,8 @@ class RxListViewState extends State<RxSliverList>
   }
 
   Widget _bodylist() {
-    return widget.data == null
+    return 
+     widget.data == null
         ? _bodylist_awaiting()
         : widget.data.length == 0
             ? _bodylist_notfound()

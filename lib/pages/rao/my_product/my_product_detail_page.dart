@@ -261,8 +261,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            CommonMethods.convertToString(data!.name ?? "create".tr)),
+        title: Text(CommonMethods.convertToString(data!.name ?? "create".tr)),
         centerTitle: true,
         elevation: 0.0,
       ),
@@ -285,10 +284,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                             // mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               _header(title: "youwant".tr.toUpperCase()),
-                              Container(
-                                color: CommonConfig.isDark
-                                    ? Colors.transparent
-                                    : Colors.white,
+                              Card(
                                 child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -301,10 +297,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     ).toList()),
                               ),
                               _header(title: "generalinfor".tr),
-                              Container(
-                                color: CommonConfig.isDark
-                                    ? Colors.transparent
-                                    : Colors.white,
+                              Card(
                                 margin: const EdgeInsets.only(bottom: 6),
                                 child: Column(
                                   children: [
@@ -390,10 +383,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                color: CommonConfig.isDark
-                                    ? Colors.transparent
-                                    : Colors.white,
+                              Card(
                                 margin: const EdgeInsets.only(bottom: 6),
                                 child: Column(children: [
                                   SizedBox(height: 10),
@@ -513,54 +503,55 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           ],
                                         ),
                                       ))),
-                              Container(
-                                  color: CommonConfig.isDark
-                                      ? Colors.transparent
-                                      : Colors.white,
-                                  padding: const EdgeInsets.all(8),
-                                  margin: const EdgeInsets.only(bottom: 6),
-                                  child: Column(children: [
-                                    SizedBox(
-                                      height: 250,
-                                      child: GridView.builder(
-                                          padding:
-                                              const EdgeInsets.only(top: 0.0),
-                                          shrinkWrap: true,
-                                          itemCount:
-                                              imgs.length > 7 ? 7 : imgs.length,
-                                          gridDelegate:
-                                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 4),
-                                          itemBuilder: (context, index) {
-                                            return Card(
-                                                child: _itemImage(index,
-                                                    onDelete: () => {},
-                                                    onShowPhoTo: () => {
-                                                          CommonNavigates
-                                                              .openDialog(
-                                                                  context,
-                                                                  PhotoViewDialog(
-                                                                    initialPage:
-                                                                        index,
-                                                                    imgs: imgs,
-                                                                    onDelete:
-                                                                        (i) => {
-                                                                      setState(
-                                                                          () {
-                                                                        imgs.removeAt(
-                                                                            i);
-                                                                      })
-                                                                    },
-                                                                  ))
-                                                        }));
-                                          }),
-                                    ),
-                                  ])),
+                              Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Card(
+
+                                    // padding: const EdgeInsets.all(8),
+                                    margin: const EdgeInsets.only(bottom: 6),
+                                    child: Column(children: [
+                                      SizedBox(
+                                        height: 250,
+                                        child: GridView.builder(
+                                            padding:
+                                                const EdgeInsets.only(top: 0.0),
+                                            shrinkWrap: true,
+                                            itemCount: imgs.length > 7
+                                                ? 7
+                                                : imgs.length,
+                                            gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 4),
+                                            itemBuilder: (context, index) {
+                                              return Card(
+                                                  child: _itemImage(index,
+                                                      onDelete: () => {},
+                                                      onShowPhoTo: () => {
+                                                            CommonNavigates
+                                                                .openDialog(
+                                                                    context,
+                                                                    PhotoViewDialog(
+                                                                      initialPage:
+                                                                          index,
+                                                                      imgs:
+                                                                          imgs,
+                                                                      onDelete:
+                                                                          (i) =>
+                                                                              {
+                                                                        setState(
+                                                                            () {
+                                                                          imgs.removeAt(
+                                                                              i);
+                                                                        })
+                                                                      },
+                                                                    ))
+                                                          }));
+                                            }),
+                                      ),
+                                    ])),
+                              ),
                               _header(title: "specifications".tr),
-                              Container(
-                                  color: CommonConfig.isDark
-                                      ? Colors.transparent
-                                      : Colors.white,
+                              Card(
                                   margin: const EdgeInsets.only(bottom: 6),
                                   child: Column(
                                     children: [
@@ -660,19 +651,18 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                               ),
                               _contact(),
                               if (data != null && data!.id > 0)
-                                Container(
-                                    color: CommonConfig.isDark
-                                        ? Colors.transparent
-                                        : Colors.white,
-                                    padding: EdgeInsets.all(kDefaultPadding),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                            child: RxRoundedButton(
-                                                onPressed: _onDelete,
-                                                title: "delete".tr))
-                                      ],
-                                    ))
+                                Padding(
+                                  padding: EdgeInsets.all(kDefaultPadding),
+                                  child: Card(
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                              child: RxRoundedButton(
+                                                  onPressed: _onDelete,
+                                                  title: "delete".tr))
+                                        ],
+                                      )),
+                                )
                             ],
                           )),
                     )

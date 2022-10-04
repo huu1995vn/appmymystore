@@ -167,7 +167,7 @@ Widget RxListSkeleton({int barCount = 3}) {
     return ListSkeleton(
       style: SkeletonStyle(
         backgroundColor:
-            CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
+            Get.isDarkMode ? AppColors.blackLight : AppColors.white,
         isShowAvatar: false,
         barCount: barCount,
         isAnimation: true,
@@ -186,12 +186,12 @@ Widget RxCardSkeleton(
     return CardSkeleton(
       style: SkeletonStyle(
         backgroundColor:
-            CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
+            Get.isDarkMode ? AppColors.blackLight : AppColors.white,
         isShowAvatar: isShowAvatar,
         isCircleAvatar: isCircleAvatar,
         borderRadius:
             BorderRadius.all(Radius.circular(isBorderRadius ? 20.0 : 0)),
-        padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
+        // padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
         barCount: barCount,
         isAnimation: true,
       ),
@@ -205,7 +205,7 @@ Widget RxCardListSkeleton(
   return CardListSkeleton(
     style: SkeletonStyle(
       backgroundColor:
-          CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
+          Get.isDarkMode ? AppColors.blackLight : AppColors.white,
       isShowAvatar: isShowAvatar,
       isCircleAvatar: isCircleAvatar,
       barCount: barCount,

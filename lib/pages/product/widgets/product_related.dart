@@ -93,121 +93,111 @@ class ReviewState extends State<ProductRelated> {
   @override
   Widget build(BuildContext context) {
     final scrollDirection = widget.scrollDirection ?? Axis.horizontal;
-    return Container(
-        color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
-        margin: EdgeInsets.only(bottom: 5),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-                padding:
-                    const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.title ?? "NaN",
-                      style: TextStyle(
-                          color: CommonConfig.isDark
-                              ? Colors.white
-                              : Colors.grey[700],
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    if (scrollDirection == Axis.horizontal)
-                      RxIconButton(
-                          icon: AppIcons.chevron_right,
-                          onTap: () {
-                            CommonNavigates.toProductPage(context,
-                                paramsSearch: widget.filter);
-                          })
-                  ],
-                )),
-            RxListView(
-              listData,
-              (context, index) {
-                var item = listData![index];
-                return scrollDirection == Axis.horizontal
-                    ? _buildItem(item)
-                    : ItemProductWidget(
-                        item,
-                        onTap: () {
-                          CommonNavigates.toProductPage(context, item: item);
-                        },
-                      );
-              },
-              key: UniqueKey(),
-              noFound: Center(child: Text("no.found".tr)),
-              scrollDirection: scrollDirection,
-            ),
-            (scrollDirection != Axis.horizontal &&
-                    listData != null &&
-                    totalItems > listData!.length)
-                ? RxRoundedButton(
-                    onPressed: _onNext,
-                    title: "seemore".tr,
-                    color: AppColors.info,
-                  )
-                : Container()
-          ],
-        ));
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: kDefaultPadding),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                widget.title ?? "NaN",
+                style: TextStyle(
+                    color: Get.isDarkMode ? Colors.white : Colors.grey[700],
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+              if (scrollDirection == Axis.horizontal)
+                RxIconButton(
+                    icon: AppIcons.chevron_right,
+                    onTap: () {
+                      CommonNavigates.toProductPage(context,
+                          paramsSearch: widget.filter);
+                    })
+            ],
+          ),
+        ),
+        RxListView(
+          listData,
+          (context, index) {
+            var item = listData![index];
+            return scrollDirection == Axis.horizontal
+                ? _buildItem(item)
+                : ItemProductWidget(
+                    item,
+                    onTap: () {
+                      CommonNavigates.toProductPage(context, item: item);
+                    },
+                  );
+          },
+          key: UniqueKey(),
+          noFound: Center(child: Text("no.found".tr)),
+          scrollDirection: scrollDirection,
+        ),
+        (scrollDirection != Axis.horizontal &&
+                listData != null &&
+                totalItems > listData!.length)
+            ? RxRoundedButton(
+                onPressed: _onNext,
+                title: "seemore".tr,
+                color: AppColors.info,
+              )
+            : Container()
+      ],
+    );
   }
 
   Widget _buildItem(ProductModel item) {
-    return Padding(
-        padding: const EdgeInsets.only(right: 10.0),
-        child: Card(
-          margin: EdgeInsets.zero,
-          child: GestureDetector(
-              onTap: () {
-                CommonNavigates.toProductPage(context, item: item);
-              },
-              child: SizedBox(
-                width: (MediaQuery.of(context).size.width / 3 - 10),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Stack(
-                      children: <Widget>[
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Container(
-                                  height: 80,
-                                  decoration: const BoxDecoration(),
-                                  child: RxImage(
-                                    item.rximg,
-                                    fit: BoxFit.cover,
-                                  )),
-                              Container(
-                                  height: 40,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  child: Text(
-                                    item.name! ?? "",
-                                    textAlign: TextAlign.justify,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    maxLines: 2,
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.all(5),
-                                child: Text(
-                                    CommonMethods.formatNumber(
-                                        item.price ?? "negotiate".tr),
-                                    style: kTextPriceStyle),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(5),
-                                child:
-                                    Text(item.rxtimeago, style: kTextTimeStyle),
-                              ),
-                            ]),
-                      ],
-                    )),
-              )),
-        ));
+    return Card(
+      margin: EdgeInsets.zero,
+      child: GestureDetector(
+        onTap: () {
+          CommonNavigates.toProductPage(context, item: item);
+        },
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: Stack(
+              children: <Widget>[
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Container(
+                          height: 80,
+                          decoration: const BoxDecoration(),
+                          child: RxImage(
+                            item.rximg,
+                            fit: BoxFit.cover,
+                          )),
+                      Container(
+                          height: 40,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 5),
+                          child: Text(
+                            item.name! ?? "",
+                            textAlign: TextAlign.justify,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                            ),
+                            maxLines: 2,
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Text(
+                            CommonMethods.formatNumber(
+                                item.price ?? "negotiate".tr),
+                            style: kTextPriceStyle),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Text(item.rxtimeago, style: kTextTimeStyle),
+                      ),
+                    ]),
+              ],
+            )),
+      ),
+    );
   }
 }

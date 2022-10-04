@@ -40,14 +40,14 @@ const TextStyle kTextTitleStyle = TextStyle(
 );
 const TextStyle kTextSubTitleStyle = TextStyle(
     fontWeight: FontWeight.normal, 
-    color: AppColors.black50,
+    fontStyle: FontStyle.italic,
     fontSize: 14);
 const kTextPriceStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 20,
   color: AppColors.primary,
 );
-const kTextTimeStyle = TextStyle(color: AppColors.black50, fontSize: 14);
+const kTextTimeStyle = TextStyle(fontSize: 14, fontStyle: FontStyle.italic);
 const NOIMAGE = "assets/images/no-image.jpg";
 const NOIMAGEAVAILABELFOLDER = "/resources/Images/hinh-anh-khong-ton-tai/";
 const NOIMAGEUUDAI = "assets/images/gift.png";

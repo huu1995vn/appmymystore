@@ -100,7 +100,6 @@ class _HomePageState extends State<HomePage>
 
     return Scaffold(
       key: _homeKey,
-      backgroundColor: CommonConfig.isDark ? Colors.transparent : Colors.white,
       body: RxCustomScrollView(
         key: const Key("lHome"),
         controller: scrollController,
@@ -111,20 +110,24 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(
               child: Column(children: [
             const BannerWidget(),
-            _buildTitle("new".tr, () {
-              CommonNavigates.toProductPage(context);
-            }),
+            Padding(
+                padding: EdgeInsets.all(kDefaultPadding),
+                child: _buildTitle("new".tr, () {
+                  CommonNavigates.toProductPage(context);
+                }))
           ])),
-          RxSliverList(listData, (BuildContext context, int index) {
-            ProductModel item = listData![index];
-            return ItemProductWidget(
-              item,
-              onTap: () {
-                CommonNavigates.toProductPage(context, item: item);
-              },
-              onFavorite: () => {onFavorite(index)},
-            );
-          })
+          SliverPadding(
+              padding: EdgeInsets.all(kDefaultPadding),
+              sliver: RxSliverList(listData, (BuildContext context, int index) {
+                ProductModel item = listData![index];
+                return ItemProductWidget(
+                  item,
+                  onTap: () {
+                    CommonNavigates.toProductPage(context, item: item);
+                  },
+                  onFavorite: () => {onFavorite(index)},
+                );
+              }))
         ],
       ),
     );
@@ -135,7 +138,6 @@ class _HomePageState extends State<HomePage>
       floating: true,
       automaticallyImplyLeading: false,
       elevation: 0.0,
-      // backgroundColor: CommonConfig.isDark ? Colors.black : kPrimaryColor,
       leading: Container(child: null),
       title: Container(
         alignment: Alignment.center,
@@ -169,24 +171,21 @@ class _HomePageState extends State<HomePage>
 }
 
 _buildTitle(String header, void Function()? onTap) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(header.toUpperCase(), style: const TextStyle(fontSize: 16).bold),
-      GestureDetector(
-          onTap: onTap,
-          child: Row(
-            children: [
-              Text("seemore".tr, style: const TextStyle().bold),
-              const SizedBox(
-                width: 5,
-              ),
-              const FaIcon(
-                FontAwesomeIcons.chevronRight,
-                size: 12,
-              )
-            ],
-          ))
-    ]),
-  );
+  return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+    Text(header.toUpperCase(), style: const TextStyle(fontSize: 16).bold),
+    GestureDetector(
+        onTap: onTap,
+        child: Row(
+          children: [
+            Text("seemore".tr, style: const TextStyle().bold),
+            const SizedBox(
+              width: 5,
+            ),
+            const FaIcon(
+              FontAwesomeIcons.chevronRight,
+              size: 12,
+            )
+          ],
+        ))
+  ]);
 }

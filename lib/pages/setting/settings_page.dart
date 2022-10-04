@@ -107,9 +107,8 @@ class _SettingsPageState extends State<SettingsPage> {
           SliverFillRemaining(
               child: Column(
             children: [
-              Container(
-                  color:
-                      CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+              Card(
+                
                   margin: EdgeInsets.only(top: 6, bottom: 6),
                   child: ListView(
                     shrinkWrap: true,

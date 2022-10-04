@@ -14,7 +14,7 @@ class AppProvider with ChangeNotifier {
     // selectedThemeMode = StorageService.get(StorageKeys.themeMode) == null
     //     ? ThemeMode.light
     //     : ThemeMode.values.byName(StorageService.get(StorageKeys.themeMode));
-    // CommonConfig.isDark = selectedThemeMode.name == "dark";
+    // Get.isDarkMode = selectedThemeMode.name == "dark";
   }
 
   int numNotification = 0;

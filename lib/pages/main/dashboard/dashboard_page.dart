@@ -56,7 +56,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Mở rộng"),
+          title: Text("expand".tr),
           elevation: 0.0,
           actions: <Widget>[
             TextButton(
@@ -64,7 +64,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 AuthService.logout(context);
               },
               child: Text(
-                "Đăng xuất",
+                "logout".tr,
                 style: TextStyle(color: Colors.white),
               ),
             )
@@ -76,16 +76,10 @@ class _DashboardPageState extends State<DashboardPage> {
               )
             : Column(
                 children: [
-                  Container(
-                      color: CommonConfig.isDark
-                          ? AppColors.blackLight
-                          : Colors.white,
+                  Card(
                       margin: EdgeInsets.only(bottom: 5, top: 5),
                       child: Column(children: [_top()])),
-                  Container(
-                    color: CommonConfig.isDark
-                        ? AppColors.blackLight
-                        : Colors.white,
+                  Card(
                     margin: EdgeInsets.only(bottom: 5),
                     child: Column(
                       children: [
@@ -171,10 +165,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       ],
                     ),
                   ),
-                  Container(
-                      color: CommonConfig.isDark
-                          ? AppColors.blackLight
-                          : Colors.white,
+                  Card(
                       margin: EdgeInsets.only(bottom: 5),
                       child: Column(children: [
                         _card(

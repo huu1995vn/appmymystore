@@ -194,7 +194,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             children: [
                               FaIcon(FontAwesomeIcons.comment,
                                   color: Colors.grey[700]),
-                              Text("chatzalo".tr)
+                              Text("chatzalo".tr,
+                                  style: TextStyle(color: Colors.grey[700]))
                             ],
                           ))),
                 ),
@@ -213,18 +214,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               width: 100,
               child: Text(
                 " $title: ",
-                style: kTextTitleStyle.copyWith(
-                    color:
-                        CommonConfig.isDark ? Colors.white : AppColors.black50),
+                style: kTextTitleStyle,
               )),
           Text(
               (subtitle is int
                       ? (subtitle > 0 ? subtitle.toString() : null)
                       : subtitle?.toString()) ??
                   "not.update".tr,
-              style: TextStyle(
-                  color: CommonConfig.isDark ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.bold))
+              style: TextStyle(fontWeight: FontWeight.bold))
         ],
       ),
     );
@@ -235,8 +232,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         RxImages(data: data!.rximglist),
-        Container(
-            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
             margin: EdgeInsets.only(bottom: 5),
             child: SizedBox(
               width: double.infinity,
@@ -281,20 +277,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                     Row(
                       children: [
-                        Text(data!.rxtimeago,
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: CommonConfig.isDark
-                                    ? Colors.white
-                                    : AppColors.black50)),
+                        Text(data!.rxtimeago, style: TextStyle(fontSize: 13)),
                       ],
                     ),
                   ],
                 ),
               ),
             )),
-        Container(
-            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
@@ -302,8 +292,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 children: [
                   Icon(
                     AppIcons.map_1,
-                    color:
-                        CommonConfig.isDark ? Colors.white : AppColors.black50,
                     size: 13,
                   ),
                   SizedBox(
@@ -311,16 +299,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ),
                   Flexible(
                       child: Text(data!.address ?? "NaN",
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: CommonConfig.isDark
-                                  ? Colors.white
-                                  : AppColors.black50)))
+                          style: TextStyle(fontSize: 13)))
                 ],
               ),
             )),
-        Container(
-          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
@@ -333,9 +316,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     padding: EdgeInsets.all(5),
                     child: Text("specification".tr,
                         style: TextStyle(
-                            color: CommonConfig.isDark
-                                ? Colors.white
-                                : Colors.grey[700],
+                            // color: Get.isDarkMode
+                            //     ? Colors.white
+                            //     : Colors.grey[700],
                             fontSize: 18,
                             fontWeight: FontWeight.bold))),
                 SizedBox(
@@ -366,8 +349,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             ),
           ),
         ),
-        Container(
-            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding),
@@ -380,9 +362,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           padding: EdgeInsets.all(5),
                           child: Text("description".tr,
                               style: TextStyle(
-                                  color: CommonConfig.isDark
-                                      ? Colors.white
-                                      : Colors.grey[700],
+                                  // color: Get.isDarkMode
+                                  //     ? Colors.white
+                                  //     : Colors.grey[700],
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold))),
                       TextFormField(
@@ -393,8 +375,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           maxLines: null,
                           enabled: false),
                     ]))),
-        Container(
-          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
@@ -422,9 +403,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   data!.fullname ?? "NaN",
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: CommonConfig.isDark
-                                        ? Colors.white
-                                        : AppColors.black50,
+                                    // color: Get.isDarkMode
+                                    //     ? Colors.white
+                                    //     : AppColors.black50,
                                   ).bold,
                                 ),
                                 SizedBox(
@@ -435,10 +416,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     Text(
                                       data!.cityname ?? "NaN",
                                       style: TextStyle(
-                                        color: CommonConfig.isDark
-                                            ? Colors.white
-                                            : AppColors.black50,
-                                      ),
+                                          // color: Get.isDarkMode
+                                          //     ? Colors.white
+                                          //     : AppColors.black50,
+                                          ),
                                     ),
                                   ],
                                 )
@@ -480,8 +461,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ],
               )),
         ),
-        Container(
-            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding),
@@ -493,9 +473,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         padding: EdgeInsets.all(5),
                         child: Text("rate".tr,
                             style: TextStyle(
-                                color: CommonConfig.isDark
-                                    ? Colors.white
-                                    : Colors.grey[700],
+                                // color: Get.isDarkMode
+                                //     ? Colors.white
+                                //     : Colors.grey[700],
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold))),
                     Row(
@@ -535,8 +515,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ])
                   ],
                 ))),
-        Container(
-          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
+          // color: Get.isDarkMode ? AppColors.blackLight : Colors.white,
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
@@ -577,11 +557,16 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
         ProductReview(data!),
-        ProductRelated(
-            title: "news.brand".tr,
-            filter: {"BrandId": data!.brandid},
-            scrollDirection: Axis.vertical,
-            notids: [data!.id])
+        Card(
+            margin: EdgeInsets.only(bottom: 5),
+            child: Padding(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: ProductRelated(
+                      title: "news.brand".tr,
+                      filter: {"BrandId": data!.brandid},
+                      scrollDirection: Axis.vertical,
+                      notids: [data!.id]),
+            ))
       ],
     );
   }

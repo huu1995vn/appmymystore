@@ -99,7 +99,8 @@ class _RxDataListViewState extends State<RxListView>
 
   Widget _bodylist_awaiting() {
     return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.1,
+        height: MediaQuery.of(context).size.height *
+            (widget.scrollDirection == Axis.vertical ? 0.1 : 1),
         child: ListView.builder(
             key: UniqueKey(),
             shrinkWrap: true,
@@ -108,12 +109,10 @@ class _RxDataListViewState extends State<RxListView>
             physics: const BouncingScrollPhysics(),
             scrollDirection: widget.scrollDirection ?? Axis.vertical,
             itemCount: kItemOnPage,
-            padding: widget.padding ?? const EdgeInsets.all(kDefaultPadding),
+            padding: const EdgeInsets.only(top: 0),
             itemBuilder: (context, index) {
-              return Padding(
-                  padding: kEdgeInsetsPadding,
-                  child: widget.awaiting ??
-                      RxCardSkeleton(barCount: 3, isShowAvatar: false));
+              return widget.awaiting ??
+                  RxCardSkeleton(barCount: 3, isShowAvatar: false);
             }));
   }
 
@@ -144,33 +143,28 @@ class _RxDataListViewState extends State<RxListView>
   }
 
   Widget _bodylist_main() {
-    return Container(
-        color: CommonConfig.isDark ? Colors.transparent : Colors.white,
-        margin: const EdgeInsets.only(top: 6),
-        child: ListView.builder(
-          key: PageStorageKey(widget.key),
-          shrinkWrap: true,
-          controller:
-              widget.scrollController != null ? null : _scrollController,
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: widget.scrollDirection ?? Axis.vertical,
-          itemCount: widget.onNextPage != null
-              ? (widget.data.length + 1)
-              : widget.data.length,
-          padding: widget.padding ??
-              const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-          itemBuilder: (context, index) {
-            if (index >= widget.data.length) {
-              return _buildProgressIndicator();
-            } else {
-              return Column(
-                children: [
-                  widget.itemBuilder(context, index),
-                ],
-              );
-            }
-          },
-        ));
+    return ListView.builder(
+      key: PageStorageKey(widget.key),
+      shrinkWrap: true,
+      controller: widget.scrollController != null ? null : _scrollController,
+      physics: const BouncingScrollPhysics(),
+      scrollDirection: widget.scrollDirection ?? Axis.vertical,
+      itemCount: widget.onNextPage != null
+          ? (widget.data.length + 1)
+          : widget.data.length,
+      padding: EdgeInsets.only(top: 10),
+      itemBuilder: (context, index) {
+        if (index >= widget.data.length) {
+          return _buildProgressIndicator();
+        } else {
+          return Column(
+            children: [
+              widget.itemBuilder(context, index),
+            ],
+          );
+        }
+      },
+    );
   }
 
   Widget _bodylist(BuildContext context) {

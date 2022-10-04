@@ -44,7 +44,9 @@ class ItemProductWidget extends StatelessWidget {
               children: <Widget>[
                 GestureDetector(
                   onTap: onTap,
-                  child: RxImage(item.rximg, width: SizeConfig.screenWidth / 4),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: RxImage(item.rximg, width: 100, height: 100)),
                 ),
                 if (lenimg > 0)
                   Positioned(

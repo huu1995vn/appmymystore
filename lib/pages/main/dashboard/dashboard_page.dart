@@ -132,9 +132,9 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         _card(
                           child: ListTile(
-                            title: Text("favorite".tr()),
+                            title: Text("bookmark".tr()),
                             leading: FaIcon(
-                              FontAwesomeIcons.heart,
+                              FontAwesomeIcons.bookmark,
                             ),
                             onTap: () =>
                                 CommonNavigates.toFavoritePage(context),

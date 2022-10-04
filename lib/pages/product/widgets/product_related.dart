@@ -141,15 +141,15 @@ class ReviewState extends State<ProductRelated> {
               noFound: Center(child: Text("nodatafound".tr())),
               scrollDirection: scrollDirection,
             ),
-            (scrollDirection != Axis.horizontal &&
-                    listData != null &&
-                    totalItems > listData!.length)
-                ? RxRoundedButton(
-                    onPressed: _onNext,
-                    title: "seemore".tr(),
-                    color: Colors.grey,
-                  )
-                : Container()
+            // (scrollDirection != Axis.horizontal &&
+            //         listData != null &&
+            //         totalItems > listData!.length)
+            //     ? RxRoundedButton(
+            //         onPressed: _onNext,
+            //         title: "seemore".tr(),
+            //         color: Colors.grey,
+            //       )
+            //     : Container()
           ],
         ));
   }

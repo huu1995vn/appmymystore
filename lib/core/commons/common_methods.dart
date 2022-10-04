@@ -617,7 +617,7 @@ class CommonMethods {
   static String deepLinkInstallWithDomain() {
     try {
       String rewriteLink =
-          'https://dailyxe.com.vn/rao-xe?appinstall=${generateMd5("d@i${APITokenService.userId}")}';
+          '${CommonConfig.apiRaoXe}/rao-xe?appinstall=${generateMd5("d@i${APITokenService.userId}")}';
       return rewriteLink;
     } catch (error) {}
     return "";

@@ -4,7 +4,6 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../commons/common_configs.dart';
 
 class ThemeService {

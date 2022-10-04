@@ -58,9 +58,9 @@ class _BannerWidgetState extends State<BannerWidget> {
   Widget build(BuildContext context) {
     return Card(
         clipBehavior: Clip.hardEdge,
-        margin: const EdgeInsets.all(10.0),
+        margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         child: RxSlider(
           onTap: (i) {

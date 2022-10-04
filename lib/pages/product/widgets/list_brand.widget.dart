@@ -1,20 +1,17 @@
 // ignore_for_file: empty_catches
 
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-
 import '../../../core/commons/common_methods.dart';
 import '../../../core/components/rx_image.dart';
-import '../../../core/utilities/size_config.dart';
 
 class ListBrandWidget extends StatefulWidget {
-  final int value;
+  final int? value;
   final void Function(int v) onPressed;
   const ListBrandWidget(
-      {super.key, required this.onPressed, required this.value});
+      {super.key, required this.onPressed, this.value});
   @override
   State<ListBrandWidget> createState() => _ListBrandWidgetState();
 }

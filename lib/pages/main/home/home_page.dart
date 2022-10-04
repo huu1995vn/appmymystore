@@ -17,6 +17,7 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/pages/main/home/widgets/banner.widget.dart';
+import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../core/commons/common_configs.dart';
 import 'widgets/item_product.widget.dart';
@@ -107,17 +108,24 @@ class _HomePageState extends State<HomePage>
         onRefresh: onRefresh,
         appBar: _appBar(),
         slivers: <Widget>[
-          SliverToBoxAdapter(
-              child: Column(children: [
-            const BannerWidget(),
-            Padding(
-                padding: EdgeInsets.all(kDefaultPadding),
-                child: _buildTitle("new".tr, () {
-                  CommonNavigates.toProductPage(context);
-                }))
-          ])),
           SliverPadding(
-              padding: EdgeInsets.all(kDefaultPadding),
+              padding: const EdgeInsets.all(kDefaultPadding),
+              sliver: SliverToBoxAdapter(
+                  child: Column(children: [
+                const BannerWidget(),
+                SizedBox(height: kDefaultPadding),
+                ListBrandWidget(
+                    onPressed: (v) => {
+                          CommonNavigates.toProductPage(context,
+                              paramsSearch: {"BrandId": v})
+                        }),
+                SizedBox(height: kDefaultPadding),
+                _buildTitle("new".tr, () {
+                  CommonNavigates.toProductPage(context);
+                })
+              ]))),
+          SliverPadding(
+              padding: const EdgeInsets.all(kDefaultPadding),
               sliver: RxSliverList(listData, (BuildContext context, int index) {
                 ProductModel item = listData![index];
                 return ItemProductWidget(

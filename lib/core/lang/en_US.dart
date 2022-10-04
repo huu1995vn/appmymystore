@@ -181,7 +181,7 @@ const Map<String, String> en_US = {
   "manager": "manager",
   "manager.contact": "Manage contacts",
   "manager.address": "Manage addresses",
-  "manager.raoxe": "Manage ads",
+  "manager.raoxe": "Manage raoxe",
   "search": "Search",
   "refresh": "Refresh",
   "history": "History",

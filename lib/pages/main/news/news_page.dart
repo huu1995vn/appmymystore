@@ -43,19 +43,18 @@ class _NewsPageState extends State<NewsPage> {
                 automaticallyImplyLeading: false,
                 elevation: 0.0,
                 bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(50),
-                  child: ColoredBox(
-                    color:Get.isDarkMode ? Colors.white10 : Colors.white,
-                    child: TabBar(
-                      isScrollable: true,
+                    preferredSize: Size.fromHeight(50),
+                    child: ColoredBox(
+                    color: Get.isDarkMode ? Colors.white10 : Colors.white,
+                      child: TabBar(
+                       isScrollable: true,
                       labelColor: AppColors.primary,
                       unselectedLabelColor:
                           Get.isDarkMode ? Colors.white : AppColors.black,
                       indicatorColor: Colors.red[800],
                       tabs: tabs,
-                    ),
-                  ),
-                )),
+                      ),
+                    ))),
             body: TabBarView(
               children: tabviews,
             )));

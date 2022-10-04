@@ -67,14 +67,14 @@ class _MyProductPageState extends State<MyProductPage> {
                 bottom: PreferredSize(
                     preferredSize: Size.fromHeight(50),
                     child: ColoredBox(
-                      color: Colors.white,
+                    color: Get.isDarkMode ? Colors.white10 : Colors.white,
                       child: TabBar(
-                        isScrollable: true,
-                        labelColor: Colors.red[900],
-                        labelPadding: EdgeInsets.symmetric(horizontal: 20.0),
-                        unselectedLabelColor: AppColors.black50,
-                        indicatorColor: Colors.red[800],
-                        tabs: tabs,
+                       isScrollable: true,
+                      labelColor: AppColors.primary,
+                      unselectedLabelColor:
+                          Get.isDarkMode ? Colors.white : AppColors.black,
+                      indicatorColor: Colors.red[800],
+                      tabs: tabs,
                       ),
                     ))),
             body: TabBarView(children: tabviews),

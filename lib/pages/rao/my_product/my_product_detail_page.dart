@@ -205,12 +205,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                       item!.address ?? "NaN",
                       style: const TextStyle(),
                     )
-                    // if (item.cityid != null || item.cityid! > 0)
-                    //   Text(
-                    //     item.cityname ?? "NaN",
-                    //     style: const TextStyle(color: AppColors.blue),
-                    //   ),
-                    //   Text(item.address ?? "", style: const TextStyle()),
+                  
                   ],
                 ),
                 onChanged: (int? value) {

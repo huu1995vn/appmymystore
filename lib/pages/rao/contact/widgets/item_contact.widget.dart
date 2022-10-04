@@ -64,31 +64,44 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
                   size: 45,
                 ),
                 title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.item.fullname ?? "",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      overflow: TextOverflow.ellipsis,
+                      widget.item.fullname ?? "NaN",
                     ),
-                    SizedBox(
-                      width: 5,
+                    Text(
+                      widget.item.isdefault ? "default".tr : "",
+                      style: const TextStyle(color: AppColors.blue),
                     ),
-                    if (widget.item.isdefault)
-                      Text(
-                        "default".tr,
-                        style: const TextStyle(color: AppColors.info),
-                      )
                   ],
                 ),
                 // isThreeLine: true,
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(widget.item.address ?? "", style: const TextStyle()),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        if (widget.item.cityid != null ||
+                            widget.item.cityid > 0)
+                          Text(
+                            widget.item.cityname ?? "NaN",
+                            style: const TextStyle(color: AppColors.blue),
+                          ),
+                        Text(
+                          widget.item.phone ?? "NaN",
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      widget.item!.address ?? "NaN",
+                      style: const TextStyle(),
+                    )
                   ],
                 ),
-                trailing: Text(widget.item.phone ?? "",
-                    style: const TextStyle(fontSize: 16)),
                 onTap: widget.onTap)));
   }
 }

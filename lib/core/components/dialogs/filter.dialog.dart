@@ -140,9 +140,8 @@ class _FilterDialogState extends State<FilterDialog> {
             // mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               _header("youwant".tr),
-              Container(
-                color: Colors.white,
-                padding: EdgeInsets.all(5),
+              Padding(
+                padding: const EdgeInsets.all(kDefaultPadding),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: map<Widget>(
@@ -154,8 +153,7 @@ class _FilterDialogState extends State<FilterDialog> {
                     ).toList()),
               ),
               _header("generalinfor".tr),
-              Container(
-                color: Colors.white,
+              Card(
                 child: Column(
                   children: [
                     _selectInput("BrandId", "brand", title: "brand".tr),
@@ -196,36 +194,33 @@ class _FilterDialogState extends State<FilterDialog> {
                 ),
               ),
               _header("specifications".tr),
-              Container(
-                  color: Colors.white,
+              Card(
+                  // color: Colors.white,
                   child: Column(
-                    children: [
-                      _selectInput("State", "productstate",
-                          title: "Tình trạng"),
-                      _selectInput("FuelTypeId", "fueltype",
-                          title: "Nhiên liệu"),
-                      _selectInput("MadeInId", "madein", title: "Năm sản xuất"),
-                      _selectInput("ColorId", "color", title: "Màu sắc"),
-                      _selectInput("Door", "productdoor", title: "Số cửa"),
-                      _selectInput("Seat", "productseat", title: "Số chỗ"),
-                      ListTile(
-                        title: Text('year'.tr, style: kTextTitleStyle),
-                        subtitle: RxInput(
-                          keyboardType: TextInputType.number,
-                          searchParams["Year"]?.toString() ?? "",
-                          onChanged: (v) {
-                            setState(() {
-                              searchParams["Year"] =
-                                  CommonMethods.convertToInt32(v);
-                            });
-                          },
-                          hintText: "year".tr,
-                          style: const TextStyle(color: AppColors.black50)
-                              .size(13),
-                        ),
-                      ),
-                    ],
-                  )),
+                children: [
+                  _selectInput("State", "productstate", title: "Tình trạng"),
+                  _selectInput("FuelTypeId", "fueltype", title: "Nhiên liệu"),
+                  _selectInput("MadeInId", "madein", title: "Năm sản xuất"),
+                  _selectInput("ColorId", "color", title: "Màu sắc"),
+                  _selectInput("Door", "productdoor", title: "Số cửa"),
+                  _selectInput("Seat", "productseat", title: "Số chỗ"),
+                  ListTile(
+                    title: Text('year'.tr, style: kTextTitleStyle),
+                    subtitle: RxInput(
+                      keyboardType: TextInputType.number,
+                      searchParams["Year"]?.toString() ?? "",
+                      onChanged: (v) {
+                        setState(() {
+                          searchParams["Year"] =
+                              CommonMethods.convertToInt32(v);
+                        });
+                      },
+                      hintText: "year".tr,
+                      style: const TextStyle(color: AppColors.black50).size(13),
+                    ),
+                  ),
+                ],
+              )),
             ],
           ),
         )),
@@ -254,9 +249,11 @@ class _FilterDialogState extends State<FilterDialog> {
   }
 
   Widget _radioButton(String type, String text, int value) {
-    return Container(
+    return 
+    
+    Container(
         margin: EdgeInsets.symmetric(horizontal: 5),
-        width: (SizeConfig.screenWidth - 30) / 2,
+        width: (SizeConfig.screenWidth - 50) / 2,
         child: OutlinedButton(
           onPressed: () {
             setState(() {
@@ -266,9 +263,7 @@ class _FilterDialogState extends State<FilterDialog> {
           child: Text(
             text,
             style: TextStyle(
-              color: (searchParams[type] == value)
-                  ? AppColors.primary
-                  : AppColors.black,
+              color: Get.isDarkMode ? AppColors.white : AppColors.black,
             ),
           ),
           style: ButtonStyle(
@@ -298,10 +293,11 @@ class _FilterDialogState extends State<FilterDialog> {
         style: styleTitle,
       ),
       subtitle: Text(
-          name != null && name.length > 0 ? name : (hintText ?? "choose".tr),
-          style: TextStyle(
-              color:
-                  name != null && name.length > 0 ? AppColors.primary : null)),
+        name != null && name.length > 0 ? name : (hintText ?? "choose".tr),
+        // style: TextStyle(
+        //     color:
+        //         name != null && name.length > 0 ? AppColors.primary : null)
+      ),
       onTap: () => _onSelect(key, type, searchParams[key],
           fnWhere: fnWhere, afterChange: afterChange),
       trailing: Icon(AppIcons.chevron_right),

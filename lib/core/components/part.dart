@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -167,7 +167,7 @@ Widget RxListSkeleton({int barCount = 3}) {
     return ListSkeleton(
       style: SkeletonStyle(
         backgroundColor:
-            CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
+            Get.isDarkMode ? AppColors.blackLight : AppColors.white,
         isShowAvatar: false,
         barCount: barCount,
         isAnimation: true,
@@ -186,12 +186,12 @@ Widget RxCardSkeleton(
     return CardSkeleton(
       style: SkeletonStyle(
         backgroundColor:
-            CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
+            Get.isDarkMode ? AppColors.blackLight : AppColors.white,
         isShowAvatar: isShowAvatar,
         isCircleAvatar: isCircleAvatar,
         borderRadius:
             BorderRadius.all(Radius.circular(isBorderRadius ? 20.0 : 0)),
-        padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
+        // padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
         barCount: barCount,
         isAnimation: true,
       ),
@@ -204,8 +204,7 @@ Widget RxCardListSkeleton(
     {int barCount = 3, bool isShowAvatar = true, bool isCircleAvatar = false}) {
   return CardListSkeleton(
     style: SkeletonStyle(
-      backgroundColor:
-          CommonConfig.isDark ? AppColors.blackLight : AppColors.white,
+      backgroundColor: Get.isDarkMode ? AppColors.blackLight : AppColors.white,
       isShowAvatar: isShowAvatar,
       isCircleAvatar: isCircleAvatar,
       barCount: barCount,
@@ -230,7 +229,7 @@ Widget RxNoFound({required String urlImage, String? message}) {
           height: 10,
         ),
         Text(
-          message ?? "nodatafound".tr(),
+          message ?? "no.found".tr,
           textAlign: TextAlign.center,
         ),
       ],
@@ -251,11 +250,11 @@ Widget RxLoginAccountLabel(context) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'message.str006'.tr(),
-              style: const TextStyle(fontSize: 13),
+              'message.str006'.tr,
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
             Text(
-              "login".tr(),
+              "login".tr,
               style: const TextStyle(
                   color: AppColors.primary500,
                   fontSize: 13,
@@ -554,9 +553,8 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
                 // text: lableText ?? type.tr(),
                 children: <TextSpan>[
                   TextSpan(
-                      text: labelText ?? type.tr(),
-                      style: kTextTitleStyle.copyWith(
-                          fontSize: 12, color: Colors.black54)),
+                      text: labelText ?? type.tr,
+                      style: kTextTitleStyle.copyWith(fontSize: 12)),
                   if (validator != null)
                     const TextSpan(
                         text: ' *',
@@ -571,11 +569,8 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
           child: RxInput(name,
               isBorder: isBorder,
               readOnly: true,
-              hintText: hintText ?? "choose.text".tr(),
-              style: TextStyle(
-                  fontSize: 16,
-                  color:
-                      name != null && name.isNotEmpty ? AppColors.black : null),
+              hintText: hintText ?? "choose".tr,
+              style: TextStyle(fontSize: 16),
               validator: validator, onTap: () {
             _onSelect(context, type, id,
                 fnWhere: fnWhere, afterChange: afterChange);
@@ -587,7 +582,15 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
 
 _onSelect(BuildContext context, String type, dynamic id,
     {bool Function(dynamic)? fnWhere, Function(dynamic)? afterChange}) async {
-  List data = MasterDataService.data[type];
+  List data = [];
+  if (type == "year") {
+    int start = 1970;
+    for (var i = DateTime.now().year+1; i >= start; i--) {
+      data.add({"name": i.toString(), "id": i});
+    }
+  } else {
+    data = MasterDataService.data[type];
+  }
   if (fnWhere != null) {
     data = data.where(fnWhere).toList();
   }

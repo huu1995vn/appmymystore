@@ -12,7 +12,7 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -80,15 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
               LOGORAOXECOLORIMAGE,
               width: 150,
             ),
-            SizedBox(height: 30),
-            Text("regist".tr().toUpperCase(),
-                style:
-                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-            SizedBox(height: 10),
-            Text(
-              "welcome".tr(),
-              style: const TextStyle(fontSize: 16, color: Colors.black54),
-            ),
+            Text("regist".tr, style: const TextStyle(color: AppColors.white)),
             if (user!.phone != null)
               Text(user!.phone!,
                   style: kTextHeaderStyle.copyWith(color: AppColors.white))
@@ -121,12 +113,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                       bottom:
                                           BorderSide(color: Colors.black26))),
                               child: RxInput(user!.fullname!,
-                                  labelText: "fullname".tr(),
+                                  labelText: "fullname".tr,
                                   icon: const Icon(AppIcons.user_1),
                                   onChanged: (v) => {user!.fullname = v},
                                   validator: Validators.compose([
                                     Validators.required(
-                                        "notempty.fullname.text".tr()),
+                                        "notempty.fullname".tr),
                                   ]))),
                           Container(
                               padding: const EdgeInsets.symmetric(
@@ -137,16 +129,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                           BorderSide(color: Colors.black26))),
                               child: RxInput(user!.phone!,
                                   keyboardType: TextInputType.number,
-                                  labelText: "phone".tr(),
+                                  labelText: "phone".tr,
                                   icon: const Icon(AppIcons.phone_handset),
                                   onChanged: (v) => {user!.phone = v},
                                   validator: (v) {
                                     if (v == null || !v.isNotEmpty) {
-                                      return "notempty.phone.text".tr();
+                                      return "notempty.phone".tr;
                                     } else {
                                       return CommonMethods.checkStringPhone(v)
                                           ? null
-                                          : "invalid.phone".tr();
+                                          : "invalid.phone".tr;
                                     }
                                   })),
                           Container(
@@ -159,14 +151,14 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: RxInput(
                                 user!.password!,
                                 isPassword: true,
-                                labelText: "password.text".tr(),
+                                labelText: "password".tr,
                                 icon: const Icon(AppIcons.lock_1),
                                 onChanged: (v) => {user!.password = v},
                                 validator: Validators.compose([
                                   Validators.required(
-                                      "notempty.password.text".tr()),
+                                      "notempty.password".tr),
                                   Validators.patternString(RxParttern.password,
-                                      "message.str004".tr())
+                                      "message.str004".tr)
                                 ]),
                               )),
                           Container(
@@ -175,12 +167,12 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: RxInput(
                                 passwordAgain,
                                 isPassword: true,
-                                labelText: "password.again".tr(),
+                                labelText: "password.again".tr,
                                 icon: const Icon(AppIcons.lock_1),
                                 validator: (value) {
                                   if (value != null &&
                                       value != user!.password) {
-                                    return "invalid.password.again".tr();
+                                    return "invalid.password.again".tr;
                                   } else {
                                     return null;
                                   }
@@ -198,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             _onRegister();
                           }
                         },
-                        text: 'continue'.tr().toUpperCase()),
+                        text: 'continue'.tr.toUpperCase()),
                   )
                 ],
               ),
@@ -216,8 +208,7 @@ class _RegisterPageState extends State<RegisterPage> {
         var res =
             await DaiLyXeApiBLL_APIAnonymous().insertuser(user!.toInsert());
         if (res.status > 0) {
-          CommonMethods.showDialogCongratulations(
-              context, "message.str008".tr());
+          CommonMethods.showDialogCongratulations(context, "message.str008".tr);
         } else {
           CommonMethods.showToast(res.message);
         }

@@ -40,7 +40,6 @@ dependencies:
   dio:  # Used for call api
   provider:  # Used for custome theme
   localstorage: # Used for save local data
-  easy_localization: # Used for language
   flutter_launcher_icons: # Used for build icon
   splashscreen: # Used for splashscreen
   wc_form_validators: # Used for form validators
@@ -78,6 +77,9 @@ dependencies:
   fluttertoast: #Used for toast
   overlay_support: #Used for showSimpleNotification
   font_awesome_flutter:  #icon
+  get: #It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
+  get_storage: #
+  intl : 
 
 dev_dependencies:
   build_runner: # Used for code generation libraries
@@ -111,7 +113,6 @@ flutter:
     - assets/images/icons/
     - assets/images/intro/
     - assets/css/dailyxe.css
-    - assets/translations/
   fonts:
   - family: AppIcons
     fonts:

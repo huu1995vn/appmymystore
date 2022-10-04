@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison, import_of_legacy_library_into_null_safe, use_build_context_synchronously
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -85,7 +85,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   _onReview() async {
     if (!CommonMethods.isLogin) {
-      CommonMethods.showToast("please.login".tr());
+      CommonMethods.showToast("please.login".tr);
       return;
     }
     await CommonNavigates.showDialogBottomSheet(
@@ -99,7 +99,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   _onReport() async {
     if (!CommonMethods.isLogin) {
-      CommonMethods.showToast("please.login".tr());
+      CommonMethods.showToast("please.login".tr);
       return;
     }
     await CommonNavigates.showDialogBottomSheet(
@@ -111,7 +111,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: isNotFound
-            ? Expanded(child: Center(child: Text("not.found".tr())))
+            ? Expanded(child: Center(child: Text("not.found".tr)))
             : ((data == null || data!.id <= 0)
                 ? Center(
                     child: CircularProgressIndicator(),
@@ -121,7 +121,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     controller: scrollController,
                     slivers: <Widget>[
                       SliverAppBar(
-                        title: Text(data!.name ?? "updating".tr()),
+                        title: Text(data!.name ?? "updating".tr),
                         elevation: 0.0,
                         actions: <Widget>[
                           RxIconButton(
@@ -171,7 +171,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               ),
                               SizedBox(width: kDefaultPadding),
                               Text(
-                                "call".tr() + ": " + (data!.phone)!,
+                                "call".tr + ": " + (data!.phone)!,
                                 style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.white,
@@ -194,7 +194,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             children: [
                               FaIcon(FontAwesomeIcons.comment,
                                   color: Colors.grey[700]),
-                              Text("chatzalo".tr())
+                              Text("chatzalo".tr,
+                                  style: TextStyle(color: Colors.grey[700]))
                             ],
                           ))),
                 ),
@@ -213,18 +214,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               width: 100,
               child: Text(
                 " $title: ",
-                style: kTextTitleStyle.copyWith(
-                    color:
-                        CommonConfig.isDark ? Colors.white : AppColors.black50),
+                style: kTextTitleStyle,
               )),
           Text(
               (subtitle is int
                       ? (subtitle > 0 ? subtitle.toString() : null)
                       : subtitle?.toString()) ??
-                  "not.update".tr(),
-              style: TextStyle(
-                  color: CommonConfig.isDark ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.bold))
+                  "not.update".tr,
+              style: TextStyle(fontWeight: FontWeight.bold))
         ],
       ),
     );
@@ -235,8 +232,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         RxImages(data: data!.rximglist),
-        Container(
-            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
             margin: EdgeInsets.only(bottom: 5),
             child: SizedBox(
               width: double.infinity,
@@ -254,7 +250,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(data!.rxprice ?? "negotiate".tr(),
+                        Text(data!.rxprice ?? "negotiate".tr,
                             style: kTextPriceStyle.copyWith(fontSize: 25)),
                         SizedBox(
                           width: 10,
@@ -281,20 +277,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                     Row(
                       children: [
-                        Text(data!.rxtimeago,
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: CommonConfig.isDark
-                                    ? Colors.white
-                                    : AppColors.black50)),
+                        Text(data!.rxtimeago, style: TextStyle(fontSize: 13)),
                       ],
                     ),
                   ],
                 ),
               ),
             )),
-        Container(
-            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
@@ -302,8 +292,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 children: [
                   Icon(
                     AppIcons.map_1,
-                    color:
-                        CommonConfig.isDark ? Colors.white : AppColors.black50,
                     size: 13,
                   ),
                   SizedBox(
@@ -311,16 +299,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ),
                   Flexible(
                       child: Text(data!.address ?? "NaN",
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: CommonConfig.isDark
-                                  ? Colors.white
-                                  : AppColors.black50)))
+                          style: TextStyle(fontSize: 13)))
                 ],
               ),
             )),
-        Container(
-          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
@@ -331,43 +314,42 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               children: [
                 Padding(
                     padding: EdgeInsets.all(5),
-                    child: Text("specification".tr(),
+                    child: Text("specification".tr,
                         style: TextStyle(
-                            color: CommonConfig.isDark
-                                ? Colors.white
-                                : Colors.grey[700],
+                            // color: Get.isDarkMode
+                            //     ? Colors.white
+                            //     : Colors.grey[700],
                             fontSize: 18,
                             fontWeight: FontWeight.bold))),
                 SizedBox(
                   height: 5,
                 ),
-                _listTitle("model".tr(), data!.modelname,
+                _listTitle("model".tr, data!.modelname,
                     leading:
                         FaIcon(FontAwesomeIcons.car, color: AppColors.primary)),
-                _listTitle("bodytype".tr(), data!.bodytypename,
+                _listTitle("bodytype".tr, data!.bodytypename,
                     leading: FaIcon(FontAwesomeIcons.carSide,
                         color: AppColors.primary)),
-                _listTitle("color".tr(), data!.colorname,
+                _listTitle("color".tr, data!.colorname,
                     leading: FaIcon(FontAwesomeIcons.palette,
                         color: AppColors.primary)),
-                _listTitle("seat".tr(), data!.seat,
+                _listTitle("seat".tr, data!.seat,
                     leading: Icon(AppIcons.airline_seat_legroom_normal,
                         color: AppColors.primary)),
-                _listTitle("fueltype".tr(), data!.fueltypename,
+                _listTitle("fueltype".tr, data!.fueltypename,
                     leading: FaIcon(FontAwesomeIcons.gasPump,
                         color: AppColors.primary)),
-                _listTitle("year".tr(), data!.year,
+                _listTitle("year".tr, data!.year,
                     leading: FaIcon(FontAwesomeIcons.calendar,
                         color: AppColors.primary)),
-                _listTitle("madein".tr(), data!.madeinname,
+                _listTitle("madein".tr, data!.madeinname,
                     leading: FaIcon(FontAwesomeIcons.circleInfo,
                         color: AppColors.primary)),
               ],
             ),
           ),
         ),
-        Container(
-            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding),
@@ -378,11 +360,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     children: [
                       Padding(
                           padding: EdgeInsets.all(5),
-                          child: Text("description".tr(),
+                          child: Text("description".tr,
                               style: TextStyle(
-                                  color: CommonConfig.isDark
-                                      ? Colors.white
-                                      : Colors.grey[700],
+                                  // color: Get.isDarkMode
+                                  //     ? Colors.white
+                                  //     : Colors.grey[700],
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold))),
                       TextFormField(
@@ -393,8 +375,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           maxLines: null,
                           enabled: false),
                     ]))),
-        Container(
-          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
@@ -422,9 +403,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   data!.fullname ?? "NaN",
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: CommonConfig.isDark
-                                        ? Colors.white
-                                        : AppColors.black50,
+                                    // color: Get.isDarkMode
+                                    //     ? Colors.white
+                                    //     : AppColors.black50,
                                   ).bold,
                                 ),
                                 SizedBox(
@@ -435,10 +416,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     Text(
                                       data!.cityname ?? "NaN",
                                       style: TextStyle(
-                                        color: CommonConfig.isDark
-                                            ? Colors.white
-                                            : AppColors.black50,
-                                      ),
+                                          // color: Get.isDarkMode
+                                          //     ? Colors.white
+                                          //     : AppColors.black50,
+                                          ),
                                     ),
                                   ],
                                 )
@@ -466,13 +447,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         colorIcon: AppColors.white,
                         onTap: _onShare,
                       ),
+                      GestureDetector(
+                          onTap: _onReview,
+                          child: Text(
+                            "review".tr,
+                            style: const TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: AppColors.info)
+                                .underline,
+                          )),
                     ],
                   )
                 ],
               )),
         ),
-        Container(
-            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding),
@@ -482,11 +471,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   children: [
                     Padding(
                         padding: EdgeInsets.all(5),
-                        child: Text("rate".tr(),
+                        child: Text("rate".tr,
                             style: TextStyle(
-                                color: CommonConfig.isDark
-                                    ? Colors.white
-                                    : Colors.grey[700],
+                                // color: Get.isDarkMode
+                                //     ? Colors.white
+                                //     : Colors.grey[700],
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold))),
                     Row(
@@ -521,13 +510,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         icon: Icon(AppIcons.edit),
                         color: Colors.blue,
                         onTap: _onReview,
-                        text: "writereview".tr(),
+                        text: "writereview".tr,
                       ),
                     ])
                   ],
                 ))),
-        Container(
-          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+        Card(
+          // color: Get.isDarkMode ? AppColors.blackLight : Colors.white,
           margin: EdgeInsets.only(bottom: 5),
           padding: const EdgeInsets.all(kDefaultPadding),
           child: Row(
@@ -541,36 +530,41 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   size: 50,
                   color: Colors.blue,
                 ),
-              ),
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    "message.str001".tr(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: kDefaultPadding),
-                    child: RxButton(
-                        onTap: _onReport,
-                        icon: Icon(
-                          AppIcons.warning,
-                        ),
-                        color: AppColors.black50,
-                        text: "report.text".tr().toUpperCase()),
-                  )
-                ],
-              ))
-            ],
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "message.str001".tr,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: kDefaultPadding),
+                      child: RxButton(
+                          onTap: _onReport,
+                          icon: Icon(
+                            AppIcons.warning,
+                          ),
+                          color: AppColors.black50,
+                          text: "report".tr.toUpperCase()),
+                    )
+                  ],
+                ))
+              ],
+            ),
           ),
         ),
         ProductReview(data!),
-        ProductRelated(
-            title: "product.thesame.suggest".tr(),
-            filter: {"BrandId": data!.brandid},
-            scrollDirection: Axis.vertical,
-            notids: [data!.id])
+        Card(
+            margin: EdgeInsets.only(bottom: 5),
+            child: Padding(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: ProductRelated(
+                      title: "news.brand".tr,
+                      filter: {"BrandId": data!.brandid},
+                      scrollDirection: Axis.vertical,
+                      notids: [data!.id]),
+            ))
       ],
     );
   }

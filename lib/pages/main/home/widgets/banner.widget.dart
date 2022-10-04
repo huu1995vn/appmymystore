@@ -43,31 +43,33 @@ class _BannerWidgetState extends State<BannerWidget> {
       for (var element in kBanners) {
         BannerModel item = BannerModel();
         item.src = CommonMethods.buildUrlImage(int.parse(element),
-                rewriteUrl: "banner-raoxe");
+            rewriteUrl: "banner-raoxe");
         list.add(item);
       }
     }
-    setState(() {
-      listData = list;
-    });
+    if (mounted) {
+      setState(() {
+        listData = list;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(  
-      clipBehavior: Clip.hardEdge,
-      margin: const EdgeInsets.all(10.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: RxSlider(
-      onTap: (i) {
-        var item = listData[i];
-        if (item.link != null && CommonMethods.isURl(item.link!)) {
-          CommonMethods.launchURL(item.link!);
-        }
-      },
-      items: listData.map((e) => e.src.toString()).toList(),
-    ) );
+    return Card(
+        clipBehavior: Clip.hardEdge,
+        margin: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        child: RxSlider(
+          onTap: (i) {
+            var item = listData[i];
+            if (item.link != null && CommonMethods.isURl(item.link!)) {
+              CommonMethods.launchURL(item.link!);
+            }
+          },
+          items: listData.map((e) => e.src.toString()).toList(),
+        ));
   }
 }

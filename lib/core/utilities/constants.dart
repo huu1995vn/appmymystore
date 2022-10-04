@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 
@@ -10,7 +11,7 @@ const kPrimaryColor = Color.fromRGBO(182, 40, 49, 1);
 const kWhite = Colors.white;
 const kTextColor = Color(0xFF707070);
 const kTextLightColor = Color(0xFF949098);
-const kDefaultPadding = 10.0;
+const kDefaultPadding = 5.0;
 const kDefaultPaddingTop = 79.0;
 const kItemOnPage = 10;
 const kMaxImages = 15;
@@ -39,14 +40,14 @@ const TextStyle kTextTitleStyle = TextStyle(
 );
 const TextStyle kTextSubTitleStyle = TextStyle(
     fontWeight: FontWeight.normal, 
-    color: AppColors.black50,
+    fontStyle: FontStyle.italic,
     fontSize: 14);
 const kTextPriceStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 20,
   color: AppColors.primary,
 );
-const kTextTimeStyle = TextStyle(color: AppColors.black50, fontSize: 14);
+const kTextTimeStyle = TextStyle(fontSize: 14, fontStyle: FontStyle.italic);
 const NOIMAGE = "assets/images/no-image.jpg";
 const NOIMAGEAVAILABELFOLDER = "/resources/Images/hinh-anh-khong-ton-tai/";
 const NOIMAGEUUDAI = "assets/images/gift.png";
@@ -69,23 +70,23 @@ const String IMAGE_NOT_FOUND =
     "https://cdn.gianhangvn.com/image/hinh-anh-khong-ton-tai.jpg";
 const List<String> kBanners = ["84748", "84749", "84750"];
 List<Categorie> CATEGORIES = [
-  Categorie(id: 2, categoryname: "Tin tức mới"),
-  Categorie(id: 8, categoryname: "Nổi bật"),
-  Categorie(id: 3, categoryname: "Đánh giá xe"),
-  Categorie(id: 4, categoryname: "Tư vấn"),
-  Categorie(id: 5, categoryname: "Hình ảnh"),
+  Categorie(id: 2, categoryname: "news.new".tr),
+  Categorie(id: 8, categoryname: "highlight".tr),
+  Categorie(id: 3, categoryname: "vehicle.reviews".tr),
+  Categorie(id: 4, categoryname: "advise".tr),
+  Categorie(id: 5, categoryname: "image".tr),
 ];
 List<Categorie> PRODUCTSTATUS = [
-  Categorie(id: 1, categoryname: "Chờ duyệt"),
-  Categorie(id: 2, categoryname: "Đã duyệt"),
-  Categorie(id: 3, categoryname: "Không duyệt"),
-  Categorie(id: 4, categoryname: "Vi phạm"),
+  Categorie(id: 1, categoryname: "pending".tr),
+  Categorie(id: 2, categoryname: "approved".tr),
+  Categorie(id: 3, categoryname: "not.approved".tr),
+  Categorie(id: 4, categoryname: "violate".tr),
   // Categorie(id: 6, categoryname: "Videos"),
 ];
 
 List<Categorie> PRODUCTREVIEWSTATUS = [
-  Categorie(id: 1, categoryname: "Đã duyệt"),
-  Categorie(id: 2, categoryname: "Không duyệt"),
+  Categorie(id: 1, categoryname: "approved".tr),
+  Categorie(id: 2, categoryname: "not.approved".tr),
 ];
 
 List PRICES = [
@@ -96,33 +97,33 @@ List PRICES = [
 ];
 
 List SORTS = [
-  {"name": "Mới nhất", "id": "CreateDate DESC"},
-  {"name": "Cũ nhất", "id": "CreateDate ASC"},
-  {"name": "Giá cao trước", "id": "Price DESC"},
-  {"name": "Giá thấp trước", "id": "Price ASC"}
+  {"name": "latest".tr, "id": "CreateDate DESC"},
+  {"name": "oldest".tr, "id": "CreateDate ASC"},
+  {"name": "highpricefirst".tr, "id": "Price DESC"},
+  {"name": "lowpricefirst".tr, "id": "Price ASC"}
 ];
 List PRODUCTTYPES = [
-  {"name": "Bán", "id": 1},
-  {"name": "Mua", "id": 2},
+  {"name": "sell".tr, "id": 1},
+  {"name": "buy".tr, "id": 2},
 ];
 List PRODUCTSTATES = [
-  {"name": "Mới", "id": 1},
-  {"name": "Đã sử dụng", "id": 2},
+  {"name": "new".tr, "id": 1},
+  {"name": "old".tr, "id": 2},
 ];
 
 List PRODUCTDOORS = [
-  {"name": "2 Cửa", "id": 2},
-  {"name": "4 Cửa", "id": 4},
+  {"name": "2 ${"seat".tr}", "id": 2},
+  {"name": "4 ${"seat".tr}", "id": 4},
 ];
 
 List PRODUCTSEATS = [
-  {"name": "1 Chỗ", "id": 1},
-  {"name": "2 Chỗ", "id": 2},
-  {"name": "4 Chỗ", "id": 4},
-  {"name": "5 Chỗ", "id": 5},
-  {"name": "6 Chỗ", "id": 6},
-  {"name": "7 Chỗ", "id": 7},
-  {"name": "9 Chỗ", "id": 9},
+  {"name": "1 ${"door".tr}", "id": 1},
+  {"name": "2 ${"door".tr}", "id": 2},
+  {"name": "4 ${"door".tr}", "id": 4},
+  {"name": "5 ${"door".tr}", "id": 5},
+  {"name": "6 ${"door".tr}", "id": 6},
+  {"name": "7 ${"door".tr}", "id": 7},
+  {"name": "9 ${"door".tr}", "id": 9},
 ];
 
 class RxParttern {

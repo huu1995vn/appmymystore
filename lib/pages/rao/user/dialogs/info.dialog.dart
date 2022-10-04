@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty, non_constant_identifier_names, must_be_immutable
 
 import 'dart:io';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
@@ -13,7 +13,7 @@ import 'package:raoxe/core/components/dialogs/address.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -69,8 +69,8 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
           } else {
             CommonMethods.showToast(res.message);
           }
-          Provider.of<UserProvider>(context, listen: false)
-              .setData(img: fileId);
+          Provider.of<AppProvider>(context, listen: false)
+              .setUserData(img: fileId);
         }
       }
     } catch (e) {
@@ -90,11 +90,11 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
         setState(() {
           data = dataClone;
         });
-        CommonMethods.showToast("success".tr());
+        CommonMethods.showToast("success".tr);
       } else {
         CommonMethods.showToast(res.message);
       }
-      Provider.of<UserProvider>(context, listen: false).setUserModel(dataClone);
+      Provider.of<AppProvider>(context, listen: false).setUserModel(dataClone);
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }
@@ -126,9 +126,9 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
               )
             : CustomScrollView(
                 slivers: <Widget>[
-                  SliverAppBar( 
+                  SliverAppBar(
                     expandedHeight: 250.0,
-                    flexibleSpace: Avatar(), 
+                    flexibleSpace: Avatar(),
                   ),
                   SliverToBoxAdapter(
                       child: Padding(
@@ -139,23 +139,23 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                             child: Column(
                           children: <Widget>[
                             rxTextInput(context, data!.fullname,
-                                labelText: "fullname".tr(),
+                                labelText: "fullname".tr,
                                 onChanged: (v) => {data!.fullname = v},
                                 validator: Validators.compose([
-                                  Validators.required("fullname.text".tr()),
+                                  Validators.required("fullname".tr),
                                 ])),
                             rxTextInput(context, data!.address,
-                                labelText: "address".tr(),
+                                labelText: "address".tr,
                                 onTap: _onAddress,
                                 validator: Validators.compose([
-                                  Validators.required("fullname.text".tr()),
+                                  Validators.required("fullname".tr),
                                 ])),
                             ListTile(
                               title: RichText(
                                 text: TextSpan(
                                   children: <TextSpan>[
                                     TextSpan(
-                                        text: "birthday".tr(),
+                                        text: "birthday".tr,
                                         style: kTextTitleStyle.copyWith(
                                             color: Theme.of(context)
                                                 .textTheme
@@ -170,7 +170,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                 ),
                               ),
                               subtitle: DateTimePicker(
-                                  dateHintText: "birthday".tr(),
+                                  dateHintText: "birthday".tr,
                                   style: TextStyle(
                                           color: data!.birthdate != null &&
                                                   data!.birthdate!
@@ -190,7 +190,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                   onChanged: (value) =>
                                       {data!.birthdate = value},
                                   validator: Validators.compose([
-                                    Validators.required("birthday.text".tr()),
+                                    Validators.required("birthday".tr),
                                   ])),
                             ),
                             ListTile(
@@ -198,8 +198,8 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: <Widget>[
-                                  CustomRadioButton("male".tr(), 1),
-                                  CustomRadioButton("female".tr(), 0),
+                                  CustomRadioButton("male".tr, 1),
+                                  CustomRadioButton("female".tr, 0),
                                 ],
                               ),
                             )
@@ -216,7 +216,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                     _onSave();
                   }
                 },
-                text: 'save'.tr())
+                text: 'save'.tr)
         ]);
   }
 

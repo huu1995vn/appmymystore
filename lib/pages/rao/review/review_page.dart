@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -51,25 +51,25 @@ class _ReviewPageState extends State<ReviewPage> {
             return <Widget>[
               SliverAppBar(
                 centerTitle: true,
-                title: Text("review".tr()),
-                elevation: 0.0, 
+                title: Text("review".tr),
+                elevation: 0.0,
               ),
               SliverPersistentHeader(
                 pinned: true,
                 delegate: RxSliverAppBarTabDelegate(
                   child: PreferredSize(
-                    preferredSize: Size.fromHeight(45.0),
-                    child: Container(
-                      color: Colors.white,
+                    preferredSize: Size.fromHeight(50),
+                    child: ColoredBox(
+                    color: Get.isDarkMode ? Colors.white10 : Colors.white,
                       child: TabBar(
-                        isScrollable: true,
-                        labelColor: AppColors.primary,
-                        unselectedLabelColor: AppColors.black50,
-                        indicatorColor: AppColors.primary,
-                        tabs: tabs,
+                       isScrollable: true,
+                      labelColor: AppColors.primary,
+                      unselectedLabelColor:
+                          Get.isDarkMode ? Colors.white : AppColors.black,
+                      indicatorColor: Colors.red[800],
+                      tabs: tabs,
                       ),
-                    ),
-                  ),
+                    ))
                 ),
               ),
             ];

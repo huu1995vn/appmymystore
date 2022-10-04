@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, unnecessary_null_comparison
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
@@ -117,9 +117,9 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
                                 onTap: () {
                                   CommonNavigates.goBack(context, value);
                                 },
-                                text: "choose.text".tr()),
+                                text: "choose".tr
                           )
-                        ],
+                      )],
                       ))
               ]);
             }));

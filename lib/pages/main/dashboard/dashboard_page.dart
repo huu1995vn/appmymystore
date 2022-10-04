@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -11,12 +11,11 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 
 import '../../../core/commons/common_configs.dart';
-import '../../../core/providers/theme_provider.dart';
 import '../../../core/utilities/app_colors.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -43,7 +42,7 @@ class _DashboardPageState extends State<DashboardPage> {
         setState(() {
           data = user;
         });
-        Provider.of<UserProvider>(context, listen: false).setUserModel(user);
+        Provider.of<AppProvider>(context, listen: false).setUserModel(user);
       } else {
         CommonMethods.showToast(res.message);
       }
@@ -57,7 +56,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Mở rộng"),
+          title: Text("expand".tr),
           elevation: 0.0,
           actions: <Widget>[
             TextButton(
@@ -65,7 +64,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 AuthService.logout(context);
               },
               child: Text(
-                "Đăng xuất",
+                "logout".tr,
                 style: TextStyle(color: Colors.white),
               ),
             )
@@ -77,22 +76,16 @@ class _DashboardPageState extends State<DashboardPage> {
               )
             : Column(
                 children: [
-                  Container(
-                      color: CommonConfig.isDark
-                          ? AppColors.blackLight
-                          : Colors.white,
+                  Card(
                       margin: EdgeInsets.only(bottom: 5, top: 5),
                       child: Column(children: [_top()])),
-                  Container(
-                    color: CommonConfig.isDark
-                        ? AppColors.blackLight
-                        : Colors.white,
+                  Card(
                     margin: EdgeInsets.only(bottom: 5),
                     child: Column(
                       children: [
                         _card(
                           child: ListTile(
-                            title: Text("manager.raoxe".tr()),
+                            title: Text("manager.raoxe".tr),
                             leading: FaIcon(
                               FontAwesomeIcons.bullhorn,
                             ),
@@ -106,7 +99,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         _card(
                           child: ListTile(
-                            title: Text("ads".tr()),
+                            title: Text("ads".tr),
                             leading: FaIcon(
                               FontAwesomeIcons.rss,
                             ),
@@ -119,7 +112,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         _card(
                           child: ListTile(
-                            title: Text("contact".tr()),
+                            title: Text("contact".tr),
                             leading: FaIcon(
                               FontAwesomeIcons.envelope,
                             ),
@@ -132,7 +125,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         _card(
                           child: ListTile(
-                            title: Text("bookmark".tr()),
+                            title: Text("bookmark".tr),
                             leading: FaIcon(
                               FontAwesomeIcons.bookmark,
                             ),
@@ -145,7 +138,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         _card(
                           child: ListTile(
-                            title: Text("review".tr()),
+                            title: Text("review".tr),
                             leading: FaIcon(
                               FontAwesomeIcons.star,
                             ),
@@ -158,7 +151,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         _card(
                           child: ListTile(
-                            title: Text("address".tr()),
+                            title: Text("address".tr),
                             leading: FaIcon(
                               FontAwesomeIcons.mapPin,
                             ),
@@ -172,10 +165,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       ],
                     ),
                   ),
-                  Container(
-                      color: CommonConfig.isDark
-                          ? AppColors.blackLight
-                          : Colors.white,
+                  Card(
                       margin: EdgeInsets.only(bottom: 5),
                       child: Column(children: [
                         _card(
@@ -202,8 +192,7 @@ class _DashboardPageState extends State<DashboardPage> {
         decoration: BoxDecoration(
           border: Border(
             bottom:
-                Provider.of<ThemeProvider>(context).selectedThemeMode.name ==
-                        'dark'
+                Get.isDarkMode
                     ? BorderSide(color: Colors.black26, width: 1)
                     : BorderSide(color: Colors.black12, width: 1),
           ),
@@ -212,7 +201,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _top() {
-    final userProvider = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<AppProvider>(context);
     return Container(
         padding: EdgeInsets.only(top: 10, bottom: 10),
         child: ListTile(

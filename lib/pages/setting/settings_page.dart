@@ -6,16 +6,15 @@ import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/providers/theme_provider.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:raoxe/core/providers/user_provider.dart';
+import 'package:get/get.dart';
+import 'package:raoxe/core/lang/translation.service.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
+import 'package:raoxe/core/theme/theme.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-
 import '../../core/commons/common_configs.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -26,9 +25,10 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  String _selectedLang = TranslationService.locale!.languageCode;
   bool authBiometric = false;
   _onBiometric(bool v) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final userProvider = Provider.of<AppProvider>(context, listen: false);
     try {
       await AuthService.authBiometric();
       if (v) {
@@ -79,16 +79,26 @@ class _SettingsPageState extends State<SettingsPage> {
     CommonMethods.unlockScreen();
   }
 
+  List<DropdownMenuItem<String>> _buildDropdownLangs() {
+    var list = <DropdownMenuItem<String>>[];
+    TranslationService.langs.forEach((key, value) {
+      list.add(DropdownMenuItem<String>(
+        value: key,
+        child: Text(value),
+      ));
+    });
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context);
-    var userProvider = Provider.of<UserProvider>(context);
+    var userProvider = Provider.of<AppProvider>(context);
     authBiometric =
         StorageService.get(StorageKeys.biometric) == userProvider.user.username;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('setting'.tr()),
+        title: Text('setting'.tr),
         centerTitle: true,
         elevation: 0.0,
       ),
@@ -97,9 +107,8 @@ class _SettingsPageState extends State<SettingsPage> {
           SliverFillRemaining(
               child: Column(
             children: [
-              Container(
-                  color:
-                      CommonConfig.isDark ? AppColors.blackLight : Colors.white,
+              Card(
+                
                   margin: EdgeInsets.only(top: 6, bottom: 6),
                   child: ListView(
                     shrinkWrap: true,
@@ -108,12 +117,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       context: context,
                       tiles: [
                         RxBuildItem(
-                            icon: FaIcon(FontAwesomeIcons.moon),
-                            title: "Giao diện tối",
+                            icon: FaIcon(FontAwesomeIcons.sun),
+                            title: "darkmode".tr,
                             trailing: Switch(
-                              value: theme.selectedThemeMode.name == "dark",
+                              value: ThemeService().isSavedDarkMode(),
                               onChanged: (value) {
-                                theme.enableDarkMode(value);
+                                setState(() {
+                                  ThemeService().changeThemeMode();
+                                });
                               },
                               activeTrackColor: Colors.red[200],
                               activeColor: Colors.red,
@@ -122,22 +133,22 @@ class _SettingsPageState extends State<SettingsPage> {
                               // _authenticateWithBiometrics();
                             }),
                         RxBuildItem(
-                          icon: const FaIcon(FontAwesomeIcons.language),
-                          title: "English",
-                          trailing: Switch(
-                            value: context.locale.languageCode != "vi",
+                          icon: const Icon(AppIcons.text_format),
+                          title: "language".tr,
+                          trailing: DropdownButton<String>(
+                            icon: Icon(Icons.arrow_drop_down),
+                            value: _selectedLang,
+                            items: _buildDropdownLangs(),
                             onChanged: (value) {
-                              context.setLocale(value
-                                  ? const Locale("en")
-                                  : const Locale("vi"));
+                              setState(() => _selectedLang = value!);
+                              TranslationService.changeLocale(value!);
                             },
-                            activeTrackColor: Colors.red[200],
-                            activeColor: Colors.red,
                           ),
                         ),
+
                         RxBuildItem(
-                            icon: const FaIcon(FontAwesomeIcons.fingerprint),
-                            title: "Đăng nhập bằng sinh trắc học",
+                            icon: const Icon(AppIcons.fingerprint),
+                            title: "login.biometrics".tr,
                             trailing: Switch(
                               value: authBiometric,
                               onChanged: _onBiometric,
@@ -148,31 +159,31 @@ class _SettingsPageState extends State<SettingsPage> {
                               // _authenticateWithBiometrics();
                             }),
                         // RxBuildItem(
-                        //     title: "Clear cache".tr(),
+                        //     title: "Clear cache".tr,
                         //     onTap: () {
                         //       RxSearchDelegate.cacheapiSearch = {};
                         //       CommonMethods.showToast(
-                        //           context, "success".tr());
+                        //           context, "success".tr);
                         //     }),
                         RxBuildItem(
                             icon:
                                 const FaIcon(FontAwesomeIcons.shareFromSquare),
-                            title: "share".tr(),
+                            title: "share".tr,
                             trailing: Icon(AppIcons.keyboard_arrow_right),
                             onTap: _onShare),
                         RxBuildItem(
-                            title: "termsandcondition".tr(),
+                            title: "termsandcondition".tr,
                             onTap: () {
                               CommonMethods.openWebViewTermsAndCondition(
                                   context);
                             }),
                         RxBuildItem(
-                            title: "policy".tr(),
+                            title: "policy".tr,
                             onTap: () {
                               CommonMethods.openWebViewPolicy(context);
                             }),
                         RxBuildItem(
-                            title: "feedback".tr(),
+                            title: "feedback".tr,
                             onTap: () {
                               CommonMethods.openWebViewFeedBack(context);
                             }),
@@ -183,7 +194,7 @@ class _SettingsPageState extends State<SettingsPage> {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "${"version".tr()} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
+                  "${"version".tr} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
                   style: TextStyle().italic,
                 ),
               )

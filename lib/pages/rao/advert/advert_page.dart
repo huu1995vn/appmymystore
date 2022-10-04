@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
@@ -86,7 +86,7 @@ class _AdvertPageState extends State<AdvertPage> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('ads'.tr()),
+          title: Text('ads'.tr),
           elevation: 0.0,
         ),
         key: _key,

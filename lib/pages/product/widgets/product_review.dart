@@ -8,7 +8,7 @@ import 'package:raoxe/core/components/dialogs/review_all.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
@@ -75,7 +75,7 @@ class ReviewState extends State<ProductReview> {
                       var item = listData![index];
                       return RxBuildItemReview(item);
                     },
-                        key: Key("review".tr()),
+                        key: Key("review".tr),
                         onRefresh: loadData,
                         noFound: Container()),
                   if (listData != null)
@@ -86,7 +86,7 @@ class ReviewState extends State<ProductReview> {
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: kDefaultPadding),
                         child: Text(
-                          "${"all".tr()} ${totalItems > 0 ? "($totalItems)" : ""}",
+                          "${"all".tr} ${totalItems > 0 ? "($totalItems)" : ""}",
                           style: const TextStyle(
                               color: Colors.blue, fontWeight: FontWeight.w500),
                         ),

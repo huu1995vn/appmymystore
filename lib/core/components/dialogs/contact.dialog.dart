@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -54,9 +54,8 @@ class _ContactDialogState extends State<ContactDialog> {
               color: AppColors.black, //change your color here
             ),
             centerTitle: true,
-            title: Text("info.concat".tr(),
-                style: kTextHeaderStyle.copyWith(
-                    color: AppColors.black)),
+            title: Text("info.concat".tr,
+                style: kTextHeaderStyle.copyWith(color: AppColors.black)),
             elevation: 0.0,
             backgroundColor: AppColors.grey,
           ),
@@ -69,22 +68,23 @@ class _ContactDialogState extends State<ContactDialog> {
                           child: Column(
                         children: <Widget>[
                           rxTextInput(context, contact.phone,
-                              labelText: "phone".tr(),
+                              labelText: "phone".tr,
                               onChanged: (v) => {contact.phone = v},
                               validator: (v) {
                                 if (v == null || !v.isNotEmpty) {
-                                  return "notempty.phone.text".tr();
+                                  return "notempty.phone".tr;
                                 } else {
                                   return CommonMethods.checkStringPhone(v)
                                       ? null
-                                      : "invalid.phone".tr();
+                                      : throw "invalid.phone".tr;
+                                  ;
                                 }
                               }),
                           rxTextInput(context, contact.fullname,
-                              labelText: "fullname".tr(),
+                              labelText: "fullname".tr,
                               onChanged: (v) => {contact.fullname = v},
                               validator: Validators.compose([
-                                Validators.required("notempty.text".tr()),
+                                Validators.required("notempty".tr),
                               ])),
                           rxSelectInput(context, "city", contact.cityid,
                               afterChange: (v) => {
@@ -95,7 +95,7 @@ class _ContactDialogState extends State<ContactDialog> {
                                   },
                               validator: (v) {
                                 if (!(contact.cityid > 0)) {
-                                  return "notempty.text".tr();
+                                  return "notempty".tr;
                                 }
                                 return null;
                               }),
@@ -110,15 +110,15 @@ class _ContactDialogState extends State<ContactDialog> {
                                   },
                               validator: (v) {
                                 if (!(contact.districtid > 0)) {
-                                  return "notempty.text".tr();
+                                  return "notempty".tr;
                                 }
                                 return null;
                               }),
                           rxTextInput(context, contact.address,
-                              labelText: "address".tr(),
+                              labelText: "address".tr,
                               onChanged: (v) => {contact.address = v},
                               validator: Validators.compose([
-                                Validators.required("notempty.text".tr()),
+                                Validators.required("notempty".tr),
                               ])),
                         ],
                       )))))
@@ -131,7 +131,7 @@ class _ContactDialogState extends State<ContactDialog> {
                 CommonNavigates.goBack(context, contact);
               }
             },
-            text: 'save'.tr())
+            text: 'save'.tr)
       ],
     );
   }

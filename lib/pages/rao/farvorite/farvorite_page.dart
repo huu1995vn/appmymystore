@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
@@ -59,7 +59,7 @@ class _FavoritePageState extends State<FavoritePage> {
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -100,9 +100,9 @@ class _FavoritePageState extends State<FavoritePage> {
       backgroundColor: Colors.transparent,
       key: _key,
       body: RxCustomScrollView(
-        appBar: SliverAppBar( 
+        appBar: SliverAppBar(
           centerTitle: true,
-          title: Text('favorite'.tr()), 
+          title: Text('favorite'.tr),
           elevation: 0.0,
         ),
         key: const Key("LFavorite"),
@@ -119,7 +119,7 @@ class _FavoritePageState extends State<FavoritePage> {
         ],
       ),
       // persistentFooterButtons: [
-      //   RxPrimaryButton(onTap: onDetail, text: "add.text".tr())
+      //   RxPrimaryButton(onTap: onDetail, text: "add".tr)
       // ],
     );
   }

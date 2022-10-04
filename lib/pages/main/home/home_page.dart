@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, curly_braces_in_flow_control_structures
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
@@ -12,11 +12,12 @@ import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/theme_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/pages/main/home/widgets/banner.widget.dart';
+import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../core/commons/common_configs.dart';
 import 'widgets/item_product.widget.dart';
@@ -100,7 +101,6 @@ class _HomePageState extends State<HomePage>
 
     return Scaffold(
       key: _homeKey,
-      backgroundColor: CommonConfig.isDark ? Colors.transparent : Colors.white,
       body: RxCustomScrollView(
         key: const Key("lHome"),
         controller: scrollController,
@@ -108,23 +108,34 @@ class _HomePageState extends State<HomePage>
         onRefresh: onRefresh,
         appBar: _appBar(),
         slivers: <Widget>[
-          SliverToBoxAdapter(
-              child: Column(children: [
-            const BannerWidget(),
-            _buildTitle("new".tr(), () {
-              CommonNavigates.toProductPage(context);
-            }),
-          ])),
-          RxSliverList(listData, (BuildContext context, int index) {
-            ProductModel item = listData![index];
-            return ItemProductWidget(
-              item,
-              onTap: () {
-                CommonNavigates.toProductPage(context, item: item);
-              },
-              onFavorite: () => {onFavorite(index)},
-            );
-          })
+          SliverPadding(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              sliver: SliverToBoxAdapter(
+                  child: Column(children: [
+                const BannerWidget(),
+                SizedBox(height: kDefaultPadding),
+                ListBrandWidget(
+                    onPressed: (v) => {
+                          CommonNavigates.toProductPage(context,
+                              paramsSearch: {"BrandId": v})
+                        }),
+                SizedBox(height: kDefaultPadding),
+                _buildTitle("new".tr, () {
+                  CommonNavigates.toProductPage(context);
+                })
+              ]))),
+          SliverPadding(
+              padding: const EdgeInsets.all(0),
+              sliver: RxSliverList(listData, (BuildContext context, int index) {
+                ProductModel item = listData![index];
+                return ItemProductWidget(
+                  item,
+                  onTap: () {
+                    CommonNavigates.toProductPage(context, item: item);
+                  },
+                  onFavorite: () => {onFavorite(index)},
+                );
+              }))
         ],
       ),
     );
@@ -135,7 +146,6 @@ class _HomePageState extends State<HomePage>
       floating: true,
       automaticallyImplyLeading: false,
       elevation: 0.0,
-      // backgroundColor: CommonConfig.isDark ? Colors.black : kPrimaryColor,
       leading: Container(child: null),
       title: Container(
         alignment: Alignment.center,
@@ -169,24 +179,21 @@ class _HomePageState extends State<HomePage>
 }
 
 _buildTitle(String header, void Function()? onTap) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(header.toUpperCase(), style: const TextStyle(fontSize: 16).bold),
-      GestureDetector(
-          onTap: onTap,
-          child: Row(
-            children: [
-              Text("seemore".tr(), style: const TextStyle().bold),
-              const SizedBox(
-                width: 5,
-              ),
-              const FaIcon(
-                FontAwesomeIcons.chevronRight,
-                size: 12,
-              )
-            ],
-          ))
-    ]),
-  );
+  return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+    Text(header.toUpperCase(), style: const TextStyle(fontSize: 16).bold),
+    GestureDetector(
+        onTap: onTap,
+        child: Row(
+          children: [
+            Text("seemore".tr, style: const TextStyle().bold),
+            const SizedBox(
+              width: 5,
+            ),
+            const FaIcon(
+              FontAwesomeIcons.chevronRight,
+              size: 12,
+            )
+          ],
+        ))
+  ]);
 }

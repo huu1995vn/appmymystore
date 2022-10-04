@@ -100,7 +100,6 @@ class FirebaseMessagingService {
       await FirebaseMessaging.instance.deleteToken();
       token = await FirebaseMessaging.instance.getToken();
       CloudFirestoreSerivce.setdevice();
-
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }
@@ -120,7 +119,7 @@ class FirebaseMessagingService {
     //     var _laction = pathRedirect.split("_");
     //     String path = _laction[1].toString();
     //     // if (path.contains("member") && !CommonMethods.isLogin) {
-    //     //   // CommonMethods.showMessageInfo("please.loginagain".tr());
+    //     //   // CommonMethods.showMessageInfo("please.loginagain".tr);
     //     //   return;
     //     // }
     //     // if (path != null) {
@@ -130,7 +129,7 @@ class FirebaseMessagingService {
     //     return;
     //   }
     // } catch (e) {
-    //   // CommonMethods.showMessageError("please.loginagain".tr());
+    //   // CommonMethods.showMessageError("please.loginagain".tr);
     // }
   }
 }

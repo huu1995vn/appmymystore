@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, no_leading_underscores_for_local_identifiers
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -73,7 +73,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     if (_data!.usercontactid <= 0) {
       lContacts = await _loadContact();
       if (lContacts.isEmpty || lContacts.isEmpty) {
-        CommonMethods.showToast("message.str013".tr());
+        CommonMethods.showToast("message.str013".tr);
         CommonNavigates.goBack(context);
         return;
       }
@@ -109,7 +109,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   onUpTop() async {
     if (data!.status != 2) {
-      CommonMethods.showToast("message.str015".tr());
+      CommonMethods.showToast("message.str015".tr);
       return;
     }
     CommonMethods.lockScreen();
@@ -118,7 +118,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       body["ids"] = [data!.id];
       ResponseModel res = await DaiLyXeApiBLL_APIUser().productuptop(body);
       if (res.status > 0) {
-        CommonMethods.showToast("update.success".tr());
+        CommonMethods.showToast("update.success".tr);
       } else {
         CommonMethods.showDialogError(context, res.message);
       }
@@ -163,32 +163,60 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             itemBuilder: (context, index) {
               ContactModel item = list[index];
               return Card(
-                  child: ListTile(
-                      leading: const RxCircleAvatar(
-                          backgroundColor: Colors.grey,
-                          child: Icon(AppIcons.map_marker,
-                              size: 20, color: Colors.white)),
-                      title: Text(
-                        item.fullname ?? "",
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          if (item.cityid != null || item.cityid! > 0)
-                            Text(
-                              item.cityname ?? "NaN",
-                              style: const TextStyle(color: AppColors.blue),
-                            ),
-                          Text(item.address ?? "", style: const TextStyle()),
-                        ],
-                      ),
-                      trailing: Text(item.phone ?? "",
-                          style: const TextStyle(fontSize: 16)),
-                      onTap: () {
-                        CommonNavigates.goBack(context, item);
-                      }));
+                  child: RadioListTile(
+                // leading: const RxCircleAvatar(
+                //     backgroundColor: Colors.grey,
+                //     child: Icon(AppIcons.map_marker,
+                //         size: 20, color: Colors.white)),
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      item.fullname ?? "NaN",
+                    ),
+                    Text(
+                      item.isdefault ? "default".tr : "",
+                      style: const TextStyle(color: AppColors.blue),
+                    ),
+                  ],
+                ),
+                value: item.id,
+                groupValue: data!.usercontactid,
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        if (item.cityid != null || item.cityid > 0)
+                          Text(
+                            item.cityname ?? "NaN",
+                            style: const TextStyle(color: AppColors.blue),
+                          ),
+                        Text(
+                          item.phone ?? "NaN",
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      item!.address ?? "NaN",
+                      style: const TextStyle(),
+                    )
+                  
+                  ],
+                ),
+                onChanged: (int? value) {
+                  CommonNavigates.goBack(context, item);
+                },
+                // trailing: Text(item.phone ?? "",
+                //     style: const TextStyle(fontSize: 16)),
+                // onTap: () {
+                //   CommonNavigates.goBack(context, item);
+                // })
+              ));
             }));
     if (contact != null) {
       setState(() {
@@ -203,7 +231,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       List<int> idFiles = await FileService.convertListHinhAnhToListInt(imgs,
           name: data!.name!);
       if (idFiles.isEmpty) {
-        CommonMethods.showToast("message.str007".tr());
+        CommonMethods.showToast("message.str007".tr);
         return;
       }
       if (idFiles.isNotEmpty) {
@@ -222,7 +250,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
         }
         CommonMethods.unlockScreen();
         await CommonMethods.showConfirmDialog(context,
-            dataClone.id > 0 ? "update.success".tr() : "create.success".tr());
+            dataClone.id > 0 ? "update.success".tr : "create.success".tr);
         if (!(data!.id > 0)) {
           CommonNavigates.goBack(context, dataClone);
         }
@@ -237,7 +265,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   _onDelete() async {
     var res =
-        await CommonMethods.showConfirmDialog(context, "message.alert01".tr());
+        await CommonMethods.showConfirmDialog(context, "message.alert01".tr);
     if (res) {
       CommonMethods.lockScreen();
       try {
@@ -245,7 +273,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             await DaiLyXeApiBLL_APIUser().productdelete([data!.id]);
         if (res.status > 0) {
           CommonMethods.unlockScreen();
-          await CommonMethods.showConfirmDialog(context, "delete.success".tr());
+          await CommonMethods.showConfirmDialog(context, "delete.success".tr);
           CommonNavigates.goBack(context, ProductModel());
         } else {
           CommonMethods.showDialogError(context, res.message);
@@ -260,8 +288,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(CommonMethods.convertToString(
+            data != null && data!.name != null ? data!.name : "create".tr)),
+        centerTitle: true,
+        elevation: 0.0,
+      ),
       body: isNotFound
-          ? Expanded(child: Center(child: Text("not.found".tr())))
+          ? Expanded(child: Center(child: Text("not.found".tr)))
           : (data == null
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -284,11 +318,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             // mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
-                              _header(title: "youwant".tr().toUpperCase()),
-                              Container(
-                                color: CommonConfig.isDark
-                                    ? Colors.transparent
-                                    : Colors.white,
+                              _header(title: "youwant".tr.toUpperCase()),
+                              Card(
                                 child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -300,17 +331,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       },
                                     ).toList()),
                               ),
-                              _header(title: "generalinfor".tr()),
-                              Container(
-                                color: CommonConfig.isDark
-                                    ? Colors.transparent
-                                    : Colors.white,
+                              _header(title: "generalinfor".tr),
+                              Card(
                                 margin: const EdgeInsets.only(bottom: 6),
                                 child: Column(
                                   children: [
                                     rxSelectInput(
                                         context, "brand", data!.brandid,
-                                        labelText: "brand".tr(),
+                                        labelText: "brand".tr,
                                         afterChange: (v) => {
                                               setState(() {
                                                 data!.brandid = CommonMethods
@@ -320,13 +348,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                             },
                                         validator: (v) {
                                           if (!(data!.brandid > 0)) {
-                                            return "notempty.text".tr();
+                                            return "notempty".tr;
                                           }
                                           return null;
                                         }),
                                     rxSelectInput(
                                         context, "model", data!.modelid,
-                                        labelText: "model".tr(),
+                                        labelText: "model".tr,
                                         afterChange: (v) => {
                                               setState(() {
                                                 data!.modelid = CommonMethods
@@ -338,13 +366,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         },
                                         validator: (v) {
                                           if (!(data!.modelid > 0)) {
-                                            return "notempty.text".tr();
+                                            return "notempty".tr;
                                           }
                                           return null;
                                         }),
                                     rxSelectInput(
                                         context, "bodytype", data!.bodytypeid,
-                                        labelText: "bodytype".tr(),
+                                        labelText: "bodytype".tr,
                                         afterChange: (v) => {
                                               setState(() {
                                                 data!.bodytypeid = CommonMethods
@@ -353,21 +381,21 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                             },
                                         validator: (v) {
                                           if (!(data!.bodytypeid > 0)) {
-                                            return "notempty.text".tr();
+                                            return "notempty".tr;
                                           }
                                           return null;
                                         }),
                                     ListTile(
                                       title: Row(
                                         children: [
-                                          Text("${'price'.tr()}: ",
+                                          Text("${'price'.tr}: ",
                                               style: kTextTitleStyle.size(13)),
                                           Text(
                                             (data!.price != null &&
                                                     data!.price! > 0)
                                                 ? CommonMethods.formatNumber(
                                                     data!.price)
-                                                : "negotiate".tr(),
+                                                : "negotiate".tr,
                                             style: kTextPriceStyle.size(13),
                                           )
                                         ],
@@ -381,7 +409,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                 CommonMethods.convertToInt32(v);
                                           });
                                         },
-                                        hintText: "price".tr(),
+                                        hintText: "price".tr,
                                         style: const TextStyle(
                                                 color: AppColors.black)
                                             .size(16),
@@ -390,17 +418,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                color: CommonConfig.isDark
-                                    ? Colors.transparent
-                                    : Colors.white,
+                              Card(
                                 margin: const EdgeInsets.only(bottom: 6),
                                 child: Column(children: [
                                   ListTile(
                                       title: RichText(
                                           text: TextSpan(children: [
                                         TextSpan(
-                                            text: "title".tr(),
+                                            text: "title".tr,
                                             style: const TextStyle(
                                                 color: Colors.black54,
                                                 fontSize: 12)),
@@ -419,12 +444,12 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           onChanged: (value) =>
                                               {data!.name = value},
                                           decoration: InputDecoration(
-                                            hintText: "please.enter".tr(),
+                                            hintText: "please.enter".tr,
                                           ),
                                           validator: (value) {
                                             if ((data!.name == null ||
                                                 data!.name!.isEmpty)) {
-                                              return "notempty.text".tr();
+                                              return "notempty".tr;
                                             }
                                             return null;
                                           },
@@ -434,7 +459,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     title: RichText(
                                         text: TextSpan(children: [
                                       TextSpan(
-                                          text: "description".tr(),
+                                          text: "description".tr,
                                           style: const TextStyle(
                                               color: Colors.black54,
                                               fontSize: 12)),
@@ -454,7 +479,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       onChanged: (value) =>
                                           {data!.desc = value},
                                       decoration: InputDecoration(
-                                        hintText: "please.enter".tr(),
+                                        hintText: "please.enter".tr,
                                       ),
                                       maxLength: 1500,
                                       maxLengthEnforcement:
@@ -462,7 +487,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       validator: (value) {
                                         if ((data!.desc == null ||
                                             data!.desc!.isEmpty)) {
-                                          return "notempty.text".tr();
+                                          return "notempty".tr;
                                         }
                                         return null;
                                       },
@@ -475,7 +500,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                            text: "image".tr().toUpperCase(),
+                                            text: "image".tr.toUpperCase(),
                                             style: TextStyle(
                                                     color: Theme.of(context)
                                                         .textTheme
@@ -503,7 +528,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                       .color),
                                             ),
                                             TextSpan(
-                                                text: " ${"add.image".tr()}",
+                                                text: " ${"add.image".tr}",
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .textTheme
@@ -512,60 +537,61 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           ],
                                         ),
                                       ))),
-                              Container(
-                                  color: CommonConfig.isDark
-                                      ? Colors.transparent
-                                      : Colors.white,
-                                  padding: const EdgeInsets.all(8),
-                                  margin: const EdgeInsets.only(bottom: 6),
-                                  child: Column(children: [
-                                    SizedBox(
-                                      height: 250,
-                                      child: GridView.builder(
-                                          padding:
-                                              const EdgeInsets.only(top: 0.0),
-                                          shrinkWrap: true,
-                                          itemCount:
-                                              imgs.length > 7 ? 7 : imgs.length,
-                                          gridDelegate:
-                                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 4),
-                                          itemBuilder: (context, index) {
-                                            return Card(
-                                                child: _itemImage(index,
-                                                    onDelete: () => {},
-                                                    onShowPhoTo: () => {
-                                                          CommonNavigates
-                                                              .openDialog(
-                                                                  context,
-                                                                  PhotoViewDialog(
-                                                                    initialPage:
-                                                                        index,
-                                                                    imgs: imgs,
-                                                                    onDelete:
-                                                                        (i) => {
-                                                                      setState(
-                                                                          () {
-                                                                        imgs.removeAt(
-                                                                            i);
-                                                                      })
-                                                                    },
-                                                                  ))
-                                                        }));
-                                          }),
-                                    ),
-                                  ])),
-                              _header(title: "specifications".tr()),
-                              Container(
-                                  color: CommonConfig.isDark
-                                      ? Colors.transparent
-                                      : Colors.white,
+                              Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Card(
+
+                                    // padding: const EdgeInsets.all(8),
+                                    margin: const EdgeInsets.only(bottom: 6),
+                                    child: Column(children: [
+                                      SizedBox(
+                                        height: 250,
+                                        child: GridView.builder(
+                                            padding:
+                                                const EdgeInsets.only(top: 0.0),
+                                            shrinkWrap: true,
+                                            itemCount: imgs.length > 7
+                                                ? 7
+                                                : imgs.length,
+                                            gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 4),
+                                            itemBuilder: (context, index) {
+                                              return Card(
+                                                  child: _itemImage(index,
+                                                      onDelete: () => {},
+                                                      onShowPhoTo: () => {
+                                                            CommonNavigates
+                                                                .openDialog(
+                                                                    context,
+                                                                    PhotoViewDialog(
+                                                                      initialPage:
+                                                                          index,
+                                                                      imgs:
+                                                                          imgs,
+                                                                      onDelete:
+                                                                          (i) =>
+                                                                              {
+                                                                        setState(
+                                                                            () {
+                                                                          imgs.removeAt(
+                                                                              i);
+                                                                        })
+                                                                      },
+                                                                    ))
+                                                          }));
+                                            }),
+                                      ),
+                                    ])),
+                              ),
+                              _header(title: "specifications".tr),
+                              Card(
                                   margin: const EdgeInsets.only(bottom: 6),
                                   child: Column(
                                     children: [
                                       rxSelectInput(
                                           context, "productstate", data!.state,
-                                          labelText: "state".tr(),
+                                          labelText: "state".tr,
                                           afterChange: (v) => {
                                                 setState(() {
                                                   data!.state = v;
@@ -573,7 +599,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                               },
                                           validator: (v) {
                                             if (!(data!.state > 0)) {
-                                              return "notempty.text".tr();
+                                              return "notempty".tr;
                                             }
                                             return null;
                                           }),
@@ -581,7 +607,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         context,
                                         "fueltype",
                                         data!.fueltypeid,
-                                        labelText: "fueltype".tr(),
+                                        labelText: "fueltype".tr,
                                         afterChange: (v) => {
                                           setState(() {
                                             data!.fueltypeid = v;
@@ -590,7 +616,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       ),
                                       rxSelectInput(
                                           context, "madein", data!.madeinid,
-                                          labelText: "madein".tr(),
+                                          labelText: "madein".tr,
                                           afterChange: (v) => {
                                                 setState(() {
                                                   data!.madeinid = v;
@@ -598,7 +624,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                               }),
                                       rxSelectInput(
                                           context, "productdoor", data!.door,
-                                          labelText: "door".tr(),
+                                          labelText: "door".tr,
                                           afterChange: (v) => {
                                                 setState(() {
                                                   data!.door = v;
@@ -606,7 +632,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                               }),
                                       rxSelectInput(
                                           context, "productseat", data!.seat,
-                                          labelText: "seat".tr(),
+                                          labelText: "seat".tr,
                                           afterChange: (v) => {
                                                 setState(() {
                                                   data!.seat = v;
@@ -614,31 +640,38 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                               }),
                                       rxSelectInput(
                                           context, "color", data!.colorid,
-                                          labelText: "color".tr(),
+                                          labelText: "color".tr,
                                           afterChange: (v) => {
                                                 setState(() {
                                                   data!.colorid = v;
                                                 })
                                               }),
-                                      ListTile(
-                                        title: Text('year'.tr(),
-                                            style: kTextTitleStyle),
-                                        subtitle: RxInput(
-                                          keyboardType: TextInputType.number,
-                                          data!.year?.toString() ?? "",
-                                          onChanged: (v) {
-                                            setState(() {
-                                              data!.year =
-                                                  CommonMethods.convertToInt32(
-                                                      v);
-                                            });
-                                          },
-                                          hintText: "year".tr(),
-                                          style: const TextStyle(
-                                                  color: AppColors.primary)
-                                              .size(16),
-                                        ),
-                                      ),
+                                      rxSelectInput(context, "year", data!.year,
+                                          labelText: "year".tr,
+                                          afterChange: (v) => {
+                                                setState(() {
+                                                  data!.year = v;
+                                                })
+                                              }),
+                                      // ListTile(
+                                      //   title: Text('year'.tr,
+                                      //       style: kTextTitleStyle),
+                                      //   subtitle: RxInput(
+                                      //     keyboardType: TextInputType.number,
+                                      //     data!.year?.toString() ?? "",
+                                      //     onChanged: (v) {
+                                      //       setState(() {
+                                      //         data!.year =
+                                      //             CommonMethods.convertToInt32(
+                                      //                 v);
+                                      //       });
+                                      //     },
+                                      //     hintText: "year".tr,
+                                      //     style: const TextStyle(
+                                      //             color: AppColors.primary)
+                                      //         .size(16),
+                                      //   ),
+                                      // ),
                                     ],
                                   )),
                               _header(
@@ -646,7 +679,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                          text: "contact".tr().toUpperCase(),
+                                          text: "contact".tr.toUpperCase(),
                                           style: TextStyle(
                                                   color: Theme.of(context)
                                                       .textTheme
@@ -659,19 +692,18 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                               ),
                               _contact(),
                               if (data != null && data!.id > 0)
-                                Container(
-                                    color: CommonConfig.isDark
-                                        ? Colors.transparent
-                                        : Colors.white,
-                                    padding: EdgeInsets.all(kDefaultPadding),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                            child: RxRoundedButton(
-                                                onPressed: _onDelete,
-                                                title: "delete.text".tr()))
-                                      ],
-                                    ))
+                                Padding(
+                                  padding: EdgeInsets.all(kDefaultPadding),
+                                  child: Card(
+                                      child: Row(
+                                    children: [
+                                      Expanded(
+                                          child: RxRoundedButton(
+                                              onPressed: _onDelete,
+                                              title: "delete".tr))
+                                    ],
+                                  )),
+                                )
                             ],
                           )),
                     )
@@ -690,7 +722,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                         _onSave();
                       }
                     },
-                    text: "save".tr()),
+                    text: "save".tr),
               ),
             ),
             Expanded(
@@ -701,7 +733,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                         color: Colors.green,
                         icon: FaIcon(FontAwesomeIcons.arrowUp),
                         onTap: onUpTop,
-                        text: "uptop.text".tr()))),
+                        text: "uptop".tr))),
           ],
         )
       ],
@@ -709,8 +741,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   }
 
   Widget _contact() {
-    return Container(
-      color: Colors.white,
+    return Card(
       margin: const EdgeInsets.only(bottom: 6),
       child: ListTile(
         leading: RxAvatarImage(data!.rximguser, size: 50),
@@ -729,7 +760,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                   ),
                 Text(
                   data!.phone ?? "NaN",
-                  style: const TextStyle(color: AppColors.black, fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
               ],
             ),

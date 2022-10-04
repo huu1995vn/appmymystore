@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages, unnecessary_null_comparison, null_check_always_fails
 
 import 'dart:io';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,13 +43,13 @@ class FileService {
           context: context,
           builder: (BuildContext context) {
             return CupertinoActionSheet(
-              title: Text("choose.imagesource".tr()),
+              title: Text("choose.imagesource".tr),
               actions: <Widget>[
                 CupertinoActionSheetAction(
                   child: Row(
                     children: <Widget>[
                       // Icon(Icon, color: AppColors.black50),
-                      Text("camera".tr())
+                      Text("camera".tr)
                     ],
                   ),
                   onPressed: () {
@@ -61,7 +61,7 @@ class FileService {
                     children: <Widget>[
                       // RxIcon(LineAwesomeIcons.envira_gallery,
                       //     color: Colors.grey),
-                      Text("gallery".tr())
+                      Text("gallery".tr)
                     ],
                   ),
                   onPressed: () {
@@ -74,7 +74,7 @@ class FileService {
                 child: Row(
                   children: <Widget>[
                     // RxIcon(AppIcons.cross, color: Colors.grey),
-                    Text("cancel".tr())
+                    Text("cancel".tr)
                   ],
                 ),
                 onPressed: () {
@@ -101,7 +101,7 @@ class FileService {
                       // leading:
                       //     Icon(LineAwesomeIcons.camera, color: Colors.grey),
                       title: Row(
-                        children: <Widget>[Text("camera".tr())],
+                        children: <Widget>[Text("camera".tr)],
                       )),
                   ListTile(
                       onTap: () {
@@ -110,7 +110,7 @@ class FileService {
                       // leading:
                       //     RxIcon(LineAwesomeIcons.image, color: Colors.grey),
                       title: Row(
-                        children: <Widget>[Text("gallery".tr())],
+                        children: <Widget>[Text("gallery".tr)],
                       )),
                   ListTile(
                       onTap: () {
@@ -118,7 +118,7 @@ class FileService {
                       },
                       // leading: RxIcon(AppIcons.cross, color: Colors.grey),
                       title: Row(
-                        children: <Widget>[Text("cancel".tr())],
+                        children: <Widget>[Text("cancel".tr)],
                       )),
                 ]));
           },

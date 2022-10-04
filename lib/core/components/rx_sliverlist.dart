@@ -1,6 +1,6 @@
 // ignore_for_file: curly_braces_in_flow_control_structures, unnecessary_null_comparison, non_constant_identifier_names, empty_catches
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -82,7 +82,7 @@ class RxListViewState extends State<RxSliverList>
                     ),
                   ),
                   Text(
-                    "nodatafound".tr(),
+                    "no.found".tr,
                   ),
                 ],
               ),
@@ -101,7 +101,8 @@ class RxListViewState extends State<RxSliverList>
   }
 
   Widget _bodylist() {
-    return widget.data == null
+    return 
+     widget.data == null
         ? _bodylist_awaiting()
         : widget.data.length == 0
             ? _bodylist_notfound()

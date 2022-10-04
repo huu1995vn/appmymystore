@@ -3,11 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/rao/vehiclecontact/widgets/item_vehiclecontact.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -87,7 +86,7 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('contact'.tr()),
+          title: Text('contact'.tr),
           elevation: 0.0,
         ),
         key: _key,

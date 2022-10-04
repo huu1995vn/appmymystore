@@ -11,7 +11,7 @@ import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 
 class LoginPage extends StatefulWidget {
@@ -78,12 +78,12 @@ class _LoginPageState extends State<LoginPage> {
           ),
           SizedBox(height: 30),
           Text(
-            "login".tr().toUpperCase(),
+            "login".tr.toUpperCase(),
             style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
           Text(
-            "welcome".tr(),
+            "welcome".tr,
             style: const TextStyle(fontSize: 16, color: Colors.black54),
           ),
         ],
@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                                 bottom: BorderSide(color: Colors.black26))),
                         child: RxInput(
                           username,
-                          labelText: "phone".tr(),
+                          labelText: "phone".tr,
                           icon: const Icon(AppIcons.phone_handset),
                           keyboardType: TextInputType.number,
                           onChanged: (v) => {username = v},
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: RxInput(
                             password,
                             isPassword: true,
-                            labelText: "password.text".tr(),
+                            labelText: "password".tr,
                             icon: const Icon(AppIcons.lock_1),
                             onChanged: (v) => {password = v},
                           )),
@@ -148,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: 'forgot.password'.tr(),
+                              text: 'forgot.password'.tr,
                               style: TextStyle(
                                 color: Theme.of(context).hintColor,
                                 fontWeight: FontWeight.w400,
@@ -166,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           _onLogin(username, password);
                         },
-                        text: "continue".tr().toUpperCase())),
+                        text: "continue".tr.toUpperCase())),
                 const Padding(padding: EdgeInsets.only(right: 10)),
                 Ink(
                   height: kSizeHeight,
@@ -205,10 +205,10 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "message.str005".tr(),
+              "message.str005".tr,
             ),
             Text(
-              "registnow".tr(),
+              "registnow".tr,
               style: const TextStyle(color: AppColors.primary500).bold,
             ),
           ],
@@ -220,7 +220,7 @@ class _LoginPageState extends State<LoginPage> {
   _onLoginBiometric() async {
     try {
       if (!CommonMethods.checkStringPhone(username)) {
-        throw "invalid.phone".tr();
+        throw "invalid.phone".tr;
       }
 
       String userbio = StorageService.get(StorageKeys.biometric);
@@ -229,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
         await AuthService.authBiometric();
         _onLogin(username, userlogin["password"]!);
       } else {
-        throw "message.str011".tr();
+        throw "message.str011".tr;
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e);

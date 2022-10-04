@@ -1,6 +1,6 @@
 // ignore_for_file: unrelated_type_equality_checks
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -51,8 +51,8 @@ class ItemVehicleContactWidget extends StatelessWidget {
                                   ),
                                   Text(
                                     item.status == 1
-                                        ? "active".tr()
-                                        : "expired".tr(),
+                                        ? "active".tr
+                                        : "expired".tr,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -74,7 +74,7 @@ class ItemVehicleContactWidget extends StatelessWidget {
                                 Text(
                                     CommonMethods.formatDateTime(
                                         item.createdate,
-                                        valueDefault: "not.update".tr()),
+                                        valueDefault: "not.update".tr),
                                     style: kTextTimeStyle)
                               ],
                             ),

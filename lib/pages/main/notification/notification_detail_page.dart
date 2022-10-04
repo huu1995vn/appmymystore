@@ -6,7 +6,7 @@ import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/notification_provider.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 
 class NotificationDetailPage extends StatefulWidget {
   final int? id;
@@ -56,8 +56,7 @@ class NotificationDetailPageState extends State<NotificationDetailPage> {
       ResponseModel res =
           await DaiLyXeApiBLL_APIUser().notificationready([data.id!]);
       if (res.status > 0) {
-        Provider.of<NotificationProvider>(context, listen: false)
-            .minusNotification();
+        Provider.of<AppProvider>(context, listen: false).minusNotification();
         data.status = 2;
         if (widget.onChanged != null) {
           widget.onChanged!(data);

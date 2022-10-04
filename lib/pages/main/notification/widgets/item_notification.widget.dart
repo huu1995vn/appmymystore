@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/entities.dart';
@@ -27,7 +27,7 @@ class ItemNotificationWidget extends StatelessWidget {
             backgroundColor: AppColors.danger,
             foregroundColor: Colors.white,
             icon: AppIcons.trash_1,
-            label: 'delete.text'.tr(),
+            label: 'delete'.tr,
           ),
         ],
       ),
@@ -42,7 +42,11 @@ class ItemNotificationWidget extends StatelessWidget {
         ),
         leading: CircleAvatar(
             backgroundColor: AppColors.grayDark,
-            child: Icon(AppIcons.alarm, color: (item.status !=1 ? AppColors.black50: AppColors.primary800), size: 30)),
+            child: Icon(AppIcons.alarm,
+                color: (item.status != 1
+                    ? AppColors.black50
+                    : AppColors.primary800),
+                size: 30)),
         subtitle: Text(item.rxtimeago),
       ),
     );

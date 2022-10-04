@@ -85,14 +85,13 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('contact'.tr()),
+          elevation: 0.0,
+        ),
         key: _key,
         body: RxCustomScrollView(
-          appBar: SliverAppBar(
-            centerTitle: true,
-            title: Text('contact'.tr),
-            elevation: 0.0,
-          ),
           key: const Key("LVehicleContact"),
           controller: scrollController,
           onNextScroll: onNextPage,

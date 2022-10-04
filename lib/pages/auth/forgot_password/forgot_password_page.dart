@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -37,12 +38,19 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return RxScaffold(
+    return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
+        ),
+        iconTheme: const IconThemeData(
+          color: AppColors.black, //change your color here
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      child: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.only(top: 32.0),
             child: Column(
@@ -58,19 +66,19 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   //#region widgets private
   Widget _header() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: kDefaultPadding),
+      padding: const EdgeInsets.all(kDefaultPadding),
       child: Center(
         child: Column(
           children: [
             Image.asset(
-              LOGORAOXEWHITEIMAGE,
-              width: 150,
+              LOGORAOXECOLORIMAGE,
+              width: 180,
             ),
-            Text("forgot.password".tr,
-                style: const TextStyle(color: AppColors.white)),
-            // if (phone != null)
-            //   Text(phone,
-            //       style: kTextHeaderStyle.copyWith(color: AppColors.white))
+            const SizedBox(height: 30),
+            Text(
+              "forgot.password".tr,
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            )
           ],
         ),
       ),
@@ -78,68 +86,95 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   Widget _body() {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-      child: Card(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        elevation: 10.0,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(children: <Widget>[
+          Form(
             key: _keyValidationForm,
-            child: Column(
-              children: <Widget>[
-                RxInput(phone,
-                    keyboardType: TextInputType.number,
-                    labelText: "phone".tr,
-                    icon: const Icon(AppIcons.phone_handset),
-                    onChanged: (v) => {
-                          setState(() => {phone = v})
-                        },
-                    validator: (v) {
-                      if (v == null || !v.isNotEmpty) {
-                        return "notempty.phone".tr;
-                      } else {
-                        return CommonMethods.checkStringPhone(v)
-                            ? null
-                            : "invalid.phone".tr;
-                      }
-                    }),
-                RxInput(password,
-                    isPassword: true,
-                    labelText: "password.new".tr,
-                    icon: const Icon(AppIcons.lock_1),
-                    onChanged: (v) => {
-                          setState(() => {password = v})
-                        },
-                    validator: Validators.compose(
-                        [Validators.required("notempty.password".tr)])),
-                RxInput(passwordAgain,
-                    isPassword: true,
-                    labelText: "password.again".tr,
-                    icon: const Icon(AppIcons.lock_1), validator: (value) {
-                  if (value != null && value != password) {
-                    return "invalid.password.again".tr;
-                  } else {
-                    return null;
-                  }
-                }),
-                RxPrimaryButton(
-                    onTap: () {
-                      if (_keyValidationForm.currentState!.validate()) {
-                        onForgotPassword();
-                      }
-                    },
-                    text: 'continue'.tr),
-                //button: login
-                RxLoginAccountLabel(context)
-              ],
-            ),
+            child: Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.black26)),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(color: Colors.black26))),
+                      child: RxInput(phone,
+                          keyboardType: TextInputType.number,
+                          labelText: "phone".tr,
+                          icon: const Icon(AppIcons.phone_handset),
+                          onChanged: (v) => {
+                                setState(() => {phone = v})
+                              },
+                          validator: (v) {
+                            if (v == null || !v.isNotEmpty) {
+                              return "notempty.phone.text".tr;
+                            } else {
+                              return CommonMethods.checkStringPhone(v)
+                                  ? null
+                                  : "invalid.phone".tr;
+                            }
+                          }),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(color: Colors.black26))),
+                      child: RxInput(password,
+                          isPassword: true,
+                          labelText: "password.new".tr,
+                          icon: const Icon(AppIcons.lock_1),
+                          onChanged: (v) => {
+                                setState(() => {password = v})
+                              },
+                          validator: Validators.compose([
+                            Validators.required("notempty.password.text".tr),
+                          ])),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      child: RxInput(passwordAgain,
+                          isPassword: true,
+                          labelText: "password.again".tr,
+                          icon: const Icon(AppIcons.lock_1),
+                          validator: (value) {
+                        if (value != null && value != password) {
+                          return "invalid.password.again".tr;
+                        } else {
+                          return null;
+                        }
+                      }),
+                    ),
+                  ],
+                )),
           ),
-        ),
+          Row(children: [
+            Expanded(
+              child: RxPrimaryButton(
+                  onTap: () {
+                    if (_keyValidationForm.currentState!.validate()) {
+                      onForgotPassword();
+                    }
+                  },
+                  text: 'continue'.tr),
+            )
+          ]),
+          const SizedBox(
+            height: 20,
+          ),
+          //button: login
+          RxLoginAccountLabel(context)
+        ]),
       ),
     );
   }

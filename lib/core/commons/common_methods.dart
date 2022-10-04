@@ -141,6 +141,10 @@ class CommonMethods {
     return valueDefault;
   }
 
+  static String formatPhoneNumber(dynamic phone) {
+    return phone.replaceAll(RegExp('[^0-9]'), '');
+  }
+
   static String generateMd5(String input) {
     return md5.convert(utf8.encode(input)).toString().toUpperCase();
   }
@@ -528,9 +532,9 @@ class CommonMethods {
       //afl == ifl: The link to open when the app isn't installed.
       //&isi=${Variables.appStoreID}
       if (hasFl) {
-        return '${CommonConfig.hostDynamicLinks}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&afl=$deepLink&ifl=$deepLink&isi=${CommonConfig.appStoreID}&efr=1';
+        return '${CommonConfig.hostDynamicLink}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&afl=$deepLink&ifl=$deepLink&isi=${CommonConfig.appStoreID}&efr=1';
       } else {
-        return '${CommonConfig.hostDynamicLinks}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&isi=${CommonConfig.appStoreID}&efr=1';
+        return '${CommonConfig.hostDynamicLink}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&isi=${CommonConfig.appStoreID}&efr=1';
       }
     } catch (error) {}
     return "";
@@ -540,7 +544,7 @@ class CommonMethods {
     try {
       rewriteUrl = rewriteUrl.convertrUrlPrefix();
       String rewriteLink =
-          'https://dailyxe.com.vn/rao-xe/$rewriteUrl-${id}r.html';
+          '${CommonConfig.hostRaoXe}/$rewriteUrl-${id}r.html';
       return rewriteLink;
     } catch (error) {}
     return "";
@@ -566,7 +570,7 @@ class CommonMethods {
     DynamicLinkParameters parameters;
     if (shareApp) {
       parameters = DynamicLinkParameters(
-          uriPrefix: CommonConfig.hostDynamicLinks,
+          uriPrefix: CommonConfig.hostDynamicLink,
           link: Uri.parse(uriPrefix),
           androidParameters: AndroidParameters(
             packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,
@@ -582,7 +586,7 @@ class CommonMethods {
               ));
     } else {
       parameters = DynamicLinkParameters(
-          uriPrefix: CommonConfig.hostDynamicLinks,
+          uriPrefix: CommonConfig.hostDynamicLink,
           link: Uri.parse(uriPrefix),
           androidParameters: AndroidParameters(
             packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,
@@ -612,7 +616,7 @@ class CommonMethods {
   static String deepLinkInstallWithDomain() {
     try {
       String rewriteLink =
-          'https://dailyxe.com.vn/rao-xe?appinstall=${generateMd5("d@i${APITokenService.userId}")}';
+          '${CommonConfig.apiRaoXe}?appinstall=${generateMd5("d@i${APITokenService.userId}")}';
       return rewriteLink;
     } catch (error) {}
     return "";
@@ -626,12 +630,13 @@ class CommonMethods {
   }
 
   static void call(String phone) {
+    phone = CommonMethods.formatPhoneNumber(phone);
     launchUrl(Uri.parse("tel://$phone"));
   }
 
   static void chatZalo(String phone) {
+    phone = CommonMethods.formatPhoneNumber(phone);
     launchUrl(Uri.parse("https://zalo.me/$phone"));
   }
   //# build end link dynamic
-
 }

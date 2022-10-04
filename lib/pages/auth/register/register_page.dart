@@ -44,26 +44,30 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return RxScaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
-      child: user == null
-          ? Expanded(
-              child: Center(
-              child: Text("no.found".tr),
-            ))
-          : SingleChildScrollView(
-              child: Padding(
-                  padding: const EdgeInsets.only(top: 32.0),
-                  child: Column(
-                    children: <Widget>[
-                      _header(),
-                      _body(),
-                    ],
-                  )),
-            ),
-    );
+        appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness:
+                Brightness.dark, //<-- For Android SEE HERE (dark icons)
+            statusBarBrightness:
+                Brightness.light, //<-- For iOS SEE HERE (dark icons)
+          ),
+          iconTheme: const IconThemeData(
+            color: AppColors.black, //change your color here
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+        ),
+        child: SingleChildScrollView(
+            child: Padding(
+          padding: const EdgeInsets.all(kDefaultPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              _header(),
+              _body(),
+            ],
+          ),
+        )));
   }
 
   Widget _header() {
@@ -88,80 +92,111 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _body() {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-      child: Card(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        elevation: 10.0,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _keyValidationForm,
-            child: Column(
-              children: <Widget>[
-                RxInput(user!.fullname!,
-                    labelText: "fullname".tr,
-                    icon: const Icon(AppIcons.user_1),
-                    onChanged: (v) => {user!.fullname = v},
-                    validator: Validators.compose([
-                      Validators.required("notempty.fullname".tr),
-                    ])),
-                RxInput(user!.phone!,
-                    keyboardType: TextInputType.number,
-                    labelText: "phone".tr,
-                    icon: const Icon(AppIcons.phone_handset),
-                    onChanged: (v) => {user!.phone = v},
-                    validator: (v) {
-                      if (v == null || !v.isNotEmpty) {
-                        return "notempty.phone".tr;
-                      } else {
-                        return CommonMethods.checkStringPhone(v)
-                            ? null
-                            : "invalid.phone".tr;
-                      }
-                    }),
-                RxInput(
-                  user!.password!,
-                  isPassword: true,
-                  labelText: "password".tr,
-                  icon: const Icon(AppIcons.lock_1),
-                  onChanged: (v) => {user!.password = v},
-                  validator: Validators.compose([
-                    Validators.required("notempty.password".tr),
-                    Validators.patternString(
-                        RxParttern.password, "message.str004".tr)
-                  ]),
-                ),
-                RxInput(
-                  passwordAgain,
-                  isPassword: true,
-                  labelText: "password.again".tr,
-                  icon: const Icon(AppIcons.lock_1),
-                  validator: (value) {
-                    if (value != null && value != user!.password) {
-                      return "invalid.password.again".tr;
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                RxPrimaryButton(
-                    onTap: () {
-                      if (_keyValidationForm.currentState!.validate()) {
-                        _onRegister();
-                      }
-                    },
-                    text: 'continue'.tr),
-                //button: login
-                RxLoginAccountLabel(context)
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Form(
+                  key: _keyValidationForm,
+                  child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.black26)),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom:
+                                          BorderSide(color: Colors.black26))),
+                              child: RxInput(user!.fullname!,
+                                  labelText: "fullname".tr,
+                                  icon: const Icon(AppIcons.user_1),
+                                  onChanged: (v) => {user!.fullname = v},
+                                  validator: Validators.compose([
+                                    Validators.required(
+                                        "notempty.fullname".tr),
+                                  ]))),
+                          Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom:
+                                          BorderSide(color: Colors.black26))),
+                              child: RxInput(user!.phone!,
+                                  keyboardType: TextInputType.number,
+                                  labelText: "phone".tr,
+                                  icon: const Icon(AppIcons.phone_handset),
+                                  onChanged: (v) => {user!.phone = v},
+                                  validator: (v) {
+                                    if (v == null || !v.isNotEmpty) {
+                                      return "notempty.phone".tr;
+                                    } else {
+                                      return CommonMethods.checkStringPhone(v)
+                                          ? null
+                                          : "invalid.phone".tr;
+                                    }
+                                  })),
+                          Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      bottom:
+                                          BorderSide(color: Colors.black26))),
+                              child: RxInput(
+                                user!.password!,
+                                isPassword: true,
+                                labelText: "password".tr,
+                                icon: const Icon(AppIcons.lock_1),
+                                onChanged: (v) => {user!.password = v},
+                                validator: Validators.compose([
+                                  Validators.required(
+                                      "notempty.password".tr),
+                                  Validators.patternString(RxParttern.password,
+                                      "message.str004".tr)
+                                ]),
+                              )),
+                          Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              child: RxInput(
+                                passwordAgain,
+                                isPassword: true,
+                                labelText: "password.again".tr,
+                                icon: const Icon(AppIcons.lock_1),
+                                validator: (value) {
+                                  if (value != null &&
+                                      value != user!.password) {
+                                    return "invalid.password.again".tr;
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                              )),
+                        ],
+                      ))),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: RxPrimaryButton(
+                        onTap: () {
+                          if (_keyValidationForm.currentState!.validate()) {
+                            _onRegister();
+                          }
+                        },
+                        text: 'continue'.tr.toUpperCase()),
+                  )
+                ],
+              ),
+              SizedBox(height: 20),
+              RxLoginAccountLabel(context)
+            ]));
   }
 
   Future<void> _onRegister() async {

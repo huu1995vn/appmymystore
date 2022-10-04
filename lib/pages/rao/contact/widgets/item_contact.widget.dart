@@ -51,7 +51,12 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
 
         // The child of the Slidable is what the user sees when the
         // component is not dragged.
-        child: Card(
+        child: Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(width: 1.0, color: Colors.black12),
+              ),
+            ),
             child: ListTile(
                 leading: RxIconButton(
                   icon: AppIcons.map_marker,
@@ -59,11 +64,14 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
                   size: 45,
                 ),
                 title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       widget.item.fullname ?? "",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                       overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      width: 5,
                     ),
                     if (widget.item.isdefault)
                       Text(
@@ -76,15 +84,11 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(widget.item.phone ?? "",
-                        style: const TextStyle().italic),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(widget.item.address ?? "",
-                        style: const TextStyle().italic),
+                    Text(widget.item.address ?? "", style: const TextStyle()),
                   ],
                 ),
+                trailing: Text(widget.item.phone ?? "",
+                    style: const TextStyle(fontSize: 16)),
                 onTap: widget.onTap)));
   }
 }

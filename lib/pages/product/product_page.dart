@@ -145,9 +145,7 @@ class _ProductPageState extends State<ProductPage> {
         backgroundColor: Colors.white,
         body: Container(
           padding: EdgeInsets.all(0),
-          child: RxCustomScrollView(
-          
-          // ignore: prefer_const_literals_to_create_immutables
+          child: RxCustomScrollView(  
           slivers: [
             SliverToBoxAdapter(
                 child: ListBrandWidget(

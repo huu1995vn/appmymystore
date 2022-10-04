@@ -74,16 +74,12 @@ class _SearchAppBarState extends State<SearchAppBar> {
     return Container(
       height: 40,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(kDefaultPadding),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(0, 10),
-              blurRadius: 50,
-              color: AppColors.black.withOpacity(0.23),
-            )
-          ]),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(kDefaultPadding),
+      ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
               icon: const Icon(
@@ -92,8 +88,8 @@ class _SearchAppBarState extends State<SearchAppBar> {
               ),
               onPressed: _onSearch),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: kDefaultPadding),
+            child: Container(
+              padding: const EdgeInsets.only(left: 0, top: 10),
               child: TextField(
                 onTap: _onSearch,
                 readOnly: true,
@@ -102,7 +98,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
                 onChanged: (_) => setState(() {}),
                 decoration: InputDecoration(
                   hintText: "message.str014".tr,
-                  // hintStyle: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.5)),
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                 ),

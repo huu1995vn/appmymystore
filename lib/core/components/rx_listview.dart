@@ -7,6 +7,9 @@ import 'package:get/get.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
+import '../commons/common_configs.dart';
+import '../utilities/app_colors.dart';
+
 class RxListView extends StatefulWidget {
   final dynamic data;
   final Widget Function(BuildContext, int) itemBuilder;
@@ -141,28 +144,33 @@ class _RxDataListViewState extends State<RxListView>
   }
 
   Widget _bodylist_main() {
-    return ListView.builder(
-      key: PageStorageKey(widget.key),
-      shrinkWrap: true,
-      controller: widget.scrollController != null ? null : _scrollController,
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: widget.scrollDirection ?? Axis.vertical,
-      itemCount: widget.onNextPage != null
-          ? (widget.data.length + 1)
-          : widget.data.length,
-      padding: widget.padding ?? const EdgeInsets.all(kDefaultPadding),
-      itemBuilder: (context, index) {
-        if (index >= widget.data.length) {
-          return _buildProgressIndicator();
-        } else {
-          return Column(
-            children: [
-              widget.itemBuilder(context, index),
-            ],
-          );
-        }
-      },
-    );
+    return Container(
+        color: CommonConfig.isDark ? Colors.transparent : Colors.white,
+        margin: const EdgeInsets.only(top: 6),
+        child: ListView.builder(
+          key: PageStorageKey(widget.key),
+          shrinkWrap: true,
+          controller:
+              widget.scrollController != null ? null : _scrollController,
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: widget.scrollDirection ?? Axis.vertical,
+          itemCount: widget.onNextPage != null
+              ? (widget.data.length + 1)
+              : widget.data.length,
+          padding: widget.padding ??
+              const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          itemBuilder: (context, index) {
+            if (index >= widget.data.length) {
+              return _buildProgressIndicator();
+            } else {
+              return Column(
+                children: [
+                  widget.itemBuilder(context, index),
+                ],
+              );
+            }
+          },
+        ));
   }
 
   Widget _bodylist(BuildContext context) {

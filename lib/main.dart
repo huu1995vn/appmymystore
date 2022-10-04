@@ -23,7 +23,6 @@ import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/theme/theme.service.dart';
 import 'package:raoxe/core/theme/themes.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/logger_utils.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';

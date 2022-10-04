@@ -130,14 +130,13 @@ class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       key: _key,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('address'.tr),
+        elevation: 0.0,
+      ),
       body: RxCustomScrollView(
-        appBar: SliverAppBar(
-          centerTitle: true,
-          title: Text('address'.tr),
-          elevation: 0.0,
-        ),
         key: const Key("LContact"),
         controller: scrollController,
         onNextScroll: onNextPage,
@@ -154,7 +153,9 @@ class _ContactPageState extends State<ContactPage> {
       ),
       persistentFooterButtons: [
         RxPrimaryButton(
-            onTap: onDetail, icon: Icon(AppIcons.plus_circle), text: "add".tr)
+            onTap: onDetail,
+            icon: Icon(AppIcons.plus_circle),
+            text: "add.text".tr)
       ],
     );
   }

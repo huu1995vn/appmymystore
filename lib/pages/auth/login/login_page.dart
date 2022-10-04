@@ -50,11 +50,8 @@ class _LoginPageState extends State<LoginPage> {
       key: keyLogin,
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.green, // <-- SEE HERE
-          statusBarIconBrightness:
-              Brightness.dark, //<-- For Android SEE HERE (dark icons)
-          statusBarBrightness:
-              Brightness.light, //<-- For iOS SEE HERE (dark icons)
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
         ),
         iconTheme: const IconThemeData(
           color: AppColors.black, //change your color here

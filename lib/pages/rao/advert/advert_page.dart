@@ -84,14 +84,13 @@ class _AdvertPageState extends State<AdvertPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('ads'.tr),
+          elevation: 0.0,
+        ),
         key: _key,
         body: RxCustomScrollView(
-          appBar: SliverAppBar(
-            centerTitle: true,
-            title: Text('ads'.tr),
-            elevation: 0.0,
-          ),
           key: const Key("LAds"),
           controller: scrollController,
           onNextScroll: onNextPage,

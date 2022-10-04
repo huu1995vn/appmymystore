@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 
+import '../commons/common_configs.dart';
+import '../utilities/app_colors.dart';
+
 class RxSliverList extends StatefulWidget {
   final dynamic data;
   final Widget Function(BuildContext, int) itemBuilder;
@@ -98,12 +101,10 @@ class RxListViewState extends State<RxSliverList>
   }
 
   Widget _bodylist() {
-    return SliverPadding(
-        padding: const EdgeInsets.all(kDefaultPadding),
-        sliver: widget.data == null
-            ? _bodylist_awaiting()
-            : widget.data.length == 0
-                ? _bodylist_notfound()
-                : _bodylist_main());
+    return widget.data == null
+        ? _bodylist_awaiting()
+        : widget.data.length == 0
+            ? _bodylist_notfound()
+            : _bodylist_main();
   }
 }

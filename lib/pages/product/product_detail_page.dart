@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison, import_of_legacy_library_into_null_safe, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:raoxe/app_icons.dart';
@@ -22,6 +21,8 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:rating_bar/rating_bar.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+
+import '../../core/commons/common_configs.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final int? id;
@@ -109,54 +110,96 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: isNotFound
-          ? Expanded(child: Center(child: Text("not.found".tr)))
-          : ((data == null || data!.id <= 0)
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : RxCustomScrollView(
-                  key: const Key("iProduct"),
-                  controller: scrollController,
-                  slivers: <Widget>[
-                    SliverAppBar(
-                      iconTheme: IconThemeData(
-                        color: AppColors.black, //change your color here
+        body: isNotFound
+            ? Expanded(child: Center(child: Text("not.found".tr)))
+            : ((data == null || data!.id <= 0)
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : RxCustomScrollView(
+                    key: const Key("iProduct"),
+                    controller: scrollController,
+                    slivers: <Widget>[
+                      SliverAppBar(
+                        title: Text(data!.name ?? "updating".tr),
+                        elevation: 0.0,
+                        actions: <Widget>[
+                          RxIconButton(
+                              icon: data!.isfavorite
+                                  ? FontAwesomeIcons.solidBookmark
+                                  : FontAwesomeIcons.bookmark,
+                              onTap: _onFavorite,
+                              size: 40,
+                              color: Colors.transparent,
+                              colorIcon: data!.isfavorite
+                                  ? AppColors.yellow
+                                  : AppColors.white),
+                          SizedBox(width: kDefaultPadding),
+                          RxIconButton(
+                            icon: FontAwesomeIcons.solidShareFromSquare,
+                            size: 40,
+                            color: Colors.transparent,
+                            colorIcon: AppColors.white,
+                            onTap: _onShare,
+                          ),
+                          SizedBox(width: kDefaultPadding),
+                        ],
                       ),
-                      title: Image.asset(
-                        LOGORAOXECOLORIMAGE,
-                        width: 100,
-                      ),
-                      centerTitle: true,
-                      elevation: 0.0,
-                      backgroundColor: AppColors.grey,
-                      actions: <Widget>[
-                        RxIconButton(
-                            icon: AppIcons.heart_1,
-                            onTap: _onFavorite,
-                            colorIcon: data!.isfavorite
-                                ? AppColors.primary
-                                : AppColors.secondary),
-                        SizedBox(width: kDefaultPadding),
-                        RxIconButton(
-                          icon: AppIcons.share_1,
-                          onTap: _onShare,
-                        )
-                      ],
-                    ),
-                    SliverToBoxAdapter(child: _buildDetail())
-                  ],
-                )),
-      persistentFooterButtons: [
-        if (data != null)
-          RxButton(
-              onTap: () => {CommonMethods.call(data!.phone!)},
-              icon: Icon(AppIcons.phone_handset),
-              color: AppColors.info,
-              text: "call".tr)
-      ],
-    );
+                      SliverToBoxAdapter(child: _buildDetail())
+                    ],
+                  )),
+        bottomNavigationBar: Container(
+            padding: EdgeInsets.all(0.0),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: GestureDetector(
+                      onTap: () => {CommonMethods.call(data!.phone!)},
+                      child: Container(
+                          height: 50,
+                          padding: EdgeInsets.all(10),
+                          color: Colors.green,
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.phone,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              SizedBox(width: kDefaultPadding),
+                              Text(
+                                "call".tr + ": " + (data!.phone)!,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ))),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: GestureDetector(
+                      onTap: () => {CommonMethods.chatZalo(data!.phone!)},
+                      child: Container(
+                          height: 50,
+                          padding: EdgeInsets.all(5),
+                          color: Colors.grey[100],
+                          alignment: Alignment.center,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FaIcon(FontAwesomeIcons.comment,
+                                  color: Colors.grey[700]),
+                              Text("chatzalo".tr)
+                            ],
+                          ))),
+                ),
+              ],
+            )));
   }
 
   Widget _listTitle(String title, dynamic subtitle, {Widget? leading}) {
@@ -165,17 +208,23 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       child: Row(
         children: [
           if (leading != null) leading,
+          SizedBox(width: 10),
+          SizedBox(
+              width: 100,
+              child: Text(
+                " $title: ",
+                style: kTextTitleStyle.copyWith(
+                    color:
+                        CommonConfig.isDark ? Colors.white : AppColors.black50),
+              )),
           Text(
-            " $title: ",
-            style: kTextTitleStyle.copyWith(color: AppColors.black50),
-          ),
-          Text(
-            (subtitle is int
-                    ? (subtitle > 0 ? subtitle.toString() : null)
-                    : subtitle?.toString()) ??
-                "not.update".tr,
-            style: TextStyle().italic.copyWith(color: AppColors.black50),
-          )
+              (subtitle is int
+                      ? (subtitle > 0 ? subtitle.toString() : null)
+                      : subtitle?.toString()) ??
+                  "not.update".tr,
+              style: TextStyle(
+                  color: CommonConfig.isDark ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.bold))
         ],
       ),
     );
@@ -187,7 +236,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       children: <Widget>[
         RxImages(data: data!.rximglist),
         Container(
-            color: Colors.white,
+            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
             margin: EdgeInsets.only(bottom: 5),
             child: SizedBox(
               width: double.infinity,
@@ -221,7 +270,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 horizontal: 10, vertical: 4),
                             child: Text(data!.statename,
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.white)))
+                                    fontSize: 15,
+                                    color: data!.state == 1
+                                        ? Colors.white
+                                        : Colors.black)))
                       ],
                     ),
                     SizedBox(
@@ -231,7 +283,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       children: [
                         Text(data!.rxtimeago,
                             style: TextStyle(
-                                fontSize: 13, color: AppColors.black50)),
+                                fontSize: 13,
+                                color: CommonConfig.isDark
+                                    ? Colors.white
+                                    : AppColors.black50)),
                       ],
                     ),
                   ],
@@ -239,7 +294,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
             )),
         Container(
-            color: Colors.white,
+            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
@@ -247,7 +302,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 children: [
                   Icon(
                     AppIcons.map_1,
-                    color: AppColors.black50,
+                    color:
+                        CommonConfig.isDark ? Colors.white : AppColors.black50,
                     size: 13,
                   ),
                   SizedBox(
@@ -256,12 +312,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   Flexible(
                       child: Text(data!.address ?? "NaN",
                           style: TextStyle(
-                              fontSize: 13, color: AppColors.black50)))
+                              fontSize: 13,
+                              color: CommonConfig.isDark
+                                  ? Colors.white
+                                  : AppColors.black50)))
                 ],
               ),
             )),
         Container(
-          color: Colors.white,
+          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
@@ -274,7 +333,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     padding: EdgeInsets.all(5),
                     child: Text("specification".tr,
                         style: TextStyle(
-                            color: Colors.grey[700],
+                            color: CommonConfig.isDark
+                                ? Colors.white
+                                : Colors.grey[700],
                             fontSize: 18,
                             fontWeight: FontWeight.bold))),
                 SizedBox(
@@ -306,7 +367,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
         Container(
-            color: Colors.white,
+            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding),
@@ -319,7 +380,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           padding: EdgeInsets.all(5),
                           child: Text("description".tr,
                               style: TextStyle(
-                                  color: Colors.grey[700],
+                                  color: CommonConfig.isDark
+                                      ? Colors.white
+                                      : Colors.grey[700],
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold))),
                       TextFormField(
@@ -331,7 +394,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           enabled: false),
                     ]))),
         Container(
-          color: Colors.white,
+          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
@@ -357,9 +420,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               children: [
                                 Text(
                                   data!.fullname ?? "NaN",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 16,
-                                    color: AppColors.black50,
+                                    color: CommonConfig.isDark
+                                        ? Colors.white
+                                        : AppColors.black50,
                                   ).bold,
                                 ),
                                 SizedBox(
@@ -367,15 +432,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(
-                                      AppIcons.map_marker,
-                                      color: AppColors.black50,
-                                      size: 13,
-                                    ),
                                     Text(
                                       data!.cityname ?? "NaN",
-                                      style: const TextStyle(
-                                        color: AppColors.black50,
+                                      style: TextStyle(
+                                        color: CommonConfig.isDark
+                                            ? Colors.white
+                                            : AppColors.black50,
                                       ),
                                     ),
                                   ],
@@ -419,7 +481,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               )),
         ),
         Container(
-            color: Colors.white,
+            color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
             margin: EdgeInsets.only(bottom: 5),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding),
@@ -431,7 +493,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         padding: EdgeInsets.all(5),
                         child: Text("rate".tr,
                             style: TextStyle(
-                                color: Colors.grey[700],
+                                color: CommonConfig.isDark
+                                    ? Colors.white
+                                    : Colors.grey[700],
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold))),
                     Row(
@@ -440,7 +504,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       children: [
                         Text(CommonMethods.convertToString(data!.ratingvalue),
                             style: TextStyle(
-                                color: Colors.orange,
+                                color: Colors.grey,
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold)),
                         SizedBox(
@@ -450,8 +514,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           filledColor: AppColors.yellow,
                           emptyColor: AppColors.yellow,
                           size: 30,
-                          //initialRating: data!.ratingvalue,
-                          initialRating: 2.5,
+                          initialRating: data!.ratingvalue,
                           isHalfAllowed: true,
                           emptyIcon: FontAwesomeIcons.star,
                           filledIcon: FontAwesomeIcons.solidStar,
@@ -473,7 +536,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ],
                 ))),
         Container(
-          color: Colors.white,
+          color: CommonConfig.isDark ? AppColors.blackLight : Colors.white,
           margin: EdgeInsets.only(bottom: 5),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),

@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, curly_braces_in_flow_control_structures
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
@@ -18,7 +19,6 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/pages/main/home/widgets/banner.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../core/commons/common_configs.dart';
-import '../../../core/utilities/app_colors.dart';
 import 'widgets/item_product.widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage>
 
     return Scaffold(
       key: _homeKey,
-      backgroundColor: Colors.white,
+      backgroundColor: CommonConfig.isDark ? Colors.transparent : Colors.white,
       body: RxCustomScrollView(
         key: const Key("lHome"),
         controller: scrollController,
@@ -170,10 +170,23 @@ class _HomePageState extends State<HomePage>
 
 _buildTitle(String header, void Function()? onTap) {
   return Padding(
-    padding: const EdgeInsets.all(kDefaultPadding),
+    padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(header.toUpperCase(), style: const TextStyle().bold),
-      RxIconButton(onTap: onTap, icon: AppIcons.chevron_right)
+      Text(header.toUpperCase(), style: const TextStyle(fontSize: 16).bold),
+      GestureDetector(
+          onTap: onTap,
+          child: Row(
+            children: [
+              Text("seemore".tr, style: const TextStyle().bold),
+              const SizedBox(
+                width: 5,
+              ),
+              const FaIcon(
+                FontAwesomeIcons.chevronRight,
+                size: 12,
+              )
+            ],
+          ))
     ]),
   );
 }

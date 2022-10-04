@@ -108,14 +108,19 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
                       },
                 )),
                 if (itemBuilder == null)
-                  Padding(
-                    padding: const EdgeInsets.all(kDefaultPadding),
-                    child: RxPrimaryButton(
-                        onTap: () {
-                          CommonNavigates.goBack(context, value);
-                        },
-                        text: "ok".tr),
-                  )
+                  Container(
+                      padding: const EdgeInsets.all(kDefaultPadding),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: RxPrimaryButton(
+                                onTap: () {
+                                  CommonNavigates.goBack(context, value);
+                                },
+                                text: "choose".tr
+                          )
+                      )],
+                      ))
               ]);
             }));
   }

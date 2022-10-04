@@ -23,7 +23,8 @@ class CommonConfig {
   static String apiDrive = "http://cdn.dailyxe.info";
   static String apiDriveSufix = "/";
   static String apiHost = "https://dailyxe.com.vn";
-  static String hostDynamicLinks = "https://raoxe.page.link";
+  static String hostDynamicLink = "https://raoxe.page.link";
+  static String hostRaoXe = "https://dailyxe.com.vn";
   static String appStoreID = "1486119532";
   static bool haveCacheImage = true;
   static int version_masterdata = 1;
@@ -47,8 +48,8 @@ class CommonConfig {
     CommonConfig.apiRaoXeSufix =
         _config["apiRaoXeSufix"] ?? CommonConfig.apiRaoXeSufix;
     CommonConfig.apiDrive = _config["apiDrive"] ?? CommonConfig.apiDrive;
-    CommonConfig.hostDynamicLinks =
-        _config["hostDynamicLinks"] ?? CommonConfig.hostDynamicLinks;
+    CommonConfig.hostDynamicLink =
+        _config["hostDynamicLink"] ?? CommonConfig.hostDynamicLink;
   }
 
   static Map<String, String> linkContent = {

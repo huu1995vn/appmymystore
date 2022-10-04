@@ -73,7 +73,7 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());

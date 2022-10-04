@@ -7,6 +7,8 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/news/widgets/tab_news.widget.dart';
 
+import '../../../core/commons/common_configs.dart';
+
 class NewsPage extends StatefulWidget {
   const NewsPage({Key? key}) : super(key: key);
 
@@ -32,43 +34,30 @@ class _NewsPageState extends State<NewsPage> {
       .toList();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: DefaultTabController(
-      length: tabs.length,
-      child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              centerTitle: true,
-              title: Text("news".tr),
-              floating: true,
-              automaticallyImplyLeading: false,
-              elevation: 0.0,
-            ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: RxSliverAppBarTabDelegate(
-                child: PreferredSize(
-                  preferredSize: Size.fromHeight(45.0),
-                  child: Container(
-                    color: Colors.white,
+    return DefaultTabController(
+        length: tabs.length,
+        child: Scaffold(
+            appBar: AppBar(
+                centerTitle: true,
+                title: Text("news.text".tr),
+                automaticallyImplyLeading: false,
+                elevation: 0.0,
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(50),
+                  child: ColoredBox(
+                    color: CommonConfig.isDark ? Colors.white10 : Colors.white,
                     child: TabBar(
                       isScrollable: true,
                       labelColor: AppColors.primary,
-                      unselectedLabelColor: AppColors.black50,
-                      indicatorColor: AppColors.primary,
+                      unselectedLabelColor:
+                          CommonConfig.isDark ? Colors.white : AppColors.black,
+                      indicatorColor: Colors.red[800],
                       tabs: tabs,
                     ),
                   ),
-                ),
-              ),
-            ),
-          ];
-        },
-        body: TabBarView(
-          children: tabviews,
-        ),
-      ),
-    ));
+                )),
+            body: TabBarView(
+              children: tabviews,
+            )));
   }
 }

@@ -554,7 +554,10 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
                 children: <TextSpan>[
                   TextSpan(
                       text: labelText ?? type.tr,
-                      style: kTextTitleStyle.copyWith(fontSize: 12)),
+                      style: kTextTitleStyle.copyWith(
+                          fontSize: 12,
+                          color:
+                              Theme.of(context).textTheme.labelLarge!.color)),
                   if (validator != null)
                     const TextSpan(
                         text: ' *',
@@ -585,7 +588,7 @@ _onSelect(BuildContext context, String type, dynamic id,
   List data = [];
   if (type == "year") {
     int start = 1970;
-    for (var i = DateTime.now().year+1; i >= start; i--) {
+    for (var i = DateTime.now().year + 1; i >= start; i--) {
       data.add({"name": i.toString(), "id": i});
     }
   } else {

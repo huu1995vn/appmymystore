@@ -152,7 +152,7 @@ class _FilterDialogState extends State<FilterDialog> {
                       },
                     ).toList()),
               ),
-              _header("generalinfor".tr),
+              _header("info.general".tr),
               Card(
                 child: Column(
                   children: [

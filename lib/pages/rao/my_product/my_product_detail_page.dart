@@ -325,7 +325,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       },
                                     ).toList()),
                               ),
-                              _header(title: "generalinfor".tr),
+                              _header(title: "info.general".tr),
                               Card(
                                 margin: const EdgeInsets.only(bottom: 6),
                                 child: Column(
@@ -498,7 +498,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                             style: TextStyle(
                                                     color: Theme.of(context)
                                                         .textTheme
-                                                        .bodyText1!
+                                                        .labelLarge!
                                                         .color)
                                                 .bold),
                                         TextSpan(

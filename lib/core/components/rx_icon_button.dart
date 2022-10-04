@@ -10,14 +10,14 @@ class RxIconButton extends StatelessWidget {
       this.onTap,
       this.size = 30,
       this.color = AppColors.white,
-      this.colorIcon = AppColors.secondary})
+      this.colorIcon})
       : super(key: key);
   bool isEnable = false;
   GestureTapCallback? onTap;
   IconData icon;
   double size;
   Color color;
-  Color colorIcon;
+  Color? colorIcon;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -34,7 +34,7 @@ class RxIconButton extends StatelessWidget {
             child: Icon(
               icon,
               size: size / 2,
-              // color: colorIcon,
+              color: colorIcon,
             ),
           ),
         ));

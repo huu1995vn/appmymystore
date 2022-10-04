@@ -183,7 +183,7 @@ class ItemProductWidget extends StatelessWidget {
                                       size: 35,
                                       colorIcon: item.isfavorite
                                           ? AppColors.yellow
-                                          : AppColors.secondary,
+                                          : null,
                                     )
                                 ],
                               ),

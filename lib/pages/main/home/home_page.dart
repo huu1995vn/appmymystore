@@ -131,7 +131,6 @@ class _HomePageState extends State<HomePage>
   }
 
   SliverAppBar _appBar() {
-    final theme = Provider.of<ThemeProvider>(context);
     return SliverAppBar(
       floating: true,
       automaticallyImplyLeading: false,

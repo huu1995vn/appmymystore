@@ -147,7 +147,7 @@ class ReviewState extends State<ProductRelated> {
                 ? RxRoundedButton(
                     onPressed: _onNext,
                     title: "seemore".tr(),
-                    color: AppColors.info,
+                    color: Colors.grey,
                   )
                 : Container()
           ],

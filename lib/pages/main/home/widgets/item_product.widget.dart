@@ -34,7 +34,8 @@ class ItemProductWidget extends StatelessWidget {
           bottom: BorderSide(width: 1, color: Colors.black12),
         ),
       ),
-      child: SizedBox(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         height: SizeConfig.screenWidth / 4,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

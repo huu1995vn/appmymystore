@@ -26,9 +26,13 @@ class RemoteConfigSerivce {
     if (configs["apiDrive"] != null) {
       CommonConfig.apiDrive = remoteConfig.getString("apiDrive");
     }
-    if (configs["hostDynamicLinks"] != null) {
-      CommonConfig.hostDynamicLinks =
-          remoteConfig.getString("hostDynamicLinks");
+    if (configs["hostDynamicLink"] != null) {
+      CommonConfig.hostDynamicLink =
+          remoteConfig.getString("hostDynamicLink");
+    }
+    if (configs["hostRaoXe"] != null) {
+      CommonConfig.hostRaoXe =
+          remoteConfig.getString("hostRaoXe");
     }
     if (configs["version_masterdata"] != null) {
       CommonConfig.version_masterdata =

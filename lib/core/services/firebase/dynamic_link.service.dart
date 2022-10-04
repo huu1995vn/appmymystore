@@ -11,7 +11,7 @@ class DynamicLinkService {
 
   static Future<Uri> createDynamicLink(String link) async {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
-      uriPrefix: CommonConfig.hostDynamicLinks,
+      uriPrefix: CommonConfig.hostDynamicLink,
       link: Uri.parse(link),
       androidParameters: AndroidParameters(
         packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,

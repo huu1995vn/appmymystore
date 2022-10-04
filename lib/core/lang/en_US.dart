@@ -41,6 +41,7 @@ const Map<String, String> en_US = {
   "please": "Please",
   "please.loginagain": "Please log in again",
   "please.login": "Please log in",
+  "please.enter": "Please enter",
   "p.please": "Please {}",
   "choose": "Choose",
   "p.choose": "Select {}",

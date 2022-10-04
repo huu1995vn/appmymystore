@@ -556,7 +556,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
                   TextSpan(
                       text: labelText ?? type.tr,
                       style: kTextTitleStyle.copyWith(
-                          fontSize: 12, color: Colors.black54)),
+                          fontSize: 12)),
                   if (validator != null)
                     const TextSpan(
                         text: ' *',
@@ -573,9 +573,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
               readOnly: true,
               hintText: hintText ?? "choose".tr,
               style: TextStyle(
-                  fontSize: 16,
-                  color:
-                      name != null && name.isNotEmpty ? AppColors.black : null),
+                  fontSize: 16),
               validator: validator, onTap: () {
             _onSelect(context, type, id,
                 fnWhere: fnWhere, afterChange: afterChange);

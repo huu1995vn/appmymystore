@@ -41,6 +41,7 @@ const Map<String, String> vi_VN = {
   "please": "Vui lòng",
   "please.loginagain": "Vui lòng đăng nhập lại",
   "please.login": "Vui lòng đăng nhập",
+  "please.enter": "Vui lòng nhập",
   "p.please": "Vui lòng {}",
   "choose": "Chọn",
   "p.choose": "Chọn {}",

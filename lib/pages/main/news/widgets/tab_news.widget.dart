@@ -46,7 +46,8 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
     try {
       nPaging = nPaging ?? 1;
       Map<String, dynamic> params = {
-        "parentid": widget.parentid, // cái này là lại ParentIdList === tin tức mới
+        "parentid":
+            widget.parentid, // cái này là lại ParentIdList === tin tức mới
         "p": nPaging,
         "n": kItemOnPage
       };
@@ -70,7 +71,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -102,6 +103,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
       },
       onNextPage: onNextPage,
       onRefresh: loadData,
+      padding: const EdgeInsets.all(10),
       key: widget.key,
     );
   }

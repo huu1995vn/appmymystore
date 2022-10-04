@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage>
         appBar: _appBar(),
         slivers: <Widget>[
           SliverPadding(
-              padding: const EdgeInsets.all(kDefaultPadding),
+              padding: const EdgeInsets.all(10),
               sliver: SliverToBoxAdapter(
                   child: Column(children: [
                 const BannerWidget(),

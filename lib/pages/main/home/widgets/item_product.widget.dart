@@ -27,7 +27,7 @@ class ItemProductWidget extends StatelessWidget {
     return Card(
         margin: EdgeInsets.zero,
         child: Container(
-          // padding: const EdgeInsets.only(top: 10, bottom: 10),
+          padding: const EdgeInsets.all(10),
           decoration: const BoxDecoration(
             color: Colors.transparent,
             border: Border(
@@ -42,20 +42,22 @@ class ItemProductWidget extends StatelessWidget {
                 Stack(
                   children: <Widget>[
                     GestureDetector(
-                      onTap: onTap,
-                      child: RxImage(item.rximg,
-                          width: SizeConfig.screenWidth / 4),
-                    ),
+                        onTap: onTap,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: RxImage(item.rximg,
+                              width: SizeConfig.screenWidth / 4),
+                        )),
                     if (lenimg > 0)
                       Positioned(
                         top: 5,
                         right: 5,
                         child: Card(
                           shape: RoundedRectangleBorder(
-                              side: BorderSide(color: AppColors.grey.withOpacity(0.5), width: 1.0),
-                              ),
-
-                        
+                            side: BorderSide(
+                                color: AppColors.grey.withOpacity(0.5),
+                                width: 1.0),
+                          ),
                           child: SizedBox(
                               height: 15, width: 20, child: Container()),
                         ),
@@ -66,8 +68,10 @@ class ItemProductWidget extends StatelessWidget {
                         right: 3,
                         child: Card(
                           shape: RoundedRectangleBorder(
-                              side: BorderSide(color: AppColors.grey.withOpacity(0.5), width:1.0),
-                              ),
+                            side: BorderSide(
+                                color: AppColors.grey.withOpacity(0.5),
+                                width: 1.0),
+                          ),
                           child: SizedBox(
                               height: 15,
                               width: 20,
@@ -84,7 +88,7 @@ class ItemProductWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                      padding: kEdgeInsetsPadding,
+                      padding: const EdgeInsets.only(left: 10),
                       child: Stack(
                         children: [
                           Column(

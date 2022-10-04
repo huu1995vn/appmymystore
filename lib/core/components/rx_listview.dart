@@ -152,7 +152,7 @@ class _RxDataListViewState extends State<RxListView>
       itemCount: widget.onNextPage != null
           ? (widget.data.length + 1)
           : widget.data.length,
-      padding: EdgeInsets.only(top: 10),
+      padding: widget.padding,
       itemBuilder: (context, index) {
         if (index >= widget.data.length) {
           return _buildProgressIndicator();

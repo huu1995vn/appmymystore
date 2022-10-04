@@ -83,8 +83,9 @@ class _SearchAppBarState extends State<SearchAppBar> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
-              icon: const Icon(
+              icon: Icon(
                 AppIcons.magnifier,
+                color: Theme.of(context).textTheme.bodyLarge?.color,
               ),
               onPressed: _onSearch),
           Expanded(

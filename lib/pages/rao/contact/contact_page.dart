@@ -155,7 +155,7 @@ class _ContactPageState extends State<ContactPage> {
         RxPrimaryButton(
             onTap: onDetail,
             icon: Icon(AppIcons.plus_circle),
-            text: "add.text".tr)
+            text: "add".tr)
       ],
     );
   }

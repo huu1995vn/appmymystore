@@ -82,7 +82,7 @@ class _MyProductPageState extends State<MyProductPage> {
               RxPrimaryButton(
                   onTap: onAdd,
                   icon: Icon(AppIcons.plus_circle),
-                  text: "add.text".tr)
+                  text: "add".tr)
             ]));
   }
 }

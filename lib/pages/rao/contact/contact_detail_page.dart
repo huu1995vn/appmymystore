@@ -106,7 +106,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                             labelText: "fullname".tr,
                             onChanged: (v) => {data!.fullname = v},
                             validator: Validators.compose([
-                              Validators.required("notempty.text".tr),
+                              Validators.required("notempty".tr),
                             ])),
                         rxTextInput(context, data!.phone,
                             labelText: "phone".tr,
@@ -114,7 +114,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                             onChanged: (v) => {data!.phone = v},
                             validator: (v) {
                               if (v == null || !v.isNotEmpty) {
-                                return "notempty.text".tr;
+                                return "notempty".tr;
                               } else {
                                 return CommonMethods.checkStringPhone(v)
                                     ? null
@@ -130,7 +130,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                                 },
                             validator: (v) {
                               if (!(data!.cityid > 0)) {
-                                return "notempty.text".tr;
+                                return "notempty".tr;
                               }
                               return null;
                             }),
@@ -145,7 +145,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                                 },
                             validator: (v) {
                               if (!(data!.districtid > 0)) {
-                                return "notempty.text".tr;
+                                return "notempty".tr;
                               }
                               return null;
                             }),
@@ -153,7 +153,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                             labelText: "address".tr,
                             onChanged: (v) => {data!.address = v},
                             validator: Validators.compose([
-                              Validators.required("notempty.text".tr),
+                              Validators.required("notempty".tr),
                             ])),
                       ],
                     )),

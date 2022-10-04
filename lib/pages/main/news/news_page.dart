@@ -39,7 +39,7 @@ class _NewsPageState extends State<NewsPage> {
         child: Scaffold(
             appBar: AppBar(
                 centerTitle: true,
-                title: Text("news.text".tr),
+                title: Text("news".tr),
                 automaticallyImplyLeading: false,
                 elevation: 0.0,
                 bottom: PreferredSize(

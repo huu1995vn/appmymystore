@@ -115,7 +115,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               },
                           validator: (v) {
                             if (v == null || !v.isNotEmpty) {
-                              return "notempty.phone.text".tr;
+                              return "notempty.phone".tr;
                             } else {
                               return CommonMethods.checkStringPhone(v)
                                   ? null
@@ -137,7 +137,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 setState(() => {password = v})
                               },
                           validator: Validators.compose([
-                            Validators.required("notempty.password.text".tr),
+                            Validators.required("notempty.password".tr),
                           ])),
                     ),
                     Container(

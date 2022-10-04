@@ -262,7 +262,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            CommonMethods.convertToString(data!.name ?? "create.text".tr)),
+            CommonMethods.convertToString(data!.name ?? "create".tr)),
         centerTitle: true,
         elevation: 0.0,
       ),
@@ -425,7 +425,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           validator: (value) {
                                             if ((data!.name == null ||
                                                 data!.name!.isEmpty)) {
-                                              return "notempty.text".tr;
+                                              return "notempty".tr;
                                             }
                                             return null;
                                           },
@@ -463,7 +463,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       validator: (value) {
                                         if ((data!.desc == null ||
                                             data!.desc!.isEmpty)) {
-                                          return "notempty.text".tr;
+                                          return "notempty".tr;
                                         }
                                         return null;
                                       },
@@ -574,7 +574,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                               },
                                           validator: (v) {
                                             if (!(data!.state > 0)) {
-                                              return "notempty.text".tr;
+                                              return "notempty".tr;
                                             }
                                             return null;
                                           }),
@@ -670,7 +670,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         Expanded(
                                             child: RxRoundedButton(
                                                 onPressed: _onDelete,
-                                                title: "delete.text".tr))
+                                                title: "delete".tr))
                                       ],
                                     ))
                             ],
@@ -702,7 +702,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                         color: Colors.green,
                         icon: FaIcon(FontAwesomeIcons.arrowUp),
                         onTap: onUpTop,
-                        text: "uptop.text".tr))),
+                        text: "uptop".tr))),
           ],
         )
       ],

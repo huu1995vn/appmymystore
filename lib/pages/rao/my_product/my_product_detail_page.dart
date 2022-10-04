@@ -163,32 +163,65 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             itemBuilder: (context, index) {
               ContactModel item = list[index];
               return Card(
-                  child: ListTile(
-                      leading: const RxCircleAvatar(
-                          backgroundColor: Colors.grey,
-                          child: Icon(AppIcons.map_marker,
-                              size: 20, color: Colors.white)),
-                      title: Text(
-                        item.fullname ?? "",
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          if (item.cityid != null || item.cityid! > 0)
-                            Text(
-                              item.cityname ?? "NaN",
-                              style: const TextStyle(color: AppColors.blue),
-                            ),
-                          Text(item.address ?? "", style: const TextStyle()),
-                        ],
-                      ),
-                      trailing: Text(item.phone ?? "",
-                          style: const TextStyle(fontSize: 16)),
-                      onTap: () {
-                        CommonNavigates.goBack(context, item);
-                      }));
+                  child: RadioListTile(
+                // leading: const RxCircleAvatar(
+                //     backgroundColor: Colors.grey,
+                //     child: Icon(AppIcons.map_marker,
+                //         size: 20, color: Colors.white)),
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      item.fullname ?? "NaN",
+                    ),
+                    Text(
+                      item.isdefault ? "default".tr : "",
+                      style: const TextStyle(color: AppColors.blue),
+                    ),
+                  ],
+                ),
+                value: item.id,
+                groupValue: data!.usercontactid,
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        if (item.cityid != null || item.cityid > 0)
+                          Text(
+                            item.cityname ?? "NaN",
+                            style: const TextStyle(color: AppColors.blue),
+                          ),
+                        Text(
+                          item.phone ?? "NaN",
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      item!.address ?? "NaN",
+                      style: const TextStyle(),
+                    )
+                    // if (item.cityid != null || item.cityid! > 0)
+                    //   Text(
+                    //     item.cityname ?? "NaN",
+                    //     style: const TextStyle(color: AppColors.blue),
+                    //   ),
+                    //   Text(item.address ?? "", style: const TextStyle()),
+                  ],
+                ),
+                onChanged: (int? value) {
+                  CommonNavigates.goBack(context, item);
+                },
+                // trailing: Text(item.phone ?? "",
+                //     style: const TextStyle(fontSize: 16)),
+                // onTap: () {
+                //   CommonNavigates.goBack(context, item);
+                // })
+              ));
             }));
     if (contact != null) {
       setState(() {
@@ -261,7 +294,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text( CommonMethods.convertToString(data!=null? data!.name : "create".tr)),
+        title: Text(CommonMethods.convertToString(
+            data != null && data!.name != null ? data!.name : "create".tr)),
         centerTitle: true,
         elevation: 0.0,
       ),
@@ -655,13 +689,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   padding: EdgeInsets.all(kDefaultPadding),
                                   child: Card(
                                       child: Row(
-                                        children: [
-                                          Expanded(
-                                              child: RxRoundedButton(
-                                                  onPressed: _onDelete,
-                                                  title: "delete".tr))
-                                        ],
-                                      )),
+                                    children: [
+                                      Expanded(
+                                          child: RxRoundedButton(
+                                              onPressed: _onDelete,
+                                              title: "delete".tr))
+                                    ],
+                                  )),
                                 )
                             ],
                           )),
@@ -700,8 +734,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   }
 
   Widget _contact() {
-    return Container(
-      color: Colors.white,
+    return Card(
       margin: const EdgeInsets.only(bottom: 6),
       child: ListTile(
         leading: RxAvatarImage(data!.rximguser, size: 50),
@@ -720,7 +753,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                   ),
                 Text(
                   data!.phone ?? "NaN",
-                  style: const TextStyle(color: AppColors.black, fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
               ],
             ),

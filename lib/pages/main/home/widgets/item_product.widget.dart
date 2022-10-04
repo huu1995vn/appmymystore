@@ -45,8 +45,11 @@ class ItemProductWidget extends StatelessWidget {
                         onTap: onTap,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
-                          child: RxImage(item.rximg,
-                              width: SizeConfig.screenWidth / 4),
+                          child: RxImage(
+                            item.rximg,
+                            width: 100,
+                            height: 100,
+                          ),
                         )),
                     if (lenimg > 0)
                       Positioned(

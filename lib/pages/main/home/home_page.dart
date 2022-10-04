@@ -192,6 +192,7 @@ _buildTitle(String header, void Function()? onTap) {
             const FaIcon(
               FontAwesomeIcons.chevronRight,
               size: 12,
+              color: Colors.black,
             )
           ],
         ))

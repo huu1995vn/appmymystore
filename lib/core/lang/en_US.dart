@@ -1,4 +1,5 @@
 const Map<String, String> en_US = {
+  "cancelfilter": "Cancel filter",
   "writereview": "Write review",
   "login.biometrics": "Login with biometrics",
   "callnow": "Call now",
@@ -18,9 +19,9 @@ const Map<String, String> en_US = {
   "state": "State",
   "download": "Download",
   "negotiate": "negotiate",
-  "youwant": "You want",
+  "youwant": "You want?",
   "general.info": "general information",
-  "pecifications": "Specifications",
+  "specifications": "Specifications",
   "madein": "Origin",
   "km": "Number of kilometers traveled",
   "color": "Color",

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 
 class Themes {
+  
   final lightTheme = ThemeData.light().copyWith(
     inputDecorationTheme: const InputDecorationTheme(
       border: InputBorder.none,

@@ -137,7 +137,7 @@ class ReviewState extends State<ProductRelated> {
                       );
               },
               key: UniqueKey(),
-              noFound: Center(child: Text("nodatafound".tr)),
+              noFound: Center(child: Text("no.found".tr)),
               scrollDirection: scrollDirection,
             ),
             (scrollDirection != Axis.horizontal &&

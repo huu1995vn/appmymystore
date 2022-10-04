@@ -1,4 +1,5 @@
 const Map<String, String> vi_VN = {
+  "cancelfilter": "Bỏ lọc",
   "writereview": "Viết đánh giá",
   "login.biometrics": "Đăng nhập bằng sinh trắc học",
   "callnow": "Gọi ngay",
@@ -18,9 +19,9 @@ const Map<String, String> vi_VN = {
   "state": "Tình trạng",
   "download": "Tải",
   "negotiate": "Thương lượng",
-  "youwant": "Bạn muốn",
+  "youwant": "Bạn muốn?",
   "general.info": "Thông tin chung",
-  "pecifications": "Thông số kỹ thuật",
+  "specifications": "Thông số kỹ thuật",
   "madein": "Nguồn gốc",
   "km": "Số Km đã đi",
   "color": "Màu sắc",

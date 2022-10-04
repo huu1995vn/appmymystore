@@ -260,12 +260,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-            CommonMethods.convertToString(data!.name ?? "create.text".tr())),
-        centerTitle: true,
-        elevation: 0.0,
-      ),
       body: isNotFound
           ? Expanded(child: Center(child: Text("not.found".tr())))
           : (data == null
@@ -276,6 +270,12 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                   key: const Key("iProduct"),
                   controller: scrollController,
                   slivers: <Widget>[
+                    SliverAppBar(
+                      title: Text(CommonMethods.convertToString(
+                          data!.name ?? "create.text".tr())),
+                      centerTitle: true,
+                      elevation: 0.0,
+                    ),
                     SliverToBoxAdapter(
                       child: Form(
                           key: _keyValidationForm,
@@ -396,7 +396,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     : Colors.white,
                                 margin: const EdgeInsets.only(bottom: 6),
                                 child: Column(children: [
-                                  SizedBox(height: 10),
                                   ListTile(
                                       title: RichText(
                                           text: TextSpan(children: [

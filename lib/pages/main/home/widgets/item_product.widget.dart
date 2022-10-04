@@ -50,12 +50,12 @@ class ItemProductWidget extends StatelessWidget {
                       Positioned(
                         top: 5,
                         right: 5,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            border: Border.all(color: AppColors.black50),
-                            color: AppColors.grey,
-                          ),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(color: AppColors.grey.withOpacity(0.5), width: 1.0),
+                              ),
+
+                        
                           child: SizedBox(
                               height: 15, width: 20, child: Container()),
                         ),
@@ -64,12 +64,10 @@ class ItemProductWidget extends StatelessWidget {
                       Positioned(
                         top: 3,
                         right: 3,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            border: Border.all(color: AppColors.black50),
-                            color: AppColors.grey,
-                          ),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(color: AppColors.grey.withOpacity(0.5), width:1.0),
+                              ),
                           child: SizedBox(
                               height: 15,
                               width: 20,
@@ -77,9 +75,7 @@ class ItemProductWidget extends StatelessWidget {
                                   child: Text(
                                 lenimg >= 9 ? "9+" : lenimg.toString(),
                                 style: kTextSubTitleStyle.copyWith(
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 12
-                                  ),
+                                    fontStyle: FontStyle.normal, fontSize: 12),
                                 //     .bold,
                               ))),
                         ),
@@ -109,7 +105,7 @@ class ItemProductWidget extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
                                     Row(
@@ -122,7 +118,7 @@ class ItemProductWidget extends StatelessWidget {
                                             color: AppColors.primary,
                                           ).bold,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Container(
@@ -133,7 +129,7 @@ class ItemProductWidget extends StatelessWidget {
                                                   ? Colors.blue
                                                   : Colors.yellow,
                                             ),
-                                            padding: EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                                 horizontal: 10, vertical: 4),
                                             child: Text(item!.statename,
                                                 style: TextStyle(
@@ -161,7 +157,7 @@ class ItemProductWidget extends StatelessWidget {
                                     children: [
                                       Text(item.rxtimeago,
                                           style: kTextTimeStyle),
-                                      SizedBox(width: 7),
+                                      const SizedBox(width: 7),
                                       Container(
                                         width: 3,
                                         height: 3,
@@ -171,7 +167,7 @@ class ItemProductWidget extends StatelessWidget {
                                           color: Colors.grey,
                                         ),
                                       ),
-                                      SizedBox(width: 7),
+                                      const SizedBox(width: 7),
                                       Text(
                                         item.cityname ?? "NaN",
                                         style: kTextSubTitleStyle,

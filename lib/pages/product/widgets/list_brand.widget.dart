@@ -28,15 +28,12 @@ class _ListBrandWidgetState extends State<ListBrandWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Container(
+    return Card(
+      margin: EdgeInsets.zero,
+        child: Container(
       height: 76,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          bottom: BorderSide(width: 6.0, color: Colors.black12),
-        ),
-      ),
-      child: RxListView(
+      child:
+       RxListView(
         data,
         (context, index) {
           var item = data[index];
@@ -79,8 +76,7 @@ class _ListBrandWidgetState extends State<ListBrandWidget>
         noFound: Container(),
         key: UniqueKey(),
         scrollDirection: Axis.horizontal,
-        // padding: const EdgeInsets.all(kDefaultPadding).copyWith(bottom: 0),
       ),
-    );
+    ));
   }
 }

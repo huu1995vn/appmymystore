@@ -134,23 +134,23 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar( 
+        appBar: AppBar(
           title: SearchAppBar(
             paramsSearch: paramsSearch ?? {},
             onChanged: _onChanged,
           ),
-          elevation: 0.0, 
+          elevation: 0.0,
         ),
         key: _key,
-        backgroundColor: Colors.white,
-        body: Container(
-          padding: EdgeInsets.all(0),
-          child: RxCustomScrollView(  
+        // backgroundColor: Colors.white,
+        body: RxCustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-                child: ListBrandWidget(
-                    onPressed: (v) => {_onBrandChange(v)},
-                    value: paramsSearch["BrandId"])),
+            SliverPadding(
+                padding: EdgeInsets.only(top: kDefaultPadding, bottom: kDefaultPadding),
+                sliver: SliverToBoxAdapter(
+                    child: ListBrandWidget(
+                        onPressed: (v) => {_onBrandChange(v)},
+                        value: paramsSearch["BrandId"]))),
             RxSliverList(listData, (BuildContext context, int index) {
               var item = listData![index];
               return ItemProductWidget(listData![index], onTap: () {
@@ -161,7 +161,6 @@ class _ProductPageState extends State<ProductPage> {
           key: const Key("LProcduct"),
           onNextScroll: onNextPage,
           onRefresh: onRefresh,
-        )
-        ) );
+        ));
   }
 }

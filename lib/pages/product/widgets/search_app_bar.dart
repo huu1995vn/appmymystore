@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
@@ -71,10 +72,10 @@ class _SearchAppBarState extends State<SearchAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
+        child: Container(
       height: 40,
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(kDefaultPadding),
       ),
       child: Row(
@@ -84,7 +85,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
           IconButton(
               icon: const Icon(
                 AppIcons.magnifier,
-                color: AppColors.black50,
               ),
               onPressed: _onSearch),
           Expanded(
@@ -101,6 +101,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                 ),
+                // style: kTextSubTitleStyle.copyWith(color: AppColors.black50),
               ),
             ),
           ),
@@ -109,7 +110,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
               child: Stack(
                 children: [
                   const IconButton(
-                      icon: Icon(AppIcons.funnel), onPressed: null),
+                      icon: FaIcon(FontAwesomeIcons.filter), onPressed: null),
                   if (numFillter > 0)
                     Positioned(
                         top: 0.0,
@@ -135,6 +136,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
               )),
         ],
       ),
-    );
+    ));
   }
 }

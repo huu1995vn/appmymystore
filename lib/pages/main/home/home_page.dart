@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage>
                 })
               ]))),
           SliverPadding(
-              padding: const EdgeInsets.all(kDefaultPadding),
+              padding: const EdgeInsets.all(0),
               sliver: RxSliverList(listData, (BuildContext context, int index) {
                 ProductModel item = listData![index];
                 return ItemProductWidget(

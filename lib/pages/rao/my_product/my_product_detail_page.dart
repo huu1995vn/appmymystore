@@ -288,12 +288,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(CommonMethods.convertToString(
-            data != null && data!.name != null ? data!.name : "create".tr)),
-        centerTitle: true,
-        elevation: 0.0,
-      ),
       body: isNotFound
           ? Expanded(child: Center(child: Text("not.found".tr)))
           : (data == null

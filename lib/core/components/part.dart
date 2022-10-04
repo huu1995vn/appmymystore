@@ -204,8 +204,7 @@ Widget RxCardListSkeleton(
     {int barCount = 3, bool isShowAvatar = true, bool isCircleAvatar = false}) {
   return CardListSkeleton(
     style: SkeletonStyle(
-      backgroundColor:
-          Get.isDarkMode ? AppColors.blackLight : AppColors.white,
+      backgroundColor: Get.isDarkMode ? AppColors.blackLight : AppColors.white,
       isShowAvatar: isShowAvatar,
       isCircleAvatar: isCircleAvatar,
       barCount: barCount,
@@ -555,8 +554,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
                 children: <TextSpan>[
                   TextSpan(
                       text: labelText ?? type.tr,
-                      style: kTextTitleStyle.copyWith(
-                          fontSize: 12)),
+                      style: kTextTitleStyle.copyWith(fontSize: 12)),
                   if (validator != null)
                     const TextSpan(
                         text: ' *',
@@ -572,8 +570,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
               isBorder: isBorder,
               readOnly: true,
               hintText: hintText ?? "choose".tr,
-              style: TextStyle(
-                  fontSize: 16),
+              style: TextStyle(fontSize: 16),
               validator: validator, onTap: () {
             _onSelect(context, type, id,
                 fnWhere: fnWhere, afterChange: afterChange);
@@ -585,7 +582,15 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
 
 _onSelect(BuildContext context, String type, dynamic id,
     {bool Function(dynamic)? fnWhere, Function(dynamic)? afterChange}) async {
-  List data = MasterDataService.data[type];
+  List data = [];
+  if (type == "year") {
+    int start = 1970;
+    for (var i = DateTime.now().year+1; i >= start; i--) {
+      data.add({"name": i.toString(), "id": i});
+    }
+  } else {
+    data = MasterDataService.data[type];
+  }
   if (fnWhere != null) {
     data = data.where(fnWhere).toList();
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 import '../../../core/commons/common_methods.dart';
 import '../../../core/components/rx_image.dart';
 
@@ -31,18 +32,15 @@ class _ListBrandWidgetState extends State<ListBrandWidget>
         (context, index) {
           var item = data[index];
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+            padding: const EdgeInsets.only(left: kDefaultPadding),
             child: Card(
-                child: Container(
-              // padding:
-              //     const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-              decoration: BoxDecoration(
+              shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
-                  border: Border.all(
+                  side: BorderSide(
+                      width: 1,
                       color: widget.value == item["id"]
                           ? AppColors.primary
                           : Colors.black26)),
-              // margin: const EdgeInsets.only(right: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +62,7 @@ class _ListBrandWidgetState extends State<ListBrandWidget>
                   )
                 ],
               ),
-            )),
+            ),
           );
         },
         noFound: Container(),

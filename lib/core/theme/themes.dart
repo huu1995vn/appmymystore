@@ -29,6 +29,10 @@ class Themes {
                 labelLarge: const TextStyle(fontSize: 13.0),
               )),
       iconTheme: const IconThemeData(size: 19, color: AppColors.white),
+      cardTheme: CardTheme(
+        margin: EdgeInsets.zero,
+       
+      ),
       appBarTheme: AppBarTheme(
           elevation: 0,
           iconTheme: const IconThemeData(
@@ -39,7 +43,8 @@ class Themes {
     );
   }
 
-  static Color _getShade(Color color, {bool darker = false, double value = .1}) {
+  static Color _getShade(Color color,
+      {bool darker = false, double value = .1}) {
     assert(value >= 0 && value <= 1);
 
     final hsl = HSLColor.fromColor(color);

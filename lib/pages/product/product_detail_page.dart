@@ -518,7 +518,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         Card(
           // color: Get.isDarkMode ? AppColors.blackLight : Colors.white,
           margin: EdgeInsets.only(bottom: 5),
-          padding: const EdgeInsets.all(kDefaultPadding),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -530,28 +529,28 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   size: 50,
                   color: Colors.blue,
                 ),
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(
-                      "message.str001".tr,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: kDefaultPadding),
-                      child: RxButton(
-                          onTap: _onReport,
-                          icon: Icon(
-                            AppIcons.warning,
-                          ),
-                          color: AppColors.black50,
-                          text: "report".tr.toUpperCase()),
-                    )
-                  ],
-                ))
-              ],
-            ),
+              ),
+              Expanded(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    "message.str001".tr,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: kDefaultPadding),
+                    child: RxButton(
+                        onTap: _onReport,
+                        icon: Icon(
+                          AppIcons.warning,
+                        ),
+                        color: AppColors.black50,
+                        text: "report".tr.toUpperCase()),
+                  )
+                ],
+              ))
+            ],
           ),
         ),
         ProductReview(data!),

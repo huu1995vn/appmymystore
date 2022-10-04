@@ -1,4 +1,5 @@
 const Map<String, String> vi_VN = {
+  "bookmark": "Tin đã lưu",
   "cancelfilter": "Bỏ lọc",
   "writereview": "Viết đánh giá",
   "login.biometrics": "Đăng nhập bằng sinh trắc học",

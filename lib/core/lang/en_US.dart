@@ -1,4 +1,5 @@
 const Map<String, String> en_US = {
+  "bookmark": "Bookmark",
   "cancelfilter": "Cancel filter",
   "writereview": "Write review",
   "login.biometrics": "Login with biometrics",

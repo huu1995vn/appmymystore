@@ -306,7 +306,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                   slivers: <Widget>[
                     SliverAppBar(
                       title: Text(CommonMethods.convertToString(
-                          data!.name ?? "create.text".tr())),
+                          data!.name ?? "create".tr)),
                       centerTitle: true,
                       elevation: 0.0,
                     ),

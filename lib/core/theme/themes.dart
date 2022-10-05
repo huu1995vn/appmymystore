@@ -32,6 +32,8 @@ class Themes {
       cardTheme: const CardTheme(
         margin: EdgeInsets.zero,
         shape: Border(),
+        shadowColor: Colors.transparent,
+        elevation: 0,
       ),
       appBarTheme: AppBarTheme(
           elevation: 0,

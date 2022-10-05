@@ -93,11 +93,12 @@ class ReviewState extends State<ProductRelated> {
   @override
   Widget build(BuildContext context) {
     final scrollDirection = widget.scrollDirection ?? Axis.horizontal;
-    return Column(
+    return Card(
+        child: Column(
       mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: kDefaultPadding),
+          padding: const EdgeInsets.all(kDefaultPaddingBox),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -145,7 +146,7 @@ class ReviewState extends State<ProductRelated> {
               )
             : Container()
       ],
-    );
+    ));
   }
 
   Widget _buildItem(ProductModel item) {

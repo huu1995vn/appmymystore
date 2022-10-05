@@ -26,8 +26,7 @@ class RxIconButton extends StatelessWidget {
           width: size,
           height: size,
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
-          ),
+              shape: BoxShape.circle, color: color ?? Colors.transparent),
           child: Center(
             child: Icon(
               icon,

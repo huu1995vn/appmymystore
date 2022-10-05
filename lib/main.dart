@@ -1,5 +1,6 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe, empty_catches
 
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
@@ -135,7 +136,9 @@ class _MyAppState extends State<MyApp> {
                   logWriterCallback: Logger.write,
                   // initialRoute: AppPages.INITIAL,
                   // getPages: AppPages.routes,
-                  supportedLocales: TranslationService.locales,
+                  localizationsDelegates: [
+                    GlobalMaterialLocalizations.delegate
+                  ],
                   locale: TranslationService.locale,
                   fallbackLocale: TranslationService.fallbackLocale,
                   translations: TranslationService(),

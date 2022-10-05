@@ -13,6 +13,7 @@ import 'package:raoxe/core/components/dialogs/address.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/lang/translation.service.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -180,7 +181,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                               ? AppColors.primary
                                               : null)
                                       .size(13),
-                                  // locale: Locale(TranslationService.locale!.languageCode??"en"),
+                                  locale: Locale(Get.locale!.languageCode??"en"),
                                   initialValue: CommonMethods.convertToDateTime(
                                           data!.birthdate!)
                                       .toString(),

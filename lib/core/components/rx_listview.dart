@@ -19,7 +19,7 @@ class RxListView extends StatefulWidget {
   final ScrollController? scrollController;
   final Widget? awaiting;
   final Widget? noFound;
-  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry padding;
   const RxListView(this.data, this.itemBuilder,
       {Key? key,
       this.onNextPage,
@@ -28,7 +28,7 @@ class RxListView extends StatefulWidget {
       this.scrollDirection,
       this.awaiting,
       this.noFound,
-      this.padding})
+      this.padding = EdgeInsets.zero})
       : super(key: key);
   @override
   _RxDataListViewState createState() => _RxDataListViewState();
@@ -157,11 +157,7 @@ class _RxDataListViewState extends State<RxListView>
         if (index >= widget.data.length) {
           return _buildProgressIndicator();
         } else {
-          return Column(
-            children: [
-              widget.itemBuilder(context, index),
-            ],
-          );
+          return widget.itemBuilder(context, index);
         }
       },
     );

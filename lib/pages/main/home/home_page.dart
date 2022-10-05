@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage>
               child: Column(children: [
             const BannerWidget(),
             Card(
-              margin: const EdgeInsets.only(bottom: 6),
+              margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
               child: Padding(
                   padding: const EdgeInsets.all(kDefaultPaddingBox),
                   child: ListBrandWidget(

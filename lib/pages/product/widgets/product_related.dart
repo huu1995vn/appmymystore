@@ -105,7 +105,7 @@ class ReviewState extends State<ProductRelated> {
               Text(
                 widget.title ?? "NaN",
                 style: TextStyle(
-                    color: Get.isDarkMode ? Colors.white : Colors.grey[700],
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),

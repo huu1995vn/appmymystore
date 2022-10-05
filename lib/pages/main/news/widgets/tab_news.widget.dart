@@ -104,8 +104,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
       onNextPage: onNextPage,
       onRefresh: loadData,
       padding: const EdgeInsets.all(10),
-      key: widget.key,
-      padding: const EdgeInsets.all(10),
+      key: widget.key
     );
   }
 }

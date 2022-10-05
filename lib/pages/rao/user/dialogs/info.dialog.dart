@@ -159,7 +159,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                         style: kTextTitleStyle.copyWith(
                                             color: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1!
+                                                .labelLarge!
                                                 .color)),
                                     const TextSpan(
                                         text: ' *',
@@ -180,7 +180,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                               ? AppColors.primary
                                               : null)
                                       .size(13),
-                                  locale: Locale("vi"),
+                                  // locale: Locale(TranslationService.locale!.languageCode??"en"),
                                   initialValue: CommonMethods.convertToDateTime(
                                           data!.birthdate!)
                                       .toString(),

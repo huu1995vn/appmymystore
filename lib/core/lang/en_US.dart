@@ -215,7 +215,7 @@ const Map<String, String> en_US = {
   "p.not": "Not yet {}",
   "personal": "Personal",
   "security": "Security",
-  "birthday": "birthday",
+  "birthday": "Birthday",
   "awaiting": "Please wait",
   "done": "Done",
   "gender": "Gender",

@@ -128,6 +128,18 @@ class _ProductPageState extends State<ProductPage> {
     return filter;
   }
 
+  onFavorite(int index) async {
+    ProductModel item = listData![index];
+    try {
+      await CommonMethods.onFavorite(context, [item.id], !item.isfavorite);
+      setState(() {
+        listData![index] = item;
+      });
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,9 +162,11 @@ class _ProductPageState extends State<ProductPage> {
                         value: paramsSearch["BrandId"]))),
             RxSliverList(listData, (BuildContext context, int index) {
               var item = listData![index];
-              return ItemProductWidget(listData![index], onTap: () {
-                CommonNavigates.toProductPage(context, item: item);
-              });
+              return ItemProductWidget(listData![index],
+                  onTap: () {
+                    CommonNavigates.toProductPage(context, item: item);
+                  },
+                  onFavorite: () => {onFavorite(index)});
             })
           ],
           key: const Key("LProcduct"),

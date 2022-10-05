@@ -145,6 +145,7 @@ const Map<String, String> en_US = {
   "suggestions": "Suggestions for you",
   "phone": "Phone",
   "email": "Email",
+  "arena": "Arena",
   "city": "province",
   "district": "district",
   "notempty": "Cannot empty",

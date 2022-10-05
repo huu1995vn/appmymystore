@@ -170,13 +170,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                 //         size: 20, color: Colors.white)),
                 title: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       item.fullname ?? "NaN",
                     ),
+                    const SizedBox(width: kDefaultMarginBottomBox),
                     Text(
-                      item.isdefault ? "default".tr : "",
+                      item.isdefault ? "(" + "default".tr + ")" : "",
                       style: const TextStyle(color: AppColors.blue),
                     ),
                   ],
@@ -515,71 +515,103 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       child: RichText(
                                         text: TextSpan(
                                           children: [
-                                            WidgetSpan(
-                                              child: Icon(AppIcons.upload_1,
-                                                  color: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyText1!
-                                                      .color),
-                                            ),
-                                            TextSpan(
-                                                text: " ${"add.image".tr}",
-                                                style: TextStyle(
+                                            if (imgs.length > 0)
+                                              WidgetSpan(
+                                                child: FaIcon(
+                                                    FontAwesomeIcons.plus,
                                                     color: Theme.of(context)
                                                         .textTheme
                                                         .bodyText1!
-                                                        .color)),
+                                                        .color),
+                                              ),
+                                            if (imgs.length > 0)
+                                              TextSpan(
+                                                  text: " ${"add.image".tr}",
+                                                  style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1!
+                                                          .color)),
                                           ],
                                         ),
                                       ))),
-                              Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: Card(
-
-                                    // padding: const EdgeInsets.all(8),
-                                    margin: const EdgeInsets.only(
-                                        bottom: kDefaultMarginBottomBox),
-                                    child: Column(children: [
-                                      SizedBox(
-                                        height: 250,
-                                        child: GridView.builder(
-                                            padding:
-                                                const EdgeInsets.only(top: 0.0),
-                                            shrinkWrap: true,
-                                            itemCount: imgs.length > 7
-                                                ? 7
-                                                : imgs.length,
-                                            gridDelegate:
-                                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 4),
-                                            itemBuilder: (context, index) {
-                                              return Card(
-                                                  child: _itemImage(index,
-                                                      onDelete: () => {},
-                                                      onShowPhoTo: () => {
-                                                            CommonNavigates
-                                                                .openDialog(
-                                                                    context,
-                                                                    PhotoViewDialog(
-                                                                      initialPage:
-                                                                          index,
-                                                                      imgs:
-                                                                          imgs,
-                                                                      onDelete:
-                                                                          (i) =>
-                                                                              {
-                                                                        setState(
-                                                                            () {
-                                                                          imgs.removeAt(
-                                                                              i);
-                                                                        })
-                                                                      },
-                                                                    ))
-                                                          }));
-                                            }),
-                                      ),
-                                    ])),
-                              ),
+                              Card(
+                                  margin: const EdgeInsets.only(
+                                      bottom: kDefaultMarginBottomBox),
+                                  child: Padding(
+                                      padding:
+                                          const EdgeInsets.all(kDefaultPadding),
+                                      child: Column(children: [
+                                        if (imgs.length == 0)
+                                          SizedBox(
+                                              height: 150,
+                                              child: Card(
+                                                  child: GestureDetector(
+                                                      onTap: chooseImages,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(20),
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: const FaIcon(
+                                                              FontAwesomeIcons
+                                                                  .squarePlus,
+                                                              size: 50,
+                                                              color: Colors
+                                                                  .black12,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            "add.image".tr,
+                                                            style: const TextStyle(
+                                                                color: Colors
+                                                                    .black45),
+                                                          )
+                                                        ],
+                                                      )))),
+                                        if (imgs.length > 0)
+                                          SizedBox(
+                                            height: 250,
+                                            child: GridView.builder(
+                                                padding: const EdgeInsets.only(
+                                                    top: 0.0),
+                                                shrinkWrap: true,
+                                                itemCount: imgs.length > 7
+                                                    ? 7
+                                                    : imgs.length,
+                                                gridDelegate:
+                                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 4),
+                                                itemBuilder: (context, index) {
+                                                  return Card(
+                                                      child: _itemImage(index,
+                                                          onDelete: () => {},
+                                                          onShowPhoTo: () => {
+                                                                CommonNavigates
+                                                                    .openDialog(
+                                                                        context,
+                                                                        PhotoViewDialog(
+                                                                          initialPage:
+                                                                              index,
+                                                                          imgs:
+                                                                              imgs,
+                                                                          onDelete:
+                                                                              (i) => {
+                                                                            setState(() {
+                                                                              imgs.removeAt(i);
+                                                                            })
+                                                                          },
+                                                                        ))
+                                                              }));
+                                                }),
+                                          ),
+                                      ]))),
                               _header(title: "specifications".tr),
                               Card(
                                   margin: const EdgeInsets.only(
@@ -826,7 +858,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   Widget _header({String? title, Widget? header, Widget? action}) {
     return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding),
+      padding: const EdgeInsets.all(kDefaultPaddingBox),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,

@@ -112,6 +112,7 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(
               child: Column(children: [
             const BannerWidget(),
+            const SizedBox(height: kDefaultMarginBottomBox),
             ListBrandWidget(
                 onPressed: (v) => {
                       CommonNavigates.toProductPage(context,

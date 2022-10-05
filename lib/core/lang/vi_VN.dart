@@ -145,6 +145,7 @@ const Map<String, String> vi_VN = {
   "suggestions": "Gợi ý cho bạn",
   "phone": "Điện thoại",
   "email": "Email",
+  "arena": "Khu vực",
   "city": "Tỉnh thành",
   "district": "Quận huyện",
   "notempty": "Không được bỏ trống",

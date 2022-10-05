@@ -142,7 +142,7 @@ class _MyAppState extends State<MyApp> {
                   logWriterCallback: Logger.write,
                   // initialRoute: AppPages.INITIAL,
                   // getPages: AppPages.routes,
-                  // supportedLocales: TranslationService.locales,
+                  supportedLocales: TranslationService.locales,
                   locale: TranslationService.locale,
                   fallbackLocale: TranslationService.fallbackLocale,
                   translations: TranslationService(),

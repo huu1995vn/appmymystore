@@ -58,7 +58,7 @@ class _PhotoViewDialogState extends State<PhotoViewDialog> {
           if (widget.onDelete != null)
             IconButton(onPressed: onDelete, icon: Icon(AppIcons.delete))
         ],
-        title: Text("($initialPage/${imgs!.length}) ${widget.title ?? "image".tr}"),
+        title: Text("(${initialPage+1}/${imgs!.length}) ${widget.title ?? "image".tr}"),
       ),
       body: PhotoViewGallery.builder(
         scrollPhysics: const BouncingScrollPhysics(),

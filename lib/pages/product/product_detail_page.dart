@@ -553,7 +553,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ),
         ProductReview(data!),
         ProductRelated(
-            title: "news.brand".tr,
+            title: "suggestions".tr,
             filter: {"BrandId": data!.brandid},
             scrollDirection: Axis.vertical,
             notids: [data!.id]),

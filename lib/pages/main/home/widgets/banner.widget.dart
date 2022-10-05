@@ -56,20 +56,14 @@ class _BannerWidgetState extends State<BannerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        clipBehavior: Clip.hardEdge,
-        margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: RxSlider(
-          onTap: (i) {
-            var item = listData[i];
-            if (item.link != null && CommonMethods.isURl(item.link!)) {
-              CommonMethods.launchURL(item.link!);
-            }
-          },
-          items: listData.map((e) => e.src.toString()).toList(),
-        ));
+    return RxSlider(
+      onTap: (i) {
+        var item = listData[i];
+        if (item.link != null && CommonMethods.isURl(item.link!)) {
+          CommonMethods.launchURL(item.link!);
+        }
+      },
+      items: listData.map((e) => e.src.toString()).toList(),
+    );
   }
 }

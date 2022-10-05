@@ -146,7 +146,7 @@ class _ProductPageState extends State<ProductPage> {
         body: RxCustomScrollView(
           slivers: [
             SliverPadding(
-                padding: EdgeInsets.only(top: kDefaultPadding, bottom: kDefaultPadding),
+                padding: EdgeInsets.all(kDefaultPadding),
                 sliver: SliverToBoxAdapter(
                     child: ListBrandWidget(
                         onPressed: (v) => {_onBrandChange(v)},

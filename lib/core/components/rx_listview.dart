@@ -109,7 +109,7 @@ class _RxDataListViewState extends State<RxListView>
             physics: const BouncingScrollPhysics(),
             scrollDirection: widget.scrollDirection ?? Axis.vertical,
             itemCount: kItemOnPage,
-            padding: const EdgeInsets.only(top: 0),
+            padding: widget.padding,
             itemBuilder: (context, index) {
               return widget.awaiting ??
                   RxCardSkeleton(barCount: 3, isShowAvatar: false);

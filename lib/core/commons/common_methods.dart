@@ -636,7 +636,8 @@ class CommonMethods {
 
   static void chatZalo(String phone) {
     phone = CommonMethods.formatPhoneNumber(phone);
-    launchUrl(Uri.parse("https://zalo.me/$phone"));
+     
+    launchUrl(Uri.parse("https://zalo.me/$phone"), mode: LaunchMode.externalNonBrowserApplication);
   }
   //# build end link dynamic
 }

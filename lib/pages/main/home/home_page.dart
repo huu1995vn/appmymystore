@@ -112,16 +112,11 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(
               child: Column(children: [
             const BannerWidget(),
-            Card(
-              margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
-              child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPaddingBox),
-                  child: ListBrandWidget(
-                      onPressed: (v) => {
-                            CommonNavigates.toProductPage(context,
-                                paramsSearch: {"BrandId": v})
-                          })),
-            ),
+            ListBrandWidget(
+                onPressed: (v) => {
+                      CommonNavigates.toProductPage(context,
+                          paramsSearch: {"BrandId": v})
+                    }),
             Card(
                 child: Padding(
                     padding: const EdgeInsets.all(kDefaultPaddingBox),

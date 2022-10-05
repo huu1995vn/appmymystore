@@ -159,7 +159,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       onTap: () => {CommonMethods.call(data!.phone!)},
                       child: Container(
                           height: 50,
-                          padding: EdgeInsets.all(10),
+                          padding: EdgeInsets.all(kDefaultPaddingBox),
                           color: Colors.green,
                           alignment: Alignment.center,
                           child: Row(
@@ -240,7 +240,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       PhotoViewDialog(
                         initialPage: index,
                         imgs: data!.rximglist,
-                        title: data!.name,                        
+                        title: data!.name,
                       ))
                 }),
         Card(

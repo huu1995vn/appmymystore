@@ -108,7 +108,6 @@ class _SettingsPageState extends State<SettingsPage> {
               child: Column(
             children: [
               Card(
-                
                   margin: EdgeInsets.only(top: 6, bottom: 6),
                   child: ListView(
                     shrinkWrap: true,
@@ -192,7 +191,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   )),
               Expanded(child: Container()),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(kDefaultPaddingBox),
                 child: Text(
                   "${"version".tr} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
                   style: TextStyle().italic,

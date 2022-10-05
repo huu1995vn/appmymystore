@@ -27,7 +27,7 @@ class ItemProductWidget extends StatelessWidget {
     return Card(
         margin: EdgeInsets.zero,
         child: Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(kDefaultPaddingBox),
           decoration: const BoxDecoration(
             color: Colors.transparent,
             border: Border(
@@ -190,7 +190,7 @@ class ItemProductWidget extends StatelessWidget {
                                       size: 35,
                                       colorIcon: item.isfavorite
                                           ? AppColors.yellow
-                                          : null,
+                                          : AppColors.black50,
                                     )
                                 ],
                               ),

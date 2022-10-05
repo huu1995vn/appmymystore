@@ -90,21 +90,18 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
   // ignore: must_call_super
   Widget build(BuildContext context) {
     super.build(context);
-    return RxListView(
-      listData,
-      (context, index) {
-        var item = listData![index];
-        return ItemNewsWidget(
-          item,
-          onTap: () {
-            CommonNavigates.toNewsPage(context, item: item);
-          },
-        );
-      },
-      onNextPage: onNextPage,
-      onRefresh: loadData,
-      padding: const EdgeInsets.all(10),
-      key: widget.key
-    );
+    return RxListView(listData, (context, index) {
+      var item = listData![index];
+      return ItemNewsWidget(
+        item,
+        onTap: () {
+          CommonNavigates.toNewsPage(context, item: item);
+        },
+      );
+    },
+        onNextPage: onNextPage,
+        onRefresh: loadData,
+        padding: const EdgeInsets.all(kDefaultPaddingBox),
+        key: widget.key);
   }
 }

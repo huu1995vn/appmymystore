@@ -244,11 +244,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ))
                 }),
         Card(
-            margin: EdgeInsets.only(bottom: 5),
+            margin: EdgeInsets.only(bottom: 6),
             child: SizedBox(
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.all(kDefaultPadding),
+                padding: const EdgeInsets.all(kDefaultPaddingBox),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -296,9 +296,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
             )),
         Card(
-            margin: EdgeInsets.only(bottom: 5),
+            margin: EdgeInsets.only(bottom: 6),
             child: Padding(
-              padding: const EdgeInsets.all(kDefaultPadding),
+              padding: const EdgeInsets.all(kDefaultPaddingBox),
               child: Row(
                 children: [
                   Icon(
@@ -316,23 +316,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
             )),
         Card(
-          margin: EdgeInsets.only(bottom: 5),
+          margin: EdgeInsets.only(bottom: 6),
           child: Padding(
-            padding: const EdgeInsets.all(kDefaultPadding),
+            padding: const EdgeInsets.all(kDefaultPaddingBox),
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               // mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                    padding: EdgeInsets.all(5),
-                    child: Text("specification".tr,
-                        style: TextStyle(
-                            // color: Get.isDarkMode
-                            //     ? Colors.white
-                            //     : Colors.grey[700],
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold))),
+                Text("specification".tr,
+                    style: TextStyle(
+                        // color: Get.isDarkMode
+                        //     ? Colors.white
+                        //     : Colors.grey[700],
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold)),
                 SizedBox(
                   height: 5,
                 ),
@@ -362,41 +360,35 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
         Card(
-            margin: EdgeInsets.only(bottom: 5),
+            margin: EdgeInsets.only(bottom: 6),
             child: Padding(
-                padding: const EdgeInsets.all(kDefaultPadding),
+                padding: const EdgeInsets.all(kDefaultPaddingBox),
                 child: Column(
                     // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     // mainAxisSize: MainAxisSize.min,
                     children: [
-                      Padding(
-                          padding: EdgeInsets.all(5),
-                          child: Text("description".tr,
-                              style: TextStyle(
-                                  // color: Get.isDarkMode
-                                  //     ? Colors.white
-                                  //     : Colors.grey[700],
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold))),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                        child: TextFormField(
-                            initialValue: data!.desc,
-                            minLines:
-                                6, // any number you need (It works as the rows for the textarea)
-                            keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                            enabled: false),
-                      )
+                      Text("description".tr,
+                          style: TextStyle(
+                              // color: Get.isDarkMode
+                              //     ? Colors.white
+                              //     : Colors.grey[700],
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold)),
+                      TextFormField(
+                          initialValue: data!.desc,
+                          minLines:
+                              6, // any number you need (It works as the rows for the textarea)
+                          keyboardType: TextInputType.multiline,
+                          maxLines: null,
+                          enabled: false),
                     ]))),
         Card(
-          margin: EdgeInsets.only(bottom: 5),
+          margin: EdgeInsets.only(bottom: 6),
           child: Padding(
-              padding: const EdgeInsets.all(kDefaultPadding),
+              padding: const EdgeInsets.all(kDefaultPaddingBox),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
@@ -451,36 +443,27 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               : FontAwesomeIcons.bookmark,
                           onTap: _onFavorite,
                           size: 40,
-                          color: Colors.black45,
+                          color: Colors.black12,
                           colorIcon: data!.isfavorite
                               ? AppColors.yellow
-                              : AppColors.white),
+                              : AppColors.black50),
                       SizedBox(width: kDefaultPadding),
                       RxIconButton(
                         icon: FontAwesomeIcons.solidShareFromSquare,
                         size: 40,
-                        color: Colors.black45,
-                        colorIcon: AppColors.white,
+                        color: Colors.black12,
+                        colorIcon: AppColors.black50,
                         onTap: _onShare,
                       ),
-                      GestureDetector(
-                          onTap: _onReview,
-                          child: Text(
-                            "review".tr,
-                            style: const TextStyle(
-                                    fontStyle: FontStyle.italic,
-                                    color: AppColors.info)
-                                .underline,
-                          )),
                     ],
                   )
                 ],
               )),
         ),
         Card(
-            margin: EdgeInsets.only(bottom: 5),
+            margin: EdgeInsets.only(bottom: 6),
             child: Padding(
-                padding: const EdgeInsets.all(kDefaultPadding),
+                padding: const EdgeInsets.all(kDefaultPaddingBox),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -489,11 +472,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         padding: EdgeInsets.all(5),
                         child: Text("rate".tr,
                             style: TextStyle(
-                                // color: Get.isDarkMode
-                                //     ? Colors.white
-                                //     : Colors.grey[700],
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold))),
+                                fontSize: 18, fontWeight: FontWeight.bold))),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -532,41 +511,44 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ],
                 ))),
         Card(
-          // color: Get.isDarkMode ? AppColors.blackLight : Colors.white,
-          margin: EdgeInsets.only(bottom: 5),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              SizedBox(
-                width: 80,
-                child: Icon(
-                  AppIcons.security,
-                  size: 50,
-                  color: Colors.blue,
-                ),
-              ),
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    "message.str001".tr,
+          margin: EdgeInsets.only(bottom: 6),
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPaddingBox),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SizedBox(
+                  width: 80,
+                  child: Icon(
+                    AppIcons.security,
+                    size: 50,
+                    color: Colors.blue,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: kDefaultPadding),
-                    child: RxButton(
-                        onTap: _onReport,
-                        icon: Icon(
-                          AppIcons.warning,
-                        ),
-                        color: AppColors.black50,
-                        text: "report".tr.toUpperCase()),
-                  )
-                ],
-              ))
-            ],
+                ),
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "message.str001".tr,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: kDefaultPadding),
+                      child: RxButton(
+                          onTap: _onReport,
+                          icon: Icon(
+                            AppIcons.warning,
+                          ),
+                          color: AppColors.black50,
+                          text: "report".tr.toUpperCase()),
+                    )
+                  ],
+                ))
+              ],
+            ),
           ),
         ),
         ProductReview(data!),

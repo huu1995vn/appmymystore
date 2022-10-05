@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
@@ -57,7 +58,7 @@ class _PhotoViewDialogState extends State<PhotoViewDialog> {
           if (widget.onDelete != null)
             IconButton(onPressed: onDelete, icon: Icon(AppIcons.delete))
         ],
-        title: Text("($initialPage/${imgs!.length}) ${widget.title}"),
+        title: Text("($initialPage/${imgs!.length}) ${widget.title ?? "image".tr}"),
       ),
       body: PhotoViewGallery.builder(
         scrollPhysics: const BouncingScrollPhysics(),

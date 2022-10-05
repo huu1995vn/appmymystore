@@ -9,6 +9,7 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
+
 class ItemNewsWidget extends StatelessWidget {
   final NewsModel item;
   void Function()? onTap;
@@ -19,6 +20,9 @@ class ItemNewsWidget extends StatelessWidget {
     bool isDark = Get.isDarkMode;
     return Card(
         margin: const EdgeInsets.only(bottom: 10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(5.0),
             child: InkWell(

@@ -32,7 +32,6 @@ class Themes {
       cardTheme: const CardTheme(
         margin: EdgeInsets.zero,
         shape: Border(),
-
       ),
       appBarTheme: AppBarTheme(
           elevation: 0,

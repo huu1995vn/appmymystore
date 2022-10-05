@@ -293,6 +293,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   Icon(
                     AppIcons.map_1,
                     size: 13,
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
                   ),
                   SizedBox(
                     width: 10,
@@ -367,13 +368,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   //     : Colors.grey[700],
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold))),
-                      TextFormField(
-                          initialValue: data!.desc,
-                          minLines:
-                              6, // any number you need (It works as the rows for the textarea)
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          enabled: false),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                        child: TextFormField(
+                            initialValue: data!.desc,
+                            minLines:
+                                6, // any number you need (It works as the rows for the textarea)
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            enabled: false),
+                      )
                     ]))),
         Card(
           margin: EdgeInsets.only(bottom: 5),
@@ -554,16 +559,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
         ProductReview(data!),
-        Card(
-            margin: EdgeInsets.only(bottom: 5),
-            child: Padding(
-              padding: const EdgeInsets.all(kDefaultPadding),
-              child: ProductRelated(
-                      title: "news.brand".tr,
-                      filter: {"BrandId": data!.brandid},
-                      scrollDirection: Axis.vertical,
-                      notids: [data!.id]),
-            ))
+        ProductRelated(
+            title: "news.brand".tr,
+            filter: {"BrandId": data!.brandid},
+            scrollDirection: Axis.vertical,
+            notids: [data!.id]),
       ],
     );
   }

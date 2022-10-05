@@ -1,5 +1,6 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe, empty_catches
 
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
@@ -101,6 +102,10 @@ class _MyAppState extends State<MyApp> {
           child: const MyPage(),
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
+                  localizationsDelegates: [
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                  ],
                   color: Colors.transparent,
                   // debugShowCheckedModeBanner: false,
                   // theme: ThemeService.main(),

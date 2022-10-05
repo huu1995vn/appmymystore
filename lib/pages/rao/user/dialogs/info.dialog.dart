@@ -181,9 +181,8 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                               ? AppColors.primary
                                               : null)
                                       .size(13),
-                                  locale: Locale(
-                                      TranslationService.locale!.languageCode ??
-                                          "en"),
+                                  locale:
+                                      Locale(Get.locale!.languageCode ?? "en"),
                                   initialValue: CommonMethods.convertToDateTime(
                                           data!.birthdate!)
                                       .toString(),

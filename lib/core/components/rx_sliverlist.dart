@@ -54,8 +54,9 @@ class RxListViewState extends State<RxSliverList>
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return Padding(
+          return Container(
               padding: kEdgeInsetsPadding,
+              color: Colors.grey[200],
               child: widget.awaiting ??
                   RxCardSkeleton(
                       barCount: 3, isShowAvatar: false, isBorderRadius: true));
@@ -101,8 +102,7 @@ class RxListViewState extends State<RxSliverList>
   }
 
   Widget _bodylist() {
-    return 
-     widget.data == null
+    return widget.data == null
         ? _bodylist_awaiting()
         : widget.data.length == 0
             ? _bodylist_notfound()

@@ -196,6 +196,7 @@ const Map<String, String> en_US = {
   "whatdoyouneed": "What do you need?",
   "old": "Used",
   "new": "New",
+  "newpost": "New Post",
   "total": "Total",
   "total.time": "Total time",
   "total.time.pintop": "total time to top",

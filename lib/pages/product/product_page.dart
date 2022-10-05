@@ -1,12 +1,9 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';

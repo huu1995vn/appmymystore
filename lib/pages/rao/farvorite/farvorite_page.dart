@@ -80,20 +80,6 @@ class _FavoritePageState extends State<FavoritePage> {
     if (mounted) scrollController.dispose();
   }
 
-  // onDelete(int index) async {
-  //   try {
-  //     var item = listData![index];
-  //     CommonMethods.onFavorite([item!.id], !item!.isfavorite);
-  //     listData!.removeAt(index);
-  //   } catch (e) {
-  //     CommonMethods.showDialogError(context, e);
-  //   }
-  // }
-
-  // onDetail([int index = -1]) async {
-  //   CommonNavigates.toFavoritePage(context, id: item.id);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,9 +104,6 @@ class _FavoritePageState extends State<FavoritePage> {
           })
         ],
       ),
-      // persistentFooterButtons: [
-      //   RxPrimaryButton(onTap: onDetail, text: "add".tr)
-      // ],
     );
   }
 }

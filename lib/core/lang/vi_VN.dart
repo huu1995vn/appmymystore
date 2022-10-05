@@ -196,6 +196,7 @@ const Map<String, String> vi_VN = {
   "whatdoyouneed": "Bạn cần gì?",
   "old": "Đã qua sử dụng",
   "new": "Mới",
+  "newpost": "Tin mới",
   "total": "Tổng",
   "total.time": "Tổng thời gian",
   "total.time.pintop": "tổng thời gian lên đầu",

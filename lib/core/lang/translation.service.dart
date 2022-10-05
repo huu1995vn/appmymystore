@@ -2,11 +2,15 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'en_US.dart';
 import 'vi_VN.dart';
 
 class TranslationService extends Translations {
+  static GetStorage _getStorage = GetStorage();
+  static String storageKey = 'isVi';
+
   // locale sẽ được get mỗi khi mới mở app (phụ thuộc vào locale hệ thống hoặc bạn có thể cache lại locale mà người dùng đã setting và set nó ở đây)
   static final locale = _getLocaleFromLanguage();
 
@@ -30,11 +34,23 @@ class TranslationService extends Translations {
     'en': 'English',
     'vi': 'Tiếng Việt',
   });
+  static saveLanguage(bool isVi) {
+    _getStorage.write(storageKey, isVi);
+  }
+
+  static Locale getLocale() {
+    return isVi() ? locales[1] : locales[0];
+  }
 
 // function change language nếu bạn không muốn phụ thuộc vào ngôn ngữ hệ thống
   static void changeLocale(String langCode) {
     final locale = _getLocaleFromLanguage(langCode: langCode);
     Get.updateLocale(locale!);
+    saveLanguage(locale!.languageCode == "vi");
+  }
+
+  static bool isVi() {
+    return _getStorage.read(storageKey) ?? false;
   }
 
   @override
@@ -44,7 +60,8 @@ class TranslationService extends Translations {
       };
 
   static Locale? _getLocaleFromLanguage({String? langCode}) {
-    var lang = langCode ?? Get.deviceLocale!.languageCode;
+    var lang = langCode ?? (isVi() ? "vi" : "en");
+    //  Get.deviceLocale!.languageCode;
     for (int i = 0; i < langCodes.length; i++) {
       if (lang == langCodes[i]) return locales[i];
     }

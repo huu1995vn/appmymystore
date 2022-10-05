@@ -12,6 +12,7 @@ const kWhite = Colors.white;
 const kTextColor = Color(0xFF707070);
 const kTextLightColor = Color(0xFF949098);
 const kDefaultPadding = 5.0;
+const kDefaultPaddingBox = 10.0;
 const kDefaultPaddingTop = 79.0;
 const kItemOnPage = 10;
 const kMaxImages = 15;

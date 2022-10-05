@@ -37,7 +37,7 @@ class ItemNewsWidget extends StatelessWidget {
                           fit: BoxFit.cover,
                         )),
                     Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(kDefaultPaddingBox),
                       child: Column(children: <Widget>[
                         Row(
                           children: <Widget>[

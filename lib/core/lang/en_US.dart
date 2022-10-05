@@ -28,7 +28,7 @@ const Map<String, String> en_US = {
   "color": "Color",
   "review": "Review",
   "favorite": "Favorite",
-  "text-search": "Search keywords",
+  "text.search": "Search keywords",
   "congratulations": "Congratulations",
   "concat": "Contact",
   "start": "Start",

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
@@ -23,7 +24,6 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
       initialValue: '', onChanged: (value) {
     try {
       _completer.complete(_fetchSuggestions()); // call the API endpoint
-
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }
@@ -34,6 +34,8 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
       (StorageService.get(StorageKeys.text_search) ?? "")!.split(",");
   List<SuggestionModel> suggestionList = <SuggestionModel>[];
   RxSearchDelegate();
+  @override
+  String get searchFieldLabel => 'text.search'.tr;
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -106,7 +108,9 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
                           SuggestionModel item = suggestionList[index];
                           return ListTile(
                             leading: Icon(
-                              item.isLocal ? AppIcons.history : AppIcons.magnifier,
+                              item.isLocal
+                                  ? AppIcons.history
+                                  : AppIcons.magnifier,
                               size: 19,
                             ),
                             title: GestureDetector(

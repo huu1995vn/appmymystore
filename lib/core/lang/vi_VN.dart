@@ -28,7 +28,7 @@ const Map<String, String> vi_VN = {
   "color": "Màu sắc",
   "review": "Đánh giá",
   "favorite": "Yêu thích",
-  "text-search": "Từ khóa tìm kiếm",
+  "text.search": "Từ khóa tìm kiếm",
   "congratulations": "Chúc mừng",
   "concat": "Liên hệ",
   "start": "Bắt đầu",

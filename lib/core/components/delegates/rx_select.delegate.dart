@@ -15,6 +15,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
   bool? ismultiple = false;
   String pkey;
   String pvalue;
+
   Widget Function(BuildContext, int)? itemBuilder;
   RxSelectDelegate(
       {required this.data,
@@ -23,6 +24,8 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
       this.pkey = "name",
       this.pvalue = "id",
       this.itemBuilder});
+  @override
+  String get searchFieldLabel => 'text.search'.tr;
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -113,13 +116,12 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
                       child: Row(
                         children: [
                           Expanded(
-                            child: RxPrimaryButton(
-                                onTap: () {
-                                  CommonNavigates.goBack(context, value);
-                                },
-                                text: "choose".tr
-                          )
-                      )],
+                              child: RxPrimaryButton(
+                                  onTap: () {
+                                    CommonNavigates.goBack(context, value);
+                                  },
+                                  text: "choose".tr))
+                        ],
                       ))
               ]);
             }));

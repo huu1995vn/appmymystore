@@ -88,10 +88,6 @@ class _UserPageState extends State<UserPage> {
                         // ignore: prefer_const_literals_to_create_immutables
                         children: [
                           _top(),
-                          Divider(
-                            height: 2,
-                            color: AppColors.black,
-                          ),
                           ListTile(
                               title: Text(data!.phone! ?? "NaN"),
                               leading: FaIcon(

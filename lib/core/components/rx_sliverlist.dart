@@ -56,7 +56,7 @@ class RxListViewState extends State<RxSliverList>
         (BuildContext context, int index) {
           return Container(
               padding: kEdgeInsetsPadding,
-              color: Colors.grey[200],
+              color: Get.isDarkMode ? Colors.black : Colors.grey[200],
               child: widget.awaiting ??
                   RxCardSkeleton(
                       barCount: 3, isShowAvatar: false, isBorderRadius: true));

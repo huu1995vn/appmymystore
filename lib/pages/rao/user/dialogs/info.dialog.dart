@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty, non_constant_identifier_names, must_be_immutable
 
 import 'dart:io';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -120,7 +121,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.grey[200],
         body: data == null
             ? Center(
                 child: CircularProgressIndicator(),
@@ -130,95 +131,132 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                   SliverAppBar(
                     expandedHeight: 250.0,
                     flexibleSpace: Avatar(),
+                    backgroundColor: Colors.white,
+                    iconTheme: const IconThemeData(
+                      color: AppColors.black,
+                    ),
                   ),
                   SliverToBoxAdapter(
-                      child: Padding(
-                    padding: const EdgeInsets.all(kDefaultPadding),
                     child: Form(
                         key: _keyValidationForm,
-                        child: Card(
-                            child: Column(
+                        child: Column(
                           children: <Widget>[
-                            rxTextInput(context, data!.fullname,
-                                labelText: "fullname".tr,
-                                onChanged: (v) => {data!.fullname = v},
-                                validator: Validators.compose([
-                                  Validators.required("fullname".tr),
-                                ])),
-                            rxTextInput(context, data!.address,
-                                labelText: "address".tr,
-                                onTap: _onAddress,
-                                validator: Validators.compose([
-                                  Validators.required("fullname".tr),
-                                ])),
-                            ListTile(
-                              title: RichText(
-                                text: TextSpan(
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                        text: "birthday".tr,
-                                        style: kTextTitleStyle.copyWith(
-                                            color: Theme.of(context)
-                                                .textTheme
-                                                .labelLarge!
-                                                .color)),
-                                    const TextSpan(
-                                        text: ' *',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.primary)),
-                                  ],
-                                ),
-                              ),
-                              subtitle: DateTimePicker(
-                                  dateHintText: "birthday".tr,
-                                  style: TextStyle(
-                                          color: data!.birthdate != null &&
-                                                  data!.birthdate!
-                                                          .toString()
-                                                          .length >
-                                                      0
-                                              ? AppColors.primary
-                                              : null)
-                                      .size(13),
-                                  locale:
-                                      Locale(Get.locale!.languageCode ?? "en"),
-                                  initialValue: CommonMethods.convertToDateTime(
-                                          data!.birthdate!)
-                                      .toString(),
-                                  dateMask: 'dd-MM-yyyy',
-                                  firstDate: DateTime(1977),
-                                  lastDate: DateTime(2100),
-                                  onChanged: (value) =>
-                                      {data!.birthdate = value},
-                                  validator: Validators.compose([
-                                    Validators.required("birthday".tr),
-                                  ])),
-                            ),
-                            ListTile(
-                              title: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: <Widget>[
-                                  CustomRadioButton("male".tr, 1),
-                                  CustomRadioButton("female".tr, 0),
-                                ],
-                              ),
-                            )
+                            SizedBox(height: kDefaultMarginBottomBox),
+                            Card(
+                                child: Column(
+                              children: [
+                                rxTextInput(context, data!.fullname,
+                                    labelText: "fullname".tr,
+                                    onChanged: (v) => {data!.fullname = v},
+                                    validator: Validators.compose([
+                                      Validators.required("fullname".tr),
+                                    ])),
+                                rxTextInput(context, data!.address,
+                                    labelText: "address".tr,
+                                    onTap: _onAddress,
+                                    validator: Validators.compose([
+                                      Validators.required("fullname".tr),
+                                    ])),
+                                Container(
+                                    decoration: const BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                            width: 1.0, color: Colors.black12),
+                                      ),
+                                    ),
+                                    child: ListTile(
+                                      title: RichText(
+                                        text: TextSpan(
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: "birthday".tr,
+                                                style: kTextTitleStyle.copyWith(
+                                                    fontSize: 12,
+                                                    color: Colors.black54)),
+                                            const TextSpan(
+                                                text: ' *',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: AppColors.primary)),
+                                          ],
+                                        ),
+                                      ),
+                                      trailing:
+                                          FaIcon(FontAwesomeIcons.calendar),
+                                      subtitle: Container(
+                                        height: 35,
+                                        child: DateTimePicker(
+                                            dateHintText: "birthday".tr,
+                                            style: TextStyle(
+                                                    color: data!.birthdate !=
+                                                                null &&
+                                                            data!.birthdate!
+                                                                    .toString()
+                                                                    .length >
+                                                                0
+                                                        ? AppColors.black
+                                                        : null)
+                                                .size(16),
+                                            locale: Locale(
+                                                Get.locale!.languageCode ??
+                                                    "en"),
+                                            initialValue:
+                                                CommonMethods.convertToDateTime(
+                                                        data!.birthdate!)
+                                                    .toString(),
+                                            dateMask: 'dd-MM-yyyy',
+                                            firstDate: DateTime(1977),
+                                            lastDate: DateTime(2100),
+                                            onChanged: (value) =>
+                                                {data!.birthdate = value},
+                                            validator: Validators.compose([
+                                              Validators.required(
+                                                  "birthday".tr),
+                                            ])),
+                                      ),
+                                    )),
+                                ListTile(
+                                  title: RichText(
+                                    text: TextSpan(
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text: "gender".tr,
+                                            style: kTextTitleStyle.copyWith(
+                                                fontSize: 12,
+                                                color: Colors.black54)),
+                                      ],
+                                    ),
+                                  ),
+                                  subtitle: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
+                                      CustomRadioButton("male".tr, 1),
+                                      SizedBox(width: 10),
+                                      CustomRadioButton("female".tr, 0),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ))
                           ],
-                        ))),
-                  ))
+                        )),
+                  )
                 ],
               ),
         persistentFooterButtons: [
           if (data != null)
-            RxPrimaryButton(
-                onTap: () {
-                  if (_keyValidationForm.currentState!.validate()) {
-                    _onSave();
-                  }
-                },
-                text: 'save'.tr)
+            Row(
+              children: [
+                Expanded(
+                    child: RxPrimaryButton(
+                        onTap: () {
+                          if (_keyValidationForm.currentState!.validate()) {
+                            _onSave();
+                          }
+                        },
+                        text: 'save'.tr))
+              ],
+            )
         ]);
   }
 
@@ -269,23 +307,20 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                           alignment: Alignment.bottomRight,
                           child: RxIconButton(
                             icon: AppIcons.camera_1,
+                            colorIcon: Colors.white,
                             onTap: onUpload,
                             size: 40,
+                            color: Colors.grey,
                           )),
                       radius: 60.0,
                       backgroundImage: RxImageProvider(data!.rximg),
                     ),
                   ),
+                  SizedBox(height: 10),
                   Text(
                     data!.fullname!.toUpperCase(),
                     style: const TextStyle(fontSize: 19).bold,
                   ),
-                  Text(
-                    data!.email!,
-                  ),
-                  Text(
-                    data!.phone!,
-                  )
                 ],
               ),
             )

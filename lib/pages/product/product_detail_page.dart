@@ -7,6 +7,7 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/photo_view.dialog.dart';
 import 'package:raoxe/core/components/dialogs/report.dialog.dart';
 import 'package:raoxe/core/components/dialogs/review.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -231,7 +232,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        RxImages(data: data!.rximglist),
+        RxImages(
+            data: data!.rximglist,
+            onTap: (index) => {
+                  CommonNavigates.openDialog(
+                      context,
+                      PhotoViewDialog(
+                        initialPage: index,
+                        imgs: data!.rximglist,
+                        title: data!.name,                        
+                      ))
+                }),
         Card(
             margin: EdgeInsets.only(bottom: 5),
             child: SizedBox(

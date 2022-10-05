@@ -205,7 +205,6 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                       item!.address ?? "NaN",
                       style: const TextStyle(),
                     )
-                  
                   ],
                 ),
                 onChanged: (int? value) {

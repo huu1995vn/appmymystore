@@ -8,11 +8,15 @@ import 'package:raoxe/core/components/part.dart';
 
 class PhotoViewDialog extends StatefulWidget {
   const PhotoViewDialog(
-      {super.key, required this.imgs, this.onDelete, this.initialPage = 0});
+      {super.key,
+      required this.imgs,
+      this.onDelete,
+      this.initialPage = 0,
+      this.title});
   final List<String> imgs;
   final void Function(int)? onDelete;
   final int initialPage;
-
+  final String? title;
   @override
   State<PhotoViewDialog> createState() => _PhotoViewDialogState();
 }
@@ -33,8 +37,7 @@ class _PhotoViewDialogState extends State<PhotoViewDialog> {
     if (widget.onDelete != null) {
       widget.onDelete!(initialPage);
       setState(() {
-        if(initialPage>0 && imgs!.length < initialPage)
-        {
+        if (initialPage > 0 && imgs!.length < initialPage) {
           initialPage = imgs!.length;
         }
       });
@@ -54,6 +57,7 @@ class _PhotoViewDialogState extends State<PhotoViewDialog> {
           if (widget.onDelete != null)
             IconButton(onPressed: onDelete, icon: Icon(AppIcons.delete))
         ],
+        title: Text("($initialPage/${imgs!.length}) ${widget.title}"),
       ),
       body: PhotoViewGallery.builder(
         scrollPhysics: const BouncingScrollPhysics(),
@@ -65,7 +69,11 @@ class _PhotoViewDialogState extends State<PhotoViewDialog> {
         },
         itemCount: widget.imgs.length,
         pageController: PageController(initialPage: widget.initialPage),
-        onPageChanged: (index) => {initialPage = index},
+        onPageChanged: (index) => {
+          setState(() {
+            initialPage = index;
+          })
+        },
       ),
     );
   }

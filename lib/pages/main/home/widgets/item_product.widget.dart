@@ -188,9 +188,12 @@ class ItemProductWidget extends StatelessWidget {
                                           : FontAwesomeIcons.bookmark,
                                       onTap: onFavorite,
                                       size: 35,
+                                      color: Colors.transparent,
                                       colorIcon: item.isfavorite
                                           ? AppColors.yellow
-                                          : AppColors.black50,
+                                          : (Get.isDarkMode
+                                              ? Colors.white
+                                              : AppColors.black50),
                                     )
                                 ],
                               ),

@@ -108,34 +108,36 @@ class _HomePageState extends State<HomePage>
         onRefresh: onRefresh,
         appBar: _appBar(),
         slivers: <Widget>[
-          SliverPadding(
-              padding: const EdgeInsets.all(kDefaultPaddingBox),
-              sliver: SliverToBoxAdapter(
-                  child: Column(children: [
-                const BannerWidget(),
-                SizedBox(height: kDefaultPadding),
-                ListBrandWidget(
-                    onPressed: (v) => {
-                          CommonNavigates.toProductPage(context,
-                              paramsSearch: {"BrandId": v})
-                        }),
-                SizedBox(height: kDefaultPadding),
-                _buildTitle("new".tr, () {
-                  CommonNavigates.toProductPage(context);
-                })
-              ]))),
-          SliverPadding(
-              padding: const EdgeInsets.all(0),
-              sliver: RxSliverList(listData, (BuildContext context, int index) {
-                ProductModel item = listData![index];
-                return ItemProductWidget(
-                  item,
-                  onTap: () {
-                    CommonNavigates.toProductPage(context, item: item);
-                  },
-                  onFavorite: () => {onFavorite(index)},
-                );
-              }))
+          SliverToBoxAdapter(
+              child: Column(children: [
+            const BannerWidget(),
+            Card(
+              margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+              child: Padding(
+                  padding: const EdgeInsets.all(kDefaultPaddingBox),
+                  child: ListBrandWidget(
+                      onPressed: (v) => {
+                            CommonNavigates.toProductPage(context,
+                                paramsSearch: {"BrandId": v})
+                          })),
+            ),
+            Card(
+                child: Padding(
+                    padding: const EdgeInsets.all(kDefaultPaddingBox),
+                    child: _buildTitle("new".tr, () {
+                      CommonNavigates.toProductPage(context);
+                    }))),
+          ])),
+          RxSliverList(listData, (BuildContext context, int index) {
+            ProductModel item = listData![index];
+            return ItemProductWidget(
+              item,
+              onTap: () {
+                CommonNavigates.toProductPage(context, item: item);
+              },
+              onFavorite: () => {onFavorite(index)},
+            );
+          })
         ],
       ),
     );

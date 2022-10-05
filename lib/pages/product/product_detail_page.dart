@@ -244,7 +244,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ))
                 }),
         Card(
-            margin: EdgeInsets.only(bottom: 6),
+            margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
             child: SizedBox(
               width: double.infinity,
               child: Padding(
@@ -296,7 +296,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
             )),
         Card(
-            margin: EdgeInsets.only(bottom: 6),
+            margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
             child: Padding(
               padding: const EdgeInsets.all(kDefaultPaddingBox),
               child: Row(
@@ -316,7 +316,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
             )),
         Card(
-          margin: EdgeInsets.only(bottom: 6),
+          margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPaddingBox),
             child: Column(
@@ -360,7 +360,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         ),
         Card(
-            margin: EdgeInsets.only(bottom: 6),
+            margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPaddingBox),
                 child: Column(
@@ -384,7 +384,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           enabled: false),
                     ]))),
         Card(
-          margin: EdgeInsets.only(bottom: 6),
+          margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
           child: Padding(
               padding: const EdgeInsets.all(kDefaultPaddingBox),
               child: Row(
@@ -461,7 +461,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               )),
         ),
         Card(
-            margin: EdgeInsets.only(bottom: 6),
+            margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPaddingBox),
                 child: Column(
@@ -511,7 +511,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ],
                 ))),
         Card(
-          margin: EdgeInsets.only(bottom: 6),
+          margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPaddingBox),
             child: Row(
@@ -553,7 +553,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ),
         ProductReview(data!),
         ProductRelated(
-            title: "news.brand".tr,
+            title: "suggestions".tr,
             filter: {"BrandId": data!.brandid},
             scrollDirection: Axis.vertical,
             notids: [data!.id]),

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty, non_constant_identifier_names
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -80,44 +81,39 @@ class _UserPageState extends State<UserPage> {
                 SliverToBoxAdapter(
                     child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(kDefaultPadding),
+                    SizedBox(height: kDefaultMarginBottomBox),
+                    Card(
+                      margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
                       child: Column(
+                        // ignore: prefer_const_literals_to_create_immutables
                         children: [
-                          Card(
-                            child: Column(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                _top(),
-                                Divider(
-                                  height: 2,
-                                  color: AppColors.black,
-                                ),
-                                ListTile(
-                                    title: Text(data!.phone! ?? "NaN"),
-                                    leading: Icon(
-                                      AppIcons.call,
-                                    )),
-                                ListTile(
-                                    title: Text(data!.email! ?? "NaN"),
-                                    leading: Icon(
-                                      AppIcons.email,
-                                    )),
-                                ListTile(
-                                    title: Text(data!.address! ?? "NaN"),
-                                    leading: Icon(
-                                      AppIcons.location_city,
-                                    )),
-                              ],
-                            ),
+                          _top(),
+                          Divider(
+                            height: 2,
+                            color: AppColors.black,
                           ),
-                          ProductRelated(
-                            title: "news.post".tr,
-                            filter: {"UserId": id},
-                            scrollDirection: Axis.vertical,
-                          )
+                          ListTile(
+                              title: Text(data!.phone! ?? "NaN"),
+                              leading: FaIcon(
+                                FontAwesomeIcons.phone,
+                              )),
+                          ListTile(
+                              title: Text(data!.email! ?? "NaN"),
+                              leading: FaIcon(
+                                FontAwesomeIcons.solidEnvelope,
+                              )),
+                          ListTile(
+                              title: Text(data!.address! ?? "NaN"),
+                              leading: FaIcon(
+                                FontAwesomeIcons.mapPin,
+                              )),
                         ],
                       ),
+                    ),
+                    ProductRelated(
+                      title: "news.post".tr,
+                      filter: {"UserId": id},
+                      scrollDirection: Axis.vertical,
                     )
                   ],
                 ))
@@ -130,7 +126,7 @@ class _UserPageState extends State<UserPage> {
     final userProvider = Provider.of<AppProvider>(context);
     return ListTile(
       leading: RxAvatarImage(isMyUser ? userProvider.user.rximg : data!.rximg,
-          size: 40),
+          size: 50),
       title: Text(
         isMyUser ? userProvider.user.fullname! : data!.fullname!,
         style: const TextStyle(

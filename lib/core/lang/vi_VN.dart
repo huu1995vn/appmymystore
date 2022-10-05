@@ -62,7 +62,8 @@ const Map<String, String> vi_VN = {
   "description": "Mô tả",
   "success": "Thành công",
   "error.sendOTP": "Không thể gửi mã xác thực trong {}. {}",
-  "error.locktime":"Nếu bạn không hoàn thành việc xác thực thì hệ thống tạm khóa chức năng gửi mã xác thực trong khoảng {} phút",
+  "error.locktime":
+      "Nếu bạn không hoàn thành việc xác thực thì hệ thống tạm khóa chức năng gửi mã xác thực trong khoảng {} phút",
   "error.limitImage": "Số hình đăng tối đa: {} hình",
   "error.p014": "Thành viên đã vi phạm nội quy: {}! khóa tài khoản từ {} - {}",
   "error.e000": "Mất kết nối mạng. Vui lòng thử lại sau",
@@ -141,6 +142,7 @@ const Map<String, String> vi_VN = {
   "news.brand": "Tin cùng thương hiệu",
   "news.price": "Tin giá tương đương",
   "news.user": "Tin cùng người đăng",
+  "suggestions": "Gợi ý cho bạn",
   "phone": "Điện thoại",
   "email": "Email",
   "city": "Tỉnh thành",
@@ -280,10 +282,12 @@ const Map<String, String> vi_VN = {
   "door": "Số cửa",
   "fueltype": "Nhiên liệu",
   "unknown": "Chưa xác định",
-  "message.str001":"Bài viết này đã được kiểm duyệt. Nếu gặp vấn đề, bạn vui lòng báo vi phạm",
+  "message.str001":
+      "Bài viết này đã được kiểm duyệt. Nếu gặp vấn đề, bạn vui lòng báo vi phạm",
   "message.str002": "Tài khoản không tồn tại hoặc bị khóa",
   "message.str003": "Không thể xóa dữ liệu mặc định",
-  "message.str004":"Mật khẩu phải có ít nhất 8 ký tự trong đó có ít nhất 1 chữ hoa",
+  "message.str004":
+      "Mật khẩu phải có ít nhất 8 ký tự trong đó có ít nhất 1 chữ hoa",
   "message.str005": "Bạn chưa có tài khoản? ",
   "message.str006": "Bạn đã có tài khoản? ",
   "message.str007": "Vui lòng chọn file đính kèm",

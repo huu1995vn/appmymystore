@@ -326,7 +326,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                               ),
                               _header(title: "info.general".tr),
                               Card(
-                                margin: const EdgeInsets.only(bottom: 6),
+                                margin: const EdgeInsets.only(
+                                    bottom: kDefaultMarginBottomBox),
                                 child: Column(
                                   children: [
                                     rxSelectInput(
@@ -412,7 +413,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                 ),
                               ),
                               Card(
-                                margin: const EdgeInsets.only(bottom: 6),
+                                margin: const EdgeInsets.only(
+                                    bottom: kDefaultMarginBottomBox),
                                 child: Column(children: [
                                   ListTile(
                                       title: RichText(
@@ -535,7 +537,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                 child: Card(
 
                                     // padding: const EdgeInsets.all(8),
-                                    margin: const EdgeInsets.only(bottom: 6),
+                                    margin: const EdgeInsets.only(
+                                        bottom: kDefaultMarginBottomBox),
                                     child: Column(children: [
                                       SizedBox(
                                         height: 250,
@@ -579,7 +582,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                               ),
                               _header(title: "specifications".tr),
                               Card(
-                                  margin: const EdgeInsets.only(bottom: 6),
+                                  margin: const EdgeInsets.only(
+                                      bottom: kDefaultMarginBottomBox),
                                   child: Column(
                                     children: [
                                       rxSelectInput(
@@ -735,7 +739,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   Widget _contact() {
     return Card(
-      margin: const EdgeInsets.only(bottom: 6),
+      margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
       child: ListTile(
         leading: RxAvatarImage(data!.rximguser, size: 50),
         title: Text(data!.fullname ?? "NaN", style: const TextStyle().bold),

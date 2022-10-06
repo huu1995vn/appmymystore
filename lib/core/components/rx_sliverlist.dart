@@ -11,14 +11,17 @@ import '../utilities/app_colors.dart';
 
 class RxSliverList extends StatefulWidget {
   final dynamic data;
+  final ViewType? viewType;
   final Widget Function(BuildContext, int) itemBuilder;
   final Widget? noFound;
   final Widget? awaiting;
   const RxSliverList(
     this.data,
+
     // ignore: invalid_required_positional_param
     @required this.itemBuilder, {
     Key? key,
+    this.viewType,
     this.noFound,
     this.awaiting,
   }) : super(key: key);
@@ -91,14 +94,30 @@ class RxListViewState extends State<RxSliverList>
   }
 
   Widget _bodylist_main() {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return widget.itemBuilder(context, index);
-        },
-        childCount: widget.data.length,
-      ),
-    );
+    return (widget.viewType == ViewType.grid)
+        ? SliverGrid(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 250,
+              mainAxisSpacing: 0.0,
+              crossAxisSpacing: 1.0,
+              childAspectRatio: 0.8,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return widget.itemBuilder(context, index);
+              },
+              childCount: widget.data.length,
+            ),
+          )
+        : SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return widget.itemBuilder(context, index);
+              },
+              childCount: widget.data.length,
+            ),
+          );
+    ;
   }
 
   Widget _bodylist() {

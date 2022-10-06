@@ -116,7 +116,6 @@ class _HomePageState extends State<HomePage>
               onTap: () {
                 CommonNavigates.toProductPage(context, item: item);
               },
-              
             );
           })
         ],

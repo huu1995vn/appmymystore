@@ -168,3 +168,5 @@ class NAMEFIREBASEDATABASE {
   static String users = "users";
   static String devices = "devices";
 }
+
+enum ViewType { grid, list }

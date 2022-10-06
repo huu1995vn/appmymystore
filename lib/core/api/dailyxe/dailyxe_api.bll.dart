@@ -71,7 +71,6 @@ class DaiLyXeApiBLL_APIAuth extends DaiLyXeApiBLL_Basic {
     return await post(body, queryParameters, "AutoLogin");
   }
   //User
-
 }
 
 class DaiLyXeApiBLL_APIGets extends DaiLyXeApiBLL_Basic {
@@ -165,6 +164,7 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     apiDAL = DaiLyXeApiDAL();
     apiDAL.controllerName = "apiraoxe/user";
   }
+  
 
   Future<ResponseModel> updateuser(Map<String, dynamic> body) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
@@ -305,10 +305,9 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
   Future<ResponseModel> reportpost(Map<String, dynamic> body) async {
     return await post(body, null, "report/post");
   }
+
   Future<ResponseModel> topics() async {
-    Map<String, dynamic> body = {
-      "token": FirebaseMessagingService.token
-    };
+    Map<String, dynamic> body = {"token": FirebaseMessagingService.token};
     return await post(body, null, "topics");
   }
 }
@@ -333,5 +332,17 @@ class DaiLyXeApiBLL_APIAnonymous extends DaiLyXeApiBLL_Basic {
       "password": nPassword
     };
     return await post(body, queryParameters, "forgotpassword");
+  }
+
+  Future<ResponseModel> sendotpemail(String email) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = <String, dynamic>{"email": email};
+    return await post(body, queryParameters, "sendotpemail");
+  }
+
+  Future<ResponseModel> verifyotpemail(String email, String code) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = <String, dynamic>{"email": email, "code": code};
+    return await post(body, queryParameters, "verifyotpemail");
   }
 }

@@ -3,7 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:raoxe/core/components/dialogs/confirm_otp.dialog.dart';
+import 'package:raoxe/core/components/dialogs/confirm_otp_email.dialog.dart';
+import 'package:raoxe/core/components/dialogs/confirm_otp_phone.dialog.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/pages/main/notification/notification_detail_page.dart';
 import 'package:raoxe/pages/my_page.dart';
@@ -238,13 +239,22 @@ class CommonNavigates {
         fullscreenDialog: true));
   }
 
-  static Future openOtpVerificationDialog(
+  static Future openOtpVerificationPhoneDialog(
       BuildContext context, String phone, bool isExist) async {
     return await Navigator.of(context)
         .push(MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-      return OtpVerificationDialog(phone: phone, isExist: isExist);
+      return OtpVerificationPhoneDialog(phone: phone, isExist: isExist);
     }));
   }
+
+  static Future openOtpVerificationEmailDialog(
+      BuildContext context, String email, bool isExist) async {
+    return await Navigator.of(context)
+        .push(MaterialPageRoute<dynamic>(builder: (BuildContext context) {
+      return OtpVerificationEmailDialog(email: email, isExist: isExist);
+    }));
+  }
+
 
   static Future openSelect(BuildContext context, Widget child,
       {double? height}) async {

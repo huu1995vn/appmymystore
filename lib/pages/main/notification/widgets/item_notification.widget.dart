@@ -14,7 +14,8 @@ class ItemNotificationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
+    return Card(
+        child: Slidable(
       // Specify a key if the Slidable is dismissible.
       key: const ValueKey(0),
 
@@ -47,8 +48,8 @@ class ItemNotificationWidget extends StatelessWidget {
                     ? AppColors.black50
                     : AppColors.primary800),
                 size: 30)),
-        subtitle: Text(item.rxtimeago),
+        subtitle: Text(item.message),
       ),
-    );
+    ));
   }
 }

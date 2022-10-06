@@ -177,20 +177,23 @@ class _NotificationPageState extends State<NotificationPage> {
             title: Text('notification'.tr),
             elevation: 0.0,
             floating: true,
+            leading: (listData != null && listData!.isNotEmpty)
+                ? RxIconButton(
+                    icon: AppIcons.delete,
+                    onTap: _onDeleteAll,
+                    size: 40,
+                    color: Colors.transparent,
+                    colorIcon: Colors.white)
+                : Container(),
             actions: <Widget>[
-              RxIconButton(
-                  icon: AppIcons.delete,
-                  onTap: _onDeleteAll,
-                  size: 40,
-                  color: Colors.transparent,
-                  colorIcon: Colors.white),
-              SizedBox(width: kDefaultPadding),
-              RxIconButton(
-                  icon: AppIcons.playlist_add_check,
-                  onTap: _onSeen,
-                  size: 40,
-                  color: Colors.transparent,
-                  colorIcon: Colors.white),
+              (listData != null && listData!.isNotEmpty)
+                  ? RxIconButton(
+                      icon: AppIcons.playlist_add_check,
+                      onTap: _onSeen,
+                      size: 50,
+                      color: Colors.transparent,
+                      colorIcon: Colors.white)
+                  : Container(),
               SizedBox(width: kDefaultPadding)
             ],
           ),

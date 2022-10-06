@@ -34,11 +34,11 @@ class TranslationService extends Translations {
     'en': 'English',
     'vi': 'Tiếng Việt',
   });
-  static saveLanguage(bool isVi) {
+  static _saveLanguage(bool isVi) {
     _getStorage.write(storageKey, isVi);
   }
 
-  static Locale getLocale() {
+  static Locale _getLocale() {
     return isVi() ? locales[1] : locales[0];
   }
 
@@ -46,7 +46,7 @@ class TranslationService extends Translations {
   static void changeLocale(String langCode) {
     final locale = _getLocaleFromLanguage(langCode: langCode);
     Get.updateLocale(locale!);
-    saveLanguage(locale!.languageCode == "vi");
+    _saveLanguage(locale!.languageCode == "vi");
   }
 
   static bool isVi() {

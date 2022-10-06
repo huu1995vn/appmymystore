@@ -68,8 +68,7 @@ class _UserPageState extends State<UserPage> {
     if (!isMyUser) {
       return;
     }
-    CommonNavigates.showDialogBottomSheet(context, InfoUserDiaLog(data: data!),
-        height: 530);
+    CommonNavigates.openDialog(context, InfoUserDiaLog(data: data!));
   }
 
   _onChangePassword() {
@@ -126,6 +125,7 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       body: data == null
           ? Center(
@@ -141,13 +141,64 @@ class _UserPageState extends State<UserPage> {
                 SliverToBoxAdapter(
                     child: Column(
                   children: [
-                    SizedBox(height: kDefaultMarginBottomBox),
+                    Card(
+                      margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+                      child: Padding(
+                        padding: const EdgeInsets.all(kDefaultPadding),
+                        child: SizedBox(
+                          height: 170,
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 60.0,
+                                      // backgroundColor: AppColors.white,
+                                      backgroundImage: const AssetImage(
+                                          'assets/loading_icon.gif'),
+                                      child: CircleAvatar(
+                                        // backgroundColor: Colors.white,
+                                        child: Container(),
+                                        radius: 60.0,
+                                        backgroundImage: RxImageProvider(
+                                            isMyUser
+                                                ? userProvider.user.rximg
+                                                : data!.rximg),
+                                      ),
+                                    ),
+                                    SizedBox(height: 10),
+                                    Text(
+                                      data!.fullname!.toUpperCase(),
+                                      style: const TextStyle(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                     Card(
                       margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
                       child: Column(
                         // ignore: prefer_const_literals_to_create_immutables
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _top(),
+                          Padding(
+                            padding: EdgeInsets.all(kDefaultPaddingBox),
+                            child: Text("personalinformation".tr,
+                                style: TextStyle(
+                                    // color: Get.isDarkMode
+                                    //     ? Colors.white
+                                    //     : Colors.grey[700],
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold)),
+                          ),
                           RxBorderListTile(
                               child: ListTile(
                                   title: Text(data!.phone! ?? "NaN"),
@@ -207,19 +258,19 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget _top() {
-    final userProvider = Provider.of<AppProvider>(context);
-    return ListTile(
-      leading: RxAvatarImage(isMyUser ? userProvider.user.rximg : data!.rximg,
-          size: 50),
-      title: Text(
-        isMyUser ? userProvider.user.fullname! : data!.fullname!,
-        style: const TextStyle(
-          fontSize: 19,
-        ),
-      ),
-      trailing:
-          isMyUser ? RxIconButton(icon: AppIcons.edit, onTap: _onEdit) : null,
-    );
-  }
+  // Widget _top() {
+  //   final userProvider = Provider.of<AppProvider>(context);
+  //   return ListTile(
+  //     leading: RxAvatarImage(isMyUser ? userProvider.user.rximg : data!.rximg,
+  //         size: 50),
+  //     title: Text(
+  //       isMyUser ? userProvider.user.fullname! : data!.fullname!,
+  //       style: const TextStyle(
+  //         fontSize: 19,
+  //       ),
+  //     ),
+  //     trailing:
+  //         isMyUser ? RxIconButton(icon: AppIcons.edit, onTap: _onEdit) : null,
+  //   );
+  // }
 }

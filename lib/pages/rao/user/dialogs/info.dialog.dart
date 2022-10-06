@@ -9,19 +9,14 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/dialogs/address.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/lang/translation.service.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-// ignore: unused_import
-import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class InfoUserDiaLog extends StatefulWidget {

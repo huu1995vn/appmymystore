@@ -114,7 +114,7 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
                                       : FontAwesomeIcons.bookmark,
                                   onTap: onFavorite,
                                   size: 30,
-                                  color: Colors.white60,
+                                  color: Colors.white,
                                   colorIcon: widget.item.isfavorite
                                       ? AppColors.yellow
                                       : AppColors.black50,

@@ -63,11 +63,14 @@ class _UserPageState extends State<UserPage> {
   }
 
   _onEdit() {
-    CommonNavigates.showDialogBottomSheet(context, InfoUserDiaLog(data: data!), height: 530);
+    CommonNavigates.showDialogBottomSheet(context, InfoUserDiaLog(data: data!),
+        height: 530);
   }
 
   _onChangePassword() {
-    CommonNavigates.showDialogBottomSheet(context, ChangePasswordDiaLog(data: data!), height: 350);
+    CommonNavigates.showDialogBottomSheet(
+        context, ChangePasswordDiaLog(data: data!),
+        height: 350);
   }
 
   _onChangeAddress() async {
@@ -81,6 +84,26 @@ class _UserPageState extends State<UserPage> {
         data!.districtid = res.districtid;
         data!.address = res.address;
       });
+      CommonMethods.lockScreen();
+      try {
+        var dataClone = data!.clone();
+        ResponseModel res =
+            await DaiLyXeApiBLL_APIUser().updateuser(dataClone.toUpdate());
+        if (res.status > 0) {
+          setState(() {
+            data = dataClone;
+          });
+          CommonMethods.showToast("success".tr);
+        } else {
+          CommonMethods.showToast(res.message);
+        }
+        Provider.of<AppProvider>(context, listen: false)
+            .setUserModel(dataClone);
+      } catch (e) {
+        CommonMethods.showDialogError(context, e.toString());
+      }
+
+      CommonMethods.unlockScreen();
     }
   }
 

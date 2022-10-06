@@ -89,7 +89,8 @@ class _AdvertPageState extends State<AdvertPage> {
           elevation: 0.0,
         ),
         key: _key,
-        body: RxCustomScrollView(
+        body: Card(
+            child: RxCustomScrollView(
           key: const Key("LAds"),
           controller: scrollController,
           onNextScroll: onNextPage,
@@ -99,6 +100,6 @@ class _AdvertPageState extends State<AdvertPage> {
               return ItemAdvertWidget(listData![index]);
             })
           ],
-        ));
+        )));
   }
 }

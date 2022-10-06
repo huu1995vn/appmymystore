@@ -132,7 +132,7 @@ class _ChangePasswordDialogState extends State<ChangePasswordDiaLog> {
   Future onChangePassword() async {
     try {
       await AuthService.checkPhone(widget.data.phone, isExist: true);
-      bool checkOtp = await CommonNavigates.openOtpVerificationDialog(
+      bool checkOtp = await CommonNavigates.openOtpVerificationPhoneDialog(
           context, widget.data.phone!, true);
       if (checkOtp != null && checkOtp) {
         var res = await DaiLyXeApiBLL_APIAnonymous()

@@ -184,7 +184,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     try {
       await AuthService.checkPhone(phone, isExist: true);
       bool checkOtp =
-          await CommonNavigates.openOtpVerificationDialog(context, phone, true);
+          await CommonNavigates.openOtpVerificationPhoneDialog(context, phone, true);
       if (checkOtp != null && checkOtp) {
         var res =
             await DaiLyXeApiBLL_APIAnonymous().forgotpassword(phone, password);

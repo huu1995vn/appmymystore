@@ -202,7 +202,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Future<void> _onRegister() async {
     try {
       await AuthService.checkPhone(user!.phone, isExist: false);
-      bool checkOtp = await CommonNavigates.openOtpVerificationDialog(
+      bool checkOtp = await CommonNavigates.openOtpVerificationPhoneDialog(
           context, user!.phone!, false);
       if (checkOtp) {
         var res =

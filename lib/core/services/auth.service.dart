@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:raoxe/core/entities.dart';
 // import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
@@ -119,6 +120,30 @@ class AuthService {
 
   static Future<bool> verifyOTPPhone(String phone, String code) async {
     return await FirebaseAuthService.verifyOTP(phone, code);
+  }
+
+  static Future sendOTPEmail(String email, bool isExist,
+      void Function(Object) fnError, void Function() fnSuccess) async {
+    try {
+      await AuthService.checkEmail(email, isExist: isExist);
+      ResponseModel res =
+          await DaiLyXeApiBLL_APIAnonymous().sendotpemail(email);
+      if (res.status <= 0) {
+        fnError(res.message);
+      }
+    } catch (e) {
+      fnError(e);
+    }
+  }
+
+  static Future<bool> verifyOTPEmail(String email, String code) async {
+    ResponseModel res =
+        await DaiLyXeApiBLL_APIAnonymous().verifyotpemail(email, code);
+    if(res.status <= 0)
+    {
+      throw Exception(res.message);
+    }
+    return res.status > 0;
   }
 
   static Future<bool> authBiometric() async {

@@ -14,17 +14,17 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 
-class OtpVerificationDialog extends StatefulWidget {
+class OtpVerificationPhoneDialog extends StatefulWidget {
   final String phone;
   final bool isExist;
 
-  const OtpVerificationDialog(
+  const OtpVerificationPhoneDialog(
       {super.key, required this.phone, required this.isExist});
   @override
-  State<OtpVerificationDialog> createState() => _OtpVerificationDialogState();
+  State<OtpVerificationPhoneDialog> createState() => _OtpVerificationPhoneDialogState();
 }
 
-class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
+class _OtpVerificationPhoneDialogState extends State<OtpVerificationPhoneDialog> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   String code = "";

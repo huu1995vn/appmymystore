@@ -104,10 +104,6 @@ class _MyAppState extends State<MyApp> {
           child: const MyPage(),
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
-                  localizationsDelegates: [
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                  ],
                   color: Colors.transparent,
                   // debugShowCheckedModeBanner: false,
                   // theme: ThemeService.main(),

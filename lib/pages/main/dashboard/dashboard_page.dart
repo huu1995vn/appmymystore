@@ -9,14 +9,11 @@ import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 
-import '../../../core/commons/common_configs.dart';
-import '../../../core/utilities/app_colors.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -83,7 +80,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     margin: EdgeInsets.only(bottom: 5),
                     child: Column(
                       children: [
-                        _card(
+                        RxBorderListTile(
                           child: ListTile(
                             title: Text("manager.raoxe".tr),
                             leading: FaIcon(
@@ -97,7 +94,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             // subtitle: Text("Quản lý danh sách tin rao"),
                           ),
                         ),
-                        _card(
+                        RxBorderListTile(
                           child: ListTile(
                             title: Text("ads".tr),
                             leading: FaIcon(
@@ -110,7 +107,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             // subtitle: Text("Quản lý danh sách quảng cáo"),
                           ),
                         ),
-                        _card(
+                        RxBorderListTile(
                           child: ListTile(
                             title: Text("contact".tr),
                             leading: FaIcon(
@@ -123,7 +120,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                           ),
                         ),
-                        _card(
+                        RxBorderListTile(
                           child: ListTile(
                             title: Text("bookmark".tr),
                             leading: FaIcon(
@@ -136,7 +133,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                           ),
                         ),
-                        _card(
+                        RxBorderListTile(
                           child: ListTile(
                             title: Text("review".tr),
                             leading: FaIcon(
@@ -149,7 +146,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             // subtitle: Text("Danh sách đánh giá"),
                           ),
                         ),
-                        _card(
+                        RxBorderListTile(
                           child: ListTile(
                             title: Text("address".tr),
                             leading: FaIcon(
@@ -168,7 +165,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   Card(
                       margin: EdgeInsets.only(bottom: 5),
                       child: Column(children: [
-                        _card(
+                        RxBorderListTile(
                           child: ListTile(
                             title: Text("setting".tr),
                             leading: FaIcon(
@@ -185,18 +182,6 @@ class _DashboardPageState extends State<DashboardPage> {
                       ])),
                 ],
               ));
-  }
-
-  Widget _card({Widget? child}) {
-    return Container(
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: Get.isDarkMode
-                ? BorderSide(color: Color.fromARGB(12, 255, 255, 255), width: 1)
-                : BorderSide(color: Color.fromARGB(12, 0, 0, 0), width: 1),
-          ),
-        ),
-        child: child);
   }
 
   Widget _top() {

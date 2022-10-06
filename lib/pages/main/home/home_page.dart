@@ -1,8 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, curly_braces_in_flow_control_structures
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -12,14 +10,12 @@ import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/pages/main/home/widgets/banner.widget.dart';
 import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import '../../../core/commons/common_configs.dart';
 import '../../../core/components/part.dart';
 import 'widgets/item_product.widget.dart';
 
@@ -84,18 +80,6 @@ class _HomePageState extends State<HomePage>
     return await loadData();
   }
 
-  onFavorite(int index) async {
-    ProductModel item = listData![index];
-    try {
-      await CommonMethods.onFavorite(context, [item.id], !item.isfavorite);
-      setState(() {
-        listData![index] = item;
-      });
-    } catch (e) {
-      CommonMethods.showDialogError(context, e);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -132,7 +116,7 @@ class _HomePageState extends State<HomePage>
               onTap: () {
                 CommonNavigates.toProductPage(context, item: item);
               },
-              onFavorite: () => {onFavorite(index)},
+              
             );
           })
         ],

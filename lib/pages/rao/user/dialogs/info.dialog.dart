@@ -104,19 +104,19 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
     CommonMethods.unlockScreen();
   }
 
-  _onAddress() async {
-    var res = await CommonNavigates.showDialogBottomSheet(
-        context, AddressDialog(contact: data!.toContact()),
-        height: 350);
+  // _onAddress() async {
+  //   var res = await CommonNavigates.showDialogBottomSheet(
+  //       context, AddressDialog(contact: data!.toContact()),
+  //       height: 350);
 
-    if (res != null) {
-      setState(() {
-        data!.cityid = res.cityid;
-        data!.districtid = res.districtid;
-        data!.address = res.address;
-      });
-    }
-  }
+  //   if (res != null) {
+  //     setState(() {
+  //       data!.cityid = res.cityid;
+  //       data!.districtid = res.districtid;
+  //       data!.address = res.address;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -151,12 +151,12 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                     validator: Validators.compose([
                                       Validators.required("fullname".tr),
                                     ])),
-                                rxTextInput(context, data!.address,
-                                    labelText: "address".tr,
-                                    onTap: _onAddress,
-                                    validator: Validators.compose([
-                                      Validators.required("fullname".tr),
-                                    ])),
+                                // rxTextInput(context, data!.address,
+                                //     labelText: "address".tr,
+                                //     onTap: _onAddress,
+                                //     validator: Validators.compose([
+                                //       Validators.required("fullname".tr),
+                                //     ])),
                                 Container(
                                     decoration: const BoxDecoration(
                                       border: Border(

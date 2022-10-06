@@ -1,4 +1,5 @@
 const Map<String, String> vi_VN = {
+  "expiration.date": "Ngày hết hạn",
   "new.email": "Email mới",
   "resend.code": "Gửi lại mã",
   "bookmark": "Tin đã lưu",
@@ -18,6 +19,7 @@ const Map<String, String> vi_VN = {
   "darkmode": "Chế độ tối",
   "language": "Ngôn ngữ",
   "detail": "Chi tiết",
+  "detail.advert": "Chi tiết quảng cáo",
   "title": "Tiêu đề",
   "state": "Tình trạng",
   "download": "Tải",

@@ -12,8 +12,9 @@ import 'package:raoxe/core/utilities/size_config.dart';
 
 class ItemAdvertWidget extends StatelessWidget {
   final AdvertModel item;
+  final void Function()? onTap;
 
-  const ItemAdvertWidget(this.item, {super.key});
+  const ItemAdvertWidget(this.item, {super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class ItemAdvertWidget extends StatelessWidget {
             ),
           ),
           child: GestureDetector(
-            onTap: () async {},
+            onTap: onTap,
             child: SizedBox(
               height: SizeConfig.screenWidth / 4.3,
               child: Row(

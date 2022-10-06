@@ -97,7 +97,12 @@ class _AdvertPageState extends State<AdvertPage> {
           onRefresh: onRefresh,
           slivers: <Widget>[
             RxSliverList(listData, (BuildContext context, int index) {
-              return ItemAdvertWidget(listData![index]);
+              var item = listData![index];
+              return ItemAdvertWidget(
+                item,
+                onTap: () =>
+                    {CommonNavigates.toAdvertPage(context, item: item)},
+              );
             })
           ],
         )));

@@ -30,16 +30,20 @@ class _SettingsPageState extends State<SettingsPage> {
   _onBiometric(bool v) async {
     final userProvider = Provider.of<AppProvider>(context, listen: false);
     try {
-      await AuthService.authBiometric();
-      if (v) {
+      var res = await AuthService.authBiometric();
+
+      if (v && res) {
         await StorageService.set(
             StorageKeys.biometric, userProvider.user.username);
+        setState(() {
+          authBiometric = true;
+        });
       } else {
         StorageService.deleteItem(StorageKeys.biometric);
+         setState(() {
+          authBiometric = false;
+        });
       }
-      setState(() {
-        authBiometric = v;
-      });
     } catch (e) {
       CommonMethods.showDialogError(context, e);
     }

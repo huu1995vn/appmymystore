@@ -79,7 +79,7 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
                               bottom: BorderSide(color: Colors.black26))),
                       child: RxInput(email,
                           labelText: "new.email".tr,
-                          icon: const Icon(AppIcons.lock_1),
+                          icon: const Icon(AppIcons.email),
                           onChanged: (v) => {
                                 setState(() => {email = v})
                               },

@@ -88,7 +88,7 @@ class AuthService {
     //isExist == false: dùng đăng ký hoặc thay đổi phone
     //isExist == true: dùng cho quên mật khẩu
 
-    if (!CommonMethods.checkStringPhone(email)) {
+    if (!CommonMethods.checkStringEmail(email)) {
       throw "invalid.email".tr;
     }
     var res = await DaiLyXeApiBLL_APIGets().statsuser({"email": email});

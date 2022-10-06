@@ -479,6 +479,56 @@ class RxButton extends StatelessWidget {
   }
 }
 
+class RxButtonMore extends StatelessWidget {
+  const RxButtonMore({
+    Key? key,
+    required this.onTap,
+    required this.text,
+    this.color,
+  }) : super(key: key);
+
+  final GestureTapCallback onTap;
+  final String text;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.only(
+              top: kDefaultPadding,
+              bottom: kDefaultPadding,
+              left: kDefaultPaddingBox,
+              right: kDefaultPadding),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            color: color ?? Colors.grey[200],
+          ),
+          child: Row(
+            children: [
+              Text(
+                text,
+                style: const TextStyle(color: Colors.black54, fontSize: 14),
+              ),
+              const SizedBox(
+                width: kDefaultPadding,
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.white,
+                  ),
+                  child: const Icon(
+                    AppIcons.chevron_right,
+                    color: Colors.black,
+                  )),
+            ],
+          ),
+        ));
+  }
+}
+
 Widget rxTextInput(BuildContext context, String? value,
     {Widget? title,
     String? hintText = "Nhập",

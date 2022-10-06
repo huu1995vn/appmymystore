@@ -20,6 +20,7 @@ import 'package:raoxe/pages/main/home/widgets/banner.widget.dart';
 import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../core/commons/common_configs.dart';
+import '../../../core/components/part.dart';
 import 'widgets/item_product.widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -111,20 +112,16 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(
               child: Column(children: [
             const BannerWidget(),
-            Card(
-              margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
-              child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPaddingBox),
-                  child: ListBrandWidget(
-                      onPressed: (v) => {
-                            CommonNavigates.toProductPage(context,
-                                paramsSearch: {"BrandId": v})
-                          })),
-            ),
+            const SizedBox(height: kDefaultMarginBottomBox),
+            ListBrandWidget(
+                onPressed: (v) => {
+                      CommonNavigates.toProductPage(context,
+                          paramsSearch: {"BrandId": v})
+                    }),
             Card(
                 child: Padding(
                     padding: const EdgeInsets.all(kDefaultPaddingBox),
-                    child: _buildTitle("new".tr, () {
+                    child: _buildTitle("newpost".tr, () {
                       CommonNavigates.toProductPage(context);
                     }))),
           ])),
@@ -180,23 +177,12 @@ class _HomePageState extends State<HomePage>
   }
 }
 
-_buildTitle(String header, void Function()? onTap) {
+_buildTitle(String header, void Function() onTap) {
   return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-    Text(header.toUpperCase(), style: const TextStyle(fontSize: 16).bold),
-    GestureDetector(
-        onTap: onTap,
-        child: Row(
-          children: [
-            Text("seemore".tr, style: const TextStyle().bold),
-            const SizedBox(
-              width: 5,
-            ),
-            const FaIcon(
-              FontAwesomeIcons.chevronRight,
-              size: 12,
-              color: Colors.black,
-            )
-          ],
-        ))
+    Text(header.toUpperCase(), style: const TextStyle(fontSize: 18).bold),
+    RxButtonMore(
+      text: "seemore".tr,
+      onTap: onTap,
+    ),
   ]);
 }

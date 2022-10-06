@@ -1,16 +1,18 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, must_be_immutable
-
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';
 import 'package:raoxe/pages/product/widgets/search_app_bar.dart';
+import '../../core/components/delegates/rx_select.delegate.dart';
+import '../../core/services/master_data.service.dart';
+import '../../core/utilities/app_colors.dart';
 
 class ProductPage extends StatefulWidget {
   Map<String, dynamic>? paramsSearch;
@@ -34,6 +36,7 @@ class _ProductPageState extends State<ProductPage> {
   int totalItems = 0;
   List<ProductModel>? listData;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  String _selectedCity = "";
   Map<String, dynamic> paramsSearch = {};
   loadData([nPaging = 1]) async {
     if (listData != null && nPaging > 1 && totalItems <= listData!.length)
@@ -101,6 +104,19 @@ class _ProductPageState extends State<ProductPage> {
     });
   }
 
+  _onSelectCity() async {
+    List data = MasterDataService.data["city"];
+    var res = await showSearch(
+        context: context,
+        delegate: RxSelectDelegate(data: data, value: paramsSearch['CityId']));
+    if (res != null) {
+      setState(() {
+        paramsSearch['CityId'] = res;
+        loadData();
+      });
+    }
+  }
+
   Map<String, dynamic> getFilter() {
     Map<String, dynamic> filter = <String, dynamic>{};
     List<String> keyfilters = [
@@ -133,6 +149,8 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    String cityName =
+        CommonMethods.getNameMasterById("city", paramsSearch["CityId"]);
     return Scaffold(
         appBar: AppBar(
           title: SearchAppBar(
@@ -146,11 +164,101 @@ class _ProductPageState extends State<ProductPage> {
         body: RxCustomScrollView(
           slivers: [
             SliverPadding(
-                padding: EdgeInsets.all(kDefaultPadding),
+                padding: const EdgeInsets.all(0),
                 sliver: SliverToBoxAdapter(
-                    child: ListBrandWidget(
+                    child: Column(
+                  children: [
+                    Card(
+                        child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: kDefaultPaddingBox),
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(
+                                      bottom: kDefaultPaddingBox),
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                          width: 1.0, color: Colors.black12),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      GestureDetector(
+                                          onTap: () {
+                                            _onSelectCity();
+                                          },
+                                          child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                side: BorderSide(
+                                                  color: (CommonMethods
+                                                              .convertToInt32(
+                                                                  paramsSearch[
+                                                                      "CityId"]) >
+                                                          0)
+                                                      ? AppColors.primary
+                                                      : Colors.black26,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        5), //<-- SEE HERE
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal:
+                                                            kDefaultPaddingBox,
+                                                        vertical:
+                                                            kDefaultPaddingBox),
+                                                child: Row(
+                                                  children: [
+                                                    FaIcon(
+                                                      FontAwesomeIcons
+                                                          .locationPin,
+                                                      color: Get.isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black26,
+                                                      size: 14,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                        (cityName != null &&
+                                                                cityName.length >
+                                                                    0)
+                                                            ? cityName
+                                                            : "arena".tr,
+                                                        style: const TextStyle(
+                                                            fontSize: 13)),
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    FaIcon(
+                                                      FontAwesomeIcons
+                                                          .caretDown,
+                                                      color: Get.isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black26,
+                                                      size: 14,
+                                                    ),
+                                                  ],
+                                                ),
+                                              )))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ))),
+                    ListBrandWidget(
                         onPressed: (v) => {_onBrandChange(v)},
-                        value: paramsSearch["BrandId"]))),
+                        value: paramsSearch["BrandId"])
+                  ],
+                ))),
             RxSliverList(listData, (BuildContext context, int index) {
               var item = listData![index];
               return ItemProductWidget(listData![index], onTap: () {

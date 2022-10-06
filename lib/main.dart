@@ -62,6 +62,8 @@ initializeApp() async {
   APITokenService.init();
   await AuthService.autologin();
   await CloudFirestoreSerivce.init();
+
+  //very important
 }
 
 class MyApp extends StatefulWidget {
@@ -102,6 +104,10 @@ class _MyAppState extends State<MyApp> {
           child: const MyPage(),
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
+                  localizationsDelegates: [
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                  ],
                   color: Colors.transparent,
                   // debugShowCheckedModeBanner: false,
                   // theme: ThemeService.main(),

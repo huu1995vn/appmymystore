@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, unnecessary_null_comparison, import_of_legacy_library_into_null_safe, use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -22,8 +20,6 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:rating_bar/rating_bar.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-
-import '../../core/commons/common_configs.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final int? id;
@@ -111,6 +107,30 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text(data!.name ?? "updating".tr),
+          elevation: 0.0,
+          actions: <Widget>[
+            RxIconButton(
+                icon: data!.isfavorite
+                    ? FontAwesomeIcons.solidBookmark
+                    : FontAwesomeIcons.bookmark,
+                onTap: _onFavorite,
+                size: 40,
+                color: Colors.transparent,
+                colorIcon:
+                    data!.isfavorite ? AppColors.yellow : AppColors.white),
+            SizedBox(width: kDefaultPadding),
+            RxIconButton(
+              icon: FontAwesomeIcons.solidShareFromSquare,
+              size: 40,
+              color: Colors.transparent,
+              colorIcon: AppColors.white,
+              onTap: _onShare,
+            ),
+            SizedBox(width: kDefaultPadding),
+          ],
+        ),
         body: isNotFound
             ? Expanded(child: Center(child: Text("not.found".tr)))
             : ((data == null || data!.id <= 0)
@@ -121,31 +141,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     key: const Key("iProduct"),
                     controller: scrollController,
                     slivers: <Widget>[
-                      SliverAppBar(
-                        title: Text(data!.name ?? "updating".tr),
-                        elevation: 0.0,
-                        actions: <Widget>[
-                          RxIconButton(
-                              icon: data!.isfavorite
-                                  ? FontAwesomeIcons.solidBookmark
-                                  : FontAwesomeIcons.bookmark,
-                              onTap: _onFavorite,
-                              size: 40,
-                              color: Colors.transparent,
-                              colorIcon: data!.isfavorite
-                                  ? AppColors.yellow
-                                  : AppColors.white),
-                          SizedBox(width: kDefaultPadding),
-                          RxIconButton(
-                            icon: FontAwesomeIcons.solidShareFromSquare,
-                            size: 40,
-                            color: Colors.transparent,
-                            colorIcon: AppColors.white,
-                            onTap: _onShare,
-                          ),
-                          SizedBox(width: kDefaultPadding),
-                        ],
-                      ),
                       SliverToBoxAdapter(child: _buildDetail())
                     ],
                   )),

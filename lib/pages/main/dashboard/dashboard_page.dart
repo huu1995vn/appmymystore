@@ -191,10 +191,9 @@ class _DashboardPageState extends State<DashboardPage> {
     return Container(
         decoration: BoxDecoration(
           border: Border(
-            bottom:
-                Get.isDarkMode
-                    ? BorderSide(color: Colors.black26, width: 1)
-                    : BorderSide(color: Colors.black12, width: 1),
+            bottom: Get.isDarkMode
+                ? BorderSide(color: Color.fromARGB(12, 255, 255, 255), width: 1)
+                : BorderSide(color: Color.fromARGB(12, 0, 0, 0), width: 1),
           ),
         ),
         child: child);

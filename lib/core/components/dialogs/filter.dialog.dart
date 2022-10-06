@@ -121,7 +121,7 @@ class _FilterDialogState extends State<FilterDialog> {
             GestureDetector(
                 onTap: onCancel,
                 child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
+                  padding: const EdgeInsets.all(kDefaultPaddingBox),
                   child: Center(
                     child: Text(
                       "cancelfilter".tr,
@@ -140,28 +140,30 @@ class _FilterDialogState extends State<FilterDialog> {
             // mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               _header("youwant".tr),
-              Padding(
-                padding: const EdgeInsets.all(kDefaultPadding),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: map<Widget>(
-                      MasterDataService.data["producttype"],
-                      (index, item) {
-                        return _radioButton(
-                            "ProductTypeId", item["name"], item["id"]);
-                      },
-                    ).toList()),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(kDefaultPadding),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: map<Widget>(
+                        MasterDataService.data["producttype"],
+                        (index, item) {
+                          return _radioButton(
+                              "ProductTypeId", item["name"], item["id"]);
+                        },
+                      ).toList()),
+                ),
               ),
               _header("info.general".tr),
               Card(
                 child: Column(
                   children: [
                     _selectInput("BrandId", "brand", title: "brand".tr),
-                    _selectInput("CityId", "city", title: "Vị trí"),
+                    _selectInput("CityId", "city", title: "Tỉnh thành"),
                     _selectInput("OrderBy", "sort", title: "Sắp xếp"),
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: kDefaultPadding, left: kDefaultPadding * 1.5),
+                          top: kDefaultPadding, left: kDefaultPaddingBox),
                       child: Row(
                         children: [
                           Text("Giá từ "),
@@ -184,6 +186,8 @@ class _FilterDialogState extends State<FilterDialog> {
                       values: _currentRangeValues,
                       max: 100,
                       divisions: 100,
+                      inactiveColor: Colors.grey,
+                      activeColor: Colors.lightBlueAccent,
                       onChanged: (RangeValues values) {
                         setState(() {
                           price = values;
@@ -240,7 +244,7 @@ class _FilterDialogState extends State<FilterDialog> {
 
   Widget _header(String header) {
     return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding),
+      padding: const EdgeInsets.all(kDefaultPaddingBox),
       child: Text(
         header.toUpperCase(),
         style: TextStyle().bold,
@@ -249,24 +253,21 @@ class _FilterDialogState extends State<FilterDialog> {
   }
 
   Widget _radioButton(String type, String text, int value) {
-    return 
-    
-    Container(
+    return Container(
         margin: EdgeInsets.symmetric(horizontal: 5),
-        width: (SizeConfig.screenWidth - 50) / 2,
+        width: (SizeConfig.screenWidth - 30) / 2,
         child: OutlinedButton(
           onPressed: () {
             setState(() {
               searchParams[type] = value;
             });
           },
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Get.isDarkMode ? AppColors.white : AppColors.black,
-            ),
-          ),
           style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith((states) {
+              return (searchParams[type] == value)
+                  ? AppColors.primary
+                  : AppColors.white;
+            }),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 side: BorderSide(
@@ -274,6 +275,14 @@ class _FilterDialogState extends State<FilterDialog> {
                       ? AppColors.primary
                       : AppColors.black,
                 ))),
+          ),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: (searchParams[type] == value)
+                  ? AppColors.white
+                  : AppColors.black,
+            ),
           ),
         ));
   }
@@ -287,20 +296,26 @@ class _FilterDialogState extends State<FilterDialog> {
     dynamic Function()? afterChange,
   }) {
     var name = CommonMethods.getNameMasterById(type, searchParams[key]);
-    return ListTile(
-      title: Text(
-        title ?? type.tr,
-        style: styleTitle,
-      ),
-      subtitle: Text(
-        name != null && name.length > 0 ? name : (hintText ?? "choose".tr),
-        // style: TextStyle(
-        //     color:
-        //         name != null && name.length > 0 ? AppColors.primary : null)
-      ),
-      onTap: () => _onSelect(key, type, searchParams[key],
-          fnWhere: fnWhere, afterChange: afterChange),
-      trailing: Icon(AppIcons.chevron_right),
-    );
+    return Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 1.0, color: Colors.black12),
+          ),
+        ),
+        child: ListTile(
+          title: Text(
+            title ?? type.tr,
+            style: styleTitle,
+          ),
+          subtitle: Text(
+            name != null && name.length > 0 ? name : (hintText ?? "choose".tr),
+            // style: TextStyle(
+            //     color:
+            //         name != null && name.length > 0 ? AppColors.primary : null)
+          ),
+          onTap: () => _onSelect(key, type, searchParams[key],
+              fnWhere: fnWhere, afterChange: afterChange),
+          trailing: Icon(AppIcons.chevron_right),
+        ));
   }
 }

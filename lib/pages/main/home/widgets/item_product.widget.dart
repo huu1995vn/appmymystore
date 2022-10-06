@@ -70,7 +70,7 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
                       if (lenimg > 0)
                         Positioned(
                           top: 5,
-                          right: 5,
+                          left: 5,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               side: BorderSide(
@@ -84,7 +84,7 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
                       if (lenimg > 0)
                         Positioned(
                           top: 3,
-                          right: 3,
+                          left: 3,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               side: BorderSide(
@@ -113,13 +113,11 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
                                       ? FontAwesomeIcons.solidBookmark
                                       : FontAwesomeIcons.bookmark,
                                   onTap: onFavorite,
-                                  size: 35,
-                                  color: Colors.black12,
+                                  size: 30,
+                                  color: Colors.white60,
                                   colorIcon: widget.item.isfavorite
                                       ? AppColors.yellow
-                                      : (Get.isDarkMode
-                                          ? Colors.white
-                                          : AppColors.black50),
+                                      : AppColors.black50,
                                 )
                               : Container()),
                     ],

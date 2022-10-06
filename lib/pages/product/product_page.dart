@@ -204,7 +204,9 @@ class _ProductPageState extends State<ProductPage> {
                                                                       "CityId"]) >
                                                           0)
                                                       ? AppColors.primary
-                                                      : Colors.black26,
+                                                      : (Get.isDarkMode
+                                                          ? Colors.white24
+                                                          : Colors.black26),
                                                 ),
                                                 borderRadius:
                                                     BorderRadius.circular(
@@ -272,7 +274,7 @@ class _ProductPageState extends State<ProductPage> {
                                                       ? FontAwesomeIcons.thLarge
                                                       : FontAwesomeIcons.list,
                                                   color: Get.isDarkMode
-                                                      ? Colors.white
+                                                      ? Colors.white24
                                                       : Colors.black26,
                                                   size: 23,
                                                 ),

@@ -341,10 +341,14 @@ class CommonMethods {
       var i = calculateDifference(time);
       final outputFormat = DateFormat('hh:mm a');
       var strTime = outputFormat.format(time).toLowerCase();
+      if(time.hour == 0 && time.minute == 0 && time.second == 0)
+      {
+        strTime = "";
+      }
       switch (i) {
         case 0:
           var _timeago = timeago.format(time, locale: 'vi');
-          strTimeAgo = _timeago == "mới đây" ? _timeago : "Hôm nay $strTime";
+          strTimeAgo = _timeago;//== "mới đây" ? _timeago : "Hôm nay $strTime";
           break;
         case -1:
           strTimeAgo = "Hôm qua $strTime";

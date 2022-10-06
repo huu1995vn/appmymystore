@@ -653,7 +653,17 @@ _onSelect(BuildContext context, String type, dynamic id,
     if (afterChange != null) afterChange(res);
   }
 }
-
+Widget RxBorderListTile({Widget? child}) {
+    return Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: Get.isDarkMode
+                ? BorderSide(color: Color.fromARGB(12, 255, 255, 255), width: 1)
+                : BorderSide(color: Color.fromARGB(12, 0, 0, 0), width: 1),
+          ),
+        ),
+        child: child);
+  }
 Widget RxBuildItemReview(ReviewModel item) {
   return ListTile(
       title: Column(

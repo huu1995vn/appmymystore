@@ -8,6 +8,7 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/components/dialogs/address.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
@@ -16,6 +17,7 @@ import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/product/widgets/product_related.dart';
+import 'package:raoxe/pages/rao/user/dialogs/change_password.dialog.dart';
 import 'package:raoxe/pages/rao/user/dialogs/info.dialog.dart';
 
 class UserPage extends StatefulWidget {
@@ -61,7 +63,25 @@ class _UserPageState extends State<UserPage> {
   }
 
   _onEdit() {
-    CommonNavigates.openDialog(context, InfoUserDiaLog(data: data!));
+    CommonNavigates.showDialogBottomSheet(context, InfoUserDiaLog(data: data!), height: 530);
+  }
+
+  _onChangePassword() {
+    CommonNavigates.showDialogBottomSheet(context, ChangePasswordDiaLog(data: data!), height: 350);
+  }
+
+  _onChangeAddress() async {
+    var res = await CommonNavigates.showDialogBottomSheet(
+        context, AddressDialog(contact: data!.toContact()),
+        height: 350);
+
+    if (res != null) {
+      setState(() {
+        data!.cityid = res.cityid;
+        data!.districtid = res.districtid;
+        data!.address = res.address;
+      });
+    }
   }
 
   @override
@@ -88,21 +108,39 @@ class _UserPageState extends State<UserPage> {
                         // ignore: prefer_const_literals_to_create_immutables
                         children: [
                           _top(),
-                          ListTile(
-                              title: Text(data!.phone! ?? "NaN"),
-                              leading: FaIcon(
-                                FontAwesomeIcons.phone,
-                              )),
-                          ListTile(
-                              title: Text(data!.email! ?? "NaN"),
-                              leading: FaIcon(
-                                FontAwesomeIcons.solidEnvelope,
-                              )),
-                          ListTile(
-                              title: Text(data!.address! ?? "NaN"),
-                              leading: FaIcon(
-                                FontAwesomeIcons.mapPin,
-                              )),
+                          RxBorderListTile(
+                              child: ListTile(
+                                  title: Text(data!.phone! ?? "NaN"),
+                                  leading: FaIcon(
+                                    FontAwesomeIcons.phone,
+                                  ))),
+                          RxBorderListTile(
+                              child: ListTile(
+                                  title: Text(data!.email! ?? "NaN"),
+                                  leading: FaIcon(
+                                    FontAwesomeIcons.solidEnvelope,
+                                  ))),
+                          RxBorderListTile(
+                              child: ListTile(
+                                  title: Text(data!.address! ?? "NaN"),
+                                  leading: FaIcon(
+                                    FontAwesomeIcons.mapPin,
+                                  ),
+                                  onTap: _onChangeAddress,
+                                  trailing: Icon(
+                                    AppIcons.keyboard_arrow_right,
+                                  ))),
+                          RxBorderListTile(
+                              child: ListTile(
+                            title: Text("change.password".tr),
+                            leading: FaIcon(
+                              FontAwesomeIcons.lock,
+                            ),
+                            onTap: _onChangePassword,
+                            trailing: Icon(
+                              AppIcons.keyboard_arrow_right,
+                            ),
+                          )),
                         ],
                       ),
                     ),

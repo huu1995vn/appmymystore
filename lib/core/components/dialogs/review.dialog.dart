@@ -71,7 +71,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
               color: AppColors.black, //change your color here
             ),
             centerTitle: true,
-            title: Text("",
+            title: Text("review".tr,
                 style: kTextHeaderStyle.copyWith(color: AppColors.black)),
             elevation: 0.0,
             backgroundColor: AppColors.grey,

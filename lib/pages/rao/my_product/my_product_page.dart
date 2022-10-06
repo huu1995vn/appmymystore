@@ -68,6 +68,7 @@ class _MyProductPageState extends State<MyProductPage> {
                   centerTitle: true,
                   title: Text("manager.raoxe".tr),
                   elevation: 0.0,
+                  floating: false,
                 ),
                 SliverPersistentHeader(
                   pinned: true,

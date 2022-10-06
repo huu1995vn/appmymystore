@@ -587,6 +587,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                     : imgs.length,
                                                 gridDelegate:
                                                     const SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisSpacing: 4,
+                                                        mainAxisSpacing: 4,
                                                         crossAxisCount: 4),
                                                 itemBuilder: (context, index) {
                                                   return Card(

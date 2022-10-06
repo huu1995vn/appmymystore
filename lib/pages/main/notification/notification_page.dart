@@ -119,7 +119,6 @@ class _NotificationPageState extends State<NotificationPage> {
           CommonMethods.showToast(res.message);
         }
         //Call api gọi api xóa
-
       } catch (e) {
         CommonMethods.showDialogError(context, e);
       }
@@ -142,7 +141,6 @@ class _NotificationPageState extends State<NotificationPage> {
           CommonMethods.showToast(res.message);
         }
         //Call api gọi api xóa
-
       } catch (e) {
         CommonMethods.showDialogError(context, e);
       }
@@ -162,7 +160,6 @@ class _NotificationPageState extends State<NotificationPage> {
           CommonMethods.showToast(res.message);
         }
         //Call api gọi api xóa
-
       } catch (e) {
         CommonMethods.showDialogError(context, e);
       }
@@ -179,6 +176,7 @@ class _NotificationPageState extends State<NotificationPage> {
             centerTitle: true,
             title: Text('notification'.tr),
             elevation: 0.0,
+            floating: true,
             actions: <Widget>[
               RxIconButton(
                   icon: AppIcons.delete,

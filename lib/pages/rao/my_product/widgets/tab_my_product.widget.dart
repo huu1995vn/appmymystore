@@ -92,24 +92,26 @@ class _TabMyProductWidgetPageState extends State<TabMyProductWidget>
   // ignore: must_call_super
   Widget build(BuildContext context) {
     super.build(context);
-    return RxListView(
-      listData,
-      (context, index) {
-        var item = listData![index];
-        return ItemProductWidget(item,
-            onTap: () => {
-                  CommonNavigates.toMyProductPage(context,
-                      item: item,
-                      onChanged: (v) => {
-                            setState(() {
-                              listData![index] = item;
-                            })
-                          })
-                });
-      },
-      onNextPage: onNextPage,
-      onRefresh: loadData,
-      key: widget.key,
-    );
+    return Container(
+        margin: const EdgeInsets.only(top: kDefaultMarginBottomBox),
+        child: RxListView(
+          listData,
+          (context, index) {
+            var item = listData![index];
+            return ItemProductWidget(item,
+                onTap: () => {
+                      CommonNavigates.toMyProductPage(context,
+                          item: item,
+                          onChanged: (v) => {
+                                setState(() {
+                                  listData![index] = item;
+                                })
+                              })
+                    });
+          },
+          onNextPage: onNextPage,
+          onRefresh: loadData,
+          key: widget.key,
+        ));
   }
 }

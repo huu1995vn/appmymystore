@@ -10,6 +10,7 @@ class RemoteConfigSerivce {
       minimumFetchInterval: Duration.zero,
     ));
     await remoteConfig.fetchAndActivate();
+    //FirebaseRemoteConfig sử dụng các giá trị defaule trong file R.xml.default_config nếu không lấy được giá trị
     var configs = remoteConfig.getAll();
     if (configs["apiDaiLyXe"] != null) {
       CommonConfig.apiDaiLyXe = remoteConfig.getString("apiDaiLyXe");

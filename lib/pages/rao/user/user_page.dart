@@ -65,19 +65,28 @@ class _UserPageState extends State<UserPage> {
   }
 
   _onEdit() {
+    if (!isMyUser) {
+      return;
+    }
     CommonNavigates.showDialogBottomSheet(context, InfoUserDiaLog(data: data!),
         height: 530);
   }
 
   _onChangePassword() {
-    CommonNavigates.openDialog(
-        context, ChangePasswordDiaLog(data: data!));
+    if (!isMyUser) {
+      return;
+    }
+    CommonNavigates.openDialog(context, ChangePasswordDiaLog(data: data!));
   }
 
   _onChangeAddress() async {
+    if (!isMyUser) {
+      return;
+    }
     var res = await CommonNavigates.openDialog(
-        context, AddressDialog(contact: data!.toContact()),
-        );
+      context,
+      AddressDialog(contact: data!.toContact()),
+    );
 
     if (res != null) {
       setState(() {
@@ -109,8 +118,10 @@ class _UserPageState extends State<UserPage> {
   }
 
   _onChangeEmail() async {
-    CommonNavigates.openDialog(
-        context, ChangeEmailDiaLog(data: data!));
+    if (!isMyUser) {
+      return;
+    }
+    CommonNavigates.openDialog(context, ChangeEmailDiaLog(data: data!));
   }
 
   @override
@@ -150,9 +161,11 @@ class _UserPageState extends State<UserPage> {
                                     FontAwesomeIcons.solidEnvelope,
                                   ),
                                   onTap: _onChangeEmail,
-                                  trailing: Icon(
-                                    AppIcons.keyboard_arrow_right,
-                                  ))),
+                                  trailing: !isMyUser
+                                      ? null
+                                      : Icon(
+                                          AppIcons.keyboard_arrow_right,
+                                        ))),
                           RxBorderListTile(
                               child: ListTile(
                                   title: Text(data!.address! ?? "NaN"),
@@ -160,20 +173,25 @@ class _UserPageState extends State<UserPage> {
                                     FontAwesomeIcons.mapPin,
                                   ),
                                   onTap: _onChangeAddress,
-                                  trailing: Icon(
-                                    AppIcons.keyboard_arrow_right,
-                                  ))),
-                          RxBorderListTile(
-                              child: ListTile(
-                            title: Text("change.password".tr),
-                            leading: FaIcon(
-                              FontAwesomeIcons.lock,
-                            ),
-                            onTap: _onChangePassword,
-                            trailing: Icon(
-                              AppIcons.keyboard_arrow_right,
-                            ),
-                          )),
+                                  trailing: !isMyUser
+                                      ? null
+                                      : Icon(
+                                          AppIcons.keyboard_arrow_right,
+                                        ))),
+                          if (isMyUser)
+                            RxBorderListTile(
+                                child: ListTile(
+                              title: Text("change.password".tr),
+                              leading: FaIcon(
+                                FontAwesomeIcons.lock,
+                              ),
+                              onTap: _onChangePassword,
+                              trailing: !isMyUser
+                                  ? null
+                                  : Icon(
+                                      AppIcons.keyboard_arrow_right,
+                                    ),
+                            )),
                         ],
                       ),
                     ),

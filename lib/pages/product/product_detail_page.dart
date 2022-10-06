@@ -239,7 +239,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ))
                 }),
         Card(
-            margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+            margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
             child: SizedBox(
               width: double.infinity,
               child: Padding(
@@ -250,7 +250,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     Text(data!.name ?? "",
                         style: kTextHeaderStyle.copyWith(fontSize: 20),
                         maxLines: 2),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -258,7 +258,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       children: [
                         Text(data!.rxprice ?? "negotiate".tr,
                             style: kTextPriceStyle.copyWith(fontSize: 25)),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Container(
@@ -268,7 +268,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   ? Colors.blue
                                   : Colors.yellow,
                             ),
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 4),
                             child: Text(data!.statename,
                                 style: TextStyle(
@@ -278,12 +278,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                         : Colors.black)))
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Text(data!.rxtimeago, style: TextStyle(fontSize: 13)),
+                        Text(data!.rxtimeago,
+                            style: const TextStyle(fontSize: 13)),
                       ],
                     ),
                   ],
@@ -301,12 +302,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     size: 13,
                     color: Get.isDarkMode ? Colors.white : Colors.black,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Flexible(
                       child: Text(data!.address ?? "NaN",
-                          style: TextStyle(fontSize: 13)))
+                          style: const TextStyle(fontSize: 13)))
                 ],
               ),
             )),
@@ -389,8 +390,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      RxAvatarImage(data!.rximguser, size: 50),
-                      SizedBox(
+                      GestureDetector(
+                        onTap: () {
+                          CommonNavigates.toUserPage(context, id: data!.userid);
+                        },
+                        child: RxAvatarImage(data!.rximguser, size: 50),
+                      ),
+                      const SizedBox(
                         width: 10,
                       ),
                       GestureDetector(
@@ -404,21 +410,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               children: [
                                 Text(
                                   data!.fullname ?? "NaN",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     // color: Get.isDarkMode
                                     //     ? Colors.white
                                     //     : AppColors.black50,
                                   ).bold,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Row(
                                   children: [
                                     Text(
                                       data!.cityname ?? "NaN",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           // color: Get.isDarkMode
                                           //     ? Colors.white
                                           //     : AppColors.black50,
@@ -466,18 +472,18 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     Padding(
                         padding: EdgeInsets.all(5),
                         child: Text("rate".tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold))),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(CommonMethods.convertToString(data!.ratingvalue),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold)),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         RatingBar.readOnly(
@@ -492,7 +498,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -513,7 +519,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                   width: 80,
                   child: Icon(
                     AppIcons.security,
@@ -534,7 +540,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       padding: const EdgeInsets.only(top: kDefaultPadding),
                       child: RxButton(
                           onTap: _onReport,
-                          icon: Icon(
+                          icon: const Icon(
                             AppIcons.warning,
                           ),
                           color: AppColors.black50,

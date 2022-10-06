@@ -84,6 +84,29 @@ class AuthService {
     }
   }
 
+  static Future checkEmail(email, {bool isExist = false}) async {
+    //isExist == false: dùng đăng ký hoặc thay đổi phone
+    //isExist == true: dùng cho quên mật khẩu
+
+    if (!CommonMethods.checkStringPhone(email)) {
+      throw "invalid.email".tr;
+    }
+    var res = await DaiLyXeApiBLL_APIGets().statsuser({"email": email});
+    int status = res.data;
+    if (isExist) {
+      if (status == -1) {
+        throw "notexist.account".tr;
+      }
+    } else {
+      if (status == 1) {
+        throw "exist.account".tr;
+      }
+    }
+    if (status >= 2) {
+      throw "message.str002".tr;
+    }
+  }
+
   static Future sendOTPPhone(String phone, bool isExist,
       void Function(Object) fnError, void Function() fnSuccess) async {
     try {

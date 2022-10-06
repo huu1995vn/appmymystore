@@ -1,14 +1,11 @@
 import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-
+import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'en_US.dart';
 import 'vi_VN.dart';
 
 class TranslationService extends Translations {
-  static GetStorage _getStorage = GetStorage();
   static String storageKey = 'isVi';
 
   // locale sẽ được get mỗi khi mới mở app (phụ thuộc vào locale hệ thống hoặc bạn có thể cache lại locale mà người dùng đã setting và set nó ở đây)
@@ -35,7 +32,7 @@ class TranslationService extends Translations {
     'vi': 'Tiếng Việt',
   });
   static _saveLanguage(bool isVi) {
-    _getStorage.write(storageKey, isVi);
+    StorageService.set(storageKey, isVi);
   }
 
   static Locale _getLocale() {
@@ -50,7 +47,7 @@ class TranslationService extends Translations {
   }
 
   static bool isVi() {
-    return _getStorage.read(storageKey) ?? false;
+    return StorageService.get(storageKey) ?? false;
   }
 
   @override

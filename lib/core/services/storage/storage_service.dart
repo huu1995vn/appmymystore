@@ -12,9 +12,8 @@ class StorageService {
   static Future<bool> init() async {
     var res = await storage.ready;
     try {
-          dataStorage = storage.getItem(keyStorage) ?? <String, dynamic>{};
-    } catch (e) {
-    }
+      dataStorage = storage.getItem(keyStorage) ?? <String, dynamic>{};
+    } catch (e) {}
     return res;
   }
 
@@ -24,10 +23,9 @@ class StorageService {
   }
 
   /// Changes a value in storage
-   static Future<void> set(String key, dynamic value) async {
+  static Future<void> set(String key, dynamic value) async {
     dataStorage[key] = value;
     await storage.setItem(keyStorage, dataStorage);
-
   }
 
   static deleteItem(String key) {
@@ -36,25 +34,24 @@ class StorageService {
   }
 
   static initFavorite() async {
-     try {
-      Map<String, dynamic> body = {
-        "p": 1,
-        "n": 1000
-      };
+    try {
+      Map<String, dynamic> body = {"p": 1, "n": 1000};
       ResponseModel res = await DaiLyXeApiBLL_APIUser().favorite(body);
       if (res.status > 0) {
-        if(res.data!=null && res.data.length > 0)
-        {
-          listFavorite = (res.data as List).map((e) => int.parse(e["id"])).toList();
+        if (res.data != null && res.data.length > 0) {
+          listFavorite =
+              (res.data as List).map((e) => int.parse(e["id"])).toList();
           set(StorageKeys.favorite, listFavorite);
         }
-      } 
+      }
     } catch (e) {}
   }
+
   static deleteFavorite(List<int> ids) {
     listFavorite.removeWhere((element) => ids.contains(element));
     set(keyStorage, listFavorite.toSet().toList());
   }
+
   static addFavorite(List<int> ids) {
     listFavorite.addAll(ids);
     set(keyStorage, listFavorite.toSet().toList());
@@ -72,5 +69,5 @@ class StorageKeys {
   static const String userlogin = 'usl';
   static const String favorite = 'fv';
   static const String token = 'token';
-
+  static const String viewtype = 'viewtype';
 }

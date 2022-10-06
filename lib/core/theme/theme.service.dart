@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
+import 'package:raoxe/core/services/storage/storage_service.dart';
 
 class ThemeService {
-  final _getStorage = GetStorage();
   final storageKey = 'isDarkMode';
 
   ThemeMode getThemeMode() {
@@ -11,11 +10,11 @@ class ThemeService {
   }
 
   bool isSavedDarkMode() {
-    return _getStorage.read(storageKey) ?? false;
+    return StorageService.get(storageKey) ?? false;
   }
 
   void saveThemeMode(bool isDarkMode) {
-    _getStorage.write(storageKey, isDarkMode);
+    StorageService.set(storageKey, isDarkMode);
   }
 
   void changeThemeMode() {

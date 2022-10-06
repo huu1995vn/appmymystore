@@ -100,7 +100,7 @@ class CommonNavigates {
 
   static Future toAdvertPage(BuildContext context,
       {int? id, AdvertModel? item}) async {
-    if (id != null && id > 0) {
+    if ((id != null && id > 0) || item!=null) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(

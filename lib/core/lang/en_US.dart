@@ -1,4 +1,5 @@
 const Map<String, String> en_US = {
+  "expiration.date": "Expiration date",
   "new.email": "new email",
   "resend.code": "Resend.code",
   "bookmark": "Bookmark",
@@ -18,6 +19,7 @@ const Map<String, String> en_US = {
   "darkmode": "Dark mode",
   "language": "Language",
   "detail": "Detail",
+  "detail.advert": "Detail advert",
   "title": "Title",
   "state": "State",
   "download": "Download",

@@ -6,6 +6,7 @@ import 'package:raoxe/core/commons/index.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_sliverlist.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/services/app.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';
@@ -27,11 +28,13 @@ class _ProductPageState extends State<ProductPage> {
   void initState() {
     super.initState();
     setState(() {
+      _viewType = AppService.getViewTypeByKey(key);
       paramsSearch = widget.paramsSearch ?? {};
       loadData();
     });
   }
 
+  String key = "LProcduct";
   int paging = 1;
   int totalItems = 0;
   List<ProductModel>? listData;
@@ -256,12 +259,15 @@ class _ProductPageState extends State<ProductPage> {
                                               ))),
                                       GestureDetector(
                                           onTap: () {
-                                            if (_viewType == ViewType.list) {
-                                              _viewType = ViewType.grid;
-                                            } else {
-                                              _viewType = ViewType.list;
-                                            }
-                                            setState(() {});
+                                            var _type =
+                                                _viewType == ViewType.list
+                                                    ? ViewType.grid
+                                                    : ViewType.list;
+                                            AppService.saveViewTypeByKey(
+                                                key, _type);
+                                            setState(() {
+                                              _viewType = _type;
+                                            });
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(
@@ -306,7 +312,7 @@ class _ProductPageState extends State<ProductPage> {
               viewType: _viewType,
             )
           ],
-          key: const Key("LProcduct"),
+          key: Key(key),
           onNextScroll: onNextPage,
           onRefresh: onRefresh,
         ));

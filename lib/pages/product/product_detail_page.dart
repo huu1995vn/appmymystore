@@ -107,30 +107,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(data!.name ?? "updating".tr),
-          elevation: 0.0,
-          actions: <Widget>[
-            RxIconButton(
-                icon: data!.isfavorite
-                    ? FontAwesomeIcons.solidBookmark
-                    : FontAwesomeIcons.bookmark,
-                onTap: _onFavorite,
-                size: 40,
-                color: Colors.transparent,
-                colorIcon:
-                    data!.isfavorite ? AppColors.yellow : AppColors.white),
-            SizedBox(width: kDefaultPadding),
-            RxIconButton(
-              icon: FontAwesomeIcons.solidShareFromSquare,
-              size: 40,
-              color: Colors.transparent,
-              colorIcon: AppColors.white,
-              onTap: _onShare,
-            ),
-            SizedBox(width: kDefaultPadding),
-          ],
-        ),
         body: isNotFound
             ? Expanded(child: Center(child: Text("not.found".tr)))
             : ((data == null || data!.id <= 0)
@@ -141,6 +117,32 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     key: const Key("iProduct"),
                     controller: scrollController,
                     slivers: <Widget>[
+                      SliverAppBar(
+                        title: Text(data!.name ?? "updating".tr),
+                        elevation: 0.0,
+                        floating: true,
+                        actions: <Widget>[
+                          RxIconButton(
+                              icon: data!.isfavorite
+                                  ? FontAwesomeIcons.solidBookmark
+                                  : FontAwesomeIcons.bookmark,
+                              onTap: _onFavorite,
+                              size: 40,
+                              color: Colors.transparent,
+                              colorIcon: data!.isfavorite
+                                  ? AppColors.yellow
+                                  : AppColors.white),
+                          const SizedBox(width: kDefaultPadding),
+                          RxIconButton(
+                            icon: FontAwesomeIcons.solidShareFromSquare,
+                            size: 40,
+                            color: Colors.transparent,
+                            colorIcon: AppColors.white,
+                            onTap: _onShare,
+                          ),
+                          const SizedBox(width: kDefaultPadding),
+                        ],
+                      ),
                       SliverToBoxAdapter(child: _buildDetail())
                     ],
                   )),

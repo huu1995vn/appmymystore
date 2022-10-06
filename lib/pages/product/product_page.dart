@@ -156,17 +156,18 @@ class _ProductPageState extends State<ProductPage> {
     String cityName =
         CommonMethods.getNameMasterById("city", paramsSearch["CityId"]);
     return Scaffold(
-        appBar: AppBar(
-          title: SearchAppBar(
-            paramsSearch: paramsSearch ?? {},
-            onChanged: _onChanged,
-          ),
-          elevation: 0.0,
-        ),
         key: _key,
         // backgroundColor: Colors.white,
         body: RxCustomScrollView(
           slivers: [
+            SliverAppBar(
+              floating: true,
+              title: SearchAppBar(
+                paramsSearch: paramsSearch ?? {},
+                onChanged: _onChanged,
+              ),
+              elevation: 0.0,
+            ),
             SliverPadding(
                 padding: const EdgeInsets.all(0),
                 sliver: SliverToBoxAdapter(

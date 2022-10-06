@@ -13,7 +13,6 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:get/get.dart';
 // ignore: unused_import
-import 'package:raoxe/pages/auth/confirm_otp_page.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class ForgotPasswordPage extends StatefulWidget {

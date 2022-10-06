@@ -426,6 +426,18 @@ class CommonMethods {
       return false;
     }
   }
+  static bool checkStringEmail(String? text) {
+    if (text != null) {
+      RegExp regExp = RegExp(
+        RxParttern.email,
+        caseSensitive: false,
+        multiLine: false,
+      );
+      return regExp.hasMatch(text);
+    } else {
+      return false;
+    }
+  }
 
   static format(Duration d) => d.toString().split('.').first.padLeft(8, "0");
 

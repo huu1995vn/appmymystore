@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty, non_constant_identifier_names
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/product/widgets/product_related.dart';
+import 'package:raoxe/pages/rao/user/dialogs/change_email.dialog.dart';
 import 'package:raoxe/pages/rao/user/dialogs/change_password.dialog.dart';
 import 'package:raoxe/pages/rao/user/dialogs/info.dialog.dart';
 
@@ -63,17 +65,19 @@ class _UserPageState extends State<UserPage> {
   }
 
   _onEdit() {
-    CommonNavigates.showDialogBottomSheet(context, InfoUserDiaLog(data: data!), height: 530);
+    CommonNavigates.showDialogBottomSheet(context, InfoUserDiaLog(data: data!),
+        height: 530);
   }
 
   _onChangePassword() {
-    CommonNavigates.showDialogBottomSheet(context, ChangePasswordDiaLog(data: data!), height: 350);
+    CommonNavigates.openDialog(
+        context, ChangePasswordDiaLog(data: data!));
   }
 
   _onChangeAddress() async {
-    var res = await CommonNavigates.showDialogBottomSheet(
+    var res = await CommonNavigates.openDialog(
         context, AddressDialog(contact: data!.toContact()),
-        height: 350);
+        );
 
     if (res != null) {
       setState(() {
@@ -81,7 +85,32 @@ class _UserPageState extends State<UserPage> {
         data!.districtid = res.districtid;
         data!.address = res.address;
       });
+      CommonMethods.lockScreen();
+      try {
+        var dataClone = data!.clone();
+        ResponseModel res =
+            await DaiLyXeApiBLL_APIUser().updateuser(dataClone.toUpdate());
+        if (res.status > 0) {
+          setState(() {
+            data = dataClone;
+          });
+          CommonMethods.showToast("success".tr);
+        } else {
+          CommonMethods.showToast(res.message);
+        }
+        Provider.of<AppProvider>(context, listen: false)
+            .setUserModel(dataClone);
+      } catch (e) {
+        CommonMethods.showDialogError(context, e.toString());
+      }
+
+      CommonMethods.unlockScreen();
     }
+  }
+
+  _onChangeEmail() async {
+    CommonNavigates.openDialog(
+        context, ChangeEmailDiaLog(data: data!));
   }
 
   @override
@@ -119,6 +148,10 @@ class _UserPageState extends State<UserPage> {
                                   title: Text(data!.email! ?? "NaN"),
                                   leading: FaIcon(
                                     FontAwesomeIcons.solidEnvelope,
+                                  ),
+                                  onTap: _onChangeEmail,
+                                  trailing: Icon(
+                                    AppIcons.keyboard_arrow_right,
                                   ))),
                           RxBorderListTile(
                               child: ListTile(

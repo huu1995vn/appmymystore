@@ -9,7 +9,6 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -117,16 +116,31 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
           const TextInputType.numberWithOptions(signed: true, decimal: true),
       length: 6,
       obscureText: true,
-      animationType: AnimationType.fade,
+      animationType: AnimationType.scale,
+      pastedTextStyle: TextStyle(
+        color: Theme.of(context).textTheme.bodyLarge!.color,
+        fontWeight: FontWeight.bold,
+      ),
+      cursorColor: AppColors.primary,
+      obscuringCharacter: '*',
+      textStyle: TextStyle(
+          fontSize: 20,
+          height: 1.6,
+          color: Theme.of(context).textTheme.bodyLarge!.color),
       pinTheme: PinTheme(
           shape: PinCodeFieldShape.box,
-          borderRadius: BorderRadius.circular(10),
-          activeFillColor: AppColors.grayDark,
-          inactiveColor: AppColors.grayDark,
-          selectedFillColor: AppColors.grayDark,
-          inactiveFillColor: AppColors.grayDark,
-          selectedColor: AppColors.grayDark,
-          activeColor: AppColors.grayDark),
+          borderRadius: BorderRadius.circular(2),
+          fieldHeight: 39,
+          fieldWidth: 39,
+          activeFillColor: Theme.of(context).cardColor,
+          activeColor:
+              Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5),
+          inactiveFillColor: Theme.of(context).cardColor,
+          inactiveColor:
+              Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5),
+          selectedColor: AppColors.primary,
+          selectedFillColor: Theme.of(context).cardColor,
+          borderWidth: 1),
       animationDuration: const Duration(milliseconds: 300),
       enableActiveFill: true,
       controller: TextEditingController(),
@@ -136,101 +150,82 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
       appContext: context,
       onChanged: (value) {},
     );
-    var form = Column(
-      children: <Widget>[
-        Container(
-          alignment: FractionalOffset.center,
-          margin: const EdgeInsets.fromLTRB(40.0, 50.0, 40.0, 0.0),
-          padding: const EdgeInsets.all(20.0),
-          decoration: const BoxDecoration(
-            color: Color(0xFFF9F9F9),
-            borderRadius: BorderRadius.all(
-              Radius.circular(6.0),
-            ),
+    var form = Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          Text("message.str016".tr),
+          Center(
+              child: Text(
+            widget.phone,
+            style: const TextStyle().bold,
+          )),
+          const SizedBox(
+            height: kDefaultPadding * 2,
           ),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                // Align(
-                //     alignment: Alignment.topRight,
-                //     child: RxIconButton(
-                //       onTap: () => {CommonNavigates.goBack(context)},
-                //       icon: AppIcons.close,
-                //       size: 40,
-                //     )),
-                const Text(
-                  "Enter valid recieved OTP",
-                  style: kTextHeaderStyle,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
-                  child: InkWell(
-                      onTap: () => {if (expiredTime <= 0) sendotp()},
-                      child: expiredTime > 0
-                          ? Text(
-                              CommonMethods.convertTimeDuration(
-                                  seconds: expiredTime),
-                              style: const TextStyle(fontSize: 13.0),
-                            )
-                          : Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  "sendcode".tr,
-                                  style: const TextStyle(color: AppColors.info)
-                                      .size(13),
-                                ),
-                                const Icon(AppIcons.sync_1,
-                                    size: 13, color: AppColors.info),
-                              ],
-                            )),
-                ),
-                otpBox,
-                const SizedBox(
-                  width: 0.0,
-                  height: 20.0,
-                ),
-                RxPrimaryButton(onTap: _submit, text: "Verify OTP"),
-                Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
-                  child: InkWell(
-                      onTap: () => {CommonNavigates.goBack(context)},
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "cancel".tr,
-                            style: const TextStyle(color: AppColors.black)
-                                .size(13),
-                          ),
-                        ],
-                      )),
-                ),
-              ],
-            ),
+          Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
+              child: otpBox),
+          const SizedBox(
+            height: kDefaultPadding * 2,
           ),
-        ),
-      ],
-    );
-    var screenRoot = Container(
-      height: double.maxFinite,
-      alignment: FractionalOffset.center,
-      child: SingleChildScrollView(
-        child: Center(
-          child: form,
-        ),
+          Row(children: [
+            Expanded(
+              child: RxPrimaryButton(onTap: _submit, text: "continue".tr),
+            )
+          ]),
+          const SizedBox(
+            height: kDefaultPadding * 2,
+          ),
+          InkWell(
+              onTap: () => {if (expiredTime <= 0) sendotp()},
+              child: expiredTime > 0
+                  ? Text(
+                      CommonMethods.convertTimeDuration(seconds: expiredTime),
+                      style: const TextStyle(fontSize: 13.0),
+                    )
+                  : Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "resend.code".tr,
+                          style: kTextSubTitleStyle.italic.copyWith(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .color!
+                                  .withOpacity(0.7)),
+                        ),
+                        Icon(AppIcons.sync_1,
+                            size: 13,
+                            color: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .color!
+                                .withOpacity(0.7)),
+                      ],
+                    )),
+        ],
       ),
     );
+
     return WillPopScope(
         onWillPop: () async {
           return true;
         },
         child: Scaffold(
-          backgroundColor: const Color(0xFF2B2B2B),
-          appBar: null,
-          key: _scaffoldKey,
-          body: screenRoot,
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text('enter.verification.code'.tr),
+            elevation: 0.0,
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+                padding: const EdgeInsets.all(kDefaultPadding)
+                    .copyWith(top: kDefaultPaddingTop / 2),
+                child: form),
+          ),
         ));
   }
 }

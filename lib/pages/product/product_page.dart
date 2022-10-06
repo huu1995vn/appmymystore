@@ -37,6 +37,7 @@ class _ProductPageState extends State<ProductPage> {
   List<ProductModel>? listData;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   String _selectedCity = "";
+  ViewType _viewType = ViewType.grid;
   Map<String, dynamic> paramsSearch = {};
   loadData([nPaging = 1]) async {
     if (listData != null && nPaging > 1 && totalItems <= listData!.length)
@@ -146,7 +147,7 @@ class _ProductPageState extends State<ProductPage> {
     }
     return filter;
   }
- 
+
   @override
   Widget build(BuildContext context) {
     String cityName =
@@ -187,6 +188,8 @@ class _ProductPageState extends State<ProductPage> {
                                     ),
                                   ),
                                   child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       GestureDetector(
                                           onTap: () {
@@ -248,7 +251,34 @@ class _ProductPageState extends State<ProductPage> {
                                                     ),
                                                   ],
                                                 ),
-                                              )))
+                                              ))),
+                                      GestureDetector(
+                                          onTap: () {
+                                            if (_viewType == ViewType.list) {
+                                              _viewType = ViewType.grid;
+                                            } else {
+                                              _viewType = ViewType.list;
+                                            }
+                                            setState(() {});
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: kDefaultPaddingBox,
+                                                vertical: kDefaultPaddingBox),
+                                            child: Row(
+                                              children: [
+                                                FaIcon(
+                                                  _viewType == ViewType.list
+                                                      ? FontAwesomeIcons.thLarge
+                                                      : FontAwesomeIcons.list,
+                                                  color: Get.isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black26,
+                                                  size: 23,
+                                                ),
+                                              ],
+                                            ),
+                                          ))
                                     ],
                                   ),
                                 )
@@ -259,12 +289,20 @@ class _ProductPageState extends State<ProductPage> {
                         value: paramsSearch["BrandId"])
                   ],
                 ))),
-            RxSliverList(listData, (BuildContext context, int index) {
-              var item = listData![index];
-              return ItemProductWidget(listData![index], onTap: () {
-                CommonNavigates.toProductPage(context, item: item);
-              });
-            })
+            RxSliverList(
+              listData,
+              (BuildContext context, int index) {
+                var item = listData![index];
+                return ItemProductWidget(
+                  listData![index],
+                  onTap: () {
+                    CommonNavigates.toProductPage(context, item: item);
+                  },
+                  viewType: _viewType,
+                );
+              },
+              viewType: _viewType,
+            )
           ],
           key: const Key("LProcduct"),
           onNextScroll: onNextPage,

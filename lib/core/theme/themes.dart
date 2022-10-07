@@ -20,7 +20,7 @@ class Themes {
           : AppColors.black.withOpacity(0.1),
       shadowColor: isDark ? AppColors.text : AppColors.grayDark,
       primarySwatch: _getMaterialColorFromColor(primaryColor),
-      textTheme: GoogleFonts.latoTextTheme(
+      textTheme: GoogleFonts.titilliumWebTextTheme(
           ThemeData(brightness: isDark ? Brightness.dark : Brightness.light)
               .textTheme
               .copyWith(

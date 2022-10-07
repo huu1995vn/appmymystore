@@ -111,7 +111,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         body: isNotFound
             ? Expanded(child: Center(child: Text("not.found".tr)))
             : ((data == null || data!.id <= 0)
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : RxCustomScrollView(
@@ -148,7 +148,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ],
                   )),
         bottomNavigationBar: Container(
-            padding: EdgeInsets.all(0.0),
+            padding: const EdgeInsets.all(0.0),
             child: Row(
               children: [
                 Expanded(
@@ -157,21 +157,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       onTap: () => {CommonMethods.call(data!.phone!)},
                       child: Container(
                           height: 50,
-                          padding: EdgeInsets.all(kDefaultPaddingBox),
+                          padding: const EdgeInsets.all(kDefaultPaddingBox),
                           color: Colors.green,
                           alignment: Alignment.center,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              FaIcon(
+                              const FaIcon(
                                 FontAwesomeIcons.phone,
                                 color: Colors.white,
                                 size: 20,
                               ),
-                              SizedBox(width: kDefaultPadding),
+                              const SizedBox(width: kDefaultPadding),
                               Text(
                                 "call".tr + ": " + (data!.phone)!,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -185,7 +185,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       onTap: () => {CommonMethods.chatZalo(data!.phone!)},
                       child: Container(
                           height: 50,
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           color: Colors.grey[100],
                           alignment: Alignment.center,
                           child: Column(
@@ -208,7 +208,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       child: Row(
         children: [
           if (leading != null) leading,
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           SizedBox(
               width: 100,
               child: Text(
@@ -220,7 +220,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ? (subtitle > 0 ? subtitle.toString() : null)
                       : subtitle?.toString()) ??
                   "not.update".tr,
-              style: TextStyle(fontWeight: FontWeight.bold))
+              style: const TextStyle(fontWeight: FontWeight.bold))
         ],
       ),
     );
@@ -295,7 +295,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
             )),
         Card(
-            margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+            margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
             child: Padding(
               padding: const EdgeInsets.all(kDefaultPaddingBox),
               child: Row(
@@ -315,7 +315,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
             )),
         Card(
-          margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+          margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPaddingBox),
             child: Column(
@@ -324,42 +324,42 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               // mainAxisSize: MainAxisSize.min,
               children: [
                 Text("specification".tr,
-                    style: TextStyle(
+                    style: const TextStyle(
                         // color: Get.isDarkMode
                         //     ? Colors.white
                         //     : Colors.grey[700],
                         fontSize: 18,
                         fontWeight: FontWeight.bold)),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 _listTitle("model".tr, data!.modelname,
                     leading:
-                        FaIcon(FontAwesomeIcons.car, color: AppColors.primary)),
+                        const FaIcon(FontAwesomeIcons.car, color: AppColors.primary)),
                 _listTitle("bodytype".tr, data!.bodytypename,
-                    leading: FaIcon(FontAwesomeIcons.carSide,
+                    leading: const FaIcon(FontAwesomeIcons.carSide,
                         color: AppColors.primary)),
                 _listTitle("color".tr, data!.colorname,
-                    leading: FaIcon(FontAwesomeIcons.palette,
+                    leading: const FaIcon(FontAwesomeIcons.palette,
                         color: AppColors.primary)),
                 _listTitle("seat".tr, data!.seat,
-                    leading: Icon(AppIcons.airline_seat_legroom_normal,
+                    leading: const Icon(AppIcons.airline_seat_legroom_normal,
                         color: AppColors.primary)),
                 _listTitle("fueltype".tr, data!.fueltypename,
-                    leading: FaIcon(FontAwesomeIcons.gasPump,
+                    leading: const FaIcon(FontAwesomeIcons.gasPump,
                         color: AppColors.primary)),
                 _listTitle("year".tr, data!.year,
-                    leading: FaIcon(FontAwesomeIcons.calendar,
+                    leading: const FaIcon(FontAwesomeIcons.calendar,
                         color: AppColors.primary)),
                 _listTitle("madein".tr, data!.madeinname,
-                    leading: FaIcon(FontAwesomeIcons.circleInfo,
+                    leading: const FaIcon(FontAwesomeIcons.circleInfo,
                         color: AppColors.primary)),
               ],
             ),
           ),
         ),
         Card(
-            margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+            margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPaddingBox),
                 child: Column(
@@ -368,7 +368,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     // mainAxisSize: MainAxisSize.min,
                     children: [
                       Text("description".tr,
-                          style: TextStyle(
+                          style: const TextStyle(
                               // color: Get.isDarkMode
                               //     ? Colors.white
                               //     : Colors.grey[700],
@@ -383,7 +383,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           enabled: false),
                     ]))),
         Card(
-          margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+          margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
           child: Padding(
               padding: const EdgeInsets.all(kDefaultPaddingBox),
               child: Row(
@@ -451,7 +451,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           colorIcon: data!.isfavorite
                               ? AppColors.yellow
                               : AppColors.black50),
-                      SizedBox(width: kDefaultPadding),
+                      const SizedBox(width: kDefaultPadding),
                       RxIconButton(
                         icon: FontAwesomeIcons.solidShareFromSquare,
                         size: 40,
@@ -465,7 +465,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               )),
         ),
         Card(
-            margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+            margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPaddingBox),
                 child: Column(
@@ -473,7 +473,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: Text("rate".tr,
                             style: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold))),
@@ -506,7 +506,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       RxButton(
-                        icon: Icon(AppIcons.edit),
+                        icon: const Icon(AppIcons.edit),
                         color: Colors.blue,
                         onTap: _onReview,
                         text: "writereview".tr,
@@ -515,7 +515,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ],
                 ))),
         Card(
-          margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+          margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
           child: Padding(
             padding: const EdgeInsets.all(kDefaultPaddingBox),
             child: Row(
@@ -537,7 +537,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   children: <Widget>[
                     Text(
                       "message.str001".tr,
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: kDefaultPadding),

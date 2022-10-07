@@ -39,7 +39,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     loadData();
   }
 
-  // String title = "";
   String? initialUrl;
   ProductModel? data;
   bool isNotFound = false;
@@ -54,7 +53,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             await DaiLyXeApiBLL_APIGets().productbyid(widget.id!);
         if (res.status > 0) {
           setState(() {
-            data = ProductModel.fromJson(res.data);
+            data = ProductModel.fromJson(res.data!);
           });
         } else {
           setState(() {

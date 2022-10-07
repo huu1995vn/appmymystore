@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
+import 'package:raoxe/core/commons/common_configs.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
@@ -24,82 +26,64 @@ class _ItemReviewWidgetState extends State<ItemReviewWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: ListTile(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  verticalDirection: VerticalDirection.up,
-                  children: [
-                    RxAvatarImage(widget.item.rximguser, size: 25),
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Text(
-                        widget.item.username ?? 'NaN',
-                        style: const TextStyle(),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    RatingBar.readOnly(
-                      filledColor: AppColors.yellow,
-                      size: 15,
-                      initialRating: 5,
-                      emptyIcon: AppIcons.star_1,
-                      filledIcon: AppIcons.star_1,
-                    ),
-                    Text(
-                        widget.item.status == 2
-                            ? widget.item.reject ?? "error"
-                            : "",
-                        style: const TextStyle(color: AppColors.danger)
-                            .italic)
-                  ],
-                ),
-                Text(widget.item.rxtimeago, style: kTextTimeStyle),
-              ],
-            ),
-            // isThreeLine: true,
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              verticalDirection: VerticalDirection.up,
-              children: <Widget>[
-                Container(
-                  height: 39,
-                  color: AppColors.grey, // <-- Red color provided to below Row
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          RxImage(
-                            widget.item.rximg,
-                            width: 39,
-                            height: 39,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(kDefaultPadding),
-                            child: Text(
-                              widget.item.name!,
-                              style: const TextStyle(),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
+        child: GestureDetector(
+            onTap: widget.onTap,
+            child: Container(
+                padding: const EdgeInsets.all(kDefaultPaddingBox),
+                decoration: const BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border(
+                    bottom: BorderSide(width: 1, color: Colors.black12),
                   ),
                 ),
-                Text(widget.item.comment ?? "",
-                    style: const TextStyle().italic, maxLines: 6),
-              ],
-            ),
-            onTap: widget.onTap));
+                child: Row(children: [
+                  SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: RxImage(
+                          widget.item.rximg,
+                        ),
+                      )),
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.only(left: kDefaultPaddingBox),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            widget.item.name!,
+                            style: kTextTitleStyle,
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(widget.item.rxtimeago,
+                                  style: kTextTimeStyle),
+                              RatingBar.readOnly(
+                                filledColor: AppColors.yellow,
+                                size: 20,
+                                initialRating: CommonMethods.convertToDouble(
+                                    widget.item.ratingvalue),
+                                emptyIcon: AppIcons.star_2,
+                                filledIcon: AppIcons.star_2,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          Text(widget.item.comment ?? "",
+                              style: const TextStyle(), maxLines: 6),
+                          const SizedBox(height: 5),
+                          Text(
+                              widget.item.status == 2
+                                  ? widget.item.reject ?? "error"
+                                  : "",
+                              style: const TextStyle(color: AppColors.danger)
+                                  .italic)
+                        ]),
+                  )),
+                ]))));
   }
 }

@@ -79,16 +79,14 @@ class _ReviewDialogState extends State<ReviewDialog> {
           ),
           SliverToBoxAdapter(
               child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
+                  padding: const EdgeInsets.all(kDefaultPaddingBox),
                   child: Form(
                       key: _keyValidationForm,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(widget.product.name!,
-                              style: kTextHeaderStyle
-                                  .copyWith(color: AppColors.black)
-                                  .size(17)),
+                              style: kTextHeaderStyle.size(20)),
                           SizedBox(height: 10),
                           Padding(
                             padding: const EdgeInsets.all(kDefaultPadding),
@@ -99,7 +97,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
                               onRatingChanged: (_) {
                                 review.ratingvalue = _.round();
                               },
-                              emptyIcon: AppIcons.star_border,
+                              emptyIcon: AppIcons.star_2,
                               filledIcon: AppIcons.star_2,
                             ),
                           ),
@@ -157,13 +155,18 @@ class _ReviewDialogState extends State<ReviewDialog> {
         ],
       ),
       persistentFooterButtons: [
-        RxPrimaryButton(
-            onTap: () {
-              if (_keyValidationForm.currentState!.validate()) {
-                onSave();
-              }
-            },
-            text: 'save'.tr)
+        Row(
+          children: [
+            Expanded(
+                child: RxPrimaryButton(
+                    onTap: () {
+                      if (_keyValidationForm.currentState!.validate()) {
+                        onSave();
+                      }
+                    },
+                    text: 'sendreview'.tr))
+          ],
+        )
       ],
     );
   }

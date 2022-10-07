@@ -100,7 +100,7 @@ class CommonNavigates {
 
   static Future toAdvertPage(BuildContext context,
       {int? id, AdvertModel? item}) async {
-    if ((id != null && id > 0) || item!=null) {
+    if ((id != null && id > 0) || item != null) {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
@@ -254,7 +254,6 @@ class CommonNavigates {
       return OtpVerificationEmailDialog(email: email, isExist: isExist);
     }));
   }
-
 
   static Future openSelect(BuildContext context, Widget child,
       {double? height}) async {

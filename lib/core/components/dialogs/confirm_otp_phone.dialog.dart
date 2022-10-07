@@ -21,10 +21,12 @@ class OtpVerificationPhoneDialog extends StatefulWidget {
   const OtpVerificationPhoneDialog(
       {super.key, required this.phone, required this.isExist});
   @override
-  State<OtpVerificationPhoneDialog> createState() => _OtpVerificationPhoneDialogState();
+  State<OtpVerificationPhoneDialog> createState() =>
+      _OtpVerificationPhoneDialogState();
 }
 
-class _OtpVerificationPhoneDialogState extends State<OtpVerificationPhoneDialog> {
+class _OtpVerificationPhoneDialogState
+    extends State<OtpVerificationPhoneDialog> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   String code = "";
@@ -115,23 +117,21 @@ class _OtpVerificationPhoneDialogState extends State<OtpVerificationPhoneDialog>
       keyboardType:
           const TextInputType.numberWithOptions(signed: true, decimal: true),
       length: 6,
-      obscureText: true,
       animationType: AnimationType.scale,
       pastedTextStyle: TextStyle(
         color: Theme.of(context).textTheme.bodyLarge!.color,
         fontWeight: FontWeight.bold,
       ),
       cursorColor: AppColors.primary,
-      obscuringCharacter: '*',
       textStyle: TextStyle(
-          fontSize: 20,
-          height: 1.6,
+          fontSize: 18,
+          height: 1.4,
           color: Theme.of(context).textTheme.bodyLarge!.color),
       pinTheme: PinTheme(
           shape: PinCodeFieldShape.box,
-          borderRadius: BorderRadius.circular(2),
-          fieldHeight: 39,
-          fieldWidth: 39,
+          borderRadius: BorderRadius.circular(4),
+          fieldHeight: 45,
+          fieldWidth: 40,
           activeFillColor: Theme.of(context).cardColor,
           activeColor:
               Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5),
@@ -151,64 +151,72 @@ class _OtpVerificationPhoneDialogState extends State<OtpVerificationPhoneDialog>
       onChanged: (value) {},
     );
     var form = Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          Text("message.str016".tr),
-          Center(
-              child: Text(
-            widget.phone,
-            style: const TextStyle().bold,
-          )),
-          const SizedBox(
-            height: kDefaultPadding * 2,
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(kDefaultPaddingBox),
+          child: Column(
+            children: <Widget>[
+              Text("message.str016".tr),
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                  child: Text(
+                widget.phone,
+                style: const TextStyle(fontSize: 25).bold,
+              )),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
+                  child: otpBox),
+              const SizedBox(
+                height: kDefaultPadding * 2,
+              ),
+              InkWell(
+                  onTap: () => {if (expiredTime <= 0) sendotp()},
+                  child: expiredTime > 0
+                      ? Text(
+                          CommonMethods.convertTimeDuration(
+                              seconds: expiredTime),
+                          style: const TextStyle(fontSize: 16),
+                        )
+                      : Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "resend.code".tr,
+                              style: kTextSubTitleStyle.italic.copyWith(
+                                  fontSize: 16,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .color!
+                                      .withOpacity(0.7)),
+                            ),
+                            const SizedBox(width: 5),
+                            Icon(AppIcons.sync_1,
+                                size: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .color!
+                                    .withOpacity(0.7)),
+                          ],
+                        )),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(children: [
+                Expanded(
+                  child: RxPrimaryButton(onTap: _submit, text: "continue".tr),
+                )
+              ]),
+            ],
           ),
-          Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
-              child: otpBox),
-          const SizedBox(
-            height: kDefaultPadding * 2,
-          ),
-          Row(children: [
-            Expanded(
-              child: RxPrimaryButton(onTap: _submit, text: "continue".tr),
-            )
-          ]),
-          const SizedBox(
-            height: kDefaultPadding * 2,
-          ),
-          InkWell(
-              onTap: () => {if (expiredTime <= 0) sendotp()},
-              child: expiredTime > 0
-                  ? Text(
-                      CommonMethods.convertTimeDuration(seconds: expiredTime),
-                      style: const TextStyle(fontSize: 13.0),
-                    )
-                  : Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "resend.code".tr,
-                          style: kTextSubTitleStyle.italic.copyWith(
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .color!
-                                  .withOpacity(0.7)),
-                        ),
-                        Icon(AppIcons.sync_1,
-                            size: 13,
-                            color: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .color!
-                                .withOpacity(0.7)),
-                      ],
-                    )),
-        ],
-      ),
-    );
+        ));
 
     return WillPopScope(
         onWillPop: () async {
@@ -220,6 +228,7 @@ class _OtpVerificationPhoneDialogState extends State<OtpVerificationPhoneDialog>
             title: Text('enter.verification.code'.tr),
             elevation: 0.0,
           ),
+          backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding)

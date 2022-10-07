@@ -125,8 +125,9 @@ class _AdvertDetailPageState extends State<AdvertDetailPage> {
                                         trailing: Text(
                                             (data!.price != null &&
                                                     data!.price! > 0)
-                                                ? CommonMethods.formatNumber(
-                                                    data!.price)
+                                                ? CommonMethods
+                                                    .formatShortCurrency(
+                                                        data!.price)
                                                 : "negotiate".tr,
                                             style: kTextPriceStyle.size(16))),
                                     ListTile(

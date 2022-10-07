@@ -63,7 +63,8 @@ class ItemAdvertWidget extends StatelessWidget {
                                       Row(
                                         children: [
                                           Text(
-                                            item.rxprice,
+                                            CommonMethods.formatShortCurrency(
+                                                item.price),
                                             style: kTextPriceStyle,
                                           ),
                                           const SizedBox(width: 10),
@@ -92,7 +93,7 @@ class ItemAdvertWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
                                       "expiration.date".tr + ": ",

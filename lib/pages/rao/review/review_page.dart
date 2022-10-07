@@ -44,17 +44,16 @@ class _ReviewPageState extends State<ReviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("review".tr),
+        elevation: 0.0,
+      ),
       body: DefaultTabController(
         length: tabs.length,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-              SliverAppBar(
-                floating: true,
-                centerTitle: true,
-                title: Text("review".tr),
-                elevation: 0.0,
-              ),
               SliverPersistentHeader(
                 pinned: true,
                 delegate: RxSliverAppBarTabDelegate(

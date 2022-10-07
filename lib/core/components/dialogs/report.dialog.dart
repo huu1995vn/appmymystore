@@ -75,7 +75,7 @@ class _ReportDialogState extends State<ReportDialog> {
               color: AppColors.black, //change your color here
             ),
             centerTitle: true,
-            title: Text("",
+            title: Text("report.violation".tr,
                 style: kTextHeaderStyle.copyWith(color: AppColors.black)),
             elevation: 0.0,
             backgroundColor: AppColors.grey,
@@ -145,13 +145,18 @@ class _ReportDialogState extends State<ReportDialog> {
         ],
       ),
       persistentFooterButtons: [
-        RxPrimaryButton(
-            onTap: () {
-              if (_keyValidationForm.currentState!.validate()) {
-                onSave();
-              }
-            },
-            text: 'save'.tr)
+        Row(
+          children: [
+            Expanded(
+                child: RxPrimaryButton(
+                    onTap: () {
+                      if (_keyValidationForm.currentState!.validate()) {
+                        onSave();
+                      }
+                    },
+                    text: 'sendreport'.tr))
+          ],
+        )
       ],
     );
   }

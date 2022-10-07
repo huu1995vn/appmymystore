@@ -1,8 +1,8 @@
 const Map<String, String> vi_VN = {
-  'copper': 'đồng',
-  'thousand': 'nghìn',
-  'million': 'triệu',
-  'billion': 'tỷ',
+  'copper': 'Đồng',
+  'thousand': 'Nghìn',
+  'million': 'Triệu',
+  'billion': 'Tỷ',
   "expiration.date": "Ngày hết hạn",
   "new.email": "Nhập email mới",
   "resend.code": "Gửi lại mã",

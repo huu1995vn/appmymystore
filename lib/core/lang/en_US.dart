@@ -1,8 +1,8 @@
 const Map<String, String> en_US = {
-  'copper': 'copper',
-  'thousand': 'thousand',
-  'million': 'million',
-  'billion': 'billion',
+  'copper': 'Copper',
+  'thousand': 'Thousand',
+  'million': 'Million',
+  'billion': 'Billion',
   "expiration.date": "Expiration date",
   "new.email": "new email",
   "resend.code": "Resend.code",

@@ -153,6 +153,22 @@ class _UserPageState extends State<UserPage> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        if (isMyUser)
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: kDefaultPaddingBox),
+                                            child: GestureDetector(
+                                                onTap: _onEdit,
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.edit,
+                                                  color: Colors.black45,
+                                                )),
+                                          )
+                                      ],
+                                    ),
                                     CircleAvatar(
                                       radius: 60.0,
                                       // backgroundColor: AppColors.white,
@@ -169,25 +185,11 @@ class _UserPageState extends State<UserPage> {
                                       ),
                                     ),
                                     SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          data!.fullname!.toUpperCase(),
-                                          style: const TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(width: 10),
-                                        if (isMyUser)
-                                          GestureDetector(
-                                              onTap: _onEdit,
-                                              child: FaIcon(
-                                                FontAwesomeIcons.edit,
-                                                color: Colors.black,
-                                              )),
-                                      ],
+                                    Text(
+                                      data!.fullname!.toUpperCase(),
+                                      style: const TextStyle(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(height: 20),
                                   ],
@@ -206,7 +208,7 @@ class _UserPageState extends State<UserPage> {
                         children: [
                           Padding(
                             padding: EdgeInsets.all(kDefaultPaddingBox),
-                            child: Text("personalinformation".tr,
+                            child: Text("info".tr,
                                 style: TextStyle(
                                     // color: Get.isDarkMode
                                     //     ? Colors.white
@@ -214,40 +216,43 @@ class _UserPageState extends State<UserPage> {
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold)),
                           ),
-                          RxBorderListTile(
-                              child: ListTile(
-                                  title: Text(data!.phone! ?? "NaN"),
-                                  leading: FaIcon(
-                                    FontAwesomeIcons.phone,
-                                  ))),
-                          RxBorderListTile(
-                              child: ListTile(
-                                  title: Text(data!.email! ?? "NaN"),
-                                  leading: FaIcon(
-                                    FontAwesomeIcons.solidEnvelope,
-                                  ),
-                                  trailing: !isMyUser
-                                      ? null
-                                      : GestureDetector(
-                                          onTap: _onChangeEmail,
-                                          child: FaIcon(
-                                            FontAwesomeIcons.edit,
-                                          )))),
-                          RxBorderListTile(
-                              child: ListTile(
-                                  title: Text(data!.address! ?? "NaN",
-                                      style: TextStyle(fontSize: 16)),
-                                  leading: FaIcon(
-                                    FontAwesomeIcons.mapMarkerAlt,
-                                  ),
-                                  trailing: !isMyUser
-                                      ? null
-                                      : GestureDetector(
-                                          onTap: _onChangeAddress,
-                                          child: FaIcon(
-                                            FontAwesomeIcons.edit,
-                                          ),
-                                        ))),
+                          if (data!.phone != "")
+                            RxBorderListTile(
+                                child: ListTile(
+                                    title: Text(data!.phone! ?? "NaN"),
+                                    leading: FaIcon(
+                                      FontAwesomeIcons.phone,
+                                    ))),
+                          if (data!.email != "")
+                            RxBorderListTile(
+                                child: ListTile(
+                                    title: Text(data!.email! ?? "NaN"),
+                                    leading: FaIcon(
+                                      FontAwesomeIcons.solidEnvelope,
+                                    ),
+                                    trailing: !isMyUser
+                                        ? null
+                                        : GestureDetector(
+                                            onTap: _onChangeEmail,
+                                            child: FaIcon(
+                                              FontAwesomeIcons.edit,
+                                            )))),
+                          if (data!.address != "")
+                            RxBorderListTile(
+                                child: ListTile(
+                                    title: Text(data!.address! ?? "NaN",
+                                        style: TextStyle(fontSize: 16)),
+                                    leading: FaIcon(
+                                      FontAwesomeIcons.mapMarkerAlt,
+                                    ),
+                                    trailing: !isMyUser
+                                        ? null
+                                        : GestureDetector(
+                                            onTap: _onChangeAddress,
+                                            child: FaIcon(
+                                              FontAwesomeIcons.edit,
+                                            ),
+                                          ))),
                           if (isMyUser)
                             RxBorderListTile(
                                 child: ListTile(
@@ -276,20 +281,4 @@ class _UserPageState extends State<UserPage> {
             ),
     );
   }
-
-  // Widget _top() {
-  //   final userProvider = Provider.of<AppProvider>(context);
-  //   return ListTile(
-  //     leading: RxAvatarImage(isMyUser ? userProvider.user.rximg : data!.rximg,
-  //         size: 50),
-  //     title: Text(
-  //       isMyUser ? userProvider.user.fullname! : data!.fullname!,
-  //       style: const TextStyle(
-  //         fontSize: 19,
-  //       ),
-  //     ),
-  //     trailing:
-  //         isMyUser ? RxIconButton(icon: AppIcons.edit, onTap: _onEdit) : null,
-  //   );
-  // }
 }

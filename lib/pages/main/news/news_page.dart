@@ -34,8 +34,7 @@ class _NewsPageState extends State<NewsPage> {
       .toList();
   @override
   Widget build(BuildContext context) {
-    return 
-    Scaffold(
+    return Scaffold(
       body: DefaultTabController(
         length: tabs.length,
         child: NestedScrollView(
@@ -47,22 +46,22 @@ class _NewsPageState extends State<NewsPage> {
                 elevation: 0.0,
               ),
               SliverPersistentHeader(
+                floating: true,
                 pinned: true,
                 delegate: RxSliverAppBarTabDelegate(
-                  child: PreferredSize(
-                    preferredSize: Size.fromHeight(50),
-                    child: ColoredBox(
-                    color: Get.isDarkMode ? Colors.white10 : Colors.white,
-                      child: TabBar(
-                       isScrollable: true,
-                      labelColor: AppColors.primary,
-                      unselectedLabelColor:
-                          Get.isDarkMode ? Colors.white : AppColors.black,
-                      indicatorColor: Colors.red[800],
-                      tabs: tabs,
-                      ),
-                    ))
-                ),
+                    child: PreferredSize(
+                        preferredSize: Size.fromHeight(50),
+                        child: ColoredBox(
+                          color: Get.isDarkMode ? Colors.white10 : Colors.white,
+                          child: TabBar(
+                            isScrollable: true,
+                            labelColor: AppColors.primary,
+                            unselectedLabelColor:
+                                Get.isDarkMode ? Colors.white : AppColors.black,
+                            indicatorColor: Colors.red[800],
+                            tabs: tabs,
+                          ),
+                        ))),
               ),
             ];
           },
@@ -72,6 +71,5 @@ class _NewsPageState extends State<NewsPage> {
         ),
       ),
     );
-   
   }
 }

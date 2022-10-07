@@ -258,6 +258,7 @@ const Map<String, String> en_US = {
   "close": "Close",
   "ignore": "Ignore",
   "hide": "Hide",
+  "preview": "Preview",
   "seemore": "See more",
   "help": "Help",
   "termsandcondition": "Terms and conditions",
@@ -295,6 +296,8 @@ const Map<String, String> en_US = {
   "gear": "gearbox",
   "door": "Door number",
   "fueltype": "Fuel",
+  "pricereport": "Price Report",
+  "testdrive": "Test Drive",
   "unknown": "Unknown",
   "message.str001":
       "This article has been moderated. If you have a problem, please report it.",

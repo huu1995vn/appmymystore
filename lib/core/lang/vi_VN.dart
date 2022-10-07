@@ -258,6 +258,7 @@ const Map<String, String> vi_VN = {
   "close": "Đóng",
   "ignore": "Bỏ qua",
   "hide": "Ẩn",
+  "preview": "Xem trước",
   "seemore": "Xem thêm",
   "help": "Trợ giúp",
   "termsandcondition": "Điều khoản và điều kiện",
@@ -295,6 +296,8 @@ const Map<String, String> vi_VN = {
   "gear": "Hộp số",
   "door": "Số cửa",
   "fueltype": "Nhiên liệu",
+  "pricereport": "Nhận báo giá",
+  "testdrive": "Đăng ký lái thử",
   "unknown": "Chưa xác định",
   "message.str001":
       "Bài viết này đã được kiểm duyệt. Nếu gặp vấn đề, bạn vui lòng báo vi phạm",

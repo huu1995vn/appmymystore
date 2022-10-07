@@ -59,28 +59,44 @@ class ItemAdvertWidget extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(fontSize: 16),
                                       ),
-                                      Text(
-                                        item.status == 1
-                                            ? "active".tr
-                                            : "expired".tr,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: item.status == 1
-                                                ? Colors.green
-                                                : Colors.red),
-                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            item.rxprice,
+                                            style: kTextPriceStyle,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: item.status == 1
+                                                    ? Colors.green
+                                                    : Colors.red,
+                                              ),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 5,
+                                                      vertical: 2),
+                                              child: Text(
+                                                  item.status == 1
+                                                      ? "active".tr
+                                                      : "expired".tr,
+                                                  style: const TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.white)))
+                                        ],
+                                      )
                                     ],
                                   ),
                                 ),
                                 Row(
-                                  // spacing: kDefaultPadding,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
-                                      item.rxprice,
-                                      style: kTextPriceStyle,
+                                      "expiration.date".tr + ": ",
+                                      style: kTextTimeStyle,
                                     ),
                                     Text(
                                         CommonMethods.formatDateTime(

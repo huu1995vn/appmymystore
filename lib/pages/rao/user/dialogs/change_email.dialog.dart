@@ -53,12 +53,12 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
 
   Widget _body() {
     return Padding(
-      padding: const EdgeInsets.all(kDefaultPaddingBox),
+      padding: const EdgeInsets.all(20.0),
       child: Column(children: <Widget>[
         Form(
           key: _keyValidationForm,
           child: Container(
-              margin: const EdgeInsets.only(bottom: 20),
+              margin: const EdgeInsets.only(top: 20, bottom: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.black26)),
@@ -66,7 +66,7 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
                 children: <Widget>[
                   Container(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
                     child: RxInput(email,
                         labelText: "new.email".tr,
                         icon: const Icon(AppIcons.email),

@@ -209,7 +209,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
                 },
               ),
               RxButtonBar(
-                icon: FaIcon(FontAwesomeIcons.earth, size: 17),
+                icon: FaIcon(FontAwesomeIcons.newspaper, size: 17),
                 isEnable: _selectedIndex == 1,
                 onPressed: () {
                   onPressedTab(1);
@@ -220,7 +220,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
               ),
               Stack(children: <Widget>[
                 RxButtonBar(
-                  icon: FaIcon(FontAwesomeIcons.bell, size: 19),
+                  icon: FaIcon(FontAwesomeIcons.solidBell, size: 19),
                   isEnable: _selectedIndex == 2,
                   onPressed: () {
                     onPressedTab(2);

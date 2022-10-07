@@ -77,7 +77,7 @@ const Map<String, String> en_US = {
   "error": "Error",
   "fail": "fail",
   "warning": "Warning",
-  "uptop": "To the top",
+  "uptop": "Up top",
   "uptop.success": "Successful to the top",
   "uptop.fail": "Uptop failed",
   "create": "Create new",

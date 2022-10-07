@@ -66,10 +66,10 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
           setState(() {
             data = dataClone;
           });
-          CommonMethods.showToast("update.success".tr);
+          CommonMethods.showToast("success".tr);
         } else {
           CommonNavigates.goBack(context);
-          CommonMethods.showToast("create.success".tr);
+          CommonMethods.showToast("success".tr);
         }
       } else {
         CommonMethods.showToast(res.message);

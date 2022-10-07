@@ -89,7 +89,7 @@ const Map<String, String> en_US = {
   "create.fail": "Create new failed",
   "update": "update",
   "update.info": "Update information",
-  "update.success": "update successful",
+  "update.success": "Update successful",
   "update.fail": "Update failed",
   "update.newversion": "Update new version",
   "delete": "Delete",

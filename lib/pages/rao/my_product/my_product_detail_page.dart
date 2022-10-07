@@ -118,7 +118,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       body["ids"] = [data!.id];
       ResponseModel res = await DaiLyXeApiBLL_APIUser().productuptop(body);
       if (res.status > 0) {
-        CommonMethods.showToast("update.success".tr);
+        CommonMethods.showToast("success".tr);
       } else {
         CommonMethods.showDialogError(context, res.message);
       }
@@ -248,8 +248,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
           widget.onChanged!(dataClone);
         }
         CommonMethods.unlockScreen();
-        await CommonMethods.showConfirmDialog(context,
-            dataClone.id > 0 ? "update.success".tr : "create.success".tr);
+        await CommonMethods.showConfirmDialog(context, "success".tr);
         if (!(data!.id > 0)) {
           CommonNavigates.goBack(context, dataClone);
         }

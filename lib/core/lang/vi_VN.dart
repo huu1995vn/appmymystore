@@ -1,6 +1,6 @@
 const Map<String, String> vi_VN = {
   "expiration.date": "Ngày hết hạn",
-  "new.email": "Email mới",
+  "new.email": "Nhập email mới",
   "resend.code": "Gửi lại mã",
   "bookmark": "Tin đã lưu",
   "cancelfilter": "Bỏ lọc",
@@ -173,7 +173,7 @@ const Map<String, String> vi_VN = {
   "password": "Mật khẩu",
   "password.new": "Mật khẩu mới",
   "password.old": "Mật khẩu cũ",
-  "password.again": "Nhập mật khẩu",
+  "password.again": "Nhập lại mật khẩu",
   "info": "Thông tin",
   "info.concat": "Thông tin liên hệ",
   "info.account": "Thông tin tài khoản",

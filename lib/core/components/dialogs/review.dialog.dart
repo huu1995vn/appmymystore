@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, import_of_legacy_library_into_null_safe
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -63,7 +64,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -88,17 +89,18 @@ class _ReviewDialogState extends State<ReviewDialog> {
                               style: kTextHeaderStyle
                                   .copyWith(color: AppColors.black)
                                   .size(17)),
+                          SizedBox(height: 10),
                           Padding(
                             padding: const EdgeInsets.all(kDefaultPadding),
                             child: RatingBar(
                               filledColor: AppColors.yellow,
-                              size: 39,
+                              size: 45,
                               initialRating: 5,
                               onRatingChanged: (_) {
                                 review.ratingvalue = _.round();
                               },
-                              emptyIcon: AppIcons.star_1,
-                              filledIcon: AppIcons.star_1,
+                              emptyIcon: AppIcons.star_border,
+                              filledIcon: AppIcons.star_2,
                             ),
                           ),
                           _header(

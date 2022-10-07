@@ -207,7 +207,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       padding: const EdgeInsets.only(top: 10, bottom: 10, right: 5, left: 5),
       child: Row(
         children: [
-          if (leading != null) leading,
+          if (leading != null)
+            Container(width: 25, alignment: Alignment.center, child: leading),
           const SizedBox(width: 10),
           SizedBox(
               width: 100,
@@ -297,67 +298,44 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         Card(
             margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
             child: Padding(
-              padding: const EdgeInsets.all(kDefaultPaddingBox),
-              child: Row(
-                children: [
-                  Icon(
-                    AppIcons.map_1,
-                    size: 13,
-                    color: Get.isDarkMode ? Colors.white : Colors.black,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Flexible(
-                      child: Text(data!.address ?? "NaN",
-                          style: const TextStyle(fontSize: 13)))
-                ],
-              ),
-            )),
-        Card(
-          margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
-          child: Padding(
-            padding: const EdgeInsets.all(kDefaultPaddingBox),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("specification".tr,
-                    style: const TextStyle(
-                        // color: Get.isDarkMode
-                        //     ? Colors.white
-                        //     : Colors.grey[700],
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold)),
-                const SizedBox(
-                  height: 5,
-                ),
-                _listTitle("model".tr, data!.modelname,
-                    leading:
-                        const FaIcon(FontAwesomeIcons.car, color: AppColors.primary)),
-                _listTitle("bodytype".tr, data!.bodytypename,
-                    leading: const FaIcon(FontAwesomeIcons.carSide,
-                        color: AppColors.primary)),
-                _listTitle("color".tr, data!.colorname,
-                    leading: const FaIcon(FontAwesomeIcons.palette,
-                        color: AppColors.primary)),
-                _listTitle("seat".tr, data!.seat,
-                    leading: const Icon(AppIcons.airline_seat_legroom_normal,
-                        color: AppColors.primary)),
-                _listTitle("fueltype".tr, data!.fueltypename,
-                    leading: const FaIcon(FontAwesomeIcons.gasPump,
-                        color: AppColors.primary)),
-                _listTitle("year".tr, data!.year,
-                    leading: const FaIcon(FontAwesomeIcons.calendar,
-                        color: AppColors.primary)),
-                _listTitle("madein".tr, data!.madeinname,
-                    leading: const FaIcon(FontAwesomeIcons.circleInfo,
-                        color: AppColors.primary)),
-              ],
-            ),
-          ),
-        ),
+                padding: const EdgeInsets.all(kDefaultPaddingBox),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.phone,
+                          size: 13,
+                          color: Get.isDarkMode ? Colors.white : Colors.black,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Flexible(
+                            child: Text(data!.phone ?? "NaN",
+                                style: const TextStyle(fontSize: 16)))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.mapMarkerAlt,
+                          size: 13,
+                          color: Get.isDarkMode ? Colors.white : Colors.black,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Flexible(
+                            child: Text(data!.address ?? "NaN",
+                                style: const TextStyle(fontSize: 16)))
+                      ],
+                    ),
+                  ],
+                ))),
         Card(
             margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
             child: Padding(
@@ -382,6 +360,50 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           maxLines: null,
                           enabled: false),
                     ]))),
+        Card(
+          margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPaddingBox),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("specification".tr,
+                    style: const TextStyle(
+                        // color: Get.isDarkMode
+                        //     ? Colors.white
+                        //     : Colors.grey[700],
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  height: 5,
+                ),
+                _listTitle("model".tr, data!.modelname,
+                    leading: const FaIcon(FontAwesomeIcons.car,
+                        color: AppColors.primary)),
+                _listTitle("bodytype".tr, data!.bodytypename,
+                    leading: const FaIcon(FontAwesomeIcons.carSide,
+                        color: AppColors.primary)),
+                _listTitle("color".tr, data!.colorname,
+                    leading: const FaIcon(FontAwesomeIcons.palette,
+                        color: AppColors.primary)),
+                _listTitle("seat".tr, data!.seat,
+                    leading: const Icon(AppIcons.airline_seat_legroom_normal,
+                        color: AppColors.primary)),
+                _listTitle("fueltype".tr, data!.fueltypename,
+                    leading: const FaIcon(FontAwesomeIcons.gasPump,
+                        color: AppColors.primary)),
+                _listTitle("year".tr, data!.year,
+                    leading: const FaIcon(FontAwesomeIcons.calendar,
+                        color: AppColors.primary)),
+                _listTitle("madein".tr, data!.madeinname,
+                    leading: const FaIcon(FontAwesomeIcons.circleInfo,
+                        color: AppColors.primary)),
+              ],
+            ),
+          ),
+        ),
         Card(
           margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
           child: Padding(
@@ -492,12 +514,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         RatingBar.readOnly(
                           filledColor: AppColors.yellow,
                           emptyColor: AppColors.yellow,
-                          size: 30,
+                          size: 40,
                           initialRating: data!.ratingvalue,
                           isHalfAllowed: true,
-                          emptyIcon: FontAwesomeIcons.star,
-                          filledIcon: FontAwesomeIcons.solidStar,
-                          halfFilledIcon: FontAwesomeIcons.starHalfStroke,
+                          emptyIcon: AppIcons.star_border,
+                          filledIcon: AppIcons.star_2,
+                          halfFilledIcon: AppIcons.star_2,
                         ),
                       ],
                     ),

@@ -146,7 +146,7 @@ class _UserPageState extends State<UserPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(kDefaultPadding),
                         child: SizedBox(
-                          height: 170,
+                          height: 200,
                           child: Stack(
                             children: [
                               Center(
@@ -169,12 +169,27 @@ class _UserPageState extends State<UserPage> {
                                       ),
                                     ),
                                     SizedBox(height: 10),
-                                    Text(
-                                      data!.fullname!.toUpperCase(),
-                                      style: const TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.bold),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          data!.fullname!.toUpperCase(),
+                                          style: const TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(width: 10),
+                                        if (isMyUser)
+                                          GestureDetector(
+                                              onTap: _onEdit,
+                                              child: FaIcon(
+                                                FontAwesomeIcons.edit,
+                                                color: Colors.black,
+                                              )),
+                                      ],
                                     ),
+                                    SizedBox(height: 20),
                                   ],
                                 ),
                               )
@@ -211,38 +226,42 @@ class _UserPageState extends State<UserPage> {
                                   leading: FaIcon(
                                     FontAwesomeIcons.solidEnvelope,
                                   ),
-                                  onTap: _onChangeEmail,
                                   trailing: !isMyUser
                                       ? null
-                                      : Icon(
-                                          AppIcons.keyboard_arrow_right,
-                                        ))),
+                                      : GestureDetector(
+                                          onTap: _onChangeEmail,
+                                          child: FaIcon(
+                                            FontAwesomeIcons.edit,
+                                          )))),
                           RxBorderListTile(
                               child: ListTile(
-                                  title: Text(data!.address! ?? "NaN"),
+                                  title: Text(data!.address! ?? "NaN",
+                                      style: TextStyle(fontSize: 16)),
                                   leading: FaIcon(
-                                    FontAwesomeIcons.mapPin,
+                                    FontAwesomeIcons.mapMarkerAlt,
                                   ),
-                                  onTap: _onChangeAddress,
                                   trailing: !isMyUser
                                       ? null
-                                      : Icon(
-                                          AppIcons.keyboard_arrow_right,
+                                      : GestureDetector(
+                                          onTap: _onChangeAddress,
+                                          child: FaIcon(
+                                            FontAwesomeIcons.edit,
+                                          ),
                                         ))),
                           if (isMyUser)
                             RxBorderListTile(
                                 child: ListTile(
-                              title: Text("change.password".tr),
-                              leading: FaIcon(
-                                FontAwesomeIcons.lock,
-                              ),
-                              onTap: _onChangePassword,
-                              trailing: !isMyUser
-                                  ? null
-                                  : Icon(
-                                      AppIcons.keyboard_arrow_right,
+                                    title: Text("change.password".tr),
+                                    leading: FaIcon(
+                                      FontAwesomeIcons.lock,
                                     ),
-                            )),
+                                    trailing: !isMyUser
+                                        ? null
+                                        : GestureDetector(
+                                            onTap: _onChangePassword,
+                                            child: FaIcon(
+                                              FontAwesomeIcons.edit,
+                                            )))),
                         ],
                       ),
                     ),

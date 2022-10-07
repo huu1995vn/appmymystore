@@ -14,7 +14,6 @@ import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 
-
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
@@ -83,8 +82,12 @@ class _DashboardPageState extends State<DashboardPage> {
                         RxBorderListTile(
                           child: ListTile(
                             title: Text("manager.raoxe".tr),
-                            leading: FaIcon(
-                              FontAwesomeIcons.bullhorn,
+                            leading: Container(
+                              width: 25,
+                              alignment: Alignment.center,
+                              child: FaIcon(
+                                FontAwesomeIcons.bullhorn,
+                              ),
                             ),
                             onTap: () =>
                                 CommonNavigates.toMyProductPage(context),
@@ -97,8 +100,12 @@ class _DashboardPageState extends State<DashboardPage> {
                         RxBorderListTile(
                           child: ListTile(
                             title: Text("ads".tr),
-                            leading: FaIcon(
-                              FontAwesomeIcons.rss,
+                            leading: Container(
+                              width: 25,
+                              alignment: Alignment.center,
+                              child: FaIcon(
+                                FontAwesomeIcons.rss,
+                              ),
                             ),
                             onTap: () => CommonNavigates.toAdvertPage(context),
                             trailing: Icon(
@@ -110,8 +117,12 @@ class _DashboardPageState extends State<DashboardPage> {
                         RxBorderListTile(
                           child: ListTile(
                             title: Text("contact".tr),
-                            leading: FaIcon(
-                              FontAwesomeIcons.envelope,
+                            leading: Container(
+                              width: 25,
+                              alignment: Alignment.center,
+                              child: FaIcon(
+                                FontAwesomeIcons.envelope,
+                              ),
                             ),
                             onTap: () =>
                                 CommonNavigates.toVehicleContactPage(context),
@@ -123,8 +134,12 @@ class _DashboardPageState extends State<DashboardPage> {
                         RxBorderListTile(
                           child: ListTile(
                             title: Text("bookmark".tr),
-                            leading: FaIcon(
-                              FontAwesomeIcons.bookmark,
+                            leading: Container(
+                              width: 25,
+                              alignment: Alignment.center,
+                              child: FaIcon(
+                                FontAwesomeIcons.solidBookmark,
+                              ),
                             ),
                             onTap: () =>
                                 CommonNavigates.toFavoritePage(context),
@@ -136,8 +151,12 @@ class _DashboardPageState extends State<DashboardPage> {
                         RxBorderListTile(
                           child: ListTile(
                             title: Text("review".tr),
-                            leading: FaIcon(
-                              FontAwesomeIcons.star,
+                            leading: Container(
+                              width: 25,
+                              alignment: Alignment.center,
+                              child: FaIcon(
+                                FontAwesomeIcons.star,
+                              ),
                             ),
                             onTap: () => CommonNavigates.toReviewPage(context),
                             trailing: Icon(
@@ -149,8 +168,12 @@ class _DashboardPageState extends State<DashboardPage> {
                         RxBorderListTile(
                           child: ListTile(
                             title: Text("address".tr),
-                            leading: FaIcon(
-                              FontAwesomeIcons.mapPin,
+                            leading: Container(
+                              width: 25,
+                              alignment: Alignment.center,
+                              child: FaIcon(
+                                FontAwesomeIcons.mapMarkerAlt,
+                              ),
                             ),
                             onTap: () => CommonNavigates.toContactPage(context),
                             trailing: Icon(
@@ -168,8 +191,12 @@ class _DashboardPageState extends State<DashboardPage> {
                         RxBorderListTile(
                           child: ListTile(
                             title: Text("setting".tr),
-                            leading: FaIcon(
-                              FontAwesomeIcons.cog,
+                            leading: Container(
+                              width: 25,
+                              alignment: Alignment.center,
+                              child: FaIcon(
+                                FontAwesomeIcons.cog,
+                              ),
                             ),
                             onTap: () =>
                                 CommonNavigates.toSettingsPage(context),

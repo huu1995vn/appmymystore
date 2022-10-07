@@ -52,54 +52,48 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
   }
 
   Widget _body() {
-    return Container(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(children: <Widget>[
-          Form(
-            key: _keyValidationForm,
-            child: Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.black26)),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 5),
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: Colors.black26))),
-                      child: RxInput(email,
-                          labelText: "new.email".tr,
-                          icon: const Icon(AppIcons.email),
-                          onChanged: (v) => {
-                                setState(() => {email = v})
-                              },
-                          validator: Validators.compose([
-                            Validators.required("notempty.email".tr),
-                            Validators.patternString(
-                                RxParttern.email, "invalid.email".tr)
-                          ])),
-                    ),
-                  ],
-                )),
-          ),
-          Row(children: [
-            Expanded(
-              child: RxPrimaryButton(
-                  onTap: () {
-                    if (_keyValidationForm.currentState!.validate()) {
-                      onChangeEmail();
-                    }
-                  },
-                  text: 'continue'.tr),
-            )
-          ]),
+    return Padding(
+      padding: const EdgeInsets.all(kDefaultPaddingBox),
+      child: Column(children: <Widget>[
+        Form(
+          key: _keyValidationForm,
+          child: Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.black26)),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    child: RxInput(email,
+                        labelText: "new.email".tr,
+                        icon: const Icon(AppIcons.email),
+                        onChanged: (v) => {
+                              setState(() => {email = v})
+                            },
+                        validator: Validators.compose([
+                          Validators.required("notempty.email".tr),
+                          Validators.patternString(
+                              RxParttern.email, "invalid.email".tr)
+                        ])),
+                  ),
+                ],
+              )),
+        ),
+        Row(children: [
+          Expanded(
+            child: RxPrimaryButton(
+                onTap: () {
+                  if (_keyValidationForm.currentState!.validate()) {
+                    onChangeEmail();
+                  }
+                },
+                text: 'continue'.tr),
+          )
         ]),
-      ),
+      ]),
     );
   }
 

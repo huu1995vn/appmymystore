@@ -45,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return RxScaffold(
         appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness:
                 Brightness.dark, //<-- For Android SEE HERE (dark icons)
             statusBarBrightness:
@@ -59,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         child: SingleChildScrollView(
             child: Padding(
-          padding: const EdgeInsets.all(kDefaultPadding),
+          padding: const EdgeInsets.only(top: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -72,18 +72,19 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _header() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: kDefaultPadding),
+      padding: const EdgeInsets.all(kDefaultPadding),
       child: Center(
         child: Column(
           children: [
             Image.asset(
               LOGORAOXECOLORIMAGE,
-              width: 150,
+              width: 180,
             ),
-            Text("regist".tr, style: const TextStyle(color: AppColors.white)),
-            if (user!.phone != null)
-              Text(user!.phone!,
-                  style: kTextHeaderStyle.copyWith(color: AppColors.white))
+            const SizedBox(height: 30),
+            Text("regist".tr.toUpperCase(),
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            if (user!.phone != null) Text(user!.phone!, style: kTextHeaderStyle)
           ],
         ),
       ),
@@ -92,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _body() {
     return Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -117,8 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   icon: const Icon(AppIcons.user_1),
                                   onChanged: (v) => {user!.fullname = v},
                                   validator: Validators.compose([
-                                    Validators.required(
-                                        "notempty.fullname".tr),
+                                    Validators.required("notempty.fullname".tr),
                                   ]))),
                           Container(
                               padding: const EdgeInsets.symmetric(
@@ -155,10 +155,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 icon: const Icon(AppIcons.lock_1),
                                 onChanged: (v) => {user!.password = v},
                                 validator: Validators.compose([
-                                  Validators.required(
-                                      "notempty.password".tr),
-                                  Validators.patternString(RxParttern.password,
-                                      "message.str004".tr)
+                                  Validators.required("notempty.password".tr),
+                                  Validators.patternString(
+                                      RxParttern.password, "message.str004".tr)
                                 ]),
                               )),
                           Container(

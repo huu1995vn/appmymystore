@@ -139,8 +139,7 @@ class AuthService {
   static Future<bool> verifyOTPEmail(String email, String code) async {
     ResponseModel res =
         await DaiLyXeApiBLL_APIAnonymous().verifyotpemail(email, code);
-    if(res.status <= 0)
-    {
+    if (res.status <= 0) {
       throw Exception(res.message);
     }
     return res.status > 0;

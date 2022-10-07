@@ -134,6 +134,7 @@ class _UserPageState extends State<UserPage> {
           : CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
+                  floating: true,
                   centerTitle: true,
                   title: Text("personalinformation".tr),
                   elevation: 0.0,

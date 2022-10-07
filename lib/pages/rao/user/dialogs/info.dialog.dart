@@ -124,6 +124,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
             : CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
+                    floating: true,
                     iconTheme: const IconThemeData(
                       color: AppColors.white,
                     ),

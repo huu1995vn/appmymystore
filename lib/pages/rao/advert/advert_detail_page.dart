@@ -67,6 +67,7 @@ class _AdvertDetailPageState extends State<AdvertDetailPage> {
           : CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
+                  floating: true,
                   centerTitle: true,
                   title: Text(
                     data!.name!,

@@ -35,18 +35,17 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("news".tr),
+        elevation: 0.0,
+      ),
       body: DefaultTabController(
         length: tabs.length,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-              SliverAppBar(
-                centerTitle: true,
-                title: Text("news".tr),
-                elevation: 0.0,
-              ),
               SliverPersistentHeader(
-                floating: true,
                 pinned: true,
                 delegate: RxSliverAppBarTabDelegate(
                     child: PreferredSize(

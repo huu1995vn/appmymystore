@@ -50,6 +50,7 @@ class _ReviewPageState extends State<ReviewPage> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
+                floating: true,
                 centerTitle: true,
                 title: Text("review".tr),
                 elevation: 0.0,
@@ -57,20 +58,19 @@ class _ReviewPageState extends State<ReviewPage> {
               SliverPersistentHeader(
                 pinned: true,
                 delegate: RxSliverAppBarTabDelegate(
-                  child: PreferredSize(
-                    preferredSize: Size.fromHeight(50),
-                    child: ColoredBox(
-                    color: Get.isDarkMode ? Colors.white10 : Colors.white,
-                      child: TabBar(
-                       isScrollable: true,
-                      labelColor: AppColors.primary,
-                      unselectedLabelColor:
-                          Get.isDarkMode ? Colors.white : AppColors.black,
-                      indicatorColor: Colors.red[800],
-                      tabs: tabs,
-                      ),
-                    ))
-                ),
+                    child: PreferredSize(
+                        preferredSize: Size.fromHeight(50),
+                        child: ColoredBox(
+                          color: Get.isDarkMode ? Colors.white10 : Colors.white,
+                          child: TabBar(
+                            isScrollable: true,
+                            labelColor: AppColors.primary,
+                            unselectedLabelColor:
+                                Get.isDarkMode ? Colors.white : AppColors.black,
+                            indicatorColor: Colors.red[800],
+                            tabs: tabs,
+                          ),
+                        ))),
               ),
             ];
           },

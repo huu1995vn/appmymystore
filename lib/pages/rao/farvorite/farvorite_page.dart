@@ -86,6 +86,7 @@ class _FavoritePageState extends State<FavoritePage> {
       key: _key,
       body: RxCustomScrollView(
         appBar: SliverAppBar(
+          floating: true,
           centerTitle: true,
           title: Text('favorite'.tr),
           elevation: 0.0,

@@ -32,9 +32,16 @@ import 'package:firebase_core/firebase_core.dart';
 init() async {
   await initializeApp();
   configLoading();
-  return runApp(
-    const MyApp(),
-  );
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((value) {
+    // Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
+    runApp(MyApp());
+  });
+  // return runApp(
+  //   const MyApp(),
+  // );
 }
 
 void configLoading() {
@@ -84,10 +91,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     //#to prevent my application from changing its orientation and force the layout
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(

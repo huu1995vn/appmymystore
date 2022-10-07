@@ -72,9 +72,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     try {
       var res = await CommonMethods.onFavorite(
           context, [data!.id], !data!.isfavorite);
-      setState(() {
-        data = data;
-      });
+      if (res) {
+        setState(() {
+          data = data;
+        });
+        CommonMethods.showToast("success".tr);
+      }
     } catch (e) {
       CommonMethods.showDialogError(context, e);
     }
@@ -85,8 +88,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       CommonMethods.showToast("please.login".tr);
       return;
     }
-    await CommonNavigates.openDialog(
-        context, ReviewDialog(product: data!));
+    await CommonNavigates.openDialog(context, ReviewDialog(product: data!));
   }
 
   _onShare() {

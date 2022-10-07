@@ -27,11 +27,13 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
   onFavorite() async {
     // ProductModel item = listData![index];
     try {
-      await CommonMethods.onFavorite(
+      var res = await CommonMethods.onFavorite(
           context, [widget.item.id], !widget.item.isfavorite);
-      setState(() {
-        // listData![index] = item;
-      });
+    
+      if (res) {
+        setState(() {});
+        CommonMethods.showToast("success".tr);
+      }
     } catch (e) {
       CommonMethods.showDialogError(context, e);
     }

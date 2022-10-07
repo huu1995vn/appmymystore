@@ -121,7 +121,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               width: 25,
                               alignment: Alignment.center,
                               child: FaIcon(
-                                FontAwesomeIcons.envelope,
+                                FontAwesomeIcons.solidEnvelope,
                               ),
                             ),
                             onTap: () =>
@@ -155,7 +155,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               width: 25,
                               alignment: Alignment.center,
                               child: FaIcon(
-                                FontAwesomeIcons.star,
+                                FontAwesomeIcons.solidStar,
                               ),
                             ),
                             onTap: () => CommonNavigates.toReviewPage(context),

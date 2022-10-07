@@ -60,10 +60,16 @@ class RxDisabled extends StatelessWidget {
 class RxWebView extends StatefulWidget {
   String? url;
   String? title;
+  Widget? action;
   String? javaScriptString;
   String? html;
   RxWebView(
-      {super.key, this.url, this.title, this.javaScriptString, this.html});
+      {super.key,
+      this.url,
+      this.title,
+      this.action,
+      this.javaScriptString,
+      this.html});
   @override
   RxWebViewState createState() => RxWebViewState();
 }
@@ -87,6 +93,7 @@ class RxWebViewState extends State<RxWebView> {
           centerTitle: true,
           title: Text(widget.title ?? ""),
           elevation: 0.0,
+          actions: [widget.action ?? Container()],
         ),
         body: Stack(
           children: <Widget>[
@@ -653,17 +660,19 @@ _onSelect(BuildContext context, String type, dynamic id,
     if (afterChange != null) afterChange(res);
   }
 }
+
 Widget RxBorderListTile({Widget? child}) {
-    return Container(
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: Get.isDarkMode
-                ? BorderSide(color: Color.fromARGB(12, 255, 255, 255), width: 1)
-                : BorderSide(color: Color.fromARGB(12, 0, 0, 0), width: 1),
-          ),
+  return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: Get.isDarkMode
+              ? BorderSide(color: Color.fromARGB(12, 255, 255, 255), width: 1)
+              : BorderSide(color: Color.fromARGB(12, 0, 0, 0), width: 1),
         ),
-        child: child);
-  }
+      ),
+      child: child);
+}
+
 Widget RxBuildItemReview(ReviewModel item) {
   return ListTile(
       title: Column(

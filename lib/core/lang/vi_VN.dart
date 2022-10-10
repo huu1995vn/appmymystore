@@ -101,6 +101,7 @@ const Map<String, String> vi_VN = {
   "verify": "Xác thực",
   "verify.now": "Xác thực ngay",
   "verify.password": "Xác thực mật khẩu",
+  "verify.email": "Xác thực email mới",
   "verify.newemail": "Xác thực email mới",
   "verify.newephone": "Xác thực điện thoại mới",
   "edit": "Chỉnh sửa",

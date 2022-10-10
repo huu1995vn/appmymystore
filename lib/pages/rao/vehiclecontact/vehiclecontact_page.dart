@@ -43,7 +43,8 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
       if (res.status > 0) {
         List<VehicleContactModel> list =
             CommonMethods.convertToList<VehicleContactModel>(
-                res.data, (val) => VehicleContactModel.fromJson(val));
+                res.data ?? [], (val) => VehicleContactModel.fromJson(val));
+        
         setState(() {
           if (nPaging == 1 && (list.isEmpty)) {
             totalItems = 0;

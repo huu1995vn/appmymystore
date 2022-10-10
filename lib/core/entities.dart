@@ -640,6 +640,7 @@ class VehicleContactModel extends Entity {
         CommonMethods.convertToInt32(json["vehiclecontacttypeid"]);
     json["createdate"] =
         CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
+    json["status"] = CommonMethods.convertToInt32(json["status"]);
     return _$VehicleContactModelFromJson(json);
   }
 

@@ -44,7 +44,7 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
         List<VehicleContactModel> list =
             CommonMethods.convertToList<VehicleContactModel>(
                 res.data ?? [], (val) => VehicleContactModel.fromJson(val));
-        
+
         setState(() {
           if (nPaging == 1 && (list.isEmpty)) {
             totalItems = 0;
@@ -82,7 +82,6 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
         ResponseModel res = await DaiLyXeApiBLL_APIUser()
             .vehiclecontactdelete([listData![index].id]);
         if (res.status > 0) {
-          
           setState(() {
             listData!.removeAt(index);
           });
@@ -97,46 +96,46 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
     }
   }
 
-  _onDeleteAll() async {
-    if (listData != null && listData!.isNotEmpty) {
-      var res =
-          await CommonMethods.showConfirmDialog(context, "message.alert01".tr);
-      if (!res) return;
-      try {
-        List<int> ids = listData!.map((e) => e.id).toList();
-        ResponseModel res =
-            await DaiLyXeApiBLL_APIUser().vehiclecontactdelete(ids);
-        if (res.status > 0) {
-          CommonMethods.showToast("success".tr);
-          loadData();
-        } else {
-          CommonMethods.showToast(res.message);
-        }
-        //Call api gọi api xóa
-      } catch (e) {
-        CommonMethods.showDialogError(context, e);
-      }
-    }
-  }
+  // _onDeleteAll() async {
+  //   if (listData != null && listData!.isNotEmpty) {
+  //     var res =
+  //         await CommonMethods.showConfirmDialog(context, "message.alert01".tr);
+  //     if (!res) return;
+  //     try {
+  //       List<int> ids = listData!.map((e) => e.id).toList();
+  //       ResponseModel res =
+  //           await DaiLyXeApiBLL_APIUser().vehiclecontactdelete(ids);
+  //       if (res.status > 0) {
+  //         CommonMethods.showToast("success".tr);
+  //         loadData();
+  //       } else {
+  //         CommonMethods.showToast(res.message);
+  //       }
+  //       //Call api gọi api xóa
+  //     } catch (e) {
+  //       CommonMethods.showDialogError(context, e);
+  //     }
+  //   }
+  // }
 
-  _onSeen() async {
-    if (listData != null && listData!.isNotEmpty) {
-      try {
-        List<int> ids = listData!.map((e) => e.id).toList();
-        ResponseModel res =
-            await DaiLyXeApiBLL_APIUser().vehiclecontactready(ids);
-        if (res.status > 0) {
-          CommonMethods.showToast("success".tr);
-          loadData();
-        } else {
-          CommonMethods.showToast(res.message);
-        }
-        //Call api gọi api xóa
-      } catch (e) {
-        CommonMethods.showDialogError(context, e);
-      }
-    }
-  }
+  // _onSeen() async {
+  //   if (listData != null && listData!.isNotEmpty) {
+  //     try {
+  //       List<int> ids = listData!.map((e) => e.id).toList();
+  //       ResponseModel res =
+  //           await DaiLyXeApiBLL_APIUser().vehiclecontactready(ids);
+  //       if (res.status > 0) {
+  //         CommonMethods.showToast("success".tr);
+  //         loadData();
+  //       } else {
+  //         CommonMethods.showToast(res.message);
+  //       }
+  //       //Call api gọi api xóa
+  //     } catch (e) {
+  //       CommonMethods.showDialogError(context, e);
+  //     }
+  //   }
+  // }
 
   @override
   dispose() {
@@ -161,9 +160,15 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
           slivers: <Widget>[
             RxSliverList(listData, (BuildContext context, int index) {
               var item = listData![index];
-              return ItemVehicleContactWidget(listData![index], onTap: () => {
-                CommonNavigates.toVehicleContactPage(context, id: item.id)
-              },);
+              return ItemVehicleContactWidget(listData![index],
+                  onTap: () {
+                        CommonNavigates.toVehicleContactPage(context,
+                            id: item.id);
+                        setState(() {
+                          item.status = 2;
+                        });
+                      },
+                  onDelete: (c) => {_onDelete(index)});
             })
           ],
         ));

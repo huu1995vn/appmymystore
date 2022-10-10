@@ -22,7 +22,6 @@ class VehicleContactDetailPage extends StatefulWidget {
 }
 
 class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
-  final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -74,88 +73,93 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: Form(
-                    key: _keyValidationForm,
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(bottom: 10),
-                          child: Text(
-                            data!.subject ?? "NaN",
-                            style: const TextStyle(fontSize: 18).bold,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            CommonMethods.call(data!.phone!);
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: Text(data!.phone!,
-                                style: const TextStyle(fontSize: 30)
-                                    .textColor(Colors.green)
-                                    .bold),
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(bottom: 10),
-                          child: Text(
-                            data!.userfullname!,
-                            style: const TextStyle().bold,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          alignment: Alignment.centerLeft,
-                          child:
-                              Text("email".tr, style: const TextStyle().bold),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            CommonMethods.launchURL("mailto:" + data!.email!);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(bottom: 10),
-                            alignment: Alignment.centerLeft,
-                            child: Text(data!.email!,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.blue)),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          alignment: Alignment.centerLeft,
-                          child:
-                              Text("content".tr, style: const TextStyle().bold),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          child: Text(data!.message!,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.normal)),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          alignment: Alignment.centerLeft,
-                          child: Text("from".tr, style: const TextStyle().bold),
-                        ),
-                        GestureDetector(
-                            onTap: () {
-                              CommonMethods.launchURL(data!.url!);
-                            },
-                            child: Container(
-                              child: Text(data!.url!,
+                  child: Padding(
+                    padding: EdgeInsets.all(kDefaultPadding*2),
+                    child: Card(
+                      child: Padding(
+                    padding: EdgeInsets.all(kDefaultPadding*2),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.only(bottom: 10),
+                              child: Text(
+                                data!.subject ?? "NaN",
+                                style: const TextStyle(fontSize: 18).bold,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                CommonMethods.call(data!.phone!);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                margin: const EdgeInsets.only(bottom: 10),
+                                child: Text(data!.phone!,
+                                    style: const TextStyle(fontSize: 30)
+                                        .textColor(Colors.green)
+                                        .bold),
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.only(bottom: 10),
+                              child: Text(
+                                data!.userfullname!,
+                                style: const TextStyle().bold,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              alignment: Alignment.centerLeft,
+                              child:
+                                  Text("email".tr, style: const TextStyle().bold),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                CommonMethods.launchURL("mailto:" + data!.email!);
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(bottom: 10),
+                                alignment: Alignment.center,
+                                child: Text(data!.email!,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.blue)),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              alignment: Alignment.centerLeft,
+                              child:
+                                  Text("content".tr, style: const TextStyle().bold),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              child: Text(data!.message!,
                                   style: const TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      color: Colors.blue)),
-                            )),
-                      ],
+                                      fontWeight: FontWeight.normal)),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              alignment: Alignment.centerLeft,
+                              child: Text("from".tr, style: const TextStyle().bold),
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  CommonMethods.launchURL(data!.url!);
+                                },
+                                child: Container(
+                                  child: Text(data!.url!,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.blue)),
+                                )),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 )

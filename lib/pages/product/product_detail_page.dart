@@ -150,7 +150,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             padding: const EdgeInsets.all(0.0),
             child: Row(
               children: [
-               if(!isNotFound) Expanded(
+               if(isNotFound) Expanded(
                   flex: 6,
                   child: GestureDetector(
                       onTap: () => {CommonMethods.call(data!.phone!)},
@@ -178,7 +178,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             ],
                           ))),
                 ),
-               if(!isNotFound) Expanded(
+               if(isNotFound) Expanded(
                   flex: 4,
                   child: GestureDetector(
                       onTap: () => {CommonMethods.chatZalo(data!.phone!)},

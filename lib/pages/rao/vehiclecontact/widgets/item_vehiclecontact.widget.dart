@@ -1,10 +1,7 @@
 // ignore_for_file: unrelated_type_equality_checks
 
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
-import 'package:raoxe/core/commons/index.dart';
-import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/entities.dart';
 // ignore: unused_import
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -13,80 +10,38 @@ import 'package:raoxe/core/utilities/size_config.dart';
 
 class ItemVehicleContactWidget extends StatelessWidget {
   final VehicleContactModel item;
-
-  const ItemVehicleContactWidget(this.item, {super.key});
+  final void Function()? onTap;
+  const ItemVehicleContactWidget(this.item, {super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return RxCard(
-      child: GestureDetector(
-        onTap: () async {},
-        child: SizedBox(
-          height: SizeConfig.screenWidth / 4.3,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const ClipRRect(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(kDefaultPadding),
-                    topLeft: Radius.circular(kDefaultPadding)),
-                child: Icon(AppIcons.email, color: AppColors.grey, size: 30),
+    return Card(
+        child: Container(
+            padding: const EdgeInsets.all(kDefaultPaddingBox),
+            decoration: const BoxDecoration(
+              color: Colors.transparent,
+              border: Border(
+                bottom: BorderSide(width: 1, color: Colors.black12),
               ),
-              Expanded(
-                child: Padding(
-                    padding: const EdgeInsets.all(kDefaultPadding),
-                    child: Stack(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    item.name ?? "",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Text(
-                                    item.status == 1
-                                        ? "active".tr
-                                        : "expired".tr,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: item.status == 1
-                                            ? Colors.green
-                                            : Colors.red),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Row(
-                              // spacing: kDefaultPadding,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                // Text(
-                                //   item.rxprice,
-                                //   style: kTextPriceStyle,
-                                // ),
-                                Text(
-                                    CommonMethods.formatDateTime(
-                                        item.createdate,
-                                        valueDefault: "not.update".tr),
-                                    style: kTextTimeStyle)
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    )),
+            ),
+            child: ListTile(
+              contentPadding: const EdgeInsets.all(10),
+              leading: CircleAvatar(
+                  child: Icon(AppIcons.email,
+                      color:
+                          item.status == 1 ? AppColors.yellow : AppColors.grey,
+                      size: 30)),
+              title: Text(item.subject!,
+                  maxLines: 2,
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold)),
+              subtitle: Transform.translate(
+                offset: const Offset(0, 10),
+                child: Text(item.message!, maxLines: 2),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+              // trailing: Icon(Icons.keyboard_arrow_right),
+              isThreeLine: true,
+              onTap: onTap,
+            )));
   }
 }

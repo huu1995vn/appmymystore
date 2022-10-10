@@ -98,7 +98,10 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
           onRefresh: onRefresh,
           slivers: <Widget>[
             RxSliverList(listData, (BuildContext context, int index) {
-              return ItemVehicleContactWidget(listData![index]);
+              var item = listData![index];
+              return ItemVehicleContactWidget(listData![index], onTap: () => {
+                CommonNavigates.toVehicleContactPage(context, id: item.id)
+              },);
             })
           ],
         ));

@@ -319,7 +319,7 @@ VehicleContactModel _$VehicleContactModelFromJson(Map<String, dynamic> json) =>
       ..useremail = json['useremail'] as String?
       ..phone = json['phone'] as String?
       ..email = json['email'] as String?
-      ..name = json['name'] as String?
+      ..contactname = json['contactname'] as String?
       ..address = json['address'] as String?
       ..vehiclename = json['vehiclename'] as String?
       ..subject = json['subject'] as String?
@@ -348,7 +348,7 @@ Map<String, dynamic> _$VehicleContactModelToJson(
       'useremail': instance.useremail,
       'phone': instance.phone,
       'email': instance.email,
-      'name': instance.name,
+      'contactname': instance.contactname,
       'address': instance.address,
       'vehiclename': instance.vehiclename,
       'subject': instance.subject,

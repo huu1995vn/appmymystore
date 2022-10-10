@@ -619,7 +619,7 @@ class VehicleContactModel extends Entity {
   String? useremail;
   String? phone;
   String? email;
-  String? name;
+  String? contactname;
   String? address;
   String? vehiclename;
   String? subject;

@@ -137,7 +137,6 @@ class _UserPageState extends State<UserPage> {
       CommonMethods.showToast(e.toString());
     }
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +162,7 @@ class _UserPageState extends State<UserPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(kDefaultPadding),
                         child: SizedBox(
-                          height: 250,
+                          height: 230,
                           child: Stack(
                             children: [
                               Center(
@@ -208,6 +207,7 @@ class _UserPageState extends State<UserPage> {
                                           fontSize: 19,
                                           fontWeight: FontWeight.bold),
                                     ),
+                                    SizedBox(height: 10),
                                     Column(
                                       children: [
                                         if (data!.email != null &&
@@ -215,7 +215,7 @@ class _UserPageState extends State<UserPage> {
                                           GestureDetector(
                                               onTap: _onVerifyEmail,
                                               child: Text(
-                                                "verify".tr,
+                                                "verify.email".tr,
                                                 style: TextStyle(
                                                     color: AppColors.yellow),
                                               )),

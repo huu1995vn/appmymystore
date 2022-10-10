@@ -41,9 +41,12 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
         ResponseModel res =
             await DaiLyXeApiBLL_APIUser().vehiclecontactbyid(widget.id!);
         if (res.status > 0) {
-          setState(() {
-            data = VehicleContactModel.fromJson(res.data);
-          });
+          data = VehicleContactModel.fromJson(res.data);
+          if (data!.status == 1) {
+            ResponseModel res =
+                await DaiLyXeApiBLL_APIUser().vehiclecontactready([data!.id!]);
+          }
+          setState(() {});
         } else {
           CommonMethods.showToast(res.message);
         }
@@ -79,7 +82,7 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                           alignment: Alignment.center,
                           margin: const EdgeInsets.only(bottom: 10),
                           child: Text(
-                            data!.subject?? "NaN",
+                            data!.subject ?? "NaN",
                             style: const TextStyle(fontSize: 18).bold,
                             textAlign: TextAlign.center,
                           ),
@@ -109,13 +112,12 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                         Container(
                           margin: const EdgeInsets.only(bottom: 10),
                           alignment: Alignment.centerLeft,
-                          child: Text("email".tr,
-                              style: const TextStyle().bold),
+                          child:
+                              Text("email".tr, style: const TextStyle().bold),
                         ),
                         GestureDetector(
                           onTap: () {
-                            CommonMethods.launchURL(
-                                "mailto:" + data!.email!);
+                            CommonMethods.launchURL("mailto:" + data!.email!);
                           },
                           child: Container(
                             margin: const EdgeInsets.only(bottom: 10),
@@ -129,8 +131,8 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                         Container(
                           margin: const EdgeInsets.only(bottom: 10),
                           alignment: Alignment.centerLeft,
-                          child: Text("content".tr,
-                              style: const TextStyle().bold),
+                          child:
+                              Text("content".tr, style: const TextStyle().bold),
                         ),
                         Container(
                           margin: const EdgeInsets.only(bottom: 10),
@@ -141,8 +143,7 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                         Container(
                           margin: const EdgeInsets.only(bottom: 10),
                           alignment: Alignment.centerLeft,
-                          child: Text("from".tr,
-                              style: const TextStyle().bold),
+                          child: Text("from".tr, style: const TextStyle().bold),
                         ),
                         GestureDetector(
                             onTap: () {

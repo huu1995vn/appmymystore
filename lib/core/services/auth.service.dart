@@ -121,24 +121,24 @@ class AuthService {
   static Future<bool> verifyOTPPhone(String phone, String code) async {
     return await FirebaseAuthService.verifyOTP(phone, code);
   }
-
-  static Future sendOTPEmail(String email, bool isExist,
+  static String verifyemail="";
+  static Future sendOTPEmail(String email,
       void Function(Object) fnError, void Function() fnSuccess) async {
     try {
-      await AuthService.checkEmail(email, isExist: isExist);
-      ResponseModel res =
-          await DaiLyXeApiBLL_APIAnonymous().sendotpemail(email);
+      // await AuthService.checkEmail(email, isExist: isExist);
+      ResponseModel res = await DaiLyXeApiBLL_APIUser().sendverifyemail(email);
       if (res.status <= 0) {
         fnError(res.message);
       }
+      verifyemail = res.data["VerifyNumber"];
     } catch (e) {
       fnError(e);
     }
   }
 
-  static Future<bool> verifyOTPEmail(String email, String code) async {
+  static Future<bool> verifyOTPEmail(String code) async {
     ResponseModel res =
-        await DaiLyXeApiBLL_APIAnonymous().verifyotpemail(email, code);
+        await DaiLyXeApiBLL_APIUser().verifyemail(verifyemail, code);
     if (res.status <= 0) {
       throw Exception(res.message);
     }

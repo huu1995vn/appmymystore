@@ -248,10 +248,10 @@ class CommonNavigates {
   }
 
   static Future openOtpVerificationEmailDialog(
-      BuildContext context, String email, bool isExist) async {
+      BuildContext context, String email) async {
     return await Navigator.of(context)
         .push(MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-      return OtpVerificationEmailDialog(email: email, isExist: isExist);
+      return OtpVerificationEmailDialog(email: email);
     }));
   }
 

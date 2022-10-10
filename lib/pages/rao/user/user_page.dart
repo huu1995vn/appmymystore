@@ -1,17 +1,14 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty, non_constant_identifier_names
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/dialogs/address.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
@@ -120,8 +117,27 @@ class _UserPageState extends State<UserPage> {
     if (!isMyUser) {
       return;
     }
-    CommonNavigates.openDialog(context, ChangeEmailDiaLog(data: data!));
+    var email = await CommonNavigates.openDialog(
+        context, ChangeEmailDiaLog(data: data!));
+    if (email != null) {
+      CommonMethods.showToast("success".tr);
+      loadData();
+    }
   }
+
+  _onVerifyEmail() async {
+    try {
+      bool checkOtp = await CommonNavigates.openOtpVerificationEmailDialog(
+          context, data!.email!);
+      if (checkOtp != null && checkOtp) {
+        CommonMethods.showToast("success".tr);
+        loadData();
+      }
+    } catch (e) {
+      CommonMethods.showToast(e.toString());
+    }
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +163,7 @@ class _UserPageState extends State<UserPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(kDefaultPadding),
                         child: SizedBox(
-                          height: 200,
+                          height: 250,
                           child: Stack(
                             children: [
                               Center(
@@ -191,6 +207,28 @@ class _UserPageState extends State<UserPage> {
                                       style: const TextStyle(
                                           fontSize: 19,
                                           fontWeight: FontWeight.bold),
+                                    ),
+                                    Column(
+                                      children: [
+                                        if (data!.email != null &&
+                                            !data!.verifyemail)
+                                          GestureDetector(
+                                              onTap: _onVerifyEmail,
+                                              child: Text(
+                                                "verify".tr,
+                                                style: TextStyle(
+                                                    color: AppColors.yellow),
+                                              )),
+                                        // if (data!.phone != null &&
+                                        //     !data!.verifyphone)
+                                        //   GestureDetector(
+                                        //       onTap: _onVerifyPhone,
+                                        //       child: Text(
+                                        //         "verify".tr,
+                                        //         style: TextStyle(
+                                        //             color: AppColors.yellow),
+                                        //       )),
+                                      ],
                                     ),
                                     SizedBox(height: 20),
                                   ],

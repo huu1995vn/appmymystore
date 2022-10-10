@@ -101,16 +101,10 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
   //#fuction main
   Future onChangeEmail() async {
     try {
-      await AuthService.checkEmail(email, isExist: false);
-      bool checkOtp = await CommonNavigates.openOtpVerificationEmailDialog(
-          context, email, false);
+      bool checkOtp = await CommonNavigates.openOtpVerificationEmailDialog(context, email);
       if (checkOtp != null && checkOtp) {
-        var res = await DaiLyXeApiBLL_APIUser().updateemail(email);
-        if (res.status > 0) {
-          CommonMethods.showToast("success".tr);
-        } else {
-          CommonMethods.showToast(res.message);
-        }
+        CommonMethods.showToast("success".tr);
+        CommonNavigates.goBack(context, email);
       }
     } catch (e) {
       CommonMethods.showToast(e.toString());

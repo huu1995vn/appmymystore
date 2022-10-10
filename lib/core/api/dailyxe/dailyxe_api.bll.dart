@@ -185,12 +185,12 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     return await post(body, queryParameters, "UpdatePhone");
   }
 
-  Future<ResponseModel> updateemail(String nEmail) async {
-    Map<String, dynamic> queryParameters = <String, dynamic>{};
-    Map<String, dynamic> body = <String, dynamic>{};
-    body["email"] = nEmail;
-    return await post(body, queryParameters, "UpdateEmail");
-  }
+  // Future<ResponseModel> updateemail(String nEmail) async {
+  //   Map<String, dynamic> queryParameters = <String, dynamic>{};
+  //   Map<String, dynamic> body = <String, dynamic>{};
+  //   body["email"] = nEmail;
+  //   return await post(body, queryParameters, "UpdateEmail");
+  // }
 
   Future<ResponseModel> product(Map<String, dynamic> body) async {
     return await post(body, null, "product");
@@ -320,6 +320,18 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     Map<String, dynamic> body = {"token": FirebaseMessagingService.token};
     return await post(body, null, "topics");
   }
+
+   Future<ResponseModel> sendverifyemail(String? email) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = <String, dynamic>{"email": email};
+    return await post(body, queryParameters, "sendverifyemail");
+  }
+
+  Future<ResponseModel> verifyemail(String verify, String code) async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = <String, dynamic>{"verify": verify, "code": code};
+    return await post(body, queryParameters, "verifyemail");
+  }
 }
 
 class DaiLyXeApiBLL_APIAnonymous extends DaiLyXeApiBLL_Basic {
@@ -344,15 +356,5 @@ class DaiLyXeApiBLL_APIAnonymous extends DaiLyXeApiBLL_Basic {
     return await post(body, queryParameters, "forgotpassword");
   }
 
-  Future<ResponseModel> sendotpemail(String email) async {
-    Map<String, dynamic> queryParameters = <String, dynamic>{};
-    Map<String, dynamic> body = <String, dynamic>{"email": email};
-    return await post(body, queryParameters, "sendotpemail");
-  }
-
-  Future<ResponseModel> verifyotpemail(String email, String code) async {
-    Map<String, dynamic> queryParameters = <String, dynamic>{};
-    Map<String, dynamic> body = <String, dynamic>{"email": email, "code": code};
-    return await post(body, queryParameters, "verifyotpemail");
-  }
+ 
 }

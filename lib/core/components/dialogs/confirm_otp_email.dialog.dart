@@ -16,15 +16,15 @@ import 'package:raoxe/core/utilities/extensions.dart';
 
 class OtpVerificationEmailDialog extends StatefulWidget {
   final String email;
-  final bool isExist;
 
-  const OtpVerificationEmailDialog(
-      {super.key, required this.email, required this.isExist});
+  const OtpVerificationEmailDialog({super.key, required this.email});
   @override
-  State<OtpVerificationEmailDialog> createState() => _OtpVerificationEmailDialogState();
+  State<OtpVerificationEmailDialog> createState() =>
+      _OtpVerificationEmailDialogState();
 }
 
-class _OtpVerificationEmailDialogState extends State<OtpVerificationEmailDialog> {
+class _OtpVerificationEmailDialogState
+    extends State<OtpVerificationEmailDialog> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   String code = "";
@@ -32,8 +32,7 @@ class _OtpVerificationEmailDialogState extends State<OtpVerificationEmailDialog>
   Future sendOTP(
       void Function(Object) fnError, void Function() fnSuccess) async {
     try {
-      await AuthService.sendOTPEmail(
-          widget.email, widget.isExist, fnError, fnSuccess);
+      await AuthService.sendOTPEmail(widget.email, fnError, fnSuccess);
     } catch (error) {
       CommonMethods.showDialogError(context, error.toString());
     }
@@ -41,7 +40,7 @@ class _OtpVerificationEmailDialogState extends State<OtpVerificationEmailDialog>
 
   Future<bool> verifyOTP() async {
     try {
-      return await AuthService.verifyOTPEmail(widget.email, code);
+      return await AuthService.verifyOTPEmail(code);
     } catch (error) {
       CommonMethods.showDialogError(context, error.toString());
     }

@@ -67,18 +67,10 @@ class _AdvertDetailPageState extends State<AdvertDetailPage> {
           : CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
+                  floating: true,
                   centerTitle: true,
-                  expandedHeight: 250.0,
-                  flexibleSpace: avatar(),
-                  backgroundColor: Theme.of(context).cardColor,
-                  iconTheme: IconThemeData(
-                    color: Theme.of(context).textTheme.bodyLarge!.color,
-                  ),
-                  elevation: 0.0,
                   title: Text(
-                    "detail.advert".tr,
-                    style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge!.color),
+                    data!.name!,
                   ),
                 ),
                 SliverToBoxAdapter(
@@ -88,111 +80,73 @@ class _AdvertDetailPageState extends State<AdvertDetailPage> {
                         children: <Widget>[
                           SizedBox(height: kDefaultMarginBottomBox),
                           Card(
+                              margin: EdgeInsets.only(
+                                  bottom: kDefaultMarginBottomBox),
                               child: Column(
-                            children: [
-                              Container(
-                                  decoration: const BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                          width: 1.0, color: Colors.black12),
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.all(kDefaultPaddingBox),
+                                      child: Text("info".tr,
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold)),
                                     ),
-                                  ),
-                                  child: ListTile(
-                                    title: Text(
-                                      data!.adverttypename!,
-                                      style: kTextTitleStyle.bold,
+                                    ListTile(
+                                        title: Text("status".tr),
+                                        trailing: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: data!.status == 1
+                                                  ? Colors.green
+                                                  : Colors.red,
+                                            ),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 4),
+                                            child: Text(
+                                                data!.status == 1
+                                                    ? "active".tr
+                                                    : "expired".tr,
+                                                style: const TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.white)))),
+                                    ListTile(
+                                      title: Text("expiration.date".tr),
+                                      trailing: Text(
+                                          CommonMethods.formatDateTime(
+                                              data!.expirationdate,
+                                              valueDefault: "not.update".tr),
+                                          style: kTextTitleStyle.bold),
                                     ),
-                                    subtitle: Text(data!.name!),
-                                  )),
-                              Container(
-                                  decoration: const BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                          width: 1.0, color: Colors.black12),
+                                    ListTile(
+                                        title: Text("price".tr),
+                                        trailing: Text(
+                                            (data!.price != null &&
+                                                    data!.price! > 0)
+                                                ? CommonMethods
+                                                    .formatShortCurrency(
+                                                        data!.price)
+                                                : "negotiate".tr,
+                                            style: kTextPriceStyle.size(16))),
+                                    ListTile(
+                                      title: Text("phone".tr),
+                                      trailing: Text(
+                                        data!.phone!,
+                                        style: kTextTitleStyle,
+                                      ),
                                     ),
-                                  ),
-                                  child: ListTile(
-                                    title: Text(
-                                      "price".tr,
-                                      style: kTextTitleStyle.bold,
+                                    ListTile(
+                                      title: Text("email".tr),
+                                      trailing: Text(data!.email!,
+                                          style: kTextTitleStyle),
                                     ),
-                                    subtitle: Text(
-                                      (data!.price != null && data!.price! > 0)
-                                          ? CommonMethods.formatNumber(
-                                              data!.price)
-                                          : "negotiate".tr,
-                                      style: kTextPriceStyle.size(13),
-                                    ),
-                                  )),
-                              Container(
-                                  decoration: const BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                          width: 1.0, color: Colors.black12),
-                                    ),
-                                  ),
-                                  child: ListTile(
-                                    title: Text(
-                                      "phone".tr,
-                                      style: kTextTitleStyle.bold,
-                                    ),
-                                    subtitle: Text(
-                                      (data!.phone!),
-                                    ),
-                                  )),
-                              Container(
-                                  decoration: const BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                          width: 1.0, color: Colors.black12),
-                                    ),
-                                  ),
-                                  child: ListTile(
-                                    title: Text(
-                                      "email".tr,
-                                      style: kTextTitleStyle.bold,
-                                    ),
-                                    subtitle: Text(
-                                      (data!.email!),
-                                    ),
-                                  )),
-                              Container(
-                                  decoration: const BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                          width: 1.0, color: Colors.black12),
-                                    ),
-                                  ),
-                                  child: ListTile(
-                                    title: Text.rich(TextSpan(
-                                        text: '',
-                                        children: <InlineSpan>[
-                                          TextSpan(
-                                            text: "${"expiration.date".tr} ",
-                                            style: kTextTitleStyle.bold,
-                                          ),
-                                          TextSpan(
-                                            text: data!.status == 1
-                                                ? "active".tr
-                                                : "expired".tr,
-                                            style: TextStyle(
-                                                color: data!.status == 1
-                                                    ? Colors.green
-                                                    : Colors.red),
-                                          )
-                                        ])),
-                                    // Text(
-                                    //   "expiration.date".tr,
-                                    //   style: kTextTitleStyle.bold,
-                                    // ),
-                                    subtitle: Text(
-                                        CommonMethods.formatDateTime(
-                                            data!.expirationdate,
-                                            valueDefault: "not.update".tr),
-                                        style: kTextTimeStyle),
-                                  )),
-                            ],
-                          ))
+                                  ])),
+                          Card(
+                            child: preview(),
+                          ),
+                          SizedBox(height: kDefaultMarginBottomBox),
                         ],
                       )),
                 )
@@ -201,31 +155,63 @@ class _AdvertDetailPageState extends State<AdvertDetailPage> {
     );
   }
 
-  Widget avatar() {
+  Widget preview() {
     return Padding(
       padding: const EdgeInsets.all(kDefaultPadding),
-      child: SizedBox(
-        height: 250,
-        child: Stack(
-          children: [
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CircleAvatar(
-                    radius: 60.0,
-                    backgroundImage: RxImageProvider(data!.rximg),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    data!.displayName!.toUpperCase(),
-                    style: const TextStyle(fontSize: 19).bold,
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+      child: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(kDefaultPaddingBox),
+                      child: Text("preview".tr,
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                CircleAvatar(
+                  radius: 80.0,
+                  backgroundImage: RxImageProvider(data!.rximg),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  data!.displayName!,
+                  style: const TextStyle(fontSize: 35).bold,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  data!.jobtitle!,
+                  style: const TextStyle(fontSize: 16),
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.phone,
+                      color: AppColors.primary,
+                      size: 20,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      data!.phone!.toUpperCase(),
+                      style: const TextStyle(
+                              fontSize: 25, color: AppColors.primary)
+                          .bold,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

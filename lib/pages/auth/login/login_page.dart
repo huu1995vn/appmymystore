@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       key: keyLogin,
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarIconBrightness: Brightness.dark,
           statusBarBrightness: Brightness.light,
         ),
@@ -76,12 +76,12 @@ class _LoginPageState extends State<LoginPage> {
             LOGORAOXECOLORIMAGE,
             width: 180,
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Text(
             "login".tr.toUpperCase(),
             style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             "welcome".tr,
             style: const TextStyle(fontSize: 16, color: Colors.black54),
@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       )),
                 )),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
@@ -166,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           _onLogin(username, password);
                         },
-                        text: "continue".tr.toUpperCase())),
+                        text: "login".tr.toUpperCase())),
                 const Padding(padding: EdgeInsets.only(right: 10)),
                 Ink(
                   height: kSizeHeight,
@@ -184,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                 )
               ],
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             _createAccountLabel(context)
           ],
         ),
@@ -209,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Text(
               "regist.now".tr,
-              style: const TextStyle(color: AppColors.primary500).bold,
+              style: const TextStyle(color: AppColors.primary).bold,
             ),
           ],
         ),
@@ -222,7 +222,6 @@ class _LoginPageState extends State<LoginPage> {
       if (!CommonMethods.checkStringPhone(username)) {
         throw "invalid.phone".tr;
       }
-
       String userbio = StorageService.get(StorageKeys.biometric);
       isLoginBio = userbio == username;
       if (isLoginBio && userlogin != null) {

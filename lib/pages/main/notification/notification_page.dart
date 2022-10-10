@@ -179,18 +179,18 @@ class _NotificationPageState extends State<NotificationPage> {
             floating: true,
             leading: (listData != null && listData!.isNotEmpty)
                 ? RxIconButton(
-                    icon: AppIcons.delete,
-                    onTap: _onDeleteAll,
-                    size: 40,
+                    icon: AppIcons.playlist_add_check,
+                    onTap: _onSeen,
+                    size: 50,
                     color: Colors.transparent,
                     colorIcon: Colors.white)
                 : Container(),
             actions: <Widget>[
               (listData != null && listData!.isNotEmpty)
                   ? RxIconButton(
-                      icon: AppIcons.playlist_add_check,
-                      onTap: _onSeen,
-                      size: 50,
+                      icon: AppIcons.delete,
+                      onTap: _onDeleteAll,
+                      size: 40,
                       color: Colors.transparent,
                       colorIcon: Colors.white)
                   : Container(),

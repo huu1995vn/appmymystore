@@ -73,7 +73,7 @@ class _TabReviewWidgetPageState extends State<TabReviewWidget>
         });
         paging = nPaging;
       } else {
-        CommonMethods.showToast( res.message);
+        CommonMethods.showToast(res.message);
       }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
@@ -98,7 +98,7 @@ class _TabReviewWidgetPageState extends State<TabReviewWidget>
         var item = listData![index];
         return ItemReviewWidget(item,
             onTap: () =>
-                {CommonNavigates.toProductPage(context, id: item.productid)});
+                {CommonNavigates.toProductPage(context, id: item!.productid)});
       },
       onNextPage: onNextPage,
       onRefresh: loadData,

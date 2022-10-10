@@ -1,5 +1,6 @@
 // ignore_for_file: unrelated_type_equality_checks
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -7,6 +8,7 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 
 class ItemContactWidget extends StatefulWidget {
@@ -51,57 +53,62 @@ class _ItemContactWidgetState extends State<ItemContactWidget> {
 
         // The child of the Slidable is what the user sees when the
         // component is not dragged.
-        child: Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(width: 1.0, color: Colors.black12),
-              ),
-            ),
-            child: ListTile(
-                leading: RxIconButton(
-                  icon: AppIcons.map_marker,
-                  colorIcon: AppColors.blue,
-                  size: 45,
+        child: Card(
+            child: Container(
+                padding: EdgeInsets.symmetric(vertical: kDefaultPaddingBox),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1.0, color: Colors.black12),
+                  ),
                 ),
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.item.fullname ?? "NaN",
-                    ),
-                    Text(
-                      widget.item.isdefault ? "default".tr : "",
-                      style: const TextStyle(color: AppColors.blue),
-                    ),
-                  ],
-                ),
-                // isThreeLine: true,
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: ListTile(
+                    leading: const CircleAvatar(
+                        backgroundColor: AppColors.grayDark,
+                        child: FaIcon(
+                          FontAwesomeIcons.mapMarkerAlt,
+                          color: Colors.grey,
+                        )),
+                    title: Row(
                       children: [
-                        if (widget.item.cityid != null ||
-                            widget.item.cityid > 0)
-                          Text(
-                            widget.item.cityname ?? "NaN",
-                            style: const TextStyle(color: AppColors.blue),
-                          ),
                         Text(
-                          widget.item.phone ?? "NaN",
-                          style: const TextStyle(fontSize: 16),
+                          widget.item.fullname ?? "NaN",
+                          style: kTextTitleStyle,
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          widget.item.isdefault ? "(" + "default".tr + ")" : "",
+                          style: const TextStyle(
+                              color: AppColors.blue,
+                              fontStyle: FontStyle.italic),
                         ),
                       ],
                     ),
-                    Text(
-                      widget.item!.address ?? "NaN",
-                      style: const TextStyle(),
-                    )
-                  ],
-                ),
-                onTap: widget.onTap)));
+                    // isThreeLine: true,
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (widget.item.cityid != null ||
+                                widget.item.cityid > 0)
+                              Text(
+                                widget.item.cityname ?? "NaN",
+                                style: const TextStyle(color: AppColors.blue),
+                              ),
+                            Text(
+                              widget.item.phone ?? "NaN",
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          widget.item!.address ?? "NaN",
+                          style: const TextStyle(),
+                        )
+                      ],
+                    ),
+                    onTap: widget.onTap))));
   }
 }

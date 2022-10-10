@@ -124,11 +124,9 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
             : CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
-                    expandedHeight: 250.0,
-                    flexibleSpace: Avatar(),
-                    backgroundColor: Colors.white,
+                    floating: true,
                     iconTheme: const IconThemeData(
-                      color: AppColors.black,
+                      color: AppColors.white,
                     ),
                   ),
                   SliverToBoxAdapter(
@@ -136,6 +134,9 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                         key: _keyValidationForm,
                         child: Column(
                           children: <Widget>[
+                            Card(
+                              child: Avatar(),
+                            ),
                             SizedBox(height: kDefaultMarginBottomBox),
                             Card(
                                 child: Column(
@@ -210,6 +211,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                             ])),
                                       ),
                                     )),
+                                SizedBox(height: 10),
                                 ListTile(
                                   title: RichText(
                                     text: TextSpan(
@@ -230,7 +232,8 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                       CustomRadioButton("female".tr, 0),
                                     ],
                                   ),
-                                )
+                                ),
+                                SizedBox(height: 10),
                               ],
                             ))
                           ],
@@ -284,7 +287,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
     return Padding(
       padding: const EdgeInsets.all(kDefaultPadding),
       child: SizedBox(
-        height: 250,
+        height: 200,
         child: Stack(
           children: [
             Center(
@@ -316,6 +319,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                     data!.fullname!.toUpperCase(),
                     style: const TextStyle(fontSize: 19).bold,
                   ),
+                  SizedBox(height: 20),
                 ],
               ),
             )

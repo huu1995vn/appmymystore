@@ -37,7 +37,7 @@ const TextStyle kTextHeaderStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 const TextStyle kTextTitleStyle = TextStyle(
-  fontSize: 15,
+  fontSize: 16,
   fontWeight: FontWeight.normal,
 );
 const TextStyle kTextSubTitleStyle =

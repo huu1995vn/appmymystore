@@ -297,6 +297,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                   controller: scrollController,
                   slivers: <Widget>[
                     SliverAppBar(
+                      floating: true,
                       title: Text(CommonMethods.convertToString(
                           data!.name ?? "create".tr)),
                       centerTitle: true,

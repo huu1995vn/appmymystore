@@ -29,7 +29,7 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
     try {
       var res = await CommonMethods.onFavorite(
           context, [widget.item.id], !widget.item.isfavorite);
-    
+
       if (res) {
         setState(() {});
         CommonMethods.showToast("success".tr);

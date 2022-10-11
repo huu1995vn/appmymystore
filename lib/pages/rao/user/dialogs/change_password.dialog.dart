@@ -44,63 +44,50 @@ class _ChangePasswordDialogState extends State<ChangePasswordDiaLog> {
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.only(top: 32.0),
-            child: Column(
+        child:  Column(
               children: <Widget>[
                 _body(),
               ],
-            )),
+            ),
       ),
     );
   }
 
   Widget _body() {
-    return Padding(
+    return Card(
+        child: Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(children: <Widget>[
         Form(
           key: _keyValidationForm,
-          child: Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.black26)),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-                    decoration: const BoxDecoration(
-                        border:
-                            Border(bottom: BorderSide(color: Colors.black26))),
-                    child: RxInput(password,
-                        isPassword: true,
-                        labelText: "password.new".tr,
-                        icon: const Icon(AppIcons.lock_1),
-                        onChanged: (v) => {
-                              setState(() => {password = v})
-                            },
-                        validator: Validators.compose([
-                          Validators.required("notempty.password".tr),
-                        ])),
-                  ),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-                    child: RxInput(passwordAgain,
-                        isPassword: true,
-                        labelText: "password.again".tr,
-                        icon: const Icon(AppIcons.lock_1), validator: (value) {
-                      if (value != null && value != password) {
-                        return "invalid.password.again".tr;
-                      } else {
-                        return null;
-                      }
-                    }),
-                  ),
-                ],
-              )),
+          child: Column(
+            children: <Widget>[
+              RxInput(password,
+                  isPassword: true,
+                  isBorder: true,
+                  labelText: "password.new".tr,
+                  onChanged: (v) => {
+                        setState(() => {password = v})
+                      },
+                  validator: Validators.compose([
+                    Validators.required("notempty.password".tr),
+                  ])),
+              SizedBox(height: 20),
+              RxInput(passwordAgain,
+                  isPassword: true,
+                  isBorder: true,
+                  labelText: "password.again".tr, validator: (value) {
+                if (value != null && value != password) {
+                  return "invalid.password.again".tr;
+                } else {
+                  return null;
+                }
+              }),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 10,
         ),
         Text(
           "message.str004".tr,
@@ -121,7 +108,7 @@ class _ChangePasswordDialogState extends State<ChangePasswordDiaLog> {
           )
         ]),
       ]),
-    );
+    ));
   }
 
   //#endregion

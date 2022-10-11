@@ -46,73 +46,73 @@ class _AddressDialogState extends State<AddressDialog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             iconTheme: IconThemeData(
-              color: AppColors.black, //change your color here
+              color: AppColors.white, //change your color here
             ),
             centerTitle: true,
-            title: Text("Địa chỉ",
-                style: kTextHeaderStyle.copyWith(color: AppColors.black)),
+            title: Text("Địa chỉ"),
             elevation: 0.0,
-            backgroundColor: AppColors.grey,
           ),
           SliverToBoxAdapter(
-              child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
-                  child: Form(
-                      key: _keyValidationForm,
-                      child: Card(
-                          child: Column(
-                        children: <Widget>[
-                          rxSelectInput(context, "city", contact.cityid,
-                              afterChange: (v) => {
-                                    setState(() {
-                                      contact.cityid = v;
-                                      contact.districtid = 0;
-                                    })
-                                  },
-                              validator: (v) {
-                                if (!(contact.cityid > 0)) {
-                                  return "notempty".tr;
-                                }
-                                return null;
-                              }),
-                          rxSelectInput(context, "district", contact.districtid,
-                              fnWhere: (item) {
-                                return item["cityid"] == contact.cityid;
+              child: Form(
+                  key: _keyValidationForm,
+                  child: Card(
+                      child: Column(
+                    children: <Widget>[
+                      rxSelectInput(context, "city", contact.cityid,
+                          afterChange: (v) => {
+                                setState(() {
+                                  contact.cityid = v;
+                                  contact.districtid = 0;
+                                })
                               },
-                              afterChange: (v) => {
-                                    setState(() {
-                                      contact.districtid = v;
-                                    })
-                                  },
-                              validator: (v) {
-                                if (!(contact.districtid > 0)) {
-                                  return "notempty".tr;
-                                }
-                                return null;
-                              }),
-                          rxTextInput(context, contact.address,
-                              labelText: "address".tr,
-                              onChanged: (v) => {contact.address = v},
-                              validator: Validators.compose([
-                                Validators.required("notempty".tr),
-                              ])),
-                        ],
-                      )))))
+                          validator: (v) {
+                            if (!(contact.cityid > 0)) {
+                              return "notempty".tr;
+                            }
+                            return null;
+                          }),
+                      rxSelectInput(context, "district", contact.districtid,
+                          fnWhere: (item) {
+                            return item["cityid"] == contact.cityid;
+                          },
+                          afterChange: (v) => {
+                                setState(() {
+                                  contact.districtid = v;
+                                })
+                              },
+                          validator: (v) {
+                            if (!(contact.districtid > 0)) {
+                              return "notempty".tr;
+                            }
+                            return null;
+                          }),
+                      rxTextInput(context, contact.address,
+                          labelText: "address".tr,
+                          onChanged: (v) => {contact.address = v},
+                          validator: Validators.compose([
+                            Validators.required("notempty".tr),
+                          ])),
+                    ],
+                  ))))
         ],
       ),
       persistentFooterButtons: [
-        RxPrimaryButton(
-            onTap: () {
-              if (_keyValidationForm.currentState!.validate()) {
-                CommonNavigates.goBack(context, contact);
-              }
-            },
-            text: 'save'.tr)
+        Row(
+          children: [
+            Expanded(
+                child: RxPrimaryButton(
+                    onTap: () {
+                      if (_keyValidationForm.currentState!.validate()) {
+                        CommonNavigates.goBack(context, contact);
+                      }
+                    },
+                    text: 'save'.tr))
+          ],
+        )
       ],
     );
   }

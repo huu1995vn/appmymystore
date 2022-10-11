@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -39,16 +40,21 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarIconBrightness:
+              Get.isDarkMode ? Brightness.light : Brightness.dark,
+          statusBarBrightness:
+              Get.isDarkMode ? Brightness.dark : Brightness.light,
         ),
-        iconTheme: const IconThemeData(
-          color: AppColors.black, //change your color here
+        iconTheme: IconThemeData(
+          color: Get.isDarkMode
+              ? AppColors.white
+              : AppColors.black, //change your color here
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
+      backgroundColor: Get.isDarkMode ? Colors.black54 : AppColors.white,
       body: SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.only(top: 20.0),
@@ -90,11 +96,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       child: Column(children: <Widget>[
         Form(
           key: _keyValidationForm,
-          child: Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              decoration: BoxDecoration(
+          child:  Card(
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.black26)),
+                ),
               child: Column(
                 children: <Widget>[
                   Container(
@@ -106,7 +111,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     child: RxInput(phone,
                         keyboardType: TextInputType.number,
                         labelText: "phone".tr,
-                        icon: const Icon(AppIcons.phone_handset),
+                        icon: const FaIcon(FontAwesomeIcons.phone),
                         onChanged: (v) => {
                               setState(() => {phone = v})
                             },
@@ -129,7 +134,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     child: RxInput(password,
                         isPassword: true,
                         labelText: "password.new".tr,
-                        icon: const Icon(AppIcons.lock_1),
+                        icon: const FaIcon(FontAwesomeIcons.lock),
                         onChanged: (v) => {
                               setState(() => {password = v})
                             },
@@ -143,7 +148,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     child: RxInput(passwordAgain,
                         isPassword: true,
                         labelText: "password.again".tr,
-                        icon: const Icon(AppIcons.lock_1), validator: (value) {
+                        icon: const FaIcon(FontAwesomeIcons.lock),
+                        validator: (value) {
                       if (value != null && value != password) {
                         return "invalid.password.again".tr;
                       } else {
@@ -154,6 +160,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ],
               )),
         ),
+        const SizedBox(height: 20),
         Row(children: [
           Expanded(
             child: RxPrimaryButton(

@@ -562,6 +562,7 @@ Widget rxTextInput(BuildContext context, String? value,
                     TextSpan(
                         text: labelText ?? "",
                         style: kTextTitleStyle.copyWith(
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                             fontSize: 12)),
                     if (validator != null)
                       const TextSpan(

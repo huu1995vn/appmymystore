@@ -68,13 +68,11 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                   floating: true,
                   centerTitle: true,
                   title: Text(
-                    data!.contactname ?? "NaN",
+                    data!.vehiclecontacttypeid == 1 ? "pricereport".tr : "testdrive".tr,
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.all(kDefaultPadding * 2),
-                    child: Card(
+                  child: Card(
                       child: Padding(
                         padding: EdgeInsets.all(kDefaultPadding * 2),
                         child: Column(
@@ -105,11 +103,12 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                               alignment: Alignment.center,
                               margin: const EdgeInsets.only(bottom: 10),
                               child: Text(
-                                data!.userfullname!,
-                                style: const TextStyle().bold,
+                                data!.contactname!,
+                                style: const TextStyle(fontSize: 20).bold,
                                 textAlign: TextAlign.center,
                               ),
                             ),
+                            SizedBox(height: 10),
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
                               alignment: Alignment.centerLeft,
@@ -123,13 +122,30 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                               },
                               child: Container(
                                 margin: const EdgeInsets.only(bottom: 10),
-                                alignment: Alignment.center,
+                                alignment: Alignment.centerLeft,
                                 child: Text(data!.email!,
                                     style: const TextStyle(
+                                      fontSize: 16,
                                         fontWeight: FontWeight.normal,
                                         color: Colors.blue)),
                               ),
                             ),
+                            SizedBox(height: 10),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              alignment: Alignment.centerLeft,
+                              child: Text("vehicle".tr,
+                                  style: const TextStyle().bold),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              alignment: Alignment.centerLeft,
+                              child: Text(data!.vehiclename!,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                      fontWeight: FontWeight.normal)),
+                            ),
+                            SizedBox(height: 10),
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
                               alignment: Alignment.centerLeft,
@@ -138,10 +154,13 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                             ),
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
+                              alignment: Alignment.centerLeft,
                               child: Text(data!.message!,
                                   style: const TextStyle(
+                                    fontSize: 16,
                                       fontWeight: FontWeight.normal)),
                             ),
+                            SizedBox(height: 10),
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
                               alignment: Alignment.centerLeft,
@@ -155,13 +174,14 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                                 child: Container(
                                   child: Text(data!.url!,
                                       style: const TextStyle(
+                                        fontSize: 16,
                                           fontWeight: FontWeight.normal,
                                           color: Colors.blue)),
                                 )),
                           ],
                         ),
                       ),
-                    ),
+                     
                   ),
                 )
               ],

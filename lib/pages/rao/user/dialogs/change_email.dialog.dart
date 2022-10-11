@@ -38,9 +38,9 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
         title: Text('change.email'.tr),
         elevation: 0.0,
       ),
+
       body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.only(top: 32.0),
+        child: Card( 
             child: Column(
               children: <Widget>[
                 _body(),
@@ -58,17 +58,14 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
           key: _keyValidationForm,
           child: Container(
               margin: const EdgeInsets.only(top: 20, bottom: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.black26)),
               child: Column(
                 children: <Widget>[
-                  Container(
+                  Container( 
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                        const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                     child: RxInput(email,
                         labelText: "new.email".tr,
-                        icon: const Icon(AppIcons.email),
+                        isBorder: true,
                         onChanged: (v) => {
                               setState(() => {email = v})
                             },

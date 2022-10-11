@@ -415,7 +415,7 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
                                             },
                                             child: RxAvatarImage(
                                                 widget.item.rximguser,
-                                                border: Border.all(width: 1),
+                                                border: Border.all(width: 1, color: Colors.white),
                                                 size: 25),
                                           ),
                                           const SizedBox(

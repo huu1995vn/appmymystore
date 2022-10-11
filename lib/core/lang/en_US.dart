@@ -55,6 +55,7 @@ const Map<String, String> en_US = {
   "p.please": "Please {}",
   "choose": "Choose",
   "p.choose": "Select {}",
+  "vehicle": "Vehicle",
   "bodytype": "Vehicle type",
   "model": "car series",
   "brand": "Car brand",

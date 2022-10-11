@@ -152,7 +152,9 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
           elevation: 0.0,
         ),
         key: _key,
-        body: RxCustomScrollView(
+        body: Container(
+          padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
+          child:RxCustomScrollView(
           key: const Key("LVehicleContact"),
           controller: scrollController,
           onNextScroll: onNextPage,
@@ -170,7 +172,8 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
                       },
                   onDelete: (c) => {_onDelete(index)});
             })
+        
           ],
-        ));
+        )));
   }
 }

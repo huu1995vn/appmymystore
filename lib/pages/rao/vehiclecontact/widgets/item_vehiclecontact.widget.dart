@@ -21,10 +21,16 @@ class ItemVehicleContactWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: Slidable(
+        child: Container( 
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+                border: Border(
+                  bottom: BorderSide(width: 1, color: Colors.black12),
+                ),
+              ), 
+              child: Slidable(
             // Specify a key if the Slidable is dismissible.
-            key: const ValueKey(0),
-
+            key: const ValueKey(0), 
             // The end action pane is the one at the right or the bottom side.
             endActionPane: ActionPane(
               motion: const ScrollMotion(),
@@ -41,27 +47,24 @@ class ItemVehicleContactWidget extends StatelessWidget {
 
             // The child of the Slidable is what the user sees when the
             // component is not dragged.
-            child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: kDefaultPaddingBox),
-                child: ListTile(
+            child:  ListTile(
                   contentPadding: const EdgeInsets.all(10),
                   leading: CircleAvatar(
                       backgroundColor: AppColors.grayDark,
-                      child: FaIcon(item.status == 1? FontAwesomeIcons.envelope: FontAwesomeIcons.envelopeOpen,
+                      child: FaIcon(item.status == 1? FontAwesomeIcons.solidEnvelope: FontAwesomeIcons.solidEnvelopeOpen,
                           color: (item.status == 1
                               ? AppColors.primary
                               : AppColors.black50),
                           size: 20)),
                   title: Text(item.subject!,
                       maxLines: 2,
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 16, fontWeight: item.status == 1? FontWeight.bold: FontWeight.normal)),
                   subtitle: Transform.translate(
                     offset: const Offset(0, 10),
-                    child: Text(item.message!, maxLines: 2),
+                    child: Text(item.message!, maxLines: 2, overflow: TextOverflow.ellipsis,),
                   ),
-                  // trailing: Icon(Icons.keyboard_arrow_right),
+                  trailing: Icon(Icons.keyboard_arrow_right),
                   isThreeLine: true,
                   onTap: onTap,
                 ))));

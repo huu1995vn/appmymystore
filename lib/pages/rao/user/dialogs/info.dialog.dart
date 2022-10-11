@@ -146,13 +146,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                     onChanged: (v) => {data!.fullname = v},
                                     validator: Validators.compose([
                                       Validators.required("fullname".tr),
-                                    ])),
-                                // rxTextInput(context, data!.address,
-                                //     labelText: "address".tr,
-                                //     onTap: _onAddress,
-                                //     validator: Validators.compose([
-                                //       Validators.required("fullname".tr),
-                                //     ])),
+                                    ])), 
                                 Container(
                                     decoration: const BoxDecoration(
                                       border: Border(

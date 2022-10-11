@@ -3,7 +3,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
-import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
@@ -101,7 +100,9 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
   //#fuction main
   Future onChangeEmail() async {
     try {
-      bool checkOtp = await CommonNavigates.openOtpVerificationEmailDialog(context, email);
+      AuthService.checkPhone(email);
+      bool checkOtp =
+          await CommonNavigates.openOtpVerificationEmailDialog(context, email);
       if (checkOtp != null && checkOtp) {
         CommonMethods.showToast("success".tr);
         CommonNavigates.goBack(context, email);

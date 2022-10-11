@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_null_comparison, use_build_context_synchronously, prefer_is_empty, non_constant_identifier_names, must_be_immutable
 
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
@@ -11,7 +10,6 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_input.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/services/auth.service.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 // ignore: unused_import

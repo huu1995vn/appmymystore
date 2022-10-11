@@ -89,7 +89,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 FontAwesomeIcons.bullhorn,
                               ),
                             ),
-                            subtitle: !data!.rxverify
+                            subtitle: !data!.verifyphone
                                 ? Text(
                                     "message.str017".tr,
                                     style: TextStyle(color: AppColors.danger),

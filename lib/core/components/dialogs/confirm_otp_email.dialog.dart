@@ -32,7 +32,7 @@ class _OtpVerificationEmailDialogState
   Future sendOTP(
       void Function(Object) fnError, void Function() fnSuccess) async {
     try {
-      // await AuthService.sendOTPEmail(widget.email, fnError, fnSuccess);
+      await AuthService.sendOTPEmail(widget.email, fnError, fnSuccess);
     } catch (error) {
       CommonMethods.showDialogError(context, error.toString());
     }

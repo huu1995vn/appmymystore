@@ -13,6 +13,7 @@ import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
+import 'package:raoxe/core/utilities/app_colors.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -28,7 +29,6 @@ class _DashboardPageState extends State<DashboardPage> {
     super.initState();
     loadData();
   }
-
   loadData() async {
     try {
       ResponseModel res =
@@ -89,8 +89,17 @@ class _DashboardPageState extends State<DashboardPage> {
                                 FontAwesomeIcons.bullhorn,
                               ),
                             ),
-                            onTap: () =>
-                                CommonNavigates.toMyProductPage(context),
+                            subtitle: !data!.rxverify
+                                ? Text(
+                                    "message.str017".tr,
+                                    style: TextStyle(color: AppColors.danger),
+                                  )
+                                : null,
+                            onTap: (){
+
+                               data!.rxverify? CommonNavigates.toMyProductPage(context): CommonNavigates.toUserPage(context);
+ 
+                            },
                             trailing: Icon(
                               AppIcons.keyboard_arrow_right,
                             ),
@@ -216,7 +225,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Container(
         padding: EdgeInsets.only(top: 10, bottom: 10),
         child: ListTile(
-          leading: RxAvatarImage(userProvider.user.rximg!, size: 60),
+          leading: RxAvatarImage(userProvider.user.rximg, size: 60),
           title: InkWell(
               onTap: () {
                 CommonNavigates.toUserPage(context);

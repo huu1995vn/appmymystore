@@ -137,7 +137,31 @@ class _UserPageState extends State<UserPage> {
       CommonMethods.showToast(e.toString());
     }
   }
-  
+
+  _onVerifyPhone() async {
+    try {
+      bool checkOtp = await CommonNavigates.openOtpVerificationPhoneDialog(
+          context, data!.phone!, true);
+      if (checkOtp != null && checkOtp) {
+        CommonMethods.lockScreen();
+        try {
+          ResponseModel res = await DaiLyXeApiBLL_APIUser().verifyphone();
+          if (res.status > 0) {
+            CommonMethods.showToast("success".tr);
+            loadData();
+          } else {
+            CommonMethods.showToast(res.message);
+          }
+        } catch (e) {
+          CommonMethods.showDialogError(context, e.toString());
+        }
+
+        CommonMethods.unlockScreen();
+      }
+    } catch (e) {
+      CommonMethods.showToast(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -206,28 +230,30 @@ class _UserPageState extends State<UserPage> {
                                           fontSize: 19,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Column(
-                                      children: [
-                                        if (data!.email != null &&
-                                            !data!.verifyemail)
-                                          GestureDetector(
-                                              onTap: _onVerifyEmail,
-                                              child: Text(
-                                                "verify".tr,
-                                                style: TextStyle(
-                                                    color: AppColors.yellow),
-                                              )),
-                                        // if (data!.phone != null &&
-                                        //     !data!.verifyphone)
-                                        //   GestureDetector(
-                                        //       onTap: _onVerifyPhone,
-                                        //       child: Text(
-                                        //         "verify".tr,
-                                        //         style: TextStyle(
-                                        //             color: AppColors.yellow),
-                                        //       )),
-                                      ],
-                                    ),
+                                    SizedBox(height: 10),
+                                    if (isMyUser)
+                                      Column(
+                                        children: [
+                                          if (data!.email != null &&
+                                              !data!.verifyemail)
+                                            GestureDetector(
+                                                onTap: _onVerifyEmail,
+                                                child: Text(
+                                                  "verify.email".tr,
+                                                  style: TextStyle(
+                                                      color: AppColors.danger),
+                                                )),
+                                          if (data!.phone != null &&
+                                              !data!.verifyphone)
+                                            GestureDetector(
+                                                onTap: _onVerifyPhone,
+                                                child: Text(
+                                                  "verify.phone".tr,
+                                                  style: TextStyle(
+                                                      color: AppColors.danger),
+                                                )),
+                                        ],
+                                      ),
                                     SizedBox(height: 20),
                                   ],
                                 ),

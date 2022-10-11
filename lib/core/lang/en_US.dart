@@ -5,7 +5,7 @@ const Map<String, String> en_US = {
   'billion': 'Billion',
   "expiration.date": "Expiration date",
   "new.email": "new email",
-  "resend.code": "Resend.code",
+  "resend.code": "Resend code",
   "bookmark": "Bookmark",
   "cancelfilter": "Cancel filter",
   "writereview": "Write review",
@@ -101,6 +101,7 @@ const Map<String, String> en_US = {
   "verify": "Verify",
   "verify.now": "Verify now",
   "verify.email": "Verify email",
+  "verify.phone": "Verify phone",
   "verify.password": "Verify password",
   "verify.newemail": "Verify new email",
   "verify.newephone": "Verify new phone",
@@ -321,5 +322,6 @@ const Map<String, String> en_US = {
   "message.str014": "Enter search keywords",
   "message.str015": "Product not approved",
   "message.str016": "Please enter the OTP sent to your phone number:",
+  "message.str017": "Unverified account",
   "message.alert01": "Are you sure you want to delete?"
 };

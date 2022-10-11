@@ -11,10 +11,10 @@ import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
 import 'package:raoxe/core/components/dialogs/photo_view.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
-import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_image.dart';
 import 'package:raoxe/core/components/rx_input.dart';
 import 'package:raoxe/core/entities.dart';
+import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/file.service.dart';
 import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
@@ -23,7 +23,6 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-import '../../../core/commons/common_configs.dart';
 
 class MyProductDetailPage extends StatefulWidget {
   final int? id;
@@ -54,6 +53,12 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   bool isNotFound = false;
   List<String> imgs = <String>[];
   loadData() async {
+    if(!AppProvider.localuser.rxverify)
+    {
+      await CommonMethods.showDialogError(context, "message.str017".tr);
+      CommonNavigates.goBack(context);
+      return;
+    };
     ProductModel? _data;
     if (widget.item != null) {
       _data = widget.item!;

@@ -125,12 +125,12 @@ class AuthService {
   static Future sendOTPEmail(String email,
       void Function(Object) fnError, void Function() fnSuccess) async {
     try {
-      // await AuthService.checkEmail(email, isExist: isExist);
       ResponseModel res = await DaiLyXeApiBLL_APIUser().sendverifyemail(email);
       if (res.status <= 0) {
         fnError(res.message);
       }
-      verifyemail = res.data["VerifyNumber"];
+      verifyemail = res.data;
+      fnSuccess();
     } catch (e) {
       fnError(e);
     }

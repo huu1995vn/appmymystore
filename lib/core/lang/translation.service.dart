@@ -47,7 +47,7 @@ class TranslationService extends Translations {
   }
 
   static bool isVi() {
-    return StorageService.get(storageKey) ?? false;
+    return StorageService.get(storageKey) ?? true;
   }
 
   @override

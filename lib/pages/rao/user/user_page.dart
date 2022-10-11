@@ -138,6 +138,31 @@ class _UserPageState extends State<UserPage> {
     }
   }
 
+  _onVerifyPhone() async {
+    try {
+      bool checkOtp = await CommonNavigates.openOtpVerificationPhoneDialog(
+          context, data!.phone!, true);
+      if (checkOtp != null && checkOtp) {
+        CommonMethods.lockScreen();
+        try {
+          ResponseModel res = await DaiLyXeApiBLL_APIUser().verifyphone();
+          if (res.status > 0) {
+            CommonMethods.showToast("success".tr);
+            loadData();
+          } else {
+            CommonMethods.showToast(res.message);
+          }
+        } catch (e) {
+          CommonMethods.showDialogError(context, e.toString());
+        }
+
+        CommonMethods.unlockScreen();
+      }
+    } catch (e) {
+      CommonMethods.showToast(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<AppProvider>(context);
@@ -162,7 +187,7 @@ class _UserPageState extends State<UserPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(kDefaultPadding),
                         child: SizedBox(
-                          height: 230,
+                          height: data!.rxverify ? 230 : 250,
                           child: Stack(
                             children: [
                               Center(
@@ -208,28 +233,29 @@ class _UserPageState extends State<UserPage> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(height: 10),
-                                    Column(
-                                      children: [
-                                        if (data!.email != null &&
-                                            !data!.verifyemail)
-                                          GestureDetector(
-                                              onTap: _onVerifyEmail,
-                                              child: Text(
-                                                "verify.email".tr,
-                                                style: TextStyle(
-                                                    color: AppColors.yellow),
-                                              )),
-                                        // if (data!.phone != null &&
-                                        //     !data!.verifyphone)
-                                        //   GestureDetector(
-                                        //       onTap: _onVerifyPhone,
-                                        //       child: Text(
-                                        //         "verify".tr,
-                                        //         style: TextStyle(
-                                        //             color: AppColors.yellow),
-                                        //       )),
-                                      ],
-                                    ),
+                                    if (isMyUser)
+                                      Column(
+                                        children: [
+                                          if (data!.email != null &&
+                                              !data!.verifyemail)
+                                            GestureDetector(
+                                                onTap: _onVerifyEmail,
+                                                child: Text(
+                                                  "verify.email".tr,
+                                                  style: TextStyle(
+                                                      color: AppColors.danger),
+                                                )),
+                                          if (data!.phone != null &&
+                                              !data!.verifyphone)
+                                            GestureDetector(
+                                                onTap: _onVerifyPhone,
+                                                child: Text(
+                                                  "verify.phone".tr,
+                                                  style: TextStyle(
+                                                      color: AppColors.danger),
+                                                )),
+                                        ],
+                                      ),
                                     SizedBox(height: 20),
                                   ],
                                 ),

@@ -332,6 +332,11 @@ class DaiLyXeApiBLL_APIUser extends DaiLyXeApiBLL_Basic {
     Map<String, dynamic> body = <String, dynamic>{"verify": verify, "code": code};
     return await post(body, queryParameters, "verifyemail");
   }
+  Future<ResponseModel> verifyphone() async {
+    Map<String, dynamic> queryParameters = <String, dynamic>{};
+    Map<String, dynamic> body = <String, dynamic>{};
+    return await post(body, queryParameters, "verifyphone");
+  }
 }
 
 class DaiLyXeApiBLL_APIAnonymous extends DaiLyXeApiBLL_Basic {

@@ -101,7 +101,8 @@ const Map<String, String> vi_VN = {
   "verify": "Xác thực",
   "verify.now": "Xác thực ngay",
   "verify.password": "Xác thực mật khẩu",
-  "verify.email": "Xác thực email mới",
+  "verify.email": "Xác thực email",
+  "verify.phone": "Xác thực số điện thoại",
   "verify.newemail": "Xác thực email mới",
   "verify.newephone": "Xác thực điện thoại mới",
   "edit": "Chỉnh sửa",
@@ -320,5 +321,6 @@ const Map<String, String> vi_VN = {
   "message.str014": "Nhập từ khóa tìm kiếm",
   "message.str015": "Sản phẩm chưa được duyệt",
   "message.str016": "Bạn hãy nhập mã OTP được gửi tới số điện thoại:",
+  "message.str017": "Tài khoản chưa được xác thực",
   "message.alert01": "Bạn có chắc muốn xóa?"
 };

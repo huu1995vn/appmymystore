@@ -73,70 +73,73 @@ class _SearchAppBarState extends State<SearchAppBar> {
   @override
   Widget build(BuildContext context) {
     return Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(kDefaultPadding),
+        ),
         child: Container(
-      height: 40,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kDefaultPadding),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-              icon: Icon(
-                AppIcons.magnifier,
-                color: Theme.of(context).textTheme.bodyLarge?.color,
-              ),
-              onPressed: _onSearch),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.only(left: 0, top: 10),
-              child: TextField(
-                onTap: _onSearch,
-                readOnly: true,
-                controller: controller,
-                textAlignVertical: TextAlignVertical.center,
-                onChanged: (_) => setState(() {}),
-                decoration: InputDecoration(
-                  hintText: "message.str014".tr,
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
+          height: 40,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IconButton(
+                  icon: Icon(
+                    AppIcons.magnifier,
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                  onPressed: _onSearch),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.only(left: 0, top: 10),
+                  child: TextField(
+                    onTap: _onSearch,
+                    readOnly: true,
+                    controller: controller,
+                    textAlignVertical: TextAlignVertical.center,
+                    onChanged: (_) => setState(() {}),
+                    decoration: InputDecoration(
+                      hintText: "message.str014".tr,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                    ),
+                    // style: kTextSubTitleStyle.copyWith(color: AppColors.black50),
+                  ),
                 ),
-                // style: kTextSubTitleStyle.copyWith(color: AppColors.black50),
               ),
-            ),
+              GestureDetector(
+                  onTap: _onFilter,
+                  child: Stack(
+                    children: [
+                      const IconButton(
+                          icon: FaIcon(FontAwesomeIcons.filter),
+                          onPressed: null),
+                      if (numFillter > 0)
+                        Positioned(
+                            top: 0.0,
+                            right: 3.0,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: AppColors.white50),
+                                color: AppColors.grayDark,
+                              ),
+                              child: SizedBox(
+                                  height: 20,
+                                  width: 25,
+                                  child: Center(
+                                      child: Text(
+                                    numFillter >= 9
+                                        ? "9+"
+                                        : numFillter.toString(),
+                                    style: kTextSubTitleStyle.copyWith(
+                                        color: AppColors.primary,
+                                        fontStyle: FontStyle.normal),
+                                  ))),
+                            )),
+                    ],
+                  )),
+            ],
           ),
-          GestureDetector(
-              onTap: _onFilter,
-              child: Stack(
-                children: [
-                  const IconButton(
-                      icon: FaIcon(FontAwesomeIcons.filter), onPressed: null),
-                  if (numFillter > 0)
-                    Positioned(
-                        top: 0.0,
-                        right: 3.0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: AppColors.white50),
-                            color: AppColors.grayDark,
-                          ),
-                          child: SizedBox(
-                              height: 20,
-                              width: 25,
-                              child: Center(
-                                  child: Text(
-                                numFillter >= 9 ? "9+" : numFillter.toString(),
-                                style: kTextSubTitleStyle.copyWith(
-                                    color: AppColors.primary,
-                                    fontStyle: FontStyle.normal),
-                              ))),
-                        )),
-                ],
-              )),
-        ],
-      ),
-    ));
+        ));
   }
 }

@@ -72,11 +72,15 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
                         onChanged: (v) => {
                               setState(() => {email = v})
                             },
-                        validator: Validators.compose([
-                          Validators.required("notempty.email".tr),
-                          Validators.patternString(
-                              RxParttern.email, "invalid.email".tr)
-                        ])),
+                        validator: (v) {
+                          if (v == null || v.length == 1) {
+                            return "notempty.email".tr;
+                          }
+                          if (RegExp(RxParttern.email).hasMatch(v)) {
+                            return "invalid.email".tr;
+                          }
+                          return null;
+                        }),
                   ),
                 ],
               )),

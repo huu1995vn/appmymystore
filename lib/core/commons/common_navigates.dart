@@ -188,7 +188,7 @@ class CommonNavigates {
   static Future toLoginPage(BuildContext context,
       {bool isReplace = true}) async {
     if (isReplace) {
-      return await Navigator.pushReplacementNamed(context, "/login");
+      return await Navigator.pushNamed(context, "/login");
     }
 
     return await Navigator.pushNamed(context, "/login");

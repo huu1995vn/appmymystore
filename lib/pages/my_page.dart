@@ -137,11 +137,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     }
   }
 
-  onPressedTab(int index) {
-    if (!APITokenService.isValid && index == 3) {
-      CommonNavigates.toLoginPage(context, isReplace: false);
-      return;
-    }
+  onPressedTab(int index) { 
     setState(() {
       _selectedIndex = index;
     });

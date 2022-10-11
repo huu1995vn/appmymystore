@@ -63,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+        
       ),
       backgroundColor: Get.isDarkMode ? Colors.black54 : AppColors.white,
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [

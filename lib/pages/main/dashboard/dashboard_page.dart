@@ -23,24 +23,27 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  UserModel? data;
+  UserModel data = UserModel();
   @override
   void initState() {
     super.initState();
     loadData();
   }
+
   loadData() async {
     try {
-      ResponseModel res =
-          await DaiLyXeApiBLL_APIGets().getuserbyid(APITokenService.userId);
-      if (res.status > 0) {
-        UserModel user = UserModel.fromJson(res.data);
-        setState(() {
-          data = user;
-        });
-        Provider.of<AppProvider>(context, listen: false).setUserModel(user);
-      } else {
-        CommonMethods.showToast(res.message);
+      if (CommonMethods.isLogin) {
+        ResponseModel res =
+            await DaiLyXeApiBLL_APIGets().getuserbyid(APITokenService.userId);
+        if (res.status > 0) {
+          UserModel user = UserModel.fromJson(res.data);
+          setState(() {
+            data = user;
+          });
+          Provider.of<AppProvider>(context, listen: false).setUserModel(user);
+        } else {
+          CommonMethods.showToast(res.message);
+        }
       }
     } catch (e) {
       CommonMethods.showToast(e.toString());
@@ -49,175 +52,201 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    final appProvider = Provider.of<AppProvider>(context, listen: true);
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           title: Text("expand".tr),
           elevation: 0.0,
           actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                AuthService.logout(context);
-              },
-              child: Text(
-                "logout".tr,
-                style: TextStyle(color: Colors.white),
-              ),
-            )
+            if (CommonMethods.isLogin)
+              TextButton(
+                onPressed: () {
+                  AuthService.logout(context);
+                },
+                child: Text(
+                  "logout".tr,
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
           ],
         ),
-        body: data == null
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Column(
-                children: [
-                  Card(
-                      margin: EdgeInsets.only(bottom: 5, top: 5),
-                      child: Column(children: [_top()])),
-                  Card(
-                    margin: EdgeInsets.only(bottom: 5),
-                    child: Column(
-                      children: [
-                        RxBorderListTile(
-                          child: ListTile(
-                            title: Text("manager.raoxe".tr),
-                            leading: Container(
-                              width: 25,
-                              alignment: Alignment.center,
-                              child: FaIcon(
-                                FontAwesomeIcons.bullhorn,
-                              ),
-                            ),
-                            subtitle: !data!.verifyphone
-                                ? Text(
-                                    "message.str017".tr,
-                                    style: TextStyle(color: AppColors.danger),
-                                  )
-                                : null,
-                            onTap: (){
-
-                               data!.verifyphone? CommonNavigates.toMyProductPage(context): CommonNavigates.toUserPage(context);
- 
-                            },
-                            trailing: Icon(
-                              AppIcons.keyboard_arrow_right,
-                            ),
-                            // subtitle: Text("Quản lý danh sách tin rao"),
+        body: Column(
+          children: [
+            if (CommonMethods.isLogin)
+              Card(
+                  margin: EdgeInsets.only(bottom: 5, top: 5),
+                  child: Column(children: [_top()])),
+            if (!CommonMethods.isLogin)
+              Card(
+                margin: EdgeInsets.only(bottom: 5),
+                child: Column(
+                  children: [
+                    Container(
+                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        child: ListTile(
+                          leading: RxCircleAvatar(
+                            backgroundColor: Colors.grey,
+                            child: FaIcon(FontAwesomeIcons.user),
                           ),
-                        ),
-                        RxBorderListTile(
-                          child: ListTile(
-                            title: Text("ads".tr),
-                            leading: Container(
-                              width: 25,
-                              alignment: Alignment.center,
-                              child: FaIcon(
-                                FontAwesomeIcons.rss,
-                              ),
-                            ),
-                            onTap: () => CommonNavigates.toAdvertPage(context),
-                            trailing: Icon(
-                              AppIcons.keyboard_arrow_right,
-                            ),
-                            // subtitle: Text("Quản lý danh sách quảng cáo"),
-                          ),
-                        ),
-                        RxBorderListTile(
-                          child: ListTile(
-                            title: Text("contact".tr),
-                            leading: Container(
-                              width: 25,
-                              alignment: Alignment.center,
-                              child: FaIcon(
-                                FontAwesomeIcons.solidEnvelope,
-                              ),
-                            ),
-                            onTap: () =>
-                                CommonNavigates.toVehicleContactPage(context),
-                            trailing: Icon(
-                              AppIcons.keyboard_arrow_right,
+                          title: Text(
+                            "${"login".tr} / ${"regist".tr}",
+                            style: const TextStyle(
+                              fontSize: 19,
                             ),
                           ),
-                        ),
-                        RxBorderListTile(
-                          child: ListTile(
-                            title: Text("bookmark".tr),
-                            leading: Container(
-                              width: 25,
-                              alignment: Alignment.center,
-                              child: FaIcon(
-                                FontAwesomeIcons.solidBookmark,
-                              ),
-                            ),
-                            onTap: () =>
-                                CommonNavigates.toFavoritePage(context),
-                            trailing: Icon(
-                              AppIcons.keyboard_arrow_right,
-                            ),
+                          subtitle: Text("welcome".tr),
+                          trailing: Icon(AppIcons.keyboard_arrow_right),
+                          onTap: () {
+                            CommonNavigates.toLoginPage(context);
+                          },
+                        ))
+                  ],
+                ),
+              ),
+            if (CommonMethods.isLogin)
+              Card(
+                margin: EdgeInsets.only(bottom: 5),
+                child: Column(
+                  children: [
+                    RxBorderListTile(
+                      child: ListTile(
+                        title: Text("manager.raoxe".tr),
+                        leading: Container(
+                          width: 25,
+                          alignment: Alignment.center,
+                          child: FaIcon(
+                            FontAwesomeIcons.bullhorn,
                           ),
                         ),
-                        RxBorderListTile(
-                          child: ListTile(
-                            title: Text("review".tr),
-                            leading: Container(
-                              width: 25,
-                              alignment: Alignment.center,
-                              child: FaIcon(
-                                FontAwesomeIcons.solidStar,
-                              ),
-                            ),
-                            onTap: () => CommonNavigates.toReviewPage(context),
-                            trailing: Icon(
-                              AppIcons.keyboard_arrow_right,
-                            ),
-                            // subtitle: Text("Danh sách đánh giá"),
-                          ),
+                        subtitle: !appProvider.user.verifyphone
+                            ? Text(
+                                "message.str017".tr,
+                                style: TextStyle(color: AppColors.danger),
+                              )
+                            : Container(),
+                        onTap: () {
+                          appProvider.user.verifyphone
+                              ? CommonNavigates.toMyProductPage(context)
+                              : CommonNavigates.toUserPage(context);
+                        },
+                        trailing: Icon(
+                          AppIcons.keyboard_arrow_right,
                         ),
-                        RxBorderListTile(
-                          child: ListTile(
-                            title: Text("address".tr),
-                            leading: Container(
-                              width: 25,
-                              alignment: Alignment.center,
-                              child: FaIcon(
-                                FontAwesomeIcons.mapMarkerAlt,
-                              ),
-                            ),
-                            onTap: () => CommonNavigates.toContactPage(context),
-                            trailing: Icon(
-                              AppIcons.keyboard_arrow_right,
-                            ),
-                            // subtitle: Text("Sổ địa chỉ"),
-                          ),
-                        ),
-                      ],
+                        // subtitle: Text("Quản lý danh sách tin rao"),
+                      ),
                     ),
-                  ),
-                  Card(
-                      margin: EdgeInsets.only(bottom: 5),
-                      child: Column(children: [
-                        RxBorderListTile(
-                          child: ListTile(
-                            title: Text("setting".tr),
-                            leading: Container(
-                              width: 25,
-                              alignment: Alignment.center,
-                              child: FaIcon(
-                                FontAwesomeIcons.cog,
-                              ),
-                            ),
-                            onTap: () =>
-                                CommonNavigates.toSettingsPage(context),
-                            trailing: Icon(
-                              AppIcons.keyboard_arrow_right,
-                            ),
-                            // subtitle: Text("Danh sách đánh giá"),
+                    RxBorderListTile(
+                      child: ListTile(
+                        title: Text("ads".tr),
+                        leading: Container(
+                          width: 25,
+                          alignment: Alignment.center,
+                          child: FaIcon(
+                            FontAwesomeIcons.rss,
                           ),
-                        )
-                      ])),
-                ],
-              ));
+                        ),
+                        onTap: () => CommonNavigates.toAdvertPage(context),
+                        trailing: Icon(
+                          AppIcons.keyboard_arrow_right,
+                        ),
+                        // subtitle: Text("Quản lý danh sách quảng cáo"),
+                      ),
+                    ),
+                    RxBorderListTile(
+                      child: ListTile(
+                        title: Text("contact".tr),
+                        leading: Container(
+                          width: 25,
+                          alignment: Alignment.center,
+                          child: FaIcon(
+                            FontAwesomeIcons.solidEnvelope,
+                          ),
+                        ),
+                        onTap: () =>
+                            CommonNavigates.toVehicleContactPage(context),
+                        trailing: Icon(
+                          AppIcons.keyboard_arrow_right,
+                        ),
+                      ),
+                    ),
+                    RxBorderListTile(
+                      child: ListTile(
+                        title: Text("bookmark".tr),
+                        leading: Container(
+                          width: 25,
+                          alignment: Alignment.center,
+                          child: FaIcon(
+                            FontAwesomeIcons.solidBookmark,
+                          ),
+                        ),
+                        onTap: () => CommonNavigates.toFavoritePage(context),
+                        trailing: Icon(
+                          AppIcons.keyboard_arrow_right,
+                        ),
+                      ),
+                    ),
+                    RxBorderListTile(
+                      child: ListTile(
+                        title: Text("review".tr),
+                        leading: Container(
+                          width: 25,
+                          alignment: Alignment.center,
+                          child: FaIcon(
+                            FontAwesomeIcons.solidStar,
+                          ),
+                        ),
+                        onTap: () => CommonNavigates.toReviewPage(context),
+                        trailing: Icon(
+                          AppIcons.keyboard_arrow_right,
+                        ),
+                        // subtitle: Text("Danh sách đánh giá"),
+                      ),
+                    ),
+                    RxBorderListTile(
+                      child: ListTile(
+                        title: Text("address".tr),
+                        leading: Container(
+                          width: 25,
+                          alignment: Alignment.center,
+                          child: FaIcon(
+                            FontAwesomeIcons.mapMarkerAlt,
+                          ),
+                        ),
+                        onTap: () => CommonNavigates.toContactPage(context),
+                        trailing: Icon(
+                          AppIcons.keyboard_arrow_right,
+                        ),
+                        // subtitle: Text("Sổ địa chỉ"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            Card(
+                margin: EdgeInsets.only(bottom: 5),
+                child: Column(children: [
+                  RxBorderListTile(
+                    child: ListTile(
+                      title: Text("setting".tr),
+                      leading: Container(
+                        width: 25,
+                        alignment: Alignment.center,
+                        child: FaIcon(
+                          FontAwesomeIcons.cog,
+                        ),
+                      ),
+                      onTap: () => CommonNavigates.toSettingsPage(context),
+                      trailing: Icon(
+                        AppIcons.keyboard_arrow_right,
+                      ),
+                      // subtitle: Text("Danh sách đánh giá"),
+                    ),
+                  )
+                ])),
+          ],
+        ));
   }
 
   Widget _top() {

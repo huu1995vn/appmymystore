@@ -121,8 +121,8 @@ class _UserPageState extends State<UserPage> {
         context, ChangeEmailDiaLog(data: data!));
     if (email != null) {
       CommonMethods.showToast("success".tr);
-      loadData();
     }
+    loadData();
   }
 
   _onVerifyEmail() async {

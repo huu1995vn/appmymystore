@@ -114,23 +114,21 @@ class _OtpVerificationEmailDialogState
       keyboardType:
           const TextInputType.numberWithOptions(signed: true, decimal: true),
       length: 6,
-      obscureText: true,
       animationType: AnimationType.scale,
       pastedTextStyle: TextStyle(
         color: Theme.of(context).textTheme.bodyLarge!.color,
         fontWeight: FontWeight.bold,
       ),
       cursorColor: AppColors.primary,
-      obscuringCharacter: '*',
       textStyle: TextStyle(
-          fontSize: 20,
-          height: 1.6,
+          fontSize: 18,
+          height: 1.4,
           color: Theme.of(context).textTheme.bodyLarge!.color),
       pinTheme: PinTheme(
           shape: PinCodeFieldShape.box,
-          borderRadius: BorderRadius.circular(2),
-          fieldHeight: 39,
-          fieldWidth: 39,
+          borderRadius: BorderRadius.circular(4),
+          fieldHeight: 45,
+          fieldWidth: 40,
           activeFillColor: Theme.of(context).cardColor,
           activeColor:
               Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5),

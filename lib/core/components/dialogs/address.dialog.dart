@@ -60,6 +60,7 @@ class _AddressDialogState extends State<AddressDialog> {
               child: Form(
                   key: _keyValidationForm,
                   child: Card(
+                    margin: EdgeInsets.only(top: kDefaultMarginBottomBox),
                       child: Column(
                     children: <Widget>[
                       rxSelectInput(context, "city", contact.cityid,

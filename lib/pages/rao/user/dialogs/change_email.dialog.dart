@@ -41,6 +41,7 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
 
       body: SingleChildScrollView(
         child: Card( 
+          margin: EdgeInsets.only(top: kDefaultMarginBottomBox),
             child: Column(
               children: <Widget>[
                 _body(),
@@ -57,7 +58,7 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
         Form(
           key: _keyValidationForm,
           child: Container(
-              margin: const EdgeInsets.only(top: 20, bottom: 20),
+              margin: const EdgeInsets.only(bottom: 20),
               child: Column(
                 children: <Widget>[
                   Container( 
@@ -90,7 +91,7 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
                 },
                 text: 'continue'.tr),
           )
-        ]),
+        ]), 
       ]),
     );
   }

@@ -81,7 +81,7 @@ class _InputTextState extends State<RxInput> {
       style: widget.style,
       decoration: InputDecoration(
           isDense: true,
-          fillColor: widget.isBorder ? Colors.white : null,
+          fillColor: widget.isBorder ? Theme.of(context).cardTheme.color : null,
           filled: widget.isBorder,
           border: widget.isBorder == true
               ? const OutlineInputBorder()

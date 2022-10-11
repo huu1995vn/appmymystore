@@ -44,12 +44,14 @@ class _ChangePasswordDialogState extends State<ChangePasswordDiaLog> {
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
-        child:  Column(
-              children: <Widget>[
-                _body(),
-              ],
-            ),
-      ),
+          child: Container(
+        margin: EdgeInsets.only(top: kDefaultMarginBottomBox),
+        child: Column(
+          children: <Widget>[
+            _body(),
+          ],
+        ),
+      )),
     );
   }
 

@@ -203,7 +203,7 @@ class _UserPageState extends State<UserPage> {
                                                 onTap: _onEdit,
                                                 child: FaIcon(
                                                   FontAwesomeIcons.edit,
-                                                  color: Colors.black45,
+                                                  color: Theme.of(context).textTheme.bodyLarge!.color,
                                                 )),
                                           )
                                       ],

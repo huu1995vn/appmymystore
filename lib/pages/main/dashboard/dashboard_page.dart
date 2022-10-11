@@ -214,9 +214,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 padding: EdgeInsets.only(top: 10, bottom: 10),
                 child: ListTile(
                   leading: RxCircleAvatar(
-                    backgroundColor: Colors.grey,
-                    child:
-                        FaIcon(FontAwesomeIcons.user, color: AppColors.black50),
+                    backgroundColor: Get.isDarkMode ? Colors.black12 :  Colors.grey,
+                    child: FaIcon(FontAwesomeIcons.user, color:AppColors.black50),
                   ),
                   title: Text(
                     "${"login".tr} / ${"regist".tr}",

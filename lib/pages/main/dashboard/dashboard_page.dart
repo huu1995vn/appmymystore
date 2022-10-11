@@ -23,7 +23,7 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  UserModel data = UserModel();
+  UserModel? data;
   @override
   void initState() {
     super.initState();
@@ -47,6 +47,9 @@ class _DashboardPageState extends State<DashboardPage> {
       }
     } catch (e) {
       CommonMethods.showToast(e.toString());
+      setState(() {
+        data = UserModel();
+      });
     }
   }
 
@@ -202,7 +205,6 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   List<Widget> _notlogin() {
-    final userProvider = Provider.of<AppProvider>(context);
     return [
       Card(
         margin: EdgeInsets.only(bottom: 5),
@@ -213,7 +215,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: ListTile(
                   leading: RxCircleAvatar(
                     backgroundColor: Colors.grey,
-                    child: FaIcon(FontAwesomeIcons.user, color:AppColors.black50),
+                    child:
+                        FaIcon(FontAwesomeIcons.user, color: AppColors.black50),
                   ),
                   title: Text(
                     "${"login".tr} / ${"regist".tr}",
@@ -280,9 +283,10 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _body() {
-    return Column(children: [
+    return SingleChildScrollView(
+        child: Column(children: [
       ...(CommonMethods.isLogin ? _logined() : _notlogin()),
       ..._public()
-    ]);
+    ]));
   }
 }

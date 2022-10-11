@@ -213,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
               "message.str005".tr,
             ),
             Text(
-              "regist.now".tr,
+              "regist".tr,
               style: const TextStyle(color: AppColors.primary).bold,
             ),
           ],

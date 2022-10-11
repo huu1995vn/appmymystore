@@ -190,17 +190,20 @@ Widget RxCardSkeleton(
     bool isCircleAvatar = false,
     bool isBorderRadius = true}) {
   try {
-    return CardSkeleton(
-      style: SkeletonStyle(
-        backgroundColor:
-            Get.isDarkMode ? AppColors.blackLight : AppColors.white,
-        isShowAvatar: isShowAvatar,
-        isCircleAvatar: isCircleAvatar,
-        borderRadius:
-            BorderRadius.all(Radius.circular(isBorderRadius ? 20.0 : 0)),
-        // padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
-        barCount: barCount,
-        isAnimation: true,
+    return Container(
+      margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+      child: CardSkeleton(
+        style: SkeletonStyle(
+          backgroundColor:
+              Get.isDarkMode ? AppColors.blackLight : AppColors.white,
+          isShowAvatar: isShowAvatar,
+          isCircleAvatar: isCircleAvatar,
+          borderRadius:
+              BorderRadius.all(Radius.circular(isBorderRadius ? 20.0 : 0)),
+          // padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
+          barCount: barCount,
+          isAnimation: true,
+        ),
       ),
     );
   } catch (e) {}
@@ -559,7 +562,7 @@ Widget rxTextInput(BuildContext context, String? value,
                     TextSpan(
                         text: labelText ?? "",
                         style: kTextTitleStyle.copyWith(
-                            fontSize: 12, color: Colors.black54)),
+                            fontSize: 12)),
                     if (validator != null)
                       const TextSpan(
                           text: ' *',
@@ -579,9 +582,7 @@ Widget rxTextInput(BuildContext context, String? value,
                 hintText: hintText,
                 onTap: onTap,
                 style: TextStyle(
-                        color: value != null && value.isNotEmpty
-                            ? AppColors.black
-                            : null)
+                        )
                     .size(16),
                 validator: validator,
                 suffixIcon: const Icon(null)),

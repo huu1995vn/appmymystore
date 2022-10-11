@@ -89,7 +89,8 @@ class _AdvertPageState extends State<AdvertPage> {
           elevation: 0.0,
         ),
         key: _key,
-        body: Card(
+        body: Container(
+          padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
             child: RxCustomScrollView(
           key: const Key("LAds"),
           controller: scrollController,

@@ -186,9 +186,7 @@ class _UserPageState extends State<UserPage> {
                       margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
                       child: Padding(
                         padding: const EdgeInsets.all(kDefaultPadding),
-                        child: SizedBox(
-                          height: data!.rxverify ? 230 : 250,
-                          child: Stack(
+                        child: Stack(
                             children: [
                               Center(
                                 child: Column(
@@ -261,8 +259,7 @@ class _UserPageState extends State<UserPage> {
                                 ),
                               )
                             ],
-                          ),
-                        ),
+                          ), 
                       ),
                     ),
                     Card(

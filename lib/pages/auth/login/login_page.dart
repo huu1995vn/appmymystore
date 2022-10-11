@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
@@ -49,17 +50,21 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       key: keyLogin,
       appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarIconBrightness:
+              Get.isDarkMode ? Brightness.light : Brightness.dark,
+          statusBarBrightness:
+              Get.isDarkMode ? Brightness.dark : Brightness.light,
         ),
-        iconTheme: const IconThemeData(
-          color: AppColors.black, //change your color here
+        iconTheme: IconThemeData(
+          color: Get.isDarkMode
+              ? AppColors.white
+              : AppColors.black, //change your color here
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      backgroundColor: AppColors.white,
+      backgroundColor: Get.isDarkMode ? Colors.black54 : AppColors.white,
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         _header(),
         _body(),
@@ -84,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 10),
           Text(
             "welcome".tr,
-            style: const TextStyle(fontSize: 16, color: Colors.black54),
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       ),
@@ -99,9 +104,8 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
+            Card(
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Form(
@@ -120,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: RxInput(
                           username,
                           labelText: "phone".tr,
-                          icon: const Icon(AppIcons.phone_handset),
+                          icon: const FaIcon(FontAwesomeIcons.phone),
                           keyboardType: TextInputType.number,
                           onChanged: (v) => {username = v},
                         ),
@@ -132,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                             password,
                             isPassword: true,
                             labelText: "password".tr,
-                            icon: const Icon(AppIcons.lock_1),
+                            icon: const FaIcon(FontAwesomeIcons.lock),
                             onChanged: (v) => {password = v},
                           )),
                     ],

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/index.dart';
@@ -135,7 +136,9 @@ class _ContactPageState extends State<ContactPage> {
         title: Text('address'.tr),
         elevation: 0.0,
       ),
-      body: RxCustomScrollView(
+      body: Container(
+        padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
+        child: RxCustomScrollView(
         key: const Key("LContact"),
         controller: scrollController,
         onNextScroll: onNextPage,
@@ -148,13 +151,20 @@ class _ContactPageState extends State<ContactPage> {
                 onDelete: (context) => onDelete(index),
                 onDefault: (context) => onDefault(index));
           })
+          
         ],
       ),
+      ) ,
       persistentFooterButtons: [
-        RxPrimaryButton(
+        Row(
+          children: [
+            Expanded(child:  RxPrimaryButton(
             onTap: onDetail,
-            icon: Icon(AppIcons.plus_circle),
-            text: "add".tr)
+            icon: FaIcon(FontAwesomeIcons.plus),
+            text: "add".tr))
+          ],
+        )
+       
       ],
     );
   }

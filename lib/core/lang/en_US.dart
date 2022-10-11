@@ -4,7 +4,7 @@ const Map<String, String> en_US = {
   'million': 'Million',
   'billion': 'Billion',
   "expiration.date": "Expiration date",
-  "new.email": "new email",
+  "new.email": "New email",
   "resend.code": "Resend code",
   "bookmark": "Bookmark",
   "cancelfilter": "Cancel filter",

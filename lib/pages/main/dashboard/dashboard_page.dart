@@ -97,7 +97,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 : null,
                             onTap: (){
 
-                               data!.rxverify? CommonNavigates.toMyProductPage(context): CommonNavigates.toUserPage(context);
+                               data!.verifyphone? CommonNavigates.toMyProductPage(context): CommonNavigates.toUserPage(context);
  
                             },
                             trailing: Icon(

@@ -180,7 +180,7 @@ class _OtpVerificationEmailDialogState
               child: expiredTime > 0
                   ? Text(
                       CommonMethods.convertTimeDuration(seconds: expiredTime),
-                      style: const TextStyle(fontSize: 13.0),
+                      style: const TextStyle(fontSize: 16),
                     )
                   : Row(
                       mainAxisSize: MainAxisSize.min,
@@ -188,14 +188,16 @@ class _OtpVerificationEmailDialogState
                         Text(
                           "resend.code".tr,
                           style: kTextSubTitleStyle.italic.copyWith(
+                              fontSize: 16,
                               color: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
                                   .color!
                                   .withOpacity(0.7)),
                         ),
+                        const SizedBox(width: 5),
                         Icon(AppIcons.sync_1,
-                            size: 13,
+                            size: 16,
                             color: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -43,21 +44,24 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return RxScaffold(
+    return Scaffold(
         appBar: AppBar(
-          systemOverlayStyle: const SystemUiOverlayStyle(
+          systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness:
-                Brightness.dark, //<-- For Android SEE HERE (dark icons)
+                Get.isDarkMode ? Brightness.light : Brightness.dark,
             statusBarBrightness:
-                Brightness.light, //<-- For iOS SEE HERE (dark icons)
+                Get.isDarkMode ? Brightness.dark : Brightness.light,
           ),
-          iconTheme: const IconThemeData(
-            color: AppColors.black, //change your color here
+          iconTheme: IconThemeData(
+            color: Get.isDarkMode
+                ? AppColors.white
+                : AppColors.black, //change your color here
           ),
           backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
-        child: SingleChildScrollView(
+        backgroundColor: Get.isDarkMode ? Colors.black54 : AppColors.white,
+        body: SingleChildScrollView(
             child: Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: Column(
@@ -100,10 +104,10 @@ class _RegisterPageState extends State<RegisterPage> {
             children: <Widget>[
               Form(
                   key: _keyValidationForm,
-                  child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.black26)),
+                  child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Column(
                         children: <Widget>[
                           Container(
@@ -115,7 +119,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                           BorderSide(color: Colors.black26))),
                               child: RxInput(user!.fullname!,
                                   labelText: "fullname".tr,
-                                  icon: const Icon(AppIcons.user_1),
+                                  icon:
+                                      const FaIcon(FontAwesomeIcons.solidUser),
                                   onChanged: (v) => {user!.fullname = v},
                                   validator: Validators.compose([
                                     Validators.required("notempty.fullname".tr),
@@ -130,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: RxInput(user!.phone!,
                                   keyboardType: TextInputType.number,
                                   labelText: "phone".tr,
-                                  icon: const Icon(AppIcons.phone_handset),
+                                  icon: const FaIcon(FontAwesomeIcons.phone),
                                   onChanged: (v) => {user!.phone = v},
                                   validator: (v) {
                                     if (v == null || !v.isNotEmpty) {
@@ -152,7 +157,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 user!.password!,
                                 isPassword: true,
                                 labelText: "password".tr,
-                                icon: const Icon(AppIcons.lock_1),
+                                icon: const FaIcon(FontAwesomeIcons.lock),
                                 onChanged: (v) => {user!.password = v},
                                 validator: Validators.compose([
                                   Validators.required("notempty.password".tr),
@@ -167,7 +172,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 passwordAgain,
                                 isPassword: true,
                                 labelText: "password.again".tr,
-                                icon: const Icon(AppIcons.lock_1),
+                                icon: const FaIcon(FontAwesomeIcons.lock),
                                 validator: (value) {
                                   if (value != null &&
                                       value != user!.password) {
@@ -179,7 +184,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               )),
                         ],
                       ))),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
@@ -193,7 +198,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   )
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               RxLoginAccountLabel(context)
             ]));
   }

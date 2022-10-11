@@ -22,7 +22,6 @@ class VehicleContactDetailPage extends StatefulWidget {
 }
 
 class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
-
   @override
   void initState() {
     super.initState();
@@ -74,10 +73,10 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(kDefaultPadding*2),
+                    padding: EdgeInsets.all(kDefaultPadding * 2),
                     child: Card(
                       child: Padding(
-                    padding: EdgeInsets.all(kDefaultPadding*2),
+                        padding: EdgeInsets.all(kDefaultPadding * 2),
                         child: Column(
                           children: <Widget>[
                             Container(
@@ -114,12 +113,13 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
                               alignment: Alignment.centerLeft,
-                              child:
-                                  Text("email".tr, style: const TextStyle().bold),
+                              child: Text("email".tr,
+                                  style: const TextStyle().bold),
                             ),
                             GestureDetector(
                               onTap: () {
-                                CommonMethods.launchURL("mailto:" + data!.email!);
+                                CommonMethods.launchURL(
+                                    "mailto:" + data!.email!);
                               },
                               child: Container(
                                 margin: const EdgeInsets.only(bottom: 10),
@@ -133,8 +133,8 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
                               alignment: Alignment.centerLeft,
-                              child:
-                                  Text("content".tr, style: const TextStyle().bold),
+                              child: Text("content".tr,
+                                  style: const TextStyle().bold),
                             ),
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
@@ -145,7 +145,8 @@ class _VehicleContactDetailPageState extends State<VehicleContactDetailPage> {
                             Container(
                               margin: const EdgeInsets.only(bottom: 10),
                               alignment: Alignment.centerLeft,
-                              child: Text("from".tr, style: const TextStyle().bold),
+                              child: Text("from".tr,
+                                  style: const TextStyle().bold),
                             ),
                             GestureDetector(
                                 onTap: () {

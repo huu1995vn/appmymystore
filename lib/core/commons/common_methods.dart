@@ -499,6 +499,7 @@ class CommonMethods {
 
   static String getNameMasterById(String type, dynamic id) {
     try {
+      if(type == "year") return id.toString();
       return (MasterDataService.data[type] as List)
           .firstWhere((element) => element["id"] == id)["name"];
     } catch (e) {

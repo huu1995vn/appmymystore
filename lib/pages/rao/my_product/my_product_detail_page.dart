@@ -684,32 +684,15 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                   data!.colorid = v;
                                                 })
                                               }),
-                                      rxSelectInput(context, "year", data!.year,
+                                      rxSelectInput(context, "year",
+                                          data!.year,
                                           labelText: "year".tr,
                                           afterChange: (v) => {
                                                 setState(() {
                                                   data!.year = v;
                                                 })
                                               }),
-                                      // ListTile(
-                                      //   title: Text('year'.tr,
-                                      //       style: kTextTitleStyle),
-                                      //   subtitle: RxInput(
-                                      //     keyboardType: TextInputType.number,
-                                      //     data!.year?.toString() ?? "",
-                                      //     onChanged: (v) {
-                                      //       setState(() {
-                                      //         data!.year =
-                                      //             CommonMethods.convertToInt32(
-                                      //                 v);
-                                      //       });
-                                      //     },
-                                      //     hintText: "year".tr,
-                                      //     style: const TextStyle(
-                                      //             color: AppColors.primary)
-                                      //         .size(16),
-                                      //   ),
-                                      // ),
+                                      
                                     ],
                                   )),
                               _header(

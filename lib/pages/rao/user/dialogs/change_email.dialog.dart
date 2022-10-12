@@ -2,7 +2,6 @@
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';

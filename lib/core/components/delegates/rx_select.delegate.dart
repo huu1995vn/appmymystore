@@ -12,7 +12,7 @@ import 'package:raoxe/core/utilities/constants.dart';
 class RxSelectDelegate extends SearchDelegate<dynamic> {
   List data;
   dynamic value;
-  bool? ismultiple = false;
+  bool ismultiple;
   String pkey;
   String pvalue;
 
@@ -20,7 +20,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
   RxSelectDelegate(
       {required this.data,
       required this.value,
-      this.ismultiple,
+      this.ismultiple = false,
       this.pkey = "name",
       this.pvalue = "id",
       this.itemBuilder});
@@ -103,14 +103,15 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
                                 title: Text(item[pkey]),
                                 groupValue: value,
                                 onChanged: (v) {
-                                  setState(() {
-                                    value = v;
+                                  setState(() {                                    
+                                    value = v;                                    
                                   });
+                                  CommonNavigates.goBack(context, v);
                                 },
                               );
                       },
                 )),
-                if (itemBuilder == null)
+                if (itemBuilder == null && ismultiple)
                   Container(
                       padding: const EdgeInsets.all(kDefaultPadding),
                       child: Row(

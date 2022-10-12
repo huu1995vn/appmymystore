@@ -155,7 +155,7 @@ class _OtpVerificationEmailDialogState
           Center(
               child: Text(
             widget.email,
-            style: const TextStyle().bold,
+            style: const TextStyle(fontSize: 20).bold,
           )),
           const SizedBox(
             height: kDefaultPadding * 2,

@@ -23,7 +23,6 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-
 class MyProductDetailPage extends StatefulWidget {
   final int? id;
   final ProductModel? item;
@@ -53,12 +52,12 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
   bool isNotFound = false;
   List<String> imgs = <String>[];
   loadData() async {
-    if(!AppProvider.localuser.rxverify)
-    {
+    if (!AppProvider.localuser.rxverify) {
       await CommonMethods.showDialogError(context, "message.str017".tr);
       CommonNavigates.goBack(context);
       return;
-    };
+    }
+    ;
     ProductModel? _data;
     if (widget.item != null) {
       _data = widget.item!;
@@ -168,11 +167,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             itemBuilder: (context, index) {
               ContactModel item = list[index];
               return Card(
-                  child: RadioListTile(
-                // leading: const RxCircleAvatar(
-                //     backgroundColor: Colors.grey,
-                //     child: Icon(AppIcons.map_marker,
-                //         size: 20, color: Colors.white)),
+                  child:Container(
+                padding: EdgeInsets.symmetric(vertical: kDefaultPaddingBox),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1.0, color: Colors.black12),
+                  ),
+                ),
+                child:   RadioListTile(
                 title: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -220,7 +222,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                 // onTap: () {
                 //   CommonNavigates.goBack(context, item);
                 // })
-              ));
+              )));
             }));
     if (contact != null) {
       setState(() {
@@ -392,7 +394,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           Text(
                                             (data!.price != null &&
                                                     data!.price! > 0)
-                                                ? CommonMethods.formatNumber(
+                                                ? CommonMethods.formatShortCurrency(
                                                     data!.price)
                                                 : "negotiate".tr,
                                             style: kTextPriceStyle.size(13),
@@ -778,38 +780,40 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
 
   Widget _contact() {
     return Card(
-      margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
-      child: ListTile(
-        leading: RxAvatarImage(data!.rximguser, size: 50),
-        title: Text(data!.fullname ?? "NaN", style: const TextStyle().bold),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+        margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingBox),
+          child: ListTile(
+            leading: RxAvatarImage(data!.rximguser, size: 50),
+            title: Text(data!.fullname ?? "NaN", style: const TextStyle().bold),
+            subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (data!.cityid != null || data!.cityid! > 0)
-                  Text(
-                    data!.cityname ?? "NaN",
-                    style: const TextStyle(color: AppColors.blue),
-                  ),
-                Text(
-                  data!.phone ?? "NaN",
-                  style: const TextStyle(fontSize: 16),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (data!.cityid != null || data!.cityid! > 0)
+                      Text(
+                        data!.cityname ?? "NaN",
+                        style: const TextStyle(color: AppColors.blue),
+                      ),
+                    Text(
+                      data!.phone ?? "NaN",
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
                 ),
+                Text(
+                  data!.address ?? "NaN",
+                  style: const TextStyle(),
+                )
               ],
             ),
-            Text(
-              data!.address ?? "NaN",
-              style: const TextStyle(),
-            )
-          ],
-        ),
-        trailing: const Icon(AppIcons.chevron_right),
-        onTap: _onAddress,
-      ),
-    );
+            trailing: const Icon(AppIcons.chevron_right),
+            onTap: _onAddress,
+          ),
+        ));
   }
 
   Widget _itemImage(int index,

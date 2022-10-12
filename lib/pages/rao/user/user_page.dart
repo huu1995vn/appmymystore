@@ -208,6 +208,7 @@ class _UserPageState extends State<UserPage> {
                                           )
                                       ],
                                     ),
+                                    SizedBox(height: 20),
                                     CircleAvatar(
                                       radius: 60.0,
                                       // backgroundColor: AppColors.white,

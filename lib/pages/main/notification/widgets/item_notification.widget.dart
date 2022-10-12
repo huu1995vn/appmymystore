@@ -38,6 +38,12 @@ class ItemNotificationWidget extends StatelessWidget {
             // The child of the Slidable is what the user sees when the
             // component is not dragged.
             child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+                border: Border(
+                  bottom: BorderSide(width: 1, color: Colors.black12),
+                ),
+              ),
               padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingBox),
               child: ListTile(
                 onTap: onTap,

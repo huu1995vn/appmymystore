@@ -101,7 +101,13 @@ class NotificationDetailPageState extends State<NotificationDetailPage> {
     return RxWebView(
       html: """<!DOCTYPE html>
                      <html>
-                       <head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+                       <head>
+                          <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+                          <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;0,700;1,300&display=swap" rel="stylesheet">
+                          <style>
+                              body{font-family: 'Roboto', sans-serif;}
+                          </style>
+                       </head>
                        <body style="margin: 0; padding: 10px;">
                           <h3>
                            ${data!.subject}

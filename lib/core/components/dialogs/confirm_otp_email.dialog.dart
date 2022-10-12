@@ -84,16 +84,18 @@ class _OtpVerificationEmailDialogState
   void sendotp() {
     CommonMethods.lockScreen();
     try {
-      sendOTP((e) {
-        CommonMethods.showDialogError(context, e.toString());
-        CommonMethods.unlockScreen();
-      }, () {
+      sendOTP((e) async {
+        if (_timer != null) _timer!.cancel();
+         CommonMethods.unlockScreen();
+        await CommonMethods.showDialogError(context, e.toString());
+        CommonNavigates.goBack(context);
+      }, 
+      () {
         startTimer();
         CommonMethods.unlockScreen();
       });
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
-
       CommonMethods.unlockScreen();
     }
   }

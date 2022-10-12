@@ -87,9 +87,11 @@ class _OtpVerificationPhoneDialogState
   void sendotp() {
     CommonMethods.lockScreen();
     try {
-      sendOTP((e) {
-        CommonMethods.showDialogError(context, e.toString());
+      sendOTP((e) async {
+        if (_timer != null) _timer!.cancel();
         CommonMethods.unlockScreen();
+        await CommonMethods.showDialogError(context, e.toString());
+        CommonNavigates.goBack(context);
       }, () {
         startTimer();
         CommonMethods.unlockScreen();

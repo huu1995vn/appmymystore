@@ -323,5 +323,6 @@ const Map<String, String> vi_VN = {
   "message.str015": "Sản phẩm chưa được duyệt",
   "message.str016": "Bạn hãy nhập mã OTP được gửi tới số điện thoại:",
   "message.str017": "Tài khoản chưa được xác thực",
-  "message.alert01": "Bạn có chắc muốn xóa?"
+  "message.alert01": "Bạn có chắc muốn xóa?",
+  "message.alert02": "Vui lòng nhập email khác email hiện tại"
 };

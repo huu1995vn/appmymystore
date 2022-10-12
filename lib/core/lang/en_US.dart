@@ -324,5 +324,7 @@ const Map<String, String> en_US = {
   "message.str015": "Product not approved",
   "message.str016": "Please enter the OTP sent to your phone number:",
   "message.str017": "Unverified account",
-  "message.alert01": "Are you sure you want to delete?"
+  "message.alert01": "Are you sure you want to delete?",
+  "message.alert02": "Please enter a different email from your current email",
+
 };

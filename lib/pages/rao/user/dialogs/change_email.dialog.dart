@@ -99,6 +99,9 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
   //#fuction main
   Future onChangeEmail() async {
     try {
+      if (email!=null && widget.data.email==email) {
+        throw "message.alert02".tr;
+      }
       AuthService.checkEmail(email);
       bool checkOtp =
           await CommonNavigates.openOtpVerificationEmailDialog(context, email);

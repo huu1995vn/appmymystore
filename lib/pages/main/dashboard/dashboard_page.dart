@@ -83,7 +83,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return [
       Card(
           margin: EdgeInsets.only(bottom: 5, top: 5),
-          child: Column(children: [_top()])),
+          child: Column(children: [_top(appProvider)])),
       Card(
         margin: EdgeInsets.only(bottom: 5),
         child: Column(
@@ -98,12 +98,6 @@ class _DashboardPageState extends State<DashboardPage> {
                     FontAwesomeIcons.bullhorn,
                   ),
                 ),
-                subtitle: !appProvider.user.verifyphone
-                    ? Text(
-                        "message.str017".tr,
-                        style: TextStyle(color: AppColors.danger),
-                      )
-                    : Container(),
                 onTap: () {
                   appProvider.user.verifyphone
                       ? CommonNavigates.toMyProductPage(context)
@@ -214,8 +208,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 padding: EdgeInsets.only(top: 10, bottom: 10),
                 child: ListTile(
                   leading: RxCircleAvatar(
-                    backgroundColor: Get.isDarkMode ? Colors.black12 :  Colors.grey,
-                    child: FaIcon(FontAwesomeIcons.user, color:AppColors.black50),
+                    backgroundColor:
+                        Get.isDarkMode ? Colors.black12 : Colors.grey,
+                    child:
+                        FaIcon(FontAwesomeIcons.user, color: AppColors.black50),
                   ),
                   title: Text(
                     "${"login".tr} / ${"regist".tr}",
@@ -261,22 +257,31 @@ class _DashboardPageState extends State<DashboardPage> {
     ];
   }
 
-  Widget _top() {
+  Widget _top(appProvider) {
     final userProvider = Provider.of<AppProvider>(context);
     return Container(
         padding: EdgeInsets.only(top: 10, bottom: 10),
         child: ListTile(
           leading: RxAvatarImage(userProvider.user.rximg, size: 60),
-          title: InkWell(
-              onTap: () {
-                CommonNavigates.toUserPage(context);
-              },
-              child: Text(
+          onTap: () {
+            CommonNavigates.toUserPage(context);
+          },
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
                 userProvider.user.fullname!,
                 style: const TextStyle(
                   fontSize: 19,
                 ),
-              )),
+              ),
+              if (!appProvider.user.verifyphone)
+                Text(
+                  "message.str017".tr,
+                  style: TextStyle(color: AppColors.danger),
+                )
+            ],
+          ),
           trailing: Icon(AppIcons.keyboard_arrow_right),
         ));
   }

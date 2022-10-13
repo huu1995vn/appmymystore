@@ -59,18 +59,6 @@ class _MyProductPageState extends State<MyProductPage> {
     }
   }
 
-  Widget _bodylist_awaiting() {
-    return ListView.builder(
-        key: UniqueKey(),
-        shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.only(top: kDefaultPadding),
-        itemCount: kItemOnPage,
-        itemBuilder: (context, index) {
-          return RxCardSkeleton(barCount: 3, isShowAvatar: false);
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,7 +96,7 @@ class _MyProductPageState extends State<MyProductPage> {
               ];
             },
             body: isAwaiting
-                ? _bodylist_awaiting()
+                ? RxListAwaiting()
                 : TabBarView(
                     children: tabviews,
                   ),

@@ -14,6 +14,7 @@ import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -275,7 +276,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   fontSize: 19,
                 ),
               ),
-              if (!appProvider.user.verifyphone)
+              if (!data!.verifyphone)
                 Text(
                   "message.str017".tr,
                   style: TextStyle(color: AppColors.danger),
@@ -285,10 +286,10 @@ class _DashboardPageState extends State<DashboardPage> {
           trailing: Icon(AppIcons.keyboard_arrow_right),
         ));
   }
-
+  
   Widget _body() {
     return SingleChildScrollView(
-        child: Column(children: [
+        child: data==null? RxListAwaiting(): Column(children: [
       ...(CommonMethods.isLogin ? _logined() : _notlogin()),
       ..._public()
     ]));

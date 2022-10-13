@@ -675,7 +675,17 @@ _onSelect(BuildContext context, String type, dynamic id,
     if (afterChange != null) afterChange(res);
   }
 }
-
+Widget RxListAwaiting() {
+    return ListView.builder(
+        key: UniqueKey(),
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.only(top: kDefaultPadding),
+        itemCount: kItemOnPage,
+        itemBuilder: (context, index) {
+          return RxCardSkeleton(barCount: 3, isShowAvatar: false);
+        });
+  }
 Widget RxBorderListTile({Widget? child}) {
   return Container(
       decoration: BoxDecoration(

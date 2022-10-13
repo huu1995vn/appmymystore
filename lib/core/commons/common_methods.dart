@@ -35,6 +35,7 @@ import '../pipes/timeago/timeago.dart' as timeago;
 import '../pipes/short_currency.dart' as shortCurrency;
 import 'package:path/path.dart' as p;
 import 'package:share_plus/share_plus.dart';
+import 'package:html/parser.dart';
 
 class CommonMethods {
   static String getExtension(File file) {
@@ -228,7 +229,7 @@ class CommonMethods {
 
   static Future<void> showDialogError(BuildContext context, dynamic pmsg,
       {String? title, List<Widget>? actions}) async {
-     pmsg = pmsg.replaceAll("Exception: ", "").replaceAll("Exception", "");
+    pmsg = pmsg.replaceAll("Exception: ", "").replaceAll("Exception", "");
     return await materialDialog(context, pmsg,
         actions: actions, color: AppColors.error);
   }
@@ -358,7 +359,7 @@ class CommonMethods {
     //       strTimeAgo = timeago.format(time, locale: 'vi');
     //   }
     // } catch (e) {}
-    return timeago.format(time, locale: Get.locale!.languageCode??"en");
+    return timeago.format(time, locale: Get.locale!.languageCode ?? "en");
   }
 
   static formatShortCurrency(dynamic amount) {
@@ -431,6 +432,7 @@ class CommonMethods {
       return false;
     }
   }
+
   static bool checkStringEmail(String? text) {
     if (text != null) {
       RegExp regExp = RegExp(
@@ -500,7 +502,7 @@ class CommonMethods {
 
   static String getNameMasterById(String type, dynamic id) {
     try {
-      if(type == "year") return id.toString();
+      if (type == "year") return id.toString();
       return (MasterDataService.data[type] as List)
           .firstWhere((element) => element["id"] == id)["name"];
     } catch (e) {
@@ -561,8 +563,7 @@ class CommonMethods {
   static String linkProduct(int id, String rewriteUrl) {
     try {
       rewriteUrl = rewriteUrl.convertrUrlPrefix();
-      String rewriteLink =
-          '${CommonConfig.hostRaoXe}/$rewriteUrl-${id}r.html';
+      String rewriteLink = '${CommonConfig.hostRaoXe}/$rewriteUrl-${id}r.html';
       return rewriteLink;
     } catch (error) {}
     return "";
@@ -654,8 +655,15 @@ class CommonMethods {
 
   static void chatZalo(String phone) {
     phone = CommonMethods.formatPhoneNumber(phone);
-     
-    launchUrl(Uri.parse("https://zalo.me/$phone"), mode: LaunchMode.externalNonBrowserApplication);
+
+    launchUrl(Uri.parse("https://zalo.me/$phone"),
+        mode: LaunchMode.externalNonBrowserApplication);
+  }
+
+ static String parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final String parsedString = parse(document.body!.text).documentElement!.text;
+    return parsedString;
   }
   //# build end link dynamic
 }

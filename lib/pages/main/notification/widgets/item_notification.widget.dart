@@ -2,6 +2,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/app_icons.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -63,7 +64,7 @@ class ItemNotificationWidget extends StatelessWidget {
                             : AppColors.primary800),
                         size: 20)),
                 subtitle: Text(
-                  item.message,
+                  CommonMethods.parseHtmlString(item.message),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

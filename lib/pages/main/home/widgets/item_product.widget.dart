@@ -284,8 +284,8 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
                               borderRadius: BorderRadius.circular(5),
                               child: RxImage(
                                 widget.item.rximg,
-                                width: 100,
-                                height: 100,
+                                width: 120,
+                                height: 120,
                               ),
                             )),
                         if (lenimg > 0)

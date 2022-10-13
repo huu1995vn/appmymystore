@@ -45,6 +45,12 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
 
     try {
       nPaging = nPaging ?? 1;
+      if (nPaging == 1) {
+        setState(() {
+          listData = null;
+          totalItems = 0;
+        });
+      }
       Map<String, dynamic> params = {
         "parentid":
             widget.parentid, // cái này là lại ParentIdList === tin tức mới
@@ -74,6 +80,10 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
         CommonMethods.showToast(res.message);
       }
     } catch (e) {
+      setState(() {
+        listData = [];
+        totalItems = 0;
+      });
       CommonMethods.showDialogError(context, e.toString());
     }
   }

@@ -228,6 +228,7 @@ class CommonMethods {
 
   static Future<void> showDialogError(BuildContext context, dynamic pmsg,
       {String? title, List<Widget>? actions}) async {
+     pmsg = pmsg.replaceAll("Exception: ", "").replaceAll("Exception", "");
     return await materialDialog(context, pmsg,
         actions: actions, color: AppColors.error);
   }

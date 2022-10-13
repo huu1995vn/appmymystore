@@ -1,4 +1,5 @@
 const Map<String, String> en_US = {
+  'sort': "Sắp xếp",
   'copper': 'Copper',
   'thousand': 'Thousand',
   'million': 'Million',

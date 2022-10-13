@@ -1,4 +1,5 @@
 const Map<String, String> vi_VN = {
+  'sort': "Sắp xếp",
   'copper': 'Đồng',
   'thousand': 'Nghìn',
   'million': 'Triệu',

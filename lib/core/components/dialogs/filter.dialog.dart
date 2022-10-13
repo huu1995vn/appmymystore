@@ -84,23 +84,13 @@ class _FilterDialogState extends State<FilterDialog> {
   }
 
   _onDone() {
-    CommonNavigates.goBack(context, searchParams);
-  }
-
-  _onSelect(String key, String type, int id,
-      {bool Function(dynamic)? fnWhere, Function()? afterChange}) async {
-    List data = MasterDataService.data[type];
-    if (fnWhere != null) {
-      data = data.where(fnWhere).toList();
-    }
-    var res = await showSearch(
-        context: context, delegate: RxSelectDelegate(data: data, value: id));
-    if (res != null) {
-      setState(() {
-        searchParams[key] = res;
-        if (afterChange != null) afterChange();
-      });
-    }
+    Map<String, dynamic> dataParams = <String, dynamic>{};
+    searchParams.forEach((key, value) {
+      if (value != null && value != -1) {
+        dataParams[key] = value;
+      }
+    });
+    CommonNavigates.goBack(context, dataParams);
   }
 
   onCancel() {
@@ -158,9 +148,26 @@ class _FilterDialogState extends State<FilterDialog> {
               Card(
                 child: Column(
                   children: [
-                    _selectInput("BrandId", "brand", title: "brand".tr),
-                    _selectInput("CityId", "city", title: "Tỉnh thành"),
-                    _selectInput("OrderBy", "sort", title: "Sắp xếp"),
+                    rxSelectInput(
+                        context, "brand", searchParams["BrandId"] ?? -1,
+                        title: Text("brand".tr), afterChange: (v) {
+                      setState(() {
+                        searchParams["BrandId"] = v;
+                      });
+                    }),
+                    rxSelectInput(context, "city", searchParams["CityId"] ?? -1,
+                        title: Text("city".tr), afterChange: (v) {
+                      setState(() {
+                        searchParams["CityId"] = v;
+                      });
+                    }),
+                    rxSelectInput(
+                        context, "sort", searchParams["OrderBy"] ?? -1,
+                        title: Text("sort".tr), afterChange: (v) {
+                      setState(() {
+                        searchParams["OrderBy"] = v;
+                      });
+                    }),
                     Padding(
                       padding: const EdgeInsets.only(
                           top: kDefaultPadding, left: kDefaultPaddingBox),
@@ -202,27 +209,53 @@ class _FilterDialogState extends State<FilterDialog> {
                   // color: Colors.white,
                   child: Column(
                 children: [
-                  _selectInput("State", "productstate", title: "Tình trạng"),
-                  _selectInput("FuelTypeId", "fueltype", title: "Nhiên liệu"),
-                  _selectInput("MadeInId", "madein", title: "Năm sản xuất"),
-                  _selectInput("ColorId", "color", title: "Màu sắc"),
-                  _selectInput("Door", "productdoor", title: "Số cửa"),
-                  _selectInput("Seat", "productseat", title: "Số chỗ"),
-                  ListTile(
-                    title: Text('year'.tr, style: kTextTitleStyle),
-                    subtitle: RxInput(
-                      keyboardType: TextInputType.number,
-                      searchParams["Year"]?.toString() ?? "",
-                      onChanged: (v) {
-                        setState(() {
-                          searchParams["Year"] =
-                              CommonMethods.convertToInt32(v);
-                        });
-                      },
-                      hintText: "year".tr,
-                      style: const TextStyle(color: AppColors.black50).size(13),
-                    ),
-                  ),
+                  rxSelectInput(
+                      context, "productstate", searchParams["State"] ?? -1,
+                      title: Text("state".tr), afterChange: (v) {
+                    setState(() {
+                      searchParams["State"] = v;
+                    });
+                  }),
+                  rxSelectInput(
+                      context, "fueltype", searchParams["FuelTypeId"] ?? -1,
+                      title: Text("fuel".tr), afterChange: (v) {
+                    setState(() {
+                      searchParams["FuelTypeId"] = v;
+                    });
+                  }),
+                  rxSelectInput(
+                      context, "madein", searchParams["MadeInId"] ?? -1,
+                      title: Text("madein".tr), afterChange: (v) {
+                    setState(() {
+                      searchParams["MadeInId"] = v;
+                    });
+                  }),
+                  rxSelectInput(context, "color", searchParams["ColorId"] ?? -1,
+                      title: Text("color".tr), afterChange: (v) {
+                    setState(() {
+                      searchParams["ColorId"] = v;
+                    });
+                  }),
+                  rxSelectInput(
+                      context, "productdoor", searchParams["ColorId"] ?? -1,
+                      title: Text("door".tr), afterChange: (v) {
+                    setState(() {
+                      searchParams["Door"] = v;
+                    });
+                  }),
+                  rxSelectInput(
+                      context, "productseat", searchParams["Seat"] ?? -1,
+                      title: Text("seat".tr), afterChange: (v) {
+                    setState(() {
+                      searchParams["Seat"] = v;
+                    });
+                  }),
+                  rxSelectInput(context, "year", searchParams["Year"] ?? -1,
+                      title: Text("year".tr), afterChange: (v) {
+                    setState(() {
+                      searchParams["Year"] = v;
+                    });
+                  }),
                 ],
               )),
             ],
@@ -287,35 +320,5 @@ class _FilterDialogState extends State<FilterDialog> {
         ));
   }
 
-  Widget _selectInput(
-    String key,
-    String type, {
-    String? title,
-    String? hintText,
-    bool Function(dynamic)? fnWhere,
-    dynamic Function()? afterChange,
-  }) {
-    var name = CommonMethods.getNameMasterById(type, searchParams[key]);
-    return Container(
-        decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(width: 1.0, color: Colors.black12),
-          ),
-        ),
-        child: ListTile(
-          title: Text(
-            title ?? type.tr,
-            style: styleTitle,
-          ),
-          subtitle: Text(
-            name != null && name.length > 0 ? name : (hintText ?? "choose".tr),
-            // style: TextStyle(
-            //     color:
-            //         name != null && name.length > 0 ? AppColors.primary : null)
-          ),
-          onTap: () => _onSelect(key, type, searchParams[key],
-              fnWhere: fnWhere, afterChange: afterChange),
-          trailing: Icon(AppIcons.chevron_right),
-        ));
-  }
+  
 }

@@ -37,6 +37,12 @@ class _FavoritePageState extends State<FavoritePage> {
 
     try {
       nPaging = nPaging ?? 1;
+      if (nPaging == 1) {
+        setState(() {
+          listData = null;
+          totalItems = 0;
+        });
+      }
       Map<String, dynamic> body = {"p": nPaging, "n": kItemOnPage};
       ResponseModel res = await DaiLyXeApiBLL_APIUser().favorite(body);
       if (res.status > 0) {
@@ -61,6 +67,10 @@ class _FavoritePageState extends State<FavoritePage> {
         CommonMethods.showToast(res.message);
       }
     } catch (e) {
+      setState(() {
+        listData = [];
+        totalItems = 0;
+      });
       CommonMethods.showDialogError(context, e.toString());
     }
   }

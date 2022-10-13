@@ -40,6 +40,12 @@ class _ContactPageState extends State<ContactPage> {
 
     try {
       nPaging = nPaging ?? 1;
+      if (nPaging == 1) {
+        setState(() {
+          listData = null;
+          totalItems = 0;
+        });
+      }
       Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
       ResponseModel res = await DaiLyXeApiBLL_APIUser().contact(params);
       if (res.status > 0) {
@@ -64,6 +70,10 @@ class _ContactPageState extends State<ContactPage> {
         CommonMethods.showToast(res.message);
       }
     } catch (e) {
+      setState(() {
+        listData = [];
+        totalItems = 0;
+      });
       CommonMethods.showDialogError(context, e.toString());
     }
   }
@@ -139,32 +149,31 @@ class _ContactPageState extends State<ContactPage> {
       body: Container(
         padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
         child: RxCustomScrollView(
-        key: const Key("LContact"),
-        controller: scrollController,
-        onNextScroll: onNextPage,
-        onRefresh: onRefresh,
-        slivers: <Widget>[
-          RxSliverList(listData, (BuildContext context, int index) {
-            ContactModel item = listData![index];
-            return ItemContactWidget(item,
-                onTap: () => {onDetail(index)},
-                onDelete: (context) => onDelete(index),
-                onDefault: (context) => onDefault(index));
-          })
-          
-        ],
+          key: const Key("LContact"),
+          controller: scrollController,
+          onNextScroll: onNextPage,
+          onRefresh: onRefresh,
+          slivers: <Widget>[
+            RxSliverList(listData, (BuildContext context, int index) {
+              ContactModel item = listData![index];
+              return ItemContactWidget(item,
+                  onTap: () => {onDetail(index)},
+                  onDelete: (context) => onDelete(index),
+                  onDefault: (context) => onDefault(index));
+            })
+          ],
+        ),
       ),
-      ) ,
       persistentFooterButtons: [
         Row(
           children: [
-            Expanded(child:  RxPrimaryButton(
-            onTap: onDetail,
-            icon: FaIcon(FontAwesomeIcons.plus),
-            text: "add".tr))
+            Expanded(
+                child: RxPrimaryButton(
+                    onTap: onDetail,
+                    icon: FaIcon(FontAwesomeIcons.plus),
+                    text: "add".tr))
           ],
         )
-       
       ],
     );
   }

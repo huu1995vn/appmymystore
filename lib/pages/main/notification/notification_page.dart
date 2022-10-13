@@ -49,10 +49,16 @@ class _NotificationPageState extends State<NotificationPage> {
 
       return;
     }
+    if (nPaging > 1 && listData != null && totalItems <= listData!.length)
+      return;
     try {
-      if (nPaging > 1 && listData != null && totalItems <= listData!.length)
-        return;
       nPaging = nPaging ?? 1;
+      if (nPaging == 1) {
+        setState(() {
+          listData = null;
+          totalItems = 0;
+        });
+      }
       Map<String, dynamic> params = {
         "p": nPaging,
         "n": kItemOnPage,
@@ -89,6 +95,10 @@ class _NotificationPageState extends State<NotificationPage> {
         });
       }
     } catch (e) {
+      setState(() {
+        listData = [];
+        totalItems = 0;
+      });
       CommonMethods.showDialogError(context, e);
     }
   }

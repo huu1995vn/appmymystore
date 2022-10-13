@@ -38,6 +38,12 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
 
     try {
       nPaging = nPaging ?? 1;
+      if (nPaging == 1) {
+        setState(() {
+          listData = null;
+          totalItems = 0;
+        });
+      }
       Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
       ResponseModel res = await DaiLyXeApiBLL_APIUser().vehiclecontact(params);
       if (res.status > 0) {
@@ -64,6 +70,10 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
         CommonMethods.showToast(res.message);
       }
     } catch (e) {
+      setState(() {
+        listData = [];
+        totalItems = 0;
+      });
       CommonMethods.showDialogError(context, e.toString());
     }
   }
@@ -153,27 +163,26 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
         ),
         key: _key,
         body: Container(
-          padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
-          child:RxCustomScrollView(
-          key: const Key("LVehicleContact"),
-          controller: scrollController,
-          onNextScroll: onNextPage,
-          onRefresh: onRefresh,
-          slivers: <Widget>[
-            RxSliverList(listData, (BuildContext context, int index) {
-              var item = listData![index];
-              return ItemVehicleContactWidget(listData![index],
-                  onTap: () {
+            padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
+            child: RxCustomScrollView(
+              key: const Key("LVehicleContact"),
+              controller: scrollController,
+              onNextScroll: onNextPage,
+              onRefresh: onRefresh,
+              slivers: <Widget>[
+                RxSliverList(listData, (BuildContext context, int index) {
+                  var item = listData![index];
+                  return ItemVehicleContactWidget(listData![index],
+                      onTap: () {
                         CommonNavigates.toVehicleContactPage(context,
                             id: item.id);
                         setState(() {
                           item.status = 2;
                         });
                       },
-                  onDelete: (c) => {_onDelete(index)});
-            })
-        
-          ],
-        )));
+                      onDelete: (c) => {_onDelete(index)});
+                })
+              ],
+            )));
   }
 }

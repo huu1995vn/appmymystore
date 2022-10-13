@@ -38,6 +38,12 @@ class _AdvertPageState extends State<AdvertPage> {
 
     try {
       nPaging = nPaging ?? 1;
+      if (nPaging == 1) {
+        setState(() {
+          listData = null;
+          totalItems = 0;
+        });
+      }
       Map<String, dynamic> params = {"p": nPaging, "n": kItemOnPage};
       ResponseModel res = await DaiLyXeApiBLL_APIUser().advert(params);
       if (res.status > 0) {
@@ -62,6 +68,10 @@ class _AdvertPageState extends State<AdvertPage> {
         CommonMethods.showToast(res.message);
       }
     } catch (e) {
+      setState(() {
+          listData = [];
+          totalItems = 0;
+        });
       CommonMethods.showDialogError(context, e.toString());
     }
   }
@@ -90,22 +100,22 @@ class _AdvertPageState extends State<AdvertPage> {
         ),
         key: _key,
         body: Container(
-          padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
+            padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
             child: RxCustomScrollView(
-          key: const Key("LAds"),
-          controller: scrollController,
-          onNextScroll: onNextPage,
-          onRefresh: onRefresh,
-          slivers: <Widget>[
-            RxSliverList(listData, (BuildContext context, int index) {
-              var item = listData![index];
-              return ItemAdvertWidget(
-                item,
-                onTap: () =>
-                    {CommonNavigates.toAdvertPage(context, item: item)},
-              );
-            })
-          ],
-        )));
+              key: const Key("LAds"),
+              controller: scrollController,
+              onNextScroll: onNextPage,
+              onRefresh: onRefresh,
+              slivers: <Widget>[
+                RxSliverList(listData, (BuildContext context, int index) {
+                  var item = listData![index];
+                  return ItemAdvertWidget(
+                    item,
+                    onTap: () =>
+                        {CommonNavigates.toAdvertPage(context, item: item)},
+                  );
+                })
+              ],
+            )));
   }
 }

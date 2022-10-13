@@ -147,7 +147,7 @@ class _RxDataListViewState extends State<RxListView>
       key: PageStorageKey(widget.key),
       shrinkWrap: true,
       controller: widget.scrollController != null ? null : _scrollController,
-      physics: const BouncingScrollPhysics(),
+      physics: const AlwaysScrollableScrollPhysics(),
       scrollDirection: widget.scrollDirection ?? Axis.vertical,
       itemCount: widget.onNextPage != null
           ? (widget.data.length + 1)
@@ -164,13 +164,18 @@ class _RxDataListViewState extends State<RxListView>
   }
 
   Widget _bodylist(BuildContext context) {
-    return (widget.data == null ||
-            widget.itemBuilder == null ||
-            widget.data is! List)
-        ? _bodylist_awaiting()
-        : widget.data.length == 0
-            ? _bodylist_notfound()
-            : _bodylist_main();
+    return Stack(
+      children: <Widget>[
+        ListView(),
+        (widget.data == null ||
+                widget.itemBuilder == null ||
+                widget.data is! List)
+            ? _bodylist_awaiting()
+            : widget.data.length == 0
+                ? _bodylist_notfound()
+                : _bodylist_main()
+      ],
+    );
   }
 
   Widget _buildProgressIndicator() {

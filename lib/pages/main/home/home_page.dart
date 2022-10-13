@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, curly_braces_in_flow_control_structures
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/index.dart';
@@ -16,7 +17,11 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/pages/main/home/widgets/banner.widget.dart';
 import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import '../../../core/components/delegates/rx_select.delegate.dart';
 import '../../../core/components/part.dart';
+import '../../../core/services/app.service.dart';
+import '../../../core/services/master_data.service.dart';
+import '../../../core/utilities/app_colors.dart';
 import 'widgets/item_product.widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,9 +44,12 @@ class _HomePageState extends State<HomePage>
     loadData();
   }
 
+  String key = "LProcductHome";
   int paging = 1;
   int totalItems = 0;
   List<ProductModel>? listData;
+  ViewType _viewType = ViewType.grid;
+  Map<String, dynamic> paramsSearch = {};
   loadData([nPaging = 1]) async {
     if (nPaging > 1 && listData != null && totalItems <= listData!.length)
       return;
@@ -72,6 +80,19 @@ class _HomePageState extends State<HomePage>
     paging = nPaging;
   }
 
+  _onSelectCity() async {
+    List data = MasterDataService.data["city"];
+    var res = await showSearch(
+        context: context,
+        delegate: RxSelectDelegate(data: data, value: paramsSearch['CityId']));
+    if (res != null) {
+      setState(() {
+        paramsSearch['CityId'] = res;
+        CommonNavigates.toProductPage(context, paramsSearch: {"CityId": res});
+      });
+    }
+  }
+
   Future<dynamic> onNextPage() async {
     return await loadData(paging + 1);
   }
@@ -83,7 +104,8 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
+    String cityName =
+        CommonMethods.getNameMasterById("city", paramsSearch["CityId"]);
     return Scaffold(
       key: _homeKey,
       body: RxCustomScrollView(
@@ -97,6 +119,93 @@ class _HomePageState extends State<HomePage>
               child: Column(children: [
             const BannerWidget(),
             const SizedBox(height: kDefaultMarginBottomBox),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingBox, vertical: kDefaultPadding),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                border: Border(
+                  bottom: BorderSide(width: 1.0, color: Colors.black12),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        _onSelectCity();
+                      },
+                      child: Card(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Get.isDarkMode
+                                  ? Colors.white24
+                                  : Colors.black12,
+                            ),
+                            borderRadius:
+                                BorderRadius.circular(5), //<-- SEE HERE
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: kDefaultPaddingBox,
+                                vertical: kDefaultPaddingBox),
+                            child: Row(
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.locationPin,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black26,
+                                  size: 14,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text("arena".tr,
+                                    style: const TextStyle(fontSize: 13)),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                FaIcon(
+                                  FontAwesomeIcons.caretDown,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black12,
+                                  size: 14,
+                                ),
+                              ],
+                            ),
+                          ))),
+                  GestureDetector(
+                      onTap: () {
+                        var _type = _viewType == ViewType.list
+                            ? ViewType.grid
+                            : ViewType.list;
+                        AppService.saveViewTypeByKey(key, _type);
+                        setState(() {
+                          _viewType = _type;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kDefaultPaddingBox,
+                            vertical: kDefaultPaddingBox),
+                        child: Row(
+                          children: [
+                            Icon(
+                              _viewType == ViewType.list
+                                  ? AppIcons.grid_on
+                                  : AppIcons.format_list_bulleted,
+                              color: Get.isDarkMode
+                                  ? Colors.white24
+                                  : Colors.black26,
+                              size: 23,
+                            ),
+                          ],
+                        ),
+                      ))
+                ],
+              ),
+            ),
             ListBrandWidget(
                 onPressed: (v) => {
                       CommonNavigates.toProductPage(context,
@@ -109,15 +218,20 @@ class _HomePageState extends State<HomePage>
                       CommonNavigates.toProductPage(context);
                     }))),
           ])),
-          RxSliverList(listData, (BuildContext context, int index) {
-            ProductModel item = listData![index];
-            return ItemProductWidget(
-              item,
-              onTap: () {
-                CommonNavigates.toProductPage(context, item: item);
-              },
-            );
-          })
+          RxSliverList(
+            listData,
+            (BuildContext context, int index) {
+              ProductModel item = listData![index];
+              return ItemProductWidget(
+                item,
+                viewType: _viewType,
+                onTap: () {
+                  CommonNavigates.toProductPage(context, item: item);
+                },
+              );
+            },
+            viewType: _viewType,
+          )
         ],
       ),
     );

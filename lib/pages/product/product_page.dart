@@ -210,7 +210,7 @@ class _ProductPageState extends State<ProductPage> {
                                                       ? AppColors.primary
                                                       : (Get.isDarkMode
                                                           ? Colors.white24
-                                                          : Colors.black26),
+                                                          : Colors.black12),
                                                 ),
                                                 borderRadius:
                                                     BorderRadius.circular(
@@ -230,7 +230,7 @@ class _ProductPageState extends State<ProductPage> {
                                                           .locationPin,
                                                       color: Get.isDarkMode
                                                           ? Colors.white
-                                                          : Colors.black26,
+                                                          : Colors.black12,
                                                       size: 14,
                                                     ),
                                                     const SizedBox(

@@ -218,7 +218,7 @@ class _FilterDialogState extends State<FilterDialog> {
                   }),
                   rxSelectInput(
                       context, "fueltype", searchParams["FuelTypeId"] ?? -1,
-                      title: Text("fuel".tr), afterChange: (v) {
+                      title: Text("fueltype".tr), afterChange: (v) {
                     setState(() {
                       searchParams["FuelTypeId"] = v;
                     });

@@ -12,7 +12,6 @@ import 'package:raoxe/core/components/dialogs/photo_view.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/components/rx_image.dart';
-import 'package:raoxe/core/components/rx_input.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/file.service.dart';
@@ -343,7 +342,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                 child: Column(
                                   children: [
                                     rxSelectInput(
-                                        context, "brand", data!.brandid,
+                                        context, "brand", data!.brandid??-1,
                                         labelText: "brand".tr,
                                         afterChange: (v) => {
                                               setState(() {
@@ -359,7 +358,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           return null;
                                         }),
                                     rxSelectInput(
-                                        context, "model", data!.modelid,
+                                        context, "model", data!.modelid??-1,
                                         labelText: "model".tr,
                                         afterChange: (v) => {
                                               setState(() {
@@ -377,7 +376,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           return null;
                                         }),
                                     rxSelectInput(
-                                        context, "bodytype", data!.bodytypeid,
+                                        context, "bodytype", data!.bodytypeid??-1,
                                         labelText: "bodytype".tr,
                                         afterChange: (v) => {
                                               setState(() {
@@ -585,7 +584,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   child: Column(
                                     children: [
                                       rxSelectInput(
-                                          context, "productstate", data!.state,
+                                          context, "productstate", data!.state??-1,
                                           labelText: "state".tr,
                                           afterChange: (v) => {
                                                 setState(() {
@@ -601,7 +600,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       rxSelectInput(
                                         context,
                                         "fueltype",
-                                        data!.fueltypeid,
+                                        data!.fueltypeid??-1,
                                         labelText: "fueltype".tr,
                                         afterChange: (v) => {
                                           setState(() {
@@ -610,7 +609,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         },
                                       ),
                                       rxSelectInput(
-                                          context, "madein", data!.madeinid,
+                                          context, "madein", data!.madeinid??-1,
                                           labelText: "madein".tr,
                                           afterChange: (v) => {
                                                 setState(() {
@@ -618,7 +617,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                 })
                                               }),
                                       rxSelectInput(
-                                          context, "productdoor", data!.door,
+                                          context, "productdoor", data!.door??-1,
                                           labelText: "door".tr,
                                           afterChange: (v) => {
                                                 setState(() {
@@ -626,7 +625,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                 })
                                               }),
                                       rxSelectInput(
-                                          context, "productseat", data!.seat,
+                                          context, "productseat", data!.seat??-1,
                                           labelText: "seat".tr,
                                           afterChange: (v) => {
                                                 setState(() {
@@ -634,14 +633,14 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                 })
                                               }),
                                       rxSelectInput(
-                                          context, "color", data!.colorid,
+                                          context, "color", data!.colorid??-1,
                                           labelText: "color".tr,
                                           afterChange: (v) => {
                                                 setState(() {
                                                   data!.colorid = v;
                                                 })
                                               }),
-                                      rxSelectInput(context, "year", data!.year,
+                                      rxSelectInput(context, "year", data!.year??-1,
                                           labelText: "year".tr,
                                           afterChange: (v) => {
                                                 setState(() {

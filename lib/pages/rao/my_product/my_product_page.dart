@@ -24,21 +24,25 @@ class _MyProductPageState extends State<MyProductPage> {
     loadData();
   }
 
-  List<Widget> tabs = <Widget>[];
-  List<Widget> tabviews = <Widget>[];
-
+  bool isAwaiting = false;
+  List<Widget> tabs = PRODUCTSTATUS
+      .map((item) => Tab(
+            child: Text(item.categoryname),
+          ))
+      .toList();
+  List<Widget> tabviews = PRODUCTSTATUS
+      .map(
+        (item) => TabMyProductWidget(status: item.id),
+      )
+      .toList();
   loadData() {
     setState(() {
-      tabs = PRODUCTSTATUS
-          .map((item) => Tab(
-                child: Text(item.categoryname),
-              ))
-          .toList();
-      tabviews = PRODUCTSTATUS
-          .map(
-            (item) => TabMyProductWidget(status: item.id),
-          )
-          .toList();
+      isAwaiting = true;
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        isAwaiting = false;
+      });
     });
   }
 
@@ -53,6 +57,18 @@ class _MyProductPageState extends State<MyProductPage> {
       });
       loadData();
     }
+  }
+
+  Widget _bodylist_awaiting() {
+    return ListView.builder(
+        key: UniqueKey(),
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        padding: EdgeInsets.only(top: kDefaultPadding),
+        itemCount: kItemOnPage,
+        itemBuilder: (context, index) {
+          return RxCardSkeleton(barCount: 3, isShowAvatar: false);
+        });
   }
 
   @override
@@ -91,14 +107,19 @@ class _MyProductPageState extends State<MyProductPage> {
                 ),
               ];
             },
-            body: TabBarView(
-              children: tabviews,
-            ),
+            body: isAwaiting
+                ? _bodylist_awaiting()
+                : TabBarView(
+                    children: tabviews,
+                  ),
           ),
         ),
         persistentFooterButtons: [
-          RxPrimaryButton(
-              onTap: onAdd, icon: Icon(AppIcons.plus_circle), text: "add".tr)
+          if (!isAwaiting)
+            RxPrimaryButton(
+                onTap: onAdd,
+                icon: Icon(AppIcons.plus_circle),
+                text: "add".tr)
         ]);
   }
 }

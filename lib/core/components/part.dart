@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -541,13 +542,16 @@ class RxButtonMore extends StatelessWidget {
 
 Widget rxTextInput(BuildContext context, String? value,
     {Widget? title,
-    String? hintText = "Nhập",
+    String? hintText,
     String? labelText,
     bool isBorder = false,
     TextInputType? keyboardType = TextInputType.text,
     void Function(String)? onChanged,
     String? Function(String?)? validator,
-    void Function()? onTap}) {
+    void Function()? onTap,
+    int? maxLength, 
+    int? minLines,
+    MaxLengthEnforcement? maxLengthEnforcement}) {
   return Container(
       decoration: const BoxDecoration(
         border: Border(
@@ -574,7 +578,7 @@ Widget rxTextInput(BuildContext context, String? value,
                 ),
               ),
           subtitle: Container(
-            height: 35,
+            height: validator!=null? null: 35,
             child: RxInput(value ?? "",
                 readOnly: onTap != null,
                 isBorder: isBorder,
@@ -582,9 +586,12 @@ Widget rxTextInput(BuildContext context, String? value,
                 onChanged: onChanged,
                 hintText: hintText,
                 onTap: onTap,
-                style: TextStyle(
+                style: const TextStyle(
                         )
                     .size(16),
+                maxLength: maxLength,
+                minLines: minLines,                
+                maxLengthEnforcement: maxLengthEnforcement,
                 validator: validator,
                 suffixIcon: const Icon(null)),
           )));
@@ -599,6 +606,10 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
     dynamic Function(dynamic)? afterChange,
     String? Function(String?)? validator}) {
   var name = CommonMethods.getNameMasterById(type, id);
+  if(id == -1)
+  {
+    name = "all".tr;
+  }
   return Container(
       decoration: const BoxDecoration(
         border: Border(
@@ -627,12 +638,12 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
               ),
             ),
         subtitle: Container(
-          height: 35,
+          height: validator!=null ? null :35,
           child: RxInput(name,
               isBorder: isBorder,
               readOnly: true,
               hintText: hintText ?? "choose".tr,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16 ),
               validator: validator, onTap: () {
             _onSelect(context, type, id,
                 fnWhere: fnWhere, afterChange: afterChange);
@@ -656,6 +667,8 @@ _onSelect(BuildContext context, String type, dynamic id,
   if (fnWhere != null) {
     data = data.where(fnWhere).toList();
   }
+
+  data = [{"name": "all".tr, "id": -1}, ...data]; 
   var res = await showSearch(
       context: context, delegate: RxSelectDelegate(data: data, value: id));
   if (res != null) {
@@ -668,8 +681,8 @@ Widget RxBorderListTile({Widget? child}) {
       decoration: BoxDecoration(
         border: Border(
           bottom: Get.isDarkMode
-              ? BorderSide(color: Color.fromARGB(12, 255, 255, 255), width: 1)
-              : BorderSide(color: Color.fromARGB(12, 0, 0, 0), width: 1),
+              ? const BorderSide(color: Color.fromARGB(12, 255, 255, 255), width: 1)
+              : const BorderSide(color: Color.fromARGB(12, 0, 0, 0), width: 1),
         ),
       ),
       child: child);

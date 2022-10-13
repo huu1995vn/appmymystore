@@ -167,6 +167,7 @@ const Map<String, String> en_US = {
   "notempty.password": "Password cannot empty",
   "p.notempty": "{} cannot empty",
   "invalid": "Invalid",
+  "invalid.data": "Invalid data",
   "invalid.phone": "Invalid phone",
   "invalid.email": "Invalid email",
   "invalid.fullname": "Invalid first name",

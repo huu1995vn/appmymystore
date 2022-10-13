@@ -19,6 +19,9 @@ class RxInput extends StatefulWidget {
   final bool isBorder;
   final void Function()? onTap;
   final TextStyle? style;
+  final MaxLengthEnforcement? maxLengthEnforcement;
+  final int? maxLength;
+  final int? minLines;
   const RxInput(this.value,
       {super.key,
       this.disabled = false,
@@ -33,7 +36,10 @@ class RxInput extends StatefulWidget {
       this.suffixIcon,
       this.isBorder = false,
       this.onTap,
-      this.style});
+      this.style,
+      this.maxLengthEnforcement,
+      this.maxLength,
+      this.minLines});
 
   @override
   _InputTextState createState() => _InputTextState();
@@ -76,6 +82,10 @@ class _InputTextState extends State<RxInput> {
           ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
           : null,
       obscureText: !showPassword && widget.isPassword,
+      maxLength: widget.maxLength,
+      minLines: widget.minLines,
+      maxLines: widget.minLines!=null ? widget.minLines! +  5: null,
+      maxLengthEnforcement: widget.maxLengthEnforcement,
       validator: widget.validator,
       onChanged: widget.onChanged,
       style: widget.style,

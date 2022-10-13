@@ -22,6 +22,7 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:wc_form_validators/wc_form_validators.dart';
 
 class MyProductDetailPage extends StatefulWidget {
   final int? id;
@@ -167,62 +168,64 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             itemBuilder: (context, index) {
               ContactModel item = list[index];
               return Card(
-                  child:Container(
-                padding: EdgeInsets.symmetric(vertical: kDefaultPaddingBox),
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1.0, color: Colors.black12),
-                  ),
-                ),
-                child:   RadioListTile(
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.fullname ?? "NaN",
-                    ),
-                    const SizedBox(width: kDefaultMarginBottomBox),
-                    Text(
-                      item.isdefault ? "(" + "default".tr + ")" : "",
-                      style: const TextStyle(color: AppColors.blue),
-                    ),
-                  ],
-                ),
-                value: item.id,
-                groupValue: data!.usercontactid,
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        if (item.cityid != null || item.cityid > 0)
-                          Text(
-                            item.cityname ?? "NaN",
-                            style: const TextStyle(color: AppColors.blue),
-                          ),
-                        Text(
-                          item.phone ?? "NaN",
-                          style: const TextStyle(fontSize: 16),
+                  child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: kDefaultPaddingBox),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 1.0, color: Colors.black12),
                         ),
-                      ],
-                    ),
-                    Text(
-                      item!.address ?? "NaN",
-                      style: const TextStyle(),
-                    )
-                  ],
-                ),
-                onChanged: (int? value) {
-                  CommonNavigates.goBack(context, item);
-                },
-                // trailing: Text(item.phone ?? "",
-                //     style: const TextStyle(fontSize: 16)),
-                // onTap: () {
-                //   CommonNavigates.goBack(context, item);
-                // })
-              )));
+                      ),
+                      child: RadioListTile(
+                        title: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.fullname ?? "NaN",
+                            ),
+                            const SizedBox(width: kDefaultMarginBottomBox),
+                            Text(
+                              item.isdefault ? "(" + "default".tr + ")" : "",
+                              style: const TextStyle(color: AppColors.blue),
+                            ),
+                          ],
+                        ),
+                        value: item.id,
+                        groupValue: data!.usercontactid,
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                if (item.cityid != null || item.cityid > 0)
+                                  Text(
+                                    item.cityname ?? "NaN",
+                                    style:
+                                        const TextStyle(color: AppColors.blue),
+                                  ),
+                                Text(
+                                  item.phone ?? "NaN",
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              item!.address ?? "NaN",
+                              style: const TextStyle(),
+                            )
+                          ],
+                        ),
+                        onChanged: (int? value) {
+                          CommonNavigates.goBack(context, item);
+                        },
+                        // trailing: Text(item.phone ?? "",
+                        //     style: const TextStyle(fontSize: 16)),
+                        // onTap: () {
+                        //   CommonNavigates.goBack(context, item);
+                        // })
+                      )));
             }));
     if (contact != null) {
       setState(() {
@@ -255,7 +258,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
           widget.onChanged!(dataClone);
         }
         CommonMethods.unlockScreen();
-        await CommonMethods.showConfirmDialog(context, "success".tr);
+        CommonMethods.showToast("success".tr);
+        // CommonMethods.
+        // await CommonMethods.showConfirmDialog(context, "success".tr);
         if (!(data!.id > 0)) {
           CommonNavigates.goBack(context, dataClone);
         }
@@ -386,7 +391,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           }
                                           return null;
                                         }),
-                                    ListTile(
+                                    rxTextInput(
+                                      context,
+                                      data!.price?.toString() ?? "",
                                       title: Row(
                                         children: [
                                           Text("${'price'.tr}: ",
@@ -394,27 +401,22 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                           Text(
                                             (data!.price != null &&
                                                     data!.price! > 0)
-                                                ? CommonMethods.formatShortCurrency(
-                                                    data!.price)
+                                                ? CommonMethods
+                                                    .formatShortCurrency(
+                                                        data!.price)
                                                 : "negotiate".tr,
                                             style: kTextPriceStyle.size(13),
                                           )
                                         ],
                                       ),
-                                      subtitle: RxInput(
-                                        keyboardType: TextInputType.number,
-                                        data!.price?.toString() ?? "",
-                                        onChanged: (v) {
-                                          setState(() {
-                                            data!.price =
-                                                CommonMethods.convertToInt32(v);
-                                          });
-                                        },
-                                        hintText: "price".tr,
-                                        style: const TextStyle(
-                                                color: AppColors.black)
-                                            .size(16),
-                                      ),
+                                      keyboardType: TextInputType.number,
+                                      hintText: "price".tr,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          data!.price =
+                                              CommonMethods.convertToInt32(v);
+                                        });
+                                      },
                                     ),
                                   ],
                                 ),
@@ -423,78 +425,33 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                 margin: const EdgeInsets.only(
                                     bottom: kDefaultMarginBottomBox),
                                 child: Column(children: [
-                                  ListTile(
-                                      title: RichText(
-                                          text: TextSpan(children: [
-                                        TextSpan(
-                                            text: "title".tr,
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 12)),
-                                        const TextSpan(
-                                            text: "*",
-                                            style: TextStyle(
-                                                color: AppColors.primary))
+                                  rxTextInput(
+                                      context, data!.name?.toString() ?? "",
+                                      labelText: "title".tr,
+                                      hintText: "please.enter".tr,
+                                      maxLength: 200, onChanged: (v) {
+                                    setState(() {
+                                      data!.name = v;
+                                    });
+                                  },
+                                      validator: Validators.compose([
+                                        Validators.required("notempty".tr),
                                       ])),
-                                      subtitle: Container(
-                                        height: 30,
-                                        child: TextFormField(
-                                          showCursor: true,
-                                          key: const Key("name"),
-                                          initialValue: data!.name,
-                                          keyboardType: TextInputType.multiline,
-                                          onChanged: (value) =>
-                                              {data!.name = value},
-                                          decoration: InputDecoration(
-                                            hintText: "please.enter".tr,
-                                          ),
-                                          validator: (value) {
-                                            if ((data!.name == null ||
-                                                data!.name!.isEmpty)) {
-                                              return "notempty".tr;
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      )),
-                                  ListTile(
-                                    title: RichText(
-                                        text: TextSpan(children: [
-                                      TextSpan(
-                                          text: "description".tr,
-                                          style: const TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 12)),
-                                      const TextSpan(
-                                          text: "*",
-                                          style: TextStyle(
-                                              color: AppColors.primary))
-                                    ])),
-                                    subtitle: TextFormField(
-                                      showCursor: true,
-                                      key: const Key("desc"),
-                                      initialValue: data!.desc,
-                                      minLines:
-                                          6, // any number you need (It works as the rows for the textarea)
-                                      keyboardType: TextInputType.multiline,
-                                      maxLines: null,
-                                      onChanged: (value) =>
-                                          {data!.desc = value},
-                                      decoration: InputDecoration(
-                                        hintText: "please.enter".tr,
-                                      ),
+                                  rxTextInput(
+                                      context, data!.desc?.toString() ?? "",
+                                      labelText: "description".tr,
+                                      hintText: "please.enter".tr,
                                       maxLength: 1500,
                                       maxLengthEnforcement:
                                           MaxLengthEnforcement.none,
-                                      validator: (value) {
-                                        if ((data!.desc == null ||
-                                            data!.desc!.isEmpty)) {
-                                          return "notempty".tr;
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
+                                      minLines: 6, onChanged: (v) {
+                                    setState(() {
+                                      data!.desc = v;
+                                    });
+                                  },
+                                      validator: Validators.compose([
+                                        Validators.required("notempty".tr),
+                                      ])),
                                 ]),
                               ),
                               _header(
@@ -684,15 +641,13 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                                   data!.colorid = v;
                                                 })
                                               }),
-                                      rxSelectInput(context, "year",
-                                          data!.year,
+                                      rxSelectInput(context, "year", data!.year,
                                           labelText: "year".tr,
                                           afterChange: (v) => {
                                                 setState(() {
                                                   data!.year = v;
                                                 })
                                               }),
-                                      
                                     ],
                                   )),
                               _header(
@@ -741,6 +696,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                     onTap: () {
                       if (_keyValidationForm.currentState!.validate()) {
                         _onSave();
+                      } else {
+                        CommonMethods.showToast("invalid.data".tr);
                       }
                     },
                     text: "save".tr),

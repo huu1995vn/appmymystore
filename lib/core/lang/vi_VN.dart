@@ -167,6 +167,7 @@ const Map<String, String> vi_VN = {
   "notempty.password": "Mật khẩu không được bỏ trống",
   "p.notempty": "{} không được bỏ trống",
   "invalid": "Không hợp lệ",
+  "invalid.data": "Dữ liệu không hợp lệ",
   "invalid.phone": "Điện thoại không hợp lệ",
   "invalid.email": "Email không hợp lệ",
   "invalid.fullname": "Họ tên không hợp lệ",

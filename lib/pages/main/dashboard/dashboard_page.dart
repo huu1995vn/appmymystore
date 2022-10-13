@@ -45,6 +45,10 @@ class _DashboardPageState extends State<DashboardPage> {
         } else {
           CommonMethods.showToast(res.message);
         }
+      } else {
+        setState(() {
+          data = UserModel();
+        });
       }
     } catch (e) {
       CommonMethods.showToast(e.toString());
@@ -260,7 +264,9 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _top(appProvider) {
     final userProvider = Provider.of<AppProvider>(context);
-    return Container(
+    return data == null
+            ? RxCardSkeleton(barCount: 1, isShowAvatar: true)
+            : Container(
         padding: EdgeInsets.only(top: 10, bottom: 10),
         child: ListTile(
           leading: RxAvatarImage(userProvider.user.rximg, size: 60),
@@ -276,7 +282,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   fontSize: 19,
                 ),
               ),
-              if (!data!.verifyphone)
+              if (!userProvider.user.verifyphone)
                 Text(
                   "message.str017".tr,
                   style: TextStyle(color: AppColors.danger),
@@ -286,12 +292,12 @@ class _DashboardPageState extends State<DashboardPage> {
           trailing: Icon(AppIcons.keyboard_arrow_right),
         ));
   }
-  
+
   Widget _body() {
     return SingleChildScrollView(
-        child: data==null? RxListAwaiting(): Column(children: [
-      ...(CommonMethods.isLogin ? _logined() : _notlogin()),
-      ..._public()
-    ]));
+        child: Column(children: [
+                ...(CommonMethods.isLogin ? _logined() : _notlogin()),
+                ..._public()
+              ]));
   }
 }

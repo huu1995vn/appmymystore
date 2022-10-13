@@ -681,7 +681,9 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                   )),
                                 )
                             ],
-                          )),
+                            
+                          ),
+                          ),
                     )
                   ],
                 )),

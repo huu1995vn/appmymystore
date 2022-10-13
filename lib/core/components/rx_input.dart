@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 
 class RxInput extends StatefulWidget {
   final String value;
@@ -84,12 +85,14 @@ class _InputTextState extends State<RxInput> {
       obscureText: !showPassword && widget.isPassword,
       maxLength: widget.maxLength,
       minLines: widget.minLines,
-      maxLines: widget.minLines!=null ? widget.minLines! +  5: null,
+      maxLines: widget.minLines != null ? widget.minLines! + 5 : null,
       maxLengthEnforcement: widget.maxLengthEnforcement,
       validator: widget.validator,
       onChanged: widget.onChanged,
       style: widget.style,
       decoration: InputDecoration(
+          // contentPadding: const EdgeInsets.only(top:0, bottom: kDefaultPadding),
+          errorStyle: const TextStyle(height: 0.3),
           isDense: true,
           fillColor: widget.isBorder ? Theme.of(context).cardTheme.color : null,
           filled: widget.isBorder,

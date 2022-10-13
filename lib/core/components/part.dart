@@ -577,8 +577,8 @@ Widget rxTextInput(BuildContext context, String? value,
                   ],
                 ),
               ),
-          subtitle: Container(
-            height: validator!=null? null: 35,
+          subtitle: SizedBox(
+            height: validator!=null? 65: 35,
             child: RxInput(value ?? "",
                 readOnly: onTap != null,
                 isBorder: isBorder,

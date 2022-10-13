@@ -125,13 +125,16 @@ class _ContactDialogState extends State<ContactDialog> {
         ],
       ),
       persistentFooterButtons: [
-        RxPrimaryButton(
-            onTap: () {
-              if (_keyValidationForm.currentState!.validate()) {
-                CommonNavigates.goBack(context, contact);
-              }
-            },
-            text: 'save'.tr)
+        Row(children: [
+          Expanded(
+              child: RxPrimaryButton(
+                  onTap: () {
+                    if (_keyValidationForm.currentState!.validate()) {
+                      CommonNavigates.goBack(context, contact);
+                    }
+                  },
+                  text: 'save'.tr))
+        ])
       ],
     );
   }

@@ -116,10 +116,13 @@ class _MyProductPageState extends State<MyProductPage> {
         ),
         persistentFooterButtons: [
           if (!isAwaiting)
-            RxPrimaryButton(
-                onTap: onAdd,
-                icon: Icon(AppIcons.plus_circle),
-                text: "add".tr)
+            Row(children: [
+              Expanded(
+                  child: RxPrimaryButton(
+                      onTap: onAdd,
+                      icon: Icon(AppIcons.plus_circle),
+                      text: "add".tr))
+            ])
         ]);
   }
 }

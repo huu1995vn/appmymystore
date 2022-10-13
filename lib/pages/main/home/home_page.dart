@@ -21,7 +21,6 @@ import '../../../core/components/delegates/rx_select.delegate.dart';
 import '../../../core/components/part.dart';
 import '../../../core/services/app.service.dart';
 import '../../../core/services/master_data.service.dart';
-import '../../../core/utilities/app_colors.dart';
 import 'widgets/item_product.widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,31 +52,44 @@ class _HomePageState extends State<HomePage>
   loadData([nPaging = 1]) async {
     if (nPaging > 1 && listData != null && totalItems <= listData!.length)
       return;
-    nPaging = nPaging ?? 1;
-    Map<String, dynamic> params = {
-      "p": nPaging,
-      "n": kItemOnPage,
-      "orderBy": "VerifyDate DESC"
-    };
-    ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);
-    List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
-        res.data, (val) => ProductModel.fromJson(val));
-    if (mounted)
-      setState(() {
-        if (nPaging == 1 && (list.isEmpty)) {
+    try {
+      nPaging = nPaging ?? 1;
+      if (nPaging == 1) {
+        setState(() {
+          listData = null;
           totalItems = 0;
-        }
-        if (list.isNotEmpty) {
-          totalItems = list[0].rxtotalrow;
-        }
-        listData ??= [];
-        if (nPaging == 1) {
-          listData = list;
-        } else {
-          listData = (listData! + list);
-        }
+        });
+      }
+      Map<String, dynamic> params = {
+        "p": nPaging,
+        "n": kItemOnPage,
+        "orderBy": "VerifyDate DESC"
+      };
+      ResponseModel res = await DaiLyXeApiBLL_APIGets().product(params);
+      List<ProductModel> list = CommonMethods.convertToList<ProductModel>(
+          res.data, (val) => ProductModel.fromJson(val));
+      if (mounted)
+        setState(() {
+          if (nPaging == 1 && (list.isEmpty)) {
+            totalItems = 0;
+          }
+          if (list.isNotEmpty) {
+            totalItems = list[0].rxtotalrow;
+          }
+          listData ??= [];
+          if (nPaging == 1) {
+            listData = list;
+          } else {
+            listData = (listData! + list);
+          }
+        });
+      paging = nPaging;
+    } catch (e) {
+      setState(() {
+        listData = [];
+        totalItems = 0;
       });
-    paging = nPaging;
+    }
   }
 
   _onSelectCity() async {
@@ -120,7 +132,8 @@ class _HomePageState extends State<HomePage>
             const BannerWidget(),
             const SizedBox(height: kDefaultMarginBottomBox),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingBox, vertical: kDefaultPadding),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: kDefaultPaddingBox, vertical: kDefaultPadding),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 border: Border(

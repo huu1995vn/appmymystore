@@ -187,7 +187,7 @@ class _HomePageState extends State<HomePage>
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: kDefaultPaddingBox,
+                            horizontal: kDefaultPadding,
                             vertical: kDefaultPaddingBox),
                         child: Row(
                           children: [

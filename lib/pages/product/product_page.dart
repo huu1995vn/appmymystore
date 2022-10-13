@@ -11,6 +11,7 @@ import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 import 'package:raoxe/pages/product/widgets/list_brand.widget.dart';
 import 'package:raoxe/pages/product/widgets/search_app_bar.dart';
+import '../../app_icons.dart';
 import '../../core/components/delegates/rx_select.delegate.dart';
 import '../../core/services/master_data.service.dart';
 import '../../core/utilities/app_colors.dart';
@@ -210,7 +211,7 @@ class _ProductPageState extends State<ProductPage> {
                                                       ? AppColors.primary
                                                       : (Get.isDarkMode
                                                           ? Colors.white24
-                                                          : Colors.black26),
+                                                          : Colors.black12),
                                                 ),
                                                 borderRadius:
                                                     BorderRadius.circular(
@@ -230,7 +231,7 @@ class _ProductPageState extends State<ProductPage> {
                                                           .locationPin,
                                                       color: Get.isDarkMode
                                                           ? Colors.white
-                                                          : Colors.black26,
+                                                          : Colors.black12,
                                                       size: 14,
                                                     ),
                                                     const SizedBox(
@@ -272,14 +273,15 @@ class _ProductPageState extends State<ProductPage> {
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(
-                                                horizontal: kDefaultPaddingBox,
+                                                horizontal: kDefaultPadding,
                                                 vertical: kDefaultPaddingBox),
                                             child: Row(
                                               children: [
-                                                FaIcon(
+                                                Icon(
                                                   _viewType == ViewType.list
-                                                      ? FontAwesomeIcons.thLarge
-                                                      : FontAwesomeIcons.list,
+                                                      ? AppIcons.grid_on
+                                                      : AppIcons
+                                                          .format_list_bulleted,
                                                   color: Get.isDarkMode
                                                       ? Colors.white24
                                                       : Colors.black26,

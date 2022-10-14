@@ -22,7 +22,11 @@ class CloudFirestoreSerivce {
           String uid = InfoDeviceService.infoDevice.Identifier!;
           if (doc["DeviceId"] != null && doc["DeviceId"] != uid) {
             AuthService.logout(context);
-           //CommonMethods.showToast("message.str012".tr);
+            if (doc["Status"] != null && doc["Status"] != 1) {
+              CommonMethods.showToast("message.str002".tr);
+            } else {
+              CommonMethods.showToast("message.str012".tr);
+            }
           }
         }
       });

@@ -14,7 +14,6 @@ import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/constants.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -23,7 +22,11 @@ class DashboardPage extends StatefulWidget {
   State<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardPageState extends State<DashboardPage>
+    with AutomaticKeepAliveClientMixin<DashboardPage> {
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
   UserModel? data;
   @override
   void initState() {
@@ -265,39 +268,39 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget _top(appProvider) {
     final userProvider = Provider.of<AppProvider>(context);
     return data == null
-            ? RxCardSkeleton(barCount: 1, isShowAvatar: true)
-            : Container(
-        padding: EdgeInsets.only(top: 10, bottom: 10),
-        child: ListTile(
-          leading: RxAvatarImage(userProvider.user.rximg, size: 60),
-          onTap: () {
-            CommonNavigates.toUserPage(context);
-          },
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                userProvider.user.fullname!,
-                style: const TextStyle(
-                  fontSize: 19,
-                ),
+        ? RxCardSkeleton(barCount: 1, isShowAvatar: true)
+        : Container(
+            padding: EdgeInsets.only(top: 10, bottom: 10),
+            child: ListTile(
+              leading: RxAvatarImage(userProvider.user.rximg, size: 60),
+              onTap: () {
+                CommonNavigates.toUserPage(context);
+              },
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    userProvider.user.fullname!,
+                    style: const TextStyle(
+                      fontSize: 19,
+                    ),
+                  ),
+                  if (!userProvider.user.verifyphone)
+                    Text(
+                      "message.str017".tr,
+                      style: TextStyle(color: AppColors.danger),
+                    )
+                ],
               ),
-              if (!userProvider.user.verifyphone)
-                Text(
-                  "message.str017".tr,
-                  style: TextStyle(color: AppColors.danger),
-                )
-            ],
-          ),
-          trailing: Icon(AppIcons.keyboard_arrow_right),
-        ));
+              trailing: Icon(AppIcons.keyboard_arrow_right),
+            ));
   }
 
   Widget _body() {
     return SingleChildScrollView(
         child: Column(children: [
-                ...(CommonMethods.isLogin ? _logined() : _notlogin()),
-                ..._public()
-              ]));
+      ...(CommonMethods.isLogin ? _logined() : _notlogin()),
+      ..._public()
+    ]));
   }
 }

@@ -262,26 +262,26 @@ class CommonMethods {
   }
 
   static String buildUrlImage(int idHinh,
-      {String? rewriteUrl, prefixSize = 0}) {
-    prefixSize = prefixSize ?? "";
-    if (prefixSize is! String) {
-      prefixSize = prefixSize.toString();
-    }
+      {String? rewriteUrl, int size = 0}) {
+   
     idHinh = idHinh > 0 ? idHinh : 0;
     rewriteUrl = rewriteUrl != null && rewriteUrl.isNotEmpty
         ? rewriteUrl
         : "image-dailyxe";
     rewriteUrl = rewriteUrl.convertrUrlPrefix();
-    return '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j$prefixSize.jpg';
-
-    // return '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j$prefixSize.jpg';
+    String url = '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j.jpg';
+    if(size > 0)
+    {
+      url = '$url?w=$size';
+    }
+    return url;
   }
 
   static String buildUrlHinhDaiDien(int idHinh,
-      {String? rewriteUrl, prefixSize = 0}) {
+      {String? rewriteUrl, int size = 70}) {
     if (idHinh > 0) {
       return buildUrlImage(idHinh,
-          rewriteUrl: rewriteUrl, prefixSize: prefixSize);
+          rewriteUrl: rewriteUrl, size: size);
     } else {
       return IMAGE_NOT_FOUND;
     }

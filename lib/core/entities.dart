@@ -79,7 +79,7 @@ class NewsModel extends Entity {
   String get rximg {
     int fileId = 0;
     fileId = img;
-    return CommonMethods.buildUrlHinhDaiDien(fileId, rewriteUrl: url);
+    return CommonMethods.buildUrlImage(fileId, rewriteUrl: url);
   }
 
   NewsModel();
@@ -430,7 +430,7 @@ class ProductModel extends Entity {
 
   String get rximg {
     try {
-      return CommonMethods.buildUrlHinhDaiDien(img, rewriteUrl: name);
+      return CommonMethods.buildUrlImage(img, rewriteUrl: name);
     } catch (e) {
       CommonMethods.wirtePrint(e);
 
@@ -443,7 +443,7 @@ class ProductModel extends Entity {
       return imglist!
           .split(",")
           .map((e) =>
-              CommonMethods.buildUrlHinhDaiDien(int.parse(e), rewriteUrl: name))
+              CommonMethods.buildUrlImage(int.parse(e), rewriteUrl: name))
           .toList();
     } catch (e) {
       CommonMethods.wirtePrint(e);
@@ -585,7 +585,7 @@ class AdvertModel extends Entity {
   }
 
   String get rximg {
-    return CommonMethods.buildUrlHinhDaiDien(img, rewriteUrl: name);
+    return CommonMethods.buildUrlImage(img, rewriteUrl: name);
   }
 
   AdvertModel();
@@ -737,7 +737,7 @@ class ReviewModel extends Entity {
 
   String get rximg {
     try {
-      return CommonMethods.buildUrlHinhDaiDien(img, rewriteUrl: name);
+      return CommonMethods.buildUrlImage(img, rewriteUrl: name);
     } catch (e) {
       CommonMethods.wirtePrint(e);
 

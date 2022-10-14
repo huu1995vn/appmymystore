@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
@@ -96,10 +95,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       child: Column(children: <Widget>[
         Form(
           key: _keyValidationForm,
-          child:  Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+          child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Column(
                 children: <Widget>[
                   Container(
@@ -192,6 +191,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         var res =
             await DaiLyXeApiBLL_APIAnonymous().forgotpassword(phone, password);
         if (res.status > 0) {
+          CommonNavigates.toLoginPage(context);
           CommonMethods.showToast("success".tr);
         } else {
           CommonMethods.showToast(res.message);

@@ -64,8 +64,8 @@ class _ListBrandWidgetState extends State<ListBrandWidget>
                                           width: 70,
                                           height: 30,
                                           child: RxImage(
-                                            CommonMethods.buildUrlHinhDaiDien(
-                                                item["img"]),
+                                            CommonMethods.buildUrlImage(
+                                                item["img"], rewriteUrl: item["name"]),
                                           ),
                                         ),
                                         const SizedBox(

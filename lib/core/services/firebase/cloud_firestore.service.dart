@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
@@ -23,7 +22,7 @@ class CloudFirestoreSerivce {
           String uid = InfoDeviceService.infoDevice.Identifier!;
           if (doc["DeviceId"] != null && doc["DeviceId"] != uid) {
             AuthService.logout(context);
-            CommonMethods.showToast("message.str012".tr);
+           //CommonMethods.showToast("message.str012".tr);
           }
         }
       });

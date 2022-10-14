@@ -154,59 +154,63 @@ class _OtpVerificationEmailDialogState
       child: Column(
         children: <Widget>[
           Text("message.str016".tr),
-          Center(
-              child: Text(
-            widget.email,
-            style: const TextStyle(fontSize: 20).bold,
-          )),
-          const SizedBox(
-            height: kDefaultPadding * 2,
-          ),
-          Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
-              child: otpBox),
-          const SizedBox(
-            height: kDefaultPadding * 2,
-          ),
-          Row(children: [
-            Expanded(
-              child: RxPrimaryButton(onTap: _submit, text: "continue".tr),
-            )
-          ]),
-          const SizedBox(
-            height: kDefaultPadding * 2,
-          ),
-          InkWell(
-              onTap: () => {if (expiredTime <= 0) sendotp()},
-              child: expiredTime > 0
-                  ? Text(
-                      CommonMethods.convertTimeDuration(seconds: expiredTime),
-                      style: const TextStyle(fontSize: 16),
-                    )
-                  : Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "resend.code".tr,
-                          style: kTextSubTitleStyle.italic.copyWith(
-                              fontSize: 16,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .color!
-                                  .withOpacity(0.7)),
-                        ),
-                        const SizedBox(width: 5),
-                        Icon(AppIcons.sync_1,
-                            size: 16,
-                            color: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .color!
-                                .withOpacity(0.7)),
-                      ],
-                    )),
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                  child: Text(
+                widget.email,
+                style: const TextStyle(fontSize: 25).bold,
+              )),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
+                  child: otpBox),
+              const SizedBox(
+                height: kDefaultPadding * 2,
+              ),
+              InkWell(
+                  onTap: () => {if (expiredTime <= 0) sendotp()},
+                  child: expiredTime > 0
+                      ? Text(
+                          CommonMethods.convertTimeDuration(
+                              seconds: expiredTime),
+                          style: const TextStyle(fontSize: 16),
+                        )
+                      : Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "resend.code".tr,
+                              style: kTextSubTitleStyle.italic.copyWith(
+                                  fontSize: 16,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .color!
+                                      .withOpacity(0.7)),
+                            ),
+                            const SizedBox(width: 5),
+                            Icon(AppIcons.sync_1,
+                                size: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .color!
+                                    .withOpacity(0.7)),
+                          ],
+                        )),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(children: [
+                Expanded(
+                  child: RxPrimaryButton(onTap: _submit, text: "continue".tr),
+                )
+              ]),
         ],
       ),
     );

@@ -275,7 +275,7 @@ class CommonMethods {
   }
 
   static String buildUrlHinhDaiDien(int idHinh,
-      {String? rewriteUrl, int size = 70}) {
+      {String? rewriteUrl, int size = 240}) {
     if (idHinh > 0) {
       return buildUrlImage(idHinh, rewriteUrl: rewriteUrl, size: size);
     } else {

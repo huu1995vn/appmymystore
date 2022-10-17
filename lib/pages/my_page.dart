@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_null_comparison, use_build_context_synchronously
 
 import 'dart:async';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -65,7 +66,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   }
 
   StreamSubscription<PushNotification>? submess;
-  initApp() {
+  initApp() async {
     Provider.of<AppProvider>(context, listen: false).getNotification();
     if (mounted) {
       submess =
@@ -110,6 +111,14 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
       }).onError((error) {
         CommonMethods.wirtePrint('onLink error');
       });
+      final PendingDynamicLinkData? data =
+          await FirebaseDynamicLinks.instance.getInitialLink();
+      if (data != null) {
+        final Uri deepLink = data.link;
+        if (deepLink != null) {
+          _eventDeepLink(deepLink);
+        }
+      }
     }
   }
 

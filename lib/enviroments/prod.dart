@@ -4,5 +4,6 @@ const configProd = {
   "apiDaiLyXeSufix": "/",
   "apiDrive": "https://cdn.dailyxe.com.vn",
   "hostDynamicLink": "https://raoxe.dailyxe.com.vn/rao",
-  "hostRaoXe": "https://raoxe.com.vn"
+  "hostRaoXe": "https://raoxe.com.vn",
+  "hostDaiLyXe": "https://dailyxe.com.vn"
 };

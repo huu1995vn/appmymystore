@@ -573,7 +573,7 @@ class CommonMethods {
     try {
       rewriteUrl = rewriteUrl.convertrUrlPrefix();
       String rewriteLink =
-          'https://dailyxe.com.vn/tin-tuc/$rewriteUrl-${id}d.html';
+          '${CommonConfig.hostDaiLyXe}/tin-tuc/$rewriteUrl-${id}d.html';
       return rewriteLink;
     } catch (error) {}
     return "";

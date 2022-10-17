@@ -4,6 +4,6 @@ const configDev = {
   "apiDaiLyXeSufix": "/",
   "apiDrive": "http://cdn.dailyxe.info",
   "hostDynamicLink": "https://raoxe.page.link",
-  "hostRaoXe": "https://dailyxe.com.vn"
+  "hostRaoXe": "https://raoxe.com.vn"
 
 };

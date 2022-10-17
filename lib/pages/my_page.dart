@@ -87,6 +87,10 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
             onDetailNotification(message);
           } else {
             if (message != null) {
+              int? id = message.data!["id"] != null
+                  ? CommonMethods.convertToInt32(
+                      message.data!["id"] ?? message.data!["Id"])
+                  : null;
               showSimpleNotification(
                 Text(message.title!, style: TextStyle(color: AppColors.black)),
                 leading: RxAvatarImage(ICON, size: 40),
@@ -94,19 +98,21 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
                     style: TextStyle(color: AppColors.black50)),
                 background: AppColors.white,
                 duration: Duration(seconds: 3),
-                trailing: GestureDetector(
-                    onTap: () {
-                      onDetailNotification(message);
-                    },
-                    child: Text("detail".tr,
-                        style: TextStyle(color: AppColors.info))),
+                trailing: (id != null && id > 0)
+                    ? GestureDetector(
+                        onTap: () {
+                          onDetailNotification(message);
+                        },
+                        child: Text("detail".tr,
+                            style: TextStyle(color: AppColors.info)))
+                    : null,
               );
             }
           }
         }
       });
       FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
-       final PendingDynamicLinkData? data =
+      final PendingDynamicLinkData? data =
           await FirebaseDynamicLinks.instance.getInitialLink();
       if (data != null) {
         final Uri deepLink = data.link;
@@ -119,7 +125,6 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
       }).onError((error) {
         CommonMethods.wirtePrint('onLink error');
       });
-     
     }
   }
 

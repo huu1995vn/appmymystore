@@ -13,7 +13,6 @@ import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/lifecyclewatcherstate.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_in_app_messaging_service.dart';

@@ -147,7 +147,7 @@ class _RxDataListViewState extends State<RxListView>
       key: PageStorageKey(widget.key),
       shrinkWrap: true,
       controller: widget.scrollController != null ? null : _scrollController,
-      physics: const AlwaysScrollableScrollPhysics(),
+      physics: widget.scrollController != null?  const NeverScrollableScrollPhysics(): null,
       scrollDirection: widget.scrollDirection ?? Axis.vertical,
       itemCount: widget.onNextPage != null
           ? (widget.data.length + 1)
@@ -166,7 +166,7 @@ class _RxDataListViewState extends State<RxListView>
   Widget _bodylist(BuildContext context) {
     return Stack(
       children: <Widget>[
-        ListView(),
+        ListView(key: UniqueKey(), shrinkWrap: true,),
         (widget.data == null ||
                 widget.itemBuilder == null ||
                 widget.data is! List)

@@ -5,27 +5,28 @@ import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/components/rx_icon_button.dart';
 import 'package:raoxe/core/components/rx_image.dart';
 import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:get/get.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
-
-import '../../../core/commons/common_configs.dart';
 
 class ProductRelated extends StatefulWidget {
   const ProductRelated(
-      {super.key, this.filter, this.notids, this.title, this.scrollDirection});
+      {super.key,
+      this.filter,
+      this.notids,
+      this.title,
+      this.scrollDirection = Axis.vertical,
+      this.scrollController});
   final List<int>? notids;
   final Map<String, dynamic>? filter;
   final String? title;
   final Axis? scrollDirection;
+  final ScrollController? scrollController;
   @override
   ReviewState createState() => ReviewState();
 }
@@ -41,7 +42,7 @@ class ReviewState extends State<ProductRelated> {
     loadData();
   }
 
-  loadData([nPaging = 1]) async {
+  Future loadData([nPaging = 1]) async {
     try {
       var body = <String, dynamic>{};
       body["p"] = 1;
@@ -69,21 +70,27 @@ class ReviewState extends State<ProductRelated> {
           if (list.isNotEmpty) {
             totalItems = list[0].rxtotalrow;
           }
-          listData = list ?? [];
-          paging = nPaging;
+          listData ??= [];
+          if (nPaging == 1) {
+            listData = list;
+          } else {
+            listData = (listData! + list);
+          }
         });
       }
+      paging = nPaging;
     } catch (e) {
       setState(() {
         paging = 1;
-
         totalItems = 0;
         listData = [];
       });
     }
   }
 
-  _onNext() {}
+  Future<dynamic> onNextPage() async {
+    return await loadData(paging + 1);
+  }
 
   @override
   void dispose() {
@@ -132,9 +139,10 @@ class ReviewState extends State<ProductRelated> {
                     },
                   );
           },
-          key: UniqueKey(),
+          key: widget.key,
+          scrollController: widget.scrollController,
           noFound: Center(child: Text("no.found".tr)),
-          scrollDirection: scrollDirection,
+          onNextPage: onNextPage,
         ),
       ],
     ));

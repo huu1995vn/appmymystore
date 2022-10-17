@@ -587,6 +587,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             title: "suggestions".tr,
             filter: {"BrandId": data!.brandid},
             scrollDirection: Axis.vertical,
+            scrollController: scrollController,
             notids: [data!.id]),
       ],
     );

@@ -31,5 +31,17 @@
                 // "--release"
             ]
 		},
+        {
+			"name": "Flutter_Prod_Release",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_prod.dart",
+            "args": [
+                "--flavor",
+                "prod",
+                "--no-sound-null-safety",
+                "--release"
+            ]
+		},
 	]
 }

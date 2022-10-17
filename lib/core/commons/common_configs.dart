@@ -24,7 +24,8 @@ class CommonConfig {
   static String apiDriveSufix = "/";
   static String apiHost = "https://dailyxe.com.vn";
   static String hostDynamicLink = "https://raoxe.page.link";
-  static String hostRaoXe = "https://dailyxe.com.vn";
+  static String hostRaoXe = "https://raoxe.com.vn";
+  static String hostDaiLyXe = "https://dailyxe.com.vn";
   static String appStoreID = "1486119532";
   static bool haveCacheImage = true;
   static int version_masterdata = 1;

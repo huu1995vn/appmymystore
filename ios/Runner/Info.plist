@@ -49,7 +49,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>dailyxe.com.vn/rao-xe</string>
+			<string>rao-xe</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>https</string>

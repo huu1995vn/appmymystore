@@ -35,6 +35,10 @@ class RemoteConfigSerivce {
       CommonConfig.hostRaoXe =
           remoteConfig.getString("hostRaoXe");
     }
+    if (configs["hostDaiLyXe"] != null) {
+      CommonConfig.hostDaiLyXe =
+          remoteConfig.getString("hostDaiLyXe");
+    }
     if (configs["version_masterdata"] != null) {
       CommonConfig.version_masterdata =
           int.parse(remoteConfig.getString("version_masterdata").toString());

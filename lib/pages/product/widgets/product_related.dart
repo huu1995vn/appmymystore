@@ -14,14 +14,19 @@ import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/home/widgets/item_product.widget.dart';
 
-
 class ProductRelated extends StatefulWidget {
   const ProductRelated(
-      {super.key, this.filter, this.notids, this.title, this.scrollDirection = Axis.vertical});
+      {super.key,
+      this.filter,
+      this.notids,
+      this.title,
+      this.scrollDirection = Axis.vertical,
+      this.scrollController});
   final List<int>? notids;
   final Map<String, dynamic>? filter;
   final String? title;
-  final Axis? scrollDirection ;
+  final Axis? scrollDirection;
+  final ScrollController? scrollController;
   @override
   ReviewState createState() => ReviewState();
 }
@@ -65,10 +70,15 @@ class ReviewState extends State<ProductRelated> {
           if (list.isNotEmpty) {
             totalItems = list[0].rxtotalrow;
           }
-          listData = list ?? [];
-          paging = nPaging;
+          listData ??= [];
+          if (nPaging == 1) {
+            listData = list;
+          } else {
+            listData = (listData! + list);
+          }
         });
       }
+      paging = nPaging;
     } catch (e) {
       setState(() {
         paging = 1;
@@ -78,7 +88,7 @@ class ReviewState extends State<ProductRelated> {
     }
   }
 
-   Future<dynamic> onNextPage() async {
+  Future<dynamic> onNextPage() async {
     return await loadData(paging + 1);
   }
 
@@ -130,9 +140,9 @@ class ReviewState extends State<ProductRelated> {
                   );
           },
           key: widget.key,
+          scrollController: widget.scrollController,
           noFound: Center(child: Text("no.found".tr)),
-          scrollDirection: scrollDirection,
-          onNextPage:  onNextPage,
+          onNextPage: onNextPage,
         ),
       ],
     ));

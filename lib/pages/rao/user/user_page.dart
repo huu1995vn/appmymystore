@@ -9,6 +9,7 @@ import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/dialogs/address.dialog.dart';
 import 'package:raoxe/core/components/part.dart';
+import 'package:raoxe/core/components/rx_customscrollview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
@@ -18,6 +19,7 @@ import 'package:raoxe/pages/product/widgets/product_related.dart';
 import 'package:raoxe/pages/rao/user/dialogs/change_email.dialog.dart';
 import 'package:raoxe/pages/rao/user/dialogs/change_password.dialog.dart';
 import 'package:raoxe/pages/rao/user/dialogs/info.dialog.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key, this.id});
@@ -27,6 +29,8 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  AutoScrollController scrollController = AutoScrollController();
+
   UserModel? data;
   String urlImage = "";
   int id = -1;
@@ -171,7 +175,8 @@ class _UserPageState extends State<UserPage> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : CustomScrollView(
+          : RxCustomScrollView(
+              controller: scrollController,
               slivers: <Widget>[
                 SliverAppBar(
                   floating: true,
@@ -187,80 +192,82 @@ class _UserPageState extends State<UserPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(kDefaultPadding),
                         child: Stack(
-                            children: [
-                              Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      if (isMyUser)
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: kDefaultPaddingBox),
+                                          child: GestureDetector(
+                                              onTap: _onEdit,
+                                              child: FaIcon(
+                                                FontAwesomeIcons.edit,
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyLarge!
+                                                    .color,
+                                              )),
+                                        )
+                                    ],
+                                  ),
+                                  SizedBox(height: 20),
+                                  CircleAvatar(
+                                    radius: 60.0,
+                                    // backgroundColor: AppColors.white,
+                                    backgroundImage: const AssetImage(
+                                        'assets/loading_icon.gif'),
+                                    child: CircleAvatar(
+                                      // backgroundColor: Colors.white,
+                                      child: Container(),
+                                      radius: 60.0,
+                                      backgroundImage: RxImageProvider(isMyUser
+                                          ? userProvider.user.rximg
+                                          : data!.rximg),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    data!.fullname!.toUpperCase(),
+                                    style: const TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(height: 10),
+                                  if (isMyUser)
+                                    Column(
                                       children: [
-                                        if (isMyUser)
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: kDefaultPaddingBox),
-                                            child: GestureDetector(
-                                                onTap: _onEdit,
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.edit,
-                                                  color: Theme.of(context).textTheme.bodyLarge!.color,
-                                                )),
-                                          )
+                                        if (data!.email != null &&
+                                            !data!.verifyemail)
+                                          GestureDetector(
+                                              onTap: _onVerifyEmail,
+                                              child: Text(
+                                                "verify.email".tr,
+                                                style: TextStyle(
+                                                    color: AppColors.danger),
+                                              )),
+                                        if (data!.phone != null &&
+                                            !data!.verifyphone)
+                                          GestureDetector(
+                                              onTap: _onVerifyPhone,
+                                              child: Text(
+                                                "verify.phone".tr,
+                                                style: TextStyle(
+                                                    color: AppColors.danger),
+                                              )),
                                       ],
                                     ),
-                                    SizedBox(height: 20),
-                                    CircleAvatar(
-                                      radius: 60.0,
-                                      // backgroundColor: AppColors.white,
-                                      backgroundImage: const AssetImage(
-                                          'assets/loading_icon.gif'),
-                                      child: CircleAvatar(
-                                        // backgroundColor: Colors.white,
-                                        child: Container(),
-                                        radius: 60.0,
-                                        backgroundImage: RxImageProvider(
-                                            isMyUser
-                                                ? userProvider.user.rximg
-                                                : data!.rximg),
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      data!.fullname!.toUpperCase(),
-                                      style: const TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 10),
-                                    if (isMyUser)
-                                      Column(
-                                        children: [
-                                          if (data!.email != null &&
-                                              !data!.verifyemail)
-                                            GestureDetector(
-                                                onTap: _onVerifyEmail,
-                                                child: Text(
-                                                  "verify.email".tr,
-                                                  style: TextStyle(
-                                                      color: AppColors.danger),
-                                                )),
-                                          if (data!.phone != null &&
-                                              !data!.verifyphone)
-                                            GestureDetector(
-                                                onTap: _onVerifyPhone,
-                                                child: Text(
-                                                  "verify.phone".tr,
-                                                  style: TextStyle(
-                                                      color: AppColors.danger),
-                                                )),
-                                        ],
-                                      ),
-                                    SizedBox(height: 20),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ), 
+                                  SizedBox(height: 20),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Card(
@@ -336,6 +343,7 @@ class _UserPageState extends State<UserPage> {
                     ProductRelated(
                       title: "news.post".tr,
                       filter: {"UserId": id},
+                      scrollController: scrollController
                     )
                   ],
                 ))

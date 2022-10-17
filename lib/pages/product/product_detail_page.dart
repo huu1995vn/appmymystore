@@ -586,6 +586,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ProductRelated(
             title: "suggestions".tr,
             filter: {"BrandId": data!.brandid},
+            scrollDirection: Axis.vertical,
+            scrollController: scrollController,
             notids: [data!.id]),
       ],
     );

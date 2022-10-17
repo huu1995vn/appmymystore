@@ -318,8 +318,8 @@ class ProductModel extends Entity {
     return state == 1 ? "new".tr : "old".tr;
   }
 
-  String get linkshare {
-    return CommonMethods.buildDynamicLink_Product(this);
+  Future<Uri> get linkshare async {
+    return await CommonMethods.buildDynamicLink_Product(this);
   }
 
   setcontact(ContactModel contact) {

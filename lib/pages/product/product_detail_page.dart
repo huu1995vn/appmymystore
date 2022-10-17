@@ -90,8 +90,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     await CommonNavigates.openDialog(context, ReviewDialog(product: data!));
   }
 
-  _onShare() {
-    CommonMethods.share(data!.linkshare);
+  _onShare() async {
+    var uri = await data!.linkshare;
+    CommonMethods.share(uri.toString());
   }
 
   _onReport() async {

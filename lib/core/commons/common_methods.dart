@@ -575,9 +575,9 @@ class CommonMethods {
     return "";
   }
 
-  static String buildDynamicLink_Product(ProductModel product) {
+  static Future<Uri> buildDynamicLink_Product(ProductModel product) async {
     String deepLink = linkProduct(product.id, product.name!);
-    return buildDynamicLink(deepLink);
+    return await createDynamicLink(deepLink);
   }
 
   static Future<Uri> createDynamicLink(String uriPrefix,

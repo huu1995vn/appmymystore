@@ -28,6 +28,10 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+	<array>
+	<string>https://proraoxe.page.link/dynamiclink</string>
+	</array>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>

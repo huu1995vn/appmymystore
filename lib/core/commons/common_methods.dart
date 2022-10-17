@@ -646,7 +646,11 @@ class CommonMethods {
 
   static void call(String phone) {
     phone = CommonMethods.formatPhoneNumber(phone);
-    launchUrl(Uri.parse("tel://$phone"));
+    launchUrl(Uri.parse("tel:$phone"));
+  }
+
+  static void mailTo(String email) { 
+    launchUrl(Uri.parse("mailto:$email"));
   }
 
   static void chatZalo(String phone) {

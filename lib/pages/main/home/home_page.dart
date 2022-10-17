@@ -131,92 +131,93 @@ class _HomePageState extends State<HomePage>
               child: Column(children: [
             const BannerWidget(),
             const SizedBox(height: kDefaultMarginBottomBox),
-            Container(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: kDefaultPaddingBox, vertical: kDefaultPadding),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                  bottom: BorderSide(width: 1.0, color: Colors.black12),
+            Card(
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: kDefaultPaddingBox, vertical: kDefaultPadding),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1.0, color: Colors.black12),
+                  ),
                 ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        _onSelectCity();
-                      },
-                      child: Card(
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Get.isDarkMode
-                                  ? Colors.white24
-                                  : Colors.black12,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          _onSelectCity();
+                        },
+                        child: Card(
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Get.isDarkMode
+                                    ? Colors.white24
+                                    : Colors.black12,
+                              ),
+                              borderRadius:
+                                  BorderRadius.circular(5), //<-- SEE HERE
                             ),
-                            borderRadius:
-                                BorderRadius.circular(5), //<-- SEE HERE
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: kDefaultPaddingBox,
+                                  vertical: kDefaultPaddingBox),
+                              child: Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.locationPin,
+                                    color: Get.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black26,
+                                    size: 14,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text("arena".tr,
+                                      style: const TextStyle(fontSize: 13)),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  FaIcon(
+                                    FontAwesomeIcons.caretDown,
+                                    color: Get.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black12,
+                                    size: 14,
+                                  ),
+                                ],
+                              ),
+                            ))),
+                    GestureDetector(
+                        onTap: () {
+                          var _type = _viewType == ViewType.list
+                              ? ViewType.grid
+                              : ViewType.list;
+                          AppService.saveViewTypeByKey(key, _type);
+                          setState(() {
+                            _viewType = _type;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: kDefaultPadding,
+                              vertical: kDefaultPaddingBox),
+                          child: Row(
+                            children: [
+                              Icon(
+                                _viewType == ViewType.list
+                                    ? AppIcons.grid_on
+                                    : AppIcons.format_list_bulleted,
+                                color: Get.isDarkMode
+                                    ? Colors.white24
+                                    : Colors.black26,
+                                size: 23,
+                              ),
+                            ],
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: kDefaultPaddingBox,
-                                vertical: kDefaultPaddingBox),
-                            child: Row(
-                              children: [
-                                FaIcon(
-                                  FontAwesomeIcons.locationPin,
-                                  color: Get.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black26,
-                                  size: 14,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text("arena".tr,
-                                    style: const TextStyle(fontSize: 13)),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                FaIcon(
-                                  FontAwesomeIcons.caretDown,
-                                  color: Get.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black12,
-                                  size: 14,
-                                ),
-                              ],
-                            ),
-                          ))),
-                  GestureDetector(
-                      onTap: () {
-                        var _type = _viewType == ViewType.list
-                            ? ViewType.grid
-                            : ViewType.list;
-                        AppService.saveViewTypeByKey(key, _type);
-                        setState(() {
-                          _viewType = _type;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: kDefaultPadding,
-                            vertical: kDefaultPaddingBox),
-                        child: Row(
-                          children: [
-                            Icon(
-                              _viewType == ViewType.list
-                                  ? AppIcons.grid_on
-                                  : AppIcons.format_list_bulleted,
-                              color: Get.isDarkMode
-                                  ? Colors.white24
-                                  : Colors.black26,
-                              size: 23,
-                            ),
-                          ],
-                        ),
-                      ))
-                ],
+                        ))
+                  ],
+                ),
               ),
             ),
             ListBrandWidget(

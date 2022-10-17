@@ -149,59 +149,61 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   )),
         bottomNavigationBar: Container(
             padding: const EdgeInsets.all(0.0),
-            child: Row(
-              children: [
-                if (isNotFound)
-                  Expanded(
-                    flex: 6,
-                    child: GestureDetector(
-                        onTap: () => {CommonMethods.call(data!.phone!)},
-                        child: Container(
-                            height: 50,
-                            padding: const EdgeInsets.all(kDefaultPaddingBox),
-                            color: Colors.green,
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const FaIcon(
-                                  FontAwesomeIcons.phone,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: kDefaultPadding),
-                                Text(
-                                  "call".tr + ": " + (data!.phone)!,
-                                  style: const TextStyle(
-                                      fontSize: 20,
+            child: isNotFound
+                ? null
+                : Row(
+                    children: [
+                      Expanded(
+                        flex: 6,
+                        child: GestureDetector(
+                            onTap: () => {CommonMethods.call(data!.phone!)},
+                            child: Container(
+                                height: 50,
+                                padding:
+                                    const EdgeInsets.all(kDefaultPaddingBox),
+                                color: Colors.green,
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const FaIcon(
+                                      FontAwesomeIcons.phone,
                                       color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ))),
-                  ),
-                if (isNotFound)
-                  Expanded(
-                    flex: 4,
-                    child: GestureDetector(
-                        onTap: () => {CommonMethods.chatZalo(data!.phone!)},
-                        child: Container(
-                            height: 50,
-                            padding: const EdgeInsets.all(5),
-                            color: Colors.grey[100],
-                            alignment: Alignment.center,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                FaIcon(FontAwesomeIcons.comment,
-                                    color: Colors.grey[700]),
-                                Text("chatzalo".tr,
-                                    style: TextStyle(color: Colors.grey[700]))
-                              ],
-                            ))),
-                  ),
-              ],
-            )));
+                                      size: 20,
+                                    ),
+                                    const SizedBox(width: kDefaultPadding),
+                                    Text(
+                                      "call".tr + ": " + (data!.phone)!,
+                                      style: const TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ))),
+                      ),
+                      Expanded(
+                        flex: 4,
+                        child: GestureDetector(
+                            onTap: () => {CommonMethods.chatZalo(data!.phone!)},
+                            child: Container(
+                                height: 50,
+                                padding: const EdgeInsets.all(5),
+                                color: Colors.grey[100],
+                                alignment: Alignment.center,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FaIcon(FontAwesomeIcons.comment,
+                                        color: Colors.grey[700]),
+                                    Text("chatzalo".tr,
+                                        style:
+                                            TextStyle(color: Colors.grey[700]))
+                                  ],
+                                ))),
+                      ),
+                    ],
+                  )));
   }
 
   Widget _listTitle(String title, dynamic subtitle, {Widget? leading}) {

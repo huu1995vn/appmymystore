@@ -106,12 +106,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         }
       });
       FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
-      DynamicLinkService.dynamicLinks.onLink.listen((dynamicLinkData) {
-        _eventDeepLink(dynamicLinkData.link);
-      }).onError((error) {
-        CommonMethods.wirtePrint('onLink error');
-      });
-      final PendingDynamicLinkData? data =
+       final PendingDynamicLinkData? data =
           await FirebaseDynamicLinks.instance.getInitialLink();
       if (data != null) {
         final Uri deepLink = data.link;
@@ -119,6 +114,12 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
           _eventDeepLink(deepLink);
         }
       }
+      DynamicLinkService.dynamicLinks.onLink.listen((dynamicLinkData) {
+        _eventDeepLink(dynamicLinkData.link);
+      }).onError((error) {
+        CommonMethods.wirtePrint('onLink error');
+      });
+     
     }
   }
 

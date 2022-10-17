@@ -55,9 +55,11 @@ class _DashboardPageState extends State<DashboardPage>
       }
     } catch (e) {
       CommonMethods.showToast(e.toString());
-      setState(() {
+      if(mounted) {
+        setState(() {
         data = UserModel();
       });
+      }
     }
   }
 

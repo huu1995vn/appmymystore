@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_null_comparison, use_build_context_synchronously
 
 import 'dart:async';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -65,7 +66,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   }
 
   StreamSubscription<PushNotification>? submess;
-  initApp() {
+  initApp() async {
     Provider.of<AppProvider>(context, listen: false).getNotification();
     if (mounted) {
       submess =
@@ -106,11 +107,34 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
       });
       FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
       DynamicLinkService.dynamicLinks.onLink.listen((dynamicLinkData) {
-        // Navigator.pushNamed(context, dynamicLinkData.link.path);
-        CommonMethods.showToast(dynamicLinkData.link.path);
+        _eventDeepLink(dynamicLinkData.link);
       }).onError((error) {
         CommonMethods.wirtePrint('onLink error');
       });
+      final PendingDynamicLinkData? data =
+          await FirebaseDynamicLinks.instance.getInitialLink();
+      if (data != null) {
+        final Uri deepLink = data.link;
+        if (deepLink != null) {
+          _eventDeepLink(deepLink);
+        }
+      }
+    }
+  }
+
+  _eventDeepLink(Uri uriLink) {
+    String deepLink = '${uriLink.origin}${uriLink.path}';
+    if (uriLink.query != null) {
+      deepLink += '?${uriLink.query}';
+    }
+
+    var resInfo = CommonMethods.getInfoRewriteLinkWithDomain(deepLink);
+    if (resInfo != null) {
+      switch (resInfo["typePage"]) {
+        case "r":
+          CommonNavigates.toProductPage(context, id: resInfo["id"]);
+          break;
+      }
     }
   }
 
@@ -136,7 +160,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     }
   }
 
-  onPressedTab(int index) { 
+  onPressedTab(int index) {
     setState(() {
       _selectedIndex = index;
     });

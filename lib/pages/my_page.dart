@@ -106,11 +106,26 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
       });
       FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
       DynamicLinkService.dynamicLinks.onLink.listen((dynamicLinkData) {
-        // Navigator.pushNamed(context, dynamicLinkData.link.path);
-        CommonMethods.showToast(dynamicLinkData.link.path);
+        _eventDeepLink(dynamicLinkData.link);
       }).onError((error) {
         CommonMethods.wirtePrint('onLink error');
       });
+    }
+  }
+
+  _eventDeepLink(Uri uriLink) {
+    String deepLink = '${uriLink.origin}${uriLink.path}';
+    if (uriLink.query != null) {
+      deepLink += '?${uriLink.query}';
+    }
+
+    var resInfo = CommonMethods.getInfoRewriteLinkWithDomain(deepLink);
+    if (resInfo != null) {
+      switch (resInfo["typePage"]) {
+        case "r":
+          CommonNavigates.toProductPage(context, id: resInfo["id"]);
+          break;
+      }
     }
   }
 
@@ -136,7 +151,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     }
   }
 
-  onPressedTab(int index) { 
+  onPressedTab(int index) {
     setState(() {
       _selectedIndex = index;
     });

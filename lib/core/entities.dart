@@ -404,7 +404,7 @@ class ProductModel extends Entity {
   //  + 4: Vi pham (Khoa)
 
   String get rxtimeago {
-    return CommonMethods.timeagoFormat(createdate);
+    return verifydate!=null? CommonMethods.timeagoFormat(verifydate) : CommonMethods.timeagoFormat(createdate);
   }
 
   String get rxprice {

@@ -289,6 +289,7 @@ class _UserPageState extends State<UserPage> {
                           if (data!.phone != "")
                             RxBorderListTile(
                                 child: ListTile(
+                                    onTap: () { CommonMethods.call(data!.phone!);},
                                     title: Text(data!.phone! ?? "NaN"),
                                     leading: FaIcon(
                                       FontAwesomeIcons.phone,
@@ -297,6 +298,7 @@ class _UserPageState extends State<UserPage> {
                             RxBorderListTile(
                                 child: ListTile(
                                     title: Text(data!.email! ?? "NaN"),
+                                    onTap: () { CommonMethods.mailTo(data!.email!);},
                                     leading: FaIcon(
                                       FontAwesomeIcons.solidEnvelope,
                                     ),

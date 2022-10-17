@@ -261,17 +261,14 @@ class CommonMethods {
         actions: [RxPrimaryButton(onTap: () {}, text: "done".tr)]);
   }
 
-  static String buildUrlImage(int idHinh,
-      {String? rewriteUrl, int size = 0}) {
-   
+  static String buildUrlImage(int idHinh, {String? rewriteUrl, int size = 0}) {
     idHinh = idHinh > 0 ? idHinh : 0;
     rewriteUrl = rewriteUrl != null && rewriteUrl.isNotEmpty
         ? rewriteUrl
         : "image-dailyxe";
     rewriteUrl = rewriteUrl.convertrUrlPrefix();
     String url = '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j.jpg';
-    if(size > 0)
-    {
+    if (size > 0) {
       url = '$url?w=$size';
     }
     return url;
@@ -280,8 +277,7 @@ class CommonMethods {
   static String buildUrlHinhDaiDien(int idHinh,
       {String? rewriteUrl, int size = 70}) {
     if (idHinh > 0) {
-      return buildUrlImage(idHinh,
-          rewriteUrl: rewriteUrl, size: size);
+      return buildUrlImage(idHinh, rewriteUrl: rewriteUrl, size: size);
     } else {
       return IMAGE_NOT_FOUND;
     }
@@ -660,10 +656,24 @@ class CommonMethods {
         mode: LaunchMode.externalNonBrowserApplication);
   }
 
- static String parseHtmlString(String htmlString) {
+  static String parseHtmlString(String htmlString) {
     final document = parse(htmlString);
-    final String parsedString = parse(document.body!.text).documentElement!.text;
+    final String parsedString =
+        parse(document.body!.text).documentElement!.text;
     return parsedString;
   }
+
   //# build end link dynamic
+  static getInfoRewriteLinkWithDomain(String linkRewriteWithDomain) {
+    try {
+      String regexString = r"-(\d+)(\w)\.html"; // not r'/api/\w+/\d+/' !!!
+      RegExp regExp = RegExp(regexString);
+      var matches = regExp.firstMatch(linkRewriteWithDomain);
+      return {
+        "id": int.parse(matches!.group(1)!),
+        "typePage": matches.group(2)
+      };
+    } catch (e) {}
+    return null;
+  }
 }

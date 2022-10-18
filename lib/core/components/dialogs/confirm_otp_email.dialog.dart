@@ -145,6 +145,7 @@ class _OtpVerificationEmailDialogState
       controller: TextEditingController(),
       onCompleted: (v) {
         code = v;
+        _submit();
       },
       appContext: context,
       onChanged: (value) {},

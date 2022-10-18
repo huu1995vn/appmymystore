@@ -36,13 +36,13 @@ class _SettingsPageState extends State<SettingsPage> {
         setState(() {
           authBiometric = true;
         });
+        CommonMethods.showToast("success".tr);
       } else {
         StorageService.deleteItem(StorageKeys.biometric);
         setState(() {
           authBiometric = false;
         });
       }
-      CommonMethods.showToast("success".tr);
     } catch (e) {
       CommonMethods.showDialogError(context, e);
     }

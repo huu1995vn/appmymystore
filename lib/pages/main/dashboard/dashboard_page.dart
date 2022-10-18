@@ -14,6 +14,7 @@ import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -55,10 +56,10 @@ class _DashboardPageState extends State<DashboardPage>
       }
     } catch (e) {
       CommonMethods.showToast(e.toString());
-      if(mounted) {
+      if (mounted) {
         setState(() {
-        data = UserModel();
-      });
+          data = UserModel();
+        });
       }
     }
   }
@@ -92,10 +93,11 @@ class _DashboardPageState extends State<DashboardPage>
     final appProvider = Provider.of<AppProvider>(context);
     return [
       Card(
-          margin: EdgeInsets.only(bottom: 5, top: 5),
+          margin: EdgeInsets.only(
+              bottom: kDefaultMarginBottomBox, top: kDefaultMarginBottomBox),
           child: Column(children: [_top(appProvider)])),
       Card(
-        margin: EdgeInsets.only(bottom: 5),
+        margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
         child: Column(
           children: [
             RxBorderListTile(
@@ -211,7 +213,8 @@ class _DashboardPageState extends State<DashboardPage>
   List<Widget> _notlogin() {
     return [
       Card(
-        margin: EdgeInsets.only(bottom: 5),
+        margin: EdgeInsets.only(
+            bottom: kDefaultMarginBottomBox, top: kDefaultMarginBottomBox),
         child: Column(
           children: [
             Container(
@@ -219,9 +222,10 @@ class _DashboardPageState extends State<DashboardPage>
                 child: ListTile(
                   leading: RxCircleAvatar(
                     backgroundColor:
-                        Get.isDarkMode ? Colors.black12 : Colors.grey,
-                    child:
-                        FaIcon(FontAwesomeIcons.user, color: AppColors.black50),
+                        Get.isDarkMode ? Colors.white : Colors.grey,
+                    child: FaIcon(FontAwesomeIcons.user,
+                        color:
+                            Get.isDarkMode ? AppColors.black50 : Colors.white),
                   ),
                   title: Text(
                     "${"login".tr} / ${"regist".tr}",

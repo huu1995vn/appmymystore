@@ -67,7 +67,7 @@ class NewsPageState extends State<NewsPage>
                               preferredSize: Size.fromHeight(50),
                               child: ColoredBox(
                                 color: Get.isDarkMode
-                                    ? Colors.white10
+                                    ? AppColors.blackLight
                                     : Colors.white,
                                 child: TabBar(
                                   isScrollable: true,

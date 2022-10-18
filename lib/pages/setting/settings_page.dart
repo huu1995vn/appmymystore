@@ -15,7 +15,6 @@ import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/theme/theme.service.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
-import '../../core/utilities/constants.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -31,7 +30,6 @@ class _SettingsPageState extends State<SettingsPage> {
     final userProvider = Provider.of<AppProvider>(context, listen: false);
     try {
       var res = await AuthService.authBiometric();
-
       if (v && res) {
         await StorageService.set(
             StorageKeys.biometric, userProvider.user.username);
@@ -40,10 +38,11 @@ class _SettingsPageState extends State<SettingsPage> {
         });
       } else {
         StorageService.deleteItem(StorageKeys.biometric);
-         setState(() {
+        setState(() {
           authBiometric = false;
         });
       }
+      CommonMethods.showToast("success".tr);
     } catch (e) {
       CommonMethods.showDialogError(context, e);
     }

@@ -48,9 +48,11 @@ class CommonNavigates {
     '/review': (context) => const ReviewPage(),
     '/favorite': (context) => const FavoritePage(),
     '/point': (context) => const PointPage()
-
-    // '/search': (context) => SearchPage(),
   };
+  
+  static Future toRootdPage(BuildContext context) async {
+    return Navigator.popUntil(context, (route) => route.isFirst);
+  }
 
   static Future toProductPage(BuildContext context,
       {int? id, ProductModel? item, Map<String, dynamic>? paramsSearch}) async {

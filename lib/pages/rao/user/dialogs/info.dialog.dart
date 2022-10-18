@@ -115,8 +115,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.grey[200],
+    return Scaffold( 
         body: data == null
             ? Center(
                 child: CircularProgressIndicator(),

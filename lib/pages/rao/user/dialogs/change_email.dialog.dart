@@ -62,7 +62,7 @@ class _ChangeEmailDialogState extends State<ChangeEmailDiaLog> {
                 children: <Widget>[
                   Container( 
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                        const EdgeInsets.symmetric(horizontal: 0, vertical: 5),   
                     child: RxInput(email,
                         labelText: "new.email".tr,
                         isBorder: true,

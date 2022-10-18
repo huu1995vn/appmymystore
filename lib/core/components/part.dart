@@ -577,9 +577,7 @@ Widget rxTextInput(BuildContext context, String? value,
                   ],
                 ),
               ),
-          subtitle: SizedBox(
-            height: validator!=null? 65: 35,
-            child: RxInput(value ?? "",
+          subtitle: RxInput(value ?? "",
                 readOnly: onTap != null,
                 isBorder: isBorder,
                 keyboardType: keyboardType,
@@ -594,7 +592,7 @@ Widget rxTextInput(BuildContext context, String? value,
                 maxLengthEnforcement: maxLengthEnforcement,
                 validator: validator,
                 suffixIcon: const Icon(null)),
-          )));
+          ));
 }
 
 Widget rxSelectInput(BuildContext context, String type, dynamic id,

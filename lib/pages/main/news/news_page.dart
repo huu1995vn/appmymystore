@@ -34,12 +34,10 @@ class NewsPageState extends State<NewsPage>
   }).toList();
   bool isloading = false;
   loadData() {
-    // (tabviews[_tabController!.index] as TabNewsWidget).getState.scrollController.jumpTo(0);
     setState(() {
       isloading = true;
     });
     Future.delayed(const Duration(milliseconds: 500), () {
-// Here you can write your code
       setState(() {
         isloading = false;
       });

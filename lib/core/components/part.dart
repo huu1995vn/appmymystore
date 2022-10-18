@@ -592,8 +592,7 @@ Widget rxTextInput(BuildContext context, String? value,
                 maxLength: maxLength,
                 minLines: minLines,                
                 maxLengthEnforcement: maxLengthEnforcement,
-                validator: validator,
-                suffixIcon: const Icon(null)),
+                validator: validator),
           )));
 }
 

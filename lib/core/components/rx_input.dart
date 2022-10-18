@@ -88,9 +88,8 @@ class _InputTextState extends State<RxInput> {
       validator: widget.validator,
       onChanged: widget.onChanged,
       style: widget.style,
-      decoration: InputDecoration(
-          // contentPadding: const EdgeInsets.only(top:0, bottom: kDefaultPadding),
-          errorStyle: const TextStyle(height: 0.3),
+      decoration: InputDecoration( 
+          errorStyle: const TextStyle(height: 0.6),
           isDense: true,
           fillColor: widget.isBorder ? Theme.of(context).cardTheme.color : null,
           filled: widget.isBorder,

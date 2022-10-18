@@ -73,13 +73,11 @@ class _RxDataListViewState extends State<RxListView>
   @override
   dispose() {
     super.dispose();
-    try {
-      if (_scrollController != null) {
-        Future.delayed(Duration.zero, () {
-          _scrollController.dispose();
-        });
-      }
-    } catch (e) {}
+    // try {
+    //   if (_scrollController != null) {
+    //     _scrollController.dispose();
+    //   }
+    // } catch (e) {}
   }
 
   _scrollListener() async {

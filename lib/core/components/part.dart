@@ -578,7 +578,7 @@ Widget rxTextInput(BuildContext context, String? value,
                 ),
               ),
           subtitle: SizedBox(
-            height: validator!=null? 65: 35,
+            height: validator!=null ? null :35,
             child: RxInput(value ?? "",
                 readOnly: onTap != null,
                 isBorder: isBorder,
@@ -637,7 +637,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
                 ],
               ),
             ),
-        subtitle: Container(
+        subtitle: SizedBox(
           height: validator!=null ? null :35,
           child: RxInput(name,
               isBorder: isBorder,

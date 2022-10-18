@@ -145,7 +145,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
                                     labelText: "fullname".tr,
                                     onChanged: (v) => {data!.fullname = v},
                                     validator: Validators.compose([
-                                      Validators.required("fullname".tr),
+                                      Validators.required("notempty".tr),
                                     ])), 
                                 Container(
                                     decoration: const BoxDecoration(

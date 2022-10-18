@@ -99,65 +99,69 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    decoration: const BoxDecoration(
-                        border:
-                            Border(bottom: BorderSide(color: Colors.black26))),
-                    child: RxInput(phone,
-                        keyboardType: TextInputType.number,
-                        labelText: "phone".tr,
-                        icon: const FaIcon(FontAwesomeIcons.phone),
-                        onChanged: (v) => {
-                              setState(() => {phone = v})
-                            },
-                        validator: (v) {
-                          if (v == null || !v.isNotEmpty) {
-                            return "notempty.phone".tr;
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.black26)),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(color: Colors.black26))),
+                        child: RxInput(phone,
+                            keyboardType: TextInputType.number,
+                            labelText: "phone".tr,
+                            icon: const FaIcon(FontAwesomeIcons.phone),
+                            onChanged: (v) => {
+                                  setState(() => {phone = v})
+                                },
+                            validator: (v) {
+                              if (v == null || !v.isNotEmpty) {
+                                return "notempty.phone".tr;
+                              } else {
+                                return CommonMethods.checkStringPhone(v)
+                                    ? null
+                                    : "invalid.phone".tr;
+                              }
+                            }),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(color: Colors.black26))),
+                        child: RxInput(password,
+                            isPassword: true,
+                            labelText: "password.new".tr,
+                            icon: const FaIcon(FontAwesomeIcons.lock),
+                            onChanged: (v) => {
+                                  setState(() => {password = v})
+                                },
+                            validator: Validators.compose([
+                              Validators.required("notempty.password".tr),
+                            ])),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        child: RxInput(passwordAgain,
+                            isPassword: true,
+                            labelText: "password.again".tr,
+                            icon: const FaIcon(FontAwesomeIcons.lock),
+                            validator: (value) {
+                          if (value != null && value != password) {
+                            return "invalid.password.again".tr;
                           } else {
-                            return CommonMethods.checkStringPhone(v)
-                                ? null
-                                : "invalid.phone".tr;
+                            return null;
                           }
                         }),
-                  ),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    decoration: const BoxDecoration(
-                        border:
-                            Border(bottom: BorderSide(color: Colors.black26))),
-                    child: RxInput(password,
-                        isPassword: true,
-                        labelText: "password.new".tr,
-                        icon: const FaIcon(FontAwesomeIcons.lock),
-                        onChanged: (v) => {
-                              setState(() => {password = v})
-                            },
-                        validator: Validators.compose([
-                          Validators.required("notempty.password".tr),
-                        ])),
-                  ),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    child: RxInput(passwordAgain,
-                        isPassword: true,
-                        labelText: "password.again".tr,
-                        icon: const FaIcon(FontAwesomeIcons.lock),
-                        validator: (value) {
-                      if (value != null && value != password) {
-                        return "invalid.password.again".tr;
-                      } else {
-                        return null;
-                      }
-                    }),
-                  ),
-                ],
-              )),
+                      ),
+                    ],
+                  ))),
         ),
         const SizedBox(height: 20),
         Row(children: [

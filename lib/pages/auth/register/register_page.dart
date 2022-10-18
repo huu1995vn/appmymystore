@@ -108,82 +108,91 @@ class _RegisterPageState extends State<RegisterPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 5),
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                      bottom:
-                                          BorderSide(color: Colors.black26))),
-                              child: RxInput(user!.fullname!,
-                                  labelText: "fullname".tr,
-                                  icon:
-                                      const FaIcon(FontAwesomeIcons.solidUser),
-                                  onChanged: (v) => {user!.fullname = v},
-                                  validator: Validators.compose([
-                                    Validators.required("notempty.fullname".tr),
-                                  ]))),
-                          Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 5),
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                      bottom:
-                                          BorderSide(color: Colors.black26))),
-                              child: RxInput(user!.phone!,
-                                  keyboardType: TextInputType.number,
-                                  labelText: "phone".tr,
-                                  icon: const FaIcon(FontAwesomeIcons.phone),
-                                  onChanged: (v) => {user!.phone = v},
-                                  validator: (v) {
-                                    if (v == null || !v.isNotEmpty) {
-                                      return "notempty.phone".tr;
-                                    } else {
-                                      return CommonMethods.checkStringPhone(v)
-                                          ? null
-                                          : "invalid.phone".tr;
-                                    }
-                                  })),
-                          Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 5),
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                      bottom:
-                                          BorderSide(color: Colors.black26))),
-                              child: RxInput(
-                                user!.password!,
-                                isPassword: true,
-                                labelText: "password".tr,
-                                icon: const FaIcon(FontAwesomeIcons.lock),
-                                onChanged: (v) => {user!.password = v},
-                                validator: Validators.compose([
-                                  Validators.required("notempty.password".tr),
-                                  Validators.patternString(
-                                      RxParttern.password, "message.str004".tr)
-                                ]),
-                              )),
-                          Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 5),
-                              child: RxInput(
-                                passwordAgain,
-                                isPassword: true,
-                                labelText: "password.again".tr,
-                                icon: const FaIcon(FontAwesomeIcons.lock),
-                                validator: (value) {
-                                  if (value != null &&
-                                      value != user!.password) {
-                                    return "invalid.password.again".tr;
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                              )),
-                        ],
-                      ))),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.black26)),
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 5),
+                                  decoration: const BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: Colors.black26))),
+                                  child: RxInput(user!.fullname!,
+                                      labelText: "fullname".tr,
+                                      icon: const FaIcon(
+                                          FontAwesomeIcons.solidUser),
+                                      onChanged: (v) => {user!.fullname = v},
+                                      validator: Validators.compose([
+                                        Validators.required(
+                                            "notempty.fullname".tr),
+                                      ]))),
+                              Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 5),
+                                  decoration: const BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: Colors.black26))),
+                                  child: RxInput(user!.phone!,
+                                      keyboardType: TextInputType.number,
+                                      labelText: "phone".tr,
+                                      icon:
+                                          const FaIcon(FontAwesomeIcons.phone),
+                                      onChanged: (v) => {user!.phone = v},
+                                      validator: (v) {
+                                        if (v == null || !v.isNotEmpty) {
+                                          return "notempty.phone".tr;
+                                        } else {
+                                          return CommonMethods.checkStringPhone(
+                                                  v)
+                                              ? null
+                                              : "invalid.phone".tr;
+                                        }
+                                      })),
+                              Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 5),
+                                  decoration: const BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: Colors.black26))),
+                                  child: RxInput(
+                                    user!.password!,
+                                    isPassword: true,
+                                    labelText: "password".tr,
+                                    icon: const FaIcon(FontAwesomeIcons.lock),
+                                    onChanged: (v) => {user!.password = v},
+                                    validator: Validators.compose([
+                                      Validators.required(
+                                          "notempty.password".tr),
+                                      Validators.patternString(
+                                          RxParttern.password,
+                                          "message.str004".tr)
+                                    ]),
+                                  )),
+                              Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 5),
+                                  child: RxInput(
+                                    passwordAgain,
+                                    isPassword: true,
+                                    labelText: "password.again".tr,
+                                    icon: const FaIcon(FontAwesomeIcons.lock),
+                                    validator: (value) {
+                                      if (value != null &&
+                                          value != user!.password) {
+                                        return "invalid.password.again".tr;
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                  )),
+                            ],
+                          )))),
               const SizedBox(height: 20),
               Row(
                 children: [

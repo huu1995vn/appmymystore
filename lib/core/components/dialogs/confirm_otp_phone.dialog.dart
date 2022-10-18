@@ -230,8 +230,7 @@ class _OtpVerificationPhoneDialogState
             centerTitle: true,
             title: Text('enter.verification.code'.tr),
             elevation: 0.0,
-          ),
-          backgroundColor: Colors.white,
+          ), 
           body: SingleChildScrollView(
             child: Padding(
                 padding: const EdgeInsets.all(kDefaultPadding)

@@ -151,7 +151,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     _onShare();
                                     break;
                                   case Menu.menuBackHome:
-                                    CommonNavigates.toProductPage(context);
+                                    CommonNavigates.toRootPage(context);
                                     break;
                                   default:
                                 }

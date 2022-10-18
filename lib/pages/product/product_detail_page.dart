@@ -21,6 +21,8 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:rating_bar/rating_bar.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
+enum Menu { menuShare, menuBackHome }
+
 class ProductDetailPage extends StatefulWidget {
   final int? id;
   final ProductModel? item;
@@ -42,6 +44,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   String? initialUrl;
   ProductModel? data;
   bool isNotFound = false;
+
   loadData() async {
     try {
       if (widget.item != null) {
@@ -134,13 +137,56 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   ? AppColors.yellow
                                   : AppColors.white),
                           const SizedBox(width: kDefaultPadding),
-                          RxIconButton(
-                            icon: FontAwesomeIcons.solidShareFromSquare,
-                            size: 40,
-                            color: Colors.transparent,
-                            colorIcon: AppColors.white,
-                            onTap: _onShare,
-                          ),
+                          PopupMenuButton<Menu>(
+                              child: RxIconButton(
+                                icon: FontAwesomeIcons.ellipsisVertical,
+                                size: 40,
+                                color: Colors.transparent,
+                                colorIcon: AppColors.white,
+                              ),
+                              // Callback that sets the selected popup menu item.
+                              onSelected: (Menu item) {
+                                switch (item) {
+                                  case Menu.menuShare:
+                                    _onShare();
+                                    break;
+                                  case Menu.menuBackHome:
+                                    CommonNavigates.toProductPage(context);
+                                    break;
+                                  default:
+                                }
+                              },
+                              itemBuilder: (BuildContext context) =>
+                                  <PopupMenuEntry<Menu>>[
+                                    PopupMenuItem<Menu>(
+                                      value: Menu.menuShare,
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                              padding: EdgeInsets.all(
+                                                  kDefaultPadding),
+                                              child: FaIcon(
+                                                  FontAwesomeIcons
+                                                      .solidShareSquare,
+                                                  color: Theme.of(context)
+                                                      .primaryColor)),
+                                          Text("share".tr)
+                                        ],
+                                      ),
+                                    ),
+                                    PopupMenuItem<Menu>(
+                                        value: Menu.menuBackHome,
+                                        child: Row(children: [
+                                          Container(
+                                              padding: EdgeInsets.all(
+                                                  kDefaultPadding),
+                                              child: FaIcon(
+                                                  FontAwesomeIcons.homeAlt,
+                                                  color: Theme.of(context)
+                                                      .primaryColor)),
+                                          Text("home".tr)
+                                        ])),
+                                  ]),
                           const SizedBox(width: kDefaultPadding),
                         ],
                       ),

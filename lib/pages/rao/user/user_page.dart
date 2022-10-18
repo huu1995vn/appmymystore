@@ -289,16 +289,23 @@ class _UserPageState extends State<UserPage> {
                           if (data!.phone != "")
                             RxBorderListTile(
                                 child: ListTile(
-                                    onTap: () { CommonMethods.call(data!.phone!);},
-                                    title: Text(data!.phone! ?? "NaN"),
+                                    title: GestureDetector(
+                                        onTap: () {
+                                          CommonMethods.call(data!.phone!);
+                                        },
+                                        child: Text(data!.phone! ?? "NaN")),
                                     leading: FaIcon(
                                       FontAwesomeIcons.phone,
                                     ))),
                           if (data!.email != "")
                             RxBorderListTile(
                                 child: ListTile(
-                                    title: Text(data!.email! ?? "NaN"),
-                                    onTap: () { CommonMethods.mailTo(data!.email!);},
+                                    title: GestureDetector(
+                                      onTap: () {
+                                        CommonMethods.mailTo(data!.email!);
+                                      },
+                                      child: Text(data!.email! ?? "NaN"),
+                                    ),
                                     leading: FaIcon(
                                       FontAwesomeIcons.solidEnvelope,
                                     ),
@@ -343,10 +350,9 @@ class _UserPageState extends State<UserPage> {
                       ),
                     ),
                     ProductRelated(
-                      title: "news.post".tr,
-                      filter: {"UserId": id},
-                      scrollController: scrollController
-                    )
+                        title: "news.post".tr,
+                        filter: {"UserId": id},
+                        scrollController: scrollController)
                   ],
                 ))
               ],

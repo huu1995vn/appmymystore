@@ -135,7 +135,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               // _authenticateWithBiometrics();
                             }),
                         RxBuildItem(
-                          icon: const Icon(AppIcons.text_format),
+                          icon: const FaIcon(FontAwesomeIcons.atlas),
                           title: "language".tr,
                           trailing: DropdownButton<String>(
                             icon: Icon(Icons.arrow_drop_down),
@@ -147,19 +147,19 @@ class _SettingsPageState extends State<SettingsPage> {
                             },
                           ),
                         ),
-
-                        RxBuildItem(
-                            icon: const Icon(AppIcons.fingerprint),
-                            title: "login.biometrics".tr,
-                            trailing: Switch(
-                              value: authBiometric,
-                              onChanged: _onBiometric,
-                              activeTrackColor: Colors.red[200],
-                              activeColor: Colors.red,
-                            ),
-                            onTap: () {
-                              // _authenticateWithBiometrics();
-                            }),
+                        if (CommonMethods.isLogin)
+                          RxBuildItem(
+                              icon: const Icon(AppIcons.fingerprint),
+                              title: "login.biometrics".tr,
+                              trailing: Switch(
+                                value: authBiometric,
+                                onChanged: _onBiometric,
+                                activeTrackColor: Colors.red[200],
+                                activeColor: Colors.red,
+                              ),
+                              onTap: () {
+                                // _authenticateWithBiometrics();
+                              }),
                         // RxBuildItem(
                         //     title: "Clear cache".tr,
                         //     onTap: () {

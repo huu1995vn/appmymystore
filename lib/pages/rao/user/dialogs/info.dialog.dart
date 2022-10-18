@@ -37,7 +37,7 @@ class _InfoUserDiaLogState extends State<InfoUserDiaLog> {
 
   loadData() {
     setState(() {
-      data = widget.data;
+      data = widget.data.clone();
     });
   }
 

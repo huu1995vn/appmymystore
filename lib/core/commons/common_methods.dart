@@ -209,6 +209,7 @@ class CommonMethods {
       message = pmsg.message ?? message;
     } catch (e) {}
     return await Dialogs.materialDialog(
+        color: Theme.of(context).cardColor,
         msg: message,
         title: title ?? "notification".tr,
         context: context,

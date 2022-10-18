@@ -39,6 +39,10 @@ class RemoteConfigSerivce {
       CommonConfig.hostDaiLyXe =
           remoteConfig.getString("hostDaiLyXe");
     }
+    if (configs["hotSearch"] != null) {
+      CommonConfig.hotSearch =
+          remoteConfig.getString("hotSearch");
+    }
     if (configs["version_masterdata"] != null) {
       CommonConfig.version_masterdata =
           int.parse(remoteConfig.getString("version_masterdata").toString());

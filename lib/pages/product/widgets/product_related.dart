@@ -45,7 +45,7 @@ class ReviewState extends State<ProductRelated> {
   Future loadData([nPaging = 1]) async {
     try {
       var body = <String, dynamic>{};
-      body["p"] = 1;
+      body["p"] = nPaging;
       body["n"] = kItemOnPage;
       body["filter"] = widget.filter ?? {};
       if (widget.notids != null) {
@@ -81,9 +81,8 @@ class ReviewState extends State<ProductRelated> {
       paging = nPaging;
     } catch (e) {
       setState(() {
-        paging = 1;
-        totalItems = 0;
         listData = [];
+        totalItems = 0;
       });
     }
   }

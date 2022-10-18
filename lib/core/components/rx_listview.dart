@@ -47,11 +47,12 @@ class _RxDataListViewState extends State<RxListView>
   @override
   initState() {
     super.initState();
-    if (mounted) {
-      setState(() {
-        _scrollController = widget.scrollController ?? ScrollController();
-      });
-    }
+    // if (mounted) {
+    //   setState(() {
+    //   });
+    // }
+    _scrollController = widget.scrollController ?? ScrollController();
+
     if (widget.onNextPage != null) {
       _scrollController.addListener(_scrollListener);
     }
@@ -72,7 +73,9 @@ class _RxDataListViewState extends State<RxListView>
   @override
   dispose() {
     super.dispose();
-    if (_scrollController != null) _scrollController.dispose();
+    if (_scrollController != null && widget.scrollController != null) {
+      _scrollController.dispose();
+    }
   }
 
   _scrollListener() async {
@@ -147,7 +150,9 @@ class _RxDataListViewState extends State<RxListView>
       key: PageStorageKey(widget.key),
       shrinkWrap: true,
       controller: widget.scrollController != null ? null : _scrollController,
-      physics: widget.scrollController != null?  const NeverScrollableScrollPhysics(): null,
+      physics: widget.scrollController != null
+          ? const NeverScrollableScrollPhysics()
+          : null,
       scrollDirection: widget.scrollDirection ?? Axis.vertical,
       itemCount: widget.onNextPage != null
           ? (widget.data.length + 1)
@@ -166,7 +171,10 @@ class _RxDataListViewState extends State<RxListView>
   Widget _bodylist(BuildContext context) {
     return Stack(
       children: <Widget>[
-        ListView(key: UniqueKey(), shrinkWrap: true,),
+        ListView(
+          key: UniqueKey(),
+          shrinkWrap: true,
+        ),
         (widget.data == null ||
                 widget.itemBuilder == null ||
                 widget.data is! List)

@@ -27,16 +27,15 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
+class HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin<HomePage> {
   @override
   bool get wantKeepAlive => true;
   final GlobalKey<FormState> _homeKey = GlobalKey<FormState>();
   AutoScrollController scrollController = AutoScrollController();
-
   @override
   void initState() {
     super.initState();

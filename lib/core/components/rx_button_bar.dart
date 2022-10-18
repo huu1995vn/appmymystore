@@ -7,17 +7,25 @@ class RxButtonBar extends StatelessWidget {
       {Key? key,
       required this.icon,
       required this.isEnable,
-      required this.onPressed})
+      required this.onTap,
+      this.onDoubleTap,
+      })
       : super(key: key);
   Widget icon;
   bool isEnable = false;
-  final GestureTapCallback onPressed;
+  final void Function()? onTap;
+  final void Function()? onDoubleTap;
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: icon,
-      color: isEnable ? Theme.of(context).primaryColor : Theme.of(context).hintColor,
-      onPressed: onPressed,
-    );
+    return GestureDetector(
+        onDoubleTap: onDoubleTap,
+        // onTap: onTap,
+        child: IconButton(
+          icon: icon,
+          color: isEnable
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).hintColor,
+          onPressed: onTap )
+        );
   }
 }

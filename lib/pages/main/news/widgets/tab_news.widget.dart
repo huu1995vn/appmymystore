@@ -10,15 +10,22 @@ import 'package:raoxe/core/components/rx_listview.dart';
 import 'package:raoxe/core/entities.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/pages/main/news/widgets/item_news.widget.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 class TabNewsWidget extends StatefulWidget {
   dynamic parentid;
-  TabNewsWidget({this.parentid = 1});
+  TabNewsWidget({Key? key, this.parentid = 1}) : super(key: key);
+  late TabNewsWidgetPageState state;
   @override
-  State<TabNewsWidget> createState() => _TabNewsWidgetPageState();
+  State<TabNewsWidget> createState() {
+    state = TabNewsWidgetPageState();
+    return state;
+  }
+
+  TabNewsWidgetPageState get getState => state;
 }
 
-class _TabNewsWidgetPageState extends State<TabNewsWidget>
+class TabNewsWidgetPageState extends State<TabNewsWidget>
     with
         SingleTickerProviderStateMixin,
         AutomaticKeepAliveClientMixin<TabNewsWidget> {
@@ -27,6 +34,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
   List<dynamic>? listData;
   int paging = 1;
   int totalItems = 0;
+  AutoScrollController scrollController = AutoScrollController();
   @override
   void initState() {
     super.initState();
@@ -80,11 +88,13 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
         CommonMethods.showToast(res.message);
       }
     } catch (e) {
-      setState(() {
-        listData = [];
-        totalItems = 0;
-      });
-      CommonMethods.showDialogError(context, e.toString());
+      if (mounted) {
+        CommonMethods.showDialogError(context, e.toString());
+        setState(() {
+          listData = [];
+          totalItems = 0;
+        });
+      }
     }
   }
 
@@ -112,6 +122,7 @@ class _TabNewsWidgetPageState extends State<TabNewsWidget>
         onNextPage: onNextPage,
         onRefresh: loadData,
         padding: const EdgeInsets.all(kDefaultPaddingBox),
-        key: widget.key);
+        key: widget.key,
+        scrollController: scrollController);
   }
 }

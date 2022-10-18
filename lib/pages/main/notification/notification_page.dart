@@ -20,14 +20,13 @@ class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
 
   @override
-  State<NotificationPage> createState() => _NotificationPageState();
+  State<NotificationPage> createState() => NotificationPageState();
 }
 
-class _NotificationPageState extends State<NotificationPage> {
+class NotificationPageState extends State<NotificationPage> {
   @override
   void initState() {
     super.initState();
-
     loadData();
   }
 

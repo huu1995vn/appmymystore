@@ -179,6 +179,10 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     super.dispose();
   }
 
+  final GlobalKey<HomePageState> _keyHomePage = GlobalKey();
+  final GlobalKey<NotificationPageState> _keyNotificationPage = GlobalKey();
+  final GlobalKey<NewsPageState> _keyNewsPage = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context, listen: true);
@@ -194,9 +198,15 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
         onPageChanged: (value) => {onPressedTab(value)},
         // ignore: prefer_const_literals_to_create_immutables
         children: <Widget>[
-          HomePage(),
-          NewsPage(),
-          NotificationPage(),
+          HomePage(
+            key: _keyHomePage,
+          ),
+          NewsPage(
+            key: _keyNewsPage,
+          ),
+          NotificationPage(
+            key: _keyNotificationPage,
+          ),
           DashboardPage(),
         ],
       ),
@@ -229,15 +239,26 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
               RxButtonBar(
                 icon: FaIcon(FontAwesomeIcons.bullhorn),
                 isEnable: _selectedIndex == 0,
-                onPressed: () {
+                onTap: () {
                   onPressedTab(0);
+                },
+                onDoubleTap: () {
+                  if (_keyHomePage.currentState != null) {
+                    _keyHomePage.currentState!.loadData();
+                    _keyHomePage.currentState!.scrollController.jumpTo(0);
+                  }
                 },
               ),
               RxButtonBar(
                 icon: FaIcon(FontAwesomeIcons.newspaper, size: 17),
                 isEnable: _selectedIndex == 1,
-                onPressed: () {
+                onTap: () {
                   onPressedTab(1);
+                },
+                onDoubleTap: () {
+                  if (_keyNewsPage.currentState != null) {
+                    _keyNewsPage.currentState!.loadData();
+                  }
                 },
               ),
               const SizedBox(
@@ -247,8 +268,15 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
                 RxButtonBar(
                   icon: FaIcon(FontAwesomeIcons.solidBell, size: 19),
                   isEnable: _selectedIndex == 2,
-                  onPressed: () {
+                  onTap: () {
                     onPressedTab(2);
+                  },
+                  onDoubleTap: () {
+                    if (_keyNotificationPage.currentState != null) {
+                      _keyNotificationPage.currentState!.loadData();
+                      _keyNotificationPage.currentState!.scrollController
+                          .jumpTo(0);
+                    }
                   },
                 ),
                 if (appProvider.numNotification > 0)
@@ -279,7 +307,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
               RxButtonBar(
                 icon: const FaIcon(FontAwesomeIcons.ellipsis, size: 17),
                 isEnable: _selectedIndex == 3,
-                onPressed: () {
+                onTap: () {
                   onPressedTab(3);
                 },
               ),

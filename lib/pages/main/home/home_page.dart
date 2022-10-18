@@ -255,7 +255,20 @@ class HomePageState extends State<HomePage>
       floating: true,
       automaticallyImplyLeading: false,
       elevation: 0.0,
-      leading: Container(child: null),
+      leading: CommonMethods.isLogin
+          ? Container(
+              child: Padding(
+                  padding: const EdgeInsets.only(right: kDefaultPadding),
+                  child: RxIconButton(
+                    onTap: () {
+                      CommonNavigates.toFavoritePage(context);
+                    },
+                    icon: AppIcons.bookmark_1,
+                    size: 40,
+                    color: Colors.transparent,
+                    colorIcon: Colors.white,
+                  )))
+          : Container(),
       title: Container(
         alignment: Alignment.center,
         child: Image.asset(

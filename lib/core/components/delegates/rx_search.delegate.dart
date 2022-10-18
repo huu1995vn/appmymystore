@@ -16,6 +16,8 @@ import 'dart:async';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
 
+import '../../utilities/app_colors.dart';
+
 class RxSearchDelegate extends SearchDelegate<dynamic> {
   static Map cacheapiSearch = {};
   Completer<List<SuggestionModel>> _completer = Completer();
@@ -72,73 +74,88 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
     return Container(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,
-        decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-        ),
-        child: query == null || query.isEmpty
-            ? Padding(
-                padding: const EdgeInsets.all(kDefaultPadding),
-                child: Wrap(
-                  children: List<Widget>.generate(
-                    listHotSearch.length,
-                    (int index) {
-                      return Container(
-                          margin: const EdgeInsets.only(right: 10, bottom: 5),
-                          child: RxRoundedButton(
-                              color: Colors.grey,
-                              onPressed: () {
-                                {
-                                  _addSuggest(listHotSearch[index]);
-                                  close(context, listHotSearch[index]);
-                                }
-                              },
-                              title: listHotSearch[index]));
-                    },
-                  ).toList(),
-                ),
-              )
-            : FutureBuilder<List<SuggestionModel>>(
-                future: _completer.future,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return StatefulBuilder(
-                        builder: (BuildContext context, StateSetter setState) {
-                      return ListView.builder(
-                        itemBuilder: (context, index) {
-                          SuggestionModel item = suggestionList[index];
-                          return ListTile(
-                            leading: Icon(
-                              item.isLocal
-                                  ? AppIcons.history
-                                  : AppIcons.magnifier,
-                              size: 19,
+        padding: const EdgeInsets.all(kDefaultPaddingBox),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: kDefaultPaddingBox),
+                child: Text("Được tìm nhiều")),
+            query == null || query.isEmpty
+                ? Wrap(
+                    children: List<Widget>.generate(
+                      listHotSearch.length,
+                      (int index) {
+                        return Card(
+                            margin:
+                                const EdgeInsets.only(right: 10, bottom: 10),
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  color: Get.isDarkMode
+                                      ? AppColors.blackLight
+                                      : AppColors.black50,
+                                  width: 1),
+                              borderRadius: BorderRadius.circular(5),
                             ),
-                            title: GestureDetector(
-                              onTap: () {
-                                _addSuggest(item.text);
-                                close(context, item.text);
-                              },
-                              child: Text(item.text),
-                            ),
-                            trailing: item.isLocal
-                                ? GestureDetector(
-                                    onTap: () {
-                                      _deleteSuggest(item.text, setState);
-                                    },
-                                    child: Icon(AppIcons.cross, size: 19))
-                                : null,
+                            child: GestureDetector(
+                                onTap: () {
+                                  {
+                                    _addSuggest(listHotSearch[index]);
+                                    close(context, listHotSearch[index]);
+                                  }
+                                },
+                                child: Padding(
+                                    padding: const EdgeInsets.all(
+                                        kDefaultPaddingBox),
+                                    child: Text(listHotSearch[index]))));
+                      },
+                    ).toList(),
+                  )
+                : FutureBuilder<List<SuggestionModel>>(
+                    future: _completer.future,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return StatefulBuilder(builder:
+                            (BuildContext context, StateSetter setState) {
+                          return ListView.builder(
+                            itemBuilder: (context, index) {
+                              SuggestionModel item = suggestionList[index];
+                              return ListTile(
+                                leading: Icon(
+                                  item.isLocal
+                                      ? AppIcons.history
+                                      : AppIcons.magnifier,
+                                  size: 19,
+                                ),
+                                title: GestureDetector(
+                                  onTap: () {
+                                    _addSuggest(item.text);
+                                    close(context, item.text);
+                                  },
+                                  child: Text(item.text),
+                                ),
+                                trailing: item.isLocal
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          _deleteSuggest(item.text, setState);
+                                        },
+                                        child: Icon(AppIcons.cross, size: 19))
+                                    : null,
+                              );
+                            },
+                            itemCount: suggestionList.length,
                           );
-                        },
-                        itemCount: suggestionList.length,
-                      );
-                    });
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ));
+                        });
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  )
+          ],
+        ));
   }
 
   _deleteSuggest(value, StateSetter setState) {

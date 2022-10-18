@@ -49,8 +49,8 @@ class CommonNavigates {
     '/favorite': (context) => const FavoritePage(),
     '/point': (context) => const PointPage()
   };
-  
-  static Future toRootdPage(BuildContext context) async {
+
+  static Future toRootPage(BuildContext context) async {
     return Navigator.popUntil(context, (route) => route.isFirst);
   }
 

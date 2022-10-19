@@ -112,18 +112,20 @@ List PRODUCTSTATES = [
 ];
 
 List PRODUCTDOORS = [
-  {"name": "2 ${"seat".tr}", "id": 2},
-  {"name": "4 ${"seat".tr}", "id": 4},
+  {"name": "2 ${"txtdoor".tr.toLowerCase()}", "id": 2},
+  {"name": "4 ${"txtdoor".tr.toLowerCase()}", "id": 4},
 ];
 
 List PRODUCTSEATS = [
-  {"name": "1 ${"door".tr}", "id": 1},
-  {"name": "2 ${"door".tr}", "id": 2},
-  {"name": "4 ${"door".tr}", "id": 4},
-  {"name": "5 ${"door".tr}", "id": 5},
-  {"name": "6 ${"door".tr}", "id": 6},
-  {"name": "7 ${"door".tr}", "id": 7},
-  {"name": "9 ${"door".tr}", "id": 9},
+  {"name": "2 ${"txtseat".tr.toLowerCase()}", "id": 2},
+  {"name": "4 ${"txtseat".tr.toLowerCase()}", "id": 4},
+  {"name": "5 ${"txtseat".tr.toLowerCase()}", "id": 5},
+  {"name": "6 ${"txtseat".tr.toLowerCase()}", "id": 6},
+  {"name": "7 ${"txtseat".tr.toLowerCase()}", "id": 7},
+  {"name": "8 ${"txtseat".tr.toLowerCase()}", "id": 8},
+  {"name": "9 ${"txtseat".tr.toLowerCase()}", "id": 9},
+  {"name": "15 ${"txtseat".tr.toLowerCase()}", "id": 15},
+  {"name": "16 ${"txtseat".tr.toLowerCase()}", "id": 16},
 ];
 
 class RxParttern {

@@ -443,7 +443,8 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       maxLength: 1500,
                                       maxLengthEnforcement:
                                           MaxLengthEnforcement.none,
-                                      minLines: 6, onChanged: (v) {
+                                      minLines: 6, 
+                                      onChanged: (v) {
                                     setState(() {
                                       data!.desc = v;
                                     });

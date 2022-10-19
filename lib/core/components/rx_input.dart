@@ -76,7 +76,7 @@ class _InputTextState extends State<RxInput> {
       onTap: widget.onTap,
       readOnly: widget.readOnly || widget.disabled,
       controller: input,
-      keyboardType: widget.keyboardType,
+      keyboardType: widget.keyboardType, 
       inputFormatters: widget.keyboardType == TextInputType.number
           ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
           : null,
@@ -86,7 +86,7 @@ class _InputTextState extends State<RxInput> {
       maxLines: widget.isPassword? 1 : (widget.minLines != null ? widget.minLines! + 5 : null),
       maxLengthEnforcement: widget.maxLengthEnforcement,
       validator: widget.validator,
-      onChanged: widget.onChanged,
+      onChanged: widget.onChanged, 
       style: widget.style,
       decoration: InputDecoration( 
           errorStyle: const TextStyle(height: 0.6),

@@ -94,29 +94,29 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
         key: const Key("lHome"),
         onNextScroll: onNextPage,
         onRefresh: onRefresh,
-        appBar: SliverAppBar(
-          iconTheme: IconThemeData(
-            color: AppColors.black, //change your color here
-          ),
+        appBar: SliverAppBar( 
           centerTitle: true,
-          title: Text('review'.tr,
-              style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-          backgroundColor: AppColors.grey,
+          title: Text('review'.tr), 
           elevation: 0.0,
         ),
         slivers: <Widget>[
           SliverToBoxAdapter(
-            child: Row(
+            child: Card(
+              margin: EdgeInsets.only(bottom: kDefaultMarginBottomBox),
+              child: Padding(
+                padding: EdgeInsets.all(kDefaultPaddingBox),
+                child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
                   children: <Widget>[
+                    Text(CommonMethods.convertToString(widget.product.ratingvalue), style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
                     RatingBar.readOnly(
                       filledColor: AppColors.yellow,
                       size: 25,
                       initialRating: widget.product.ratingvalue,
-                      emptyIcon: AppIcons.star_1,
-                      filledIcon: AppIcons.star_1,
+                      emptyIcon: AppIcons.star_2,
+                      filledIcon: AppIcons.star_2,
                     ),
                   ],
                 ),
@@ -132,10 +132,13 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
                 ),
               ],
             ),
+              ),
+            ) 
           ),
+
           RxSliverList(listData, (BuildContext context, int index) {
             ReviewModel item = listData![index];
-            return Card(child: RxBuildItemReview(item));
+            return Card(child: RxBuildItemReview(item, context));
           })
         ],
       ),
@@ -148,8 +151,8 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
         filledColor: AppColors.yellow,
         size: 15,
         initialRating: CommonMethods.convertToDouble(rating),
-        filledIcon: AppIcons.star_1,
-        emptyIcon: AppIcons.star_1,
+        filledIcon: AppIcons.star_2,
+        emptyIcon: AppIcons.star_2,
       ),
       Container(
         width: 60,

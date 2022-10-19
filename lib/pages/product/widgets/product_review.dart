@@ -73,7 +73,7 @@ class ReviewState extends State<ProductReview> {
                   if (listData != null)
                     RxListView(listData, (context, index) {
                       var item = listData![index];
-                      return RxBuildItemReview(item);
+                      return RxBuildItemReview(item, context);
                     },
                         key: Key("review".tr),
                         onRefresh: loadData,

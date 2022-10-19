@@ -120,8 +120,14 @@ class _ReviewDialogState extends State<ReviewDialog> {
                       ))))
         ],
       ),
-      persistentFooterButtons: [
-        Row(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, 
+      floatingActionButton:  
+      Card(
+        
+        child: Padding(
+          padding: EdgeInsets.all(kDefaultPaddingBox),
+          child: Row(
+          mainAxisSize: MainAxisSize.max,
           children: [
             Expanded(
                 child: RxPrimaryButton(
@@ -133,7 +139,10 @@ class _ReviewDialogState extends State<ReviewDialog> {
                     text: 'sendreview'.tr))
           ],
         )
-      ],
+      )
+        
+        )
+      
     );
   }
 

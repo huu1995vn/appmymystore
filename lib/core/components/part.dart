@@ -549,7 +549,7 @@ Widget rxTextInput(BuildContext context, String? value,
     void Function(String)? onChanged,
     String? Function(String?)? validator,
     void Function()? onTap,
-    int? maxLength, 
+    int? maxLength,
     int? minLines,
     MaxLengthEnforcement? maxLengthEnforcement}) {
   return Container(
@@ -566,7 +566,7 @@ Widget rxTextInput(BuildContext context, String? value,
                     TextSpan(
                         text: labelText ?? "",
                         style: kTextTitleStyle.copyWith(
-                          color: Theme.of(context).textTheme.bodyLarge!.color,
+                            color: Theme.of(context).textTheme.bodyLarge!.color,
                             fontSize: 12)),
                     if (validator != null)
                       const TextSpan(
@@ -578,7 +578,7 @@ Widget rxTextInput(BuildContext context, String? value,
                 ),
               ),
           subtitle: SizedBox(
-            height: validator!=null ? null :35,
+            height: validator != null ? null : 35,
             child: RxInput(value ?? "",
                 readOnly: onTap != null,
                 isBorder: isBorder,
@@ -586,11 +586,9 @@ Widget rxTextInput(BuildContext context, String? value,
                 onChanged: onChanged,
                 hintText: hintText,
                 onTap: onTap,
-                style: const TextStyle(
-                        )
-                    .size(16),
+                style: const TextStyle().size(16),
                 maxLength: maxLength,
-                minLines: minLines,                
+                minLines: minLines,
                 maxLengthEnforcement: maxLengthEnforcement,
                 validator: validator),
           )));
@@ -605,8 +603,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
     dynamic Function(dynamic)? afterChange,
     String? Function(String?)? validator}) {
   var name = CommonMethods.getNameMasterById(type, id);
-  if(id == -1)
-  {
+  if (id == -1) {
     name = "all".tr;
   }
   return Container(
@@ -637,12 +634,12 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
               ),
             ),
         subtitle: SizedBox(
-          height: validator!=null ? null :35,
+          height: validator != null ? null : 35,
           child: RxInput(name,
               isBorder: isBorder,
               readOnly: true,
               hintText: hintText ?? "choose".tr,
-              style: const TextStyle(fontSize: 16 ),
+              style: const TextStyle(fontSize: 16),
               validator: validator, onTap: () {
             _onSelect(context, type, id,
                 fnWhere: fnWhere, afterChange: afterChange);
@@ -667,81 +664,71 @@ _onSelect(BuildContext context, String type, dynamic id,
     data = data.where(fnWhere).toList();
   }
 
-  data = [{"name": "all".tr, "id": -1}, ...data]; 
+  data = [
+    {"name": "all".tr, "id": -1},
+    ...data
+  ];
   var res = await showSearch(
       context: context, delegate: RxSelectDelegate(data: data, value: id));
   if (res != null) {
     if (afterChange != null) afterChange(res);
   }
 }
+
 Widget RxListAwaiting() {
-    return ListView.builder(
-        key: UniqueKey(),
-        shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.only(top: kDefaultPadding),
-        itemCount: kItemOnPage,
-        itemBuilder: (context, index) {
-          return RxCardSkeleton(barCount: 3, isShowAvatar: false);
-        });
-  }
+  return ListView.builder(
+      key: UniqueKey(),
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.only(top: kDefaultPadding),
+      itemCount: kItemOnPage,
+      itemBuilder: (context, index) {
+        return RxCardSkeleton(barCount: 3, isShowAvatar: false);
+      });
+}
+
 Widget RxBorderListTile({Widget? child}) {
   return Container(
       decoration: BoxDecoration(
         border: Border(
           bottom: Get.isDarkMode
-              ? const BorderSide(color: Color.fromARGB(12, 255, 255, 255), width: 1)
+              ? const BorderSide(
+                  color: Color.fromARGB(12, 255, 255, 255), width: 1)
               : const BorderSide(color: Color.fromARGB(12, 0, 0, 0), width: 1),
         ),
       ),
       child: child);
 }
 
-Widget RxBuildItemReview(ReviewModel item) {
+Widget RxBuildItemReview(ReviewModel item, context) {
   return ListTile(
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            verticalDirection: VerticalDirection.up,
-            children: [
-              RxAvatarImage(item.rximguser, size: 25),
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: Text(
-                  item.username ?? "NaN",
-                  style: const TextStyle(),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RatingBar.readOnly(
-                filledColor: AppColors.yellow,
-                size: 15,
-                initialRating:
-                    CommonMethods.convertToDouble(item.ratingvalue ?? 0.0),
-                filledIcon: AppIcons.star_1,
-                emptyIcon: AppIcons.star_1,
-              ),
-              const Spacer()
-            ],
-          ),
-        ],
-      ),
-      // isThreeLine: true,
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        verticalDirection: VerticalDirection.up,
-        children: <Widget>[
-          Text(item.comment ?? "",
-              style: const TextStyle().italic, maxLines: 6),
-          Text(item.rxtimeago, style: kTextTimeStyle),
-        ],
-      ));
+    title: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          item.username ?? "NaN",
+          style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
+        ),
+        const SizedBox(height: kDefaultPadding),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            RatingBar.readOnly(
+              filledColor: AppColors.yellow,
+              size: 15,
+              initialRating:
+                  CommonMethods.convertToDouble(item.ratingvalue ?? 0.0),
+              filledIcon: AppIcons.star_2,
+              emptyIcon: AppIcons.star_2,
+            ),
+          ],
+        ),
+        const SizedBox(height: kDefaultPadding),
+        Text(item.comment ?? "", style: const TextStyle().italic, maxLines: 6),
+      ],
+    ), 
+    horizontalTitleGap: 0,
+    leading: RxAvatarImage(item.rximguser, size: 30),
+    subtitle: Text(item.rxtimeago, style: kTextTimeStyle),
+  );
 }

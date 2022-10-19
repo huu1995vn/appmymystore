@@ -440,6 +440,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                       context, data!.desc?.toString() ?? "",
                                       labelText: "description".tr,
                                       hintText: "please.enter".tr,
+                                      keyboardType: TextInputType.multiline,
                                       maxLength: 1500,
                                       maxLengthEnforcement:
                                           MaxLengthEnforcement.none,

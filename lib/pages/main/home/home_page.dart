@@ -263,7 +263,7 @@ class HomePageState extends State<HomePage>
                     onTap: () {
                       CommonNavigates.toFavoritePage(context);
                     },
-                    icon: AppIcons.bookmark_1,
+                    icon: FontAwesomeIcons.bookmark,
                     size: 40,
                     color: Colors.transparent,
                     colorIcon: Colors.white,
@@ -283,7 +283,7 @@ class HomePageState extends State<HomePage>
             padding: const EdgeInsets.only(right: kDefaultPadding),
             child: RxIconButton(
               onTap: _onSearch,
-              icon: AppIcons.magnifier,
+              icon: FontAwesomeIcons.search,
               size: 40,
               color: Colors.transparent,
               colorIcon: Colors.white,

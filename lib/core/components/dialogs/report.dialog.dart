@@ -86,8 +86,7 @@ class _ReportDialogState extends State<ReportDialog> {
                   padding: const EdgeInsets.all(kDefaultPadding),
                   child: Form(
                       key: _keyValidationForm,
-                      child: Card(
-                          child: Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           for (int i = 0; i < reporttype.length; i++)
@@ -138,7 +137,7 @@ class _ReportDialogState extends State<ReportDialog> {
                                
                                 ),
                         ],
-                      )))))
+                      ))))
         ],
       ),
       persistentFooterButtons: [

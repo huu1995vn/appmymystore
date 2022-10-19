@@ -65,7 +65,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -102,44 +102,20 @@ class _ReviewDialogState extends State<ReviewDialog> {
                               filledIcon: AppIcons.star_2,
                             ),
                           ),
-                          // _header(
-                          //   header: RichText(
-                          //     text: TextSpan(
-                          //       children: [
-                          //         TextSpan(
-                          //             text: "review".tr,
-                          //             style: TextStyle(
-                          //                     color: Theme.of(context)
-                          //                         .textTheme
-                          //                         .bodyText1!
-                          //                         .color)
-                          //                 .bold),
-                          //         const TextSpan(
-                          //             text: "*",
-                          //             style:
-                          //                 TextStyle(color: AppColors.primary)),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
-                          Card(
-                            child:  rxTextInput(
-                                    context, review.comment ?? "",
-                                    labelText: "description".tr,
-                                    hintText: "please.enter".tr,
-                                    keyboardType: TextInputType.multiline,
-                                    maxLength: 500,
-                                    maxLengthEnforcement:
-                                        MaxLengthEnforcement.none,
-                                    minLines: 6, onChanged: (v) {
-                                  setState(() {
-                                    review.comment = v;
-                                  });
-                                },
-                                    validator: Validators.compose([
-                                      Validators.required("notempty".tr),
-                                    ])),
-                          )
+                          rxTextInput(context, review.comment ?? "",
+                                labelText: "description".tr,
+                                hintText: "please.enter".tr,
+                                keyboardType: TextInputType.multiline,
+                                maxLength: 500,
+                                maxLengthEnforcement: MaxLengthEnforcement.none,
+                                minLines: 6, onChanged: (v) {
+                              setState(() {
+                                review.comment = v;
+                              });
+                            },
+                                validator: Validators.compose([
+                                  Validators.required("notempty".tr),
+                                ]))
                         ],
                       ))))
         ],

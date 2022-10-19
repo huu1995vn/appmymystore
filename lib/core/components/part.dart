@@ -724,7 +724,7 @@ Widget RxBuildItemReview(ReviewModel item, context) {
           ],
         ),
         const SizedBox(height: kDefaultPadding),
-        Text(item.comment ?? "", style: const TextStyle().italic, maxLines: 6),
+        Text(item.comment ?? "", style: const TextStyle(), maxLines: 6),
       ],
     ), 
     horizontalTitleGap: 0,

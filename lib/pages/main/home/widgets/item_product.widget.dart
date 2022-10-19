@@ -272,7 +272,7 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
                 ),
               ),
               child: SizedBox(
-                height: 100,
+                height: (widget.item.status > 2 && widget.item.reject != null) ? 120 : 100,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[

@@ -694,7 +694,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
             Expanded(
               flex: 7,
               child: Container(
-                padding: const EdgeInsets.only(right: 5),
+                padding: EdgeInsets.only(right: (data != null && data!.id > 0 && data!.status == 2)? 5: 0),
                 child: RxPrimaryButton(
                     onTap: () {
                       if (_keyValidationForm.currentState!.validate()) {
@@ -706,7 +706,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                     text: "save".tr),
               ),
             ),
-            Expanded(
+            if(data != null && data!.id > 0 && data!.status == 2) Expanded(
                 flex: 3,
                 child: Container(
                     padding: const EdgeInsets.only(left: 5),

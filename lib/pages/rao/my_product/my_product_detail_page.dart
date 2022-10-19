@@ -425,7 +425,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                     bottom: kDefaultMarginBottomBox),
                                 child: Column(children: [
                                   rxTextInput(
-                                      context, data!.name?.toString() ?? "",
+                                      context, data!.name ?? "",
                                       labelText: "title".tr,
                                       hintText: "please.enter".tr,
                                       maxLength: 200, onChanged: (v) {
@@ -437,7 +437,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
                                         Validators.required("notempty".tr),
                                       ])),
                                   rxTextInput(
-                                      context, data!.desc?.toString() ?? "",
+                                      context, data!.desc ?? "",
                                       labelText: "description".tr,
                                       hintText: "please.enter".tr,
                                       keyboardType: TextInputType.multiline,

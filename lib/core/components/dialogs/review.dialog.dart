@@ -13,6 +13,7 @@ import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:rating_bar/rating_bar.dart';
+import 'package:wc_form_validators/wc_form_validators.dart';
 
 class ReviewDialog extends StatefulWidget {
   const ReviewDialog({
@@ -101,54 +102,43 @@ class _ReviewDialogState extends State<ReviewDialog> {
                               filledIcon: AppIcons.star_2,
                             ),
                           ),
-                          _header(
-                            header: RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: "review".tr,
-                                      style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1!
-                                                  .color)
-                                          .bold),
-                                  const TextSpan(
-                                      text: "*",
-                                      style:
-                                          TextStyle(color: AppColors.primary)),
-                                ],
-                              ),
-                            ),
-                          ),
+                          // _header(
+                          //   header: RichText(
+                          //     text: TextSpan(
+                          //       children: [
+                          //         TextSpan(
+                          //             text: "review".tr,
+                          //             style: TextStyle(
+                          //                     color: Theme.of(context)
+                          //                         .textTheme
+                          //                         .bodyText1!
+                          //                         .color)
+                          //                 .bold),
+                          //         const TextSpan(
+                          //             text: "*",
+                          //             style:
+                          //                 TextStyle(color: AppColors.primary)),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                           Card(
-                            child: Padding(
-                                padding: kEdgeInsetsPadding,
-                                child: TextFormField(
-                                  showCursor: true,
-                                  key: const Key("review"),
-                                  initialValue: review.comment,
-                                  minLines:
-                                      6, // any number you need (It works as the rows for the textarea)
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: null,
-                                  onChanged: (value) =>
-                                      {review.comment = value},
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
+                            child:  rxTextInput(
+                                    context, review.comment ?? "",
+                                    labelText: "description".tr,
                                     hintText: "please.enter".tr,
-                                  ),
-                                  maxLength: 500,
-                                  maxLengthEnforcement:
-                                      MaxLengthEnforcement.none,
-                                  validator: (value) {
-                                    if ((review.comment == null ||
-                                        review.comment!.isEmpty)) {
-                                      return "notempty".tr;
-                                    }
-                                    return null;
-                                  },
-                                )),
+                                    keyboardType: TextInputType.multiline,
+                                    maxLength: 500,
+                                    maxLengthEnforcement:
+                                        MaxLengthEnforcement.none,
+                                    minLines: 6, onChanged: (v) {
+                                  setState(() {
+                                    review.comment = v;
+                                  });
+                                },
+                                    validator: Validators.compose([
+                                      Validators.required("notempty".tr),
+                                    ])),
                           )
                         ],
                       ))))

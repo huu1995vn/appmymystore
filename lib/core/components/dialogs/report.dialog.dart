@@ -11,6 +11,7 @@ import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:wc_form_validators/wc_form_validators.dart';
 
 class ReportDialog extends StatefulWidget {
   const ReportDialog({
@@ -116,30 +117,26 @@ class _ReportDialogState extends State<ReportDialog> {
                           if (showText)
                             Padding(
                                 padding: kEdgeInsetsPadding,
-                                child: TextFormField(
-                                  showCursor: true,
-                                  key: const Key("report"),
-                                  initialValue: report.note,
-                                  minLines:
-                                      6, // any number you need (It works as the rows for the textarea)
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: null,
-                                  onChanged: (value) => {report.note = value},
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    hintText: "please.enter".tr,
-                                  ),
-                                  maxLength: 500,
-                                  maxLengthEnforcement:
-                                      MaxLengthEnforcement.none,
-                                  validator: (value) {
-                                    if ((report.note == null ||
-                                        report.note!.isEmpty)) {
-                                      return "notempty".tr;
-                                    }
-                                    return null;
+                                child: 
+                                rxTextInput(
+                                      context, report.note?? "",
+                                      labelText: "description".tr,
+                                      hintText: "please.enter".tr,
+                                      keyboardType: TextInputType.multiline,
+                                      maxLength: 500,
+                                      maxLengthEnforcement:
+                                          MaxLengthEnforcement.none,
+                                      minLines: 6, 
+                                      onChanged: (v) {
+                                    setState(() {
+                                      report.note = v;
+                                    });
                                   },
-                                )),
+                                      validator: Validators.compose([
+                                        Validators.required("notempty".tr),
+                                      ]))
+                               
+                                ),
                         ],
                       )))))
         ],

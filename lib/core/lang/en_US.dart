@@ -36,7 +36,7 @@ const Map<String, String> en_US = {
   "km": "Number of kilometers traveled",
   "color": "Color",
   "review": "Review",
-  "sentreview": "Send Review",
+  "sendreview": "Send Review",
   "favorite": "Favorite",
   "text.search": "Search keywords",
   "congratulations": "Congratulations",

@@ -396,10 +396,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     // mainAxisSize: MainAxisSize.min,
                     children: [
                       Text("description".tr,
-                          style: const TextStyle(
-                              // color: Get.isDarkMode
-                              //     ? Colors.white
-                              //     : Colors.grey[700],
+                          style: const TextStyle(                             
                               fontSize: 18,
                               fontWeight: FontWeight.bold)),
                       TextFormField(

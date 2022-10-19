@@ -97,8 +97,8 @@ List PRICES = [
 ];
 
 List SORTS = [
-  {"name": "latest".tr, "id": "CreateDate DESC"},
-  {"name": "oldest".tr, "id": "CreateDate ASC"},
+  {"name": "latest".tr, "id": "VerifyDate DESC"},
+  {"name": "oldest".tr, "id": "VerifyDate ASC"},
   {"name": "highpricefirst".tr, "id": "Price DESC"},
   {"name": "lowpricefirst".tr, "id": "Price ASC"}
 ];

@@ -90,7 +90,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       CommonMethods.showToast("please.login".tr);
       return;
     }
-    await CommonNavigates.showDialogBottomSheet(context, ReviewDialog(product: data!), height: 500);
+    await CommonNavigates.openDialog(context, ReviewDialog(product: data!));
   }
 
   _onShare() async {

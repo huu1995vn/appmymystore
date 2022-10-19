@@ -127,7 +127,7 @@ class CommonMethods {
   static DateTime? convertToDateTime(String date,
       [String? newPattern, DateTime? valuedefault]) {
     try {
-      return DateFormat(newPattern ?? "MM/dd/yyyy HH:mm:ss").parse(date);
+      return DateFormat(newPattern ?? "MM/dd/yyyy HH:mm").parse(date);
     } catch (e) {}
     return valuedefault;
   }
@@ -136,7 +136,7 @@ class CommonMethods {
       {String? newPattern, String valueDefault = ""}) {
     if (date != null) {
       try {
-        return DateFormat(newPattern ?? "dd/MM/yyyy HH:mm:ss").format(date);
+        return DateFormat(newPattern ?? "dd/MM/yyyy HH:mm").format(date);
       } catch (e) {}
     }
     return valueDefault;

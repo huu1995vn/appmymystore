@@ -390,6 +390,7 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
                                                             : Colors.black)))
                                           ],
                                         ),
+                                        const SizedBox(height: kDefaultPadding,),
                                         if (widget.item.status > 2 &&
                                             widget.item.reject != null)
                                           Text(

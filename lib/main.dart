@@ -109,18 +109,7 @@ class _MyAppState extends State<MyApp> {
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
                   color: Colors.transparent,
-                  // debugShowCheckedModeBanner: false,
-                  // theme: ThemeService.main(),
-                  // darkTheme: ThemeService.main(
-                  //   isDark: true,
-                  // ).copyWith(
-                  //   colorScheme:
-                  //       ColorScheme.fromSwatch(primarySwatch: Colors.red)
-                  //           .copyWith(
-                  //               secondary: AppColors.primary,
-                  //               brightness: Brightness.dark),
-                  // ),
-                  // themeMode: themeProvider.selectedThemeMode,
+               
                   home: FutureBuilder<FirebaseRemoteConfig>(
                     future: RemoteConfigSerivce.init(),
                     builder: (BuildContext context,

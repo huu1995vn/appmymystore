@@ -109,7 +109,7 @@ class _MyAppState extends State<MyApp> {
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
                   color: Colors.transparent,
-               
+
                   home: FutureBuilder<FirebaseRemoteConfig>(
                     future: RemoteConfigSerivce.init(),
                     builder: (BuildContext context,
@@ -121,7 +121,11 @@ class _MyAppState extends State<MyApp> {
                                   const AssetImage('assets/splash.png'),
                               loaderColor: Colors.red,
                             )
-                          : Container();
+                          : const Scaffold(
+                              body: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
                     },
                   ),
                   routes: CommonNavigates.routers,

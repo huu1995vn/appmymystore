@@ -109,10 +109,6 @@ class _MyAppState extends State<MyApp> {
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
                   color: Colors.transparent,
-<<<<<<< HEAD
-
-=======
->>>>>>> 7dee29dce459dbc1ef9597448a9b01175dd8f1ae
                   home: FutureBuilder<FirebaseRemoteConfig>(
                     future: RemoteConfigSerivce.init(),
                     builder: (BuildContext context,

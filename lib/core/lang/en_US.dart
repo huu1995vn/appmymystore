@@ -330,5 +330,7 @@ const Map<String, String> en_US = {
   "message.str017": "Unverified account",
   "message.alert01": "Are you sure you want to delete?",
   "message.alert02": "Please enter a different email from your current email",
+  "message.alert03": "Cannot connect server. Please try again after!"
+
 
 };

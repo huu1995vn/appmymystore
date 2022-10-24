@@ -24,6 +24,7 @@ import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/theme/theme.service.dart';
 import 'package:raoxe/core/theme/themes.dart';
 import 'package:raoxe/core/utilities/logger_utils.dart';
+import 'package:raoxe/pages/error/error_page.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -60,12 +61,8 @@ void configLoading() {
 initializeApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageService.init();
-  await InfoDeviceService.init();
   await Firebase.initializeApp();
-  await FirebaseAuthService.signInAnonymously();
-  await FirebaseMessagingService.init();
-  APITokenService.init();
-  await CloudFirestoreSerivce.init();
+
   //very important
 }
 
@@ -79,12 +76,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Future<Widget> loadFromFuture(Widget? main) async {
     try {
-      bool res = await MasterDataService.init();
+        await InfoDeviceService.init();
+        await FirebaseAuthService.signInAnonymously();
+        await FirebaseMessagingService.init();
+        APITokenService.init();
+        await CloudFirestoreSerivce.init();
+        bool res = await MasterDataService.init();
       if (res) {
         return main!;
       }
     } catch (e) {}
-    return main!; //const ErrorPage(message: "Vui lòng trở lại sau");
+    return ErrorPage(message: "message.alert03".tr);
   }
 
   @override

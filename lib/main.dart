@@ -123,8 +123,13 @@ class _MyAppState extends State<MyApp> {
                               loaderColor: Colors.red,
                             )
                           : const Scaffold(
-                              body: Center(
-                                child: CircularProgressIndicator(),
+                              body: Image(
+                                  image: AssetImage('assets/splash.png'),
+                                  fit: BoxFit.cover,
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  alignment: Alignment.center
+                                
                               ),
                             );
                     },

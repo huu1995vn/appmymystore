@@ -62,7 +62,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
 
   @override
   void onResumed() {
-    FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
+    // FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
   }
 
   StreamSubscription<PushNotification>? submess;
@@ -111,7 +111,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
           }
         }
       });
-      FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
+      // FirebaseInAppMessagingService.fiam.triggerEvent("on_foreground");
       final PendingDynamicLinkData? data =
           await FirebaseDynamicLinks.instance.getInitialLink();
       if (data != null) {

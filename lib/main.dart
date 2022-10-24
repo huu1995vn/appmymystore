@@ -115,6 +115,7 @@ class _MyAppState extends State<MyApp> {
                         AsyncSnapshot<FirebaseRemoteConfig> snapshot) {
                       return snapshot.hasData
                           ? SplashScreen(
+                              seconds: 3,
                               navigateAfterFuture: loadFromFuture(home),
                               imageBackground:
                                   const AssetImage('assets/splash.png'),

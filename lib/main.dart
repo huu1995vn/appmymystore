@@ -65,7 +65,6 @@ initializeApp() async {
   await FirebaseAuthService.signInAnonymously();
   await FirebaseMessagingService.init();
   APITokenService.init();
-  await AuthService.autologin();
   await CloudFirestoreSerivce.init();
   //very important
 }

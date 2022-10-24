@@ -34,9 +34,13 @@ class InfoDeviceService {
   static Future<InfoDevice> init() async {
     final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     try {
-      infoDevice.IpAddress = await CommonMethods.getIPv4();
+      CommonMethods.getIPv4().then((value) => {
+            infoDevice.IpAddress = value
+      });
       infoDevice.PackageInfo = await CommonMethods.getPackageInfo();
-      infoDevice.Position = await CommonMethods.getPosition();
+      CommonMethods.getPosition().then((value) => {
+            infoDevice.Position = value
+      });
       dynamic info;
 
       if (UniversalPlatform.isAndroid) {

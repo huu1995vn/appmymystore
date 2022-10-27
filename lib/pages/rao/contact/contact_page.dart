@@ -149,7 +149,7 @@ class _ContactPageState extends State<ContactPage> {
       body: Container(
         padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
         child: RxCustomScrollView(
-          key: const Key("LContact"),
+          key: UniqueKey(),
           controller: scrollController,
           onNextScroll: onNextPage,
           onRefresh: onRefresh,

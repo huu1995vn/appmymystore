@@ -160,6 +160,7 @@ class _ProductPageState extends State<ProductPage> {
         key: _key,
         // backgroundColor: Colors.white,
         body: RxCustomScrollView(
+          key: UniqueKey(),
           slivers: [
             SliverAppBar(
               floating: true,
@@ -315,7 +316,6 @@ class _ProductPageState extends State<ProductPage> {
               viewType: _viewType,
             )
           ],
-          key: Key(key),
           onNextScroll: onNextPage,
           onRefresh: onRefresh,
         ));

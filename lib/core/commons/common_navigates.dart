@@ -60,12 +60,12 @@ class CommonNavigates {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => ProductDetailPage(id: id, item: item)));
+              builder: (context) => ProductDetailPage(key: UniqueKey(), id: id, item: item)));
     } else {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => ProductPage(paramsSearch: paramsSearch)));
+              builder: (context) => ProductPage(key: UniqueKey(), paramsSearch: paramsSearch)));
       // return await Navigator.pushNamed(context, "/product");
     }
   }

@@ -181,6 +181,7 @@ class NotificationPageState extends State<NotificationPage> {
         backgroundColor: Colors.transparent,
         key: _key,
         body: RxCustomScrollView(
+          key: UniqueKey(),
           appBar: SliverAppBar(
             centerTitle: true,
             title: Text('notification'.tr),
@@ -206,7 +207,6 @@ class NotificationPageState extends State<NotificationPage> {
               SizedBox(width: kDefaultPadding)
             ],
           ),
-          key: const Key("LNoti"),
           controller: scrollController,
           onNextScroll: onNextPage,
           onRefresh: onRefresh,

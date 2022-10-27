@@ -565,7 +565,7 @@ class CommonMethods {
   static String linkProduct(int id, String rewriteUrl) {
     try {
       rewriteUrl = rewriteUrl.convertrUrlPrefix();
-      String rewriteLink = '${CommonConfig.hostRaoXe}/$rewriteUrl-${id}r.html';
+      String rewriteLink = '${CommonConfig.hostRaoXe}/$rewriteUrl-${id}.html';
       return rewriteLink;
     } catch (error) {}
     return "";
@@ -676,7 +676,7 @@ class CommonMethods {
   //# build end link dynamic
   static getInfoRewriteLinkWithDomain(String linkRewriteWithDomain) {
     try {
-      String regexString = r"-(\d+)(\w)\.html"; // not r'/api/\w+/\d+/' !!!
+      String regexString = r"-(\d+)(\w?)\.html"; // not r'/api/\w+/\d+/' !!!
       RegExp regExp = RegExp(regexString);
       var matches = regExp.firstMatch(linkRewriteWithDomain);
       return {

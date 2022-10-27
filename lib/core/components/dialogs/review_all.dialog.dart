@@ -91,7 +91,7 @@ class _ReviewAllDialogState extends State<ReviewAllDialog> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: RxCustomScrollView(
-        key: const Key("lHome"),
+        key: UniqueKey(),
         onNextScroll: onNextPage,
         onRefresh: onRefresh,
         appBar: SliverAppBar( 

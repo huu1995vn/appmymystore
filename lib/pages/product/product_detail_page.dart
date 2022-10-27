@@ -1,3 +1,5 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -43,7 +45,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   String? initialUrl;
   ProductModel? data;
-  bool isNotFound = false;
 
   loadData() async {
     try {
@@ -59,9 +60,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             data = ProductModel.fromJson(res.data!);
           });
         } else {
-          setState(() {
-            isNotFound = true;
-          });
+          
           CommonMethods.showToast(res.message);
         }
       }
@@ -111,14 +110,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: isNotFound
+        body: data == null
             ? Expanded(child: Center(child: Text("not.found".tr)))
             : ((data == null || data!.id <= 0)
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : RxCustomScrollView(
-                    key: const Key("iProduct"),
+                    key: UniqueKey(),
                     controller: scrollController,
                     slivers: <Widget>[
                       SliverAppBar(
@@ -163,11 +162,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                       child: Row(
                                         children: [
                                           Container(
-                                              padding: EdgeInsets.all(
+                                              padding: const EdgeInsets.all(
                                                   kDefaultPadding),
                                               child: FaIcon(
                                                   FontAwesomeIcons
-                                                      .solidShareSquare,
+                                                      .solidShareFromSquare,
                                                   color: Theme.of(context)
                                                       .primaryColor)),
                                           Text("share".tr)
@@ -178,6 +177,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                         value: Menu.menuBackHome,
                                         child: Row(children: [
                                           Container(
+                                              // ignore: prefer_const_constructors
                                               padding: EdgeInsets.all(
                                                   kDefaultPadding),
                                               child: FaIcon(
@@ -195,7 +195,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   )),
         bottomNavigationBar: Container(
             padding: const EdgeInsets.all(0.0),
-            child: isNotFound
+            child: data==null
                 ? null
                 : Row(
                     children: [
@@ -219,7 +219,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     ),
                                     const SizedBox(width: kDefaultPadding),
                                     Text(
-                                      "call".tr + ": " + (data!.phone)!,
+                                      "${"call".tr}: ${(data!.phone)!}",
                                       style: const TextStyle(
                                           fontSize: 20,
                                           color: Colors.white,
@@ -396,9 +396,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     // mainAxisSize: MainAxisSize.min,
                     children: [
                       Text("description".tr,
-                          style: const TextStyle(                             
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold)),
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                       TextFormField(
                           initialValue: data!.desc,
                           minLines:

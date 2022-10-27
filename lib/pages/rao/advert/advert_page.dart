@@ -69,9 +69,9 @@ class _AdvertPageState extends State<AdvertPage> {
       }
     } catch (e) {
       setState(() {
-          listData = [];
-          totalItems = 0;
-        });
+        listData = [];
+        totalItems = 0;
+      });
       CommonMethods.showDialogError(context, e.toString());
     }
   }
@@ -102,7 +102,7 @@ class _AdvertPageState extends State<AdvertPage> {
         body: Container(
             padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
             child: RxCustomScrollView(
-              key: const Key("LAds"),
+              key: UniqueKey(),
               controller: scrollController,
               onNextScroll: onNextPage,
               onRefresh: onRefresh,

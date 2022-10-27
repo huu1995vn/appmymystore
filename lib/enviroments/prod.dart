@@ -3,7 +3,7 @@ const configProd = {
   "apiDaiLyXe": "https://api.dailyxe.com.vn",
   "apiDaiLyXeSufix": "/",
   "apiDrive": "https://cdn.dailyxe.com.vn",
-  "hostDynamicLink": "https://prodraoxe.page.link/dynamiclink",
+  "hostDynamicLink": "https://prodraoxe.page.link",
   "hostRaoXe": "https://raoxe.com.vn",
   "hostDaiLyXe": "https://dailyxe.com.vn"
 };

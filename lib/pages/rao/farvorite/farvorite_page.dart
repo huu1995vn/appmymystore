@@ -95,13 +95,13 @@ class _FavoritePageState extends State<FavoritePage> {
       backgroundColor: Colors.transparent,
       key: _key,
       body: RxCustomScrollView(
+        key: UniqueKey(),
         appBar: SliverAppBar(
           floating: true,
           centerTitle: true,
           title: Text('favorite'.tr),
           elevation: 0.0,
         ),
-        key: const Key("LFavorite"),
         controller: scrollController,
         onNextScroll: onNextPage,
         onRefresh: onRefresh,

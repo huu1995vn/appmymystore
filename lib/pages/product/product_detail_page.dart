@@ -1,5 +1,3 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -60,7 +58,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             data = ProductModel.fromJson(res.data!);
           });
         } else {
-          
           CommonMethods.showToast(res.message);
         }
       }
@@ -110,146 +107,142 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: data == null
-            ? Expanded(child: Center(child: Text("not.found".tr)))
-            : ((data == null || data!.id <= 0)
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : RxCustomScrollView(
-                    key: UniqueKey(),
-                    controller: scrollController,
-                    slivers: <Widget>[
-                      SliverAppBar(
-                        title: Text(data!.name ?? "updating".tr),
-                        elevation: 0.0,
-                        floating: true,
-                        actions: <Widget>[
-                          RxIconButton(
-                              icon: data!.isfavorite
-                                  ? FontAwesomeIcons.solidBookmark
-                                  : FontAwesomeIcons.bookmark,
-                              onTap: _onFavorite,
-                              size: 40,
-                              color: Colors.transparent,
-                              colorIcon: data!.isfavorite
-                                  ? AppColors.yellow
-                                  : AppColors.white),
-                          const SizedBox(width: kDefaultPadding),
-                          PopupMenuButton<Menu>(
-                              child: RxIconButton(
-                                icon: FontAwesomeIcons.ellipsisVertical,
-                                size: 40,
-                                color: Colors.transparent,
-                                colorIcon: AppColors.white,
-                              ),
-                              // Callback that sets the selected popup menu item.
-                              onSelected: (Menu item) {
-                                switch (item) {
-                                  case Menu.menuShare:
-                                    _onShare();
-                                    break;
-                                  case Menu.menuBackHome:
-                                    CommonNavigates.toRootPage(context);
-                                    break;
-                                  default:
-                                }
-                              },
-                              itemBuilder: (BuildContext context) =>
-                                  <PopupMenuEntry<Menu>>[
-                                    PopupMenuItem<Menu>(
-                                      value: Menu.menuShare,
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                              padding: const EdgeInsets.all(
-                                                  kDefaultPadding),
-                                              child: FaIcon(
-                                                  FontAwesomeIcons
-                                                      .solidShareFromSquare,
-                                                  color: Theme.of(context)
-                                                      .primaryColor)),
-                                          Text("share".tr)
-                                        ],
-                                      ),
-                                    ),
-                                    PopupMenuItem<Menu>(
-                                        value: Menu.menuBackHome,
-                                        child: Row(children: [
-                                          Container(
-                                              // ignore: prefer_const_constructors
-                                              padding: EdgeInsets.all(
-                                                  kDefaultPadding),
-                                              child: FaIcon(
-                                                  FontAwesomeIcons.homeAlt,
-                                                  color: Theme.of(context)
-                                                      .primaryColor)),
-                                          Text("home".tr)
-                                        ])),
-                                  ]),
-                          const SizedBox(width: kDefaultPadding),
-                        ],
-                      ),
-                      SliverToBoxAdapter(child: _buildDetail())
+        body: ((data == null || data!.id <= 0)
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : RxCustomScrollView(
+                key: const Key("iProduct"),
+                controller: scrollController,
+                slivers: <Widget>[
+                  SliverAppBar(
+                    title: Text(data!.name ?? "updating".tr),
+                    elevation: 0.0,
+                    floating: true,
+                    actions: <Widget>[
+                      RxIconButton(
+                          icon: data!.isfavorite
+                              ? FontAwesomeIcons.solidBookmark
+                              : FontAwesomeIcons.bookmark,
+                          onTap: _onFavorite,
+                          size: 40,
+                          color: Colors.transparent,
+                          colorIcon: data!.isfavorite
+                              ? AppColors.yellow
+                              : AppColors.white),
+                      const SizedBox(width: kDefaultPadding),
+                      PopupMenuButton<Menu>(
+                          child: RxIconButton(
+                            icon: FontAwesomeIcons.ellipsisVertical,
+                            size: 40,
+                            color: Colors.transparent,
+                            colorIcon: AppColors.white,
+                          ),
+                          // Callback that sets the selected popup menu item.
+                          onSelected: (Menu item) {
+                            switch (item) {
+                              case Menu.menuShare:
+                                _onShare();
+                                break;
+                              case Menu.menuBackHome:
+                                CommonNavigates.toRootPage(context);
+                                break;
+                              default:
+                            }
+                          },
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<Menu>>[
+                                PopupMenuItem<Menu>(
+                                  value: Menu.menuShare,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                          padding: const EdgeInsets.all(
+                                              kDefaultPadding),
+                                          child: FaIcon(
+                                              FontAwesomeIcons
+                                                  .solidShareFromSquare,
+                                              color: Theme.of(context)
+                                                  .primaryColor)),
+                                      Text("share".tr)
+                                    ],
+                                  ),
+                                ),
+                                PopupMenuItem<Menu>(
+                                    value: Menu.menuBackHome,
+                                    child: Row(children: [
+                                      Container(
+                                          // ignore: prefer_const_constructors
+                                          padding:
+                                              EdgeInsets.all(kDefaultPadding),
+                                          child: FaIcon(
+                                              FontAwesomeIcons.homeAlt,
+                                              color: Theme.of(context)
+                                                  .primaryColor)),
+                                      Text("home".tr)
+                                    ])),
+                              ]),
+                      const SizedBox(width: kDefaultPadding),
                     ],
-                  )),
-        bottomNavigationBar: Container(
-            padding: const EdgeInsets.all(0.0),
-            child: data==null
-                ? null
-                : Row(
-                    children: [
-                      Expanded(
-                        flex: 6,
-                        child: GestureDetector(
-                            onTap: () => {CommonMethods.call(data!.phone!)},
-                            child: Container(
-                                height: 50,
-                                padding:
-                                    const EdgeInsets.all(kDefaultPaddingBox),
-                                color: Colors.green,
-                                alignment: Alignment.center,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const FaIcon(
-                                      FontAwesomeIcons.phone,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                    const SizedBox(width: kDefaultPadding),
-                                    Text(
-                                      "${"call".tr}: ${(data!.phone)!}",
-                                      style: const TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ))),
-                      ),
-                      Expanded(
-                        flex: 4,
-                        child: GestureDetector(
-                            onTap: () => {CommonMethods.chatZalo(data!.phone!)},
-                            child: Container(
-                                height: 50,
-                                padding: const EdgeInsets.all(5),
-                                color: Colors.grey[100],
-                                alignment: Alignment.center,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    FaIcon(FontAwesomeIcons.comment,
-                                        color: Colors.grey[700]),
-                                    Text("chatzalo".tr,
-                                        style:
-                                            TextStyle(color: Colors.grey[700]))
-                                  ],
-                                ))),
-                      ),
-                    ],
-                  )));
+                  ),
+                  SliverToBoxAdapter(child: _buildDetail())
+                ],
+              )),
+        bottomNavigationBar: data == null
+            ? null
+            : Container(
+                padding: const EdgeInsets.all(0.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 6,
+                      child: GestureDetector(
+                          onTap: () => {CommonMethods.call(data!.phone!)},
+                          child: Container(
+                              height: 50,
+                              padding: const EdgeInsets.all(kDefaultPaddingBox),
+                              color: Colors.green,
+                              alignment: Alignment.center,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const FaIcon(
+                                    FontAwesomeIcons.phone,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: kDefaultPadding),
+                                  Text(
+                                    "${"call".tr}: ${(data!.phone)!}",
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ))),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: GestureDetector(
+                          onTap: () => {CommonMethods.chatZalo(data!.phone!)},
+                          child: Container(
+                              height: 50,
+                              padding: const EdgeInsets.all(5),
+                              color: Colors.grey[100],
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FaIcon(FontAwesomeIcons.comment,
+                                      color: Colors.grey[700]),
+                                  Text("chatzalo".tr,
+                                      style: TextStyle(color: Colors.grey[700]))
+                                ],
+                              ))),
+                    ),
+                  ],
+                )));
   }
 
   Widget _listTitle(String title, dynamic subtitle, {Widget? leading}) {

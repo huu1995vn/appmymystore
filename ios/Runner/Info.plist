@@ -49,6 +49,16 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
+			<string>zalo</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>https</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
 			<string>prodraoxe.page.link</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
@@ -69,7 +79,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>raoxe.dailyxe.com</string>
+			<string>raoxe.com.vn</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>https</string>

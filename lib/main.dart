@@ -6,14 +6,12 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/lang/translation.service.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/services/auth.service.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
@@ -141,6 +139,7 @@ class _MyAppState extends State<MyApp> {
                   logWriterCallback: Logger.write,
                   // initialRoute: AppPages.INITIAL,
                   // getPages: AppPages.routes,
+                  // ignore: prefer_const_literals_to_create_immutables
                   localizationsDelegates: [
                     GlobalMaterialLocalizations.delegate
                   ],

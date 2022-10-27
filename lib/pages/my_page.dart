@@ -16,7 +16,6 @@ import 'package:raoxe/core/lifecyclewatcherstate.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
 import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
-import 'package:raoxe/core/services/firebase/firebase_in_app_messaging_service.dart';
 import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -137,9 +136,16 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
     var resInfo = CommonMethods.getInfoRewriteLinkWithDomain(deepLink);
     if (resInfo != null) {
       switch (resInfo["typePage"]) {
-        case "r":
-          CommonNavigates.toProductPage(context, id: resInfo["id"]);
-          break;
+        // case "r":
+        //   CommonNavigates.toProductPage(context, id: resInfo["id"]);
+        //   break;
+        default:
+          {
+            var id = resInfo["id"];
+            if (id!=null && id > 0) {
+              CommonNavigates.toProductPage(context, id: id);
+            }
+          }
       }
     }
   }

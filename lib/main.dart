@@ -27,7 +27,7 @@ import 'package:raoxe/pages/error/error_page.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:new_version/new_version.dart';
+import 'package:new_version_plus/new_version_plus.dart';
 
 //#test
 init() async {
@@ -79,28 +79,31 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future checkUpdate() async {
-    // if (kReleaseMode) {}
-    final newVersion = NewVersion(
-      iOSId: 'vn.com.raoxe',
-      androidId: 'vn.com.raoxe',
-    );
-    var status = await newVersion.getVersionStatus();
-    if (status != null && status.canUpdate) {
-      newVersion.showUpdateDialog(
-          context: context,
-          versionStatus: status,
-          dialogTitle: "update".tr.toUpperCase(),
-          dialogText: "pattern.str001"
-              .tr
-              .format([status.localVersion, status.storeVersion]),
-          dismissAction: () {
-            CommonNavigates.exit(context);
-          },
-          updateButtonText: "update".tr);
-      setState(() {
-        canUpdate = status.canUpdate;
-      });
-    } else {
+    try {
+      // if (kReleaseMode) {}
+      final newVersion = NewVersionPlus();
+      var status = await newVersion.getVersionStatus();
+      if (status != null && status.canUpdate) {
+        newVersion.showUpdateDialog(
+            context: context,
+            versionStatus: status,
+            dialogTitle: "update".tr.toUpperCase(),
+            dialogText: "pattern.str001"
+                .tr
+                .format([status.localVersion, status.storeVersion]),
+            dismissAction: () {
+              CommonNavigates.exit(context);
+            },
+            updateButtonText: "update".tr);
+        setState(() {
+          canUpdate = status.canUpdate;
+        });
+      } else {
+        setState(() {
+          canUpdate = false;
+        });
+      }
+    } catch (e) {
       setState(() {
         canUpdate = false;
       });

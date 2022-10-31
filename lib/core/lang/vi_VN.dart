@@ -329,6 +329,6 @@ const Map<String, String> vi_VN = {
   "message.str017": "Tài khoản chưa được xác thực",
   "message.alert01": "Bạn có chắc muốn xóa?",
   "message.alert02": "Vui lòng nhập email khác email hiện tại",
-  "message.alert03": "Không thể kết nối server. Vui lòng thử lại sau!"
-  
+  "message.alert03": "Không thể kết nối server. Vui lòng thử lại sau!",
+  "pattern.str001": "Vui lòng cập nhật ứng dụng từ %1 đến %2"
 };

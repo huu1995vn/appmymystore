@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Refe1rence/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 2.5.06+2.5.06
+version: 2.4.04+2.4.04
 
 environment:
   sdk: '>=2.18.0-149.0.dev <3.0.0'
@@ -64,7 +64,7 @@ dependencies:
   json_annotation: # Used for code generation libraries
   scroll_to_index: #This package provides the scroll to index mechanism for fixed/variable row height for Flutter scrollable widget.
   cached_network_image: # Used cache image
-  new_version: #Used update version 
+  new_version: ^0.2.3 #Used update version 
   flutter_skeleton: #Used for skeleton
   pin_code_fields: #Used for pin_code
   carousel_slider: #Used for show banner
@@ -79,7 +79,7 @@ dependencies:
   overlay_support: #Used for showSimpleNotification
   font_awesome_flutter:  #icon
   get: #It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
-  update_notification: #update
+  sprintf: #string format string
   intl:
   
 dev_dependencies:
@@ -114,6 +114,7 @@ flutter:
     - assets/images/icons/
     - assets/images/intro/
     - assets/css/dailyxe.css
+    - assets/error.svg
   fonts:
   - family: AppIcons
     fonts:

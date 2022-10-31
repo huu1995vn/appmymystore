@@ -10,7 +10,18 @@ import 'package:intl/intl.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 
+String interpolate(String string, List<String> params) {
+  String result = string;
+  for (int i = 1; i < params.length + 1; i++) {
+    result = result.replaceAll('%${i}\$', params[i - 1]);
+  }
+
+  return result;
+}
+
 extension StringExtension on String {
+  String format(List<String> params) => interpolate(this, params);
+
   int getIdFile() {
     var str = this;
     if (Uri.parse(str).isAbsolute) {
@@ -327,9 +338,10 @@ extension Unique<E, Id> on List<E> {
     return list;
   }
 }
+
 List<T> map<T>(List list, Function handler) {
   List<T> result = [];
-  if(list==null) return result;
+  if (list == null) return result;
   for (var i = 0; i < list.length; i++) {
     result.add(handler(i, list[i]));
   }

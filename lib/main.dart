@@ -21,12 +21,13 @@ import 'package:raoxe/core/services/master_data.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/theme/theme.service.dart';
 import 'package:raoxe/core/theme/themes.dart';
+import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/logger_utils.dart';
 import 'package:raoxe/pages/error/error_page.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:update_notification/screens/update_notification.dart';
+import 'package:new_version/new_version.dart';
 
 //#test
 init() async {
@@ -37,11 +38,8 @@ init() async {
     DeviceOrientation.portraitDown,
   ]).then((value) {
     // Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
-    runApp(MyApp());
+    runApp(const MyApp());
   });
-  // return runApp(
-  //   const MyApp(),
-  // );
 }
 
 void configLoading() {
@@ -73,19 +71,49 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool canUpdate = true;
+  @override
+  void initState() {
+    super.initState();
+    checkUpdate();
+  }
+
+  Future checkUpdate() async {
+    // if (kReleaseMode) {}
+    final newVersion = NewVersion(
+      iOSId: 'vn.com.raoxe',
+      androidId: 'vn.com.raoxe',
+    );
+    var status = await newVersion.getVersionStatus();
+    if (status != null && status.canUpdate) {
+      newVersion.showUpdateDialog(
+          context: context,
+          versionStatus: status,
+          dialogTitle: "update".tr.toUpperCase(),
+          dialogText: "pattern.str001"
+              .tr
+              .format([status.localVersion, status.storeVersion]),
+          dismissAction: () {
+            CommonNavigates.exit(context);
+          },
+          updateButtonText: "update".tr);
+      setState(() {
+        canUpdate = status.canUpdate;
+      });
+    } else {
+      setState(() {
+        canUpdate = false;
+      });
+    }
+  }
+
   Future<Widget> loadFromFuture(Widget? main) async {
     try {
-      await UpdateNotification(
-              iOSAppId: 'vn.com.raoxe',
-              androidAppId: 'vn.com.raoxe',
-              minimumVersion: '1.0.0')
-          .showAlertDialog(context: context);
       await InfoDeviceService.init();
       await FirebaseAuthService.signInAnonymously();
       await FirebaseMessagingService.init();
       APITokenService.init();
       await CloudFirestoreSerivce.init();
-
       bool res = await MasterDataService.init();
       if (res) {
         return main!;
@@ -114,7 +142,7 @@ class _MyAppState extends State<MyApp> {
                     future: RemoteConfigSerivce.init(),
                     builder: (BuildContext context,
                         AsyncSnapshot<FirebaseRemoteConfig> snapshot) {
-                      return snapshot.hasData
+                      return (snapshot.hasData && !canUpdate)
                           ? SplashScreen(
                               seconds: 3,
                               navigateAfterFuture: loadFromFuture(home),

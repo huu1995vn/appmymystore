@@ -89,11 +89,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    //#to prevent my application from changing its orientation and force the layout
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    // ]);
+  
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(

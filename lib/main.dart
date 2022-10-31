@@ -26,6 +26,7 @@ import 'package:raoxe/pages/error/error_page.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:update_notification/screens/update_notification.dart';
 
 //#test
 init() async {
@@ -74,12 +75,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Future<Widget> loadFromFuture(Widget? main) async {
     try {
-        await InfoDeviceService.init();
-        await FirebaseAuthService.signInAnonymously();
-        await FirebaseMessagingService.init();
-        APITokenService.init();
-        await CloudFirestoreSerivce.init();
-        bool res = await MasterDataService.init();
+      await UpdateNotification(
+              iOSAppId: 'vn.com.raoxe',
+              androidAppId: 'vn.com.raoxe',
+              minimumVersion: '1.0.0')
+          .showAlertDialog(context: context);
+      await InfoDeviceService.init();
+      await FirebaseAuthService.signInAnonymously();
+      await FirebaseMessagingService.init();
+      APITokenService.init();
+      await CloudFirestoreSerivce.init();
+
+      bool res = await MasterDataService.init();
       if (res) {
         return main!;
       }
@@ -89,7 +96,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-  
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -122,9 +128,7 @@ class _MyAppState extends State<MyApp> {
                                   fit: BoxFit.cover,
                                   height: double.infinity,
                                   width: double.infinity,
-                                  alignment: Alignment.center
-                                
-                              ),
+                                  alignment: Alignment.center),
                             );
                     },
                   ),

@@ -79,6 +79,7 @@ dependencies:
   overlay_support: #Used for showSimpleNotification
   font_awesome_flutter:  #icon
   get: #It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
+  update_notification: #update
   intl:
   
 dev_dependencies:

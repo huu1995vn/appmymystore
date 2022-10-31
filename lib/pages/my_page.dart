@@ -225,6 +225,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
             CommonNavigates.toMyProductPage(context, item: ProductModel());
           } else {
             CommonMethods.showToast("please.login".tr);
+            CommonNavigates.toLoginPage(context);
           }
         },
         shape: RoundedRectangleBorder(

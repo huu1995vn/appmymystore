@@ -120,7 +120,7 @@ class HomePageState extends State<HomePage>
     return Scaffold(
       key: _homeKey,
       body: RxCustomScrollView(
-        key: UniqueKey(),
+        key: Key("lHome"),
         controller: scrollController,
         onNextScroll: onNextPage,
         onRefresh: onRefresh,

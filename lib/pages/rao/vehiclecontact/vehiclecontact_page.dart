@@ -165,7 +165,7 @@ class _VehicleContactPageState extends State<VehicleContactPage> {
         body: Container(
             padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
             child: RxCustomScrollView(
-              key: UniqueKey(),
+              key: Key("lVehicleContact"),
               controller: scrollController,
               onNextScroll: onNextPage,
               onRefresh: onRefresh,

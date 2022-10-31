@@ -176,7 +176,7 @@ class _UserPageState extends State<UserPage> {
               child: CircularProgressIndicator(),
             )
           : RxCustomScrollView(
-              key: UniqueKey(),
+              key: Key("User"),
               controller: scrollController,
               slivers: <Widget>[
                 SliverAppBar(

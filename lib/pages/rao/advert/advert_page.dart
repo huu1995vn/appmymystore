@@ -102,7 +102,7 @@ class _AdvertPageState extends State<AdvertPage> {
         body: Container(
             padding: EdgeInsets.only(top: kDefaultMarginBottomBox),
             child: RxCustomScrollView(
-              key: UniqueKey(),
+              key: Key("lAdvert"),
               controller: scrollController,
               onNextScroll: onNextPage,
               onRefresh: onRefresh,

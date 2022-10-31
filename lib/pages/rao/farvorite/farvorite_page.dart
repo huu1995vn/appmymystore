@@ -95,7 +95,7 @@ class _FavoritePageState extends State<FavoritePage> {
       backgroundColor: Colors.transparent,
       key: _key,
       body: RxCustomScrollView(
-        key: UniqueKey(),
+        key: Key("lFarvorite"),
         appBar: SliverAppBar(
           floating: true,
           centerTitle: true,

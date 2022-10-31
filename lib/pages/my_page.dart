@@ -20,7 +20,6 @@ import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/size_config.dart';
-import 'package:uni_links/uni_links.dart';
 import 'main/index.dart';
 
 class MyPage extends StatefulWidget {
@@ -117,11 +116,6 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
       Uri? deepLink;
       if (data != null) {
         deepLink = data.link;
-      } else {
-        final initialLink = await getInitialLink();
-        if (initialLink != null) {
-          deepLink = Uri.parse(initialLink);
-        }
       }
       if (deepLink != null) {
         _eventDeepLink(deepLink);

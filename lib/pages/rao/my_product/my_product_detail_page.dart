@@ -56,8 +56,7 @@ class _MyProductDetailPageState extends State<MyProductDetailPage> {
       await CommonMethods.showDialogError(context, "message.str017".tr);
       CommonNavigates.goBack(context);
       return;
-    }
-    ;
+    };
     ProductModel? _data;
     if (widget.item != null) {
       _data = widget.item!;

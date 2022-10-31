@@ -47,11 +47,11 @@ class TranslationService extends Translations {
   }
 
   static bool isVi() {
-    if (!StorageService.get(storageKey)) {
+    dynamic lc = StorageService.get(storageKey);
+    if (lc == null) {
       return true;
     } else {
-      return StorageService.get(storageKey) ??
-          Get.deviceLocale!.languageCode == "vi";
+      return lc ?? Get.deviceLocale!.languageCode == "vi";
     }
   }
 

@@ -1,6 +1,5 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe, empty_catches
 
-import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -11,6 +10,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:raoxe/core/commons/flutter_app_version_checker.dart';
 import 'package:raoxe/core/lang/translation.service.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
 import 'package:raoxe/core/services/api_token.service.dart';

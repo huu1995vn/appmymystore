@@ -64,7 +64,6 @@ dependencies:
   json_annotation: # Used for code generation libraries
   scroll_to_index: #This package provides the scroll to index mechanism for fixed/variable row height for Flutter scrollable widget.
   cached_network_image: # Used cache image
-  flutter_app_version_checker: #Used update version 
   flutter_skeleton: #Used for skeleton
   pin_code_fields: #Used for pin_code
   carousel_slider: #Used for show banner

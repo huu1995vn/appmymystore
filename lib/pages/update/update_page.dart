@@ -3,10 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';
+import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/utilities/constants.dart';
 import 'package:raoxe/core/utilities/extensions.dart';
 
 class UpdatePage extends StatefulWidget {
@@ -28,32 +30,41 @@ class _UpdatePageState extends State<UpdatePage> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Container(),
-          Text("pattern.str001"
-              .tr
-              .format([widget.data.currentVersion, widget.data.newVersion!])),
-          Positioned(
-            bottom: 100,
-            left: 30,
-            child: RxButton(
-              text: "exit".tr,
-              onTap: () {
-                CommonNavigates.exit(context);
-              },
-              color: AppColors.black50,
-            ),
+          // Image.asset(
+          //   "assets/images/connection-lost.png",
+          //   fit: BoxFit.cover,
+          // ),     
+          // Icon(AppIcons.update, size: 500, color: AppColors.secondary,),   
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("pattern.str001".tr.format(
+                  [widget.data.currentVersion, widget.data.newVersion!])),
+            ],
           ),
           Positioned(
-            bottom: 100,
-            left: 30,
-            child: RxButton(
-              text: "update".tr,
-              onTap: () {
-                CommonMethods.launchURL(widget.data.appURL!);
-              },
-              color: AppColors.blue,
-            ),
-          )
+                  bottom: 100,
+                  left: 30,
+                  child: Row(
+                    children: [
+                      RxButton(
+                        text: "exit".tr,
+                        onTap: () {
+                          CommonNavigates.exit(context);
+                        },
+                        color: AppColors.blackLight,
+                      ),
+                      const SizedBox(width: kDefaultPadding),
+                      RxButton(
+                        text: "update".tr,
+                        onTap: () {
+                          CommonMethods.launchURL(widget.data.appURL!);
+                        },
+                        color: AppColors.blue,
+                      )
+                    ],
+                  )),
         ],
       ),
     );

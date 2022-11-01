@@ -248,7 +248,6 @@ class _LoginPageState extends State<LoginPage> {
     CommonMethods.lockScreen();
     try {
       await AuthService.checkPhone(username, isExist: true);
-      await InfoDeviceService.dataSafety();
       if (mounted) await AuthService.login(context, username, password);
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());

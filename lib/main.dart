@@ -79,38 +79,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  Future checkUpdate() async {
-    try {
-      // if (kReleaseMode) {}
-      final newVersion = AppVersionChecker();
-      var status = await newVersion.checkUpdate();
-      if (status != null && status.canUpdate) {
-        await showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text("update".tr.toUpperCase()),
-                content: Text("pattern.str001"
-                    .tr
-                    .format([status.currentVersion, status.newVersion!])),
-                actions: <Widget>[
-                  TextButton(
-                      onPressed: () {
-                        CommonNavigates.exit(context);
-                      },
-                      child: Text('exit'.tr)),
-                  TextButton(
-                    onPressed: () {
-                      CommonMethods.launchURL(status.appURL!);
-                    },
-                    child: Text('update'.tr),
-                  )
-                ],
-              );
-            });
-      }
-    } catch (e) {}
-  }
 
   Future<Widget> loadFromFuture(Widget? main) async {
     try {

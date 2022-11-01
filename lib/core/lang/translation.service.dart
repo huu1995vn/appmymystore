@@ -47,7 +47,12 @@ class TranslationService extends Translations {
   }
 
   static bool isVi() {
-    return StorageService.get(storageKey) ?? Get.deviceLocale!.languageCode == "vi";
+    dynamic lc = StorageService.get(storageKey);
+    if (lc == null) {
+      return true;
+    } else {
+      return lc ?? Get.deviceLocale!.languageCode == "vi";
+    }
   }
 
   @override

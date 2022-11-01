@@ -9,6 +9,7 @@ import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/components/index.dart';
 import 'package:raoxe/core/components/part.dart';
 import 'package:raoxe/core/services/auth.service.dart';
+import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/core/utilities/app_colors.dart';
 import 'package:raoxe/core/utilities/constants.dart';
@@ -63,7 +64,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        
       ),
       backgroundColor: Get.isDarkMode ? Colors.black54 : AppColors.white,
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [

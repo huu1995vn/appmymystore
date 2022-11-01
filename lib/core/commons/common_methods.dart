@@ -13,7 +13,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:material_dialogs/material_dialogs.dart';
-import 'package:new_version/new_version.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
 import 'package:raoxe/core/commons/common_configs.dart';
@@ -409,18 +408,18 @@ class CommonMethods {
         title: "feedback".tr);
   }
 
-  static versionCheck(context) async {
-    if (CommonConfig.env == "prod") {
-      final NewVersion newVersion = NewVersion();
-      VersionStatus? versionStatus = await newVersion.getVersionStatus();
-      if (versionStatus != null && versionStatus.canUpdate) {
-        newVersion.showUpdateDialog(
-            context: context,
-            versionStatus: versionStatus,
-            allowDismissal: false);
-      }
-    }
-  }
+  // static versionCheck(context) async {
+  //   if (CommonConfig.env == "prod") {
+  //     final NewVersionPlus newVersion = NewVersionPlus();
+  //     NewVersionPlus? versionStatus = await newVersion.getVersionStatus();
+  //     if (versionStatus != null && versionStatus.canUpdate) {
+  //       newVersion.showUpdateDialog(
+  //           context: context,
+  //           versionStatus: versionStatus,
+  //           allowDismissal: false);
+  //     }
+  //   }
+  // }
 
   static bool checkStringPhone(String? text) {
     if (text != null) {

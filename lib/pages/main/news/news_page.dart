@@ -30,7 +30,7 @@ class NewsPageState extends State<NewsPage>
       .toList();
 
   List<Widget> tabviews = CATEGORIES.map((item) {
-    return TabNewsWidget(parentid: item.id, key: UniqueKey());
+    return TabNewsWidget(parentid: item.id, key: Key(item.categoryname));
   }).toList();
   bool isloading = false;
   loadData() {

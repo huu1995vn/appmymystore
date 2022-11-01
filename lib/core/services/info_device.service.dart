@@ -43,9 +43,7 @@ class InfoDeviceService {
     final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     try {
       infoDevice.PackageInfo = await CommonMethods.getPackageInfo();
-
       dynamic info;
-
       if (UniversalPlatform.isAndroid) {
         info = await deviceInfoPlugin.androidInfo;
         infoDevice.DeviceName = info.model;

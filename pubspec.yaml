@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Refe1rence/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 2.6.06+2.6.06
+version: 2.4.06+2.4.06
 
 environment:
   sdk: '>=2.18.0-149.0.dev <3.0.0'
@@ -45,7 +45,7 @@ dependencies:
   splashscreen: # Used for splashscreen
   wc_form_validators: # Used for form validators
   firebase_core: # Required to use any Firebase service with Flutter
-  firebase_messaging: 11.4.1 # Used for receiving notifications in the app
+  firebase_messaging: # Used for receiving notifications in the app
   firebase_dynamic_links: # Use the Firebase Dynamic Links API. (ANDROID/IOS)
   firebase_auth: # Used for send otp
   # firebase_in_app_messaging: # Used for send message ads
@@ -64,7 +64,7 @@ dependencies:
   json_annotation: # Used for code generation libraries
   scroll_to_index: #This package provides the scroll to index mechanism for fixed/variable row height for Flutter scrollable widget.
   cached_network_image: # Used cache image
-  new_version_plus: #Used update version 
+  flutter_app_version_checker: #Used update version 
   flutter_skeleton: #Used for skeleton
   pin_code_fields: #Used for pin_code
   carousel_slider: #Used for show banner
@@ -79,7 +79,7 @@ dependencies:
   overlay_support: #Used for showSimpleNotification
   font_awesome_flutter:  #icon
   get: #It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
-  sprintf: #string format string
+  html:
   intl:
   
 dev_dependencies:

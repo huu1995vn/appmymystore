@@ -1,5 +1,6 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe, empty_catches
 
+import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
+import 'package:raoxe/core/commons/common_methods.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/lang/translation.service.dart';
 import 'package:raoxe/core/providers/app_provider.dart';
@@ -25,9 +27,9 @@ import 'package:raoxe/core/utilities/extensions.dart';
 import 'package:raoxe/core/utilities/logger_utils.dart';
 import 'package:raoxe/pages/error/error_page.dart';
 import 'package:raoxe/pages/my_page.dart';
+import 'package:raoxe/pages/update/update_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:new_version_plus/new_version_plus.dart';
 
 //#test
 init() async {
@@ -71,47 +73,51 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool canUpdate = true;
+  final newVersion = AppVersionChecker();
   @override
   void initState() {
     super.initState();
-    checkUpdate();
   }
 
   Future checkUpdate() async {
     try {
       // if (kReleaseMode) {}
-      final newVersion = NewVersionPlus();
-      var status = await newVersion.getVersionStatus();
+      final newVersion = AppVersionChecker();
+      var status = await newVersion.checkUpdate();
       if (status != null && status.canUpdate) {
-        newVersion.showUpdateDialog(
+        await showDialog(
             context: context,
-            versionStatus: status,
-            dialogTitle: "update".tr.toUpperCase(),
-            dialogText: "pattern.str001"
-                .tr
-                .format([status.localVersion, status.storeVersion]),
-            dismissAction: () {
-              CommonNavigates.exit(context);
-            },
-            updateButtonText: "update".tr);
-        setState(() {
-          canUpdate = status.canUpdate;
-        });
-      } else {
-        setState(() {
-          canUpdate = false;
-        });
+            builder: (context) {
+              return AlertDialog(
+                title: Text("update".tr.toUpperCase()),
+                content: Text("pattern.str001"
+                    .tr
+                    .format([status.currentVersion, status.newVersion!])),
+                actions: <Widget>[
+                  TextButton(
+                      onPressed: () {
+                        CommonNavigates.exit(context);
+                      },
+                      child: Text('exit'.tr)),
+                  TextButton(
+                    onPressed: () {
+                      CommonMethods.launchURL(status.appURL!);
+                    },
+                    child: Text('update'.tr),
+                  )
+                ],
+              );
+            });
       }
-    } catch (e) {
-      setState(() {
-        canUpdate = false;
-      });
-    }
+    } catch (e) {}
   }
 
   Future<Widget> loadFromFuture(Widget? main) async {
     try {
+      var status = await newVersion.checkUpdate();
+      if (status != null && status.canUpdate) {
+        return UpdatePage(data: status);
+      }
       await InfoDeviceService.init();
       await FirebaseAuthService.signInAnonymously();
       await FirebaseMessagingService.init();
@@ -121,7 +127,9 @@ class _MyAppState extends State<MyApp> {
       if (res) {
         return main!;
       }
-    } catch (e) {}
+    } catch (e) {
+      CommonMethods.wirtePrint(e.toString());
+    }
     return ErrorPage(message: "message.alert03".tr);
   }
 
@@ -145,7 +153,7 @@ class _MyAppState extends State<MyApp> {
                     future: RemoteConfigSerivce.init(),
                     builder: (BuildContext context,
                         AsyncSnapshot<FirebaseRemoteConfig> snapshot) {
-                      return (snapshot.hasData && !canUpdate)
+                      return (snapshot.hasData)
                           ? SplashScreen(
                               seconds: 3,
                               navigateAfterFuture: loadFromFuture(home),

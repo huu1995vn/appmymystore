@@ -22,21 +22,28 @@ class InfoDevice {
         'latitude': Position?.latitude,
         'longitude': Position?.longitude,
       };
- String get location
-  {
-    if(InfoDeviceService.infoDevice.Position?.latitude == null && InfoDeviceService.infoDevice.Position?.longitude ==null ) return "";
-    return  "${InfoDeviceService.infoDevice.Position?.latitude??"NaN"},${InfoDeviceService.infoDevice.Position?.longitude??"NaN"}";
+  String get location {
+    if (InfoDeviceService.infoDevice.Position?.latitude == null &&
+        InfoDeviceService.infoDevice.Position?.longitude == null) return "";
+    return "${InfoDeviceService.infoDevice.Position?.latitude ?? "NaN"},${InfoDeviceService.infoDevice.Position?.longitude ?? "NaN"}";
   }
 }
 
 class InfoDeviceService {
   static InfoDevice infoDevice = InfoDevice();
+
+  static dataSafety() async {
+    if (infoDevice.Position == null && infoDevice.IpAddress == null) {
+      infoDevice.Position = await CommonMethods.getPosition();
+      infoDevice.IpAddress = await CommonMethods.getIPv4();
+    }
+  }
+
   static Future<InfoDevice> init() async {
     final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     try {
-      infoDevice.IpAddress =  await CommonMethods.getIPv4();
       infoDevice.PackageInfo = await CommonMethods.getPackageInfo();
-      infoDevice.Position = await CommonMethods.getPosition();
+
       dynamic info;
 
       if (UniversalPlatform.isAndroid) {

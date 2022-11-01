@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, empty_catches, no_leading_underscores_for_local_identifiers
 
-import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
@@ -9,6 +8,7 @@ import 'package:raoxe/core/entities.dart';
 // import 'package:raoxe/core/commons/common_navigates.dart';
 import 'package:raoxe/core/services/api_token.service.dart';
 import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
+import 'package:raoxe/core/services/info_device.service.dart';
 import 'package:raoxe/core/services/storage/storage_service.dart';
 import 'package:raoxe/pages/my_page.dart';
 import 'package:local_auth/local_auth.dart';
@@ -18,6 +18,7 @@ class AuthService {
       BuildContext context, String username, String password) async {
     CommonMethods.lockScreen();
     try {
+      await InfoDeviceService.dataSafety();
       var res = await DaiLyXeApiBLL_APIAuth().login(username, password);
       if (res.status > 0) {
         await APITokenService.login(res.data);
@@ -40,6 +41,7 @@ class AuthService {
 
   static Future<bool> autologin() async {
     if (APITokenService.token != null && APITokenService.token.isNotEmpty) {
+      await InfoDeviceService.dataSafety();
       var res = await DaiLyXeApiBLL_APIAuth().autologin();
       if (res.status > 0) {
         APITokenService.login(res.data);
@@ -121,9 +123,10 @@ class AuthService {
   static Future<bool> verifyOTPPhone(String phone, String code) async {
     return await FirebaseAuthService.verifyOTP(phone, code);
   }
-  static String verifyemail="";
-  static Future sendOTPEmail(String email,
-      void Function(Object) fnError, void Function() fnSuccess) async {
+
+  static String verifyemail = "";
+  static Future sendOTPEmail(String email, void Function(Object) fnError,
+      void Function() fnSuccess) async {
     try {
       ResponseModel res = await DaiLyXeApiBLL_APIUser().sendverifyemail(email);
       if (res.status <= 0) {

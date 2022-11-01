@@ -195,7 +195,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context, listen: true);
 
-    CommonMethods.versionCheck(context);
+    // CommonMethods.versionCheck(context);
     Size size = MediaQuery.of(context).size;
     SizeConfig.init(size);
     return Scaffold(

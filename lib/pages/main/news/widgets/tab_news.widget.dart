@@ -17,6 +17,7 @@ class TabNewsWidget extends StatefulWidget {
   TabNewsWidget({Key? key, this.parentid = 1}) : super(key: key);
   late TabNewsWidgetPageState state;
   @override
+  // ignore: no_logic_in_create_state
   State<TabNewsWidget> createState() {
     state = TabNewsWidgetPageState();
     return state;
@@ -34,7 +35,6 @@ class TabNewsWidgetPageState extends State<TabNewsWidget>
   List<dynamic>? listData;
   int paging = 1;
   int totalItems = 0;
-  AutoScrollController scrollController = AutoScrollController();
   @override
   void initState() {
     super.initState();
@@ -122,7 +122,6 @@ class TabNewsWidgetPageState extends State<TabNewsWidget>
         onNextPage: onNextPage,
         onRefresh: loadData,
         padding: const EdgeInsets.all(kDefaultPaddingBox),
-        key: widget.key,
-        scrollController: scrollController);
+        key: widget.key ??  UniqueKey());
   }
 }

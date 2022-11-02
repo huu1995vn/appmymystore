@@ -1,5 +1,6 @@
 // ignore_for_file: null_check_always_fails
 
+import 'dart:io'; 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,12 +61,14 @@ class CommonNavigates {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => ProductDetailPage(key: UniqueKey(), id: id, item: item)));
+              builder: (context) =>
+                  ProductDetailPage(key: UniqueKey(), id: id, item: item)));
     } else {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => ProductPage(key: UniqueKey(), paramsSearch: paramsSearch)));
+              builder: (context) =>
+                  ProductPage(key: UniqueKey(), paramsSearch: paramsSearch)));
       // return await Navigator.pushNamed(context, "/product");
     }
   }
@@ -229,8 +232,12 @@ class CommonNavigates {
     }
   }
 
-  static exit(BuildContext context) {
-    return SystemNavigator.pop();
+  static exitApp(BuildContext context) {
+    if (Platform.isAndroid) {
+      return SystemNavigator.pop();
+    } else if (Platform.isIOS) {
+      return exit(0);
+    } 
   }
 
   static Future openDialog(BuildContext context, Widget child) async {

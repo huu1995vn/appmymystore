@@ -308,6 +308,9 @@ const Map<String, String> en_US = {
   "pricereport": "Price Report",
   "testdrive": "Test Drive",
   "unknown": "Unknown",
+  "newversion": "There is a new version",
+  "noconnect": "No connect",
+  "noconnectmessage": "No connect to server.",
   "message.str001":
       "This article has been moderated. If you have a problem, please report it.",
   "message.str002": "Account does not exist or is locked",

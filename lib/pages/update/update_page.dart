@@ -1,6 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:raoxe/app_icons.dart';
 import 'package:raoxe/core/commons/common_methods.dart';
@@ -27,46 +29,67 @@ class _UpdatePageState extends State<UpdatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Image.asset(
-          //   "assets/images/connection-lost.png",
-          //   fit: BoxFit.cover,
-          // ),     
-          // Icon(AppIcons.update, size: 500, color: AppColors.secondary,),   
-          Column(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          systemOverlayStyle:
+              SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+        ),
+        backgroundColor: Colors.white,
+        body: Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("pattern.str001".tr.format(
-                  [widget.data.currentVersion, widget.data.newVersion!])),
+              Text(
+                ("newversion".tr + "!").toUpperCase(),
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "pattern.str001".tr.format([widget.data.newVersion!]),
+                style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 30),
+              SizedBox(
+                width: double.infinity,
+                height: 150,
+                child: Image.asset(
+                  ICON,
+                  height: 200,
+                  width: double.infinity,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: RxButton(
+                      text: "update".tr,
+                      onTap: () {
+                        CommonMethods.launchURL(widget.data.appURL!);
+                      },
+                      color: AppColors.blue,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                      child: RxButton(
+                    text: "exit".tr,
+                    onTap: () {
+                      CommonNavigates.exitApp(context);
+                    },
+                    color: Colors.blueGrey,
+                  ))
+                ],
+              ),
             ],
           ),
-          Positioned(
-                  bottom: 100,
-                  left: 30,
-                  child: Row(
-                    children: [
-                      RxButton(
-                        text: "exit".tr,
-                        onTap: () {
-                          CommonNavigates.exit(context);
-                        },
-                        color: AppColors.blackLight,
-                      ),
-                      const SizedBox(width: kDefaultPadding),
-                      RxButton(
-                        text: "update".tr,
-                        onTap: () {
-                          CommonMethods.launchURL(widget.data.appURL!);
-                        },
-                        color: AppColors.blue,
-                      )
-                    ],
-                  )),
-        ],
-      ),
-    );
+        ));
   }
 }

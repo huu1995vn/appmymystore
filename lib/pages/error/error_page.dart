@@ -1,10 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; 
 import 'package:get/get.dart';
 import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:raoxe/core/components/part.dart'; 
+import '../../app_icons.dart'; 
 
 class ErrorPage extends StatefulWidget {
   const ErrorPage({super.key, required this.message});
@@ -22,26 +23,53 @@ class _ErrorPageState extends State<ErrorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset(
-            "assets/images/connection-lost.png",
-            fit: BoxFit.cover,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          systemOverlayStyle:
+              SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+        ),
+        backgroundColor: Colors.white,
+        body: Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                ("noconnect".tr + "!").toUpperCase(),
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "noconnectmessage".tr,
+                style: const TextStyle(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 40),
+              Container(
+                child: Icon(
+                  AppIcons.signal_wifi_off,
+                  color: Theme.of(context).textTheme.bodyLarge!.color,
+                  size: 100,
+                ),
+              ), 
+              const SizedBox(height: 70),
+              Row(
+                children: [
+                  Expanded(
+                      child: RxButton(
+                    text: "exit".tr,
+                    onTap: () {
+                      CommonNavigates.exitApp(context);
+                    },
+                    color: Colors.blueGrey,
+                  ))
+                ],
+              ),
+            ],
           ),
-          Positioned(
-            bottom: 100,
-            left: 30,
-            child: RxButton(
-              text: "exit".tr,
-              onTap: () {
-                CommonNavigates.exit(context);
-              },
-              color: AppColors.black50,
-            ),
-          )
-        ],
-      ),
-    );
+        ));
   }
 }

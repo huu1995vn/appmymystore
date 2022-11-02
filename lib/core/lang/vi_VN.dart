@@ -308,6 +308,9 @@ const Map<String, String> vi_VN = {
   "pricereport": "Nhận báo giá",
   "testdrive": "Đăng ký lái thử",
   "unknown": "Chưa xác định",
+  "newversion": "Đã có phiên bản mới", 
+  "noconnect": "Mất kết nối",
+  "noconnectmessage": "Không thể kết nối đến máy chủ.",
   "message.str001":
       "Bài viết này đã được kiểm duyệt. Nếu gặp vấn đề, bạn vui lòng báo vi phạm",
   "message.str002": "Tài khoản không tồn tại hoặc bị khóa",
@@ -329,6 +332,6 @@ const Map<String, String> vi_VN = {
   "message.str017": "Tài khoản chưa được xác thực",
   "message.alert01": "Bạn có chắc muốn xóa?",
   "message.alert02": "Vui lòng nhập email khác email hiện tại",
-  "message.alert03": "Không thể kết nối server. Vui lòng thử lại sau!",
-  "pattern.str001": "Vui lòng cập nhật ứng dụng từ %1 đến %2"
+  "message.alert03": "Không thể kết nối đến máy chủ. Vui lòng thử lại sau!",
+  "pattern.str001": "Vui lòng cập nhật ứng dụng lên %1"
 };

@@ -1213,14 +1213,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
-  restart_app:
-    dependency: "direct main"
-    description:
-      name: restart_app
-      sha256: "2c3de763c51f6f9565f910ccf37ca039e2ba4a0d14c4749cae299e73b24285e6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0+1"
   rxdart:
     dependency: transitive
     description:

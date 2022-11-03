@@ -64,24 +64,20 @@ class _ReviewDialogState extends State<ReviewDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
+    return Scaffold( 
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-            iconTheme: IconThemeData(
-              color: AppColors.black, //change your color here
-            ),
+          SliverAppBar( 
             centerTitle: true,
             title: Text("review".tr,
-                style: kTextHeaderStyle.copyWith(color: AppColors.black)),
-            elevation: 0.0,
-            backgroundColor: AppColors.grey,
+                style: kTextHeaderStyle),
+            elevation: 0.0, 
           ),
           SliverToBoxAdapter(
-              child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPaddingBox),
-                  child: Form(
+              child: Card(  
+                  child: Padding(
+                    padding: EdgeInsets.all(kDefaultPaddingBox),
+                    child: Form(
                       key: _keyValidationForm,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,9 +111,10 @@ class _ReviewDialogState extends State<ReviewDialog> {
                             },
                                 validator: Validators.compose([
                                   Validators.required("notempty".tr),
-                                ]))
+                                ])), 
                         ],
-                      ))))
+                      ))
+                  ) ))
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, 

@@ -1,4 +1,5 @@
 {
     "git.ignoreLimitWarning": true,
-    "html.format.wrapLineLength": 0
+    "html.format.wrapLineLength": 0,
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

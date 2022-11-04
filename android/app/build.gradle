@@ -93,8 +93,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-inappmessaging-display:19.0.3'
     implementation 'com.google.firebase:firebase-messaging:19.0.3'
+}
 
-
+configurations.all { 
+    exclude group: 'com.google.android.gms', module: 'play-services-safetynet'
 }
 apply plugin: 'com.google.gms.google-services'
 android.buildTypes.release.ndk.debugSymbolLevel = 'FULL'

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mymystore/core/size_config.dart';
-
+import '../../../size_config.dart';
 
 class TopRoundedContainer extends StatelessWidget {
   const TopRoundedContainer({

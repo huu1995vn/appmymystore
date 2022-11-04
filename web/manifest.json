@@ -1,6 +1,6 @@
 {
-    "name": "mymystore",
-    "short_name": "mymystore",
+    "name": "appmymystore",
+    "short_name": "appmymystore",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mymystore/core/components/no_account_text.dart';
-import 'package:mymystore/core/components/socal_card.dart';
-import 'package:mymystore/core/size_config.dart';
-
+import 'package:shop_app/components/no_account_text.dart';
+import 'package:shop_app/components/socal_card.dart';
+import '../../../size_config.dart';
 import 'sign_form.dart';
 
 class Body extends StatelessWidget {

@@ -2,134 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>MyMyStore</string>
+	<string>Appmymystore</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-		<string>vi</string>
-	</array>
 	<key>CFBundleName</key>
-	<string>MyMyStore</string>
+	<string>appmymystore</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
+	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.170518340284-0mgeobcqu03112hnasad7j3te0eu0dri</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.3702342930-ra53el6curl51fvc9esu5pk89nc9dt3d</string>
-			</array>
-		</dict>		
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>prodmymystore.page.link</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>https</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>mymystore</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>https</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>BUNDLE_ID</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>mymystore</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<string>0</string>
-	<key>FirebaseScreenReportingEnabled</key>
-	<true/>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Giúp người dùng truy cập kho lưu trữ nhạc tiện dụng.</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Giúp người dùng hiển thị thời gian chính xác.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Giúp người dùng chụp ảnh và upload ảnh 1 cách nhanh chóng, trực tiếp từ camera. Tiết kiệm dung lượng máy vì không cần lưu vào máy. Hữu hiệu trong các trường hợp máy hết dung lượng nhưng chưa kịp xoá bớt ảnh.</string>
-	<key>NSContactsUsageDescription</key>
-	<string>Giúp người dùng truy cập danh bạ nhanh chóng.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Giúp người dùng luôn luôn truy cập được địa điểm hiện tại.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Giúp người dùng dễ dàng tìm kiếm xe tại địa điểm hiện tại và các khu vực lân cận nhanh hơn.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Giúp người dùng dễ dàng tìm kiếm xe tại địa điểm hiện tại và các khu vực lân cận nhanh hơn.</string>
-	<key>NSMotionUsageDescription</key>
-	<string>Giúp người dùng truy cập vào tiện ích chuyển động.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Thêm ảnh vào thư viện ảnh để dễ dàng thao tác chọn, xem lại, kiểm tra.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Giúp người dùng đăng ảnh sản phẩm, ảnh mô tả nhu cầu cần bán/mua/thuê, chia sẻ hình ảnh xe độ, sơn, sửa, tìm kiếm phụ tùng,... từ các ảnh có sẵn trong photos/album. Các ảnh này đã lưu trữ sẵn trong máy chứ không chụp trực tiếp từ camera.</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Giúp người dùng nhận diện giọng nói.</string>
-	<key>NSpictureUsageDescription</key>
-	<string>Bật camera: Giúp bạn chụp hình nhanh hơn, tiện lợi hơn dễ dàng upload vào hình ảnh sản phẩm và thành viên.</string>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-		<string>remote-notification</string>
-	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -149,7 +43,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>io.flutter.embedded_views_preview</key>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 </dict>
 </plist>

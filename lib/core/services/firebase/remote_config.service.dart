@@ -18,12 +18,6 @@ class RemoteConfigSerivce {
     if (configs["apiSufix"] != null) {
       CommonConfig.apiSufix = remoteConfig.getString("apiSufix");
     }
-    if (configs["apimymystore"] != null) {
-      CommonConfig.apimymystore = remoteConfig.getString("apimymystore");
-    }
-    if (configs["apimymystoreSufix"] != null) {
-      CommonConfig.apimymystoreSufix = remoteConfig.getString("apimymystoreSufix");
-    }
     if (configs["apiDrive"] != null) {
       CommonConfig.apiDrive = remoteConfig.getString("apiDrive");
     }

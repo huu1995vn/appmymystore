@@ -1,14 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
-import 'package:mymystore/enviroments/prod.dart';
-import 'package:mymystore/enviroments/dev.dart';
-
-enum Environment {
-  dev,
-  prod,
-}
 
 class CommonConfig {
   //system
@@ -16,43 +8,20 @@ class CommonConfig {
   static Map deviceInfo = {};
   static String languageCode = "vi";
   static String env = "dev";
-  static String api = "http://api..info";
+  static String api = "http://api.dailyxe.info";
   static String apiSufix = "/";
-  static String apimymystore = "https://mymystore..info";
-  static String apimymystoreSufix = "/";
-  static String apiDrive = "http://cdn..info";
+  static String apiDrive = "http://cdn.dailyxe.com.vn";
   static String apiDriveSufix = "/";
-  static String apiHost = "https://.com.vn";
+  static String apiHost = "https://dailyxe.com.vn";
   static String hostDynamicLink = "https://mymystore.page.link";
   static String hostmymystore = "https://mymystore.com.vn";
-  static String host = "https://.com.vn";
+  static String host = "https://dailyxe.com.vn";
   static String appStoreID = "1486119532";
   static bool haveCacheImage = true;
   static int version_masterdata = 1;
   static int timeVerify = 2; // phút
   static String hotSearch = "vinfast,ford,xe moi";
   static late Map<String, dynamic> _config;
-  static void setEnvironment(Environment env) {
-    switch (env) {
-      case Environment.dev:
-        _config = configDev;
-        break;
-      case Environment.prod:
-        _config = configProd;
-        break;
-    }
-    CommonConfig.env = _config["env"];
-    CommonConfig.api = _config["api"] ?? CommonConfig.api;
-    CommonConfig.apiSufix =
-        _config["apiSufix"] ?? CommonConfig.apiSufix;
-    CommonConfig.apimymystore = _config["apimymystore"] ?? CommonConfig.apimymystore;
-    CommonConfig.apimymystoreSufix =
-        _config["apimymystoreSufix"] ?? CommonConfig.apimymystoreSufix;
-    CommonConfig.apiDrive = _config["apiDrive"] ?? CommonConfig.apiDrive;
-    CommonConfig.hotSearch = _config["hotSearch"] ?? CommonConfig.hotSearch;
-    CommonConfig.hostDynamicLink =
-        _config["hostDynamicLink"] ?? CommonConfig.hostDynamicLink;
-  }
 
   static Map<String, String> linkContent = {
     "dieuKhoan":

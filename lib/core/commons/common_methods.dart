@@ -612,15 +612,6 @@ class CommonMethods {
     return url;
   }
 
-  static String deepLinkInstallWithDomain() {
-    try {
-      String rewriteLink =
-          '${CommonConfig.apimymystore}?appinstall=${generateMd5("d@i${APITokenService.userId}")}';
-      return rewriteLink;
-    } catch (error) {}
-    return "";
-  }
-
   static copy(BuildContext context, String noiDung) {
     Clipboard.setData(ClipboardData(text: noiDung)).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(

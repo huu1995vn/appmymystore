@@ -61,13 +61,13 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   loadData() async {
-    String linkDeepLinkInstallWithDomain =
-        CommonMethods.deepLinkInstallWithDomain();
-    Uri uri =
-        await CommonMethods.createDynamicLink(linkDeepLinkInstallWithDomain);
-    setState(() {
-      link = Uri.decodeFull("$uri&efr=1");
-    });
+    // String linkDeepLinkInstallWithDomain =
+    //     CommonMethods.deepLinkInstallWithDomain();
+    // Uri uri =
+    //     await CommonMethods.createDynamicLink(linkDeepLinkInstallWithDomain);
+    // setState(() {
+    //   link = Uri.decodeFull("$uri&efr=1");
+    // });
   }
 
   _onShare() async {

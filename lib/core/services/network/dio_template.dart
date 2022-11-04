@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/core/services/network/dio_client.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
+import 'package:mymystore/core/services/network/dio_client.dart';
 
 class DioTemplate {
   //function call api drive
@@ -18,21 +18,21 @@ class DioTemplate {
   }
 
 
-  //function call api dailyxe
-  static _buildDaiLyXeUrl(String controllerName, [String? addApiHostSufix]) {
-    return CommonConfig.apiDaiLyXe +
-        (addApiHostSufix ?? CommonConfig.apiDaiLyXeSufix) +
+  //function call api 
+  static _buildUrl(String controllerName, [String? addApiHostSufix]) {
+    return CommonConfig.api +
+        (addApiHostSufix ?? CommonConfig.apiSufix) +
         controllerName; //crm/
   }
 
-  static getDaiLyXe(String controllerName,
+  static get(String controllerName,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
-    final requestString = _buildDaiLyXeUrl(controllerName);
+    final requestString = _buildUrl(controllerName);
     return await DioClient.get(requestString,
         queryParameters: queryParameters, options: options);
   }
 
-  static putDaiLyXe(String controllerName, dynamic data,
+  static put(String controllerName, dynamic data,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
     var id = -1;
     if (data != null) {
@@ -42,43 +42,43 @@ class DioTemplate {
         id = data.Id ?? -1;
       }
     }
-    final requestString = _buildDaiLyXeUrl(controllerName) +
+    final requestString = _buildUrl(controllerName) +
         (id > 0 ? "/$id" : "");
     return await DioClient.put(requestString, data,
         queryParameters: queryParameters, options: options);
   }
 
-  static postDaiLyXe(String controllerName, dynamic data,
+  static post(String controllerName, dynamic data,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
-    final requestString = _buildDaiLyXeUrl(controllerName);
+    final requestString = _buildUrl(controllerName);
     return await DioClient.post(requestString, data,
         queryParameters: queryParameters, options: options);
   }
 
 
-  static deleteDaiLyXe(String controllerName, dynamic id,
+  static delete(String controllerName, dynamic id,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
-    final requestString = _buildDaiLyXeUrl(controllerName) +
+    final requestString = _buildUrl(controllerName) +
         (id > 0 ? "/$id" : "");
     return await DioClient.delete(requestString,
         queryParameters: queryParameters, options: options);
   }
 
-  //function call api dailyxe
-  static _buildRaoXeUrl(String controllerName, [String? addApiHostSufix]) {
-    return CommonConfig.apiRaoXe +
-        (addApiHostSufix ?? CommonConfig.apiRaoXeSufix) +
+  //function call api 
+  static _buildmymystoreUrl(String controllerName, [String? addApiHostSufix]) {
+    return CommonConfig.apimymystore +
+        (addApiHostSufix ?? CommonConfig.apimymystoreSufix) +
         controllerName; //crm/
   }
 
-  static getRaoXe(String controllerName,
+  static getmymystore(String controllerName,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
-    final requestString = _buildRaoXeUrl(controllerName);
+    final requestString = _buildmymystoreUrl(controllerName);
     return await DioClient.get(requestString,
         queryParameters: queryParameters, options: options);
   }
 
-  static putRaoXe(String controllerName, dynamic data,
+  static putmymystore(String controllerName, dynamic data,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
     var id = -1;
     if (data != null) {
@@ -88,23 +88,23 @@ class DioTemplate {
         id = data.Id ?? -1;
       }
     }
-    final requestString = _buildRaoXeUrl(controllerName) +
+    final requestString = _buildmymystoreUrl(controllerName) +
         (id > 0 ? "/$id" : "");
     return await DioClient.put(requestString, data,
         queryParameters: queryParameters, options: options);
   }
 
-  static postRaoXe(String controllerName, dynamic data,
+  static postmymystore(String controllerName, dynamic data,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
-    final requestString = _buildRaoXeUrl(controllerName);
+    final requestString = _buildmymystoreUrl(controllerName);
     return await DioClient.post(requestString, data,
         queryParameters: queryParameters, options: options);
   }
 
 
-  static deleteRaoXe(String controllerName, dynamic id,
+  static deletemymystore(String controllerName, dynamic id,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
-    final requestString = _buildRaoXeUrl(controllerName) +
+    final requestString = _buildmymystoreUrl(controllerName) +
         (id > 0 ? "/$id" : "");
     return await DioClient.delete(requestString,
         queryParameters: queryParameters, options: options);

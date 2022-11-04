@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/main.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
+import 'package:mymystore/main.dart';
 
 void main() async {
   CommonConfig.setEnvironment(Environment.prod);

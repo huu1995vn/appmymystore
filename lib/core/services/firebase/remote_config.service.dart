@@ -1,6 +1,6 @@
 // ignore_for_file: empty_catches, unnecessary_null_comparison
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
 
 class RemoteConfigSerivce {
   static FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
@@ -12,17 +12,17 @@ class RemoteConfigSerivce {
     await remoteConfig.fetchAndActivate();
     //FirebaseRemoteConfig sử dụng các giá trị defaule trong file R.xml.default_config nếu không lấy được giá trị
     var configs = remoteConfig.getAll();
-    if (configs["apiDaiLyXe"] != null) {
-      CommonConfig.apiDaiLyXe = remoteConfig.getString("apiDaiLyXe");
+    if (configs["api"] != null) {
+      CommonConfig.api = remoteConfig.getString("api");
     }
-    if (configs["apiDaiLyXeSufix"] != null) {
-      CommonConfig.apiDaiLyXeSufix = remoteConfig.getString("apiDaiLyXeSufix");
+    if (configs["apiSufix"] != null) {
+      CommonConfig.apiSufix = remoteConfig.getString("apiSufix");
     }
-    if (configs["apiRaoXe"] != null) {
-      CommonConfig.apiRaoXe = remoteConfig.getString("apiRaoXe");
+    if (configs["apimymystore"] != null) {
+      CommonConfig.apimymystore = remoteConfig.getString("apimymystore");
     }
-    if (configs["apiRaoXeSufix"] != null) {
-      CommonConfig.apiRaoXeSufix = remoteConfig.getString("apiRaoXeSufix");
+    if (configs["apimymystoreSufix"] != null) {
+      CommonConfig.apimymystoreSufix = remoteConfig.getString("apimymystoreSufix");
     }
     if (configs["apiDrive"] != null) {
       CommonConfig.apiDrive = remoteConfig.getString("apiDrive");
@@ -31,13 +31,13 @@ class RemoteConfigSerivce {
       CommonConfig.hostDynamicLink =
           remoteConfig.getString("hostDynamicLink");
     }
-    if (configs["hostRaoXe"] != null) {
-      CommonConfig.hostRaoXe =
-          remoteConfig.getString("hostRaoXe");
+    if (configs["hostmymystore"] != null) {
+      CommonConfig.hostmymystore =
+          remoteConfig.getString("hostmymystore");
     }
-    if (configs["hostDaiLyXe"] != null) {
-      CommonConfig.hostDaiLyXe =
-          remoteConfig.getString("hostDaiLyXe");
+    if (configs["host"] != null) {
+      CommonConfig.host =
+          remoteConfig.getString("host");
     }
     if (configs["hotSearch"] != null) {
       CommonConfig.hotSearch =

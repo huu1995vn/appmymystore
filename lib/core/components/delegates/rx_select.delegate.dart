@@ -2,12 +2,12 @@
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/app_icons.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
+import 'package:mymystore/app_icons.dart';
+import 'package:mymystore/core/commons/common_navigates.dart';
 // ignore: unused_import
-import 'package:raoxe/core/components/index.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/utilities/constants.dart';
+import 'package:mymystore/core/components/index.dart';
+import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 
 class RxSelectDelegate extends SearchDelegate<dynamic> {
   List data;

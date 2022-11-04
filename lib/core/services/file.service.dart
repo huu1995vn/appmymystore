@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:raoxe/core/api/drive/drive_api.bll.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:mymystore/core/api/drive/drive_api.bll.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/entities.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 class FileService {

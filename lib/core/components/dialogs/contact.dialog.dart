@@ -2,12 +2,12 @@
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/index.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/services/master_data.service.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/index.dart';
+import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/entities.dart';
+import 'package:mymystore/core/services/master_data.service.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class ContactDialog extends StatefulWidget {

@@ -1,10 +1,10 @@
 // ignore_for_file: unused_element, empty_catches
 
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/services/info_device.service.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
+import 'package:mymystore/core/commons/common_navigates.dart';
+import 'package:mymystore/core/services/info_device.service.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
 
 class DynamicLinkService {
   static FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
@@ -38,10 +38,10 @@ class DynamicLinkService {
     var resInfo = _getInfoRewriteLinkWithDomain(deepLink);
     if (resInfo != null) {
       switch (resInfo["typePage"]) {
-        case "rm":
-          CommonNavigates.toProductPage(context,
-              id: int.parse(resInfo["id"].toString()));
-          break;
+        // case "rm":
+        //   CommonNavigates.toProductPage(context,
+        //       id: int.parse(resInfo["id"].toString()));
+        //   break;
       }
     }
   }

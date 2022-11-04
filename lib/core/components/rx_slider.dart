@@ -2,8 +2,8 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
 
 class ActiveDot extends StatelessWidget {
   const ActiveDot({super.key});

@@ -1,8 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
+import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/utilities/size_config.dart';
 
 Scaffold RxScaffold(
     {Key? key,

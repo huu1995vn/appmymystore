@@ -7,8 +7,8 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
 
 String interpolate(String string, List<String> params) {
   String result = string;

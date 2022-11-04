@@ -8,18 +8,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_skeleton/flutter_skeleton.dart';
-import 'package:raoxe/app_icons.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/delegates/rx_select.delegate.dart';
-import 'package:raoxe/core/components/index.dart';
-import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/services/master_data.service.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
+import 'package:mymystore/app_icons.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/commons/common_navigates.dart';
+import 'package:mymystore/core/components/delegates/rx_select.delegate.dart';
+import 'package:mymystore/core/components/index.dart';
+import 'package:mymystore/core/entities.dart';
+import 'package:mymystore/core/services/master_data.service.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
+import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
+import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:rating_bar/rating_bar.dart';
 
 class RxDivider extends Divider {
@@ -251,7 +251,7 @@ Widget RxNoFound({required String urlImage, String? message}) {
 Widget RxLoginAccountLabel(context) {
   return InkWell(
     onTap: () {
-      CommonNavigates.toLoginPage(context);
+      // CommonNavigates.toLoginPage(context);
     },
     child: Padding(
       padding: const EdgeInsets.all(kDefaultPadding),

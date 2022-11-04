@@ -6,28 +6,26 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/commons/common_navigates.dart';
+import 'package:mymystore/core/commons/flutter_app_version_checker.dart';
+import 'package:mymystore/core/lang/translation.service.dart';
+import 'package:mymystore/core/providers/app_provider.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
+import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
+import 'package:mymystore/core/services/firebase/firebase_auth.service.dart';
+import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
+import 'package:mymystore/core/services/firebase/remote_config.service.dart';
+import 'package:mymystore/core/services/info_device.service.dart';
+import 'package:mymystore/core/services/master_data.service.dart';
+import 'package:mymystore/core/services/storage/storage_service.dart';
+import 'package:mymystore/core/theme/theme.service.dart';
+import 'package:mymystore/core/theme/themes.dart';
+import 'package:mymystore/core/utilities/logger_utils.dart';
+import 'package:mymystore/screens/error/error_page.dart';
+import 'package:mymystore/screens/update/update_page.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/commons/flutter_app_version_checker.dart';
-import 'package:raoxe/core/lang/translation.service.dart';
-import 'package:raoxe/core/providers/app_provider.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
-import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
-import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
-import 'package:raoxe/core/services/firebase/remote_config.service.dart';
-import 'package:raoxe/core/services/info_device.service.dart';
-import 'package:raoxe/core/services/master_data.service.dart';
-import 'package:raoxe/core/services/storage/storage_service.dart';
-import 'package:raoxe/core/theme/theme.service.dart';
-import 'package:raoxe/core/theme/themes.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:raoxe/core/utilities/logger_utils.dart';
-import 'package:raoxe/pages/error/error_page.dart';
-import 'package:raoxe/pages/my_page.dart';
-import 'package:raoxe/pages/update/update_page.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -40,7 +38,7 @@ init() async {
     DeviceOrientation.portraitDown,
   ]).then((value) {
     // Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
-    runApp(const MyApp());
+    runApp(const HomeScreen());
   });
 }
 
@@ -65,14 +63,14 @@ initializeApp() async {
   //very important
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _HomeScreenState extends State<HomeScreen> {
   final newVersion = AppVersionChecker();
   @override
   void initState() {
@@ -113,7 +111,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: Consumer<AppProvider>(
-          child: const MyPage(),
+          child: const HomeScreen(),
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
                   color: Colors.transparent,

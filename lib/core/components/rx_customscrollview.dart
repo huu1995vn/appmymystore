@@ -2,8 +2,8 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class RxCustomScrollView extends StatefulWidget {

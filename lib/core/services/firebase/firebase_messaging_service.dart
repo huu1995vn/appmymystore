@@ -5,8 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/services/firebase/cloud_firestore.service.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
 
 //model
 class PushNotification {

@@ -3,8 +3,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/utilities/constants.dart';
+import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 
 import '../commons/common_configs.dart';
 import '../utilities/app_colors.dart';

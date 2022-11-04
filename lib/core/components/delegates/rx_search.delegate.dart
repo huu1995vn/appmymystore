@@ -3,18 +3,16 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:raoxe/app_icons.dart';
-import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/services/storage/storage_service.dart';
-import 'package:raoxe/core/utilities/constants.dart';
+import 'package:mymystore/app_icons.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/entities.dart';
+import 'package:mymystore/core/services/storage/storage_service.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 import 'package:debounce_throttle/debounce_throttle.dart';
 import 'dart:async';
-import 'package:raoxe/core/utilities/extensions.dart';
-import 'package:raoxe/core/utilities/size_config.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
+import 'package:mymystore/core/utilities/size_config.dart';
 
 import '../../utilities/app_colors.dart';
 
@@ -181,33 +179,33 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
         .toList()
         .map((e) => SuggestionModel(text: e, isLocal: true))
         .toList();
-    if (suggestionList.length < kItemOnPage) {
-      List list = [];
-      try {
-        if (RxSearchDelegate.cacheapiSearch[query] == null ||
-            RxSearchDelegate.cacheapiSearch[query].length == 0) {
-          var res = await DaiLyXeApiBLL_APIGets().suggest(query);
-          if (res.status > 0) {
-            final data = res.data as List;
-            list = data.isNotEmpty
-                ? data.map((e) => jsonDecode(e["Data"])["TuKhoa"]).toList()
-                : [];
-            if (list.isNotEmpty) {
-              RxSearchDelegate.cacheapiSearch[query] = list;
-            }
-          }
-        } else {
-          list = RxSearchDelegate.cacheapiSearch[query];
-        }
+    // if (suggestionList.length < kItemOnPage) {
+    //   List list = [];
+    //   try {
+    //     if (RxSearchDelegate.cacheapiSearch[query] == null ||
+    //         RxSearchDelegate.cacheapiSearch[query].length == 0) {
+    //       var res = await ApiBLL_APIGets().suggest(query);
+    //       if (res.status > 0) {
+    //         final data = res.data as List;
+    //         list = data.isNotEmpty
+    //             ? data.map((e) => jsonDecode(e["Data"])["TuKhoa"]).toList()
+    //             : [];
+    //         if (list.isNotEmpty) {
+    //           RxSearchDelegate.cacheapiSearch[query] = list;
+    //         }
+    //       }
+    //     } else {
+    //       list = RxSearchDelegate.cacheapiSearch[query];
+    //     }
 
-        suggestionList.addAll(
-            list.map((e) => SuggestionModel(text: e, isLocal: false)).toList());
-        suggestionList = suggestionList.unique((x) => x.text);
-        return suggestionList;
-      } catch (e) {
-        CommonMethods.wirtePrint(e);
-      }
-    }
+    //     suggestionList.addAll(
+    //         list.map((e) => SuggestionModel(text: e, isLocal: false)).toList());
+    //     suggestionList = suggestionList.unique((x) => x.text);
+    //     return suggestionList;
+    //   } catch (e) {
+    //     CommonMethods.wirtePrint(e);
+    //   }
+    // }
     return suggestionList;
   }
 }

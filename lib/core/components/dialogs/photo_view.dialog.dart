@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:raoxe/app_icons.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/part.dart';
+import 'package:mymystore/app_icons.dart';
+import 'package:mymystore/core/commons/common_navigates.dart';
+import 'package:mymystore/core/components/part.dart';
 
 class PhotoViewDialog extends StatefulWidget {
   const PhotoViewDialog(

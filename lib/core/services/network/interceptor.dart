@@ -1,10 +1,10 @@
 // ignore_for_file: void_checks, deprecated_member_use, empty_catches, unused_element, unnecessary_overrides
 
 import 'package:dio/dio.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
-import 'package:raoxe/core/services/info_device.service.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
+import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
+import 'package:mymystore/core/services/info_device.service.dart';
 import 'dart:convert';
 
 class DioInterceptors extends InterceptorsWrapper {
@@ -37,7 +37,7 @@ class DioInterceptors extends InterceptorsWrapper {
 
   String _getToken(RequestOptions options) {
     String path = options.path.toLowerCase();
-    return path.indexOf("apiraoxe/user/") > 0 || path.indexOf("/autologin") > 0 || path.indexOf("/logout") > 0
+    return path.indexOf("apimymystore/user/") > 0 || path.indexOf("/autologin") > 0 || path.indexOf("/logout") > 0
         ? APITokenService.token //token sau khi login chỉ dùng cho các api user
         : APITokenService.getTokenDefaultString; // token default
   }

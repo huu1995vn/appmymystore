@@ -14,20 +14,19 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/services/firebase/dynamic_link.service.dart';
-import 'package:raoxe/core/services/info_device.service.dart';
-import 'package:raoxe/core/services/master_data.service.dart';
-import 'package:raoxe/core/services/storage/storage_service.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
+import 'package:mymystore/core/commons/common_navigates.dart';
+import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/entities.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
+import 'package:mymystore/core/services/firebase/dynamic_link.service.dart';
+import 'package:mymystore/core/services/info_device.service.dart';
+import 'package:mymystore/core/services/master_data.service.dart';
+import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'dart:convert' show base64, utf8;
-import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
+import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../pipes/timeago/timeago.dart' as timeago;
@@ -519,26 +518,6 @@ class CommonMethods {
     }
   }
 
-  static Future<bool> onFavorite(context, List<int> ids, bool status) async {
-    try {
-      if (!CommonMethods.isLogin) {
-        CommonMethods.showToast("please.login".tr);
-        return false;
-      }
-      ResponseModel res =
-          await DaiLyXeApiBLL_APIUser().favoritepost(ids, status);
-      if (res.status > 0) {
-        status
-            ? StorageService.addFavorite(ids)
-            : StorageService.deleteFavorite(ids);
-        return true;
-      } else {
-        CommonMethods.showToast(res.message);
-      }
-    } catch (e) {}
-    return false;
-  }
-
   static Future<void> share(String linkShare, {String? subject}) async {
     await Share.share(linkShare, subject: subject);
   }
@@ -564,7 +543,7 @@ class CommonMethods {
   static String linkProduct(int id, String rewriteUrl) {
     try {
       rewriteUrl = rewriteUrl.convertrUrlPrefix();
-      String rewriteLink = '${CommonConfig.hostRaoXe}/$rewriteUrl-${id}.html';
+      String rewriteLink = '${CommonConfig.hostmymystore}/$rewriteUrl-${id}.html';
       return rewriteLink;
     } catch (error) {}
     return "";
@@ -574,7 +553,7 @@ class CommonMethods {
     try {
       rewriteUrl = rewriteUrl.convertrUrlPrefix();
       String rewriteLink =
-          '${CommonConfig.hostDaiLyXe}/tin-tuc/$rewriteUrl-${id}d.html';
+          '${CommonConfig.host}/tin-tuc/$rewriteUrl-${id}d.html';
       return rewriteLink;
     } catch (error) {}
     return "";
@@ -636,7 +615,7 @@ class CommonMethods {
   static String deepLinkInstallWithDomain() {
     try {
       String rewriteLink =
-          '${CommonConfig.apiRaoXe}?appinstall=${generateMd5("d@i${APITokenService.userId}")}';
+          '${CommonConfig.apimymystore}?appinstall=${generateMd5("d@i${APITokenService.userId}")}';
       return rewriteLink;
     } catch (error) {}
     return "";

@@ -1,8 +1,8 @@
 // ignore_for_file: unused_element, empty_catches
 
-import 'package:raoxe/core/commons/common_configs.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
 
 class FirebaseAuthService {
   static signInAnonymously() async {

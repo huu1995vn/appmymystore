@@ -465,8 +465,8 @@ Map<String, dynamic> _$ReportModelToJson(ReportModel instance) =>
 ConfigModel _$ConfigModelFromJson(Map<String, dynamic> json) => ConfigModel()
   ..TotalRow = json['TotalRow']
   ..RowIndex = json['RowIndex']
-  ..apiDaiLyXe = json['apiDaiLyXe'] as String?
-  ..apiDaiLyXeSufix = json['apiDaiLyXeSufix'] as String?
+  ..api = json['api'] as String?
+  ..apiSufix = json['apiSufix'] as String?
   ..apiDrive = json['apiDrive'] as String?
   ..version = json['version'] as int?;
 
@@ -474,8 +474,8 @@ Map<String, dynamic> _$ConfigModelToJson(ConfigModel instance) =>
     <String, dynamic>{
       'TotalRow': instance.TotalRow,
       'RowIndex': instance.RowIndex,
-      'apiDaiLyXe': instance.apiDaiLyXe,
-      'apiDaiLyXeSufix': instance.apiDaiLyXeSufix,
+      'api': instance.api,
+      'apiSufix': instance.apiSufix,
       'apiDrive': instance.apiDrive,
       'version': instance.version,
     };
@@ -522,19 +522,4 @@ Map<String, dynamic> _$RankTypeModelToJson(RankTypeModel instance) =>
       'discount': instance.discount,
       'promotion': instance.promotion,
       'desc': instance.desc,
-    };
-
-PointModel _$PointModelFromJson(Map<String, dynamic> json) => PointModel(
-      json['currentpoint'] as int,
-      json['usedpoint'] as int,
-      json['ranktypeid'] as int,
-      json['totalpoint'] as int,
-    );
-
-Map<String, dynamic> _$PointModelToJson(PointModel instance) =>
-    <String, dynamic>{
-      'currentpoint': instance.currentpoint,
-      'usedpoint': instance.usedpoint,
-      'ranktypeid': instance.ranktypeid,
-      'totalpoint': instance.totalpoint,
     };

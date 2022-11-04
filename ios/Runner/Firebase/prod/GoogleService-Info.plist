@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>170518340284-0mgeobcqu03112hnasad7j3te0eu0dri.apps.googleusercontent.com</string>
+	<string>929194255134-gvtm3kpk5kqui8pqi6a6ufhdu8b624n0.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.170518340284-0mgeobcqu03112hnasad7j3te0eu0dri</string>
+	<string>com.googleusercontent.apps.929194255134-gvtm3kpk5kqui8pqi6a6ufhdu8b624n0</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBmgZnKssyenyrBvjatyuaj9IIPYr7hSiE</string>
+	<string>AIzaSyDbmqjvbs9Ta-fkWG94M0aTLEg1hoZ4flI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>170518340284</string>
+	<string>929194255134</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>vn.com.raoxe</string>
+	<string>com.example.storemymy</string>
 	<key>PROJECT_ID</key>
-	<string>raovat-257509</string>
+	<string>modern-optics-234509</string>
 	<key>STORAGE_BUCKET</key>
-	<string>raovat-257509.appspot.com</string>
+	<string>modern-optics-234509.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:170518340284:ios:46c84cc9a4c7fde09b66b9</string>
+	<string>1:929194255134:ios:1e846a7498059e10409f0f</string>
 	<key>DATABASE_URL</key>
-	<string>https://raovat-257509.firebaseio.com</string>
+	<string>https://modern-optics-234509-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

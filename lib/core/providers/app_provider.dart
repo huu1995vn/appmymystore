@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/services/storage/storage_service.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/entities.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
+import 'package:mymystore/core/services/storage/storage_service.dart';
 
 class AppProvider with ChangeNotifier {
   AppProvider() {
@@ -17,37 +16,6 @@ class AppProvider with ChangeNotifier {
     // Get.isDarkMode = selectedThemeMode.name == "dark";
   }
 
-  int numNotification = 0;
-
-  getNotification() async {
-    Map<String, dynamic> params = {
-      "p": 1,
-      "n": 1,
-    };
-    ResponseModel res = await DaiLyXeApiBLL_APIUser().notification(params);
-    if (res.status > 0) {
-      if (res.data != null && res.data.length > 0) {
-        List<NotificationModel> list =
-            CommonMethods.convertToList<NotificationModel>(
-                res.data, (val) => NotificationModel.fromJson(val));
-        setNotification(list[0].unread);
-      }
-    }
-  }
-
-  minusNotification() {
-    if (numNotification > 0) {
-      numNotification--;
-      setNotification(numNotification);
-    }
-  }
-
-  setNotification(int notification) {
-    try {
-      numNotification = notification;
-      notifyListeners();
-    } catch (e) {}
-  }
 
   UserModel user = UserModel();
   static UserModel localuser = UserModel();

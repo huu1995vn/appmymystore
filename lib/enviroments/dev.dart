@@ -1,10 +1,10 @@
 const configDev = {
   "env": 'Dev',
-  "apiDaiLyXe": "http://api.dailyxe.info",
-  "apiDaiLyXeSufix": "/",
+  "api": "http://api.dailyxe.info",
+  "apiSufix": "/",
   "apiDrive": "http://cdn.dailyxe.info",
-  "hostDynamicLink": "https://raoxe.page.link",
-  "hostRaoXe": "https://raoxe.com.vn",
-  "hostDaiLyXe": "https://dailyxe.com.vn"
+  "hostDynamicLink": "https://mymystore.page.link",
+  "hostmymystore": "https://mymystore.com.vn",
+  "host": "https://dailyxe.com.vn"
 
 };

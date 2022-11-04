@@ -4,11 +4,11 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/app_icons.dart';
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/utilities/constants.dart';
+import 'package:mymystore/app_icons.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 
 class RxImage extends StatelessWidget {
   final String url;

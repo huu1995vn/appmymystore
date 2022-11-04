@@ -1,9 +1,9 @@
 const configProd = {
   "env": 'Prod',
-  "apiDaiLyXe": "https://api.dailyxe.com.vn",
-  "apiDaiLyXeSufix": "/",
+  "api": "https://api.dailyxe.com.vn",
+  "apiSufix": "/",
   "apiDrive": "https://cdn.dailyxe.com.vn",
-  "hostDynamicLink": "https://prodraoxe.page.link",
-  "hostRaoXe": "https://raoxe.com.vn",
-  "hostDaiLyXe": "https://dailyxe.com.vn"
+  "hostDynamicLink": "https://prodmymystore.page.link",
+  "hostmymystore": "https://mymystore.com.vn",
+  "host": "https://dailyxe.com.vn"
 };

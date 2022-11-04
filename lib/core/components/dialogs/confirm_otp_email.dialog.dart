@@ -4,15 +4,15 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:mymystore/app_icons.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:raoxe/app_icons.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/components/part.dart';
-import 'package:raoxe/core/services/auth.service.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
-import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/commons/common_navigates.dart';
+import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/services/auth.service.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
+import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
 
 class OtpVerificationEmailDialog extends StatefulWidget {
   final String email;

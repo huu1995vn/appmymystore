@@ -1,5 +1,5 @@
-import 'package:raoxe/core/commons/common_configs.dart';
-import 'package:raoxe/main.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
+import 'main.dart';
 
 void main() async {
   CommonConfig.setEnvironment(Environment.dev);

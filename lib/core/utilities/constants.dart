@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:raoxe/core/entities.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:mymystore/core/entities.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
 
 const kStepPrice = 20000000;
 const TOKEN_SECURITY_KEY = "SDGD\$E^&Ư#RBSDGFGJ*IY^&ÉDQQWRWF#\$%#SGSAS";
@@ -57,8 +57,8 @@ const CHECKSUCCESSIMAGE = "/assets/check-verify.jpg";
 const MAINTOPIMAGE = "assets/images/bg/main_top.png";
 const LOGINBOTTOMIMAGE = "assets/images/bg/login_bottom.png";
 const BGLOGINMEMBERIMAGE = "assets/images/img-screen/bg-login-member.png";
-const LOGORAOXECOLORIMAGE = "assets/logo-raoxe-comau.png";
-const LOGORAOXEWHITEIMAGE = "assets/images/logo-raoxe-trang.png";
+const LOGOmymystoreCOLORIMAGE = "assets/logo-mymystore-comau.png";
+const LOGOmymystoreWHITEIMAGE = "assets/images/logo-mymystore-trang.png";
 const UUDAISVG = "assets/images/img-screen/uu-dai.svg";
 const BGBANNER = "assets/images/bg/bg-banner.png";
 const NOTFOUNDDATA = "assets/images/img-screen/no-data.png";

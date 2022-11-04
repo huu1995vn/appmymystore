@@ -1,7 +1,7 @@
 // ignore_for_file: camel_case_types, depend_on_referenced_packages
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:raoxe/core/entities.dart';
+import 'package:mymystore/core/entities.dart';
 import 'drive_api.dal.dart';
 import 'package:path/path.dart' as p;
 

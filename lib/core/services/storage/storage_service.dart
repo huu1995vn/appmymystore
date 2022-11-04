@@ -1,8 +1,7 @@
 // ignore_for_file: constant_identifier_names, empty_catches
 
 import 'package:localstorage/localstorage.dart';
-import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:raoxe/core/entities.dart';
+import 'package:mymystore/core/entities.dart';
 
 class StorageService {
   static String keyStorage = "rx";
@@ -33,29 +32,6 @@ class StorageService {
     storage.setItem(keyStorage, dataStorage);
   }
 
-  static initFavorite() async {
-    try {
-      Map<String, dynamic> body = {"p": 1, "n": 1000};
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().favorite(body);
-      if (res.status > 0) {
-        if (res.data != null && res.data.length > 0) {
-          listFavorite =
-              (res.data as List).map((e) => int.parse(e["id"])).toList();
-          set(StorageKeys.favorite, listFavorite);
-        }
-      }
-    } catch (e) {}
-  }
-
-  static deleteFavorite(List<int> ids) {
-    listFavorite.removeWhere((element) => ids.contains(element));
-    set(keyStorage, listFavorite.toSet().toList());
-  }
-
-  static addFavorite(List<int> ids) {
-    listFavorite.addAll(ids);
-    set(keyStorage, listFavorite.toSet().toList());
-  }
 }
 
 class StorageKeys {
@@ -67,7 +43,6 @@ class StorageKeys {
   static const String text_search = 'text_search';
   static const String biometric = 'biometric';
   static const String userlogin = 'usl';
-  static const String favorite = 'fv';
   static const String token = 'token';
   static const String viewtype = 'viewtype';
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
 
 class Themes {
   static ThemeData _theme({bool isDark = false}) {

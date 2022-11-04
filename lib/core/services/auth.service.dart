@@ -2,16 +2,16 @@
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/entities.dart';
-// import 'package:raoxe/core/commons/common_navigates.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/services/firebase/firebase_auth.service.dart';
-import 'package:raoxe/core/services/info_device.service.dart';
-import 'package:raoxe/core/services/storage/storage_service.dart';
-import 'package:raoxe/pages/my_page.dart';
+import 'package:mymystore/core/api/api.bll.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/entities.dart';
+// import 'package:mymystore/core/commons/common_navigates.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
+import 'package:mymystore/core/services/firebase/firebase_auth.service.dart';
+import 'package:mymystore/core/services/info_device.service.dart';
+import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:mymystore/main.dart';
 
 class AuthService {
   static Future login(
@@ -19,7 +19,7 @@ class AuthService {
     CommonMethods.lockScreen();
     try {
       await InfoDeviceService.dataSafety();
-      var res = await DaiLyXeApiBLL_APIAuth().login(username, password);
+      var res = await ApiBLL_APIAuth().login(username, password);
       if (res.status > 0) {
         await APITokenService.login(res.data);
         if (APITokenService.isValid) {
@@ -29,7 +29,7 @@ class AuthService {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => const MyPage(indexTab: 3)),
+                  builder: (BuildContext context) => const HomeScreen()),
               (Route<dynamic> route) => route.isFirst);
         }
       } else {
@@ -42,7 +42,7 @@ class AuthService {
   static Future<bool> autologin() async {
     if (APITokenService.token != null && APITokenService.token.isNotEmpty) {
       await InfoDeviceService.dataSafety();
-      var res = await DaiLyXeApiBLL_APIAuth().autologin();
+      var res = await ApiBLL_APIAuth().autologin();
       if (res.status > 0) {
         APITokenService.login(res.data);
       }
@@ -58,7 +58,7 @@ class AuthService {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) => const MyPage(indexTab: 3)),
+              builder: (BuildContext context) => const HomeScreen()),
           (Route<dynamic> route) => route.isFirst);
     } catch (e) {}
     CommonMethods.unlockScreen();
@@ -71,7 +71,7 @@ class AuthService {
     if (!CommonMethods.checkStringPhone(phone)) {
       throw "invalid.phone".tr;
     }
-    var res = await DaiLyXeApiBLL_APIGets().statsuser({"phone": phone});
+    var res = await ApiBLL_APIGets().statsuser({"phone": phone});
     int status = res.data;
     if (isExist) {
       if (status == -1) {
@@ -94,7 +94,7 @@ class AuthService {
     if (!CommonMethods.checkStringEmail(email)) {
       throw "invalid.email".tr;
     }
-    // var res = await DaiLyXeApiBLL_APIGets().statsuser({"email": email});
+    // var res = await ApiBLL_APIGets().statsuser({"email": email});
     // int status = res.data;
     // if (isExist) {
     //   if (status == -1) {
@@ -128,7 +128,7 @@ class AuthService {
   static Future sendOTPEmail(String email, void Function(Object) fnError,
       void Function() fnSuccess) async {
     try {
-      ResponseModel res = await DaiLyXeApiBLL_APIUser().sendverifyemail(email);
+      ResponseModel res = await ApiBLL_APIUser().sendverifyemail(email);
       if (res.status <= 0) {
         fnError(res.message);
       }
@@ -141,7 +141,7 @@ class AuthService {
 
   static Future<bool> verifyOTPEmail(String code) async {
     ResponseModel res =
-        await DaiLyXeApiBLL_APIUser().verifyemail(verifyemail, code);
+        await ApiBLL_APIUser().verifyemail(verifyemail, code);
     if (res.status <= 0) {
       throw Exception(res.message);
     }

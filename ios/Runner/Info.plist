@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>RaoXe</string>
+	<string>MyMyStore</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,7 +20,7 @@
 		<string>vi</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>RaoXe</string>
+	<string>MyMyStore</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -49,7 +49,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>prodraoxe.page.link</string>
+			<string>prodmymystore.page.link</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>https</string>
@@ -59,7 +59,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>raoxe.com.vn</string>
+			<string>mymystore</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>https</string>
@@ -80,7 +80,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>raoxe</string>
+				<string>mymystore</string>
 			</array>
 		</dict>
 	</array>

@@ -2,15 +2,13 @@
 
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:raoxe/core/api/dailyxe/dailyxe_api.bll.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/services/aes.service.dart';
-import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
-import 'package:raoxe/core/services/storage/storage_service.dart';
-import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/core/utilities/extensions.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/services/aes.service.dart';
+import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
+import 'package:mymystore/core/services/storage/storage_service.dart';
+import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
 
 class APITokenService {
   static String _token = "";
@@ -88,26 +86,12 @@ class APITokenService {
         FirebaseMessagingService.subscribeToTopic(topic);
         res = true;
       }
-      Timer(Duration.zero, () async {
-        await StorageService.initFavorite();
-      });
+      
     } catch (e) {
       CommonMethods.wirtePrint(e);
     }
 
     return res;
-  }
-
-  static unsubscribeAlltopic(topic) {
-    DaiLyXeApiBLL_APIUser().topics().then((value) {
-      try {
-        value.data["res"]["topics"].forEach((key, value) {
-          if (topic == null || key != topic) {
-            FirebaseMessagingService.unsubscribeFromTopic(key);
-          }
-        });
-      } catch (e) {}
-    });
   }
 
   static Future<bool> logout() async {

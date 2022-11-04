@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/utilities/app_colors.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
 
 /*
 Application use

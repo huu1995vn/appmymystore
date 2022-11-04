@@ -3,12 +3,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/services/auth.service.dart';
-import 'package:raoxe/core/services/firebase/firebase_messaging_service.dart';
-import 'package:raoxe/core/services/info_device.service.dart';
-import 'package:raoxe/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
+import 'package:mymystore/core/services/auth.service.dart';
+import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
+import 'package:mymystore/core/services/info_device.service.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 
 class CloudFirestoreSerivce {
   static subcriptuser(BuildContext context) {
@@ -62,9 +62,9 @@ class CloudFirestoreSerivce {
     //   var value = await fireStoreService.get();
     //   if (value.docs != null && value.docs.isNotEmpty) {
     //     dynamic item = value.docs[0].data()!;
-    //     CommonConfig.apiDaiLyXe = item["apiDaiLyXe"] ?? CommonConfig.apiDaiLyXe;
-    //     CommonConfig.apiDaiLyXeSufix =
-    //         item["apiDaiLyXeSufix"] ?? CommonConfig.apiDaiLyXeSufix;
+    //     CommonConfig.api = item["api"] ?? CommonConfig.api;
+    //     CommonConfig.apiSufix =
+    //         item["apiSufix"] ?? CommonConfig.apiSufix;
     //     CommonConfig.apiDrive = item["apiDrive"] ?? CommonConfig.apiDrive;
     //     CommonConfig.version_masterdata =
     //         item["version_masterdata"] ?? CommonConfig.version_masterdata;

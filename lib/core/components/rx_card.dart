@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:raoxe/core/utilities/constants.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 
 class RxCard extends StatelessWidget {
   final Widget child;

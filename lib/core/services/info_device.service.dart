@@ -2,7 +2,7 @@
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 class InfoDevice {

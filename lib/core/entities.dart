@@ -4,12 +4,11 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:raoxe/core/commons/common_methods.dart';
-import 'package:raoxe/core/providers/app_provider.dart';
-import 'package:raoxe/core/services/api_token.service.dart';
-import 'package:raoxe/core/services/storage/storage_service.dart';
-import 'package:raoxe/core/utilities/constants.dart';
-import 'package:raoxe/data/ranktypes.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/providers/app_provider.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
+import 'package:mymystore/core/services/storage/storage_service.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 
 /// This allows the class to access private members in
 /// the generated file called *.g.dart, where the star denotes the source file name.
@@ -797,8 +796,8 @@ class ReportModel extends Entity {
 
 @JsonSerializable()
 class ConfigModel extends Entity {
-  String? apiDaiLyXe;
-  String? apiDaiLyXeSufix;
+  String? api;
+  String? apiSufix;
   String? apiDrive;
   int? version;
   ConfigModel();
@@ -863,25 +862,6 @@ class RankTypeModel {
   Map<String, dynamic> toJson() => _$RankTypeModelToJson(this);
 }
 
-@JsonSerializable()
-class PointModel {
-  int currentpoint = 0;
-  int usedpoint = 0;
-  int ranktypeid = 1;
-  int totalpoint = 0;
-  RankTypeModel get ranktype {
-    return rRankTypes.firstWhere((element) => element.id == ranktypeid);
-  }
-
-  PointModel(
-      this.currentpoint, this.usedpoint, this.ranktypeid, this.totalpoint);
-
-  PointModel clone() => PointModel.fromJson(toJson());
-  factory PointModel.fromJson(Map<String, dynamic> json) {
-    return _$PointModelFromJson(json);
-  }
-  Map<String, dynamic> toJson() => _$PointModelToJson(this);
-}
 
 class AppTheme {
   ThemeMode mode;

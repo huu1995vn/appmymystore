@@ -77,22 +77,22 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-
   Future<Widget> loadFromFuture(Widget? main) async {
     try {
-      var status = await newVersion.checkUpdate();
-      if (status != null && status.canUpdate) {
-        return UpdatePage(data: status);
-      }
-      await InfoDeviceService.init();
-      await FirebaseAuthService.signInAnonymously();
-      await FirebaseMessagingService.init();
-      APITokenService.init();
-      await CloudFirestoreSerivce.init();
-      bool res = await MasterDataService.init();
-      if (res) {
-        return main!;
-      }
+      // var status = await newVersion.checkUpdate();
+      // if (status != null && status.canUpdate) {
+      //   return UpdatePage(data: status);
+      // }
+      // await InfoDeviceService.init();
+      // await FirebaseAuthService.signInAnonymously();
+      // await FirebaseMessagingService.init();
+      // APITokenService.init();
+      // await CloudFirestoreSerivce.init();
+      // bool res = await MasterDataService.init();
+      // if (res) {
+      //   return main!;
+      // }
+      return main!;
     } catch (e) {
       CommonMethods.wirtePrint(e.toString());
     }

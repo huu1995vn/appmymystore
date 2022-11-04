@@ -5,17 +5,15 @@
 			"name": "Flutter_Dev",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_dev.dart",
-            "args": [
-                "--flavor",
-                "dev",
+            "program": "lib/main.dart",
+            "args": [                
                 "--no-sound-null-safety"        ]
 		},
         {
 			"name": "Flutter_Dev_Web",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_dev.dart",
+            "program": "lib/main.dart",
             "args":["-d", "chrome", "--no-sound-null-safety", "--web-port=5000", "--web-renderer html"],
             
 		},
@@ -23,10 +21,8 @@
 			"name": "Flutter_Prod",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_prod.dart",
+            "program": "lib/main.dart",
             "args": [
-                "--flavor",
-                "prod",
                 "--no-sound-null-safety",
                 // "--release"
             ]
@@ -35,10 +31,8 @@
 			"name": "Flutter_Prod_Release",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_prod.dart",
+            "program": "lib/main.dart",
             "args": [
-                "--flavor",
-                "prod",
                 "--no-sound-null-safety",
                 "--release"
             ]

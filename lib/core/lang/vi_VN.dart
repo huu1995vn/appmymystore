@@ -1,3 +1,4 @@
+// ignore: constant_identifier_names
 const Map<String, String> vi_VN = {
   'sort': "Sắp xếp",
   'copper': 'Đồng',
@@ -308,7 +309,7 @@ const Map<String, String> vi_VN = {
   "pricereport": "Nhận báo giá",
   "testdrive": "Đăng ký lái thử",
   "unknown": "Chưa xác định",
-  "newversion": "Đã có phiên bản mới", 
+  "newversion": "Đã có phiên bản mới",
   "noconnect": "Mất kết nối",
   "noconnectmessage": "Không thể kết nối đến máy chủ.",
   "message.str001":

@@ -20,6 +20,7 @@ import 'package:mymystore/pages/my_page.dart';
 import 'package:mymystore/pages/update/update_page.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:splashscreen/splashscreen.dart';
 
 Future<void> main() async {
@@ -72,7 +73,7 @@ class _MyAppState extends State<MyApp> {
   Future<Widget> loadFromFuture(Widget? main) async {
     try {
       var status = await newVersion.checkUpdate();
-      if (status != null && status.canUpdate) {
+      if (status.canUpdate) {
         return UpdatePage(data: status);
       }
       await InfoDeviceService.init();

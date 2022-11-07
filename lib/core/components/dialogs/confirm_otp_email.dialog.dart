@@ -26,7 +26,6 @@ class OtpVerificationEmailDialog extends StatefulWidget {
 class _OtpVerificationEmailDialogState
     extends State<OtpVerificationEmailDialog> {
   final _formKey = GlobalKey<FormState>();
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
   String code = "";
   int expiredTime = 0;
   Future sendOTP(

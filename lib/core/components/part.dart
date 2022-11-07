@@ -98,7 +98,7 @@ class RxWebViewState extends State<RxWebView> {
         ),
         body: Stack(
           children: <Widget>[
-            widget.html != null && widget.html!.length > 0
+            widget.html != null && widget.html!.isNotEmpty
                 ? InAppWebView(
                     key: _key,
                     initialData: InAppWebViewInitialData(data: widget.html!),
@@ -467,7 +467,7 @@ class RxButton extends StatelessWidget {
             ? ElevatedButton(
                 onPressed: onTap,
                 style: ElevatedButton.styleFrom(
-                    primary: color //elevated btton background color
+                    backgroundColor: color //elevated btton background color
                     ),
                 child: Text(text,
                     style: const TextStyle(
@@ -484,7 +484,7 @@ class RxButton extends StatelessWidget {
                       fontSize: 16,
                     )), //label text
                 style: ElevatedButton.styleFrom(
-                    primary: color //elevated btton background color
+                    backgroundColor: color //elevated btton background color
                     ),
               ));
   }

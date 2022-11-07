@@ -2,7 +2,6 @@
 
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
-import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 

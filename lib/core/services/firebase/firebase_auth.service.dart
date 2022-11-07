@@ -7,7 +7,7 @@ import 'package:mymystore/core/commons/common_methods.dart';
 class FirebaseAuthService {
   static signInAnonymously() async {
     try {
-      final userCredential = await FirebaseAuth.instance.signInAnonymously();
+      await FirebaseAuth.instance.signInAnonymously();
       CommonMethods.wirtePrint("Signed in with temporary account.");
     } on FirebaseAuthException catch (e) {
       switch (e.code) {

@@ -16,7 +16,7 @@ Scaffold RxScaffold(
     appBar: appBar,
     backgroundColor: color ?? Colors.white,
     extendBodyBehindAppBar: true,
-    body: Container(
+    body: SizedBox(
       width: double.infinity,
       height: SizeConfig.screenHeight,
       child: Padding(

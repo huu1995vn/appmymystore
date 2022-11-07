@@ -50,7 +50,7 @@ class _InputTextState extends State<RxInput> {
   @override
   void initState() {
     super.initState();
-    if (mounted && widget.value != input.text) input.text = widget.value ?? "";
+    if (mounted && widget.value != input.text) input.text = widget.value;
   }
 
   @override
@@ -58,8 +58,7 @@ class _InputTextState extends State<RxInput> {
     super.didUpdateWidget(oldWidget);
     if (widget.value != oldWidget.value) {
       Future.delayed(Duration.zero, () {
-        if (mounted && widget.value != input.text)
-          input.text = widget.value ?? "";
+        if (mounted && widget.value != input.text) input.text = widget.value;
       });
     }
   }
@@ -76,19 +75,21 @@ class _InputTextState extends State<RxInput> {
       onTap: widget.onTap,
       readOnly: widget.readOnly || widget.disabled,
       controller: input,
-      keyboardType: widget.keyboardType, 
+      keyboardType: widget.keyboardType,
       inputFormatters: widget.keyboardType == TextInputType.number
           ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
           : null,
       obscureText: !showPassword && widget.isPassword,
       maxLength: widget.maxLength,
-      minLines: widget.isPassword? 1 : widget.minLines,
-      maxLines: widget.isPassword? 1 : (widget.minLines != null ? widget.minLines! + 5 : null),
+      minLines: widget.isPassword ? 1 : widget.minLines,
+      maxLines: widget.isPassword
+          ? 1
+          : (widget.minLines != null ? widget.minLines! + 5 : null),
       maxLengthEnforcement: widget.maxLengthEnforcement,
       validator: widget.validator,
-      onChanged: widget.onChanged, 
+      onChanged: widget.onChanged,
       style: widget.style,
-      decoration: InputDecoration( 
+      decoration: InputDecoration(
           errorStyle: const TextStyle(height: 0.6),
           isDense: true,
           fillColor: widget.isBorder ? Theme.of(context).cardTheme.color : null,

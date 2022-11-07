@@ -1,12 +1,10 @@
 // ignore_for_file: null_check_always_fails
 
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mymystore/core/components/dialogs/confirm_otp_email.dialog.dart';
 import 'package:mymystore/core/components/dialogs/confirm_otp_phone.dialog.dart';
-import 'package:mymystore/core/entities.dart';
 
 class CommonNavigates {
   static Map<String, Widget Function(BuildContext)> routers =

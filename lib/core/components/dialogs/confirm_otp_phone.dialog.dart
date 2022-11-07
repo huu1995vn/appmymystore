@@ -28,7 +28,6 @@ class OtpVerificationPhoneDialog extends StatefulWidget {
 class _OtpVerificationPhoneDialogState
     extends State<OtpVerificationPhoneDialog> {
   final _formKey = GlobalKey<FormState>();
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
   String code = "";
   int expiredTime = 0;
   Future sendOTP(

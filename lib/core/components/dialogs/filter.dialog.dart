@@ -2,10 +2,7 @@
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/index.dart';
-import 'package:mymystore/core/components/delegates/rx_select.delegate.dart';
-import 'package:mymystore/core/components/index.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/services/master_data.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';

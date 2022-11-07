@@ -26,7 +26,7 @@ class _ErrorPageState extends State<ErrorPage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+              const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
         ),
         backgroundColor: Colors.white,
         body: Container(
@@ -36,7 +36,7 @@ class _ErrorPageState extends State<ErrorPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                ("noconnect".tr + "!").toUpperCase(),
+                ("${"noconnect".tr}!").toUpperCase(),
                 style:
                     const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
@@ -48,12 +48,10 @@ class _ErrorPageState extends State<ErrorPage> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 40),
-              Container(
-                child: Icon(
-                  AppIcons.signal_wifi_off,
-                  color: Theme.of(context).textTheme.bodyLarge!.color,
-                  size: 100,
-                ),
+              Icon(
+                AppIcons.signal_wifi_off,
+                color: Theme.of(context).textTheme.bodyLarge!.color,
+                size: 100,
               ),
               const SizedBox(height: 70),
               Row(

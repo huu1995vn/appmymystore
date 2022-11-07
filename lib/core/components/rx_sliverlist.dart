@@ -1,13 +1,9 @@
 // ignore_for_file: curly_braces_in_flow_control_structures, unnecessary_null_comparison, non_constant_identifier_names, empty_catches
 
 import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/utilities/constants.dart';
-
-import '../commons/common_configs.dart';
-import '../utilities/app_colors.dart';
 
 class RxSliverList extends StatefulWidget {
   final dynamic data;
@@ -117,7 +113,6 @@ class RxListViewState extends State<RxSliverList>
               childCount: widget.data.length,
             ),
           );
-    ;
   }
 
   Widget _bodylist() {

@@ -1,7 +1,6 @@
 // ignore_for_file: constant_identifier_names, empty_catches
 
 import 'package:localstorage/localstorage.dart';
-import 'package:mymystore/core/entities.dart';
 
 class StorageService {
   static String keyStorage = "mm";

@@ -48,12 +48,12 @@ dynamic format(dynamic amount,
 
     amount = amount ?? 0; // không để giá trị bị lỗi
     var valueCurrency = amount / iCurrency!['value'];
-    if (numRound != null && numRound > 0) {
+    if (numRound > 0) {
       valueCurrency = valueCurrency.toStringAsFixed(numRound);
     }
     // valueCurrency = new DecimalPipe('en-US').transform(amount / iCurrency['value'], '1.2-' + numRound);  // giá trị
     valueCurrency = formatCurrency(valueCurrency);
-    var typeCurrency = iCurrency!['label']; // đơn vị
+    var typeCurrency = iCurrency['label']; // đơn vị
     return '${valueCurrency ?? 0} $typeCurrency';
 
     // return {

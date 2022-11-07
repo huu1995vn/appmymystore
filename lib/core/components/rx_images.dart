@@ -4,7 +4,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/components/rx_image.dart';
-import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 
@@ -35,7 +34,7 @@ class _RxImagesState extends State<RxImages>
 
   loadData() {
     setState(() {
-      data = widget.data ?? [IMAGE_NOT_FOUND];
+      data = widget.data;
     });
   }
 

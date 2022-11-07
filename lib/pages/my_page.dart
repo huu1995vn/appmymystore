@@ -20,7 +20,6 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends LifecycleWatcherState<MyPage> {
-  int _selectedIndex = 0;
   final PageController _pageController = PageController();
 
   @override
@@ -50,9 +49,7 @@ class _MyPageState extends LifecycleWatcherState<MyPage> {
   StreamSubscription<PushNotification>? submess;
   initApp() async {}
   onPressedTab(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() {});
     if (_pageController.hasClients) _pageController.jumpToPage(index);
   }
 

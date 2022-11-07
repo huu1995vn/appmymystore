@@ -7,9 +7,6 @@ import 'package:get/get.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 
-import '../commons/common_configs.dart';
-import '../utilities/app_colors.dart';
-
 class RxListView extends StatefulWidget {
   final dynamic data;
   final Widget Function(BuildContext, int) itemBuilder;

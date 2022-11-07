@@ -77,7 +77,6 @@ class _ContactDialogState extends State<ContactDialog> {
                                   return CommonMethods.checkStringPhone(v)
                                       ? null
                                       : throw "invalid.phone".tr;
-                                  ;
                                 }
                               }),
                           rxTextInput(context, contact.fullname,

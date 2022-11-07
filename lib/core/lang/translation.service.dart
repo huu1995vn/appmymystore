@@ -12,7 +12,7 @@ class TranslationService extends Translations {
   static final locale = _getLocaleFromLanguage();
 
 // fallbackLocale là locale default nếu locale được set không nằm trong những Locale support
-  static final fallbackLocale = Locale('en', 'US');
+  static const fallbackLocale = Locale('en', 'US');
 
 // language code của những locale được support
   static final langCodes = [
@@ -22,8 +22,8 @@ class TranslationService extends Translations {
 
 // các Locale được support
   static final locales = [
-    Locale('en', 'US'),
-    Locale('vi', 'VN'),
+    const Locale('en', 'US'),
+    const Locale('vi', 'VN'),
   ];
 
 // cái này là Map các language được support đi kèm với mã code của lang đó: cái này dùng để đổ data vào Dropdownbutton và set language mà không cần quan tâm tới language của hệ thống
@@ -35,15 +35,11 @@ class TranslationService extends Translations {
     StorageService.set(storageKey, isVi);
   }
 
-  static Locale _getLocale() {
-    return isVi() ? locales[1] : locales[0];
-  }
-
 // function change language nếu bạn không muốn phụ thuộc vào ngôn ngữ hệ thống
   static void changeLocale(String langCode) {
     final locale = _getLocaleFromLanguage(langCode: langCode);
     Get.updateLocale(locale!);
-    _saveLanguage(locale!.languageCode == "vi");
+    _saveLanguage(locale.languageCode == "vi");
   }
 
   static bool isVi() {

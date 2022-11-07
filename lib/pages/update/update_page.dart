@@ -30,7 +30,7 @@ class _UpdatePageState extends State<UpdatePage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+              const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
         ),
         backgroundColor: Colors.white,
         body: Container(
@@ -40,7 +40,7 @@ class _UpdatePageState extends State<UpdatePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                ("newversion".tr + "!").toUpperCase(),
+                ("${"newversion".tr}!").toUpperCase(),
                 style:
                     const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),

@@ -1,3 +1,4 @@
+// ignore: constant_identifier_names
 const Map<String, String> en_US = {
   'sort': "Sắp xếp",
   'copper': 'Copper',
@@ -335,6 +336,4 @@ const Map<String, String> en_US = {
   "message.alert02": "Please enter a different email from your current email",
   "message.alert03": "Cannot connect server. Please try again after!",
   "pattern.str001": "Please update the app from %1 to %2"
-
-
 };

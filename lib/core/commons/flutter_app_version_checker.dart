@@ -1,6 +1,9 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math' as math;
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -25,8 +28,10 @@ class AppVersionChecker {
     this.androidStore = AndroidStore.googlePlayStore,
   });
 
+  // ignore: duplicate_ignore
   Future<AppCheckerResult> checkUpdate() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    // ignore: no_leading_underscores_for_local_identifiers
     final _currentVersion = currentVersion ?? packageInfo.version;
     final _packageName = appId ?? packageInfo.packageName;
     if (Platform.isAndroid) {

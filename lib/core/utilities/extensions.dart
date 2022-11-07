@@ -142,9 +142,9 @@ extension StringExtension on String {
   }
 
   String formartContent() {
-    var str = this ?? "";
+    var str = this;
     if (CommonMethods.isMobile()) {
-      return str!.replaceAllMapped(
+      return str.replaceAllMapped(
           RegExp(r'((\u0023|\u002a|[\u0030-\u0039])\ufe0f\u20e3){1}'),
           (match) => match[2]!);
     }

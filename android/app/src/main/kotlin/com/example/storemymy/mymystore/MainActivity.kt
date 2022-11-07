@@ -1,4 +1,4 @@
-package com.example.storemymy.mymystore
+package com.example.storemymy
 
 import io.flutter.embedding.android.FlutterActivity
 

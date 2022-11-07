@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/utilities/constants.dart';
+import 'package:skeletons/skeletons.dart';
 
 class RxListView extends StatefulWidget {
   final dynamic data;
@@ -114,7 +115,12 @@ class _RxDataListViewState extends State<RxListView>
             padding: widget.padding,
             itemBuilder: (context, index) {
               return widget.awaiting ??
-                  RxCardSkeleton(barCount: 3, isShowAvatar: false);
+                  SkeletonLine(
+                    style: SkeletonLineStyle(
+                        height: 16,
+                        width: 64,
+                        borderRadius: BorderRadius.circular(8)),
+                  );
             }));
   }
 

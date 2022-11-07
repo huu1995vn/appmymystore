@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/utilities/constants.dart';
+import 'package:skeletons/skeletons.dart';
 
 class RxSliverList extends StatefulWidget {
   final dynamic data;
@@ -57,8 +58,12 @@ class RxListViewState extends State<RxSliverList>
               padding: kEdgeInsetsPadding,
               color: Get.isDarkMode ? Colors.black : Colors.grey[200],
               child: widget.awaiting ??
-                  RxCardSkeleton(
-                      barCount: 3, isShowAvatar: false, isBorderRadius: true));
+                  SkeletonLine(
+                    style: SkeletonLineStyle(
+                        height: 16,
+                        width: 64,
+                        borderRadius: BorderRadius.circular(8)),
+                  ));
         },
         childCount: kItemOnPage,
       ),

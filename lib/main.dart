@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/commons/flutter_app_version_checker.dart';
+import 'package:mymystore/core/components/splashscreen.dart';
 import 'package:mymystore/core/lang/translation.service.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/firebase/remote_config.service.dart';
@@ -20,8 +21,6 @@ import 'package:mymystore/pages/my_page.dart';
 import 'package:mymystore/pages/update/update_page.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:splashscreen/splashscreen.dart';
 
 Future<void> main() async {
   await initializeApp();
@@ -113,8 +112,7 @@ class _MyAppState extends State<MyApp> {
                     builder: (BuildContext context,
                         AsyncSnapshot<FirebaseRemoteConfig> snapshot) {
                       return (snapshot.hasData)
-                          ? SplashScreen(
-                              seconds: 3,
+                          ? SplashScreen.future(
                               navigateAfterFuture: loadFromFuture(home),
                               imageBackground:
                                   const AssetImage('assets/splash.png'),

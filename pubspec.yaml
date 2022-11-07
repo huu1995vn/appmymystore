@@ -38,12 +38,11 @@ dependencies:
   cupertino_icons: 
   flutter_svg:  # Used to render svg images
   google_fonts:  # Used to include google fonts
-  rating_bar:  # Used for show product star ratings
+  flutter_rating_bar:  # Used for show product star ratings
   dio:  # Used for call api
   provider:  # Used for custome theme
   localstorage: # Used for save local data
   flutter_launcher_icons: # Used for build icon
-  splashscreen: # Used for splashscreen
   wc_form_validators: # Used for form validators
   firebase_core: # Required to use any Firebase service with Flutter
   firebase_messaging: # Used for receiving notifications in the app
@@ -65,7 +64,7 @@ dependencies:
   json_annotation: # Used for code generation libraries
   scroll_to_index: #This package provides the scroll to index mechanism for fixed/variable row height for Flutter scrollable widget.
   cached_network_image: # Used cache image
-  flutter_skeleton: #Used for skeleton
+  skeletons: #Used for skeleton
   pin_code_fields: #Used for pin_code
   carousel_slider: #Used for show banner
   image_picker: #Used for open camera

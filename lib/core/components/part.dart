@@ -4,10 +4,8 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_skeleton/flutter_skeleton.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
@@ -20,7 +18,7 @@ import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
-import 'package:rating_bar/rating_bar.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class RxDivider extends Divider {
   const RxDivider({super.key, double indent = 20})
@@ -168,59 +166,6 @@ class RxCustomShape extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
     return true;
   }
-}
-
-Widget RxListSkeleton({int barCount = 3}) {
-  try {
-    return ListSkeleton(
-      style: SkeletonStyle(
-        backgroundColor:
-            Get.isDarkMode ? AppColors.blackLight : AppColors.white,
-        isShowAvatar: false,
-        barCount: barCount,
-        isAnimation: true,
-      ),
-    );
-  } catch (e) {}
-  return const Center(child: CupertinoActivityIndicator());
-}
-
-Widget RxCardSkeleton(
-    {int barCount = 3,
-    bool isShowAvatar = true,
-    bool isCircleAvatar = false,
-    bool isBorderRadius = true}) {
-  try {
-    return Container(
-      margin: const EdgeInsets.only(bottom: kDefaultMarginBottomBox),
-      child: CardSkeleton(
-        style: SkeletonStyle(
-          backgroundColor:
-              Get.isDarkMode ? AppColors.blackLight : AppColors.white,
-          isShowAvatar: isShowAvatar,
-          isCircleAvatar: isCircleAvatar,
-          borderRadius:
-              BorderRadius.all(Radius.circular(isBorderRadius ? 20.0 : 0)),
-          // padding: EdgeInsets.all(isBorderRadius ? 20.0 : 10.0),
-          barCount: barCount,
-          isAnimation: true,
-        ),
-      ),
-    );
-  } catch (e) {}
-  return const Center(child: CupertinoActivityIndicator());
-}
-
-Widget RxCardListSkeleton(
-    {int barCount = 3, bool isShowAvatar = true, bool isCircleAvatar = false}) {
-  return CardListSkeleton(
-    style: SkeletonStyle(
-      backgroundColor: Get.isDarkMode ? AppColors.blackLight : AppColors.white,
-      isShowAvatar: isShowAvatar,
-      isCircleAvatar: isCircleAvatar,
-      barCount: barCount,
-    ),
-  );
 }
 
 Widget RxNoFound({required String urlImage, String? message}) {
@@ -675,18 +620,6 @@ _onSelect(BuildContext context, String type, dynamic id,
   }
 }
 
-Widget RxListAwaiting() {
-  return ListView.builder(
-      key: UniqueKey(),
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.only(top: kDefaultPadding),
-      itemCount: kItemOnPage,
-      itemBuilder: (context, index) {
-        return RxCardSkeleton(barCount: 3, isShowAvatar: false);
-      });
-}
-
 Widget RxBorderListTile({Widget? child}) {
   return Container(
       decoration: BoxDecoration(
@@ -713,13 +646,22 @@ Widget RxBuildItemReview(ReviewModel item, context) {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            RatingBar.readOnly(
-              filledColor: AppColors.yellow,
-              size: 15,
+            RatingBar.builder(
               initialRating:
                   CommonMethods.convertToDouble(item.ratingvalue ?? 0.0),
-              filledIcon: AppIcons.star_2,
-              emptyIcon: AppIcons.star_2,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              // ignore: prefer_const_constructors
+              itemBuilder: (context, _) => Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              onRatingUpdate: (rating) {
+                print(rating);
+              },
             ),
           ],
         ),

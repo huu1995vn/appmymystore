@@ -6,6 +6,7 @@ import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/components/rx_image.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
+import 'package:skeletons/skeletons.dart';
 
 class RxImages extends StatefulWidget {
   final List<String> data;
@@ -44,7 +45,10 @@ class _RxImagesState extends State<RxImages>
     if (widget.data == null && widget.data.isNotEmpty) {
       return Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: RxCardSkeleton());
+          child: SkeletonLine(
+            style: SkeletonLineStyle(
+                height: 16, width: 64, borderRadius: BorderRadius.circular(8)),
+          ));
     } else {
       return Stack(children: [
         CarouselSlider(

@@ -98,9 +98,6 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) => AppProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => AppProvider(),
-        ),
       ],
       child: Consumer<AppProvider>(
           child: const MyPage(),
@@ -133,12 +130,6 @@ class _MyAppState extends State<MyApp> {
                   debugShowCheckedModeBanner: false,
                   enableLog: true,
                   logWriterCallback: Logger.write,
-                  // initialRoute: AppPages.INITIAL,
-                  // getPages: AppPages.routes,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  // localizationsDelegates: [
-                  //   GlobalMaterialLocalizations.delegate
-                  // ],
                   locale: TranslationService.locale,
                   fallbackLocale: TranslationService.fallbackLocale,
                   translations: TranslationService(),

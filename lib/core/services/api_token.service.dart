@@ -11,7 +11,7 @@ import 'package:mymystore/core/utilities/extensions.dart';
 
 class APITokenService {
   static String _token = "";
-  static dynamic userId;
+  static int userId = -1;
   static bool isExpired = false;
   static bool isValid = false;
 

@@ -6,7 +6,7 @@ class AppColors {
     ..color = primary
     ..style = PaintingStyle.stroke
     ..strokeJoin = StrokeJoin.round;
-  static const Color primary = Color(0x30b56d);
+  static const Color primary = Color.fromARGB(255, 48, 181, 110);
   static const Color secondary = Color(0xFF2B2B2B);
   static const Color yellow = Color.fromARGB(214, 255, 196, 0);
   static const Color orange = Colors.orange;

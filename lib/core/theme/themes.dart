@@ -28,7 +28,9 @@ class Themes {
                 bodySmall: const TextStyle(fontSize: 13.0),
                 labelLarge: const TextStyle(fontSize: 13.0),
               )),
-      iconTheme: const IconThemeData(size: 19, color: AppColors.white),
+      iconTheme: IconThemeData(
+          size: 19,
+          color: AppColors.black),
       cardTheme: const CardTheme(
         margin: EdgeInsets.zero,
         shape: Border(),

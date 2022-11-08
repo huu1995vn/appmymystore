@@ -3,6 +3,8 @@ import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
 import 'package:mymystore/core/components/product_card.dart';
 import 'package:mymystore/core/popular.dart';
 import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/pages/detail/detail_screen.dart';
 import 'package:mymystore/pages/home/hearder.dart';
 import 'package:mymystore/pages/home/most_popular.dart';
@@ -48,12 +50,12 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    const padding = EdgeInsets.fromLTRB(24, 24, 24, 0);
+    const padding = EdgeInsets.fromLTRB(kDefaultPadding, kDefaultPadding, kDefaultPadding, 0);
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          const SliverPadding(
-            padding: EdgeInsets.only(top: 24),
+         const SliverPadding(
+            padding: EdgeInsets.only(top: 24, bottom: 0),
             sliver: SliverAppBar(
               pinned: true,
               flexibleSpace: HomeAppBar(),
@@ -81,8 +83,8 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        const SearchField(),
-        const SizedBox(height: 24),
+        // const SearchField(),
+        // const SizedBox(height: 24),
         SpecialOffers(onTapSeeAll: () => _onTapSpecialOffersSeeAll(context)),
         const SizedBox(height: 24),
         MostPopularTitle(onTapseeAll: () => _onTapMostPopularSeeAll(context)),

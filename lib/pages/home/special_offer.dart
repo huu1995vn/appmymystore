@@ -24,8 +24,8 @@ class _SpecialOffersState extends State<SpecialOffers> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildTitle(),
-        const SizedBox(height: 24),
+        // _buildTitle(),
+        // const SizedBox(height: 24),
         Stack(children: [
           Container(
             height: 181,

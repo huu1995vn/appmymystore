@@ -8,11 +8,11 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: Row(
         children: [
           InkWell(
-            borderRadius: const BorderRadius.all(Radius.circular(24)),
+            borderRadius: const BorderRadius.all(Radius.circular(kDefaultPadding)),
             onTap: () => Navigator.pushNamed(context, ProfileScreen.route()),
             child: const CircleAvatar(
               backgroundImage: AssetImage('$kIconPath/me.png'),
@@ -27,7 +27,7 @@ class HomeAppBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text(
-                    'Good Morning 👋',
+                    'Trần Thị Ngọc Mỹ',
                     style: TextStyle(
                       color: Color(0xFF757575),
                       fontWeight: FontWeight.w500,
@@ -35,7 +35,7 @@ class HomeAppBar extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    'Mansuriosdev',
+                    'Thông tin cửa hàng',
                     style: TextStyle(
                       color: Color(0xFF212121),
                       fontWeight: FontWeight.bold,
@@ -46,17 +46,8 @@ class HomeAppBar extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-            iconSize: 13,
-            icon: Image.asset('$kIconPath/qrcode.png'),
-            onPressed: () {},
-          ),
-          // const SizedBox(width: 16),
-          // IconButton(
-          //   iconSize: 28,
-          //   icon: Image.asset('$kIconPath/light/heart@2x.png'),
-          //   onPressed: () {},
-          // ),
+          const Icon(AppIcons.frame_expand)
+         
         ],
       ),
     );

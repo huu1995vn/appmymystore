@@ -100,7 +100,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: Consumer<AppProvider>(
-          child: const MyPage(),
+          // child: const MyPage(),
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
                   color: Colors.transparent,

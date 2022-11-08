@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-
+const String kIconPath = 'assets/icons/';
 const kStepPrice = 20000000;
 const TOKEN_SECURITY_KEY = "SDGD\$E^&Ư#RBSDGFGJ*IY^&ÉDQQWRWF#\$%#SGSAS";
 const kPrimaryColor = Color.fromRGBO(182, 40, 49, 1);

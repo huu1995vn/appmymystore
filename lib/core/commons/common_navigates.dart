@@ -5,26 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mymystore/core/components/dialogs/confirm_otp_email.dialog.dart';
 import 'package:mymystore/core/components/dialogs/confirm_otp_phone.dialog.dart';
+import 'package:mymystore/pages/detail/detail_screen.dart';
+import 'package:mymystore/pages/home/home.dart';
+import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
+import 'package:mymystore/pages/profile/profile_screen.dart';
+import 'package:mymystore/pages/special_offers/special_offers_screen.dart';
+import 'package:mymystore/pages/test/test_screen.dart';
 
 class CommonNavigates {
   static Map<String, Widget Function(BuildContext)> routers =
       <String, WidgetBuilder>{
-    // // '/': (context) => const MyPage(),
-    // '/login': (context) => const LoginPage(),
-    // '/register': (context) => const RegisterPage(),
-    // '/forgot-password': (context) => const ForgotPasswordPage(),
-    // '/user': (context) => const UserPage(),
-    // '/settings': (context) => const SettingsPage(),
-    // '/product': (context) => ProductPage(),
-    // '/my-product': (context) => const MyProductPage(),
-    // '/advert': (context) => const AdvertPage(),
-    // '/vehiclecontact': (context) => const VehicleContactPage(),
-    // '/news': (context) => const NewsPage(),
-    // '/notification': (context) => const NotificationPage(),
-    // '/contact': (context) => const ContactPage(),
-    // '/review': (context) => const ReviewPage(),
-    // '/favorite': (context) => const FavoritePage(),
-    // '/point': (context) => const PointPage()
+    HomeScreen.route(): (context) => const HomeScreen(title: '123'),
+    MostPopularScreen.route(): (context) => const MostPopularScreen(),
+    SpecialOfferScreen.route(): (context) => const SpecialOfferScreen(),
+    ProfileScreen.route(): (context) => const ProfileScreen(),
+    ShopDetailScreen.route(): (context) => const ShopDetailScreen(),
+    TestScreen.route(): (context) => const TestScreen(),
   };
 
   static Future toRootPage(BuildContext context) async {

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
+import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/components/product_card.dart';
 import 'package:mymystore/core/popular.dart';
 import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/pages/detail/detail_screen.dart';
+import 'package:mymystore/pages/home/mediterranesn_diet_view.dart';
 import 'package:mymystore/pages/home/most_popular.dart';
 import 'package:mymystore/pages/home/special_offer.dart';
 import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
@@ -24,13 +27,19 @@ class HomeScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
+class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
+    with TickerProviderStateMixin {
   late final datas = homePopularProducts;
+  late AnimationController animationController;
+
   @override
   void initState() {
     super.initState();
+    animationController = AnimationController(
+        duration: const Duration(milliseconds: 600), vsync: this);
     CloudFirestoreSerivce.subcriptuser(context);
     CloudFirestoreSerivce.setdevice(isOnline: true);
+    animationController.reverse();
   }
 
   @override
@@ -62,12 +71,16 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
       appBar: AppBar(
         elevation: 0.0,
         title: ListTile(
-          leading: const CircleAvatar(
-            backgroundImage: AssetImage('$kIconPath/me.png'),
-            radius: 24,
+          leading: const RxAvatarImage(
+            '$kIconPath/me.png',
+            size: 39,
           ),
-          title: const Text("Trần Thị Ngọc Mỹ"),
-          subtitle: const Text('Thông tin cửa hàng'),
+          title: const Text(
+            "Trần Thị Ngọc Mỹ",
+            style: TextStyle(color: AppColors.white),
+          ),
+          subtitle: const Text('Thông tin cửa hàng',
+              style: TextStyle(color: AppColors.white50)),
           onTap: () => Navigator.pushNamed(context, ProfileScreen.route()),
         ),
         actions: [
@@ -76,17 +89,15 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(AppIcons.settings),
+            icon: const Icon(AppIcons.cog_1),
             onPressed: () {
               CommonNavigates.toSettingsPage(context);
-
             },
           ),
         ],
       ),
       body: CustomScrollView(
         slivers: <Widget>[
-         
           SliverPadding(
             padding: padding,
             sliver: SliverList(
@@ -100,7 +111,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
             padding: padding,
             sliver: _buildPopulars(),
           ),
-          const SliverAppBar(flexibleSpace: SizedBox(height: 24))
+          // const SliverAppBar(flexibleSpace: SizedBox(height: 24))
         ],
       ),
     );
@@ -110,9 +121,21 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
     return Column(
       children: [
         SpecialOffers(onTapSeeAll: () => _onTapSpecialOffersSeeAll(context)),
-        const SizedBox(height: 24),
-        MostPopularTitle(onTapseeAll: () => _onTapMostPopularSeeAll(context)),
-        const SizedBox(height: 24),
+        // const SizedBox(height: 24),
+        // ListTile(
+        //     title: const Text("Hôm nay"),
+        //     trailing: TextButton.icon(
+        //         onPressed: () => _onTapMostPopularSeeAll(context),
+        //         icon: const Text("Báo cáo"),
+        //         label: const Icon(AppIcons.chevron_right))),
+        MediterranesnDietView(
+          animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+              CurvedAnimation(
+                  parent: animationController,
+                  curve:
+                      Interval((1 / 9) * 1, 1.0, curve: Curves.fastOutSlowIn))),
+          animationController: animationController,
+        ),
         const MostPupularCategory(),
       ],
     );

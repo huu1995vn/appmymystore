@@ -56,7 +56,8 @@ class _MostPupularCategoryState extends State<MostPupularCategory> {
           child: Text(
             data.category,
             style: TextStyle(
-              color: isActive ? const Color(0xFFFFFFFF) : const Color(0xFF101010),
+              color:
+                  isActive ? const Color(0xFFFFFFFF) : const Color(0xFF101010),
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -71,36 +72,5 @@ class _MostPupularCategoryState extends State<MostPupularCategory> {
     setState(() {
       _selectIndex = index;
     });
-  }
-}
-
-class MostPopularTitle extends StatelessWidget {
-  const MostPopularTitle({
-    Key? key,
-    required this.onTapseeAll,
-  }) : super(key: key);
-
-  final Function onTapseeAll;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const Text('Most Popular', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF212121))),
-        TextButton(
-          onPressed: () => onTapseeAll(),
-          child: const Text(
-            'See All',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Color(0xFF212121),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 }

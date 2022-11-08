@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/category.dart';
 import 'package:mymystore/core/components/special_offer_widget.dart';
 import 'package:mymystore/core/special_offer.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
 
@@ -63,24 +65,28 @@ class _SpecialOffersState extends State<SpecialOffers> {
           itemBuilder: ((context, index) {
             final data = categories[index];
             return GestureDetector(
-              onTap: () => Navigator.pushNamed(context, MostPopularScreen.route()),
+              onTap: () =>
+                  Navigator.pushNamed(context, MostPopularScreen.route()),
               child: Column(
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0x10101014),
+                      color: AppColors.primary.withAlpha(700),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(16),
-                      child: Image.asset(data.icon, width: 28, height: 28),
+                      child: data.icon,
                     ),
                   ),
                   const SizedBox(height: 12),
                   FittedBox(
                     child: Text(
                       data.title,
-                      style: const TextStyle(color: Color(0xff424242), fontWeight: FontWeight.bold, fontSize: 16),
+                      style: const TextStyle(
+                          color: Color(0xff424242),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
                     ),
                   ),
                 ],
@@ -99,13 +105,19 @@ class _SpecialOffersState extends State<SpecialOffers> {
       children: [
         const Text(
           'Special Offers',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF212121)),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Color(0xFF212121)),
         ),
         TextButton(
           onPressed: () => widget.onTapSeeAll?.call(),
           child: const Text(
             'See All',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF212121)),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Color(0xFF212121)),
           ),
         ),
       ],

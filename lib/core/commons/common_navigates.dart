@@ -9,6 +9,7 @@ import 'package:mymystore/pages/detail/detail_screen.dart';
 import 'package:mymystore/pages/home/home.dart';
 import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
 import 'package:mymystore/pages/profile/profile_screen.dart';
+import 'package:mymystore/pages/setting/settings_page.dart';
 import 'package:mymystore/pages/special_offers/special_offers_screen.dart';
 import 'package:mymystore/pages/test/test_screen.dart';
 
@@ -21,6 +22,7 @@ class CommonNavigates {
     ProfileScreen.route(): (context) => const ProfileScreen(),
     ShopDetailScreen.route(): (context) => const ShopDetailScreen(),
     TestScreen.route(): (context) => const TestScreen(),
+    SettingsPage.route(): (context) => const SettingsPage(),
   };
 
   static Future toRootPage(BuildContext context) async {
@@ -49,7 +51,7 @@ class CommonNavigates {
   }
 
   static Future toSettingsPage(BuildContext context) async {
-    return await Navigator.pushNamed(context, "/settings");
+    return await Navigator.pushNamed(context, SettingsPage.route());
   }
 
   // static Future toUserPage(BuildContext context, {int? id}) async {

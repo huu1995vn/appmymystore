@@ -17,6 +17,7 @@ import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 
 class SettingsPage extends StatefulWidget {
+  static String route() => '/setting';
   const SettingsPage({Key? key}) : super(key: key);
 
   @override

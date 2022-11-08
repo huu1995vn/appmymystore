@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymystore/app_icons.dart';
+import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
 import 'package:mymystore/core/components/product_card.dart';
 import 'package:mymystore/core/popular.dart';
@@ -73,6 +74,13 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
           IconButton(
             icon: const Icon(AppIcons.frame_expand),
             onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(AppIcons.settings),
+            onPressed: () {
+              CommonNavigates.toSettingsPage(context);
+
+            },
           ),
         ],
       ),

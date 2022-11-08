@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/pages/profile/profile_screen.dart';
 class HomeAppBar extends StatelessWidget {
@@ -13,7 +14,7 @@ class HomeAppBar extends StatelessWidget {
           InkWell(
             borderRadius: const BorderRadius.all(Radius.circular(24)),
             onTap: () => Navigator.pushNamed(context, ProfileScreen.route()),
-            child: CircleAvatar(
+            child: const CircleAvatar(
               backgroundImage: AssetImage('$kIconPath/me.png'),
               radius: 24,
             ),
@@ -46,16 +47,16 @@ class HomeAppBar extends StatelessWidget {
             ),
           ),
           IconButton(
-            iconSize: 28,
-            icon: Image.asset('$kIconPath/notification.png'),
+            iconSize: 13,
+            icon: Image.asset('$kIconPath/qrcode.png'),
             onPressed: () {},
           ),
-          const SizedBox(width: 16),
-          IconButton(
-            iconSize: 28,
-            icon: Image.asset('$kIconPath/light/heart@2x.png'),
-            onPressed: () {},
-          ),
+          // const SizedBox(width: 16),
+          // IconButton(
+          //   iconSize: 28,
+          //   icon: Image.asset('$kIconPath/light/heart@2x.png'),
+          //   onPressed: () {},
+          // ),
         ],
       ),
     );

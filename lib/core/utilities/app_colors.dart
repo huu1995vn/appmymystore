@@ -6,17 +6,7 @@ class AppColors {
     ..color = primary
     ..style = PaintingStyle.stroke
     ..strokeJoin = StrokeJoin.round;
-  static const Color primary = Color(0xFFB71C1C);
-  static const Color primary50 = Color(0xFFFFEBEE);
-  static const Color primary100 = Color(0xFFFFCDD2);
-  static const Color primary200 = Color(0xFFEF9A9A);
-  static const Color primary300 = Color(0xFFE57373);
-  static const Color primary400 = Color(0xFFEF5350);
-  static const Color primary500 = Color(_redPrimaryValue);
-  static const Color primary600 = Color(0xFFE53935);
-  static const Color primary700 = Color(0xFFD32F2F);
-  static const Color primary800 = Color(0xFFC62828);
-  static const Color primary900 = Color(0xFFB71C1C);
+  static const Color primary = Color(0x30b56d);
   static const Color secondary = Color(0xFF2B2B2B);
   static const Color yellow = Color.fromARGB(214, 255, 196, 0);
   static const Color orange = Colors.orange;
@@ -27,19 +17,19 @@ class AppColors {
   static const Color info = Color.fromARGB(255, 8, 171, 235);
   static const Color success = Color.fromARGB(179, 12, 187, 50);
 
-  static const MaterialColor red = MaterialColor(
+  static MaterialColor constred = MaterialColor(
     _redPrimaryValue,
     <int, Color>{
-      50: primary50,
-      100: primary100,
-      200: primary200,
-      300: primary300,
-      400: primary400,
-      500: primary500,
-      600: primary600,
-      700: primary700,
-      800: primary800,
-      900: primary900,
+      50: primary.withAlpha(50),
+      100: primary.withAlpha(100),
+      200: primary.withAlpha(200),
+      300: primary.withAlpha(300),
+      400: primary.withAlpha(400),
+      500: primary.withAlpha(500),
+      600: primary.withAlpha(600),
+      700: primary.withAlpha(700),
+      800: primary.withAlpha(800),
+      900: primary.withAlpha(900),
     },
   );
   static const int _redPrimaryValue = 0xFFF44336;

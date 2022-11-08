@@ -211,8 +211,8 @@ Widget RxLoginAccountLabel(context) {
             ),
             Text(
               "login".tr,
-              style: const TextStyle(
-                  color: AppColors.primary500,
+              style: TextStyle(
+                  color: AppColors.primary.withAlpha(500),
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),

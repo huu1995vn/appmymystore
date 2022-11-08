@@ -17,6 +17,7 @@ import 'package:mymystore/core/theme/theme.service.dart';
 import 'package:mymystore/core/theme/themes.dart';
 import 'package:mymystore/core/utilities/logger_utils.dart';
 import 'package:mymystore/pages/error/error_page.dart';
+import 'package:mymystore/pages/home/home.dart';
 import 'package:mymystore/pages/update/update_page.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
@@ -75,6 +76,8 @@ class _MyAppState extends State<MyApp> {
       //   return UpdatePage(data: status);
       // }
       await InfoDeviceService.init();
+      return main!;
+
       // await FirebaseAuthService.signInAnonymously();
       // await FirebaseMessagingService.init();
       // APITokenService.init();
@@ -83,7 +86,6 @@ class _MyAppState extends State<MyApp> {
       // if (res) {
       //   return main!;
       // }
-      return main!;
     } catch (e) {
       CommonMethods.wirtePrint(e.toString());
     }
@@ -99,7 +101,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: Consumer<AppProvider>(
-          // child: const MyPage(),
+          child: const HomeScreen(),
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
                   color: Colors.transparent,

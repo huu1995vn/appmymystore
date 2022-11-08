@@ -27,11 +27,11 @@ class CircularBackgroundPainter extends CustomPainter {
     mainPaint.isAntiAlias = true;
     mainPaint.style = PaintingStyle.fill;
 
-    middlePaint.color = AppColors.primary500;
+    middlePaint.color = AppColors.primary.withAlpha(500);
     middlePaint.isAntiAlias = true;
     middlePaint.style = PaintingStyle.fill;
 
-    lowerPaint.color = AppColors.primary100;
+    lowerPaint.color = AppColors.primary.withAlpha(100);
     lowerPaint.isAntiAlias = true;
     lowerPaint.style = PaintingStyle.fill;
   }

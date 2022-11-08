@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-const String kIconPath = 'assets/icons/';
+const String kIconPath = 'assets/icons';
 const kStepPrice = 20000000;
 const TOKEN_SECURITY_KEY = "SDGD\$E^&Ư#RBSDGFGJ*IY^&ÉDQQWRWF#\$%#SGSAS";
-const kPrimaryColor = Color.fromRGBO(182, 40, 49, 1);
+const kPrimaryColor = Color.fromARGB(120, 8, 204, 106);
 const kWhite = Colors.white;
 const kTextColor = Color(0xFF707070);
 const kTextLightColor = Color(0xFF949098);
@@ -25,11 +25,11 @@ const kEdgeInsetsPadding = EdgeInsets.only(
     right: kDefaultPadding,
     top: kDefaultPadding / 2,
     bottom: kDefaultPadding / 2);
-const kBoxDecorationStyle = BoxDecoration(
+var kBoxDecorationStyle = BoxDecoration(
     gradient: LinearGradient(colors: [
   AppColors.primary,
-  AppColors.primary700,
-  AppColors.primary500,
+  AppColors.primary.withAlpha(700),
+  AppColors.primary.withAlpha(500),
   AppColors.primary
 ]));
 const TextStyle kTextHeaderStyle = TextStyle(

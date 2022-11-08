@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymystore/core/category.dart';
 import 'package:mymystore/core/components/special_offer_widget.dart';
 import 'package:mymystore/core/special_offer.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
 
 typedef SpecialOffersOnTapSeeAll = void Function();
@@ -31,7 +32,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
             height: 181,
             decoration: const BoxDecoration(
               color: Color(0xFFE7E7E7),
-              borderRadius: BorderRadius.all(Radius.circular(32)),
+              borderRadius: BorderRadius.all(Radius.circular(kDefaultPadding)),
             ),
             child: PageView.builder(
               itemBuilder: (context, index) {

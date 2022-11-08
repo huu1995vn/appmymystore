@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
 import 'package:mymystore/core/components/product_card.dart';
 import 'package:mymystore/core/popular.dart';
 import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
-import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/pages/detail/detail_screen.dart';
-import 'package:mymystore/pages/home/hearder.dart';
 import 'package:mymystore/pages/home/most_popular.dart';
-import 'package:mymystore/pages/home/search_field.dart';
 import 'package:mymystore/pages/home/special_offer.dart';
 import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
+import 'package:mymystore/pages/profile/profile_screen.dart';
 import 'package:mymystore/pages/special_offers/special_offers_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -50,17 +49,36 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    const padding = EdgeInsets.fromLTRB(kDefaultPadding, kDefaultPadding, kDefaultPadding, 0);
+    const padding = EdgeInsets.fromLTRB(
+        kDefaultPadding, kDefaultPadding, kDefaultPadding, 0);
     return Scaffold(
+      // appBar: AppBar(
+      //     centerTitle: true,
+      //     title: HomeAppBar(),
+      //     elevation: 0.0,
+      //     // actions: [widget.action ?? Container()],
+      //   ),
+      appBar: AppBar(
+        elevation: 0.0,
+        title: ListTile(
+          leading: const CircleAvatar(
+            backgroundImage: AssetImage('$kIconPath/me.png'),
+            radius: 24,
+          ),
+          title: const Text("Trần Thị Ngọc Mỹ"),
+          subtitle: const Text('Thông tin cửa hàng'),
+          onTap: () => Navigator.pushNamed(context, ProfileScreen.route()),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(AppIcons.frame_expand),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: CustomScrollView(
         slivers: <Widget>[
-         const SliverPadding(
-            padding: EdgeInsets.only(top: 24, bottom: 0),
-            sliver: SliverAppBar(
-              pinned: true,
-              flexibleSpace: HomeAppBar(),
-            ),
-          ),
+         
           SliverPadding(
             padding: padding,
             sliver: SliverList(
@@ -83,8 +101,6 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        // const SearchField(),
-        // const SizedBox(height: 24),
         SpecialOffers(onTapSeeAll: () => _onTapSpecialOffersSeeAll(context)),
         const SizedBox(height: 24),
         MostPopularTitle(onTapseeAll: () => _onTapMostPopularSeeAll(context)),

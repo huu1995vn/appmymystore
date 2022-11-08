@@ -20,7 +20,7 @@ class Themes {
           : AppColors.black.withOpacity(0.1),
       shadowColor: isDark ? AppColors.text : AppColors.grayDark,
       primarySwatch: _getMaterialColorFromColor(primaryColor),
-      textTheme: GoogleFonts.robotoTextTheme(
+      textTheme: GoogleFonts.titilliumWebTextTheme(
           ThemeData(brightness: isDark ? Brightness.dark : Brightness.light)
               .textTheme
               .copyWith(
@@ -28,9 +28,7 @@ class Themes {
                 bodySmall: const TextStyle(fontSize: 13.0),
                 labelLarge: const TextStyle(fontSize: 13.0),
               )),
-      iconTheme: IconThemeData(
-          size: 19,
-          color: AppColors.black),
+      iconTheme: const IconThemeData(size: 19, color: AppColors.white),
       cardTheme: const CardTheme(
         margin: EdgeInsets.zero,
         shape: Border(),
@@ -40,7 +38,7 @@ class Themes {
       appBarTheme: AppBarTheme(
           elevation: 0,
           iconTheme: const IconThemeData(
-            color: AppColors.white,
+            color: AppColors.black,
           ),
           backgroundColor: isDark ? primaryColorDarkMode : primaryColor,
           systemOverlayStyle: SystemUiOverlayStyle.light),

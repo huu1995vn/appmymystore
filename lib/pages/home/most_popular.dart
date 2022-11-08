@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/popular.dart';
+import 'package:mymystore/core/utilities/constants.dart';
 
 class MostPupularCategory extends StatefulWidget {
   const MostPupularCategory({super.key});
@@ -39,7 +40,7 @@ class _MostPupularCategoryState extends State<MostPupularCategory> {
   Widget _buildItem(BuildContext context, int index) {
     final data = datas[index];
     final isActive = _selectIndex == index;
-    const radius = BorderRadius.all(Radius.circular(19));
+    const radius = BorderRadius.all(Radius.circular(kDefaultPadding));
     return Container(
       decoration: BoxDecoration(
         borderRadius: radius,

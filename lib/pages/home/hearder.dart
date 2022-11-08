@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:mymystore/pages/profile/profile_screen.dart';
+
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      padding: EdgeInsets.symmetric(
+          horizontal: SizeConfig.getProportionateScreenWidth(20)),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
-            borderRadius: const BorderRadius.all(Radius.circular(kDefaultPadding)),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
             onTap: () => Navigator.pushNamed(context, ProfileScreen.route()),
             child: const CircleAvatar(
               backgroundImage: AssetImage('$kIconPath/me.png'),
@@ -47,7 +51,6 @@ class HomeAppBar extends StatelessWidget {
             ),
           ),
           const Icon(AppIcons.frame_expand)
-         
         ],
       ),
     );

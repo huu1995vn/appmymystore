@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
 import 'package:mymystore/core/components/product_card.dart';
 import 'package:mymystore/core/popular.dart';
+import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
 import 'package:mymystore/pages/detail/detail_screen.dart';
 import 'package:mymystore/pages/home/hearder.dart';
 import 'package:mymystore/pages/home/most_popular.dart';
@@ -10,19 +12,40 @@ import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
 import 'package:mymystore/pages/special_offers/special_offers_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  final String title;
+  final String? title;
 
   static String route() => '/home';
 
-  const HomeScreen({super.key, required this.title});
+  const HomeScreen({super.key, this.title = "Trang chủ"});
 
   @override
   State<StatefulWidget> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends LifecycleWatcherState<HomeScreen> {
   late final datas = homePopularProducts;
+  @override
+  void initState() {
+    super.initState();
+    CloudFirestoreSerivce.subcriptuser(context);
+    CloudFirestoreSerivce.setdevice(isOnline: true);
+  }
 
+  @override
+  void onDetached() {
+    // CloudFirestoreSerivce.setdevice(isOnline: false);
+  }
+
+  @override
+  void onInactive() {}
+
+  @override
+  void onPaused() {}
+
+  @override
+  void onResumed() {
+    // FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
+  }
   @override
   Widget build(BuildContext context) {
     const padding = EdgeInsets.fromLTRB(24, 24, 24, 0);

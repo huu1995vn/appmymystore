@@ -11,7 +11,7 @@ import 'package:mymystore/core/services/firebase/firebase_auth.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:mymystore/pages/my_page.dart';
+import 'package:mymystore/pages/home/home.dart';
 
 class AuthService {
   static Future login(
@@ -29,7 +29,7 @@ class AuthService {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => const MyPage()),
+                  builder: (BuildContext context) => const HomeScreen()),
               (Route<dynamic> route) => route.isFirst);
         }
       } else {
@@ -57,7 +57,7 @@ class AuthService {
       await APITokenService.logout();
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (BuildContext context) => const MyPage()),
+          MaterialPageRoute(builder: (BuildContext context) => const HomeScreen()),
           (Route<dynamic> route) => route.isFirst);
     } catch (e) {}
     CommonMethods.unlockScreen();

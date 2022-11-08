@@ -17,7 +17,6 @@ import 'package:mymystore/core/theme/theme.service.dart';
 import 'package:mymystore/core/theme/themes.dart';
 import 'package:mymystore/core/utilities/logger_utils.dart';
 import 'package:mymystore/pages/error/error_page.dart';
-import 'package:mymystore/pages/my_page.dart';
 import 'package:mymystore/pages/update/update_page.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
@@ -71,10 +70,10 @@ class _MyAppState extends State<MyApp> {
 
   Future<Widget> loadFromFuture(Widget? main) async {
     try {
-      var status = await newVersion.checkUpdate();
-      if (status.canUpdate) {
-        return UpdatePage(data: status);
-      }
+      // var status = await newVersion.checkUpdate();
+      // if (status.canUpdate) {
+      //   return UpdatePage(data: status);
+      // }
       await InfoDeviceService.init();
       // await FirebaseAuthService.signInAnonymously();
       // await FirebaseMessagingService.init();

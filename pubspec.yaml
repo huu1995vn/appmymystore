@@ -109,6 +109,14 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/icons/bold/
+    - assets/icons/detail/
+    - assets/icons/light/
+    - assets/icons/products/
+    - assets/icons/profile/
+    - assets/icons/tabbar/
+    - assets/icons/tabbar/light/
+    - assets/icons/tabbar/bold/
     - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see

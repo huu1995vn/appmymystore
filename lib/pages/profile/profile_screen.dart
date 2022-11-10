@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
+import 'package:mymystore/app_icons.dart';
+import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/services/info_device.service.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/pages/profile/header.dart';
 
 typedef ProfileOptionTap = void Function();
 
 class ProfileOption {
   String title;
-  String icon;
+  Widget icon;
   Color? titleColor;
   ProfileOptionTap? onClick;
   Widget? trailing;
@@ -23,7 +28,7 @@ class ProfileOption {
     required this.icon,
     this.onClick,
     this.titleColor = const Color(0xFF212121),
-    this.trailing = const Image(image: AssetImage('assets/icons/profile/arrow_right@2x.png'), width: 24, height: 24),
+    this.trailing = const Icon(Icons.chevron_right, size: 24),
   });
 }
 
@@ -42,18 +47,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _isDark = false;
 
   get datas => <ProfileOption>[
-        ProfileOption.arrow(title: 'Edit Profile', icon: _profileIcon('user@2x.png')),
-        ProfileOption.arrow(title: 'Adress', icon: _profileIcon('location@2x.png')),
-        ProfileOption.arrow(title: 'Notification', icon: _profileIcon('notification@2x.png')),
-        ProfileOption.arrow(title: 'Payment', icon: _profileIcon('wallet@2x.png')),
-        ProfileOption.arrow(title: 'Security', icon: _profileIcon('shield_done@2x.png')),
-        _languageOption(),
-        _darkModel(),
-        ProfileOption.arrow(title: 'Help Center', icon: _profileIcon('info_square@2x.png')),
-        ProfileOption.arrow(title: 'Invite Friends', icon: _profileIcon('user@2x.png')),
+        ProfileOption.arrow(title: 'Edit Profile', icon: Icon(AppIcons.user_1)),
+        ProfileOption.arrow(title: 'Setting', icon: Icon(AppIcons.cog_1)),
+        ProfileOption.arrow(title: 'Help Center', icon: Icon(AppIcons.help_1)),
         ProfileOption(
           title: 'Logout',
-          icon: _profileIcon('logout@2x.png'),
+          icon: Icon(AppIcons.exit),
           titleColor: const Color(0xFFF75555),
         ),
       ];
@@ -68,7 +67,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             const Text(
               'English (US)',
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xFF212121)),
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                  color: Color(0xFF212121)),
             ),
             const SizedBox(width: 16),
             Image.asset('assets/icons/profile/arrow_right@2x.png', scale: 2)
@@ -76,36 +78,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ));
 
-  _darkModel() => ProfileOption(
-      title: 'Dark Mode',
-      icon: _profileIcon('show@2x.png'),
-      trailing: Switch(
-        value: _isDark,
-        activeColor: const Color(0xFF212121),
-        onChanged: (value) {
-          setState(() {
-            _isDark = !_isDark;
-          });
-        },
-      ));
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          const SliverList(
-            delegate: SliverChildListDelegate.fixed([
-              Padding(
-                padding: EdgeInsets.only(top: 30),
-                child: ProfileHeader(),
-              ),
-            ]),
+        appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: AppColors.primary, //change your color here
           ),
-          _buildBody(),
-        ],
-      ),
-    );
+          leading: RxGoBack(context),
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          // title: Text(
+          //   'personalinformation'.tr,
+          //   style: TextStyle(color: AppColors.primary),
+          // ),
+          elevation: 0.0,
+        ),
+        body: CustomScrollView(
+          slivers: [
+            const SliverList(
+              delegate: SliverChildListDelegate.fixed([
+                Padding(
+                  padding: EdgeInsets.only(top: 30),
+                  child: ProfileHeader(),
+                ),
+              ]),
+            ),
+            _buildBody(),
+
+            // Center(
+            //         child: Text(
+            //             InfoDeviceService.infoDevice.DeviceVersion ?? "1.1.0"))
+          ],
+        ),
+        bottomSheet: Container(
+          color: Colors.transparent,
+            height: 40,
+            width: MediaQuery.of(context).size.width,
+            child: Center(
+                child: Text(
+                    InfoDeviceService.infoDevice.DeviceVersion ?? "1.1.0"))));
   }
 
   Widget _buildBody() {
@@ -125,10 +137,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildOption(BuildContext context, int index, ProfileOption data) {
     return ListTile(
-      leading: Image.asset(data.icon, scale: 2),
+      leading: data.icon,
       title: Text(
         data.title,
-        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: data.titleColor),
+        style: TextStyle(
+            fontWeight: FontWeight.w500, fontSize: 18, color: data.titleColor),
       ),
       trailing: data.trailing,
       onTap: () {},

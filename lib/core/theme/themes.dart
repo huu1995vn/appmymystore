@@ -38,10 +38,11 @@ class Themes {
       appBarTheme: AppBarTheme(
           elevation: 0,
           iconTheme: const IconThemeData(
-            color: AppColors.white,
+            color: AppColors.primary,
           ),
-          titleTextStyle: TextStyle(color: AppColors.white),
-          toolbarTextStyle: TextStyle(color: AppColors.white),
+          
+          titleTextStyle: const TextStyle(color: AppColors.white),
+          toolbarTextStyle: const TextStyle(color: AppColors.white),
           backgroundColor: isDark ? primaryColorDarkMode : primaryColor,
           systemOverlayStyle: SystemUiOverlayStyle.light),
     );

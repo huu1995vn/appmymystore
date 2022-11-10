@@ -9,7 +9,7 @@ import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/pages/detail/detail_screen.dart';
-import 'package:mymystore/pages/home/mediterranesn_diet_view.dart';
+import 'package:mymystore/pages/home/report_view.dart';
 import 'package:mymystore/pages/home/most_popular.dart';
 import 'package:mymystore/pages/home/special_offer.dart';
 import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
@@ -85,11 +85,11 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
         ),
         actions: [
           IconButton(
-            icon: const Icon(AppIcons.frame_expand),
+            icon: const Icon(AppIcons.frame_expand, color: AppColors.white,),
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(AppIcons.cog_1),
+            icon: const Icon(AppIcons.cog_1, color: AppColors.white),
             onPressed: () {
               CommonNavigates.toSettingsPage(context);
             },
@@ -107,10 +107,10 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
               ),
             ),
           ),
-          SliverPadding(
-            padding: padding,
-            sliver: _buildPopulars(),
-          ),
+          // SliverPadding(
+          //   padding: padding,
+          //   sliver: _buildPopulars(),
+          // ),
           // const SliverAppBar(flexibleSpace: SizedBox(height: 24))
         ],
       ),
@@ -121,37 +121,23 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
     return Column(
       children: [
         SpecialOffers(onTapSeeAll: () => _onTapSpecialOffersSeeAll(context)),
-        // const SizedBox(height: 24),
-        // ListTile(
-        //     title: const Text("Hôm nay"),
-        //     trailing: TextButton.icon(
-        //         onPressed: () => _onTapMostPopularSeeAll(context),
-        //         icon: const Text("Báo cáo"),
-        //         label: const Icon(AppIcons.chevron_right))),
-        MediterranesnDietView(
-          animation: Tween<double>(begin: 0.0, end: 1.0).animate(
-              CurvedAnimation(
-                  parent: animationController,
-                  curve:
-                      Interval((1 / 9) * 1, 1.0, curve: Curves.fastOutSlowIn))),
-          animationController: animationController,
-        ),
-        const MostPupularCategory(),
+        const ReportView(),
+        // const MostPupularCategory(),
       ],
     );
   }
 
-  Widget _buildPopulars() {
-    return SliverGrid(
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 185,
-        mainAxisSpacing: 24,
-        crossAxisSpacing: 16,
-        mainAxisExtent: 285,
-      ),
-      delegate: SliverChildBuilderDelegate(_buildPopularItem, childCount: 30),
-    );
-  }
+  // Widget _buildPopulars() {
+  //   return SliverGrid(
+  //     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+  //       maxCrossAxisExtent: 185,
+  //       mainAxisSpacing: 24,
+  //       crossAxisSpacing: 16,
+  //       mainAxisExtent: 285,
+  //     ),
+  //     delegate: SliverChildBuilderDelegate(_buildPopularItem, childCount: 30),
+  //   );
+  // }
 
   Widget _buildPopularItem(BuildContext context, int index) {
     final data = datas[index % datas.length];

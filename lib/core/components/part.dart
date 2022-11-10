@@ -674,3 +674,11 @@ Widget RxBuildItemReview(ReviewModel item, context) {
     subtitle: Text(item.rxtimeago, style: kTextTimeStyle),
   );
 }
+
+Widget RxGoBack(context) {
+  return 
+  IconButton(
+    icon: const Icon(Icons.chevron_left, color: AppColors.primary, size: 24,),
+    onPressed: () => Navigator.of(context).pop(),
+  );
+}

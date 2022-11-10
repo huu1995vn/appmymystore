@@ -338,7 +338,7 @@ class ReportView extends StatelessWidget {
                           const Padding(
                             padding: EdgeInsets.only(top: 6),
                             child: Text(
-                              'kmkm',
+                              '1000',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,

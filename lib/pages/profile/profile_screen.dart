@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/utils.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
@@ -47,12 +46,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _isDark = false;
 
   get datas => <ProfileOption>[
-        ProfileOption.arrow(title: 'Edit Profile', icon: Icon(AppIcons.user_1)),
-        ProfileOption.arrow(title: 'Setting', icon: Icon(AppIcons.cog_1)),
-        ProfileOption.arrow(title: 'Help Center', icon: Icon(AppIcons.help_1)),
+        ProfileOption.arrow(title: 'Edit Profile', icon: const Icon(AppIcons.user_1)),
+        ProfileOption.arrow(title: 'Setting', icon: const Icon(AppIcons.cog_1)),
+        ProfileOption.arrow(title: 'Help Center', icon: const Icon(AppIcons.help_1)),
         ProfileOption(
           title: 'Logout',
-          icon: Icon(AppIcons.exit),
+          icon: const Icon(AppIcons.exit),
           titleColor: const Color(0xFFF75555),
         ),
       ];

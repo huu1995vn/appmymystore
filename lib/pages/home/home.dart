@@ -8,6 +8,7 @@ import 'package:mymystore/core/popular.dart';
 import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:mymystore/pages/detail/detail_screen.dart';
 import 'package:mymystore/pages/home/report_view.dart';
 import 'package:mymystore/pages/home/most_popular.dart';
@@ -59,6 +60,8 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
   }
   @override
   Widget build(BuildContext context) {
+        SizeConfig.init(context);
+
     const padding = EdgeInsets.fromLTRB(
         kDefaultPadding, kDefaultPadding, kDefaultPadding, 0);
     return Scaffold(
@@ -107,10 +110,10 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
               ),
             ),
           ),
-          // SliverPadding(
-          //   padding: padding,
-          //   sliver: _buildPopulars(),
-          // ),
+          SliverPadding(
+            padding: padding,
+            sliver: _buildPopulars(),
+          ),
           // const SliverAppBar(flexibleSpace: SizedBox(height: 24))
         ],
       ),
@@ -127,17 +130,17 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
     );
   }
 
-  // Widget _buildPopulars() {
-  //   return SliverGrid(
-  //     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-  //       maxCrossAxisExtent: 185,
-  //       mainAxisSpacing: 24,
-  //       crossAxisSpacing: 16,
-  //       mainAxisExtent: 285,
-  //     ),
-  //     delegate: SliverChildBuilderDelegate(_buildPopularItem, childCount: 30),
-  //   );
-  // }
+  Widget _buildPopulars() {
+    return SliverGrid(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 185,
+        mainAxisSpacing: 24,
+        crossAxisSpacing: 16,
+        mainAxisExtent: 285,
+      ),
+      delegate: SliverChildBuilderDelegate(_buildPopularItem, childCount: 30),
+    );
+  }
 
   Widget _buildPopularItem(BuildContext context, int index) {
     final data = datas[index % datas.length];

@@ -16,6 +16,7 @@ import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/theme/theme.service.dart';
 import 'package:mymystore/core/theme/themes.dart';
 import 'package:mymystore/core/utilities/logger_utils.dart';
+import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:mymystore/pages/error/error_page.dart';
 import 'package:mymystore/pages/home/home.dart';
 import 'package:mymystore/pages/update/update_page.dart';

@@ -52,10 +52,10 @@ class ApiBLL_Basic {
   }
 }
 
-class ApiBLL_APIAuth extends ApiBLL_Basic {
-  ApiBLL_APIAuth() {
+class ApiBLL_APIToken extends ApiBLL_Basic {
+  ApiBLL_APIToken() {
     apiDAL = ApiDAL();
-    apiDAL.controllerName = "api/auth";
+    apiDAL.controllerName = "api/token";
   }
   //login
   Future<ResponseModel> login(String username, String password) async {

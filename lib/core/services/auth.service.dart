@@ -18,8 +18,8 @@ class AuthService {
       BuildContext context, String username, String password) async {
     CommonMethods.lockScreen();
     try {
-      await InfoDeviceService.dataSafety();
-      var res = await ApiBLL_APIAuth().login(username, password);
+      // await InfoDeviceService.dataSafety();
+      var res = await ApiBLL_APIToken().login(username, password);
       if (res.status > 0) {
         await APITokenService.login(res.data);
         if (APITokenService.isValid) {
@@ -35,14 +35,17 @@ class AuthService {
       } else {
         CommonMethods.showToast(res.message);
       }
-    } catch (e) {}
+    } catch (e ) {
+      CommonMethods.showToast(e.toString());
+
+    }
     CommonMethods.unlockScreen();
   }
 
   static Future<bool> autologin() async {
     if (APITokenService.token != null && APITokenService.token.isNotEmpty) {
       await InfoDeviceService.dataSafety();
-      var res = await ApiBLL_APIAuth().autologin();
+      var res = await ApiBLL_APIToken().autologin();
       if (res.status > 0) {
         APITokenService.login(res.data);
       }

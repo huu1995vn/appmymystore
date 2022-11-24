@@ -5,7 +5,7 @@ class CommonConfig {
   static Map deviceInfo = {};
   static String languageCode = "vi";
   static String env = "dev";
-  static String api = "http://api.dailyxe.info";
+  static String api = "https://mymystore.herokuapp.com";
   static String apiSufix = "/";
   static bool haveCacheImage = true;
   static int version = 1;

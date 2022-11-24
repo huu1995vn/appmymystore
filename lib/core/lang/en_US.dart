@@ -249,7 +249,7 @@ const Map<String, String> en_US = {
   "referralcode": "Referral Code",
   "login": "Sign in",
   "regist": "Sign up",
-  "welcome": "Welcome to RaoXe",
+  "welcome": "Welcome to MyMyStore",
   "version": "Version",
   "content": "Content",
   "contactads": "Contacts from ads",
@@ -321,7 +321,7 @@ const Map<String, String> en_US = {
   "message.str005": "Don't have an account yet?",
   "message.str006": "Do you already have an account?",
   "message.str007": "Please select attachment",
-  "message.str008": "Congratulations on becoming a member of RaoXe",
+  "message.str008": "Congratulations on becoming a member of MyMyStore",
   "message.str009":
       "Please create contact information before creating a message",
   "message.str010": "The device does not support biometric authentication",

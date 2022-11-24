@@ -20,12 +20,12 @@ import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class RxDivider extends Divider {
-  const RxDivider({super.key, double indent = 20})
+class MMDivider extends Divider {
+  const MMDivider({super.key, double indent = 20})
       : super(indent: indent, endIndent: indent, height: 1, thickness: 1);
 }
 
-Widget RxBuildItem(
+Widget MMBuildItem(
     {required String title,
     Widget? icon,
     void Function()? onTap,
@@ -38,11 +38,11 @@ Widget RxBuildItem(
   );
 }
 
-class RxDisabled extends StatelessWidget {
+class MMDisabled extends StatelessWidget {
   final Widget child;
   final bool disabled;
 
-  const RxDisabled({Key? key, this.disabled = false, required this.child})
+  const MMDisabled({Key? key, this.disabled = false, required this.child})
       : super(key: key);
 
   @override
@@ -56,13 +56,13 @@ class RxDisabled extends StatelessWidget {
   }
 }
 
-class RxWebView extends StatefulWidget {
+class MMWebView extends StatefulWidget {
   String? url;
   String? title;
   Widget? action;
   String? javaScriptString;
   String? html;
-  RxWebView(
+  MMWebView(
       {super.key,
       this.url,
       this.title,
@@ -70,10 +70,10 @@ class RxWebView extends StatefulWidget {
       this.javaScriptString,
       this.html});
   @override
-  RxWebViewState createState() => RxWebViewState();
+  MMWebViewState createState() => MMWebViewState();
 }
 
-class RxWebViewState extends State<RxWebView> {
+class MMWebViewState extends State<MMWebView> {
   final _key = UniqueKey();
   bool isLoading = true;
   late InAppWebViewController _controller;
@@ -149,7 +149,7 @@ class RxWebViewState extends State<RxWebView> {
   }
 }
 
-class RxCustomShape extends CustomClipper<Path> {
+class MMCustomShape extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
@@ -168,7 +168,7 @@ class RxCustomShape extends CustomClipper<Path> {
   }
 }
 
-Widget RxNoFound({required String urlImage, String? message}) {
+Widget MMNoFound({required String urlImage, String? message}) {
   return SizedBox(
     height: SizeConfig.screenHeight -
         kToolbarHeight -
@@ -177,7 +177,7 @@ Widget RxNoFound({required String urlImage, String? message}) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        RxImage(
+        MMImage(
           urlImage,
           fullHeight: false,
         ),
@@ -193,7 +193,7 @@ Widget RxNoFound({required String urlImage, String? message}) {
   );
 }
 
-Widget RxLoginAccountLabel(context) {
+Widget MMLoginAccountLabel(context) {
   return InkWell(
     onTap: () {
       CommonNavigates.toLoginPage(context);
@@ -223,11 +223,11 @@ Widget RxLoginAccountLabel(context) {
   );
 }
 
-class RxAvatarImage extends StatelessWidget {
+class MMAvatarImage extends StatelessWidget {
   final String url;
   final double size;
   final BoxBorder? border;
-  const RxAvatarImage(this.url, {Key? key, this.border, required this.size})
+  const MMAvatarImage(this.url, {Key? key, this.border, required this.size})
       : super(key: key);
 
   @override
@@ -238,7 +238,7 @@ class RxAvatarImage extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xff7c94b6),
         image: DecorationImage(
-          image: RxImageProvider(url),
+          image: MMImageProvider(url),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.all(Radius.circular(size / 2)),
@@ -252,13 +252,13 @@ class RxAvatarImage extends StatelessWidget {
     // SizedBox(
     //     width: width,
     //     height: height,
-    //     child: RxCircleAvatar(
-    //         backgroundImage: RxImageProvider(url)));
+    //     child: MMCircleAvatar(
+    //         backgroundImage: MMImageProvider(url)));
   }
 }
 
-class RxCircleAvatar extends CircleAvatar {
-  const RxCircleAvatar(
+class MMCircleAvatar extends CircleAvatar {
+  const MMCircleAvatar(
       {super.key,
       Widget? child,
       Color? backgroundColor,
@@ -282,7 +282,7 @@ class RxCircleAvatar extends CircleAvatar {
             maxRadius: maxRadius);
 }
 
-ImageProvider<Object> RxImageProvider(String url) {
+ImageProvider<Object> MMImageProvider(String url) {
   if (url.isEmpty) {
     url = NOIMAGE;
   }
@@ -300,8 +300,8 @@ ImageProvider<Object> RxImageProvider(String url) {
   }
 }
 
-class RxSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
-  RxSliverPersistentHeaderDelegate(this._tabBar);
+class MMSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
+  MMSliverPersistentHeaderDelegate(this._tabBar);
 
   final TabBar _tabBar;
 
@@ -319,15 +319,15 @@ class RxSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(RxSliverPersistentHeaderDelegate oldDelegate) {
+  bool shouldRebuild(MMSliverPersistentHeaderDelegate oldDelegate) {
     return false;
   }
 }
 
-class RxSliverAppBarTabDelegate extends SliverPersistentHeaderDelegate {
+class MMSliverAppBarTabDelegate extends SliverPersistentHeaderDelegate {
   PreferredSize? child;
 
-  RxSliverAppBarTabDelegate({this.child});
+  MMSliverAppBarTabDelegate({this.child});
 
   @override
   Widget build(
@@ -347,8 +347,8 @@ class RxSliverAppBarTabDelegate extends SliverPersistentHeaderDelegate {
   }
 }
 
-class RxRoundedButton extends StatelessWidget {
-  const RxRoundedButton({
+class MMRoundedButton extends StatelessWidget {
+  const MMRoundedButton({
     Key? key,
     required this.onPressed,
     required this.title,
@@ -378,8 +378,8 @@ class RxRoundedButton extends StatelessWidget {
   }
 }
 
-class RxPrimaryButton extends RxButton {
-  const RxPrimaryButton(
+class MMPrimaryButton extends MMButton {
+  const MMPrimaryButton(
       {super.key, required this.onTap, required this.text, this.icon})
       : super(onTap: onTap, text: text);
   @override
@@ -390,8 +390,8 @@ class RxPrimaryButton extends RxButton {
   final Widget? icon;
 }
 
-class RxButton extends StatelessWidget {
-  const RxButton({
+class MMButton extends StatelessWidget {
+  const MMButton({
     Key? key,
     required this.onTap,
     required this.text,
@@ -435,8 +435,8 @@ class RxButton extends StatelessWidget {
   }
 }
 
-class RxButtonMore extends StatelessWidget {
-  const RxButtonMore({
+class MMButtonMore extends StatelessWidget {
+  const MMButtonMore({
     Key? key,
     required this.onTap,
     required this.text,
@@ -524,7 +524,7 @@ Widget rxTextInput(BuildContext context, String? value,
               ),
           subtitle: SizedBox(
             height: validator != null ? null : 35,
-            child: RxInput(value ?? "",
+            child: MMInput(value ?? "",
                 readOnly: onTap != null,
                 isBorder: isBorder,
                 keyboardType: keyboardType,
@@ -580,7 +580,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
             ),
         subtitle: SizedBox(
           height: validator != null ? null : 35,
-          child: RxInput(name,
+          child: MMInput(name,
               isBorder: isBorder,
               readOnly: true,
               hintText: hintText ?? "choose".tr,
@@ -614,13 +614,13 @@ _onSelect(BuildContext context, String type, dynamic id,
     ...data
   ];
   var res = await showSearch(
-      context: context, delegate: RxSelectDelegate(data: data, value: id));
+      context: context, delegate: MMSelectDelegate(data: data, value: id));
   if (res != null) {
     if (afterChange != null) afterChange(res);
   }
 }
 
-Widget RxBorderListTile({Widget? child}) {
+Widget MMBorderListTile({Widget? child}) {
   return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -633,49 +633,8 @@ Widget RxBorderListTile({Widget? child}) {
       child: child);
 }
 
-Widget RxBuildItemReview(ReviewModel item, context) {
-  return ListTile(
-    title: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          item.username ?? "NaN",
-          style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
-        ),
-        const SizedBox(height: kDefaultPadding),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            RatingBar.builder(
-              initialRating:
-                  CommonMethods.convertToDouble(item.ratingvalue ?? 0.0),
-              minRating: 1,
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              itemCount: 5,
-              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-              // ignore: prefer_const_constructors
-              itemBuilder: (context, _) => Icon(
-                Icons.star,
-                color: Colors.amber,
-              ),
-              onRatingUpdate: (rating) {
-                print(rating);
-              },
-            ),
-          ],
-        ),
-        const SizedBox(height: kDefaultPadding),
-        Text(item.comment ?? "", style: const TextStyle(), maxLines: 6),
-      ],
-    ),
-    horizontalTitleGap: 0,
-    leading: RxAvatarImage(item.rximguser, size: 30),
-    subtitle: Text(item.rxtimeago, style: kTextTimeStyle),
-  );
-}
 
-Widget RxGoBack(context) {
+Widget MMGoBack(context) {
   return 
   IconButton(
     icon: const Icon(Icons.chevron_left, color: AppColors.primary, size: 24,),

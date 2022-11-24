@@ -6,7 +6,6 @@ class StorageService {
   static String keyStorage = "mm";
   static Map<String, dynamic> dataStorage = <String, dynamic>{};
   static LocalStorage storage = LocalStorage('app');
-  static List<int> listFavorite = [];
   static Future<bool> init() async {
     var res = await storage.ready;
     try {
@@ -17,7 +16,10 @@ class StorageService {
 
   /// Retrieves a value from storage
   static dynamic get(String key) {
-    return dataStorage[key];
+    try {
+      return dataStorage[key];
+    } catch (e) {}
+    return null;
   }
 
   /// Changes a value in storage

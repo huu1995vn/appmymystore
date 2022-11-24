@@ -6,13 +6,13 @@ import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-class RxCustomScrollView extends StatefulWidget {
+class MMCustomScrollView extends StatefulWidget {
   final List<Widget>? slivers;
   final AutoScrollController? controller;
   final SliverAppBar? appBar;
   final Future<dynamic> Function()? onNextScroll;
   final Future<dynamic> Function()? onRefresh;
-  const RxCustomScrollView(
+  const MMCustomScrollView(
       {super.key,
       this.controller,
       this.slivers,
@@ -20,15 +20,15 @@ class RxCustomScrollView extends StatefulWidget {
       this.onNextScroll,
       this.onRefresh});
   @override
-  RxListViewState createState() => RxListViewState();
+  MMListViewState createState() => MMListViewState();
 }
 
-class RxListViewState extends State<RxCustomScrollView>
+class MMListViewState extends State<MMCustomScrollView>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
-  RxListViewState();
+  MMListViewState();
   late AutoScrollController scrollController;
   // ignore: prefer_final_fields
   GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =

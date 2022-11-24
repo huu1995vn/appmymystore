@@ -10,13 +10,13 @@ import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 
-class RxImage extends StatelessWidget {
+class MMImage extends StatelessWidget {
   final String url;
   final BoxFit fit;
   final double? width;
   final double? height;
   final bool fullHeight;
-  RxImage(this.url,
+  MMImage(this.url,
       {Key? key,
       this.width,
       this.height,
@@ -46,7 +46,7 @@ class RxImage extends StatelessWidget {
               width: width ?? MediaQuery.of(context).size.width,
               height: fullHeight ? MediaQuery.of(context).size.height : height,
               placeholder: MemoryImage(KTRANSPARENTIMAGE),
-              image: RxImageProvider(url),
+              image: MMImageProvider(url),
               fit: fit,
             );
     } else {

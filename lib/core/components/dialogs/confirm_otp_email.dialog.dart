@@ -206,7 +206,7 @@ class _OtpVerificationEmailDialogState
           ),
           Row(children: [
             Expanded(
-              child: RxPrimaryButton(onTap: _submit, text: "continue".tr),
+              child: MMPrimaryButton(onTap: _submit, text: "continue".tr),
             )
           ]),
         ],

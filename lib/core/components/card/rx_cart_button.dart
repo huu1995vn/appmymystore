@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-class RxCartButton extends StatelessWidget {
-  const RxCartButton({
+class MMCartButton extends StatelessWidget {
+  const MMCartButton({
     Key? key,
     required this.onTap,
   }) : super(key: key);

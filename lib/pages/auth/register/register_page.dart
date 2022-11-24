@@ -26,6 +26,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
   UserModel? user;
   String passwordAgain = "";
+  String password = "";
+
   @override
   void initState() {
     super.initState();
@@ -36,8 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {
       user = UserModel();
       user!.phone = "";
-      user!.fullname = "";
-      user!.password = "";
+      user!.name = "";
     });
   }
 
@@ -80,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: [
             Image.asset(
-              LOGORAOXECOLORIMAGE,
+              LOGO,
               width: 180,
             ),
             const SizedBox(height: 30),
@@ -120,10 +121,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                       border: Border(
                                           bottom: BorderSide(
                                               color: Colors.black26))),
-                                  child: RxInput(user!.fullname!,
+                                  child: MMInput(user!.name!,
                                       labelText: "fullname".tr,
                                       icon: const Icon(AppIcons.users_1),
-                                      onChanged: (v) => {user!.fullname = v},
+                                      onChanged: (v) => {user!.name = v},
                                       validator: Validators.compose([
                                         Validators.required(
                                             "notempty.fullname".tr),
@@ -135,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       border: Border(
                                           bottom: BorderSide(
                                               color: Colors.black26))),
-                                  child: RxInput(user!.phone!,
+                                  child: MMInput(user!.phone!,
                                       keyboardType: TextInputType.number,
                                       labelText: "phone".tr,
                                       icon: const Icon(AppIcons.phone_1),
@@ -157,31 +158,31 @@ class _RegisterPageState extends State<RegisterPage> {
                                       border: Border(
                                           bottom: BorderSide(
                                               color: Colors.black26))),
-                                  child: RxInput(
-                                    user!.password!,
+                                  child: MMInput(
+                                    password!,
                                     isPassword: true,
                                     labelText: "password".tr,
                                     icon: const Icon(AppIcons.lock_1),
-                                    onChanged: (v) => {user!.password = v},
+                                    onChanged: (v) => {password = v},
                                     validator: Validators.compose([
                                       Validators.required(
                                           "notempty.password".tr),
                                       Validators.patternString(
-                                          RxParttern.password,
+                                          MMParttern.password,
                                           "message.str004".tr)
                                     ]),
                                   )),
                               Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 5),
-                                  child: RxInput(
+                                  child: MMInput(
                                     passwordAgain,
                                     isPassword: true,
                                     labelText: "password.again".tr,
                                     icon: const Icon(AppIcons.lock_1),
                                     validator: (value) {
                                       if (value != null &&
-                                          value != user!.password) {
+                                          value != password) {
                                         return "invalid.password.again".tr;
                                       } else {
                                         return null;
@@ -194,7 +195,7 @@ class _RegisterPageState extends State<RegisterPage> {
               Row(
                 children: [
                   Expanded(
-                    child: RxPrimaryButton(
+                    child: MMPrimaryButton(
                         onTap: () {
                           if (_keyValidationForm.currentState!.validate()) {
                             _onRegister();
@@ -205,7 +206,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ],
               ),
               const SizedBox(height: 20),
-              RxLoginAccountLabel(context)
+              MMLoginAccountLabel(context)
             ]));
   }
 
@@ -215,7 +216,7 @@ class _RegisterPageState extends State<RegisterPage> {
       bool checkOtp = await CommonNavigates.openOtpVerificationPhoneDialog(
           context, user!.phone!, false);
       if (checkOtp) {
-        var res = await ApiBLL_APIAnonymous().insertuser(user!.toInsert());
+        var res = await ApiBLL_APIAnonymous().insertuser(user!.toJson());
         if (res.status > 0) {
           CommonMethods.showDialogCongratulations(context, "message.str008".tr);
         } else {

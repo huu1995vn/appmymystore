@@ -39,16 +39,16 @@ class InactiveDot extends StatelessWidget {
   }
 }
 
-class RxSlider extends StatefulWidget {
+class MMSlider extends StatefulWidget {
   final List items;
   final void Function(int)? onTap;
-  const RxSlider({required this.items, Key? key, this.onTap}) : super(key: key);
+  const MMSlider({required this.items, Key? key, this.onTap}) : super(key: key);
 
   @override
-  _RxSliderState createState() => _RxSliderState();
+  _MMSliderState createState() => _MMSliderState();
 }
 
-class _RxSliderState extends State<RxSlider> {
+class _MMSliderState extends State<MMSlider> {
   int activeIndex = 0;
 
   setActiveDot(index) {
@@ -87,7 +87,7 @@ class _RxSliderState extends State<RxSlider> {
                       color: AppColors.white,
                       // borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        image: RxImageProvider(widget.items[index]),
+                        image: MMImageProvider(widget.items[index]),
                         fit: BoxFit.cover,
                       ),
                     ),

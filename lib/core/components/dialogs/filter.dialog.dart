@@ -262,7 +262,7 @@ class _FilterDialogState extends State<FilterDialog> {
           Row(
             children: [
               Expanded(
-                child: RxPrimaryButton(
+                child: MMPrimaryButton(
                   onTap: _onDone,
                   text: "apply".tr,
                 ),

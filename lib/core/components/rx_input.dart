@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class RxInput extends StatefulWidget {
+class MMInput extends StatefulWidget {
   final String value;
   final String? labelText;
   final String? hintText;
@@ -21,7 +21,7 @@ class RxInput extends StatefulWidget {
   final MaxLengthEnforcement? maxLengthEnforcement;
   final int? maxLength;
   final int? minLines;
-  const RxInput(this.value,
+  const MMInput(this.value,
       {super.key,
       this.disabled = false,
       this.validator,
@@ -44,7 +44,7 @@ class RxInput extends StatefulWidget {
   _InputTextState createState() => _InputTextState();
 }
 
-class _InputTextState extends State<RxInput> {
+class _InputTextState extends State<MMInput> {
   TextEditingController input = TextEditingController();
   bool showPassword = false;
   @override
@@ -54,7 +54,7 @@ class _InputTextState extends State<RxInput> {
   }
 
   @override
-  void didUpdateWidget(RxInput oldWidget) {
+  void didUpdateWidget(MMInput oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.value != oldWidget.value) {
       Future.delayed(Duration.zero, () {

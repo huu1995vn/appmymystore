@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 
-class RxCard extends StatelessWidget {
+class MMCard extends StatelessWidget {
   final Widget child;
   final EdgeInsets? margin;
   final RoundedRectangleBorder? shape;
   final bool isBorder;
-  const RxCard(
+  const MMCard(
       {key, required this.child, this.margin, this.shape, this.isBorder = true})
       : super(key: key);
 

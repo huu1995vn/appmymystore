@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RxCardBody extends StatelessWidget {
-  const RxCardBody({
+class MMCardBody extends StatelessWidget {
+  const MMCardBody({
     Key? key,
     required this.child,
     required this.onTap,

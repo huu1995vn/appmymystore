@@ -15,7 +15,7 @@ import 'package:mymystore/core/utilities/size_config.dart';
 
 import '../../utilities/app_colors.dart';
 
-class RxSearchDelegate extends SearchDelegate<dynamic> {
+class MMSearchDelegate extends SearchDelegate<dynamic> {
   static Map cacheapiSearch = {};
   Completer<List<SuggestionModel>> _completer = Completer();
 
@@ -32,7 +32,7 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
   List<String> listSearchLocal =
       (StorageService.get(StorageKeys.text_search) ?? "")!.split(",");
   List<SuggestionModel> suggestionList = <SuggestionModel>[];
-  RxSearchDelegate();
+  MMSearchDelegate();
   @override
   String get searchFieldLabel => 'text.search'.tr;
   @override
@@ -181,8 +181,8 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
     if (suggestionList.length < kItemOnPage) {
       List list = [];
       try {
-        if (RxSearchDelegate.cacheapiSearch[query] == null ||
-            RxSearchDelegate.cacheapiSearch[query].length == 0) {
+        if (MMSearchDelegate.cacheapiSearch[query] == null ||
+            MMSearchDelegate.cacheapiSearch[query].length == 0) {
           // var res = await ApiBLL_APIGets().suggest(query);
           // if (res.status > 0) {
           //   final data = res.data as List;
@@ -190,11 +190,11 @@ class RxSearchDelegate extends SearchDelegate<dynamic> {
           //       ? data.map((e) => jsonDecode(e["Data"])["TuKhoa"]).toList()
           //       : [];
           //   if (list.isNotEmpty) {
-          //     RxSearchDelegate.cacheapiSearch[query] = list;
+          //     MMSearchDelegate.cacheapiSearch[query] = list;
           //   }
           // }
         } else {
-          list = RxSearchDelegate.cacheapiSearch[query];
+          list = MMSearchDelegate.cacheapiSearch[query];
         }
 
         suggestionList.addAll(

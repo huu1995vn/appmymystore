@@ -66,7 +66,7 @@ class _PhotoViewDialogState extends State<PhotoViewDialog> {
         builder: (BuildContext context, int index) {
           String img = widget.imgs[index];
           return PhotoViewGalleryPageOptions(
-            imageProvider: RxImageProvider(img),
+            imageProvider: MMImageProvider(img),
           );
         },
         itemCount: widget.imgs.length,

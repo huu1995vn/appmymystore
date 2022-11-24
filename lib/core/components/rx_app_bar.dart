@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-AppBar RxAppBar({
+AppBar MMAppBar({
   Widget? title,
   Widget? leading,
   List<Widget>? actions,

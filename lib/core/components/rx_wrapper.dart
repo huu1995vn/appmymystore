@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RxWrapper extends StatelessWidget {
-  const RxWrapper({
+class MMWrapper extends StatelessWidget {
+  const MMWrapper({
     Key? key,
     required this.body,
   }) : super(key: key);

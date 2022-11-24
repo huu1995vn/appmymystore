@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class RxButtonBar extends StatelessWidget {
-  RxButtonBar(
+class MMButtonBar extends StatelessWidget {
+  MMButtonBar(
       {Key? key,
       required this.icon,
       required this.isEnable,

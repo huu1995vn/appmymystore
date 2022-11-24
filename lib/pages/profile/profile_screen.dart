@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           iconTheme: const IconThemeData(
             color: AppColors.primary, //change your color here
           ),
-          leading: RxGoBack(context),
+          leading: MMGoBack(context),
           backgroundColor: Colors.transparent,
           centerTitle: true,
           // title: Text(

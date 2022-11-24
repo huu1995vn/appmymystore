@@ -58,7 +58,7 @@ class FileService {
                 CupertinoActionSheetAction(
                   child: Row(
                     children: <Widget>[
-                      // RxIcon(LineAwesomeIcons.envira_gallery,
+                      // MMIcon(LineAwesomeIcons.envira_gallery,
                       //     color: Colors.grey),
                       Text("gallery".tr)
                     ],
@@ -72,7 +72,7 @@ class FileService {
                 isDefaultAction: true,
                 child: Row(
                   children: <Widget>[
-                    // RxIcon(AppIcons.cross, color: Colors.grey),
+                    // MMIcon(AppIcons.cross, color: Colors.grey),
                     Text("cancel".tr)
                   ],
                 ),
@@ -107,7 +107,7 @@ class FileService {
                         return Navigator.pop(context, 2);
                       },
                       // leading:
-                      //     RxIcon(LineAwesomeIcons.image, color: Colors.grey),
+                      //     MMIcon(LineAwesomeIcons.image, color: Colors.grey),
                       title: Row(
                         children: <Widget>[Text("gallery".tr)],
                       )),
@@ -115,7 +115,7 @@ class FileService {
                       onTap: () {
                         return Navigator.pop(context, null);
                       },
-                      // leading: RxIcon(AppIcons.cross, color: Colors.grey),
+                      // leading: MMIcon(AppIcons.cross, color: Colors.grey),
                       title: Row(
                         children: <Widget>[Text("cancel".tr)],
                       )),

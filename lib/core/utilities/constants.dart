@@ -48,46 +48,27 @@ const kTextPriceStyle = TextStyle(
   color: AppColors.primary,
 );
 const kTextTimeStyle = TextStyle(fontSize: 14);
-const NOIMAGE = "assets/images/no-image.jpg";
-const NOIMAGEAVAILABELFOLDER = "/resources/Images/hinh-anh-khong-ton-tai/";
-const NOIMAGEUUDAI = "assets/images/gift.png";
-const NOIMAGEUSER = "assets/avatar.png";
-const LAZYLOADIMAGE = "/assets/lazy-load-image.jpg";
-const CHECKSUCCESSIMAGE = "/assets/check-verify.jpg";
-const MAINTOPIMAGE = "assets/images/bg/main_top.png";
-const LOGINBOTTOMIMAGE = "assets/images/bg/login_bottom.png";
-const BGLOGINMEMBERIMAGE = "assets/images/img-screen/bg-login-member.png";
-const LOGORAOXECOLORIMAGE = "assets/logo-raoxe-comau.png";
-const LOGORAOXEWHITEIMAGE = "assets/images/logo-raoxe-trang.png";
-const UUDAISVG = "assets/images/img-screen/uu-dai.svg";
-const BGBANNER = "assets/images/bg/bg-banner.png";
-const NOTFOUNDDATA = "assets/images/img-screen/no-data.png";
-const EMPTYDATA = "assets/images/img-screen/empty-data.png";
-const BGOTP = "assets/images/img-screen/otp.png";
-const ICON = "assets/icon.png";
+const NOIMAGE = "assets/images/no-image.png";
+// const NOIMAGEAVAILABELFOLDER = "/resources/Images/hinh-anh-khong-ton-tai/";
+// const NOIMAGEUUDAI = "assets/images/gift.png";
+const NOIMAGEUSER = "assets/images/avatar.png";
+// const LAZYLOADIMAGE = "/assets/lazy-load-image.jpg";
+// const CHECKSUCCESSIMAGE = "/assets/check-verify.jpg";
+// const MAINTOPIMAGE = "assets/images/bg/main_top.png";
+// const LOGINBOTTOMIMAGE = "assets/images/bg/login_bottom.png";
+// const BGLOGINMEMBERIMAGE = "assets/images/img-screen/bg-login-member.png";
+const LOGO = "assets/images/logo.png";
+// const LOGORAOXEWHITEIMAGE = "assets/images/logo-raoxe-trang.png";
+// const UUDAISVG = "assets/images/img-screen/uu-dai.svg";
+// const BGBANNER = "assets/images/bg/bg-banner.png";
+// const NOTFOUNDDATA = "assets/images/img-screen/no-data.png";
+const EMPTYDATA = "assets/images/empty-data.png";
+// const BGOTP = "assets/images/img-screen/otp.png";
+// const ICON = "assets/icon.png";
 
 const String IMAGE_NOT_FOUND =
     "https://cdn.gianhangvn.com/image/hinh-anh-khong-ton-tai.jpg";
 const List<String> kBanners = ["84748", "84749", "84750"];
-List<Categorie> CATEGORIES = [
-  Categorie(id: 2, categoryname: "news.new".tr),
-  Categorie(id: 8, categoryname: "highlight".tr),
-  Categorie(id: 3, categoryname: "vehicle.reviews".tr),
-  Categorie(id: 4, categoryname: "advise".tr),
-  Categorie(id: 5, categoryname: "image".tr),
-];
-List<Categorie> PRODUCTSTATUS = [
-  Categorie(id: 1, categoryname: "pending".tr),
-  Categorie(id: 2, categoryname: "approved".tr),
-  Categorie(id: 3, categoryname: "not.approved".tr),
-  Categorie(id: 4, categoryname: "violate".tr),
-  // Categorie(id: 6, categoryname: "Videos"),
-];
-
-List<Categorie> PRODUCTREVIEWSTATUS = [
-  Categorie(id: 1, categoryname: "approved".tr),
-  Categorie(id: 2, categoryname: "not.approved".tr),
-];
 
 List PRICES = [
   {"name": "0 - 500 triệu", "id": 0},
@@ -128,7 +109,7 @@ List PRODUCTSEATS = [
   {"name": "16 ${"txtseat".tr.toLowerCase()}", "id": 16},
 ];
 
-class RxParttern {
+class MMParttern {
   //[Update]
   static String password =
       r'^(?=.*?[A-Z]).{8,25}$'; // Phải có ít nhất 1 ký tự chữ hoa

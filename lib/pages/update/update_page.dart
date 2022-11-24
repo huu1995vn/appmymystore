@@ -54,7 +54,7 @@ class _UpdatePageState extends State<UpdatePage> {
                 width: double.infinity,
                 height: 150,
                 child: Image.asset(
-                  ICON,
+                  LOGO,
                   height: 200,
                   width: double.infinity,
                 ),
@@ -63,7 +63,7 @@ class _UpdatePageState extends State<UpdatePage> {
               Row(
                 children: [
                   Expanded(
-                    child: RxButton(
+                    child: MMButton(
                       text: "update".tr,
                       onTap: () {
                         CommonMethods.launchURL(widget.data.appURL!);
@@ -77,7 +77,7 @@ class _UpdatePageState extends State<UpdatePage> {
               Row(
                 children: [
                   Expanded(
-                      child: RxButton(
+                      child: MMButton(
                     text: "exit".tr,
                     onTap: () {
                       CommonNavigates.exitApp(context);

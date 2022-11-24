@@ -51,10 +51,7 @@ class CommonMethods {
     }
   }
 
-  static bool get isLogin {
-    return APITokenService.token != null && APITokenService.token.isNotEmpty;
-  }
-
+  
   static Future<PackageInfo?> getPackageInfo() async {
     try {
       return await PackageInfo.fromPlatform();
@@ -258,7 +255,7 @@ class CommonMethods {
           fit: BoxFit.contain,
         ),
         context: context,
-        actions: [RxPrimaryButton(onTap: () {}, text: "done".tr)]);
+        actions: [MMPrimaryButton(onTap: () {}, text: "done".tr)]);
   }
 
   static String buildUrlImage(int idHinh, {String? rewriteUrl, int size = 0}) {
@@ -368,7 +365,7 @@ class CommonMethods {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => RxWebView(
+              builder: (context) => MMWebView(
                   url: url, html: html, title: title ?? "content".tr)));
     } else {
       return CommonMethods.launchURL(url!);
@@ -409,7 +406,7 @@ class CommonMethods {
   static bool checkStringPhone(String? text) {
     if (text != null) {
       RegExp regExp = RegExp(
-        RxParttern.phone,
+        MMParttern.phone,
         caseSensitive: false,
         multiLine: false,
       );
@@ -422,7 +419,7 @@ class CommonMethods {
   static bool checkStringEmail(String? text) {
     if (text != null) {
       RegExp regExp = RegExp(
-        RxParttern.email,
+        MMParttern.email,
         caseSensitive: false,
         multiLine: false,
       );

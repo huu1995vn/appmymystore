@@ -10,6 +10,7 @@ import 'package:mymystore/core/commons/flutter_app_version_checker.dart';
 import 'package:mymystore/core/components/splashscreen.dart';
 import 'package:mymystore/core/lang/translation.service.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/firebase/remote_config.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
@@ -22,6 +23,8 @@ import 'package:mymystore/pages/home/home.dart';
 import 'package:mymystore/pages/update/update_page.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
+
+import 'pages/auth/login/login_page.dart';
 
 Future<void> main() async {
   await initializeApp();
@@ -102,7 +105,8 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: Consumer<AppProvider>(
-          child: const HomeScreen(),
+          child:
+              APITokenService.isLogin ? const HomeScreen(): const LoginPage(),
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
                   color: Colors.transparent,

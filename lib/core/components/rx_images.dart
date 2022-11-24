@@ -8,16 +8,16 @@ import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:skeletons/skeletons.dart';
 
-class RxImages extends StatefulWidget {
+class MMImages extends StatefulWidget {
   final List<String> data;
   final void Function(int)? onTap;
-  const RxImages({super.key, required this.data, this.onTap});
+  const MMImages({super.key, required this.data, this.onTap});
   @override
-  State<RxImages> createState() => _RxImagesState();
+  State<MMImages> createState() => _MMImagesState();
 }
 
-class _RxImagesState extends State<RxImages>
-    with AutomaticKeepAliveClientMixin<RxImages> {
+class _MMImagesState extends State<MMImages>
+    with AutomaticKeepAliveClientMixin<MMImages> {
   @override
   bool get wantKeepAlive => true;
   int _current = 0;
@@ -102,7 +102,7 @@ class _RxImagesState extends State<RxImages>
                   if (widget.onTap != null) {widget.onTap!(index)}
                 },
             child: Stack(children: <Widget>[
-              RxImage(widget.data[index]),
+              MMImage(widget.data[index]),
               Positioned(
                 bottom: 0.0,
                 left: 0.0,

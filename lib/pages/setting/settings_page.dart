@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:provider/provider.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
@@ -33,7 +34,7 @@ class _SettingsPageState extends State<SettingsPage> {
       var res = await AuthService.authBiometric();
       if (v && res) {
         await StorageService.set(
-            StorageKeys.biometric, userProvider.user.username);
+            StorageKeys.biometric, userProvider.user.phone);
         setState(() {
           authBiometric = true;
         });
@@ -77,7 +78,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     var userProvider = Provider.of<AppProvider>(context);
     authBiometric =
-        StorageService.get(StorageKeys.biometric) == userProvider.user.username;
+        StorageService.get(StorageKeys.biometric) == userProvider.user.phone;
 
     return Scaffold(
       appBar: AppBar(
@@ -98,7 +99,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       //          <-- ListTile.divideTiles
                       context: context,
                       tiles: [
-                        RxBuildItem(
+                        MMBuildItem(
                             icon: Icon(AppIcons.sun),
                             title: "darkmode".tr,
                             trailing: Switch(
@@ -114,7 +115,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: () {
                               // _authenticateWithBiometrics();
                             }),
-                        RxBuildItem(
+                        MMBuildItem(
                           icon: const Icon(AppIcons.language_1),
                           title: "language".tr,
                           trailing: DropdownButton<String>(
@@ -127,8 +128,8 @@ class _SettingsPageState extends State<SettingsPage> {
                             },
                           ),
                         ),
-                        if (CommonMethods.isLogin)
-                          RxBuildItem(
+                        if (APITokenService.isLogin)
+                          MMBuildItem(
                               icon: const Icon(AppIcons.fingerprint),
                               title: "login.biometrics".tr,
                               trailing: Switch(
@@ -140,25 +141,25 @@ class _SettingsPageState extends State<SettingsPage> {
                               onTap: () {
                                 // _authenticateWithBiometrics();
                               }),
-                        // RxBuildItem(
+                        // MMBuildItem(
                         //     title: "Clear cache".tr,
                         //     onTap: () {
-                        //       RxSearchDelegate.cacheapiSearch = {};
+                        //       MMSearchDelegate.cacheapiSearch = {};
                         //       CommonMethods.showToast(
                         //           context, "success".tr);
                         //     }),
 
-                        RxBuildItem(
+                        MMBuildItem(
                             title: "termsandcondition".tr,
                             onTap: () {
                               openWebViewTermsAndCondition(context);
                             }),
-                        RxBuildItem(
+                        MMBuildItem(
                             title: "policy".tr,
                             onTap: () {
                               openWebViewPolicy(context);
                             }),
-                        RxBuildItem(
+                        MMBuildItem(
                             title: "feedback".tr,
                             onTap: () {
                               openWebViewFeedBack(context);

@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 
-class RxIconButton extends StatelessWidget {
-  RxIconButton(
+class MMIconButton extends StatelessWidget {
+  MMIconButton(
       {Key? key,
       required this.icon,
       this.onTap,

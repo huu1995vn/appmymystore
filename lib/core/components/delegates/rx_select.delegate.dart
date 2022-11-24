@@ -9,7 +9,7 @@ import 'package:mymystore/core/components/index.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 
-class RxSelectDelegate extends SearchDelegate<dynamic> {
+class MMSelectDelegate extends SearchDelegate<dynamic> {
   List data;
   dynamic value;
   bool ismultiple;
@@ -17,7 +17,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
   String pvalue;
 
   Widget Function(BuildContext, int)? itemBuilder;
-  RxSelectDelegate(
+  MMSelectDelegate(
       {required this.data,
       required this.value,
       this.ismultiple = false,
@@ -117,7 +117,7 @@ class RxSelectDelegate extends SearchDelegate<dynamic> {
                       child: Row(
                         children: [
                           Expanded(
-                              child: RxPrimaryButton(
+                              child: MMPrimaryButton(
                                   onTap: () {
                                     CommonNavigates.goBack(context, value);
                                   },

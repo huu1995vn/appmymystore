@@ -7,15 +7,15 @@ class AppProvider with ChangeNotifier {
   UserModel user = UserModel();
   static UserModel localuser = UserModel();
 
-  setUserData({String? fullname, int? img, int? id}) {
-    user.fullname = fullname ?? "Nguyễn Văn A";
-    user.img = img ?? -1;
-    user.id = id ?? APITokenService.userId;
+  setUserData({String? pfullname, String? pimage, int? pid}) {
+    user.name = pfullname ?? "Nguyễn Văn A";
+    user.image = pimage ?? "";
+    user.id = pid ?? APITokenService.userId;
     setUserModel(user);
   }
 
-  setAvatarUserModel(int img) {
-    user.img = img;
+  setAvatarUserModel(String img) {
+    user.image = img;
     setUserModel(user);
   }
 

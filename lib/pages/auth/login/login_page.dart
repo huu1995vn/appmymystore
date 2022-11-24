@@ -35,9 +35,9 @@ class _LoginPageState extends State<LoginPage> {
   Map<String, dynamic> userlogin = {};
 
   loadData() {
-    userlogin = StorageService.get(StorageKeys.userlogin);
+    userlogin = StorageService.get(StorageKeys.userlogin)??{};
     setState(() {
-      if (userlogin != null) {
+      if (userlogin != null && !userlogin.isEmpty) {
         username = userlogin["username"];
       }
     });
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         children: [
           Image.asset(
-            LOGORAOXECOLORIMAGE,
+            LOGO,
             width: 180,
           ),
           const SizedBox(height: 30),
@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: const BoxDecoration(
                             border: Border(
                                 bottom: BorderSide(color: Colors.black26))),
-                        child: RxInput(
+                        child: MMInput(
                           username,
                           labelText: "phone".tr,
                           icon: const Icon(AppIcons.phone_1),
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                       Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 5),
-                          child: RxInput(
+                          child: MMInput(
                             password,
                             isPassword: true,
                             labelText: "password".tr,
@@ -165,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               children: [
                 Expanded(
-                    child: RxPrimaryButton(
+                    child: MMPrimaryButton(
                         onTap: () {
                           _onLogin(username, password);
                         },

@@ -57,7 +57,7 @@ class _ErrorPageState extends State<ErrorPage> {
               Row(
                 children: [
                   Expanded(
-                      child: RxButton(
+                      child: MMButton(
                     text: "exit".tr,
                     onTap: () {
                       CommonNavigates.exitApp(context);

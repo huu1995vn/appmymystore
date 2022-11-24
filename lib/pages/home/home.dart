@@ -74,7 +74,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
       appBar: AppBar(
         elevation: 0.0,
         title: ListTile(
-          leading: const RxAvatarImage(
+          leading: const MMAvatarImage(
             '$kIconPath/me.png',
             size: 39,
           ),

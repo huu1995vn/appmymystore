@@ -4,11 +4,10 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:skeletons/skeletons.dart';
 
-class RxListView extends StatefulWidget {
+class MMListView extends StatefulWidget {
   final dynamic data;
   final Widget Function(BuildContext, int) itemBuilder;
   final Future<dynamic> Function()? onNextPage;
@@ -18,7 +17,7 @@ class RxListView extends StatefulWidget {
   final Widget? awaiting;
   final Widget? noFound;
   final EdgeInsetsGeometry padding;
-  const RxListView(this.data, this.itemBuilder,
+  const MMListView(this.data, this.itemBuilder,
       {Key? key,
       this.onNextPage,
       this.onRefresh,
@@ -29,14 +28,14 @@ class RxListView extends StatefulWidget {
       this.padding = EdgeInsets.zero})
       : super(key: key);
   @override
-  _RxDataListViewState createState() => _RxDataListViewState();
+  _MMDataListViewState createState() => _MMDataListViewState();
 }
 
-class _RxDataListViewState extends State<RxListView>
+class _MMDataListViewState extends State<MMListView>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-  _RxDataListViewState();
+  _MMDataListViewState();
   ScrollController _scrollController = ScrollController();
   // ignore: prefer_final_fields
   GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =

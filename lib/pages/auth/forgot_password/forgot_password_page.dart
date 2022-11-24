@@ -72,7 +72,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Column(
           children: [
             Image.asset(
-              LOGORAOXECOLORIMAGE,
+              LOGO,
               width: 180,
             ),
             const SizedBox(height: 30),
@@ -108,7 +108,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         decoration: const BoxDecoration(
                             border: Border(
                                 bottom: BorderSide(color: Colors.black26))),
-                        child: RxInput(phone,
+                        child: MMInput(phone,
                             keyboardType: TextInputType.number,
                             labelText: "phone".tr,
                             icon: const Icon(AppIcons.phone_1),
@@ -131,7 +131,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         decoration: const BoxDecoration(
                             border: Border(
                                 bottom: BorderSide(color: Colors.black26))),
-                        child: RxInput(password,
+                        child: MMInput(password,
                             isPassword: true,
                             labelText: "password.new".tr,
                             icon: const Icon(AppIcons.lock_1),
@@ -145,7 +145,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 5),
-                        child: RxInput(passwordAgain,
+                        child: MMInput(passwordAgain,
                             isPassword: true,
                             labelText: "password.again".tr,
                             icon: const Icon(AppIcons.lock_1),
@@ -163,7 +163,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         const SizedBox(height: 20),
         Row(children: [
           Expanded(
-            child: RxPrimaryButton(
+            child: MMPrimaryButton(
                 onTap: () {
                   if (_keyValidationForm.currentState!.validate()) {
                     onForgotPassword();
@@ -176,7 +176,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           height: 20,
         ),
         //button: login
-        RxLoginAccountLabel(context)
+        MMLoginAccountLabel(context)
       ]),
     );
   }

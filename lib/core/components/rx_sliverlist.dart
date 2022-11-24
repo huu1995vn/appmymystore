@@ -6,13 +6,13 @@ import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:skeletons/skeletons.dart';
 
-class RxSliverList extends StatefulWidget {
+class MMSliverList extends StatefulWidget {
   final dynamic data;
   final ViewType? viewType;
   final Widget Function(BuildContext, int) itemBuilder;
   final Widget? noFound;
   final Widget? awaiting;
-  const RxSliverList(
+  const MMSliverList(
     this.data,
 
     // ignore: invalid_required_positional_param
@@ -23,15 +23,15 @@ class RxSliverList extends StatefulWidget {
     this.awaiting,
   }) : super(key: key);
   @override
-  RxListViewState createState() => RxListViewState();
+  MMListViewState createState() => MMListViewState();
 }
 
-class RxListViewState extends State<RxSliverList>
+class MMListViewState extends State<MMSliverList>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
-  RxListViewState();
+  MMListViewState();
   bool isLoading = false;
 
   @override

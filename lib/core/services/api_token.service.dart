@@ -108,7 +108,6 @@ class APITokenService {
     try {
       await FirebaseMessagingService.refeshToken();
       StorageService.deleteItem(StorageKeys.dataLogin);
-      StorageService.listFavorite = [];
       token = "";
       return true;
     } catch (e) {
@@ -126,4 +125,9 @@ class APITokenService {
       }
     } catch (e) {}
   }
+  
+  static bool get isLogin {
+    return APITokenService.token != null && APITokenService.token.isNotEmpty;
+  }
+
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 
-Scaffold RxScaffold(
+Scaffold MMScaffold(
     {Key? key,
     PreferredSizeWidget? appBar,
     Widget? child,

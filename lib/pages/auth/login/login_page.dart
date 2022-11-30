@@ -7,6 +7,8 @@ import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/index.dart';
 import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/providers/app_provider.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
@@ -14,6 +16,7 @@ import 'package:mymystore/core/utilities/constants.dart';
 import 'package:get/get.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/pages/home/home.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -36,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   Map<String, dynamic> userlogin = {};
 
   loadData() {
-    userlogin = StorageService.get(StorageKeys.userlogin)??{};
+    userlogin = StorageService.get(StorageKeys.userlogin) ?? {};
     setState(() {
       if (userlogin != null && !userlogin.isEmpty) {
         username = userlogin["username"];
@@ -229,8 +232,8 @@ class _LoginPageState extends State<LoginPage> {
       String userbio = StorageService.get(StorageKeys.biometric);
       isLoginBio = userbio == username;
       if (isLoginBio && userlogin != null) {
-        await AuthService.authBiometric();
-        _onLogin(username, userlogin["password"]!);
+        // await AuthService.authBiometric();
+        // _onLogin(username, userlogin["password"]!);
       } else {
         throw "message.str011".tr;
       }
@@ -247,11 +250,10 @@ class _LoginPageState extends State<LoginPage> {
     CommonMethods.lockScreen();
     try {
       // await AuthService.checkPhone(username, isExist: true);
-      if (mounted) 
-      {
+      if (mounted) {
         var res = await AuthService.login(context, username, password);
-        if(res)
-        {
+        if (res) {
+          Provider.of<AppProvider>(context).setUserModel(APITokenService.user);
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(

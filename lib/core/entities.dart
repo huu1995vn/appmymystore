@@ -52,8 +52,8 @@ class UserModel extends Entity {
   int id = APITokenService.id;
   String name = "";
   String phone = "";
-  late String email = "";
-  late String address = "";
+  String? email = "";
+  String? address = "";
   String? image;
   String get mmimage {
     return image ?? '$kIconPath/me.png';

@@ -34,7 +34,7 @@ class APITokenService {
     }
     _token = pToken;
     StorageService.set(StorageKeys.token, _token);
-    if (pToken.isNotNullEmpty) {
+    if (_token.isNotNullEmpty) {
       try {
         user = UserModel.fromJson(_decodeToken(_token));
         FirebaseMessagingService.subscribeToTopic("user${user.id}");

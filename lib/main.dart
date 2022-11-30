@@ -115,6 +115,7 @@ class _MyAppState extends State<MyApp> {
                     future: RemoteConfigSerivce.init(),
                     builder: (BuildContext context,
                         AsyncSnapshot<FirebaseRemoteConfig> snapshot) {
+                          
                       return (snapshot.hasData)
                           ? SplashScreen.future(
                               navigateAfterFuture: loadFromFuture(home),

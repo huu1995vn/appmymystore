@@ -43,8 +43,12 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
     CloudFirestoreSerivce.subcriptuser(context);
     CloudFirestoreSerivce.setdevice(isOnline: true);
     animationController.reverse();
-    Provider.of<AppProvider>(context, listen: false)
-        .setUserModel(APITokenService.user);
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (mounted) {
+        Provider.of<AppProvider>(context, listen: false)
+            .setUserModel(APITokenService.user);
+      }
+    });
   }
 
   @override
@@ -66,16 +70,10 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final appProvider = Provider.of<AppProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context, listen: true);
     const padding = EdgeInsets.fromLTRB(
         kDefaultPadding, kDefaultPadding, kDefaultPadding, 0);
     return Scaffold(
-      // appBar: AppBar(
-      //     centerTitle: true,
-      //     title: HomeAppBar(),
-      //     elevation: 0.0,
-      //     // actions: [widget.action ?? Container()],
-      //   ),
       appBar: AppBar(
         elevation: 0.0,
         title: ListTile(

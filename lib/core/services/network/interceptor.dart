@@ -40,10 +40,6 @@ class DioInterceptors extends InterceptorsWrapper {
 
   String _getToken(RequestOptions options) {
     var token = APITokenService.token;
-    if(options.path.toLowerCase().contains("refreshlogin") && APITokenService.token.isNullEmpty)
-    {
-      token = StorageService.get(StorageKeys.token);
-    }
     return "Bearer $token";
   }
 

@@ -11,11 +11,13 @@ import 'package:mymystore/core/components/splashscreen.dart';
 import 'package:mymystore/core/lang/translation.service.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
+import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/firebase/remote_config.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/theme/theme.service.dart';
 import 'package:mymystore/core/theme/themes.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/logger_utils.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:mymystore/pages/error/error_page.dart';
@@ -80,11 +82,14 @@ class _MyAppState extends State<MyApp> {
       //   return UpdatePage(data: status);
       // }
       await InfoDeviceService.init();
+      await APITokenService.init();
+      if (APITokenService.token.isNullEmpty) {
+        return const LoginPage();
+      }
       return main!;
 
       // await FirebaseAuthService.signInAnonymously();
       // await FirebaseMessagingService.init();
-      // APITokenService.init();
       // await CloudFirestoreSerivce.init();
       // bool res = await MasterDataService.init();
       // if (res) {
@@ -105,8 +110,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: Consumer<AppProvider>(
-          child:
-              APITokenService.isLogin ? const HomeScreen(): const LoginPage(),
+          child: const HomeScreen(),
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
                   color: Colors.transparent,

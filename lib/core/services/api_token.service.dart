@@ -1,8 +1,8 @@
 // ignore_for_file: empty_catches, non_constant_identifier_names
 
-import 'dart:async';
 import 'dart:convert';
 import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
@@ -56,11 +56,15 @@ class APITokenService {
     return pText.replaceAll('+', '_').replaceAll('/', '-').split("=")[0];
   }
 
-  static void init() {
+  static Future<void> init() async {
     try {
       String storetoken = StorageService.get(StorageKeys.token);
       if (storetoken.isNotNullEmpty) {
         token = storetoken;
+      }
+      if(isExpired)
+      {
+        await AuthService.refreshlogin();
       }
     } catch (e) {}
   }

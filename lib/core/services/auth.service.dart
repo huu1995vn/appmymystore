@@ -14,32 +14,28 @@ import 'package:local_auth/local_auth.dart';
 import 'package:mymystore/pages/home/home.dart';
 
 class AuthService {
-  static Future login(
+  static Future<bool> login(
       BuildContext context, String username, String password) async {
     CommonMethods.lockScreen();
+    bool islogin = false;
     try {
-      // await InfoDeviceService.dataSafety();
+      await InfoDeviceService.dataSafety();
       var res = await ApiBLL_APIToken().login(username, password);
       if (res.status > 0) {
         await APITokenService.login(res.data);
         if (APITokenService.isValid) {
-          await StorageService.set(StorageKeys.userlogin,
-              <String, String>{"username": username, "password": password});
-
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => const HomeScreen()),
-              (Route<dynamic> route) => route.isFirst);
+          await StorageService.set(StorageKeys.token, APITokenService.token);
         }
+        islogin = true;
       } else {
         CommonMethods.showToast(res.message);
       }
-    } catch (e ) {
+    } catch (e) {
       CommonMethods.showToast(e.toString());
-
     }
     CommonMethods.unlockScreen();
+
+    return islogin;
   }
 
   static Future<bool> refreshlogin() async {
@@ -60,7 +56,8 @@ class AuthService {
       await APITokenService.logout();
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (BuildContext context) => const HomeScreen()),
+          MaterialPageRoute(
+              builder: (BuildContext context) => const HomeScreen()),
           (Route<dynamic> route) => route.isFirst);
     } catch (e) {}
     CommonMethods.unlockScreen();

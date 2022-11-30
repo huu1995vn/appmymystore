@@ -7,6 +7,8 @@ import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'dart:convert';
 
+import 'package:mymystore/core/services/storage/storage_service.dart';
+
 class DioInterceptors extends InterceptorsWrapper {
   // ignore: unused_field
   final Dio _dio;
@@ -36,7 +38,12 @@ class DioInterceptors extends InterceptorsWrapper {
   }
 
   String _getToken(RequestOptions options) {
-    return "Bearer ${APITokenService.token}";
+    var token = APITokenService.token;
+    if(options.path.toLowerCase().contains("refreshlogin"))
+    {
+      token = StorageService.get(StorageKeys.token);
+    }
+    return "Bearer $token";
   }
 
   @override

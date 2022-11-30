@@ -13,6 +13,7 @@ import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:get/get.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
+import 'package:mymystore/pages/home/home.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -246,7 +247,18 @@ class _LoginPageState extends State<LoginPage> {
     CommonMethods.lockScreen();
     try {
       // await AuthService.checkPhone(username, isExist: true);
-      if (mounted) await AuthService.login(context, username, password);
+      if (mounted) 
+      {
+        var res = await AuthService.login(context, username, password);
+        if(res)
+        {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const HomeScreen()),
+              (Route<dynamic> route) => route.isFirst);
+        }
+      }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }

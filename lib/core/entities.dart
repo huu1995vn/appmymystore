@@ -40,6 +40,7 @@ class ResponseModel {
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) {
     json["status"] = CommonMethods.convertToInt32(json["status"]);
+    json["message"] = CommonMethods.convertToString(json["message"]);
     return _$ResponseModelFromJson(json);
   }
 

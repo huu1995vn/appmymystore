@@ -33,10 +33,12 @@ class InfoDeviceService {
   static InfoDevice infoDevice = InfoDevice();
 
   static dataSafety() async {
-    if (infoDevice.Position == null && infoDevice.IpAddress == null) {
-      infoDevice.Position = await CommonMethods.getPosition();
-      infoDevice.IpAddress = await CommonMethods.getIPv4();
-    }
+    try {
+      if (infoDevice.Position == null && infoDevice.IpAddress == null) {
+        infoDevice.Position = await CommonMethods.getPosition();
+        infoDevice.IpAddress = await CommonMethods.getIPv4();
+      }
+    } catch (e) {}
   }
 
   static Future<InfoDevice> init() async {

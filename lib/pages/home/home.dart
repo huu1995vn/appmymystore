@@ -5,6 +5,7 @@ import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/components/product_card.dart';
 import 'package:mymystore/core/popular.dart';
+import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/constants.dart';
@@ -16,6 +17,7 @@ import 'package:mymystore/pages/home/special_offer.dart';
 import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
 import 'package:mymystore/pages/profile/profile_screen.dart';
 import 'package:mymystore/pages/special_offers/special_offers_screen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   final String? title;
@@ -60,7 +62,8 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
   }
   @override
   Widget build(BuildContext context) {
-        SizeConfig.init(context);
+    SizeConfig.init(context);
+    final appProvider = Provider.of<AppProvider>(context);
 
     const padding = EdgeInsets.fromLTRB(
         kDefaultPadding, kDefaultPadding, kDefaultPadding, 0);
@@ -74,12 +77,12 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
       appBar: AppBar(
         elevation: 0.0,
         title: ListTile(
-          leading: const MMAvatarImage(
-            '$kIconPath/me.png',
+          leading: MMAvatarImage(
+            appProvider.user.mmimage,
             size: 39,
           ),
-          title: const Text(
-            "Trần Thị Ngọc Mỹ",
+          title: Text(
+            appProvider.user.name!,
             style: TextStyle(color: AppColors.white),
           ),
           subtitle: const Text('Thông tin cửa hàng',
@@ -88,7 +91,10 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
         ),
         actions: [
           IconButton(
-            icon: const Icon(AppIcons.frame_expand, color: AppColors.white,),
+            icon: const Icon(
+              AppIcons.frame_expand,
+              color: AppColors.white,
+            ),
             onPressed: () {},
           ),
           IconButton(

@@ -50,16 +50,23 @@ class ResponseModel {
 @JsonSerializable()
 class UserModel extends Entity {
   int id = APITokenService.id;
-  String? name;
-  String? phone;
-  String? email;
-  bool address = false;  
+  String name = "";
+  String phone = "";
+  late String email = "";
+  late String address = "";
   String? image;
+  String get mmimage {
+    return image ?? '$kIconPath/me.png';
+  }
+
   UserModel();
   factory UserModel.fromJson(Map<String, dynamic> json) {
+    json["name"] = CommonMethods.convertToString(json["name"]);
+    json["phone"] = CommonMethods.convertToString(json["phone"]);
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
     return _$UserModelFromJson(json);
   }
-  
+
   UserModel clone() => UserModel.fromJson(toJson());
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }
@@ -71,7 +78,7 @@ class CustomerModel extends Entity {
   String? phone;
   String? email;
   String? image;
-  bool address = false;  
+  bool address = false;
   CustomerModel() {
     name;
     email;
@@ -80,7 +87,7 @@ class CustomerModel extends Entity {
   factory CustomerModel.fromJson(Map<String, dynamic> json) {
     return _$CustomerModelFromJson(json);
   }
-  
+
   CustomerModel clone() => CustomerModel.fromJson(toJson());
   Map<String, dynamic> toJson() => _$CustomerModelToJson(this);
 }
@@ -88,7 +95,7 @@ class CustomerModel extends Entity {
 @JsonSerializable()
 class ProductModel extends Entity {
   int id = 0;
-  String name ="";
+  String name = "";
   String code = "";
   int? promotion;
   bool ispercentpromotion = false;
@@ -105,13 +112,12 @@ class ProductModel extends Entity {
   DateTime? createdate;
   ProductModel();
   factory ProductModel.fromJson(Map<String, dynamic> json) {
-    
-   
     json["createdate"] =
         CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
     json["updatedate"] =
         CommonMethods.convertToDateTime(json["updatedate"])?.toIso8601String();
-    json["ispercentpromotion"] = CommonMethods.convertToBoolean(json["ispercentpromotion"]);
+    json["ispercentpromotion"] =
+        CommonMethods.convertToBoolean(json["ispercentpromotion"]);
 
     return _$ProductModelFromJson(json);
   }
@@ -143,7 +149,6 @@ class ProductModel extends Entity {
     }
   }
 }
-
 
 class SuggestionModel {
   bool isLocal = true;

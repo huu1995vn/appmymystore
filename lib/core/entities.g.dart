@@ -24,10 +24,10 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel()
   ..TotalRow = json['TotalRow']
   ..RowIndex = json['RowIndex']
   ..id = json['id'] as int
-  ..name = json['name'] as String?
-  ..phone = json['phone'] as String?
-  ..email = json['email'] as String?
-  ..address = json['address'] as bool
+  ..name = json['name'] as String
+  ..phone = json['phone'] as String
+  ..email = json['email'] as String
+  ..address = json['address'] as String
   ..image = json['image'] as String?;
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{

@@ -1,10 +1,8 @@
 // ignore_for_file: empty_catches, non_constant_identifier_names
 
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/entities.dart';
-import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
@@ -39,7 +37,6 @@ class APITokenService {
     if (pToken.isNotNullEmpty) {
       try {
         user = UserModel.fromJson(_decodeToken(_token));
-      AppProvider().setUserModel(user);
         FirebaseMessagingService.subscribeToTopic("user${user.id}");
       } catch (ex) {
         // throw new Exception(CommonConstants.MESSAGE_TOKEN_INVALID + string.Format(" ({0})", ex.Message));

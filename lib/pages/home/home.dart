@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
@@ -6,13 +7,13 @@ import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/components/product_card.dart';
 import 'package:mymystore/core/popular.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
+import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:mymystore/pages/detail/detail_screen.dart';
 import 'package:mymystore/pages/home/report_view.dart';
-import 'package:mymystore/pages/home/most_popular.dart';
 import 'package:mymystore/pages/home/special_offer.dart';
 import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
 import 'package:mymystore/pages/profile/profile_screen.dart';
@@ -34,7 +35,6 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
     with TickerProviderStateMixin {
   late final datas = homePopularProducts;
   late AnimationController animationController;
-
   @override
   void initState() {
     super.initState();
@@ -43,6 +43,8 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
     CloudFirestoreSerivce.subcriptuser(context);
     CloudFirestoreSerivce.setdevice(isOnline: true);
     animationController.reverse();
+    Provider.of<AppProvider>(context, listen: false)
+        .setUserModel(APITokenService.user);
   }
 
   @override
@@ -60,11 +62,11 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
   void onResumed() {
     // FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
   }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     final appProvider = Provider.of<AppProvider>(context);
-
     const padding = EdgeInsets.fromLTRB(
         kDefaultPadding, kDefaultPadding, kDefaultPadding, 0);
     return Scaffold(
@@ -82,11 +84,11 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
             size: 39,
           ),
           title: Text(
-            appProvider.user.name!,
-            style: TextStyle(color: AppColors.white),
+            appProvider.user.name,
+            style: const TextStyle(color: AppColors.white),
           ),
-          subtitle: const Text('Thông tin cửa hàng',
-              style: TextStyle(color: AppColors.white50)),
+          subtitle: Text("info.store".tr,
+              style: const TextStyle(color: AppColors.white50)),
           onTap: () => Navigator.pushNamed(context, ProfileScreen.route()),
         ),
         actions: [

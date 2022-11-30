@@ -187,6 +187,7 @@ const Map<String, String> vi_VN = {
   "password.old": "Mật khẩu cũ",
   "password.again": "Nhập lại mật khẩu",
   "info": "Thông tin",
+  "info.store": "Thông tin cửa hàng",
   "info.concat": "Thông tin liên hệ",
   "info.account": "Thông tin tài khoản",
   "info.point": "Thông tin point",

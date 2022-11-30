@@ -187,6 +187,7 @@ const Map<String, String> en_US = {
   "password.old": "Old password",
   "password.again": "Password again",
   "info": "Information",
+  "info.store": "Store Information",
   "info.concat": "Contact Information",
   "info.account": "Account Information",
   "info.point": "Information point",

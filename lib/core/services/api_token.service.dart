@@ -1,7 +1,9 @@
 // ignore_for_file: empty_catches, non_constant_identifier_names
 
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
@@ -9,7 +11,7 @@ import 'package:mymystore/core/utilities/extensions.dart';
 
 class APITokenService {
   static String _token = "";
-  static int userId = -1;
+  static UserModel user = UserModel();
   static bool get isExpired {
     return _token.isNotNullEmpty ? isTokenExpired(_token) : false;
   }
@@ -20,19 +22,15 @@ class APITokenService {
 
   static set token(String pToken) {
     if (_token.isNotNullEmpty && pToken.isNullEmpty) {
-      dynamic data = _decodeToken(_token);
-      var id = int.parse(data["id"]);
-      FirebaseMessagingService.unsubscribeFromTopic("user$id");
+      user = UserModel.fromJson(_decodeToken(_token));
+      FirebaseMessagingService.unsubscribeFromTopic("user${user.id}");
     }
     _token = pToken;
-    userId = -1;
     StorageService.set(StorageKeys.token, _token);
     if (pToken.isNotNullEmpty) {
       try {
-        dynamic data = _decodeToken(_token);
-        var id = int.parse(data["id"]);
-        userId = id;
-        FirebaseMessagingService.subscribeToTopic("user$id");
+        user = UserModel.fromJson(_decodeToken(_token));
+        FirebaseMessagingService.subscribeToTopic("user${user.id}");
       } catch (ex) {
         // throw new Exception(CommonConstants.MESSAGE_TOKEN_INVALID + string.Format(" ({0})", ex.Message));
       }

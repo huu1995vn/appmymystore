@@ -10,7 +10,7 @@ class AppProvider with ChangeNotifier {
   setUserData({String? pfullname, String? pimage, int? pid}) {
     user.name = pfullname ?? "Nguyễn Văn A";
     user.image = pimage ?? "";
-    user.id = pid ?? APITokenService.userId;
+    user.id = pid ?? APITokenService.user.id;
     setUserModel(user);
   }
 

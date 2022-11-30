@@ -42,10 +42,10 @@ class AuthService {
     CommonMethods.unlockScreen();
   }
 
-  static Future<bool> autologin() async {
+  static Future<bool> refreshlogin() async {
     if (APITokenService.token != null && APITokenService.token.isNotEmpty) {
       await InfoDeviceService.dataSafety();
-      var res = await ApiBLL_APIToken().autologin();
+      var res = await ApiBLL_APIToken().refreshlogin();
       if (res.status > 0) {
         APITokenService.login(res.data);
       }

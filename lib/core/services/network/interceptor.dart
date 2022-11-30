@@ -36,12 +36,7 @@ class DioInterceptors extends InterceptorsWrapper {
   }
 
   String _getToken(RequestOptions options) {
-    String path = options.path.toLowerCase();
-    return path.indexOf("apiraoxe/user/") > 0 ||
-            path.indexOf("/autologin") > 0 ||
-            path.indexOf("/logout") > 0
-        ? APITokenService.token //token sau khi login chỉ dùng cho các api user
-        : APITokenService.getTokenDefaultString; // token default
+    return "Bearer ${APITokenService.token}";
   }
 
   @override
@@ -52,6 +47,11 @@ class DioInterceptors extends InterceptorsWrapper {
   @override
   // ignore: avoid_renaming_method_parameters
   Future onError(DioError dioError, ErrorInterceptorHandler handler) async {
+    switch (dioError.error) {
+      case 404:
+        throw "Không tìm thấy";
+      default:
+    }
     return super.onError(dioError, handler);
   }
 

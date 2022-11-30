@@ -64,10 +64,10 @@ class ApiBLL_APIToken extends ApiBLL_Basic {
     return await post(body, queryParameters, "Login");
   }
 
-  Future<ResponseModel> autologin() async {
+  Future<ResponseModel> refreshlogin() async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     Map<String, dynamic> body = {};
-    return await post(body, queryParameters, "AutoLogin");
+    return await post(body, queryParameters, "refreshlogin");
   }
   //User
 }

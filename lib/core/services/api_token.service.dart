@@ -15,20 +15,6 @@ class APITokenService {
   static bool isExpired = false;
   static bool isValid = false;
 
-  static String get getTokenDefaultString {
-    String token = "";
-    try {
-      int expired = DateTime.now().add(const Duration(days: 1)).ticks;
-      String value = "-1|${expired.toString()}";
-      String code = CommonMethods.generateMd5("$value$TOKEN_SECURITY_KEY");
-      String resAes = AESService.encrypt("$value.$code");
-      token = convertUrlFromBase64(resAes);
-    } catch (e) {
-      CommonMethods.wirtePrint(e);
-    }
-    return token;
-  }
-
   static String get token {
     return _token;
   }

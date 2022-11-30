@@ -22,7 +22,7 @@ class AuthService {
       var res = await ApiBLL_APIToken().login(username, password);
       if (res.status > 0) {
         APITokenService.token = res.data;
-        islogin = true;
+        islogin = res.status > 0;
       } else {
         CommonMethods.showToast(res.message);
       }

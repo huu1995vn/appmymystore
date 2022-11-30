@@ -22,10 +22,7 @@ class AuthService {
       await InfoDeviceService.dataSafety();
       var res = await ApiBLL_APIToken().login(username, password);
       if (res.status > 0) {
-        await APITokenService.login(res.data);
-        if (APITokenService.isValid) {
-          await StorageService.set(StorageKeys.token, APITokenService.token);
-        }
+        APITokenService.token = res.data;
         islogin = true;
       } else {
         CommonMethods.showToast(res.message);
@@ -43,7 +40,7 @@ class AuthService {
       await InfoDeviceService.dataSafety();
       var res = await ApiBLL_APIToken().refreshlogin();
       if (res.status > 0) {
-        APITokenService.login(res.data);
+        APITokenService.token = res.data;
       }
       return res.status == 1;
     }

@@ -3,39 +3,31 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:mymystore/core/commons/common_methods.dart';
-import 'package:mymystore/core/services/aes.service.dart';
 import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
-import 'package:mymystore/core/utilities/constants.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 
 class APITokenService {
   static String _token = "";
   static int userId = -1;
-  static bool isExpired = false;
-  static bool isValid = false;
-
+  static bool _isExpired = false;
+  static bool get isExpired {
+    return _token.isNotNullEmpty? isTokenExpired(_token): false;
+  }
   static String get token {
     return _token;
   }
 
   static set token(String pToken) {
     _token = pToken;
-    isValid = false;
-    isExpired = false;
     userId = -1;
-
+    StorageService.set(StorageKeys.token, _token);
     if (pToken.isNotNullEmpty) {
       try {
-        dynamic tokenSplit =
-            AESService.decrypt(convertBase64FromUrl(pToken)).split('.');
-        if (CommonMethods.generateMd5(tokenSplit[0] + TOKEN_SECURITY_KEY) ==
-            tokenSplit[1]) {
-          dynamic values = tokenSplit[0].split('|');
-          userId = int.parse(values[0]);
-          isExpired = DateTime.now().ticks > int.parse(values[1]);
-          isValid = true;
-        }
+        dynamic data = _decodeToken(_token);
+        userId = int.parse(data["id"]);
+        var topic = "user${userId}";
+        FirebaseMessagingService.subscribeToTopic(topic);
       } catch (ex) {
         // throw new Exception(CommonConstants.MESSAGE_TOKEN_INVALID + string.Format(" ({0})", ex.Message));
       }
@@ -57,25 +49,6 @@ class APITokenService {
 
   static String convertUrlFromBase64(String pText) {
     return pText.replaceAll('+', '_').replaceAll('/', '-').split("=")[0];
-  }
-
-  static Future<bool> login(String pData) async {
-    bool res = false;
-    try {
-      String dataBase64 = convertBase64FromUrl(pData);
-      Map data = json.decode(AESService.decrypt(dataBase64));
-      if ((data["token"] as String).isNotNullEmpty) {
-        token = data["token"];
-        await StorageService.set(StorageKeys.dataLogin, pData);
-        var topic = "user${APITokenService.userId}";
-        FirebaseMessagingService.subscribeToTopic(topic);
-        res = true;
-      }
-    } catch (e) {
-      CommonMethods.wirtePrint(e);
-    }
-
-    return res;
   }
 
   // static unsubscribeAlltopic(topic) {
@@ -105,15 +78,88 @@ class APITokenService {
 
   static void init() {
     try {
-      String pData = StorageService.get(StorageKeys.dataLogin);
-      if (pData.isNotNullEmpty) {
-        login(pData);
+      String storetoken = StorageService.get(StorageKeys.token);
+      if (storetoken.isNotNullEmpty) {
+        token = storetoken;
       }
     } catch (e) {}
   }
-  
+
   static bool get isLogin {
     return APITokenService.token != null && APITokenService.token.isNotEmpty;
   }
 
+  // offsetSeconds = 3 days
+  static isTokenExpired([String? pToken, int offsetSeconds = 259200]) {
+    pToken = pToken ?? APITokenService.token;
+    if (pToken == null || pToken.isEmpty) {
+      return true;
+    }
+    try {
+      var timeExpiration = _getTokenExpirationDate(pToken);
+      offsetSeconds = offsetSeconds ?? 0;
+      if (timeExpiration == null) {
+        return true;
+      }
+      //CoreVariables.timeDateServer
+      return timeExpiration <
+          (DateTime.now().millisecondsSinceEpoch ~/ 1000 + offsetSeconds);
+    } catch (e) {
+      CommonMethods.wirtePrint(e);
+    }
+
+    return true;
+  }
+
+  static _getTokenExpirationDate(String pToken) {
+    var decoded = _decodeToken(pToken);
+    if (decoded["exp"] == null) {
+      return null;
+    }
+    // var date = new DateTime(0); // The 0 here is the key, which sets the date to the epoch
+    // date.setUTCSeconds(decoded.exp);
+    return decoded["exp"];
+  }
+
+  //Dịch mã token
+  static _decodeToken(String pToken) {
+    var parts = pToken.split('.');
+    if (parts?.length != 3) {
+      throw 'JWT must have 3 parts';
+    }
+    var decoded = urlBase64Decode(parts[1]);
+    if (decoded.isEmpty) {
+      throw 'Cannot decode the token';
+    }
+    return jsonDecode(decoded);
+  }
+
+  static String decodeBase64Utf8(String text) {
+    return utf8.fuse(base64).decode(text);
+  }
+
+  static String urlBase64Decode(String text) {
+    var output = text.replaceAll("-", '+').replaceAll("_", '/');
+    switch (output.length % 4) {
+      case 0:
+        {
+          break;
+        }
+      case 2:
+        {
+          output += '==';
+          break;
+        }
+      case 3:
+        {
+          output += '=';
+          break;
+        }
+      default:
+        {
+          throw 'Illegal base64url string!';
+        }
+    }
+    return decodeBase64Utf8(output);
+  }
 }

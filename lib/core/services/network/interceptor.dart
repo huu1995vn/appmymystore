@@ -8,6 +8,7 @@ import 'package:mymystore/core/services/info_device.service.dart';
 import 'dart:convert';
 
 import 'package:mymystore/core/services/storage/storage_service.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
 
 class DioInterceptors extends InterceptorsWrapper {
   // ignore: unused_field
@@ -39,7 +40,7 @@ class DioInterceptors extends InterceptorsWrapper {
 
   String _getToken(RequestOptions options) {
     var token = APITokenService.token;
-    if(options.path.toLowerCase().contains("refreshlogin"))
+    if(options.path.toLowerCase().contains("refreshlogin") && APITokenService.token.isNullEmpty)
     {
       token = StorageService.get(StorageKeys.token);
     }

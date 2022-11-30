@@ -51,30 +51,6 @@ class APITokenService {
     return pText.replaceAll('+', '_').replaceAll('/', '-').split("=")[0];
   }
 
-  // static unsubscribeAlltopic(topic) {
-  //   ApiBLL_APIUser().topics().then((value) {
-  //     try {
-  //       value.data["res"]["topics"].forEach((key, value) {
-  //         if (topic == null || key != topic) {
-  //           FirebaseMessagingService.unsubscribeFromTopic(key);
-  //         }
-  //       });
-  //     } catch (e) {}
-  //   });
-  // }
-
-  static Future<bool> logout() async {
-    try {
-      await FirebaseMessagingService.refeshToken();
-      StorageService.deleteItem(StorageKeys.dataLogin);
-      token = "";
-      return true;
-    } catch (e) {
-      CommonMethods.wirtePrint(e);
-    }
-
-    return false;
-  }
 
   static void init() {
     try {

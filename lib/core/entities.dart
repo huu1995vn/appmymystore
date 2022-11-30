@@ -49,7 +49,7 @@ class ResponseModel {
 
 @JsonSerializable()
 class UserModel extends Entity {
-  int id = APITokenService.user.id;
+  int id = APITokenService.id;
   String? name;
   String? phone;
   String? email;

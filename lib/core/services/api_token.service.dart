@@ -15,6 +15,14 @@ class APITokenService {
   static bool get isExpired {
     return _token.isNotNullEmpty ? isTokenExpired(_token) : false;
   }
+  static int get id {
+    try {
+      return user.id;
+    } catch (e) {
+      
+    }
+    return -1;
+  }
 
   static String get token {
     return _token;

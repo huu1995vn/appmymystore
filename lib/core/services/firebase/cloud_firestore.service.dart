@@ -12,10 +12,10 @@ import 'package:mymystore/core/utilities/constants.dart';
 
 class CloudFirestoreSerivce {
   static subcriptuser(BuildContext context) {
-    if (APITokenService.user.id != null && APITokenService.user.id > 0) {
+    if (APITokenService.id != null && APITokenService.id > 0) {
       FirebaseFirestore.instance
           .collection(NAMEFIREBASEDATABASE.users)
-          .doc(APITokenService.user.id.toString())
+          .doc(APITokenService.id.toString())
           .snapshots()
           .listen((doc) {
         if (doc.exists) {
@@ -42,7 +42,7 @@ class CloudFirestoreSerivce {
         'OSName': InfoDeviceService.infoDevice.OSName,
         'Location': InfoDeviceService.infoDevice.location,
         'FCMToken': FirebaseMessagingService.token,
-        'UserId': APITokenService.user.id ?? ""
+        'UserId': APITokenService.id ?? ""
       };
       FirebaseFirestore.instance
           .collection(NAMEFIREBASEDATABASE.devices)

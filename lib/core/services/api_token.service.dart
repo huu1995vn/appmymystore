@@ -10,24 +10,29 @@ import 'package:mymystore/core/utilities/extensions.dart';
 class APITokenService {
   static String _token = "";
   static int userId = -1;
-  static bool _isExpired = false;
   static bool get isExpired {
-    return _token.isNotNullEmpty? isTokenExpired(_token): false;
+    return _token.isNotNullEmpty ? isTokenExpired(_token) : false;
   }
+
   static String get token {
     return _token;
   }
 
   static set token(String pToken) {
+    if (_token.isNotNullEmpty && pToken.isNullEmpty) {
+      dynamic data = _decodeToken(_token);
+      var id = int.parse(data["id"]);
+      FirebaseMessagingService.unsubscribeFromTopic("user$id");
+    }
     _token = pToken;
     userId = -1;
     StorageService.set(StorageKeys.token, _token);
     if (pToken.isNotNullEmpty) {
       try {
         dynamic data = _decodeToken(_token);
-        userId = int.parse(data["id"]);
-        var topic = "user${userId}";
-        FirebaseMessagingService.subscribeToTopic(topic);
+        var id = int.parse(data["id"]);
+        userId = id;
+        FirebaseMessagingService.subscribeToTopic("user$id");
       } catch (ex) {
         // throw new Exception(CommonConstants.MESSAGE_TOKEN_INVALID + string.Format(" ({0})", ex.Message));
       }
@@ -50,7 +55,6 @@ class APITokenService {
   static String convertUrlFromBase64(String pText) {
     return pText.replaceAll('+', '_').replaceAll('/', '-').split("=")[0];
   }
-
 
   static void init() {
     try {

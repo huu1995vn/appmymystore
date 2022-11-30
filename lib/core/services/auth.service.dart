@@ -9,7 +9,6 @@ import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/firebase/firebase_auth.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
-import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:mymystore/pages/home/home.dart';
 

@@ -37,7 +37,7 @@ extension StringExtension on String {
     str = str.toLowerCase();
     return str[0].toUpperCase() + str.substring(1);
   }
-
+  
   bool get isNotNullEmpty {
     return this != null && isNotEmpty;
   }

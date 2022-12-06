@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/api/api.bll.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
@@ -7,6 +9,7 @@ import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/file.service.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:provider/provider.dart';
 
 class ProfileHeader extends StatefulWidget {
@@ -20,13 +23,12 @@ class _ProfileHeaderState extends State<ProfileHeader> {
   uploadImage() async {
     try {
       var path = await FileService.getImagePicker(context);
-      if (path.isEmpty) {
+      if (path.isNullEmpty) {
         CommonMethods.showToast(CommonConstants.MESSAGE_ERROR_EMPTY);
         return;
       }
       var url = await FileService.uploadImageByPath(path);
-      if (url.isEmpty) {
-           CommonMethods.showToast(CommonConstants.MESSAGE_ERROR_EMPTY);
+      if (url.isNullEmpty) {
         return;
       }
        var res = await ApiBLL_APIUser().updateavatar(url);

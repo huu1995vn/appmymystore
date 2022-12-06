@@ -6,7 +6,7 @@ import 'package:mymystore/core/commons/index.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/services/master_data.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 
@@ -26,7 +26,7 @@ class _FilterDialogState extends State<FilterDialog> {
   Map<String, dynamic> names = {};
   RangeValues _currentRangeValues = const RangeValues(0, 100);
   TextStyle styleTitle =
-      kTextHeaderStyle.copyWith(fontSize: 15, fontWeight: FontWeight.normal);
+      CommonConstants.kTextHeaderStyle.copyWith(fontSize: 15, fontWeight: FontWeight.normal);
   @override
   initState() {
     super.initState();
@@ -108,7 +108,7 @@ class _FilterDialogState extends State<FilterDialog> {
             GestureDetector(
                 onTap: onCancel,
                 child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPaddingBox),
+                  padding: const EdgeInsets.all(CommonConstants.kDefaultPaddingBox),
                   child: Center(
                     child: Text(
                       "cancelfilter".tr,
@@ -129,7 +129,7 @@ class _FilterDialogState extends State<FilterDialog> {
               _header("youwant".tr),
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
+                  padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: map<Widget>(
@@ -167,19 +167,19 @@ class _FilterDialogState extends State<FilterDialog> {
                     }),
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: kDefaultPadding, left: kDefaultPaddingBox),
+                          top: CommonConstants.kDefaultPadding, left: CommonConstants.kDefaultPaddingBox),
                       child: Row(
                         children: [
                           Text("Giá từ "),
                           Text(
                               CommonMethods.formatNumber(
-                                  (_currentRangeValues.start * kStepPrice)
+                                  (_currentRangeValues.start * CommonConstants.kStepPrice)
                                       .round()),
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           Text(' đến '),
                           Text(
                               CommonMethods.formatNumber(
-                                      (_currentRangeValues.end * kStepPrice)
+                                      (_currentRangeValues.end * CommonConstants.kStepPrice)
                                           .round()) +
                                   (_currentRangeValues.end == 100 ? "+" : ""),
                               style: TextStyle(fontWeight: FontWeight.bold)),
@@ -274,7 +274,7 @@ class _FilterDialogState extends State<FilterDialog> {
 
   Widget _header(String header) {
     return Padding(
-      padding: const EdgeInsets.all(kDefaultPaddingBox),
+      padding: const EdgeInsets.all(CommonConstants.kDefaultPaddingBox),
       child: Text(
         header.toUpperCase(),
         style: TextStyle().bold,

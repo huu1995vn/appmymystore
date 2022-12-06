@@ -7,7 +7,7 @@ import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/components/index.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:get/get.dart';
 // ignore: unused_import
 import 'package:wc_form_validators/wc_form_validators.dart';
@@ -67,12 +67,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   //#region widgets private
   Widget _header() {
     return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding),
+      padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
       child: Center(
         child: Column(
           children: [
             Image.asset(
-              LOGO,
+              CommonConstants.IMAGE_LOGO,
               width: 180,
             ),
             const SizedBox(height: 30),

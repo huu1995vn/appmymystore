@@ -11,7 +11,7 @@ import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 
 class OtpVerificationEmailDialog extends StatefulWidget {
@@ -169,7 +169,7 @@ class _OtpVerificationEmailDialogState
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
               child: otpBox),
           const SizedBox(
-            height: kDefaultPadding * 2,
+            height: CommonConstants.kDefaultPadding * 2,
           ),
           InkWell(
               onTap: () => {if (expiredTime <= 0) sendotp()},
@@ -183,7 +183,7 @@ class _OtpVerificationEmailDialogState
                       children: [
                         Text(
                           "resend.code".tr,
-                          style: kTextSubTitleStyle.italic.copyWith(
+                          style: CommonConstants.kTextSubTitleStyle.italic.copyWith(
                               fontSize: 16,
                               color: Theme.of(context)
                                   .textTheme
@@ -225,8 +225,8 @@ class _OtpVerificationEmailDialogState
           ),
           body: SingleChildScrollView(
             child: Padding(
-                padding: const EdgeInsets.all(kDefaultPadding)
-                    .copyWith(top: kDefaultPaddingTop / 2),
+                padding: const EdgeInsets.all(CommonConstants.kDefaultPadding)
+                    .copyWith(top: CommonConstants.kDefaultPaddingTop / 2),
                 child: form),
           ),
         ));

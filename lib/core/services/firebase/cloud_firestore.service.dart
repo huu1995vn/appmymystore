@@ -8,7 +8,7 @@ import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 
 class CloudFirestoreSerivce {
   static subcriptuser(BuildContext context) {

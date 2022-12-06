@@ -7,7 +7,7 @@ import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:debounce_throttle/debounce_throttle.dart';
 import 'dart:async';
 import 'package:mymystore/core/utilities/extensions.dart';
@@ -71,13 +71,13 @@ class MMSearchDelegate extends SearchDelegate<dynamic> {
     return Container(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,
-        padding: const EdgeInsets.all(kDefaultPaddingBox),
+        padding: const EdgeInsets.all(CommonConstants.kDefaultPaddingBox),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: kDefaultPaddingBox),
+                    const EdgeInsets.symmetric(vertical: CommonConstants.kDefaultPaddingBox),
                 child: Text("Được tìm nhiều")),
             query == null || query.isEmpty
                 ? Wrap(
@@ -104,7 +104,7 @@ class MMSearchDelegate extends SearchDelegate<dynamic> {
                                 },
                                 child: Padding(
                                     padding: const EdgeInsets.all(
-                                        kDefaultPaddingBox),
+                                        CommonConstants.kDefaultPaddingBox),
                                     child: Text(listHotSearch[index]))));
                       },
                     ).toList(),
@@ -178,7 +178,7 @@ class MMSearchDelegate extends SearchDelegate<dynamic> {
         .toList()
         .map((e) => SuggestionModel(text: e, isLocal: true))
         .toList();
-    if (suggestionList.length < kItemOnPage) {
+    if (suggestionList.length < CommonConstants.kItemOnPage) {
       List list = [];
       try {
         if (MMSearchDelegate.cacheapiSearch[query] == null ||

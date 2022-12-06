@@ -10,7 +10,7 @@ import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:mymystore/pages/detail/detail_screen.dart';
 import 'package:mymystore/pages/home/report_view.dart';
@@ -72,7 +72,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
     SizeConfig.init(context);
     final appProvider = Provider.of<AppProvider>(context, listen: true);
     const padding = EdgeInsets.fromLTRB(
-        kDefaultPadding, kDefaultPadding, kDefaultPadding, 0);
+        CommonConstants.kDefaultPadding, CommonConstants.kDefaultPadding, CommonConstants.kDefaultPadding, 0);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,

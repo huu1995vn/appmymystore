@@ -45,6 +45,7 @@ dependencies:
   flutter_launcher_icons: # Used for build icon
   wc_form_validators: # Used for form validators
   firebase_core: # Required to use any Firebase service with Flutter
+  firebase_storage: # Used for upload image
   firebase_messaging: # Used for receiving notifications in the app
   firebase_dynamic_links: # Use the Firebase Dynamic Links API. (ANDROID/IOS)
   firebase_auth: # Used for send otp

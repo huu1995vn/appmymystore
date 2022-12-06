@@ -14,7 +14,7 @@ import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/theme/theme.service.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -169,7 +169,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   )),
               Expanded(child: Container()),
               Padding(
-                padding: EdgeInsets.all(kDefaultPaddingBox),
+                padding: EdgeInsets.all(CommonConstants.kDefaultPaddingBox),
                 child: Text(
                   "${"version".tr} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
                   style: TextStyle().italic,

@@ -15,7 +15,7 @@ import 'package:mymystore/core/components/index.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/services/master_data.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -199,7 +199,7 @@ Widget MMLoginAccountLabel(context) {
       CommonNavigates.toLoginPage(context);
     },
     child: Padding(
-      padding: const EdgeInsets.all(kDefaultPadding),
+      padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
       child: Container(
         alignment: Alignment.bottomCenter,
         child: Row(
@@ -284,7 +284,7 @@ class MMCircleAvatar extends CircleAvatar {
 
 ImageProvider<Object> MMImageProvider(String url) {
   if (url.isEmpty) {
-    url = NOIMAGE;
+    url = CommonConstants.IMAGE_NO;
   }
   if (CommonMethods.isURl(url)) {
     if (CommonConfig.haveCacheImage) {
@@ -367,7 +367,7 @@ class MMRoundedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         side: BorderSide(width: 1.0, color: color),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radius ?? kDefaultPadding),
+          borderRadius: BorderRadius.circular(radius ?? CommonConstants.kDefaultPadding),
         ),
       ),
       child: Text(
@@ -407,7 +407,7 @@ class MMButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: kSizeHeight,
+        height: CommonConstants.kSizeHeight,
         child: icon == null
             ? ElevatedButton(
                 onPressed: onTap,
@@ -416,7 +416,7 @@ class MMButton extends StatelessWidget {
                     ),
                 child: Text(text,
                     style: const TextStyle(
-                      color: kWhite,
+                      color: CommonConstants.kWhite,
                       fontSize: 16,
                     )),
               )
@@ -425,7 +425,7 @@ class MMButton extends StatelessWidget {
                 icon: icon!, //icon data for elevated button
                 label: Text(text,
                     style: const TextStyle(
-                      color: kWhite,
+                      color: CommonConstants.kWhite,
                       fontSize: 16,
                     )), //label text
                 style: ElevatedButton.styleFrom(
@@ -453,10 +453,10 @@ class MMButtonMore extends StatelessWidget {
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.only(
-              top: kDefaultPadding,
-              bottom: kDefaultPadding,
-              left: kDefaultPaddingBox,
-              right: kDefaultPadding),
+              top: CommonConstants.kDefaultPadding,
+              bottom: CommonConstants.kDefaultPadding,
+              left: CommonConstants.kDefaultPaddingBox,
+              right: CommonConstants.kDefaultPadding),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
             color: color ?? Colors.grey[200],
@@ -468,7 +468,7 @@ class MMButtonMore extends StatelessWidget {
                 style: const TextStyle(color: Colors.black54, fontSize: 14),
               ),
               const SizedBox(
-                width: kDefaultPadding,
+                width: CommonConstants.kDefaultPadding,
               ),
               Container(
                   decoration: BoxDecoration(
@@ -510,7 +510,7 @@ Widget rxTextInput(BuildContext context, String? value,
                   children: <TextSpan>[
                     TextSpan(
                         text: labelText ?? "",
-                        style: kTextTitleStyle.copyWith(
+                        style: CommonConstants.kTextTitleStyle.copyWith(
                             color: Theme.of(context).textTheme.bodyLarge!.color,
                             fontSize: 12)),
                     if (validator != null)
@@ -565,7 +565,7 @@ Widget rxSelectInput(BuildContext context, String type, dynamic id,
                 children: <TextSpan>[
                   TextSpan(
                       text: labelText ?? type.tr,
-                      style: kTextTitleStyle.copyWith(
+                      style: CommonConstants.kTextTitleStyle.copyWith(
                           fontSize: 12,
                           color:
                               Theme.of(context).textTheme.labelLarge!.color)),

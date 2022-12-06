@@ -8,7 +8,7 @@ import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/commons/flutter_app_version_checker.dart';
 import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 
 class UpdatePage extends StatefulWidget {
@@ -54,7 +54,7 @@ class _UpdatePageState extends State<UpdatePage> {
                 width: double.infinity,
                 height: 150,
                 child: Image.asset(
-                  LOGO,
+                  CommonConstants.IMAGE_LOGO,
                   height: 200,
                   width: double.infinity,
                 ),

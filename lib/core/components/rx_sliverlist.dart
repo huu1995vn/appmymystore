@@ -3,7 +3,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/components/part.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:skeletons/skeletons.dart';
 
 class MMSliverList extends StatefulWidget {
@@ -55,7 +55,7 @@ class MMListViewState extends State<MMSliverList>
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           return Container(
-              padding: kEdgeInsetsPadding,
+              padding: CommonConstants.kEdgeInsetsPadding,
               color: Get.isDarkMode ? Colors.black : Colors.grey[200],
               child: widget.awaiting ??
                   SkeletonLine(
@@ -65,7 +65,7 @@ class MMListViewState extends State<MMSliverList>
                         borderRadius: BorderRadius.circular(8)),
                   ));
         },
-        childCount: kItemOnPage,
+        childCount: CommonConstants.kItemOnPage,
       ),
     );
   }
@@ -81,7 +81,7 @@ class MMListViewState extends State<MMSliverList>
                     width: double.infinity,
                     height: 200,
                     child: Image.asset(
-                      EMPTYDATA,
+                      CommonConstants.IMAGE_EMPTY,
                       height: 200,
                       width: double.infinity,
                     ),

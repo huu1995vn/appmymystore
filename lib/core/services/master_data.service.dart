@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:mymystore/core/api/api.bll.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 
 class MasterDataService {
   static Map<String, dynamic> data = <String, dynamic>{};
@@ -35,12 +35,12 @@ class MasterDataService {
         res = api.status > 0;
       }
       //extends local
-      data["price"] = PRICES;
-      data["sort"] = SORTS;
-      data["producttype"] = PRODUCTTYPES;
-      data["productstate"] = PRODUCTSTATES;
-      data["productdoor"] = PRODUCTDOORS;
-      data["productseat"] = PRODUCTSEATS;
+      data["price"] = CommonConstants.PRICES;
+      data["sort"] = CommonConstants.SORTS;
+      data["producttype"] = CommonConstants.PRODUCTTYPES;
+      data["productstate"] = CommonConstants.PRODUCTSTATES;
+      data["productdoor"] = CommonConstants.PRODUCTDOORS;
+      data["productseat"] = CommonConstants.PRODUCTSEATS;
     } catch (e) {}
     return res;
   }

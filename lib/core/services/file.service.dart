@@ -6,18 +6,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
-import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:universal_platform/universal_platform.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart';
 
 class FileService {
-  static Future<int> uploadImage(File f,
-      {int idFile = -1, String name = ""}) async {
-    var extension = CommonMethods.getExtension(f);
-    // ResponseModel res =
-    //     await DriveApiBLL_ApiFile().uploadfile(f, idFile, "$name$extension");
-    // if (!(res.status > 0)) throw res.message;
-    // return res.data;
-    return 1;
+  static firebase_storage.FirebaseStorage storage =
+  firebase_storage.FirebaseStorage.instance;
+  static Future<String> uploadImage(File f) async {
+    // var extension = CommonMethods.getExtension(f);
+    final fileName = basename( f.path);
+    final destination = 'fileupload/$fileName';
+    try {
+       final ref = firebase_storage.FirebaseStorage.instance
+          .ref(destination)
+          .child('file/');
+      await ref.putFile(f);
+      return await ref.getDownloadURL();
+    } catch (e) {
+    }
+    return "";
+  }
+
+   static Future<String> uploadImageByPath(String path) async {
+    File f = File(path);
+    return uploadImage(f);
   }
 
   static Future<String> getImagePicker(context,
@@ -166,22 +179,11 @@ class FileService {
     return [];
   }
 
-  static Future<int> uploadImageByPath(String path, {String? name}) async {
-    int idFileDaiDien = -1;
-    if (Uri.parse(path).isAbsolute) {
-      idFileDaiDien = path.getIdFile();
-    }
-    if (idFileDaiDien > 0) {
-      return idFileDaiDien;
-    }
-    File file = File(path);
-    return await uploadImage(file, name: name!);
-  }
 
-  static Future<List<int>> convertListHinhAnhToListInt(List<String> listPath,
+  static Future<List<String>> updateListPath(List<String> listPath,
       {String? name}) async {
-    List<Future<int>> listApi =
-        listPath.map((url) => uploadImageByPath(url, name: name)).toList();
+    List<Future<String>> listApi =
+        listPath.map((url) => uploadImageByPath(url)).toList();
     return await Future.wait(listApi);
   }
 }

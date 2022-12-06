@@ -12,7 +12,7 @@ import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:get/get.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/pages/home/home.dart';
@@ -77,11 +77,11 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _header() {
     return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding),
+      padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
       child: Column(
         children: [
           Image.asset(
-            LOGO,
+            CommonConstants.IMAGE_LOGO,
             width: 180,
           ),
           const SizedBox(height: 30),
@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _body() {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(kDefaultPadding * 3),
+        padding: const EdgeInsets.all(CommonConstants.kDefaultPadding * 3),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
             Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding),
+                  padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
                   child: GestureDetector(
                       onTap: _onForgotPassword,
                       child: RichText(
@@ -176,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                         text: "login".tr.toUpperCase())),
                 const Padding(padding: EdgeInsets.only(right: 10)),
                 Ink(
-                  height: kSizeHeight,
+                  height: CommonConstants.kSizeHeight,
                   decoration: const ShapeDecoration(
                     color: AppColors.grayDark,
                     shape: RoundedRectangleBorder(

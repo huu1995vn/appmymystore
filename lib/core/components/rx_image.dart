@@ -8,7 +8,7 @@ import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/components/part.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 
 class MMImage extends StatelessWidget {
   final String url;
@@ -27,7 +27,7 @@ class MMImage extends StatelessWidget {
   Widget build(BuildContext context) {
     if (url.isEmpty) {
       return Image.asset(
-        NOIMAGE,
+        CommonConstants.IMAGE_NO,
         fit: fit,
         width: width,
         height: height,

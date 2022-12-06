@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:skeletons/skeletons.dart';
 
 class MMListView extends StatefulWidget {
@@ -110,7 +110,7 @@ class _MMDataListViewState extends State<MMListView>
                 widget.scrollController != null ? null : _scrollController,
             physics: const BouncingScrollPhysics(),
             scrollDirection: widget.scrollDirection ?? Axis.vertical,
-            itemCount: kItemOnPage,
+            itemCount: CommonConstants.kItemOnPage,
             padding: widget.padding,
             itemBuilder: (context, index) {
               return widget.awaiting ??
@@ -126,7 +126,7 @@ class _MMDataListViewState extends State<MMListView>
   Widget _bodylist_notfound() {
     return Center(
         child: Container(
-      padding: const EdgeInsets.all(kDefaultPadding),
+      padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
       child: widget.noFound ??
           Center(
             child: Column(
@@ -135,7 +135,7 @@ class _MMDataListViewState extends State<MMListView>
                   width: double.infinity,
                   height: 200,
                   child: Image.asset(
-                    EMPTYDATA,
+                    CommonConstants.IMAGE_EMPTY,
                     height: 200,
                     width: double.infinity,
                   ),

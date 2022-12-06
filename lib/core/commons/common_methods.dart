@@ -23,7 +23,7 @@ import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/services/master_data.service.dart';
 import 'dart:convert' show base64, utf8;
 import 'package:mymystore/core/utilities/app_colors.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../pipes/timeago/timeago.dart' as timeago;
@@ -276,7 +276,7 @@ class CommonMethods {
     if (idHinh > 0) {
       return buildUrlImage(idHinh, rewriteUrl: rewriteUrl, size: size);
     } else {
-      return IMAGE_NOT_FOUND;
+      return CommonConstants.IMAGE_NOT_FOUND;
     }
   }
 

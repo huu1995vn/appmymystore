@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 
 /// This allows the class to access private members in
 /// the generated file called *.g.dart, where the star denotes the source file name.
@@ -56,7 +56,7 @@ class UserModel extends Entity {
   String? address = "";
   String? image;
   String get mmimage {
-    return image ?? '$kIconPath/me.png';
+    return image ?? '${CommonConstants.kIconPath}/me.png';
   }
 
   UserModel();

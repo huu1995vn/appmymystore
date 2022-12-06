@@ -7,7 +7,7 @@ import 'package:mymystore/core/commons/common_navigates.dart';
 // ignore: unused_import
 import 'package:mymystore/core/components/index.dart';
 import 'package:mymystore/core/components/part.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 
 class MMSelectDelegate extends SearchDelegate<dynamic> {
   List data;
@@ -113,7 +113,7 @@ class MMSelectDelegate extends SearchDelegate<dynamic> {
                 )),
                 if (itemBuilder == null && ismultiple)
                   Container(
-                      padding: const EdgeInsets.all(kDefaultPadding),
+                      padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
                       child: Row(
                         children: [
                           Expanded(

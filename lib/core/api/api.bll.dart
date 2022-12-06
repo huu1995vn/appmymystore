@@ -169,10 +169,10 @@ class ApiBLL_APIUser extends ApiBLL_Basic {
     return await post(body, queryParameters, "update");
   }
 
-  Future<ResponseModel> updateavatar(int bImg) async {
+  Future<ResponseModel> updateavatar(String purl) async {
     Map<String, dynamic> queryParameters = <String, dynamic>{};
     Map<String, dynamic> body = <String, dynamic>{};
-    body["img"] = bImg;
+    body["image"] = purl;
     return await post(body, queryParameters, "UpdateAvatar");
   }
 

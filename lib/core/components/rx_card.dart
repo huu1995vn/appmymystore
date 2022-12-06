@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 
 class MMCard extends StatelessWidget {
   final Widget child;
@@ -16,7 +16,7 @@ class MMCard extends StatelessWidget {
       shape: isBorder
           ? (shape ??
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(kDefaultPadding),
+                borderRadius: BorderRadius.circular(CommonConstants.kDefaultPadding),
               ))
           : RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0),

@@ -11,7 +11,7 @@ import 'package:mymystore/core/components/part.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-import 'package:mymystore/core/utilities/constants.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:get/get.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
@@ -76,19 +76,19 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _header() {
     return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding),
+      padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
       child: Center(
         child: Column(
           children: [
             Image.asset(
-              LOGO,
+              CommonConstants.IMAGE_LOGO,
               width: 180,
             ),
             const SizedBox(height: 30),
             Text("regist".tr.toUpperCase(),
                 style:
                     const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-            if (user!.phone != null) Text(user!.phone!, style: kTextHeaderStyle)
+            if (user!.phone != null) Text(user!.phone, style: CommonConstants.kTextHeaderStyle)
           ],
         ),
       ),

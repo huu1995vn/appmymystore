@@ -1,6 +1,7 @@
 // ignore_for_file: void_checks, deprecated_member_use, empty_catches, unused_element, unnecessary_overrides
 
 import 'package:dio/dio.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
@@ -53,7 +54,7 @@ class DioInterceptors extends InterceptorsWrapper {
   Future onError(DioError dioError, ErrorInterceptorHandler handler) async {
     switch (dioError.error) {
       case 404:
-        throw "Không tìm thấy";
+        throw CommonConstants.MESSAGE_ERROR_404;
       default:
     }
     return super.onError(dioError, handler);

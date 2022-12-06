@@ -10,22 +10,19 @@ import 'package:universal_platform/universal_platform.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart';
 
+import 'api_token.service.dart';
+
 class FileService {
   static firebase_storage.FirebaseStorage storage =
   firebase_storage.FirebaseStorage.instance;
   static Future<String> uploadImage(File f) async {
-    // var extension = CommonMethods.getExtension(f);
     final fileName = basename( f.path);
-    final destination = 'fileupload/$fileName';
-    try {
-       final ref = firebase_storage.FirebaseStorage.instance
+    final destination = '${APITokenService.id}/fileupload/$fileName';
+     final ref = firebase_storage.FirebaseStorage.instance
           .ref(destination)
-          .child('file/');
+          .child(fileName);
       await ref.putFile(f);
       return await ref.getDownloadURL();
-    } catch (e) {
-    }
-    return "";
   }
 
    static Future<String> uploadImageByPath(String path) async {

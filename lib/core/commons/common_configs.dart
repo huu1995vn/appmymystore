@@ -12,8 +12,7 @@ class CommonConfig {
   static String HotKeySearch = "vinfast,ford,xe moi";
   static String DomainDynamicLink = "https://mymystore.link.com";
   static String AppStoreID = "";
-
-  static Map<String, String> linkContent = {
+  static Map<String, String> LinkContent = {
     "dieuKhoan":
         "https://docs.google.com/document/d/e/2PACX-1vSCwdwfhncFilHGBq30Wf4RFoj4eDmFNuFs8yNOsPTl-SANYiITlxYBr7SNLKi7Iw/pub?embedded=true",
     "chinhSach":

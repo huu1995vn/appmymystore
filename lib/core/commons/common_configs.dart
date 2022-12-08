@@ -2,17 +2,16 @@
 class CommonConfig {
   //system
   // static bool isDark = false;
-  static Map deviceInfo = {};
-  static String languageCode = "vi";
-  static String env = "dev";
-  static String api = "https://mymystore.herokuapp.com";
-  static String apiSufix = "/";
-  static bool haveCacheImage = true;
-  static int version = 1;
-  static int timeVerify = 2; // phút
-  static String hotSearch = "vinfast,ford,xe moi";
-  static String apiDynamicLink = "https://mymystore.link.com";
-  static String appStoreID = "";
+  static String LanguageCode = "vi";
+  static String ENV = "dev";
+  static String DomainApi = "https://mymystore.azurewebsites.net";
+  static String SufixApi = "/";
+  static bool HaveCacheImage = true;
+  static int Version = 1;
+  static int TimeVerify = 2; // phút
+  static String HotKeySearch = "vinfast,ford,xe moi";
+  static String DomainDynamicLink = "https://mymystore.link.com";
+  static String AppStoreID = "";
 
   static Map<String, String> linkContent = {
     "dieuKhoan":

@@ -19,7 +19,7 @@ class MasterDataService {
       }
       if (masterdata != null &&
           versionMasterdata != null &&
-          CommonConfig.version <= versionMasterdata) {
+          CommonConfig.Version <= versionMasterdata) {
         data = masterdata;
         res = true;
       } else {
@@ -30,7 +30,7 @@ class MasterDataService {
           }
           await StorageService.set(StorageKeys.masterdata, data);
           await StorageService.set(
-              StorageKeys.version, CommonConfig.version.toString());
+              StorageKeys.version, CommonConfig.Version.toString());
         }
         res = api.status > 0;
       }

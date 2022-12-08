@@ -34,7 +34,7 @@ class MMImage extends StatelessWidget {
       );
     }
     if (CommonMethods.isURl(url)) {
-      return CommonConfig.haveCacheImage
+      return CommonConfig.HaveCacheImage
           ? CachedNetworkImage(
               imageUrl: url,
               width: width ?? MediaQuery.of(context).size.width,

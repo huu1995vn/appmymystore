@@ -264,7 +264,7 @@ class CommonMethods {
     //     ? rewriteUrl
     //     : "image-dailyxe";
     // rewriteUrl = rewriteUrl.convertrUrlPrefix();
-    // String url = '${CommonConfig.apiDrive}/image/$rewriteUrl-${idHinh}j.jpg';
+    // String url = '${CommonConfig.DomainApiDrive}/image/$rewriteUrl-${idHinh}j.jpg';
     // if (size > 0) {
     //   url = '$url?w=$size';
     // }
@@ -374,24 +374,24 @@ class CommonMethods {
 
   // static Future<T?> openWebViewTermsAndCondition<T>(context) async {
   //   return openWebView(context,
-  //       url: CommonConfig.linkContent["dieuKhoan"].toString(),
+  //       url: CommonConfig.LinkContent["dieuKhoan"].toString(),
   //       title: "termsandcondition".tr);
   // }
 
   // static Future<T?> openWebViewPolicy<T>(context) async {
   //   return openWebView(context,
-  //       url: CommonConfig.linkContent["chinhSach"].toString(),
+  //       url: CommonConfig.LinkContent["chinhSach"].toString(),
   //       title: "policy".tr);
   // }
 
   // static Future<T?> openWebViewFeedBack<T>(context) async {
   //   return openWebView(context,
-  //       url: CommonConfig.linkContent["feedBack"].toString(),
+  //       url: CommonConfig.LinkContent["feedBack"].toString(),
   //       title: "feedback".tr);
   // }
 
   // static versionCheck(context) async {
-  //   if (CommonConfig.env == "prod") {
+  //   if (CommonConfig.ENV == "prod") {
   //     final NewVersionPlus newVersion = NewVersionPlus();
   //     NewVersionPlus? versionStatus = await newVersion.getVersionStatus();
   //     if (versionStatus != null && versionStatus.canUpdate) {
@@ -515,9 +515,9 @@ class CommonMethods {
       //afl == ifl: The link to open when the app isn't installed.
       //&isi=${Variables.appStoreID}
       if (hasFl) {
-        return '${CommonConfig.apiDynamicLink}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&afl=$deepLink&ifl=$deepLink&isi=${CommonConfig.appStoreID}&efr=1';
+        return '${CommonConfig.DomainApiDynamicLink}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&afl=$deepLink&ifl=$deepLink&isi=${CommonConfig.AppStoreID}&efr=1';
       } else {
-        return '${CommonConfig.apiDynamicLink}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&isi=${CommonConfig.appStoreID}&efr=1';
+        return '${CommonConfig.DomainApiDynamicLink}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&isi=${CommonConfig.AppStoreID}&efr=1';
       }
     } catch (error) {}
     return "";
@@ -528,7 +528,7 @@ class CommonMethods {
     DynamicLinkParameters parameters;
     if (shareApp) {
       parameters = DynamicLinkParameters(
-          uriPrefix: CommonConfig.api,
+          uriPrefix: CommonConfig.DomainApi,
           link: Uri.parse(uriPrefix),
           androidParameters: AndroidParameters(
             packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,
@@ -539,12 +539,12 @@ class CommonMethods {
           // ),
           iosParameters: IOSParameters(
               bundleId: InfoDeviceService.infoDevice.PackageInfo.packageName,
-              appStoreId: CommonConfig.appStoreID
+              appStoreId: CommonConfig.AppStoreID
               // minimumVersion: '16',
               ));
     } else {
       parameters = DynamicLinkParameters(
-          uriPrefix: CommonConfig.apiDynamicLink,
+          uriPrefix: CommonConfig.DomainApiDynamicLink,
           link: Uri.parse(uriPrefix),
           androidParameters: AndroidParameters(
             packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,
@@ -555,7 +555,7 @@ class CommonMethods {
           // ),
           iosParameters: IOSParameters(
               bundleId: InfoDeviceService.infoDevice.PackageInfo.packageName,
-              appStoreId: CommonConfig.appStoreID
+              appStoreId: CommonConfig.AppStoreID
               // minimumVersion: '16',
               ));
     }

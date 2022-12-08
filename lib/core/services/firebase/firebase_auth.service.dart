@@ -43,7 +43,7 @@ class FirebaseAuthService {
     void Function(Object) fnError,
     void Function() fnSuccess,
   ) async {
-    _auth.setLanguageCode(CommonConfig.languageCode);
+    _auth.setLanguageCode(CommonConfig.LanguageCode);
     phoneNumber = _convertNumberPhoneWithCountryCode(phoneNumber);
     if (!CommonMethods.isMobile()) {
       try {
@@ -57,7 +57,7 @@ class FirebaseAuthService {
       await _auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {},
-        timeout: Duration(seconds: CommonConfig.timeVerify * 60),
+        timeout: Duration(seconds: CommonConfig.TimeVerify * 60),
         verificationFailed: (FirebaseAuthException ex) {
           fnError(ex.message!);
         },

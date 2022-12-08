@@ -184,19 +184,19 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<T?> openWebViewTermsAndCondition<T>(context) async {
     return CommonMethods.openWebView(context,
-        url: CommonConfig.linkContent["dieuKhoan"].toString(),
+        url: CommonConfig.LinkContent["dieuKhoan"].toString(),
         title: "termsandcondition".tr);
   }
 
   Future<T?> openWebViewPolicy<T>(context) async {
     return CommonMethods.openWebView(context,
-        url: CommonConfig.linkContent["chinhSach"].toString(),
+        url: CommonConfig.LinkContent["chinhSach"].toString(),
         title: "policy".tr);
   }
 
   Future<T?> openWebViewFeedBack<T>(context) async {
     return CommonMethods.openWebView(context,
-        url: CommonConfig.linkContent["feedBack"].toString(),
+        url: CommonConfig.LinkContent["feedBack"].toString(),
         title: "feedback".tr);
   }
 }

@@ -28,7 +28,7 @@ class MMSearchDelegate extends SearchDelegate<dynamic> {
     }
   });
 
-  final List<String> listHotSearch = CommonConfig.hotSearch.split(",");
+  final List<String> listHotSearch = CommonConfig.HotKeySearch.split(",");
   List<String> listSearchLocal =
       (StorageService.get(StorageKeys.text_search) ?? "")!.split(",");
   List<SuggestionModel> suggestionList = <SuggestionModel>[];

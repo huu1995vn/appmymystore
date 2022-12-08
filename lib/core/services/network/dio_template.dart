@@ -5,8 +5,8 @@ import 'package:mymystore/core/services/network/dio_client.dart';
 class DioTemplate {
   //function call api dailyxe
   static _buildUrl(String controllerName, [String? addApiHostSufix]) {
-    return CommonConfig.api +
-        (addApiHostSufix ?? CommonConfig.apiSufix) +
+    return CommonConfig.DomainApi +
+        (addApiHostSufix ?? CommonConfig.DomainApiSufix) +
         controllerName; //crm/
   }
 

@@ -10,7 +10,7 @@ class DynamicLinkService {
 
   static Future<Uri> createDynamicLink(String link) async {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
-      uriPrefix: CommonConfig.apiDynamicLink,
+      uriPrefix: CommonConfig.DomainApiDynamicLink,
       link: Uri.parse(link),
       androidParameters: AndroidParameters(
         packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,
@@ -19,7 +19,7 @@ class DynamicLinkService {
       iosParameters: IOSParameters(
         bundleId: InfoDeviceService.infoDevice.PackageInfo.packageName,
         minimumVersion: '1',
-        appStoreId: CommonConfig.appStoreID,
+        appStoreId: CommonConfig.AppStoreID,
       ),
     );
     final ShortDynamicLink shortLink =

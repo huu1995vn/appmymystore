@@ -62,12 +62,12 @@ class CloudFirestoreSerivce {
     //   var value = await fireStoreService.get();
     //   if (value.docs != null && value.docs.isNotEmpty) {
     //     dynamic item = value.docs[0].data()!;
-    //     CommonConfig.apiDaiLyXe = item["apiDaiLyXe"] ?? CommonConfig.apiDaiLyXe;
-    //     CommonConfig.apiDaiLyXeSufix =
-    //         item["apiDaiLyXeSufix"] ?? CommonConfig.apiDaiLyXeSufix;
-    //     CommonConfig.apiDrive = item["apiDrive"] ?? CommonConfig.apiDrive;
-    //     CommonConfig.version_masterdata =
-    //         item["version_masterdata"] ?? CommonConfig.version_masterdata;
+    //     CommonConfig.DomainApiDaiLyXe = item["apiDaiLyXe"] ?? CommonConfig.DomainApiDaiLyXe;
+    //     CommonConfig.DomainApiDaiLyXeSufix =
+    //         item["apiDaiLyXeSufix"] ?? CommonConfig.DomainApiDaiLyXeSufix;
+    //     CommonConfig.DomainApiDrive = item["apiDrive"] ?? CommonConfig.DomainApiDrive;
+    //     CommonConfig.Version_masterdata =
+    //         item["version_masterdata"] ?? CommonConfig.Version_masterdata;
     //   }
     // } catch (e) {}
   }

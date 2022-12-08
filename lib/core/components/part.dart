@@ -287,7 +287,7 @@ ImageProvider<Object> MMImageProvider(String url) {
     url = CommonConstants.IMAGE_NO;
   }
   if (CommonMethods.isURl(url)) {
-    if (CommonConfig.haveCacheImage) {
+    if (CommonConfig.HaveCacheImage) {
       return CachedNetworkImageProvider(url);
     } else {
       return NetworkImage(url);

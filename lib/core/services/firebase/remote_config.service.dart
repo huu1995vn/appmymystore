@@ -13,20 +13,20 @@ class RemoteConfigSerivce {
     //FirebaseRemoteConfig sử dụng các giá trị defaule trong file R.xml.default_config nếu không lấy được giá trị
     var configs = remoteConfig.getAll();
     if (configs["api"] != null) {
-      CommonConfig.api = remoteConfig.getString("api");
+      CommonConfig.DomainApi = remoteConfig.getString("api");
     }
     if (configs["apiSufix"] != null) {
-      CommonConfig.apiSufix = remoteConfig.getString("apiSufix");
+      CommonConfig.DomainApiSufix = remoteConfig.getString("apiSufix");
     }
 
     if (configs["apiDynamicLink"] != null) {
-      CommonConfig.apiDynamicLink = remoteConfig.getString("apiDynamicLink");
+      CommonConfig.DomainApiDynamicLink = remoteConfig.getString("apiDynamicLink");
     }
     if (configs["hotSearch"] != null) {
-      CommonConfig.hotSearch = remoteConfig.getString("hotSearch");
+      CommonConfig.HotKeySearch = remoteConfig.getString("hotSearch");
     }
     if (configs["version"] != null) {
-      CommonConfig.version =
+      CommonConfig.Version =
           int.parse(remoteConfig.getString("version").toString());
     }
     return remoteConfig;

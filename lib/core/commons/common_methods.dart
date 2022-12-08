@@ -515,9 +515,9 @@ class CommonMethods {
       //afl == ifl: The link to open when the app isn't installed.
       //&isi=${Variables.appStoreID}
       if (hasFl) {
-        return '${CommonConfig.DomainApiDynamicLink}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&afl=$deepLink&ifl=$deepLink&isi=${CommonConfig.AppStoreID}&efr=1';
+        return '${CommonConfig.DomainDynamicLink}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&afl=$deepLink&ifl=$deepLink&isi=${CommonConfig.AppStoreID}&efr=1';
       } else {
-        return '${CommonConfig.DomainApiDynamicLink}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&isi=${CommonConfig.AppStoreID}&efr=1';
+        return '${CommonConfig.DomainDynamicLink}/?link=$deepLink&apn=${InfoDeviceService.infoDevice.PackageInfo.packageName}&ibi=${InfoDeviceService.infoDevice.PackageInfo.packageName}&isi=${CommonConfig.AppStoreID}&efr=1';
       }
     } catch (error) {}
     return "";
@@ -544,7 +544,7 @@ class CommonMethods {
               ));
     } else {
       parameters = DynamicLinkParameters(
-          uriPrefix: CommonConfig.DomainApiDynamicLink,
+          uriPrefix: CommonConfig.DomainDynamicLink,
           link: Uri.parse(uriPrefix),
           androidParameters: AndroidParameters(
             packageName: InfoDeviceService.infoDevice.PackageInfo.packageName,

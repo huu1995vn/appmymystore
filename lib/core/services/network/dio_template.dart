@@ -4,20 +4,20 @@ import 'package:mymystore/core/services/network/dio_client.dart';
 
 class DioTemplate {
   //function call api dailyxe
-  static _buildUrl(String controllerName, [String? addApiHostSufix]) {
+  static _buildUrl(String pCtrlName, [String? pSufixApi]) {
     return CommonConfig.DomainApi +
-        (addApiHostSufix ?? CommonConfig.DomainApiSufix) +
-        controllerName; //crm/
+        (pSufixApi ?? CommonConfig.SufixApi) +
+        pCtrlName; //crm/
   }
 
-  static get(String controllerName,
+  static get(String pCtrlName,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
-    final requestString = _buildUrl(controllerName);
+    final requestString = _buildUrl(pCtrlName);
     return await DioClient.get(requestString,
         queryParameters: queryParameters, options: options);
   }
 
-  static put(String controllerName, dynamic data,
+  static put(String pCtrlName, dynamic data,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
     var id = -1;
     if (data != null) {
@@ -27,21 +27,21 @@ class DioTemplate {
         id = data.Id ?? -1;
       }
     }
-    final requestString = _buildUrl(controllerName) + (id > 0 ? "/$id" : "");
+    final requestString = _buildUrl(pCtrlName) + (id > 0 ? "/$id" : "");
     return await DioClient.put(requestString, data,
         queryParameters: queryParameters, options: options);
   }
 
-  static post(String controllerName, dynamic data,
+  static post(String pCtrlName, dynamic data,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
-    final requestString = _buildUrl(controllerName);
+    final requestString = _buildUrl(pCtrlName);
     return await DioClient.post(requestString, data,
         queryParameters: queryParameters, options: options);
   }
 
-  static delete(String controllerName, dynamic id,
+  static delete(String pCtrlName, dynamic id,
       {Map<String, dynamic>? queryParameters, Options? options}) async {
-    final requestString = _buildUrl(controllerName) + (id > 0 ? "/$id" : "");
+    final requestString = _buildUrl(pCtrlName) + (id > 0 ? "/$id" : "");
     return await DioClient.delete(requestString,
         queryParameters: queryParameters, options: options);
   }

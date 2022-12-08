@@ -12,22 +12,22 @@ class RemoteConfigSerivce {
     await remoteConfig.fetchAndActivate();
     //FirebaseRemoteConfig sử dụng các giá trị defaule trong file R.xml.default_config nếu không lấy được giá trị
     var configs = remoteConfig.getAll();
-    if (configs["api"] != null) {
-      CommonConfig.DomainApi = remoteConfig.getString("api");
+    if (configs["DomainApi"] != null) {
+      CommonConfig.DomainApi = remoteConfig.getString("DomainApi");
     }
-    if (configs["apiSufix"] != null) {
-      CommonConfig.DomainApiSufix = remoteConfig.getString("apiSufix");
+    if (configs["SufixApi"] != null) {
+      CommonConfig.SufixApi = remoteConfig.getString("SufixApi");
     }
 
-    if (configs["apiDynamicLink"] != null) {
-      CommonConfig.DomainApiDynamicLink = remoteConfig.getString("apiDynamicLink");
+    if (configs["DomainDynamicLink"] != null) {
+      CommonConfig.DomainDynamicLink = remoteConfig.getString("DomainDynamicLink");
     }
-    if (configs["hotSearch"] != null) {
-      CommonConfig.HotKeySearch = remoteConfig.getString("hotSearch");
+    if (configs["HotKeySearch"] != null) {
+      CommonConfig.HotKeySearch = remoteConfig.getString("HotKeySearch");
     }
-    if (configs["version"] != null) {
+    if (configs["Version"] != null) {
       CommonConfig.Version =
-          int.parse(remoteConfig.getString("version").toString());
+          int.parse(remoteConfig.getString("Version").toString());
     }
     return remoteConfig;
   }

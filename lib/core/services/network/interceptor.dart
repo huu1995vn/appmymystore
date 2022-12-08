@@ -7,10 +7,6 @@ import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'dart:convert';
-
-import 'package:mymystore/core/services/storage/storage_service.dart';
-import 'package:mymystore/core/utilities/extensions.dart';
-
 class DioInterceptors extends InterceptorsWrapper {
   // ignore: unused_field
   final Dio _dio;

@@ -17,6 +17,7 @@ import 'package:get/get.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/pages/home/home.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -264,7 +265,6 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }
-
     CommonMethods.unlockScreen();
   }
 }

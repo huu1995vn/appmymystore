@@ -22,9 +22,7 @@ class RemoteConfigSerivce {
     if (configs["DomainDynamicLink"] != null) {
       CommonConfig.DomainDynamicLink = remoteConfig.getString("DomainDynamicLink");
     }
-    if (configs["HotKeySearch"] != null) {
-      CommonConfig.HotKeySearch = remoteConfig.getString("HotKeySearch");
-    }
+    
     if (configs["Version"] != null) {
       CommonConfig.Version =
           int.parse(remoteConfig.getString("Version").toString());

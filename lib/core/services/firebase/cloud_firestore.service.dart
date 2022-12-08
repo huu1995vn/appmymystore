@@ -52,23 +52,6 @@ class CloudFirestoreSerivce {
   }
 
   static init() async {
-    // await CloudFirestoreSerivce.configs();
   }
 
-  static Future<void> configs() async {
-    // try {
-    //   CollectionReference fireStoreService =
-    //       FirebaseFirestore.instance.collection(NAMEFIREBASEDATABASE.configs);
-    //   var value = await fireStoreService.get();
-    //   if (value.docs != null && value.docs.isNotEmpty) {
-    //     dynamic item = value.docs[0].data()!;
-    //     CommonConfig.DomainApiDaiLyXe = item["apiDaiLyXe"] ?? CommonConfig.DomainApiDaiLyXe;
-    //     CommonConfig.DomainApiDaiLyXeSufix =
-    //         item["apiDaiLyXeSufix"] ?? CommonConfig.DomainApiDaiLyXeSufix;
-    //     CommonConfig.DomainApiDrive = item["apiDrive"] ?? CommonConfig.DomainApiDrive;
-    //     CommonConfig.Version_masterdata =
-    //         item["version_masterdata"] ?? CommonConfig.Version_masterdata;
-    //   }
-    // } catch (e) {}
-  }
 }

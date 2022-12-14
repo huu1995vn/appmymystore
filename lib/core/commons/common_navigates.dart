@@ -4,21 +4,17 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mymystore/pages/auth/forgot_password/forgot_password_page.dart';
-import 'package:mymystore/pages/auth/register/register_page.dart';
-import 'package:mymystore/pages/detail/detail_screen.dart';
-import 'package:mymystore/pages/home/home.dart';
-import 'package:mymystore/pages/profile/profile_screen.dart';
-import 'package:mymystore/pages/setting/settings_page.dart';
-import 'package:mymystore/pages/test/test_screen.dart';
+import 'package:mymystore/pages/auth/forgot_password/forgot_password.page.dart';
+import 'package:mymystore/pages/auth/register/register.page.dart';
+import 'package:mymystore/pages/home/home.page.dart';
+import 'package:mymystore/pages/profile/profile.page.dart';
+import 'package:mymystore/pages/setting/settings.page.dart';
 
 class CommonNavigates {
   static Map<String, Widget Function(BuildContext)> routers =
       <String, WidgetBuilder>{
-    HomeScreen.route(): (context) => const HomeScreen(title: '123'),
-    ProfileScreen.route(): (context) => const ProfileScreen(),
-    ShopDetailScreen.route(): (context) => const ShopDetailScreen(),
-    TestScreen.route(): (context) => const TestScreen(),
+    HomePage.route(): (context) => const HomePage(title: '123'),
+    ProfilePage.route(): (context) => const ProfilePage(),
     SettingsPage.route(): (context) => const SettingsPage(),
   };
 

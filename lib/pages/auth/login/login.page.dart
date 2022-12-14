@@ -17,7 +17,7 @@ import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:get/get.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:http/http.dart' as http;
-import 'package:mymystore/pages/home/home.dart';
+import 'package:mymystore/pages/home/home.page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -239,7 +239,7 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => const HomeScreen()),
+                  builder: (BuildContext context) => const HomePage()),
               (Route<dynamic> route) => route.isFirst);
         } else {
           CommonMethods.showToast(res.message);
@@ -269,7 +269,7 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => const HomeScreen()),
+                  builder: (BuildContext context) => const HomePage()),
               (Route<dynamic> route) => route.isFirst);
         }
       }

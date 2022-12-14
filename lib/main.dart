@@ -18,12 +18,12 @@ import 'package:mymystore/core/theme/theme.service.dart';
 import 'package:mymystore/core/theme/themes.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/logger_utils.dart';
-import 'package:mymystore/pages/error/error_page.dart';
-import 'package:mymystore/pages/home/home.dart';
+import 'package:mymystore/pages/error/error.page.dart';
+import 'package:mymystore/pages/home/home.page.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/auth/login/login_page.dart';
+import 'pages/auth/login/login.page.dart';
 
 Future<void> main() async {
   await initializeApp();
@@ -107,7 +107,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: Consumer<AppProvider>(
-          child: const HomeScreen(),
+          child: const HomePage(),
           builder: (c, appProvider, home) => OverlaySupport(
                 child: GetMaterialApp(
                   color: Colors.transparent,

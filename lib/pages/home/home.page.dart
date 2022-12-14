@@ -11,21 +11,21 @@ import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
-import 'package:mymystore/pages/profile/profile_screen.dart';
+import 'package:mymystore/pages/profile/profile.page.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomePage extends StatefulWidget {
   final String? title;
 
   static String route() => '/home';
 
-  const HomeScreen({super.key, this.title = "Trang chủ"});
+  const HomePage({super.key, this.title = "Trang chủ"});
 
   @override
   State<StatefulWidget> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
+class _HomeScreenState extends LifecycleWatcherState<HomePage>
     with TickerProviderStateMixin {
   late final datas = homePopularProducts;
   late AnimationController animationController;
@@ -78,7 +78,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
           ),
           subtitle: Text("info.store".tr,
               style: const TextStyle(color: AppColors.white50)),
-          onTap: () => Navigator.pushNamed(context, ProfileScreen.route()),
+          onTap: () => Navigator.pushNamed(context, ProfilePage.route()),
         ),
         actions: [
           IconButton(

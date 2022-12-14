@@ -15,7 +15,7 @@ import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
-import 'package:mymystore/pages/home/home.dart';
+import 'package:mymystore/pages/home/home.page.dart';
 
 class AuthService {
   static Future<bool> login(
@@ -59,7 +59,7 @@ class AuthService {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) => const HomeScreen()),
+              builder: (BuildContext context) => const HomePage()),
           (Route<dynamic> route) => route.isFirst);
     } catch (e) {}
     CommonMethods.unlockScreen();

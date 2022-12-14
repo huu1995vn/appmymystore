@@ -31,16 +31,16 @@ class ProfileOption {
   });
 }
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   static String route() => '/profile';
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<ProfilePage> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends State<ProfilePage> {
 
   get datas => <ProfileOption>[
         ProfileOption.arrow(title: 'Edit Profile', icon: const Icon(AppIcons.user_1)),

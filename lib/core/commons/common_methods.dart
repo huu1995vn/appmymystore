@@ -13,10 +13,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:material_dialogs/material_dialogs.dart';
+import 'package:mymystore/core/components/dialogs/webview.dialog.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
-import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/firebase/dynamic_link.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
@@ -117,7 +118,7 @@ class CommonMethods {
   }
 
   static DateTime? convertToDateTime(String date,
-      [String? newPattern, DateTime? valuedefault]) {
+      {String? newPattern, DateTime? valuedefault}) {
     try {
       var d = DateFormat(newPattern ?? "MM/dd/yyyy HH:mm").parse(date);
       if (date != null && date.toString().toLowerCase().endsWith(" pm")) {
@@ -365,7 +366,7 @@ class CommonMethods {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) => MMWebView(
+              builder: (context) => HtmlViewDialog(
                   url: url, html: html, title: title ?? "content".tr)));
     } else {
       return CommonMethods.launchURL(url!);

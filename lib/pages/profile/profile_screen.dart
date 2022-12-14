@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymystore/app_icons.dart';
-import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/pages/profile/header.dart';
@@ -84,13 +84,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           iconTheme: const IconThemeData(
             color: AppColors.primary, //change your color here
           ),
-          leading: MMGoBack(context),
           backgroundColor: Colors.transparent,
-          centerTitle: true,
-          // title: Text(
-          //   'personalinformation'.tr,
-          //   style: TextStyle(color: AppColors.primary),
-          // ),
+          centerTitle: true,         
           elevation: 0.0,
         ),
         body: CustomScrollView(

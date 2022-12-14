@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.0-41.0.dev <3.0.0'
+  sdk: ">=2.19.0-41.0.dev <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -32,15 +32,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-
-   # The following adds the Cupertino Icons font to your application.
+    # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: 
-  flutter_svg:  # Used to render svg images
-  google_fonts:  # Used to include google fonts
-  flutter_rating_bar:  # Used for show product star ratings
-  dio:  # Used for call api
-  provider:  # Used for custome theme
+  cupertino_icons:
+  flutter_svg: # Used to render svg images
+  google_fonts: # Used to include google fonts
+  flutter_rating_bar: # Used for show product star ratings
+  provider: # Used for custome theme
   localstorage: # Used for save local data
   flutter_launcher_icons: # Used for build icon
   wc_form_validators: # Used for form validators
@@ -52,15 +50,15 @@ dependencies:
   # firebase_in_app_messaging: # Used for send message ads
   firebase_remote_config: # Remote config
   cloud_firestore: # Used for firestore
-  universal_platform: # Used for check platform  
-  device_info_plus: 3.2.4 # Used for device info  
-  package_info_plus:  # Used for package info 
+  universal_platform: # Used for check platform
+  device_info_plus: 3.2.4 # Used for device info
+  package_info_plus: # Used for package info
   geolocator: # Used for get geolocator
   encrypt: # Used for encrypt ASE token
   crypto: # Used for encrypt md5
   material_dialogs: # Used for show dialogs notification
   flutter_easyloading: # Used for show loading
-  flutter_inappwebview:  # Used for show webviewx
+  flutter_inappwebview: # Used for show webviewx
   url_launcher: # Used for open url
   json_annotation: # Used for code generation libraries
   scroll_to_index: #This package provides the scroll to index mechanism for fixed/variable row height for Flutter scrollable widget.
@@ -79,9 +77,10 @@ dependencies:
   overlay_support: #Used for showSimpleNotification
   get: #It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
   html:
-  intl: 
+  intl:
   expandable_text:
-  
+  flutter_datetime_picker: #datepicker
+
 dev_dependencies:
   build_runner: # Used for code generation libraries
   json_serializable: # Used for code generation libraries
@@ -100,7 +99,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -132,10 +130,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-  - family: AppIcons
-    fonts:
-      - asset: assets/fonts/AppIcons.ttf
-      
+    - family: AppIcons
+      fonts:
+        - asset: assets/fonts/AppIcons.ttf
+
 flutter_icons:
   android: true
   ios: true

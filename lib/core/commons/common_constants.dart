@@ -14,13 +14,16 @@ class CommonConstants {
   static const kWhite = Colors.white;
   static const kTextColor = Color(0xFF707070);
   static const kTextLightColor = Color(0xFF949098);
-  static const kDefaultPadding = 5.0;
-  static const kDefaultPaddingBox = 10.0;
-  static const kDefaultMarginBottomBox = 6.0;
-  static const kDefaultPaddingTop = 79.0;
+  static const kDefaultPadding = 10.0;
+  static const kDefaultRadius = 10.0;
+  static const kDefaultMargin = 5.0;
+  static const kDefaultPaddingTop = kDefaultPadding * 4;
   static const kItemOnPage = 10;
   static const kMaxImages = 15;
   static const kSizeHeight = 39.0;
+  static const kSizeAvatarSmall = 30.0;
+  static const kSizeAvatarMedium = 60.0;
+  static const kSizeAvatarLarge = 120.0;
   static const kEdgeInsetsCardPadding = EdgeInsets.only(
       left: CommonConstants.kDefaultPadding,
       right: CommonConstants.kDefaultPadding);
@@ -41,14 +44,14 @@ class CommonConstants {
     fontWeight: FontWeight.bold,
   );
   static const TextStyle kTextTitleStyle = TextStyle(
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: FontWeight.normal,
   );
   static const TextStyle kTextSubTitleStyle =
-      TextStyle(fontWeight: FontWeight.normal, fontSize: 14);
+      TextStyle(fontWeight: FontWeight.normal, fontSize: 12);
   static const kTextPriceStyle = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: 20,
+    fontSize: 16,
     color: AppColors.primary,
   );
   static const MESSAGE_ERROR_404 = "Thao tác không tồn tại";
@@ -67,7 +70,7 @@ class CommonConstants {
 // static const LOGINBOTTOMIMAGE = "assets/images/bg/login_bottom.png";
 // static const BGLOGINMEMBERIMAGE = "assets/images/img-screen/bg-login-member.png";
   static const IMAGE_LOGO = "assets/images/logo.png";
-// static const LOGORAOXEWHITEIMAGE = "assets/images/logo-raoxe-trang.png";
+// static const LOGORAOXEWHITEIMAGE = "assets/images/logo-mymystore-trang.png";
 // static const UUDAISVG = "assets/images/img-screen/uu-dai.svg";
 // static const BGBANNER = "assets/images/bg/bg-banner.png";
 // static const NOTFOUNDDATA = "assets/images/img-screen/no-data.png";

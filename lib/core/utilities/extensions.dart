@@ -348,3 +348,69 @@ List<T> map<T>(List list, Function handler) {
 
   return result;
 }
+String buildUrlString(String url, Map<String, dynamic>? parameters) {
+  // Avoids unnecessary processing.
+  if (parameters == null) return url;
+
+  // Check if there are parameters to add.
+  if (parameters.isNotEmpty) {
+    // Checks if the string url already has parameters.
+    if (url.contains("?")) {
+      url += "&";
+    } else {
+      url += "?";
+    }
+
+    // Concat every parameter to the string url.
+    parameters.forEach((key, value) {
+      if (value is List) {
+        if (value is List<String>) {
+          for (String singleValue in value) {
+            url += "$key=${Uri.encodeQueryComponent(singleValue)}&";
+          }
+        } else {
+          for (dynamic singleValue in value) {
+            url += "$key=${Uri.encodeQueryComponent(singleValue.toString())}&";
+          }
+        }
+      } else if (value is String) {
+        url += "$key=${Uri.encodeQueryComponent(value)}&";
+      } else {
+        url += "$key=${Uri.encodeQueryComponent(value.toString())}&";
+      }
+    });
+
+    // Remove last '&' character.
+    url = url.substring(0, url.length - 1);
+  }
+
+  return url;
+}
+
+extension AddParameters on Uri {
+  /// Returns a new `Uri` instance based on `this` and adds [parameters].
+  Uri addParameters(Map<String, dynamic>? parameters) {
+    if (parameters == null) return this;
+
+    String paramUrl = origin + path;
+
+    Map<String, dynamic> newParameters = {};
+
+    queryParametersAll.forEach((key, values) {
+      newParameters[key] = values;
+    });
+
+    parameters.forEach((key, value) {
+      newParameters[key] = value;
+    });
+
+    return buildUrlString(paramUrl, newParameters).toUri();
+  }
+}
+
+extension ToURI on String {
+  /// Converts the current string into a valid URI. Since it uses
+  /// `Uri.parse` then it can throw `FormatException` if `this` is not
+  /// a valid string for parsing.
+  Uri toUri() => Uri.parse(this);
+}

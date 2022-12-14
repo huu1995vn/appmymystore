@@ -3,22 +3,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mymystore/core/components/dialogs/confirm_otp_email.dialog.dart';
-import 'package:mymystore/core/components/dialogs/confirm_otp_phone.dialog.dart';
 import 'package:mymystore/pages/detail/detail_screen.dart';
 import 'package:mymystore/pages/home/home.dart';
-import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
 import 'package:mymystore/pages/profile/profile_screen.dart';
 import 'package:mymystore/pages/setting/settings_page.dart';
-import 'package:mymystore/pages/special_offers/special_offers_screen.dart';
 import 'package:mymystore/pages/test/test_screen.dart';
 
 class CommonNavigates {
   static Map<String, Widget Function(BuildContext)> routers =
       <String, WidgetBuilder>{
     HomeScreen.route(): (context) => const HomeScreen(title: '123'),
-    MostPopularScreen.route(): (context) => const MostPopularScreen(),
-    SpecialOfferScreen.route(): (context) => const SpecialOfferScreen(),
     ProfileScreen.route(): (context) => const ProfileScreen(),
     ShopDetailScreen.route(): (context) => const ShopDetailScreen(),
     TestScreen.route(): (context) => const TestScreen(),
@@ -85,22 +79,6 @@ class CommonNavigates {
           return child;
         },
         fullscreenDialog: true));
-  }
-
-  static Future openOtpVerificationPhoneDialog(
-      BuildContext context, String phone, bool isExist) async {
-    return await Navigator.of(context)
-        .push(MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-      return OtpVerificationPhoneDialog(phone: phone, isExist: isExist);
-    }));
-  }
-
-  static Future openOtpVerificationEmailDialog(
-      BuildContext context, String email) async {
-    return await Navigator.of(context)
-        .push(MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-      return OtpVerificationEmailDialog(email: email);
-    }));
   }
 
   static Future openSelect(BuildContext context, Widget child,

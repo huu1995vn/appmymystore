@@ -6,8 +6,9 @@ import 'dart:async';
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 
-class SplashScreen extends StatefulWidget {
+class MMSplashScreen extends StatefulWidget {
   /// Seconds to navigate after for time based navigation
   final int? seconds;
 
@@ -69,7 +70,7 @@ class SplashScreen extends StatefulWidget {
 
   /// Use one of the provided factory constructors instead of.
   @protected
-  SplashScreen({
+  MMSplashScreen({
     super.key,
     this.loaderColor,
     this.navigateAfterFuture,
@@ -116,7 +117,7 @@ class SplashScreen extends StatefulWidget {
           'navigateAfterSeconds must be a String beginning with forward slash (/)',
         );
 
-  factory SplashScreen.timer({
+  factory MMSplashScreen.timer({
     required int seconds,
     Color? loaderColor,
     Color backgroundColor = Colors.white,
@@ -134,7 +135,7 @@ class SplashScreen extends StatefulWidget {
     bool useLoader = true,
     String? routeName,
   }) =>
-      SplashScreen(
+      MMSplashScreen(
         loaderColor: loaderColor,
         seconds: seconds,
         photoSize: photoSize,
@@ -153,7 +154,7 @@ class SplashScreen extends StatefulWidget {
         routeName: routeName,
       );
 
-  factory SplashScreen.future({
+  factory MMSplashScreen.future({
     required Future<Object> navigateAfterFuture,
     Color? loaderColor,
     Color backgroundColor = Colors.white,
@@ -171,7 +172,7 @@ class SplashScreen extends StatefulWidget {
     bool useLoader = true,
     String? routeName,
   }) =>
-      SplashScreen(
+      MMSplashScreen(
         loaderColor: loaderColor,
         navigateAfterFuture: navigateAfterFuture,
         photoSize: photoSize,
@@ -194,7 +195,7 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<MMSplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -296,7 +297,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             )
                           : Container(),
                       const Padding(
-                        padding: EdgeInsets.only(top: 20.0),
+                        padding: EdgeInsets.only(top: CommonConstants.kDefaultPadding),
                       ),
                       Padding(
                         padding: widget.loadingTextPadding,

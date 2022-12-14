@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
-import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import '../../app_icons.dart';
 
 class ErrorPage extends StatefulWidget {

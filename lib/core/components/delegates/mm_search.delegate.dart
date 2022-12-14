@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
@@ -71,20 +72,20 @@ class MMSearchDelegate extends SearchDelegate<dynamic> {
     return Container(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,
-        padding: const EdgeInsets.all(CommonConstants.kDefaultPaddingBox),
+        padding:  EdgeInsets.all(CommonConstants.kDefaultPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: CommonConstants.kDefaultPaddingBox),
+                    const EdgeInsets.symmetric(vertical: CommonConstants.kDefaultPadding),
                 child: Text("Được tìm nhiều")),
             query == null || query.isEmpty
                 ? Wrap(
                     children: List<Widget>.generate(
                       listHotSearch.length,
                       (int index) {
-                        return Card(
+                        return MMCard(
                             margin:
                                 const EdgeInsets.only(right: 10, bottom: 10),
                             shape: RoundedRectangleBorder(
@@ -103,8 +104,8 @@ class MMSearchDelegate extends SearchDelegate<dynamic> {
                                   }
                                 },
                                 child: Padding(
-                                    padding: const EdgeInsets.all(
-                                        CommonConstants.kDefaultPaddingBox),
+                                    padding: EdgeInsets.all(
+                                        CommonConstants.kDefaultPadding),
                                     child: Text(listHotSearch[index]))));
                       },
                     ).toList(),

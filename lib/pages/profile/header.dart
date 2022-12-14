@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mymystore/core/api/api.bll.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/commons/index.dart';
-import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/auth.service.dart';

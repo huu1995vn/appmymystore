@@ -2,8 +2,8 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mymystore/core/components/part.dart';
-import 'package:mymystore/core/components/rx_image.dart';
+import 'package:mymystore/core/components/mm_part.dart';
+import 'package:mymystore/core/components/mm_image.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 import 'package:skeletons/skeletons.dart';

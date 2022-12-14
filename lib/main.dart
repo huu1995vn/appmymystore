@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/commons/flutter_app_version_checker.dart';
-import 'package:mymystore/core/components/splashscreen.dart';
+import 'package:mymystore/core/components/mm_splashscreen.dart';
 import 'package:mymystore/core/lang/translation.service.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
@@ -117,7 +117,7 @@ class _MyAppState extends State<MyApp> {
                         AsyncSnapshot<FirebaseRemoteConfig> snapshot) {
                           
                       return (snapshot.hasData)
-                          ? SplashScreen.future(
+                          ? MMSplashScreen.future(
                               navigateAfterFuture: loadFromFuture(home),
                               imageBackground:
                                   const AssetImage('assets/splash.png'),

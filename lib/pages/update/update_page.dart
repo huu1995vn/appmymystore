@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/commons/flutter_app_version_checker.dart';
-import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/extensions.dart';

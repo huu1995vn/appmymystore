@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
-import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 
 class MMImage extends StatelessWidget {

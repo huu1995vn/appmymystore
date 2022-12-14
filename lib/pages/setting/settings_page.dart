@@ -6,11 +6,10 @@ import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:provider/provider.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
-import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:get/get.dart';
 import 'package:mymystore/core/lang/translation.service.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
-import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/theme/theme.service.dart';
@@ -29,25 +28,25 @@ class _SettingsPageState extends State<SettingsPage> {
   String _selectedLang = TranslationService.locale!.languageCode;
   bool authBiometric = false;
   _onBiometric(bool v) async {
-    final userProvider = Provider.of<AppProvider>(context, listen: false);
-    try {
-      var res = await AuthService.authBiometric();
-      if (v && res) {
-        await StorageService.set(
-            StorageKeys.biometric, userProvider.user.phone);
-        setState(() {
-          authBiometric = true;
-        });
-        CommonMethods.showToast("success".tr);
-      } else {
-        StorageService.deleteItem(StorageKeys.biometric);
-        setState(() {
-          authBiometric = false;
-        });
-      }
-    } catch (e) {
-      CommonMethods.showDialogError(context, e);
-    }
+    // final userProvider = Provider.of<AppProvider>(context, listen: false);
+    // try {
+    //   var res = await AuthService.authBiometric();
+    //   if (v && res) {
+    //     await StorageService.set(
+    //         StorageKeys.biometric, userProvider.user.phone);
+    //     setState(() {
+    //       authBiometric = true;
+    //     });
+    //     CommonMethods.showToast("success".tr);
+    //   } else {
+    //     StorageService.deleteItem(StorageKeys.biometric);
+    //     setState(() {
+    //       authBiometric = false;
+    //     });
+    //   }
+    // } catch (e) {
+    //   CommonMethods.showDialogError(context, e);
+    // }
   }
 
   @override
@@ -169,7 +168,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   )),
               Expanded(child: Container()),
               Padding(
-                padding: EdgeInsets.all(CommonConstants.kDefaultPaddingBox),
+                padding: EdgeInsets.all(CommonConstants.kDefaultPadding),
                 child: Text(
                   "${"version".tr} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
                   style: TextStyle().italic,

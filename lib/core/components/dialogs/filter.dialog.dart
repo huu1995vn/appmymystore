@@ -3,7 +3,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/commons/index.dart';
-import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/services/master_data.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
@@ -108,7 +108,7 @@ class _FilterDialogState extends State<FilterDialog> {
             GestureDetector(
                 onTap: onCancel,
                 child: Padding(
-                  padding: const EdgeInsets.all(CommonConstants.kDefaultPaddingBox),
+                  padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
                   child: Center(
                     child: Text(
                       "cancelfilter".tr,
@@ -145,29 +145,10 @@ class _FilterDialogState extends State<FilterDialog> {
               Card(
                 child: Column(
                   children: [
-                    rxSelectInput(
-                        context, "brand", searchParams["BrandId"] ?? -1,
-                        title: Text("brand".tr), afterChange: (v) {
-                      setState(() {
-                        searchParams["BrandId"] = v;
-                      });
-                    }),
-                    rxSelectInput(context, "city", searchParams["CityId"] ?? -1,
-                        title: Text("city".tr), afterChange: (v) {
-                      setState(() {
-                        searchParams["CityId"] = v;
-                      });
-                    }),
-                    rxSelectInput(
-                        context, "sort", searchParams["OrderBy"] ?? -1,
-                        title: Text("sort".tr), afterChange: (v) {
-                      setState(() {
-                        searchParams["OrderBy"] = v;
-                      });
-                    }),
+                    
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: CommonConstants.kDefaultPadding, left: CommonConstants.kDefaultPaddingBox),
+                          top: CommonConstants.kDefaultPadding, left: CommonConstants.kDefaultPadding),
                       child: Row(
                         children: [
                           Text("Giá từ "),
@@ -206,53 +187,7 @@ class _FilterDialogState extends State<FilterDialog> {
                   // color: Colors.white,
                   child: Column(
                 children: [
-                  rxSelectInput(
-                      context, "productstate", searchParams["State"] ?? -1,
-                      title: Text("state".tr), afterChange: (v) {
-                    setState(() {
-                      searchParams["State"] = v;
-                    });
-                  }),
-                  rxSelectInput(
-                      context, "fueltype", searchParams["FuelTypeId"] ?? -1,
-                      title: Text("fueltype".tr), afterChange: (v) {
-                    setState(() {
-                      searchParams["FuelTypeId"] = v;
-                    });
-                  }),
-                  rxSelectInput(
-                      context, "madein", searchParams["MadeInId"] ?? -1,
-                      title: Text("madein".tr), afterChange: (v) {
-                    setState(() {
-                      searchParams["MadeInId"] = v;
-                    });
-                  }),
-                  rxSelectInput(context, "color", searchParams["ColorId"] ?? -1,
-                      title: Text("color".tr), afterChange: (v) {
-                    setState(() {
-                      searchParams["ColorId"] = v;
-                    });
-                  }),
-                  rxSelectInput(
-                      context, "productdoor", searchParams["ColorId"] ?? -1,
-                      title: Text("door".tr), afterChange: (v) {
-                    setState(() {
-                      searchParams["Door"] = v;
-                    });
-                  }),
-                  rxSelectInput(
-                      context, "productseat", searchParams["Seat"] ?? -1,
-                      title: Text("seat".tr), afterChange: (v) {
-                    setState(() {
-                      searchParams["Seat"] = v;
-                    });
-                  }),
-                  rxSelectInput(context, "year", searchParams["Year"] ?? -1,
-                      title: Text("year".tr), afterChange: (v) {
-                    setState(() {
-                      searchParams["Year"] = v;
-                    });
-                  }),
+                  
                 ],
               )),
             ],
@@ -274,7 +209,7 @@ class _FilterDialogState extends State<FilterDialog> {
 
   Widget _header(String header) {
     return Padding(
-      padding: const EdgeInsets.all(CommonConstants.kDefaultPaddingBox),
+      padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
       child: Text(
         header.toUpperCase(),
         style: TextStyle().bold,

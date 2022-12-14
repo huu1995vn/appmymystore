@@ -7,7 +7,7 @@ import 'package:mymystore/core/api/index.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/index.dart';
-import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
@@ -63,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Get.isDarkMode ? Colors.black54 : AppColors.white,
         body: SingleChildScrollView(
             child: Padding(
-          padding: const EdgeInsets.only(top: 20.0),
+          padding: const EdgeInsets.only(top: CommonConstants.kDefaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -212,17 +212,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> _onRegister() async {
     try {
-      await AuthService.checkPhone(user!.phone, isExist: false);
-      bool checkOtp = await CommonNavigates.openOtpVerificationPhoneDialog(
-          context, user!.phone!, false);
-      if (checkOtp) {
-        var res = await ApiBLL_APIAnonymous().insertuser(user!.toJson());
-        if (res.status > 0) {
-          CommonMethods.showDialogCongratulations(context, "message.str008".tr);
-        } else {
-          CommonMethods.showToast(res.message);
-        }
-      }
+     
     } catch (e) {
       CommonMethods.showToast(e.toString());
     }

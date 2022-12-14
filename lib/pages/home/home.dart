@@ -3,8 +3,7 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
-import 'package:mymystore/core/components/part.dart';
-import 'package:mymystore/core/components/product_card.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/popular.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
@@ -12,12 +11,7 @@ import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
-import 'package:mymystore/pages/detail/detail_screen.dart';
-import 'package:mymystore/pages/home/report_view.dart';
-import 'package:mymystore/pages/home/special_offer.dart';
-import 'package:mymystore/pages/mostpopular/most_popular_screen.dart';
 import 'package:mymystore/pages/profile/profile_screen.dart';
-import 'package:mymystore/pages/special_offers/special_offers_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -116,10 +110,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
               ),
             ),
           ),
-          SliverPadding(
-            padding: padding,
-            sliver: _buildPopulars(),
-          ),
+         
           // const SliverAppBar(flexibleSpace: SizedBox(height: 24))
         ],
       ),
@@ -129,38 +120,10 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        SpecialOffers(onTapSeeAll: () => _onTapSpecialOffersSeeAll(context)),
-        const ReportView(),
+        Text("Nội dung")
         // const MostPupularCategory(),
       ],
     );
   }
 
-  Widget _buildPopulars() {
-    return SliverGrid(
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 185,
-        mainAxisSpacing: 24,
-        crossAxisSpacing: 16,
-        mainAxisExtent: 285,
-      ),
-      delegate: SliverChildBuilderDelegate(_buildPopularItem, childCount: 30),
-    );
-  }
-
-  Widget _buildPopularItem(BuildContext context, int index) {
-    final data = datas[index % datas.length];
-    return ProductCard(
-      data: data,
-      ontap: (data) => Navigator.pushNamed(context, ShopDetailScreen.route()),
-    );
-  }
-
-  void _onTapMostPopularSeeAll(BuildContext context) {
-    Navigator.pushNamed(context, MostPopularScreen.route());
-  }
-
-  void _onTapSpecialOffersSeeAll(BuildContext context) {
-    Navigator.pushNamed(context, SpecialOfferScreen.route());
-  }
 }

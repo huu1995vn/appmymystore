@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/components/index.dart';
-import 'package:mymystore/core/components/part.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:get/get.dart';
@@ -53,7 +53,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       backgroundColor: Get.isDarkMode ? Colors.black54 : AppColors.white,
       body: SingleChildScrollView(
         child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: CommonConstants.kDefaultPadding),
             child: Column(
               children: <Widget>[
                 _header(),
@@ -92,7 +92,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       child: Column(children: <Widget>[
         Form(
           key: _keyValidationForm,
-          child: Card(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: MMCard(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -102,61 +103,43 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       border: Border.all(color: Colors.black26)),
                   child: Column(
                     children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: const BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(color: Colors.black26))),
-                        child: MMInput(phone,
-                            keyboardType: TextInputType.number,
-                            labelText: "phone".tr,
-                            icon: const Icon(AppIcons.phone_1),
-                            onChanged: (v) => {
-                                  setState(() => {phone = v})
-                                },
-                            validator: (v) {
-                              if (v == null || !v.isNotEmpty) {
-                                return "notempty.phone".tr;
-                              } else {
-                                return CommonMethods.checkStringPhone(v)
-                                    ? null
-                                    : "invalid.phone".tr;
-                              }
-                            }),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: const BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(color: Colors.black26))),
-                        child: MMInput(password,
-                            isPassword: true,
-                            labelText: "password.new".tr,
-                            icon: const Icon(AppIcons.lock_1),
-                            onChanged: (v) => {
-                                  setState(() => {password = v})
-                                },
-                            validator: Validators.compose([
-                              Validators.required("notempty.password".tr),
-                            ])),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        child: MMInput(passwordAgain,
-                            isPassword: true,
-                            labelText: "password.again".tr,
-                            icon: const Icon(AppIcons.lock_1),
-                            validator: (value) {
-                          if (value != null && value != password) {
-                            return "invalid.password.again".tr;
-                          } else {
-                            return null;
-                          }
-                        }),
-                      ),
+                      MMInput(phone,
+                          keyboardType: TextInputType.number,
+                          labelText: "phone".tr,
+                          icon: const Icon(AppIcons.phone_1),
+                          onChanged: (v) => {
+                                setState(() => {phone = v})
+                              },
+                          validator: (v) {
+                            if (v == null || !v.isNotEmpty) {
+                              return "notempty.phone".tr;
+                            } else {
+                              return CommonMethods.checkStringPhone(v)
+                                  ? null
+                                  : "invalid.phone".tr;
+                            }
+                          }),
+                      MMInput(password,
+                          isPassword: true,
+                          labelText: "password.new".tr,
+                          icon: const Icon(AppIcons.lock_1),
+                          onChanged: (v) => {
+                                setState(() => {password = v})
+                              },
+                          validator: Validators.compose([
+                            Validators.required("notempty.password".tr),
+                          ])),
+                      MMInput(passwordAgain,
+                          isPassword: true,
+                          labelText: "password.again".tr,
+                          icon: const Icon(AppIcons.lock_1),
+                          validator: (value) {
+                        if (value != null && value != password) {
+                          return "invalid.password.again".tr;
+                        } else {
+                          return null;
+                        }
+                      }),
                     ],
                   ))),
         ),

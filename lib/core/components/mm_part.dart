@@ -10,8 +10,9 @@ import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
-import 'package:mymystore/core/components/delegates/rx_select.delegate.dart';
+import 'package:mymystore/core/components/delegates/mm_select.delegate.dart';
 import 'package:mymystore/core/components/index.dart';
+import 'package:mymystore/core/components/mm_text_avatar.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/services/master_data.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
@@ -30,9 +31,9 @@ Widget MMBuildItem(
     Widget? icon,
     void Function()? onTap,
     Widget? trailing}) {
-  return ListTile(
+  return MMListTile(
     leading: icon,
-    title: Text(title),
+    title: MMText(data: title),
     trailing: trailing,
     onTap: onTap,
   );
@@ -56,24 +57,16 @@ class MMDisabled extends StatelessWidget {
   }
 }
 
-class MMWebView extends StatefulWidget {
+class MMHtmlView extends StatefulWidget {
   String? url;
-  String? title;
-  Widget? action;
   String? javaScriptString;
   String? html;
-  MMWebView(
-      {super.key,
-      this.url,
-      this.title,
-      this.action,
-      this.javaScriptString,
-      this.html});
+  MMHtmlView({super.key, this.url, this.javaScriptString, this.html});
   @override
-  MMWebViewState createState() => MMWebViewState();
+  MMHtmlViewState createState() => MMHtmlViewState();
 }
 
-class MMWebViewState extends State<MMWebView> {
+class MMHtmlViewState extends State<MMHtmlView> {
   final _key = UniqueKey();
   bool isLoading = true;
   late InAppWebViewController _controller;
@@ -87,65 +80,58 @@ class MMWebViewState extends State<MMWebView> {
   @override
   Widget build(BuildContext context) {
     // bool ishtml = widget.html != null && widget.url == null;
-    return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(widget.title ?? ""),
-          elevation: 0.0,
-          actions: [widget.action ?? Container()],
-        ),
-        body: Stack(
-          children: <Widget>[
-            widget.html != null && widget.html!.isNotEmpty
-                ? InAppWebView(
-                    key: _key,
-                    initialData: InAppWebViewInitialData(data: widget.html!),
-                    onWebViewCreated: (InAppWebViewController controller) {
-                      _controller = controller;
-                    },
-                    onProgressChanged: (controller, progress) {
-                      if (progress > 20) {
-                        if (isLoading) {
-                          setState(() {
-                            isLoading = false;
-                          });
-                        }
-                        if (_controller != null &&
-                            widget.javaScriptString != null) {
-                          _controller.evaluateJavascript(
-                              source: widget.javaScriptString!);
-                        }
-                      }
-                    },
-                  )
-                : InAppWebView(
-                    key: _key,
-                    initialUrlRequest: URLRequest(url: Uri.parse(widget.url!)),
-                    onWebViewCreated: (InAppWebViewController controller) {
-                      _controller = controller;
-                    },
-                    onProgressChanged: (controller, progress) {
-                      if (progress > 20) {
-                        if (isLoading) {
-                          setState(() {
-                            isLoading = false;
-                          });
-                        }
-                        if (_controller != null &&
-                            widget.javaScriptString != null) {
-                          _controller.evaluateJavascript(
-                              source: widget.javaScriptString!);
-                        }
-                      }
-                    },
-                  ),
-            isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Stack(),
-          ],
-        ));
+    return Stack(
+      children: <Widget>[
+        widget.url != null && widget.url!.isNotEmpty
+            ? InAppWebView(
+                key: _key,
+                initialUrlRequest: URLRequest(url: Uri.parse(widget.url!)),
+                onWebViewCreated: (InAppWebViewController controller) {
+                  _controller = controller;
+                },
+                onProgressChanged: (controller, progress) {
+                  if (progress > 20) {
+                    if (isLoading) {
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                    if (_controller != null &&
+                        widget.javaScriptString != null) {
+                      _controller.evaluateJavascript(
+                          source: widget.javaScriptString!);
+                    }
+                  }
+                },
+              )
+            : InAppWebView(
+                key: _key,
+                initialData: InAppWebViewInitialData(data: widget.html ?? ""),
+                onWebViewCreated: (InAppWebViewController controller) {
+                  _controller = controller;
+                },
+                onProgressChanged: (controller, progress) {
+                  if (progress > 20) {
+                    if (isLoading) {
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                    if (_controller != null &&
+                        widget.javaScriptString != null) {
+                      _controller.evaluateJavascript(
+                          source: widget.javaScriptString!);
+                    }
+                  }
+                },
+              ),
+        isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Stack(),
+      ],
+    );
   }
 }
 
@@ -168,6 +154,7 @@ class MMCustomShape extends CustomClipper<Path> {
   }
 }
 
+
 Widget MMNoFound({required String urlImage, String? message}) {
   return SizedBox(
     height: SizeConfig.screenHeight -
@@ -182,10 +169,10 @@ Widget MMNoFound({required String urlImage, String? message}) {
           fullHeight: false,
         ),
         const SizedBox(
-          height: 10,
+          height: CommonConstants.kDefaultMargin,
         ),
-        Text(
-          message ?? "no.found".tr,
+        MMText(
+          data: message ?? "no.found".tr,
           textAlign: TextAlign.center,
         ),
       ],
@@ -205,14 +192,14 @@ Widget MMLoginAccountLabel(context) {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'message.str006'.tr,
+            MMText(
+              data: 'message.str006'.tr,
               style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
-            Text(
-              "login".tr,
-              style: TextStyle(
-                  color: AppColors.primary.withAlpha(500),
+            MMText(
+              data: "login".tr,
+              style: const TextStyle(
+                  color: AppColors.primary,
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),
@@ -227,7 +214,7 @@ class MMAvatarImage extends StatelessWidget {
   final String url;
   final double size;
   final BoxBorder? border;
-  const MMAvatarImage(this.url, {Key? key, this.border, required this.size})
+  const MMAvatarImage(this.url, {Key? key, this.border, this.size = 16})
       : super(key: key);
 
   @override
@@ -236,7 +223,7 @@ class MMAvatarImage extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: const Color(0xff7c94b6),
+        color: AppColors.white.withOpacity(0.5),
         image: DecorationImage(
           image: MMImageProvider(url),
           fit: BoxFit.cover,
@@ -245,15 +232,10 @@ class MMAvatarImage extends StatelessWidget {
         border: border ??
             Border.all(
               color: AppColors.white,
-              width: 3.0,
+              width: 1.0,
             ),
       ),
     );
-    // SizedBox(
-    //     width: width,
-    //     height: height,
-    //     child: MMCircleAvatar(
-    //         backgroundImage: MMImageProvider(url)));
   }
 }
 
@@ -287,11 +269,13 @@ ImageProvider<Object> MMImageProvider(String url) {
     url = CommonConstants.IMAGE_NO;
   }
   if (CommonMethods.isURl(url)) {
-    if (CommonConfig.HaveCacheImage) {
+    if (true) {
       return CachedNetworkImageProvider(url);
-    } else {
-      return NetworkImage(url);
-    }
+    } 
+    // else 
+    // {
+    //   return NetworkImage(url);
+    // }
   } else {
     if (url.contains("assets/")) {
       return AssetImage(url);
@@ -367,14 +351,224 @@ class MMRoundedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         side: BorderSide(width: 1.0, color: color),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radius ?? CommonConstants.kDefaultPadding),
+          borderRadius: BorderRadius.circular(radius ?? CommonConstants.kDefaultRadius),
         ),
       ),
-      child: Text(
-        title,
+      child: MMText(
+        data: title,
         style: TextStyle(color: color),
       ),
     );
+  }
+}
+
+class MMCard extends Card {
+  const MMCard({
+    super.key,
+    this.color,
+    this.shadowColor,
+    this.surfaceTintColor,
+    this.elevation,
+    this.shape,
+    this.borderOnForeground = true,
+    this.margin = const EdgeInsets.only(bottom: CommonConstants.kDefaultPadding),
+    this.clipBehavior,
+    this.child,
+    this.semanticContainer = true,
+  })  : assert(elevation == null || elevation >= 0.0),
+        assert(borderOnForeground != null);
+
+  final Color? color;
+
+  final Color? shadowColor;
+
+  final Color? surfaceTintColor;
+
+  final double? elevation;
+
+  final ShapeBorder? shape;
+
+  final bool borderOnForeground;
+
+  final Clip? clipBehavior;
+
+  final EdgeInsetsGeometry? margin;
+
+  final bool semanticContainer;
+
+  final Widget? child;
+}
+
+class MMListTile extends ListTile {
+  const MMListTile({
+    super.key,
+    this.leading,
+    this.title,
+    this.subtitle,
+    this.trailing,
+    this.isThreeLine = false,
+    this.dense,
+    this.visualDensity,
+    this.shape,
+    this.style,
+    this.selectedColor,
+    this.iconColor,
+    this.textColor,
+    this.contentPadding = const EdgeInsets.all(0),
+    this.enabled = true,
+    this.onTap,
+    this.onLongPress,
+    this.mouseCursor,
+    this.selected = false,
+    this.focusColor,
+    this.hoverColor,
+    this.splashColor,
+    this.focusNode,
+    this.autofocus = false,
+    this.tileColor,
+    this.selectedTileColor,
+    this.enableFeedback,
+    this.horizontalTitleGap,
+    this.minVerticalPadding,
+    this.minLeadingWidth,
+  });
+
+  @override
+  final Widget? leading;
+  @override
+  final Widget? title;
+  @override
+  final Widget? subtitle;
+  @override
+  final Widget? trailing;
+  @override
+  final bool isThreeLine;
+  @override
+  final bool? dense;
+  @override
+  final VisualDensity? visualDensity;
+  @override
+  final ShapeBorder? shape;
+  @override
+  final Color? selectedColor;
+  @override
+  final Color? iconColor;
+
+  @override
+  final Color? textColor;
+  @override
+  final ListTileStyle? style;
+  @override
+  final EdgeInsetsGeometry contentPadding;
+  @override
+  final bool enabled;
+  @override
+  final GestureTapCallback? onTap;
+  @override
+  final GestureLongPressCallback? onLongPress;
+  @override
+  final MouseCursor? mouseCursor;
+  @override
+  final bool selected;
+  @override
+  final Color? focusColor;
+  @override
+  final Color? hoverColor;
+  @override
+  final Color? splashColor;
+  @override
+  final FocusNode? focusNode;
+  @override
+  final bool autofocus;
+  @override
+  final Color? tileColor;
+  @override
+  final Color? selectedTileColor;
+  @override
+  final bool? enableFeedback;
+  @override
+  final double? horizontalTitleGap;
+  @override
+  final double? minVerticalPadding;
+  @override
+  final double? minLeadingWidth;
+}
+
+class MMText extends StatefulWidget {
+  final String? data;
+  final TextStyle? style;
+  final StrutStyle? strutStyle;
+  final TextAlign? textAlign;
+  final TextDirection? textDirection;
+  final Locale? locale;
+  final bool? softWrap;
+  final TextOverflow? overflow;
+  final double? textScaleFactor;
+  final int? maxLines;
+  final String? semanticsLabel;
+  final TextWidthBasis? textWidthBasis;
+  final Color? selectionColor;
+  const MMText(
+      {this.data,
+      super.key,
+      this.style,
+      this.strutStyle,
+      this.textAlign,
+      this.textDirection,
+      this.locale,
+      this.softWrap,
+      this.overflow,
+      this.textScaleFactor,
+      this.maxLines,
+      this.semanticsLabel,
+      this.textWidthBasis,
+      this.selectionColor});
+  @override
+  State<StatefulWidget> createState() {
+    return _MMTextState();
+  }
+}
+
+class _MMTextState extends State<MMText> {
+  String data = "";
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      data = widget.data ?? "";
+    });
+  }
+
+  @override
+  void didUpdateWidget(MMText oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.data != oldWidget.data) {
+      Future.delayed(Duration.zero, () {
+        if (mounted && widget.data != data) {
+          setState(() {
+            data = widget.data!;
+          });
+        }
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(data,
+        key: widget.key,
+        style: widget.style,
+        strutStyle: widget.strutStyle,
+        textAlign: widget.textAlign,
+        textDirection: widget.textDirection,
+        locale: widget.locale,
+        softWrap: widget.softWrap,
+        overflow: widget.overflow,
+        textScaleFactor: widget.textScaleFactor,
+        maxLines: widget.maxLines,
+        semanticsLabel: widget.semanticsLabel,
+        textWidthBasis: widget.textWidthBasis,
+        selectionColor: widget.selectionColor);
   }
 }
 
@@ -407,25 +601,27 @@ class MMButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: CommonConstants.kSizeHeight,
+        height:  CommonConstants.kSizeHeight,
         child: icon == null
             ? ElevatedButton(
                 onPressed: onTap,
                 style: ElevatedButton.styleFrom(
                     backgroundColor: color //elevated btton background color
                     ),
-                child: Text(text,
+                child: MMText(
+                    data: text,
                     style: const TextStyle(
-                      color: CommonConstants.kWhite,
+                      color: AppColors.white,
                       fontSize: 16,
                     )),
               )
             : ElevatedButton.icon(
                 onPressed: onTap,
                 icon: icon!, //icon data for elevated button
-                label: Text(text,
+                label: MMText(
+                    data: text,
                     style: const TextStyle(
-                      color: CommonConstants.kWhite,
+                      color: AppColors.white,
                       fontSize: 16,
                     )), //label text
                 style: ElevatedButton.styleFrom(
@@ -452,20 +648,16 @@ class MMButtonMore extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.only(
-              top: CommonConstants.kDefaultPadding,
-              bottom: CommonConstants.kDefaultPadding,
-              left: CommonConstants.kDefaultPaddingBox,
-              right: CommonConstants.kDefaultPadding),
+          padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
             color: color ?? Colors.grey[200],
           ),
           child: Row(
             children: [
-              Text(
-                text,
-                style: const TextStyle(color: Colors.black54, fontSize: 14),
+              MMText(
+                data: text,
+                style: CommonConstants.kTextSubTitleStyle,
               ),
               const SizedBox(
                 width: CommonConstants.kDefaultPadding,
@@ -485,143 +677,22 @@ class MMButtonMore extends StatelessWidget {
   }
 }
 
-Widget rxTextInput(BuildContext context, String? value,
-    {Widget? title,
-    String? hintText,
-    String? labelText,
-    bool isBorder = false,
-    TextInputType? keyboardType = TextInputType.text,
-    void Function(String)? onChanged,
-    String? Function(String?)? validator,
-    void Function()? onTap,
-    int? maxLength,
-    int? minLines,
-    MaxLengthEnforcement? maxLengthEnforcement}) {
-  return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: 1.0, color: Colors.black12),
-        ),
-      ),
-      child: ListTile(
-          title: title ??
-              RichText(
-                text: TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: labelText ?? "",
-                        style: CommonConstants.kTextTitleStyle.copyWith(
-                            color: Theme.of(context).textTheme.bodyLarge!.color,
-                            fontSize: 12)),
-                    if (validator != null)
-                      const TextSpan(
-                          text: ' *',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.primary)),
-                  ],
-                ),
-              ),
-          subtitle: SizedBox(
-            height: validator != null ? null : 35,
-            child: MMInput(value ?? "",
-                readOnly: onTap != null,
-                isBorder: isBorder,
-                keyboardType: keyboardType,
-                onChanged: onChanged,
-                hintText: hintText,
-                onTap: onTap,
-                style: const TextStyle().size(16),
-                maxLength: maxLength,
-                minLines: minLines,
-                maxLengthEnforcement: maxLengthEnforcement,
-                validator: validator),
-          )));
+Widget MMListAwaiting() {
+  return ListView.builder(
+      key: UniqueKey(),
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.only(top: CommonConstants.kDefaultMargin),
+      itemCount: CommonConstants.kItemOnPage,
+      itemBuilder: (context, index) {
+        return Container();
+      });
 }
 
-Widget rxSelectInput(BuildContext context, String type, dynamic id,
-    {Widget? title,
-    String? labelText,
-    String? hintText,
-    bool isBorder = false,
-    bool Function(dynamic)? fnWhere,
-    dynamic Function(dynamic)? afterChange,
-    String? Function(String?)? validator}) {
-  var name = CommonMethods.getNameMasterById(type, id);
-  if (id == -1) {
-    name = "all".tr;
-  }
+Widget MMBorder({Widget? child}) {
   return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: 1.0, color: Colors.black12),
-        ),
-      ),
-      child: ListTile(
-        title: title ??
-            RichText(
-              text: TextSpan(
-                // text: lableText ?? type.tr(),
-                children: <TextSpan>[
-                  TextSpan(
-                      text: labelText ?? type.tr,
-                      style: CommonConstants.kTextTitleStyle.copyWith(
-                          fontSize: 12,
-                          color:
-                              Theme.of(context).textTheme.labelLarge!.color)),
-                  if (validator != null)
-                    const TextSpan(
-                        text: ' *',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primary)),
-                ],
-              ),
-            ),
-        subtitle: SizedBox(
-          height: validator != null ? null : 35,
-          child: MMInput(name,
-              isBorder: isBorder,
-              readOnly: true,
-              hintText: hintText ?? "choose".tr,
-              style: const TextStyle(fontSize: 16),
-              validator: validator, onTap: () {
-            _onSelect(context, type, id,
-                fnWhere: fnWhere, afterChange: afterChange);
-          }),
-        ),
-        trailing: const Icon(AppIcons.chevron_right),
-      ));
-}
-
-_onSelect(BuildContext context, String type, dynamic id,
-    {bool Function(dynamic)? fnWhere, Function(dynamic)? afterChange}) async {
-  List data = [];
-  if (type == "year") {
-    int start = 1970;
-    for (var i = DateTime.now().year + 1; i >= start; i--) {
-      data.add({"name": i.toString(), "id": i});
-    }
-  } else {
-    data = MasterDataService.data[type];
-  }
-  if (fnWhere != null) {
-    data = data.where(fnWhere).toList();
-  }
-
-  data = [
-    {"name": "all".tr, "id": -1},
-    ...data
-  ];
-  var res = await showSearch(
-      context: context, delegate: MMSelectDelegate(data: data, value: id));
-  if (res != null) {
-    if (afterChange != null) afterChange(res);
-  }
-}
-
-Widget MMBorderListTile({Widget? child}) {
-  return Container(
+      margin: const EdgeInsets.all(0),
+      padding: const EdgeInsets.all(0),
       decoration: BoxDecoration(
         border: Border(
           bottom: Get.isDarkMode
@@ -634,10 +705,22 @@ Widget MMBorderListTile({Widget? child}) {
 }
 
 
-Widget MMGoBack(context) {
-  return 
-  IconButton(
-    icon: const Icon(Icons.chevron_left, color: AppColors.primary, size: 24,),
-    onPressed: () => Navigator.of(context).pop(),
-  );
+Widget Avatar(int id, String name, {double size = 16, BoxBorder? border}) {
+  border = border ??
+      Border.all(
+        color: AppColors.white,
+        width: size == CommonConstants.kSizeAvatarSmall ? 1 : 3,
+      );
+  try {
+    if (id > 0) {
+      return MMAvatarImage(
+          CommonMethods.buildUrlHinhDaiDien(id, rewriteUrl: name),
+          size: size,
+          border: border);
+    }
+  } catch (e) {
+    CommonMethods.wirtePrint(e);
+  }
+  return MMTextAvatar(
+      text: name ?? "R", shape: Shape.Circular, size: size, border: border);
 }

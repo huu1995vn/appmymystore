@@ -250,18 +250,21 @@ class _LoginPageState extends State<LoginPage> {
   _onLogin(String username, String password) async {
     CommonMethods.lockScreen();
     try {
-      // await AuthService.checkPhone(username, isExist: true);
-      if (mounted) {
-        var res = await AuthService.login(context, username, password);
-        if (res) {
-          Provider.of<AppProvider>(context).setUserModel(APITokenService.user);
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => const HomeScreen()),
-              (Route<dynamic> route) => route.isFirst);
-        }
-      }
+      var uri = Uri.https('mymystore.azurewebsites.net', '/api/user/checkapi');
+      var response = await http.get(uri);
+
+      // // await AuthService.checkPhone(username, isExist: true);
+      // if (mounted) {
+      //   var res = await AuthService.login(context, username, password);
+      //   if (res) {
+      //     Provider.of<AppProvider>(context).setUserModel(APITokenService.user);
+      //     Navigator.pushAndRemoveUntil(
+      //         context,
+      //         MaterialPageRoute(
+      //             builder: (BuildContext context) => const HomeScreen()),
+      //         (Route<dynamic> route) => route.isFirst);
+      //   }
+      // }
     } catch (e) {
       CommonMethods.showDialogError(context, e.toString());
     }

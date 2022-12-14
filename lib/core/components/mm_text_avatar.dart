@@ -49,7 +49,7 @@ class MMTextAvatar extends StatelessWidget {
       backgroundColor =
           colorData[_textConfiguration()[0].toLowerCase().toString()];
     }
-    return backgroundColor??AppColors.primary;
+    return backgroundColor ?? AppColors.primary;
   }
 
   Color _colorTextConfig() {
@@ -67,15 +67,18 @@ class MMTextAvatar extends StatelessWidget {
   }
 
   String _textConfiguration() {
-    var newText = text == null ? '?' : _toString(value: text);
-    newText = upperCase! ? newText.toUpperCase() : newText;
-    var arrayLeeters = newText.trim().split(' ');
+    if(text == null || text!.isEmpty || text!.length == 0){
+            return "?";
+      }
+      var newText = text == null ? '?' : _toString(value: text);
+      newText = upperCase! ? newText.toUpperCase() : newText;
+      var arrayLeeters = newText.trim().split(' ');
 
-    if (arrayLeeters.length > 1 && arrayLeeters.length == numberLetters) {
-      return '${arrayLeeters[0][0].trim()}${arrayLeeters[1][0].trim()}';
-    }
+      if (arrayLeeters.length > 1 && arrayLeeters.length == numberLetters) {
+        return '${arrayLeeters[0][0].trim()}${arrayLeeters[1][0].trim()}';
+      }
 
-    return newText[0];
+      return newText[0];
   }
 
   Widget _buildText() {
@@ -114,22 +117,22 @@ class MMTextAvatar extends StatelessWidget {
   // }
 
   Widget _textDisplay() {
-    return 
-    Container(
-        height: size,
-        width: size,
-        decoration: BoxDecoration(
-          color: backgroundColor!.withOpacity(0.7),
-          borderRadius: BorderRadius.all(Radius.circular(size! / 2)),
-          border: border ?? Border.all(
-            color: AppColors.white,
-            width: 3.0,
-          ),
-        ),
-        child: Center(
-          child: _buildText(),
-        ),
-      );
+    return Container(
+      height: size,
+      width: size,
+      decoration: BoxDecoration(
+        color: backgroundColor!.withOpacity(0.7),
+        borderRadius: BorderRadius.all(Radius.circular(size! / 2)),
+        border: border ??
+            Border.all(
+              color: AppColors.white,
+              width: 3.0,
+            ),
+      ),
+      child: Center(
+        child: _buildText(),
+      ),
+    );
     // Material(
     //   shape: _buildTextType(),
     //   color: backgroundColor,

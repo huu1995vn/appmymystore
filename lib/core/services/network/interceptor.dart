@@ -24,7 +24,7 @@ class InterceptedClient extends http.BaseClient {
         params: params,
         body: body,
         encoding: encoding,
-      )) as http.Response;
+      ));
 
   @override
   Future<http.Response> put(
@@ -41,7 +41,7 @@ class InterceptedClient extends http.BaseClient {
         params: params,
         body: body,
         encoding: encoding,
-      )) as http.Response;
+      ));
   @override
   Future<http.Response> delete(
     Uri url, {
@@ -57,18 +57,17 @@ class InterceptedClient extends http.BaseClient {
         params: params,
         body: body,
         encoding: encoding,
-      )) as http.Response;
+      ));
 
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
     final response = await _onRequest(request);
+     final interceptedResponse = _onResponse(response);
 
-    final interceptedResponse = await _onResponse(response);
-
-    return interceptedResponse;
+    return  interceptedResponse;
   }
 
-  Future<http.StreamedResponse> _sendUnstreamed({
+  Future<http.Response> _sendUnstreamed({
     required String method,
     required Uri url,
     Map<String, String>? headers,
@@ -87,13 +86,13 @@ class InterceptedClient extends http.BaseClient {
       } else if (body is List) {
         request.bodyBytes = body.cast<int>();
       } else if (body is Map) {
-        request.bodyFields = body.cast<String, String>();
+        request.body = jsonEncode(body);
       } else {
         throw ArgumentError('Invalid request body "$body".');
       }
     }
 
-    return send(request) as http.StreamedResponse;
+    return http.Response.fromStream(await send(request));
   }
 
   Future<http.StreamedResponse> _onRequest(http.BaseRequest request) async {
@@ -113,7 +112,10 @@ class InterceptedClient extends http.BaseClient {
     };
     request.headers.addAll({
       'Authorization': _getToken(request),
-      'InfoDevice': CommonMethods.encodeBase64Utf8(jsonEncode(infoDevice))
+      'InfoDevice': CommonMethods.encodeBase64Utf8(jsonEncode(infoDevice)),
+      'Content-Type': 'application/json',
+      'Cookie':
+          'ARRAffinity=ff4936ed4b1df8b61705d57775948cf742f64871e283307599c75a5b7ed7d759; ARRAffinitySameSite=ff4936ed4b1df8b61705d57775948cf742f64871e283307599c75a5b7ed7d759'
     });
     return request;
   }
@@ -124,11 +126,9 @@ class InterceptedClient extends http.BaseClient {
   }
 
   /// This internal function intercepts the response.
-  Future<http.StreamedResponse> _onResponse(
-      http.StreamedResponse response) async {
-    http.StreamedResponse interceptedResponse = response;
-
-    return interceptedResponse;
+  http.StreamedResponse _onResponse(
+      http.StreamedResponse response)  {
+    return response;
   }
 
   // // ignore: unused_field

@@ -14,12 +14,11 @@ class APITokenService {
   static bool get isExpired {
     return _token.isNotNullEmpty ? isTokenExpired(_token) : false;
   }
+
   static int get id {
     try {
       return user.id;
-    } catch (e) {
-      
-    }
+    } catch (e) {}
     return -1;
   }
 
@@ -29,14 +28,16 @@ class APITokenService {
 
   static set token(String pToken) {
     if (_token.isNotNullEmpty && pToken.isNullEmpty) {
-      user = UserModel.fromJson(_decodeToken(_token));
+      var dtoken = _decodeToken(_token);
+      user = UserModel.fromJson(dtoken);
       FirebaseMessagingService.unsubscribeFromTopic("user${user.id}");
     }
     _token = pToken;
     StorageService.set(StorageKeys.token, _token);
     if (_token.isNotNullEmpty) {
       try {
-        user = UserModel.fromJson(_decodeToken(_token));
+        var dtoken = _decodeToken(_token);
+        user = UserModel.fromJson(dtoken);
         FirebaseMessagingService.subscribeToTopic("user${user.id}");
       } catch (ex) {
         // throw new Exception(CommonConstants.MESSAGE_TOKEN_INVALID + string.Format(" ({0})", ex.Message));
@@ -60,15 +61,14 @@ class APITokenService {
   static String convertUrlFromBase64(String pText) {
     return pText.replaceAll('+', '_').replaceAll('/', '-').split("=")[0];
   }
-  
+
   static Future<void> init() async {
     try {
       String storetoken = StorageService.get(StorageKeys.token);
       if (storetoken.isNotNullEmpty) {
         token = storetoken;
       }
-      if(!isExpired)
-      {
+      if (!isExpired) {
         await AuthService.refreshlogin();
       }
     } catch (e) {}

@@ -6,27 +6,29 @@ import 'package:mymystore/core/utilities/app_colors.dart';
 class Themes {
   static ThemeData _theme({bool isDark = false}) {
     Color primaryColor = AppColors.primary;
-    Color primaryColorDarkMode = AppColors.blackLight;
+     Color primaryColorDarkMode = AppColors.blackLight;
+    Color backgroundColor =isDark?  AppColors.black: Color(0xfff3f3f3);
     return ThemeData(
       inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
       ),
       brightness: isDark ? Brightness.dark : Brightness.light,
       primaryColor: isDark ? AppColors.white : primaryColor,
-      scaffoldBackgroundColor: isDark ? Colors.black : AppColors.grey,
+      scaffoldBackgroundColor: backgroundColor,
       cardColor: isDark ? AppColors.blackLight : AppColors.white,
       dividerColor: isDark
           ? AppColors.white.withOpacity(0.2)
           : AppColors.black.withOpacity(0.1),
       shadowColor: isDark ? AppColors.text : AppColors.grayDark,
       primarySwatch: _getMaterialColorFromColor(primaryColor),
-      textTheme: GoogleFonts.titilliumWebTextTheme(
+      textTheme: GoogleFonts.robotoTextTheme(
           ThemeData(brightness: isDark ? Brightness.dark : Brightness.light)
               .textTheme
               .copyWith(
                 bodyLarge: const TextStyle(fontSize: 16.0),
-                bodySmall: const TextStyle(fontSize: 13.0),
-                labelLarge: const TextStyle(fontSize: 13.0),
+                bodyMedium: const TextStyle(fontSize: 13.0),
+                bodySmall: const TextStyle(fontSize: 10.0),
+                labelLarge: const TextStyle(fontSize: 16.0),
               )),
       iconTheme: const IconThemeData(size: 19, color: AppColors.white),
       cardTheme: const CardTheme(
@@ -38,11 +40,8 @@ class Themes {
       appBarTheme: AppBarTheme(
           elevation: 0,
           iconTheme: const IconThemeData(
-            color: AppColors.primary,
+            color: AppColors.white,
           ),
-          
-          titleTextStyle: const TextStyle(color: AppColors.white),
-          toolbarTextStyle: const TextStyle(color: AppColors.white),
           backgroundColor: isDark ? primaryColorDarkMode : primaryColor,
           systemOverlayStyle: SystemUiOverlayStyle.light),
     );

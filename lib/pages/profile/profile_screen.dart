@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymystore/app_icons.dart';
-import 'package:mymystore/core/components/mm_part.dart';
+import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/pages/profile/header.dart';
@@ -41,9 +41,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  static _profileIcon(String last) => 'assets/icons/profile/$last';
-
-  bool _isDark = false;
 
   get datas => <ProfileOption>[
         ProfileOption.arrow(title: 'Edit Profile', icon: const Icon(AppIcons.user_1)),
@@ -55,27 +52,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           titleColor: const Color(0xFFF75555),
         ),
       ];
-
-  _languageOption() => ProfileOption(
-      title: 'Language',
-      icon: _profileIcon('more_circle@2x.png'),
-      trailing: SizedBox(
-        width: 150,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            const Text(
-              'English (US)',
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18,
-                  color: Color(0xFF212121)),
-            ),
-            const SizedBox(width: 16),
-            Image.asset('assets/icons/profile/arrow_right@2x.png', scale: 2)
-          ],
-        ),
-      ));
 
   @override
   Widget build(BuildContext context) {
@@ -93,13 +69,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SliverList(
               delegate: SliverChildListDelegate.fixed([
                 Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.all(CommonConstants.kDefaultPadding),
                   child: ProfileHeader(),
                 ),
               ]),
             ),
             _buildBody(),
-
+            
             // Center(
             //         child: Text(
             //             InfoDeviceService.infoDevice.DeviceVersion ?? "1.1.0"))

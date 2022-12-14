@@ -33,13 +33,13 @@ class AppColors {
     },
   );
   static const int _redPrimaryValue = 0xFFF44336;
-  static const Color white = Color(0xffffffff);
+  static const Color white = Colors.white;
   static const Color white50 = Color(0x88ffffff);
   static const Color grayDark = Color(0xffeaeaea);
-  static const Color grey = Color(0xfff3f3f3);
+  static const Color grey = Colors.grey;
   static const Color text = Color(0xff000000);
   static const Color text50 = Color(0x88000000);
-  static const Color black = Color(0xff001424);
+  static const Color black = Colors.black;
   static const Color black50 = Color(0x88001424);
   static const Color blackLight = Color.fromARGB(255, 30, 33, 36);
 }

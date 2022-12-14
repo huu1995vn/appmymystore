@@ -154,7 +154,6 @@ class MMCustomShape extends CustomClipper<Path> {
   }
 }
 
-
 Widget MMNoFound({required String urlImage, String? message}) {
   return SizedBox(
     height: SizeConfig.screenHeight -
@@ -271,8 +270,8 @@ ImageProvider<Object> MMImageProvider(String url) {
   if (CommonMethods.isURl(url)) {
     if (true) {
       return CachedNetworkImageProvider(url);
-    } 
-    // else 
+    }
+    // else
     // {
     //   return NetworkImage(url);
     // }
@@ -351,7 +350,8 @@ class MMRoundedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         side: BorderSide(width: 1.0, color: color),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radius ?? CommonConstants.kDefaultRadius),
+          borderRadius:
+              BorderRadius.circular(radius ?? CommonConstants.kDefaultRadius),
         ),
       ),
       child: MMText(
@@ -371,7 +371,8 @@ class MMCard extends Card {
     this.elevation,
     this.shape,
     this.borderOnForeground = true,
-    this.margin = const EdgeInsets.only(bottom: CommonConstants.kDefaultPadding),
+    this.margin =
+        const EdgeInsets.only(bottom: CommonConstants.kDefaultPadding),
     this.clipBehavior,
     this.child,
     this.semanticContainer = true,
@@ -601,7 +602,7 @@ class MMButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height:  CommonConstants.kSizeHeight,
+        height: CommonConstants.kSizeHeight,
         child: icon == null
             ? ElevatedButton(
                 onPressed: onTap,
@@ -704,23 +705,30 @@ Widget MMBorder({Widget? child}) {
       child: child);
 }
 
-
-Widget Avatar(int id, String name, {double size = 16, BoxBorder? border}) {
+Widget MMAvatar(String name,
+    {String? url, double size = 16, BoxBorder? border}) {
   border = border ??
       Border.all(
         color: AppColors.white,
         width: size == CommonConstants.kSizeAvatarSmall ? 1 : 3,
       );
   try {
-    if (id > 0) {
-      return MMAvatarImage(
-          CommonMethods.buildUrlHinhDaiDien(id, rewriteUrl: name),
-          size: size,
-          border: border);
+    if (url != null && url.isNotEmpty && CommonMethods.isURl(url)) {
+      return MMAvatarImage(url, size: size, border: border);
     }
   } catch (e) {
     CommonMethods.wirtePrint(e);
   }
   return MMTextAvatar(
-      text: name ?? "R", shape: Shape.Circular, size: size, border: border);
+      text: name, shape: Shape.Circular, size: size, border: border);
+}
+
+Widget MMMarginVertical([double? size]) {
+  size = size ?? CommonConstants.kDefaultMargin;
+  return SizedBox(height: size);
+}
+
+Widget MMMarginHorizontal([double? size]) {
+  size = size ?? CommonConstants.kDefaultMargin;
+  return SizedBox(width: size);
 }

@@ -7,8 +7,7 @@ import 'package:mymystore/core/services/network/interceptor.dart';
 class HTTPClient {
   static get(String url,
       {Map<String, dynamic>? params, Map<String, String>? headers}) async {
-    return await _request("GET", url,
-        params: params, headers: headers);
+    return await _request("GET", url, params: params, headers: headers);
   }
 
   static post(String url, body,
@@ -25,25 +24,29 @@ class HTTPClient {
 
   static delete(String url,
       {Map<String, dynamic>? params, Map<String, String>? headers}) async {
-    return await _request("DELETE", url,
-        params: params, headers: headers);
+    return await _request("DELETE", url, params: params, headers: headers);
   }
 
   static _request(String strMethod, String path,
-      {body, Map<String, dynamic>? params, Map<String, String>? headers}) async {
+      {body,
+      Map<String, dynamic>? params,
+      Map<String, String>? headers}) async {
     try {
-
       var client = InterceptedClient();
       http.Response res;
-   
+
       switch (strMethod) {
         case "POST":
           res = await client.post(Uri.parse(path),
-              body: body, params: params, headers: headers);
+              body: body,
+              params: params,
+              headers: headers);
           break;
         case "PUT":
           res = await client.put(Uri.parse(path),
-              body: body, params: params, headers: headers);
+              body: body,
+              params: params,
+              headers: headers);
           break;
         case "DELETE":
           res = await client.delete(Uri.parse(path),
@@ -52,7 +55,7 @@ class HTTPClient {
         default:
           res = await client.get(Uri.parse(path), headers: headers);
       }
-      var data;
+      dynamic data;
       try {
         data = res.body is Map ? res.body : jsonDecode(res.body);
       } catch (e) {

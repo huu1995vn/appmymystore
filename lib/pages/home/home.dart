@@ -71,10 +71,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomeScreen>
       appBar: AppBar(
         elevation: 0.0,
         title: ListTile(
-          leading: MMAvatarImage(
-            appProvider.user.mmimage,
-            size: 39,
-          ),
+          leading: appProvider.user.avatar(size: CommonConstants.kSizeAvatarSmall),
           title: Text(
             appProvider.user.name,
             style: const TextStyle(color: AppColors.white),

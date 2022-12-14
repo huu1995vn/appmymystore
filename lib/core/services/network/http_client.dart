@@ -34,19 +34,15 @@ class HTTPClient {
     try {
       var client = InterceptedClient();
       http.Response res;
-
+      path = path.toLowerCase();
       switch (strMethod) {
         case "POST":
           res = await client.post(Uri.parse(path),
-              body: body,
-              params: params,
-              headers: headers);
+              body: body, params: params, headers: headers);
           break;
         case "PUT":
           res = await client.put(Uri.parse(path),
-              body: body,
-              params: params,
-              headers: headers);
+              body: body, params: params, headers: headers);
           break;
         case "DELETE":
           res = await client.delete(Uri.parse(path),

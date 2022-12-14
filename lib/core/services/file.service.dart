@@ -17,7 +17,7 @@ class FileService {
   firebase_storage.FirebaseStorage.instance;
   static Future<String> uploadImage(File f) async {
     final fileName = basename( f.path);
-    final destination = '${APITokenService.id}/fileupload/$fileName';
+    final destination = '${APITokenService.id}/fileupload';
      final ref = firebase_storage.FirebaseStorage.instance
           .ref(destination)
           .child(fileName);

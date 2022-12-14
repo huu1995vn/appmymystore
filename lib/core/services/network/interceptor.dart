@@ -113,10 +113,7 @@ class InterceptedClient extends http.BaseClient {
     request.headers.addAll({
       'Authorization': _getToken(request),
       'InfoDevice': CommonMethods.encodeBase64Utf8(jsonEncode(infoDevice)),
-      'Content-Type': 'application/json',
-      'Cookie':
-          'ARRAffinity=ff4936ed4b1df8b61705d57775948cf742f64871e283307599c75a5b7ed7d759; ARRAffinitySameSite=ff4936ed4b1df8b61705d57775948cf742f64871e283307599c75a5b7ed7d759'
-    });
+      'Content-Type': 'application/json' });
     return request;
   }
 

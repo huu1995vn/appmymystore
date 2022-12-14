@@ -34,7 +34,7 @@ class HTTPClient {
     try {
       var client = InterceptedClient();
       http.Response res;
-      path = path.toLowerCase();
+      // path = path.toLowerCase();
       switch (strMethod) {
         case "POST":
           res = await client.post(Uri.parse(path),

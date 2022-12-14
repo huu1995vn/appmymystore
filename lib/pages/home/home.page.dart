@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mymystore/app_icons.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
+import 'package:mymystore/core/components/index.dart';
 import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
-import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/popular.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
@@ -65,13 +66,14 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     final appProvider = Provider.of<AppProvider>(context, listen: true);
-    const padding = EdgeInsets.fromLTRB(
-        CommonConstants.kDefaultPadding, CommonConstants.kDefaultPadding, CommonConstants.kDefaultPadding, 0);
+    const padding = EdgeInsets.fromLTRB(CommonConstants.kDefaultPadding,
+        CommonConstants.kDefaultPadding, CommonConstants.kDefaultPadding, 0);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
         title: ListTile(
-          leading: appProvider.user.avatar(size: CommonConstants.kSizeAvatarSmall),
+          leading:
+              appProvider.user.avatar(size: CommonConstants.kSizeAvatarSmall),
           title: Text(
             appProvider.user.name,
             style: const TextStyle(color: AppColors.white),
@@ -107,7 +109,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
               ),
             ),
           ),
-         
+
           // const SliverAppBar(flexibleSpace: SizedBox(height: 24))
         ],
       ),
@@ -117,10 +119,15 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        Text("Nội dung")
+        // Text("Nội dung"),
+        MMInput(APITokenService.token),
+        MMPrimaryButton(
+            onTap: () {
+              CommonMethods.copy(context, APITokenService.token);
+            },
+            text: "copy".tr)
         // const MostPupularCategory(),
       ],
     );
   }
-
 }

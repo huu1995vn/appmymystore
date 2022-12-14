@@ -62,9 +62,9 @@ class InterceptedClient extends http.BaseClient {
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
     final response = await _onRequest(request);
-     final interceptedResponse = _onResponse(response);
+    // final interceptedResponse = _onResponse(response);
 
-    return  interceptedResponse;
+    return response;
   }
 
   Future<http.Response> _sendUnstreamed({
@@ -86,7 +86,7 @@ class InterceptedClient extends http.BaseClient {
       } else if (body is List) {
         request.bodyBytes = body.cast<int>();
       } else if (body is Map) {
-        request.body = jsonEncode(body);
+        request.body = json.encode(body);
       } else {
         throw ArgumentError('Invalid request body "$body".');
       }
@@ -97,8 +97,8 @@ class InterceptedClient extends http.BaseClient {
 
   Future<http.StreamedResponse> _onRequest(http.BaseRequest request) async {
     request = _addHeaders(request);
-
-    return await request.send();
+    http.StreamedResponse response = await request.send();
+    return response;
   }
 
   _addHeaders(http.BaseRequest request) {
@@ -113,7 +113,8 @@ class InterceptedClient extends http.BaseClient {
     request.headers.addAll({
       'Authorization': _getToken(request),
       'InfoDevice': CommonMethods.encodeBase64Utf8(jsonEncode(infoDevice)),
-      'Content-Type': 'application/json' });
+      'Content-Type': 'application/json'
+    });
     return request;
   }
 
@@ -123,57 +124,7 @@ class InterceptedClient extends http.BaseClient {
   }
 
   /// This internal function intercepts the response.
-  http.StreamedResponse _onResponse(
-      http.StreamedResponse response)  {
+  http.StreamedResponse _onResponse(http.StreamedResponse response) {
     return response;
   }
-
-  // // ignore: unused_field
-  // final http.Request request;
-  // HTTPInterceptor(this.request);
-  // void onRequest(
-  //     RequestOptions options, RequestInterceptorHandler handler) async {
-  //   options.path = options.path.toLowerCase();
-  //   options = _addHeaders(options);
-  //   return super.onRequest(options, handler);
-  // }
-
-  // _addHeaders(RequestOptions options) {
-  //   var infoDevice = {
-  //     'IPAddress': InfoDeviceService.infoDevice.IpAddress,
-  //     'DeviceId': InfoDeviceService.infoDevice.Identifier,
-  //     'DeviceName': InfoDeviceService.infoDevice.DeviceName,
-  //     'OSName': InfoDeviceService.infoDevice.OSName,
-  //     'Location': InfoDeviceService.infoDevice.location,
-  //     'FCMToken': FirebaseMessagingService.token,
-  //   };
-  //   options.headers.addAll({
-  //     'Authorization': _getToken(options),
-  //     'InfoDevice': CommonMethods.encodeBase64Utf8(jsonEncode(infoDevice))
-  //   });
-  //   return options;
-  // }
-
-  // String _getToken(RequestOptions options) {
-  //   var token = APITokenService.token;
-  //   return "Bearer $token";
-  // }
-
-  // void onResponse(Response response, ResponseInterceptorHandler handler) {
-  //   return super.onResponse(response, handler);
-  // }
-
-  // // ignore: avoid_renaming_method_parameters
-  // Future onError(DioError dioError, ErrorInterceptorHandler handler) async {
-  //   switch (dioError.error) {
-  //     case 404:
-  //       throw CommonConstants.MESSAGE_ERROR_404;
-  //     default:
-  //   }
-  //   return super.onError(dioError, handler);
-  // }
-
-  // convertValueHeader(value) {
-  //   return Uri.encodeComponent(value.toString());
-  // }
 }

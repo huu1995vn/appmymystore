@@ -155,12 +155,11 @@ class _InputTextState extends State<MMInput> {
                 errorBorder: inputborder,
                 // labelText: widget.labelText,
                 hintText: widget.hintText ??
-                    "${"enter".tr} ${widget.labelText!.toLowerCase()}",
+                    "${"enter".tr} ${widget.labelText ?? "".toLowerCase()}",
                 prefixIcon: widget.icon != null
-                    ?  IconButton(
+                    ? IconButton(
                         icon: widget.icon!,
-                        onPressed: () {                         
-                        },
+                        onPressed: () {},
                       )
                     : null,
                 suffixIcon: widget.isPassword

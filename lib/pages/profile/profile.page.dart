@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
+import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/pages/profile/header.dart';
@@ -41,16 +42,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfilePage> {
-
   get datas => <ProfileOption>[
-        ProfileOption.arrow(title: 'Edit Profile', icon: const Icon(AppIcons.user_1)),
+        ProfileOption.arrow(
+            title: 'Edit Profile', icon: const Icon(AppIcons.user_1)),
         ProfileOption.arrow(title: 'Setting', icon: const Icon(AppIcons.cog_1)),
-        ProfileOption.arrow(title: 'Help Center', icon: const Icon(AppIcons.help_1)),
+        ProfileOption.arrow(
+            title: 'Help Center', icon: const Icon(AppIcons.help_1)),
         ProfileOption(
-          title: 'Logout',
-          icon: const Icon(AppIcons.exit),
-          titleColor: const Color(0xFFF75555),
-        ),
+            title: 'Logout',
+            icon: const Icon(AppIcons.exit),
+            titleColor: const Color(0xFFF75555),
+            onClick: () => {AuthService.logout(context)}),
       ];
 
   @override
@@ -61,7 +63,7 @@ class _ProfileScreenState extends State<ProfilePage> {
             color: AppColors.primary, //change your color here
           ),
           backgroundColor: Colors.transparent,
-          centerTitle: true,         
+          centerTitle: true,
           elevation: 0.0,
         ),
         body: CustomScrollView(
@@ -75,14 +77,14 @@ class _ProfileScreenState extends State<ProfilePage> {
               ]),
             ),
             _buildBody(),
-            
+
             // Center(
             //         child: Text(
             //             InfoDeviceService.infoDevice.DeviceVersion ?? "1.1.0"))
           ],
         ),
         bottomSheet: Container(
-          color: Colors.transparent,
+            color: Colors.transparent,
             height: 40,
             width: MediaQuery.of(context).size.width,
             child: Center(
@@ -114,7 +116,7 @@ class _ProfileScreenState extends State<ProfilePage> {
             fontWeight: FontWeight.w500, fontSize: 18, color: data.titleColor),
       ),
       trailing: data.trailing,
-      onTap: () {},
+      onTap: data.onClick,
     );
   }
 }

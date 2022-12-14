@@ -71,6 +71,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
+        automaticallyImplyLeading: false,
         title: ListTile(
           leading:
               appProvider.user.avatar(size: CommonConstants.kSizeAvatarSmall),

@@ -15,6 +15,7 @@ import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
+import 'package:mymystore/pages/auth/login/login.page.dart';
 import 'package:mymystore/pages/home/home.page.dart';
 
 class AuthService {
@@ -59,13 +60,13 @@ class AuthService {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) => const HomePage()),
+              builder: (BuildContext context) => const LoginPage()),
           (Route<dynamic> route) => route.isFirst);
     } catch (e) {}
     CommonMethods.unlockScreen();
   }
 
-   static Future checkPhone(phone, {bool isExist = false}) async {
+  static Future checkPhone(phone, {bool isExist = false}) async {
     //isExist == false: dùng đăng ký hoặc thay đổi phone
     //isExist == true: dùng cho quên mật khẩu
 
@@ -88,7 +89,7 @@ class AuthService {
     }
   }
 
-   static Future checkEmail(phone, {bool isExist = false}) async {
+  static Future checkEmail(phone, {bool isExist = false}) async {
     //isExist == false: dùng đăng ký hoặc thay đổi phone
     //isExist == true: dùng cho quên mật khẩu
 
@@ -110,7 +111,7 @@ class AuthService {
       throw "message.str002".tr;
     }
   }
-  
+
   static Future<bool> authBiometric() async {
     //initialize Local Authentication plugin.
     final LocalAuthentication _localAuthentication = LocalAuthentication();
@@ -136,8 +137,8 @@ class AuthService {
     return isAuthenticated;
   }
 
-  static Future<bool> checkPermission(BuildContext context, String phone) async {
-    
+  static Future<bool> checkPermission(
+      BuildContext context, String phone) async {
     String phonenumber = CommonMethods.formatPhoneNumber(phone);
     if (!CommonMethods.checkStringPhone(phonenumber)) {
       CommonMethods.showToast("invalid.phone".tr);

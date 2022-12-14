@@ -50,15 +50,17 @@ class ApiBLL_APIToken extends ApiBLL_Basic {
     apiDAL.controllerName = "api/token";
   }
   //login
-  Future<ResponseModel> login(String username, String password) async {
+  Future<ResponseModel> login(String pusername, String ppassword) async {
     Map<String, String> params = <String, String>{};
-    Map<String, String> body = {"username": username, "password": password};
+    Map<String, String> body = {"username": pusername, "password": ppassword};
     return await post(body, params, "Login");
   }
 
-  Future<ResponseModel> refreshlogin() async {
+  Future<ResponseModel> refreshlogin(String ptoken) async {
     Map<String, String> params = <String, String>{};
-    Map<String, String> body = {};
+    Map<String, String> body = {
+      "token": ptoken
+    };
     return await post(body, params, "refreshlogin");
   }
   //User

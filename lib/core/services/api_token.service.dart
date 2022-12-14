@@ -60,7 +60,7 @@ class APITokenService {
   static String convertUrlFromBase64(String pText) {
     return pText.replaceAll('+', '_').replaceAll('/', '-').split("=")[0];
   }
-
+  
   static Future<void> init() async {
     try {
       String storetoken = StorageService.get(StorageKeys.token);

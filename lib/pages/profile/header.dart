@@ -33,7 +33,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
       }
        var res = await ApiBLL_APIUser().updateavatar(url);
         if (res.status > 0) {
-          var res = await ApiBLL_APIToken().refreshlogin();
+          var res = await ApiBLL_APIToken().refreshlogin(APITokenService.token);
           if (res.status > 0) {
             APITokenService.token = res.data;
             Provider.of<AppProvider>(context).user = APITokenService.user;

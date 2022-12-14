@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 import 'package:mymystore/core/utilities/extensions.dart';
 
 class InterceptedClient extends http.BaseClient {
-
   @override
   Future<http.Response> post(
     Uri url, {
@@ -42,7 +41,7 @@ class InterceptedClient extends http.BaseClient {
         params: params,
         body: body,
         encoding: encoding,
-      )) as  http.Response;
+      )) as http.Response;
   @override
   Future<http.Response> delete(
     Uri url, {
@@ -58,7 +57,7 @@ class InterceptedClient extends http.BaseClient {
         params: params,
         body: body,
         encoding: encoding,
-      )) as  http.Response;
+      )) as http.Response;
 
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
@@ -97,11 +96,12 @@ class InterceptedClient extends http.BaseClient {
     return send(request) as http.StreamedResponse;
   }
 
-  Future<http.StreamedResponse> _onRequest(http.BaseRequest request) async {    
+  Future<http.StreamedResponse> _onRequest(http.BaseRequest request) async {
     request = _addHeaders(request);
 
     return await request.send();
   }
+
   _addHeaders(http.BaseRequest request) {
     var infoDevice = {
       'IPAddress': InfoDeviceService.infoDevice.IpAddress,
@@ -112,19 +112,20 @@ class InterceptedClient extends http.BaseClient {
       'FCMToken': FirebaseMessagingService.token,
     };
     request.headers.addAll({
-      'Authorization': _getToken(),
+      'Authorization': _getToken(request),
       'InfoDevice': CommonMethods.encodeBase64Utf8(jsonEncode(infoDevice))
     });
     return request;
   }
 
-  String _getToken() {
+  String _getToken(http.BaseRequest request) {
     var token = APITokenService.token;
     return "Bearer $token";
   }
 
   /// This internal function intercepts the response.
-  Future<http.StreamedResponse> _onResponse(http.StreamedResponse response) async {
+  Future<http.StreamedResponse> _onResponse(
+      http.StreamedResponse response) async {
     http.StreamedResponse interceptedResponse = response;
 
     return interceptedResponse;

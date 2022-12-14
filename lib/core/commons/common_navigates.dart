@@ -1,8 +1,11 @@
 // ignore_for_file: null_check_always_fails
 
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mymystore/pages/auth/forgot_password/forgot_password_page.dart';
+import 'package:mymystore/pages/auth/register/register_page.dart';
 import 'package:mymystore/pages/detail/detail_screen.dart';
 import 'package:mymystore/pages/home/home.dart';
 import 'package:mymystore/pages/profile/profile_screen.dart';
@@ -32,12 +35,14 @@ class CommonNavigates {
     return await Navigator.pushNamed(context, "/login");
   }
 
-  static Future toRegisterPage(BuildContext context) async {
-    return await Navigator.pushNamed(context, "/register");
+  static Future toRegisterPage(BuildContext context, String pphone) async {
+    return await Navigator.push(
+        context, CupertinoPageRoute(builder: (context) => RegisterPage(phone: pphone)));
   }
 
-  static Future toForgotPasswordPage(BuildContext context) async {
-    return await Navigator.pushNamed(context, "/forgot-password");
+  static Future toForgotPasswordPage(BuildContext context, String pphone) async {
+    return await Navigator.push(
+        context, CupertinoPageRoute(builder: (context) => ForgotPasswordPage(phone: pphone)));
   }
 
   static pop(BuildContext context, Object? value) {

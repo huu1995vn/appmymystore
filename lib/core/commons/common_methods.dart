@@ -52,7 +52,6 @@ class CommonMethods {
     }
   }
 
-  
   static Future<PackageInfo?> getPackageInfo() async {
     try {
       return await PackageInfo.fromPlatform();
@@ -614,5 +613,20 @@ class CommonMethods {
       };
     } catch (e) {}
     return null;
+  }
+
+  static convertNumberPhoneWithCountryCode(String number,
+      {String code = "+84"}) {
+    String numberCode = number;
+    if (number[0] == "0") {
+      numberCode = number.replaceFirst("0", code);
+    }
+    return numberCode;
+  }
+
+  static convertNumber(dynamic value) {
+    var intInStr = RegExp(r'\d+');
+
+    return intInStr.allMatches(value).map((m) => m.group(0));
   }
 }

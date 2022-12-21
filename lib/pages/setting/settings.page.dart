@@ -76,7 +76,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('setting'.tr),
+        title: Text('setting'.tr, style: CommonConstants.kTextHeaderStyle.copyWith(color: AppColors.white)),
         centerTitle: true,
         elevation: 0.0,
       ),

@@ -2,21 +2,18 @@
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:mymystore/core/api/api.bll.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/dialogs/password_auth.dailog.dart';
-import 'package:mymystore/core/entities.dart';
 // import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
-import 'package:mymystore/core/services/firebase/firebase_auth.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/pages/auth/login/login.page.dart';
-import 'package:mymystore/pages/home/home.page.dart';
 
 class AuthService {
   static Future<bool> login(

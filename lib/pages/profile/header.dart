@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/api/api.bll.dart';
@@ -29,11 +31,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
         CommonMethods.showToast(CommonConstants.MESSAGE_ERROR_EMPTY);
         return;
       }
-      var url = await FileService.uploadImageByPath(path);
-      if (url.isNullEmpty) {
-        return;
-      }
-      var res = await ApiBLL_APIUser().updateavatar(url);
+      var res = await ApiBLL_APIUser().updateavatar(path);
       if (res.status > 0) {
         var res = await ApiBLL_APIToken().refreshlogin(APITokenService.token);
         if (res.status > 0) {

@@ -77,10 +77,6 @@ class _ProfileScreenState extends State<ProfilePage> {
               ]),
             ),
             _buildBody(),
-
-            // Center(
-            //         child: Text(
-            //             InfoDeviceService.infoDevice.DeviceVersion ?? "1.1.0"))
           ],
         ),
         bottomSheet: Container(

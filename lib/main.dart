@@ -84,11 +84,11 @@ class _MyAppState extends State<MyApp> {
       // }
       await InfoDeviceService.init();
       await APITokenService.init();
+      CommonConfig.IsBiometricSupported =
+          await _localAuthentication.isDeviceSupported();
       if (APITokenService.token.isNullEmpty) {
         return const LoginPage();
       }
-      CommonConfig.IsBiometricSupported =
-          await _localAuthentication.isDeviceSupported();
       return main!;
 
       // await FirebaseAuthService.signInAnonymously();

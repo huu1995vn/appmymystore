@@ -1,4 +1,6 @@
 // ignore_for_file: camel_case_types
+import 'dart:io';
+
 import 'package:mymystore/core/api/api.dal.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/services/firebase/firebase_messaging_service.dart';
@@ -163,10 +165,10 @@ class ApiBLL_APIUser extends ApiBLL_Basic {
     return await post(body, params, "update");
   }
 
-  Future<ResponseModel> updateavatar(String purl) async {
+  Future<ResponseModel> updateavatar(String ppath) async {
     Map<String, String> params = <String, String>{};
     Map<String, String> body = <String, String>{};
-    body["image"] = purl;
+    body["file"] = ppath;   
     return await post(body, params, "UpdateAvatar");
   }
 

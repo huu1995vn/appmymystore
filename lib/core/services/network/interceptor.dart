@@ -62,7 +62,6 @@ class InterceptedClient extends http.BaseClient {
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
     final response = await _onRequest(request);
-    // final interceptedResponse = _onResponse(response);
 
     return response;
   }
@@ -78,6 +77,7 @@ class InterceptedClient extends http.BaseClient {
     url = url.addParameters(params);
 
     http.Request request = http.Request(method, url);
+
     if (headers != null) request.headers.addAll(headers);
     if (encoding != null) request.encoding = encoding;
     if (body != null) {
@@ -91,14 +91,24 @@ class InterceptedClient extends http.BaseClient {
         throw ArgumentError('Invalid request body "$body".');
       }
     }
-
     return http.Response.fromStream(await send(request));
   }
 
   Future<http.StreamedResponse> _onRequest(http.BaseRequest request) async {
     request = _addHeaders(request);
-    http.StreamedResponse response = await request.send();
-    return response;
+    String url = request.url.toString().toLowerCase();
+    if (url.contains("/updateavatar")|| url.contains("/file/upload")) {
+      var body = json.decode((request as http.Request).body);
+      var requestupload = http.MultipartRequest('POST', request.url);
+      requestupload.files.add(await http.MultipartFile.fromPath(
+          'file', body["file"]));
+      requestupload.headers.addAll(request.headers);
+      http.StreamedResponse response = await requestupload.send();
+      return response;
+    } else {
+      http.StreamedResponse response = await request.send();
+      return response;
+    }
   }
 
   _addHeaders(http.BaseRequest request) {

@@ -258,28 +258,9 @@ class CommonMethods {
         actions: [MMPrimaryButton(onTap: () {}, text: "done".tr)]);
   }
 
-  static String buildUrlImage(int idHinh, {String? rewriteUrl, int size = 0}) {
-    // idHinh = idHinh > 0 ? idHinh : 0;
-    // rewriteUrl = rewriteUrl != null && rewriteUrl.isNotEmpty
-    //     ? rewriteUrl
-    //     : "image-dailyxe";
-    // rewriteUrl = rewriteUrl.convertrUrlPrefix();
-    // String url = '${CommonConfig.DomainApiDrive}/image/$rewriteUrl-${idHinh}j.jpg';
-    // if (size > 0) {
-    //   url = '$url?w=$size';
-    // }
-    return "";
+  static String buildUrlImage(int pIdHinh) {
+    return "https://firebasestorage.googleapis.com/v0/b/modern-optics-234509.appspot.com/o/image%2F${pIdHinh}?alt=media";
   }
-
-  static String buildUrlHinhDaiDien(int idHinh,
-      {String? rewriteUrl, int size = 240}) {
-    if (idHinh > 0) {
-      return buildUrlImage(idHinh, rewriteUrl: rewriteUrl, size: size);
-    } else {
-      return CommonConstants.IMAGE_NOT_FOUND;
-    }
-  }
-
   static lockScreen() {
     EasyLoading.show(
         status: "${"awaiting".tr}...", maskType: EasyLoadingMaskType.custom);

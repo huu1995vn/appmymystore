@@ -28,7 +28,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel()
   ..phone = json['phone'] as String
   ..email = json['email'] as String?
   ..address = json['address'] as String?
-  ..image = json['image'] as String?;
+  ..fileid = json['fileid'] as int;
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'TotalRow': instance.TotalRow,
@@ -38,7 +38,7 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'phone': instance.phone,
       'email': instance.email,
       'address': instance.address,
-      'image': instance.image,
+      'fileid': instance.fileid,
     };
 
 CustomerModel _$CustomerModelFromJson(Map<String, dynamic> json) =>
@@ -49,7 +49,7 @@ CustomerModel _$CustomerModelFromJson(Map<String, dynamic> json) =>
       ..name = json['name'] as String?
       ..phone = json['phone'] as String?
       ..email = json['email'] as String?
-      ..image = json['image'] as String?
+      ..fileid = json['fileid'] as int
       ..address = json['address'] as bool;
 
 Map<String, dynamic> _$CustomerModelToJson(CustomerModel instance) =>
@@ -60,7 +60,7 @@ Map<String, dynamic> _$CustomerModelToJson(CustomerModel instance) =>
       'name': instance.name,
       'phone': instance.phone,
       'email': instance.email,
-      'image': instance.image,
+      'fileid': instance.fileid,
       'address': instance.address,
     };
 
@@ -75,7 +75,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..price = json['price'] as int?
   ..amountexport = json['amountexport'] as int?
   ..amountimport = json['amountimport'] as int?
-  ..image = json['image'] as String?
+  ..fileid = json['fileid'] as int
   ..material = json['material'] as String?
   ..color = json['color'] as String?
   ..size = json['size'] as String?
@@ -100,7 +100,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'price': instance.price,
       'amountexport': instance.amountexport,
       'amountimport': instance.amountimport,
-      'image': instance.image,
+      'fileid': instance.fileid,
       'material': instance.material,
       'color': instance.color,
       'size': instance.size,

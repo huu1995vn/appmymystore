@@ -6,7 +6,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
-import 'package:mymystore/core/commons/common_constants.dart';
 
 /// This allows the class to access private members in
 /// the generated file called *.g.dart, where the star denotes the source file name.
@@ -53,13 +52,13 @@ class UserModel extends Entity {
   String phone = "";
   String? email = "";
   String? address = "";
-  String? image;
-  String get mmimage {
-    return image ?? '${CommonConstants.kIconPath}/me.png';
+  int fileid = -1;
+  String get mmimg {
+    return CommonMethods.buildUrlImage(fileid);
   }
 
   Widget avatar({double size = 16}) {
-    return MMAvatar(name, url: image, size: size);
+    return MMAvatar(name, url: mmimg, size: size);
   }
 
   UserModel();
@@ -67,6 +66,8 @@ class UserModel extends Entity {
     json["name"] = CommonMethods.convertToString(json["name"]);
     json["phone"] = CommonMethods.convertToString(json["phone"]);
     json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["fileid"] = CommonMethods.convertToInt32(json["fileid"]);
+
     return _$UserModelFromJson(json);
   }
 
@@ -80,7 +81,7 @@ class CustomerModel extends Entity {
   String? name;
   String? phone;
   String? email;
-  String? image;
+  int fileid = -1;
   bool address = false;
   CustomerModel() {
     name;
@@ -88,6 +89,8 @@ class CustomerModel extends Entity {
     phone;
   }
   factory CustomerModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["fileid"] = CommonMethods.convertToInt32(json["fileid"]);
     return _$CustomerModelFromJson(json);
   }
 
@@ -105,7 +108,7 @@ class ProductModel extends Entity {
   int? price;
   int? amountexport;
   int? amountimport;
-  String? image;
+  int fileid = -1;
   String? material;
   String? color;
   String? size;
@@ -114,7 +117,10 @@ class ProductModel extends Entity {
   DateTime? updatedate;
   DateTime? createdate;
   ProductModel();
+
   factory ProductModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["fileid"] = CommonMethods.convertToInt32(json["fileid"]);
     json["createdate"] =
         CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
     json["updatedate"] =
@@ -139,6 +145,13 @@ class ProductModel extends Entity {
   //  + 2: Da duyet
   //  + 3: Khong duyet
   //  + 4: Vi pham (Khoa)
+  String get mmimg {
+    return CommonMethods.buildUrlImage(fileid);
+  }
+
+  Widget avatar({double size = 16}) {
+    return MMAvatar(name, url: mmimg, size: size);
+  }
 
   String get mmcreatedateago {
     return CommonMethods.timeagoFormat(createdate);

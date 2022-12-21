@@ -13,6 +13,7 @@ import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/theme/theme.service.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -129,8 +130,8 @@ class _SettingsPageState extends State<SettingsPage> {
                             trailing: Switch(
                               value: isBiometric,
                               onChanged: _onBiometric,
-                              activeTrackColor: Colors.red[200],
-                              activeColor: Colors.red,
+                              activeTrackColor: AppColors.primary.withOpacity(200),
+                              activeColor: AppColors.primary,
                             ),
                             onTap: () {
                               // _authenticateWithBiometrics();

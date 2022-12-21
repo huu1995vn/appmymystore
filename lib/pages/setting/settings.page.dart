@@ -3,13 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
-import 'package:provider/provider.dart';
+import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/components/mm_part.dart';
 import 'package:get/get.dart';
 import 'package:mymystore/core/lang/translation.service.dart';
-import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/theme/theme.service.dart';
@@ -26,27 +25,25 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   String _selectedLang = TranslationService.locale!.languageCode;
-  bool authBiometric = false;
+  bool isBiometric = StorageService.enableBiometric();
   _onBiometric(bool v) async {
-    // final userProvider = Provider.of<AppProvider>(context, listen: false);
-    // try {
-    //   var res = await AuthService.authBiometric();
-    //   if (v && res) {
-    //     await StorageService.set(
-    //         StorageKeys.biometric, userProvider.user.phone);
-    //     setState(() {
-    //       authBiometric = true;
-    //     });
-    //     CommonMethods.showToast("success".tr);
-    //   } else {
-    //     StorageService.deleteItem(StorageKeys.biometric);
-    //     setState(() {
-    //       authBiometric = false;
-    //     });
-    //   }
-    // } catch (e) {
-    //   CommonMethods.showDialogError(context, e);
-    // }
+    try {
+      var res = await AuthService.authBiometric();
+      if (v && res) {
+        await StorageService.setBiometric();
+        setState(() {
+          isBiometric = true;
+        });
+        CommonMethods.showToast("success".tr);
+      } else {
+        await StorageService.deleteBiometric();
+        setState(() {
+          isBiometric = false;
+        });
+      }
+    } catch (e) {
+      CommonMethods.showDialogError(context, e);
+    }
   }
 
   @override
@@ -74,10 +71,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    var userProvider = Provider.of<AppProvider>(context, listen: true);
-    authBiometric =
-        StorageService.get(StorageKeys.biometric) == userProvider.user.phone;
+  Widget build(BuildContext context) {    
 
     return Scaffold(
       appBar: AppBar(
@@ -88,94 +82,96 @@ class _SettingsPageState extends State<SettingsPage> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverFillRemaining(
-              child: Column(
-            children: [
-              Card(
-                  margin: EdgeInsets.only(top: 6, bottom: 6),
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: ListTile.divideTiles(
-                      //          <-- ListTile.divideTiles
-                      context: context,
-                      tiles: [
+              child: MMCard(
+                  child: Padding(
+            padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
+            child: Column(
+              children: [
+                ListView(
+                  shrinkWrap: true,
+                  children: ListTile.divideTiles(
+                    //          <-- ListTile.divideTiles
+                    context: context,
+                    tiles: [
+                      MMBuildItem(
+                          icon: Icon(AppIcons.sun),
+                          title: "darkmode".tr,
+                          trailing: Switch(
+                            value: ThemeService().isSavedDarkMode(),
+                            onChanged: (value) {
+                              setState(() {
+                                ThemeService().changeThemeMode();
+                              });
+                            },
+                            activeTrackColor: Colors.red[200],
+                            activeColor: Colors.red,
+                          ),
+                          onTap: () {
+                            // _authenticateWithBiometrics();
+                          }),
+                      MMBuildItem(
+                        icon: const Icon(AppIcons.language_1),
+                        title: "language".tr,
+                        trailing: DropdownButton<String>(
+                          icon: Icon(Icons.arrow_drop_down),
+                          value: _selectedLang,
+                          items: _buildDropdownLangs(),
+                          onChanged: (value) {
+                            setState(() => _selectedLang = value!);
+                            TranslationService.changeLocale(value!);
+                          },
+                        ),
+                      ),
+                      if (APITokenService.isLogin && CommonConfig.IsBiometricSupported)
                         MMBuildItem(
-                            icon: Icon(AppIcons.sun),
-                            title: "darkmode".tr,
+                            icon: const Icon(AppIcons.fingerprint),
+                            title: "login.biometrics".tr,
                             trailing: Switch(
-                              value: ThemeService().isSavedDarkMode(),
-                              onChanged: (value) {
-                                setState(() {
-                                  ThemeService().changeThemeMode();
-                                });
-                              },
+                              value: isBiometric,
+                              onChanged: _onBiometric,
                               activeTrackColor: Colors.red[200],
                               activeColor: Colors.red,
                             ),
                             onTap: () {
                               // _authenticateWithBiometrics();
                             }),
-                        MMBuildItem(
-                          icon: const Icon(AppIcons.language_1),
-                          title: "language".tr,
-                          trailing: DropdownButton<String>(
-                            icon: Icon(Icons.arrow_drop_down),
-                            value: _selectedLang,
-                            items: _buildDropdownLangs(),
-                            onChanged: (value) {
-                              setState(() => _selectedLang = value!);
-                              TranslationService.changeLocale(value!);
-                            },
-                          ),
-                        ),
-                        if (APITokenService.isLogin)
-                          MMBuildItem(
-                              icon: const Icon(AppIcons.fingerprint),
-                              title: "login.biometrics".tr,
-                              trailing: Switch(
-                                value: authBiometric,
-                                onChanged: _onBiometric,
-                                activeTrackColor: Colors.red[200],
-                                activeColor: Colors.red,
-                              ),
-                              onTap: () {
-                                // _authenticateWithBiometrics();
-                              }),
-                        // MMBuildItem(
-                        //     title: "Clear cache".tr,
-                        //     onTap: () {
-                        //       MMSearchDelegate.cacheapiSearch = {};
-                        //       CommonMethods.showToast(
-                        //           context, "success".tr);
-                        //     }),
+                      // MMBuildItem(
+                      //     title: "Clear cache".tr,
+                      //     onTap: () {
+                      //       MMSearchDelegate.cacheapiSearch = {};
+                      //       CommonMethods.showToast(
+                      //           context, "success".tr);
+                      //     }),
 
-                        MMBuildItem(
-                            title: "termsandcondition".tr,
-                            onTap: () {
-                              openWebViewTermsAndCondition(context);
-                            }),
-                        MMBuildItem(
-                            title: "policy".tr,
-                            onTap: () {
-                              openWebViewPolicy(context);
-                            }),
-                        MMBuildItem(
-                            title: "feedback".tr,
-                            onTap: () {
-                              openWebViewFeedBack(context);
-                            }),
-                      ],
-                    ).toList(),
-                  )),
-              Expanded(child: Container()),
-              Padding(
-                padding: EdgeInsets.all(CommonConstants.kDefaultPadding),
-                child: Text(
-                  "${"version".tr} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
-                  style: TextStyle().italic,
+                      MMBuildItem(
+                          title: "termsandcondition".tr,
+                          onTap: () {
+                            openWebViewTermsAndCondition(context);
+                          }),
+                      MMBuildItem(
+                          title: "policy".tr,
+                          onTap: () {
+                            openWebViewPolicy(context);
+                          }),
+                      MMBuildItem(
+                          title: "feedback".tr,
+                          onTap: () {
+                            openWebViewFeedBack(context);
+                          }),
+                    ],
+                  ).toList(),
                 ),
-              )
-            ],
-          ))
+                Expanded(child: Container()),
+                Padding(
+                  padding: EdgeInsets.all(CommonConstants.kDefaultPadding),
+                  child: Text(
+                    "${"version".tr} ${InfoDeviceService.infoDevice.PackageInfo?.version.toLowerCase()}",
+                    style: TextStyle().italic,
+                  ),
+                )
+              ],
+            ),
+          )))
         ],
       ),
     );

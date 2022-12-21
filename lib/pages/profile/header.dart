@@ -25,7 +25,6 @@ class ProfileHeader extends StatefulWidget {
 
 class _ProfileHeaderState extends State<ProfileHeader> {
   Key _refreshKey = UniqueKey();
-
   uploadImage() async {
     var path = await FileService.getImagePicker(context);
     if (path.isNullEmpty) {

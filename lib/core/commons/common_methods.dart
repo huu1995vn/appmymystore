@@ -224,10 +224,17 @@ class CommonMethods {
         title: "notification".tr, actions: actions, color: AppColors.info);
   }
 
-  static Future<void> showDialogError(BuildContext context, dynamic pmsg,
+  static Future<void> showDialogError(BuildContext context, dynamic error,
       {String? title, List<Widget>? actions}) async {
-    pmsg = pmsg.replaceAll("Exception: ", "").replaceAll("Exception", "");
-    return await materialDialog(context, pmsg,
+    String message = error.toString();
+    if (error is PlatformException) {
+      message = error.message.toString();
+    }
+    message = message
+        .toString()
+        .replaceAll("Exception: ", "")
+        .replaceAll("Exception", "");
+    return await materialDialog(context, message,
         actions: actions, color: AppColors.error);
   }
 

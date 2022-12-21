@@ -54,27 +54,30 @@ class StorageService {
   }
 
   static updateBiometric() async {
-    String biometric = getBiometric();
-    if (biometric.contains("###${APITokenService.id}###")) {
+    String? biometric = getBiometric();
+    if (biometric != null &&
+        biometric.contains("###${APITokenService.id}###")) {
       await StorageService.set(StorageKeys.biometric,
           "###${APITokenService.id}###${APITokenService.token}");
     } else {
-      await deleteBiometric();
+      if (biometric != null) {
+        await deleteBiometric();
+      }
     }
   }
 
-  static String getBiometric() {
+  static String? getBiometric() {
     return StorageService.get(StorageKeys.biometric);
   }
 
   static bool enableBiometric() {
-    String biometric = StorageService.get(StorageKeys.biometric);
+    String? biometric = getBiometric();
     if (biometric == null) return false;
     return biometric.contains("###${APITokenService.id}###");
   }
 
   static String getTokenBiometric() {
-    String biometric = StorageService.get(StorageKeys.biometric);
+    String? biometric = getBiometric();
     if (biometric == null) return "";
     return biometric.replaceAll(RegExp(r'###(\d+)###'), "");
   }

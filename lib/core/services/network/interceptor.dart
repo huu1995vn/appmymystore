@@ -97,11 +97,11 @@ class InterceptedClient extends http.BaseClient {
   Future<http.StreamedResponse> _onRequest(http.BaseRequest request) async {
     request = _addHeaders(request);
     String url = request.url.toString().toLowerCase();
-    if (url.contains("/updateavatar")|| url.contains("/file/upload")) {
+    if (url.contains("/updateavatar") || url.contains("/file/upload")) {
       var body = json.decode((request as http.Request).body);
       var requestupload = http.MultipartRequest('POST', request.url);
-      requestupload.files.add(await http.MultipartFile.fromPath(
-          'file', body["file"]));
+      requestupload.files
+          .add(await http.MultipartFile.fromPath('file', body["file"]));
       requestupload.headers.addAll(request.headers);
       http.StreamedResponse response = await requestupload.send();
       return response;
@@ -130,6 +130,10 @@ class InterceptedClient extends http.BaseClient {
 
   String _getToken(http.BaseRequest request) {
     var token = APITokenService.token;
+    String path = request.url.toString().toLowerCase();
+    if (path.indexOf("/refreshlogin") > 0) {
+      return json.decode((request as http.Request).body)["token"];
+    }
     return "Bearer $token";
   }
 

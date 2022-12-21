@@ -130,7 +130,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             trailing: Switch(
                               value: isBiometric,
                               onChanged: _onBiometric,
-                              activeTrackColor: AppColors.primary.withOpacity(200),
+                              activeTrackColor: AppColors.primary.withOpacity(0.5),
                               activeColor: AppColors.primary,
                             ),
                             onTap: () {

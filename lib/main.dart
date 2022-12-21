@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/commons/flutter_app_version_checker.dart';
@@ -66,6 +68,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final LocalAuthentication _localAuthentication = LocalAuthentication();
+
   final newVersion = AppVersionChecker();
   @override
   void initState() {
@@ -83,6 +87,8 @@ class _MyAppState extends State<MyApp> {
       if (APITokenService.token.isNullEmpty) {
         return const LoginPage();
       }
+      CommonConfig.IsBiometricSupported =
+          await _localAuthentication.isDeviceSupported();
       return main!;
 
       // await FirebaseAuthService.signInAnonymously();
@@ -115,7 +121,6 @@ class _MyAppState extends State<MyApp> {
                     future: RemoteConfigSerivce.init(),
                     builder: (BuildContext context,
                         AsyncSnapshot<FirebaseRemoteConfig> snapshot) {
-                          
                       return (snapshot.hasData)
                           ? MMSplashScreen.future(
                               navigateAfterFuture: loadFromFuture(home),

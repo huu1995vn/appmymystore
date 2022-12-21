@@ -1,6 +1,7 @@
 // ignore_for_file: empty_catches, no_leading_underscores_for_local_identifiers, depend_on_referenced_packages, library_prefixes, unnecessary_null_comparison, non_constant_identifier_names
 
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto/crypto.dart';
 import 'package:get/get.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
@@ -18,7 +19,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/mm_part.dart';
-import 'package:mymystore/core/services/api_token.service.dart';
 import 'package:mymystore/core/services/firebase/dynamic_link.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/services/master_data.service.dart';
@@ -261,6 +261,7 @@ class CommonMethods {
   static String buildUrlImage(int pIdHinh) {
     return "https://firebasestorage.googleapis.com/v0/b/modern-optics-234509.appspot.com/o/image%2F${pIdHinh}?alt=media";
   }
+
   static lockScreen() {
     EasyLoading.show(
         status: "${"awaiting".tr}...", maskType: EasyLoadingMaskType.custom);
@@ -609,5 +610,11 @@ class CommonMethods {
     var intInStr = RegExp(r'\d+');
 
     return intInStr.allMatches(value).map((m) => m.group(0));
+  }
+
+  static Future deleteImageFromCache(String? url) async {
+    if (url != null) {
+      await CachedNetworkImage.evictFromCache(url);
+    }
   }
 }

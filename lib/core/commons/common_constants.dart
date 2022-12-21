@@ -54,6 +54,7 @@ class CommonConstants {
     fontSize: 16,
     color: AppColors.primary,
   );
+  static String MESSAGE_SUCCESS = "success".tr;
   static const MESSAGE_ERROR_404 = "Thao tác không tồn tại";
   static const MESSAGE_ERROR = "Thao tác thất bại";
   static const MESSAGE_ERROR_EMPTY = "Dữ liệu không được bỏ trống";

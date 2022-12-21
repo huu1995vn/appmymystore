@@ -24,19 +24,27 @@ class ProfileHeader extends StatefulWidget {
 }
 
 class _ProfileHeaderState extends State<ProfileHeader> {
+  Key _refreshKey = UniqueKey();
+
   uploadImage() async {
+    var path = await FileService.getImagePicker(context);
+    if (path.isNullEmpty) {
+      CommonMethods.showToast(CommonConstants.MESSAGE_ERROR_EMPTY);
+      return;
+    }
+    CommonMethods.lockScreen();
+
     try {
-      var path = await FileService.getImagePicker(context);
-      if (path.isNullEmpty) {
-        CommonMethods.showToast(CommonConstants.MESSAGE_ERROR_EMPTY);
-        return;
-      }
       var res = await ApiBLL_APIUser().updateavatar(path);
       if (res.status > 0) {
         var res = await ApiBLL_APIToken().refreshlogin(APITokenService.token);
         if (res.status > 0) {
           APITokenService.token = res.data;
-          Provider.of<AppProvider>(context).user = APITokenService.user;
+          await CommonMethods.deleteImageFromCache(APITokenService.user.mmimg);
+          Provider.of<AppProvider>(context, listen: false)
+              .setUserModel(APITokenService.user);
+          _handleLocalChanged();
+          CommonMethods.showToast(CommonConstants.MESSAGE_SUCCESS);
         }
       } else {
         CommonMethods.showToast(res.message);
@@ -44,13 +52,17 @@ class _ProfileHeaderState extends State<ProfileHeader> {
     } catch (e) {
       CommonMethods.showToast(CommonConstants.MESSAGE_ERROR);
     }
+    CommonMethods.unlockScreen();
   }
 
+  void _handleLocalChanged() => setState(() {
+        _refreshKey = UniqueKey();
+      });
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context, listen: true);
-
     return Column(
+      key: _refreshKey,
       children: [
         Stack(
           children: [

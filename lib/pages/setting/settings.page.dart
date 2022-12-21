@@ -75,7 +75,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var userProvider = Provider.of<AppProvider>(context);
+    var userProvider = Provider.of<AppProvider>(context, listen: true);
     authBiometric =
         StorageService.get(StorageKeys.biometric) == userProvider.user.phone;
 

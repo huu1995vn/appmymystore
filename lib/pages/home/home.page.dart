@@ -119,16 +119,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
 
   Widget _buildBody(BuildContext context) {
     return Column(
-      children: [
-        // Text("Nội dung"),
-        MMInput(APITokenService.token),
-        MMPrimaryButton(
-            onTap: () {
-              CommonMethods.copy(context, APITokenService.token);
-            },
-            text: "copy".tr)
-        // const MostPupularCategory(),
-      ],
+      children: [],
     );
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
-import 'package:mymystore/core/components/index.dart';
 import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
 import 'package:mymystore/core/popular.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
@@ -61,6 +62,13 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
   void onResumed() {
     // FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
   }
+  Future barCodeScanner() async {
+    try {
+      var barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
+      CommonMethods.showDialogInfo(context, barcodeScanRes);
+    } on PlatformException {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +97,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
               AppIcons.frame_expand,
               color: AppColors.white,
             ),
-            onPressed: () {},
+            onPressed: barCodeScanner,
           ),
           IconButton(
             icon: const Icon(AppIcons.cog_1, color: AppColors.white),

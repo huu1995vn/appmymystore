@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.11"
+  ai_barcode_scanner:
+    dependency: "direct main"
+    description:
+      name: ai_barcode_scanner
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   analyzer:
     dependency: transitive
     description:
@@ -468,13 +475,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_barcode_scanner:
-    dependency: "direct main"
-    description:
-      name: flutter_barcode_scanner
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -856,6 +856,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  mobile_scanner:
+    dependency: transitive
+    description:
+      name: mobile_scanner
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   nested:
     dependency: transitive
     description:

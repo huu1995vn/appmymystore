@@ -80,7 +80,7 @@ dependencies:
   intl:
   expandable_text:
   flutter_datetime_picker: #datepicker,
-  flutter_barcode_scanner: # scanner code
+  ai_barcode_scanner: # scanner code
 
 dev_dependencies:
   build_runner: # Used for code generation libraries

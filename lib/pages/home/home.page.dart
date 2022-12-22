@@ -1,6 +1,6 @@
+import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
@@ -63,11 +63,22 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
     // FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
   }
   Future barCodeScanner() async {
-    try {
-      var barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
-      CommonMethods.showDialogInfo(context, barcodeScanRes);
-    } on PlatformException {}
+    var res = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => AiBarcodeScanner(
+          //    validateText: 'https://', // link to be validated
+          //   validateType: ValidateType.startsWith,
+          onScan: (String value) {
+            if (mounted) CommonNavigates.goBack(context, value);
+            // if (value.isNotEmpty) {
+            //   debugPrint(value);
+            // }
+          },
+        ),
+      ),
+    );
+
+    debugPrint(res);
   }
 
   @override
@@ -97,7 +108,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
               AppIcons.frame_expand,
               color: AppColors.white,
             ),
-            onPressed: barCodeScanner,
+            onPressed: () => {barCodeScanner()},
           ),
           IconButton(
             icon: const Icon(AppIcons.cog_1, color: AppColors.white),

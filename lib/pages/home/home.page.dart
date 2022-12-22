@@ -1,9 +1,7 @@
-import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:mymystore/app_icons.dart';
-import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
 import 'package:mymystore/core/popular.dart';
@@ -62,19 +60,20 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
   void onResumed() {
     // FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
   }
+  //https://github.com/mohesu/barcode_scanner/blob/master/lib/src/ai_barcode_scanner.dart
   Future barCodeScanner() async {
     var res = await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => AiBarcodeScanner(
-          //    validateText: 'https://', // link to be validated
-          //   validateType: ValidateType.startsWith,
-          onScan: (String value) {
-            if (mounted) CommonNavigates.goBack(context, value);
-            // if (value.isNotEmpty) {
-            //   debugPrint(value);
-            // }
-          },
-        ),
+        builder: (context) => MobileScanner(
+            allowDuplicates: false,
+            onDetect: (barcode, args) {
+              if (barcode.rawValue == null) {
+                debugPrint('Failed to scan Barcode');
+              } else {
+                final String code = barcode.rawValue!;
+                debugPrint('Barcode found! $code');
+              }
+            }),
       ),
     );
 

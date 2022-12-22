@@ -15,13 +15,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.11"
-  ai_barcode_scanner:
-    dependency: "direct main"
-    description:
-      name: ai_barcode_scanner
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.3"
   analyzer:
     dependency: transitive
     description:
@@ -857,7 +850,7 @@ packages:
     source: hosted
     version: "1.0.3"
   mobile_scanner:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: mobile_scanner
       url: "https://pub.dartlang.org"

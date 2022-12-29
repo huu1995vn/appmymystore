@@ -20,9 +20,9 @@ class CommonConstants {
   static const kItemOnPage = 10;
   static const kMaxImages = 15;
   static const kSizeHeight = 49.0;
-  static const kSizeAvatarSmall = 30.0;
-  static const kSizeAvatarMedium = 60.0;
-  static const kSizeAvatarLarge = 120.0;
+  static const kSizeAvatarSmall = 35.0;
+  static const kSizeAvatarMedium = 55.0;
+  static const kSizeAvatarLarge = 115.0;
   static const kEdgeInsetsCardPadding = EdgeInsets.only(
       left: CommonConstants.kDefaultPadding,
       right: CommonConstants.kDefaultPadding);

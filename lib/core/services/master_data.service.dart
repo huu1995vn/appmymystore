@@ -44,7 +44,9 @@ class MasterDataService {
     // } catch (e) {}
     return res;
   }
-
+   static initDataLocal() {
+    
+  }
   static String getNameById(String type, int id) {
     try {
       return (data[type] as List)

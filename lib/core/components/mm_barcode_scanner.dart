@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:mymystore/core/commons/common_enums.dart';
 import 'package:mymystore/core/components/mm_part.dart';
+import 'package:mymystore/core/utilities/app_colors.dart';
 
 /// Barcode scanner widget
-class AiBarcodeScanner extends StatefulWidget {
+class MMBarcodeScanner extends StatefulWidget {
   /// Function that gets Called when barcode is scanned successfully
   final void Function(String) onScan;
 
@@ -105,7 +106,7 @@ class AiBarcodeScanner extends StatefulWidget {
 
   final dynamic Function(bool)? onPermissionSet;
 
-  const AiBarcodeScanner({
+  const MMBarcodeScanner({
     Key? key,
     required this.onScan,
     this.validateText,
@@ -144,10 +145,10 @@ class AiBarcodeScanner extends StatefulWidget {
         super(key: key);
 
   @override
-  State<AiBarcodeScanner> createState() => _AiBarcodeScannerState();
+  State<MMBarcodeScanner> createState() => _AiBarcodeScannerState();
 }
 
-class _AiBarcodeScannerState extends State<AiBarcodeScanner> {
+class _AiBarcodeScannerState extends State<MMBarcodeScanner> {
   /// bool to check if barcode is valid or not
   bool? _isSuccess;
 
@@ -169,6 +170,14 @@ class _AiBarcodeScannerState extends State<AiBarcodeScanner> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: AppColors.primary, //change your color here
+        ),
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        elevation: 0.0,
+      ),
       body: Stack(
         children: [
           MobileScanner(
@@ -204,7 +213,7 @@ class _AiBarcodeScannerState extends State<AiBarcodeScanner> {
               widget.onScan(code);
               setState(() {});
               if (widget.canPop && mounted) {
-                Navigator.pop(context);
+                Navigator.pop(context, code);
               }
             },
           ),

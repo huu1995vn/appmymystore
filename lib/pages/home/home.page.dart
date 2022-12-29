@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:mymystore/app_icons.dart';
+import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
+import 'package:mymystore/core/components/mm_barcode_scanner.dart';
 import 'package:mymystore/core/popular.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
 import 'package:mymystore/core/services/api_token.service.dart';
@@ -64,20 +65,17 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
   Future barCodeScanner() async {
     var res = await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => MobileScanner(
-            allowDuplicates: false,
-            onDetect: (barcode, args) {
-              if (barcode.rawValue == null) {
-                debugPrint('Failed to scan Barcode');
-              } else {
-                final String code = barcode.rawValue!;
-                debugPrint('Barcode found! $code');
-              }
-            }),
+        builder: (context) => MMBarcodeScanner(
+          canPop: false,
+          onScan: (String value) async {
+            await CommonMethods.showDialogInfo(context, value);
+          },
+        ),
       ),
     );
-
-    debugPrint(res);
+    if (res != null) {
+      CommonMethods.showToast(res);
+    }
   }
 
   @override
@@ -104,7 +102,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
         actions: [
           IconButton(
             icon: const Icon(
-              AppIcons.frame_expand,
+              AppIcons.settings_overscan,
               color: AppColors.white,
             ),
             onPressed: () => {barCodeScanner()},

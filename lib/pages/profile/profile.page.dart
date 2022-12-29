@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
+import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/services/auth.service.dart';
 import 'package:mymystore/core/services/info_device.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
@@ -42,17 +44,64 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfilePage> {
-  get datas => <ProfileOption>[
-        ProfileOption.arrow(
-            title: 'Edit Profile', icon: const Icon(AppIcons.user_1)),
-        ProfileOption.arrow(title: 'Setting', icon: const Icon(AppIcons.cog_1)),
-        ProfileOption.arrow(
-            title: 'Help Center', icon: const Icon(AppIcons.help_1)),
-        ProfileOption(
-            title: 'Logout',
-            icon: const Icon(AppIcons.exit),
-            titleColor: const Color(0xFFF75555),
-            onClick: () => {AuthService.logout(context)}),
+  get widgetOptions => <Widget>[
+        MMBorder(
+          child: MMListTile(
+            title: const MMText(data: "Edit Profile"),
+            leading: Container(
+              width: 25,
+              alignment: Alignment.center,
+              child: const Icon(AppIcons.user_1),
+            ),
+            onTap: () {},
+            trailing: const Icon(
+              AppIcons.keyboard_arrow_right,
+            ),
+          ),
+        ),
+        MMBorder(
+          child: MMListTile(
+            title: MMText(data: "setting".tr),
+            leading: Container(
+              width: 25,
+              alignment: Alignment.center,
+              child: const Icon(AppIcons.cog_1),
+            ),
+            onTap: () {},
+            trailing: const Icon(
+              AppIcons.keyboard_arrow_right,
+            ),
+          ),
+        ),
+        MMBorder(
+          child: MMListTile(
+            title: MMText(data: "Help Center"),
+            leading: Container(
+              width: 25,
+              alignment: Alignment.center,
+              child: const Icon(AppIcons.help_1),
+            ),
+            onTap: () {},
+            trailing: const Icon(
+              AppIcons.keyboard_arrow_right,
+            ),
+          ),
+        ),
+        MMBorder(
+          child: MMListTile(
+            title: MMText(data: "logout".tr),
+            leading: Container(
+              width: 25,
+              alignment: Alignment.center,
+              child: const Icon(AppIcons.exit),
+            ),
+            onTap: () => {AuthService.logout(context)},
+            trailing: const Icon(
+              AppIcons.keyboard_arrow_right,
+            ),
+          ),
+        ),
+       
       ];
 
   @override
@@ -90,29 +139,17 @@ class _ProfileScreenState extends State<ProfilePage> {
 
   Widget _buildBody() {
     return SliverPadding(
-      padding: const EdgeInsets.only(top: 10.0),
+      padding: const EdgeInsets.only(top: CommonConstants.kDefaultPadding),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            final data = datas[index];
-            return _buildOption(context, index, data);
+            return widgetOptions[index];
           },
-          childCount: datas.length,
+          childCount: widgetOptions.length,
         ),
       ),
     );
   }
 
-  Widget _buildOption(BuildContext context, int index, ProfileOption data) {
-    return ListTile(
-      leading: data.icon,
-      title: Text(
-        data.title,
-        style: TextStyle(
-            fontWeight: FontWeight.w500, fontSize: 18, color: data.titleColor),
-      ),
-      trailing: data.trailing,
-      onTap: data.onClick,
-    );
-  }
+  
 }

@@ -9,5 +9,5 @@ export 'mm_select_input.dart';
 export 'mm_slider.dart';
 export 'mm_splashscreen.dart';
 export 'mm_text_avatar.dart';
-export 'mm_wrapper.dart';
 export 'mm_part.dart';
+export 'mm_barcode_scanner.dart';

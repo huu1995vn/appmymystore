@@ -24,7 +24,6 @@ import 'package:mymystore/pages/error/error.page.dart';
 import 'package:mymystore/pages/home/home.page.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
-
 import 'pages/auth/login/login.page.dart';
 
 Future<void> main() async {

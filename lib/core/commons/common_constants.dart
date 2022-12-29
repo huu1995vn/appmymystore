@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 
 class CommonConstants {
@@ -20,7 +19,7 @@ class CommonConstants {
   static const kDefaultPaddingTop = kDefaultPadding * 4;
   static const kItemOnPage = 10;
   static const kMaxImages = 15;
-  static const kSizeHeight = 39.0;
+  static const kSizeHeight = 49.0;
   static const kSizeAvatarSmall = 30.0;
   static const kSizeAvatarMedium = 60.0;
   static const kSizeAvatarLarge = 120.0;

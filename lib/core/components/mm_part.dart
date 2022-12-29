@@ -2,24 +2,16 @@
 
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:mymystore/app_icons.dart';
-import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
-import 'package:mymystore/core/components/delegates/mm_select.delegate.dart';
 import 'package:mymystore/core/components/index.dart';
-import 'package:mymystore/core/components/mm_text_avatar.dart';
-import 'package:mymystore/core/entities.dart';
-import 'package:mymystore/core/services/master_data.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
-import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MMDivider extends Divider {
   const MMDivider({super.key, double indent = 20})
@@ -601,19 +593,29 @@ class MMButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
         height: CommonConstants.kSizeHeight,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            color ?? AppColors.primary.withOpacity(0.9),
+            AppColors.primary.withOpacity(0.4),
+          ]),
+          borderRadius: BorderRadius.circular(CommonConstants.kDefaultRadius),
+        ),
         child: icon == null
             ? ElevatedButton(
                 onPressed: onTap,
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: color //elevated btton background color
-                    ),
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          CommonConstants.kDefaultRadius)),
+                ),
                 child: MMText(
                     data: text,
                     style: const TextStyle(
                       color: AppColors.white,
-                      fontSize: 16,
                     )),
               )
             : ElevatedButton.icon(
@@ -623,11 +625,14 @@ class MMButton extends StatelessWidget {
                     data: text,
                     style: const TextStyle(
                       color: AppColors.white,
-                      fontSize: 16,
                     )), //label text
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: color //elevated btton background color
-                    ),
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          CommonConstants.kDefaultRadius)),
+                ),
               ));
   }
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:mymystore/app_icons.dart';
-import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
-import 'package:mymystore/core/components/index.dart';
 import 'package:mymystore/core/components/lifecyclewatcherstate.dart';
 import 'package:mymystore/core/popular.dart';
 import 'package:mymystore/core/providers/app_provider.dart';
@@ -61,6 +60,25 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
   void onResumed() {
     // FirebaseInAppMessagingService.triggerEvent("main_screen_opened");
   }
+  //https://github.com/mohesu/barcode_scanner/blob/master/lib/src/ai_barcode_scanner.dart
+  Future barCodeScanner() async {
+    var res = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MobileScanner(
+            allowDuplicates: false,
+            onDetect: (barcode, args) {
+              if (barcode.rawValue == null) {
+                debugPrint('Failed to scan Barcode');
+              } else {
+                final String code = barcode.rawValue!;
+                debugPrint('Barcode found! $code');
+              }
+            }),
+      ),
+    );
+
+    debugPrint(res);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +107,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
               AppIcons.frame_expand,
               color: AppColors.white,
             ),
-            onPressed: () {},
+            onPressed: () => {barCodeScanner()},
           ),
           IconButton(
             icon: const Icon(AppIcons.cog_1, color: AppColors.white),
@@ -119,16 +137,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
 
   Widget _buildBody(BuildContext context) {
     return Column(
-      children: [
-        // Text("Nội dung"),
-        MMInput(APITokenService.token),
-        MMPrimaryButton(
-            onTap: () {
-              CommonMethods.copy(context, APITokenService.token);
-            },
-            text: "copy".tr)
-        // const MostPupularCategory(),
-      ],
+      children: [],
     );
   }
 }

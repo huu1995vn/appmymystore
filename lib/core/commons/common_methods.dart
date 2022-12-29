@@ -15,6 +15,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:mymystore/core/components/dialogs/webview.dialog.dart';
+import 'package:mymystore/core/utilities/extensions.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
@@ -264,11 +265,18 @@ class CommonMethods {
         context: context,
         actions: [MMPrimaryButton(onTap: () {}, text: "done".tr)]);
   }
-
-  static String buildUrlImage(int pIdHinh) {
-    return "https://firebasestorage.googleapis.com/v0/b/modern-optics-234509.appspot.com/o/image%2F${pIdHinh}?alt=media";
+   static String buildUrlImage(int idHinh, {String? rewriteUrl, int size = 0}) {
+    idHinh = idHinh > 0 ? idHinh : 0;
+    rewriteUrl = rewriteUrl != null && rewriteUrl.isNotEmpty
+        ? rewriteUrl
+        : "image-mymy";
+    rewriteUrl = rewriteUrl.convertrUrlPrefix();
+    String url = '${CommonConfig.DomainCND}/file/$rewriteUrl-${idHinh}j.jpg';
+    if (size > 0) {
+      url = '$url?w=$size';
+    }
+    return url;
   }
-
   static lockScreen() {
     EasyLoading.show(
         status: "${"awaiting".tr}...", maskType: EasyLoadingMaskType.custom);

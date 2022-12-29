@@ -5,6 +5,7 @@ class CommonConfig {
   static String LanguageCode = "vi";
   static String ENV = "dev";
   static String DomainApi = "https://mymystore.azurewebsites.net";
+  static String DomainCND = "https://mymystore.azurewebsites.net";
   static String SufixApi = "/";
   static bool HaveCacheImage = true;
   static int Version = 1;

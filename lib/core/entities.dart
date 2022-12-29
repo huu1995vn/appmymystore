@@ -54,7 +54,7 @@ class UserModel extends Entity {
   String? address = "";
   int fileid = -1;
   String? get mmimg {
-    return fileid >0? CommonMethods.buildUrlImage(fileid): null;
+    return fileid >0? CommonMethods.buildUrlImage(fileid, rewriteUrl: name): null;
   }
 
   Widget avatar({double size = 16}) {
@@ -146,7 +146,7 @@ class ProductModel extends Entity {
   //  + 3: Khong duyet
   //  + 4: Vi pham (Khoa)
   String? get mmimg {
-    return fileid >0? CommonMethods.buildUrlImage(fileid): null;
+    return fileid >0? CommonMethods.buildUrlImage(fileid, rewriteUrl: name): null;
   }
 
   Widget avatar({double size = 16}) {

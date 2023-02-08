@@ -6,8 +6,8 @@ import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 
-class ReportComponent extends StatelessWidget {
-  ReportComponent({
+class ReportWidget extends StatelessWidget {
+  ReportWidget({
     super.key,
   });
   List<DropdownMenuItem<String>> get dropdownItems {

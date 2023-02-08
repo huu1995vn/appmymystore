@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
-import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
 
-class SaleComponent extends StatelessWidget {
-  const SaleComponent({
+class SaleWidget extends StatelessWidget {
+  const SaleWidget({
     Key? key,
   }) : super(key: key);
 

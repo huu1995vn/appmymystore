@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
-
 class CommonConstants {
+  static List<Categorie> PRODUCTSTATUS = [];
+
   static const String kIconPath = 'assets/icons';
   static const kStepPrice = 20000000;
   static const TOKEN_SECURITY_KEY =
@@ -157,6 +159,7 @@ abstract class FormStyle {
     ),
   );
   static String charRequire = "*";
+
 }
 
 class NAMEFIREBASEDATABASE {

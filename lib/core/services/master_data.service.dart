@@ -1,8 +1,10 @@
 // ignore_for_file: empty_catches, unnecessary_null_comparison
 
 import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:mymystore/core/api/api.bll.dart';
 import 'package:mymystore/core/commons/common_configs.dart';
+import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/services/storage/storage_service.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 
@@ -42,6 +44,7 @@ class MasterDataService {
     //   data["productdoor"] = CommonConstants.PRODUCTDOORS;
     //   data["productseat"] = CommonConstants.PRODUCTSEATS;
     // } catch (e) {}
+     
     return res;
   }
    static initDataLocal() {

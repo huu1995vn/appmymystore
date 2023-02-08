@@ -4,9 +4,12 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/pages/auth/forgot_password/forgot_password.page.dart';
 import 'package:mymystore/pages/auth/register/register.page.dart';
 import 'package:mymystore/pages/home/home.page.dart';
+import 'package:mymystore/pages/product/product_detail_page.dart';
+import 'package:mymystore/pages/product/product_page.dart';
 import 'package:mymystore/pages/profile/profile.page.dart';
 import 'package:mymystore/pages/setting/settings.page.dart';
 
@@ -41,6 +44,23 @@ class CommonNavigates {
         context, CupertinoPageRoute(builder: (context) => ForgotPasswordPage(phone: pphone)));
   }
 
+  static Future toProductPage(BuildContext context,
+      {int? id, ProductModel? item, Map<String, dynamic>? paramsSearch}) async {
+    if ((id != null && id > 0) || item != null) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) =>
+                  ProductDetailPage(key: UniqueKey(), id: id, item: item)));
+    } else {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) =>
+                  ProductPage(key: UniqueKey())));
+      // return await Navigator.pushNamed(context, "/product");
+    }
+  }
   static pop(BuildContext context, Object? value) {
     return Navigator.of(context).pop(value);
   }

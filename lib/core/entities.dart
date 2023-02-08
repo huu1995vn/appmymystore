@@ -171,3 +171,10 @@ class SuggestionModel {
   String text;
   SuggestionModel({required this.text, required this.isLocal});
 }
+
+class Categorie {
+  int id;
+  String categoryname;
+
+  Categorie({required this.id, required this.categoryname});
+}

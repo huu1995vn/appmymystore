@@ -1,10 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/components/mm_part.dart';
 
-class CategoryComponent extends StatelessWidget {
-  CategoryComponent({Key? key}) : super(key: key);
+class CategoryWidget extends StatelessWidget {
+  CategoryWidget({Key? key}) : super(key: key);
 
   var buttons = [
     MMButtonMenu(

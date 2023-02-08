@@ -25,4 +25,5 @@ class CommonConfig {
     "gopYBaoLoi":
         "https://docs.google.com/forms/d/e/1FAIpQLSc_jGYUcXvRieynLykLPjjf-r41L2CT5OAiqUn93OvcmwQzAg/viewform?usp=sf_link", //&entry.407002442=%s&entry.67388375=%s",
   };
+  
 }

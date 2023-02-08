@@ -94,7 +94,7 @@ class _ProductPageState extends State<ProductPage> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: MMText(data:'ads'.tr),
+          title: MMText(data:'product'.tr),
           elevation: 0.0,
         ),
         key: _key,

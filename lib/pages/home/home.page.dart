@@ -141,7 +141,7 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
     return Column(
       children: [
         const SaleWidget(),
-        CategoryWidget(),
+        const CategoryWidget(),
         ReportWidget(),
       ],
     );

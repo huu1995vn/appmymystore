@@ -17,6 +17,7 @@ import 'package:mymystore/pages/profile/profile.page.dart';
 import 'package:provider/provider.dart';
 
 import 'components/category.component.dart';
+import 'components/report.component.dart';
 
 class HomePage extends StatefulWidget {
   final String? title;
@@ -139,11 +140,9 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
-        SaleComponent(),
-        Padding(
-          padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
-          child: CategoryComponent(),
-        ),
+        const SaleComponent(),
+        CategoryComponent(),
+        ReportComponent(),
       ],
     );
   }

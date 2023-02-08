@@ -35,11 +35,7 @@ class CategoryComponent extends StatelessWidget {
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Category",
-            style: CommonConstants.kTextHeaderStyle,
-          ),
+        children: [         
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
@@ -48,7 +44,7 @@ class CategoryComponent extends StatelessWidget {
               children: buttons
                   .map(
                     (e) => Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
                       child: e,
                     ),
                   )

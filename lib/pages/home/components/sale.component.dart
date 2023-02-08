@@ -14,27 +14,27 @@ class SaleComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * .26,
+      height: MediaQuery.of(context).size.height * .19,
       child: Column(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
               borderRadius:
                   BorderRadius.circular(CommonConstants.kDefaultRadius),
-              gradient: const LinearGradient(
+              gradient: LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   // Add one stop for each color. Stops should increase from 0 to 1
-                  stops: [
+                  stops: const [
                     0.2,
                     0.7
                   ],
                   colors: [
+                    AppColors.primary.withOpacity(0.86),
                     AppColors.primary,
-                    Color(0xff79d2a6),
                   ]),
             ),
-            height: MediaQuery.of(context).size.height * .26,
+            height: MediaQuery.of(context).size.height * .19,
             padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
             child: Column(
               children: <Widget>[
@@ -47,48 +47,16 @@ class SaleComponent extends StatelessWidget {
                 Text(
                   r"$15,990.00 VND",
                   style: CommonConstants.kTextTitleStyle
-                      .copyWith(color: AppColors.white, fontSize: 29),
+                      .copyWith(color: AppColors.white, fontSize: 29).bold,
                 ),
-                const SizedBox(height: CommonConstants.kDefaultPadding),
+                const SizedBox(height: CommonConstants.kDefaultPadding * 2),
+                
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text("Đơn hàng",
-                        style: CommonConstants.kTextTitleStyle
-                            .copyWith(color: AppColors.white)
-                            .bold),
-                  ],
-                ),
-                const SizedBox(height: CommonConstants.kDefaultPadding),
-                Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 79,
-                        color: Colors.black12,
-                      ),
-                    ),
-                    const VerticalDivider(
-                      color: Colors.black, //color of divider
-                      width: 5, //width space of divider
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 79,
-                        color: Colors.black12,
-                      ),
-                    ),
-                    const VerticalDivider(
-                      color: Colors.black, //color of divider
-                      width: 5, //width space of divider
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 79,
-                        color: Colors.black12,
-                      ),
-                    )
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Spendings(name: "Đã thanh toán", amount: "1,500"),
+                    Spendings(name: "Đang xử lý", amount: "1,500"),
+                    Spendings(name: "Trả hàng", amount: "0")
                   ],
                 ),
               ],
@@ -97,5 +65,33 @@ class SaleComponent extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class Spendings extends StatelessWidget {
+  final String name;
+  final String amount;
+  const Spendings({
+    super.key,
+    required this.name,
+    required this.amount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(name,
+            style: CommonConstants.kTextTitleStyle
+                .copyWith(color: AppColors.white)),
+        const SizedBox(height: CommonConstants.kDefaultPadding),
+        Text(this.amount,
+            style: CommonConstants.kTextSubTitleStyle
+                .copyWith(color: AppColors.white)
+                .bold),
+      ],
+    ));
   }
 }

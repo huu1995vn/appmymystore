@@ -992,54 +992,24 @@ class MMOverlayShape extends ShapeBorder {
   }
 }
 
-class MMSpendings extends StatelessWidget {
-  final String name;
-  final String amount;
-  const MMSpendings({
+class MMVerticalDivider extends StatelessWidget {
+  final double height;
+  const MMVerticalDivider({
     super.key,
-    required this.name,
-    required this.amount,
+    required this.height,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-      elevation: 4.0,
-      child: InkWell(
-        onTap: () => print("tapped"),
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40.0),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const SizedBox(height: CommonConstants.kDefaultPadding),
-                    Column(
-                      children: <Widget>[
-                        Text(name,
-                            style: CommonConstants.kTextTitleStyle
-                                .copyWith(color: AppColors.primary)),
-                        const SizedBox(height: CommonConstants.kDefaultPadding),
-                        Text(
-                          "$amount",
-                          style: CommonConstants.kTextPriceStyle.copyWith(),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return SizedBox(
+                  height: height,
+                  child: const VerticalDivider(
+                    color: AppColors.primary,
+                    thickness: 2,
+                    indent: 5,
+                    endIndent: 0,
+                    width: 20,
+                  ),
+                );
   }
 }

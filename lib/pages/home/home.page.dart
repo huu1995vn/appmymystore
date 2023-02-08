@@ -12,8 +12,11 @@ import 'package:mymystore/core/services/firebase/cloud_firestore.service.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
+import 'package:mymystore/pages/home/components/sale.component.dart';
 import 'package:mymystore/pages/profile/profile.page.dart';
 import 'package:provider/provider.dart';
+
+import 'components/category.component.dart';
 
 class HomePage extends StatefulWidget {
   final String? title;
@@ -135,7 +138,13 @@ class _HomeScreenState extends LifecycleWatcherState<HomePage>
 
   Widget _buildBody(BuildContext context) {
     return Column(
-      children: [],
+      children: [
+        SaleComponent(),
+        Padding(
+          padding: const EdgeInsets.all(CommonConstants.kDefaultPadding),
+          child: CategoryComponent(),
+        ),
+      ],
     );
   }
 }

@@ -578,6 +578,61 @@ class MMPrimaryButton extends MMButton {
   final Widget? icon;
 }
 
+class MMButtonMenu extends StatelessWidget {
+  const MMButtonMenu({
+    required this.icon,
+    required this.label,
+    required this.onPressed,
+    this.color = AppColors.primary,
+    this.borderRadius,
+    Key? key,
+  }) : super(key: key);
+
+  final IconData icon;
+  final Color color;
+  final String label;
+  final Function() onPressed;
+  final BorderRadius? borderRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    final _borderRadius = borderRadius ?? BorderRadius.circular(10);
+
+    return Column(
+      children: [
+        InkWell(
+          onTap: onPressed,
+          borderRadius: _borderRadius,
+          child: Container(
+            width: 70,
+            height: 70,
+            decoration: BoxDecoration(
+              color: color.withOpacity(.15),
+              borderRadius: _borderRadius,
+            ),
+            padding: const EdgeInsets.all(15),
+            child: Icon(
+              icon,
+              color: color,
+              size: 30,
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+        SizedBox(
+          width: 70,
+          child: Text(
+            label.capitalizeFirst!,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        )
+      ],
+    );
+  }
+}
+
 class MMButton extends StatelessWidget {
   const MMButton({
     Key? key,
@@ -933,6 +988,58 @@ class MMOverlayShape extends ShapeBorder {
       borderColor: borderColor,
       borderWidth: borderWidth,
       overlayColor: overlayColor,
+    );
+  }
+}
+
+class MMSpendings extends StatelessWidget {
+  final String name;
+  final String amount;
+  const MMSpendings({
+    super.key,
+    required this.name,
+    required this.amount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      elevation: 4.0,
+      child: InkWell(
+        onTap: () => print("tapped"),
+        child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(40.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const SizedBox(height: CommonConstants.kDefaultPadding),
+                    Column(
+                      children: <Widget>[
+                        Text(name,
+                            style: CommonConstants.kTextTitleStyle
+                                .copyWith(color: AppColors.primary)),
+                        const SizedBox(height: CommonConstants.kDefaultPadding),
+                        Text(
+                          "$amount",
+                          style: CommonConstants.kTextPriceStyle.copyWith(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

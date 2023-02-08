@@ -26,7 +26,7 @@ class _ProductPageState extends State<ProductPage> {
 
   int paging = 1;
   int totalItems = 0;
-  List<ProductModel>? listData;
+  List<ProductModel> listData = [];
   AutoScrollController scrollController = AutoScrollController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
@@ -107,7 +107,7 @@ class _ProductPageState extends State<ProductPage> {
               onRefresh: onRefresh,
               slivers: <Widget>[
                 MMSliverList(listData, (BuildContext context, int index) {
-                  var item = listData![index];
+                  var item = listData[index];
                   return ItemProductWidget(
                     item,
                     onTap: () =>

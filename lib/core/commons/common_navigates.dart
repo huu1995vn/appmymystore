@@ -7,7 +7,11 @@ import 'package:flutter/services.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/pages/auth/forgot_password/forgot_password.page.dart';
 import 'package:mymystore/pages/auth/register/register.page.dart';
+import 'package:mymystore/pages/export/export_detail_page.dart';
+import 'package:mymystore/pages/export/export_page.dart';
 import 'package:mymystore/pages/home/home.page.dart';
+import 'package:mymystore/pages/import/import_detail_page.dart';
+import 'package:mymystore/pages/import/import_page.dart';
 import 'package:mymystore/pages/product/product_detail_page.dart';
 import 'package:mymystore/pages/product/product_page.dart';
 import 'package:mymystore/pages/profile/profile.page.dart';
@@ -35,13 +39,16 @@ class CommonNavigates {
   }
 
   static Future toRegisterPage(BuildContext context, String pphone) async {
-    return await Navigator.push(
-        context, CupertinoPageRoute(builder: (context) => RegisterPage(phone: pphone)));
+    return await Navigator.push(context,
+        CupertinoPageRoute(builder: (context) => RegisterPage(phone: pphone)));
   }
 
-  static Future toForgotPasswordPage(BuildContext context, String pphone) async {
+  static Future toForgotPasswordPage(
+      BuildContext context, String pphone) async {
     return await Navigator.push(
-        context, CupertinoPageRoute(builder: (context) => ForgotPasswordPage(phone: pphone)));
+        context,
+        CupertinoPageRoute(
+            builder: (context) => ForgotPasswordPage(phone: pphone)));
   }
 
   static Future toProductPage(BuildContext context,
@@ -56,11 +63,47 @@ class CommonNavigates {
       return await Navigator.push(
           context,
           CupertinoPageRoute(
-              builder: (context) =>
-                  ProductPage(key: UniqueKey())));
+              builder: (context) => ProductPage(key: UniqueKey())));
       // return await Navigator.pushNamed(context, "/product");
     }
   }
+
+  static Future toImportPage(BuildContext context,
+      {int? id, ImportModel? item, Map<String, dynamic>? paramsSearch}) async {
+    if ((id != null && id > 0) || item != null) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) =>
+                  ImportDetailPage(key: UniqueKey(), id: id, item: item)));
+    } else {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => ImportPage(key: UniqueKey())));
+      // return await Navigator.pushNamed(context, "/product");
+    }
+  }
+
+  
+  static Future toExportPage(BuildContext context,
+      {int? id, ExportModel? item, Map<String, dynamic>? paramsSearch}) async {
+    if ((id != null && id > 0) || item != null) {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) =>
+                  ExportDetailPage(key: UniqueKey(), id: id, item: item)));
+    } else {
+      return await Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => ExportPage(key: UniqueKey())));
+      // return await Navigator.pushNamed(context, "/product");
+    }
+  }
+
+
   static pop(BuildContext context, Object? value) {
     return Navigator.of(context).pop(value);
   }
@@ -68,15 +111,6 @@ class CommonNavigates {
   static Future toSettingsPage(BuildContext context) async {
     return await Navigator.pushNamed(context, SettingsPage.route());
   }
-
-  // static Future toUserPage(BuildContext context, {int? id}) async {
-  //   if ((id != null && id > 0)) {
-  //     return await Navigator.push(
-  //         context, CupertinoPageRoute(builder: (context) => UserPage(id: id)));
-  //   } else {
-  //     return await Navigator.pushNamed(context, "/user");
-  //   }
-  // }
 
   static goBack(BuildContext context, [dynamic result]) {
     if (result != null) {

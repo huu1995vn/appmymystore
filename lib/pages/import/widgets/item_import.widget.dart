@@ -4,17 +4,17 @@ import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
 
-class ItemProductWidget extends StatefulWidget {
-  final ProductModel item;
+class ItemImportWidget extends StatefulWidget {
+  final ImportModel item;
   final void Function()? onTap;
 
-  const ItemProductWidget(this.item, {super.key, this.onTap});
+  const ItemImportWidget(this.item, {super.key, this.onTap});
 
   @override
-  State<ItemProductWidget> createState() => _ItemProductWidgetState();
+  State<ItemImportWidget> createState() => _ItemImportWidgetState();
 }
 
-class _ItemProductWidgetState extends State<ItemProductWidget> {
+class _ItemImportWidgetState extends State<ItemImportWidget> {
   @override
   Widget build(BuildContext context) {
     const borderRadius = BorderRadius.all(Radius.circular(20));
@@ -31,7 +31,7 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
             ),
             child: Stack(
               children: [
-                MMImage(widget.item.mmimg!, width: SizeConfig.screenWidth / 4),
+                // MMImage(widget.item.mmimg!, width: SizeConfig.screenWidth / 4),
                 Positioned(
                   top: 16,
                   right: 16,
@@ -56,7 +56,7 @@ class _ItemProductWidgetState extends State<ItemProductWidget> {
           _buildSoldPoint(4.5, 6937),
           const SizedBox(height: 10),
           Text(
-            '\$${widget.item.price}',
+            '\$${widget.item.total}',
             style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

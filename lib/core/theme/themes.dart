@@ -25,10 +25,10 @@ class Themes {
           ThemeData(brightness: isDark ? Brightness.dark : Brightness.light)
               .textTheme
               .copyWith(
-                bodyLarge: const TextStyle(fontSize: 16.0),
-                bodyMedium: const TextStyle(fontSize: 13.0),
-                bodySmall: const TextStyle(fontSize: 10.0),
-                labelLarge: const TextStyle(fontSize: 16.0),
+                bodyLarge: const TextStyle(fontSize: 13.0),
+                bodyMedium: const TextStyle(fontSize: 10.0),
+                bodySmall: const TextStyle(fontSize: 8.0),
+                labelLarge: const TextStyle(fontSize: 13.0),
               )),
       iconTheme: const IconThemeData(size: 19, color: AppColors.white),
       cardTheme: const CardTheme(

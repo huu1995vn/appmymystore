@@ -109,3 +109,59 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'updatedate': instance.updatedate?.toIso8601String(),
       'createdate': instance.createdate?.toIso8601String(),
     };
+
+ImportModel _$ImportModelFromJson(Map<String, dynamic> json) => ImportModel()
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..id = json['id'] as int
+  ..name = json['name'] as String
+  ..promotion = json['promotion'] as int?
+  ..count = json['count'] as int?
+  ..total = json['total'] as int?
+  ..updatedate = json['updatedate'] == null
+      ? null
+      : DateTime.parse(json['updatedate'] as String)
+  ..createdate = json['createdate'] == null
+      ? null
+      : DateTime.parse(json['createdate'] as String);
+
+Map<String, dynamic> _$ImportModelToJson(ImportModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'id': instance.id,
+      'name': instance.name,
+      'promotion': instance.promotion,
+      'count': instance.count,
+      'total': instance.total,
+      'updatedate': instance.updatedate?.toIso8601String(),
+      'createdate': instance.createdate?.toIso8601String(),
+    };
+
+ExportModel _$ExportModelFromJson(Map<String, dynamic> json) => ExportModel()
+  ..TotalRow = json['TotalRow']
+  ..RowIndex = json['RowIndex']
+  ..id = json['id'] as int
+  ..name = json['name'] as String
+  ..promotion = json['promotion'] as int?
+  ..count = json['count'] as int?
+  ..total = json['total'] as int?
+  ..updatedate = json['updatedate'] == null
+      ? null
+      : DateTime.parse(json['updatedate'] as String)
+  ..createdate = json['createdate'] == null
+      ? null
+      : DateTime.parse(json['createdate'] as String);
+
+Map<String, dynamic> _$ExportModelToJson(ExportModel instance) =>
+    <String, dynamic>{
+      'TotalRow': instance.TotalRow,
+      'RowIndex': instance.RowIndex,
+      'id': instance.id,
+      'name': instance.name,
+      'promotion': instance.promotion,
+      'count': instance.count,
+      'total': instance.total,
+      'updatedate': instance.updatedate?.toIso8601String(),
+      'createdate': instance.createdate?.toIso8601String(),
+    };

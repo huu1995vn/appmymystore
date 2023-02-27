@@ -133,18 +133,7 @@ class ProductModel extends Entity {
   ProductModel clone() => ProductModel.fromJson(toJson());
 
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
-  // Products.ProductTypeId
-  //  + 1: Ban
-  //  + 2: Mua
-
-  // Products.State // tạm bỏ qua mạc định là
-  //  + 1: Moi
-  //  + 2: Da su dung
-  // Products.Status
-  //  + 1: Tao moi
-  //  + 2: Da duyet
-  //  + 3: Khong duyet
-  //  + 4: Vi pham (Khoa)
+  
   String? get mmimg {
     return fileid >0? CommonMethods.buildUrlImage(fileid, rewriteUrl: name): null;
   }
@@ -164,6 +153,56 @@ class ProductModel extends Entity {
       return "not.update".tr;
     }
   }
+}
+
+@JsonSerializable()
+class ImportModel extends Entity {
+  int id = 0;
+  String name = "";
+  int? promotion;
+  int? count;
+  int? total;
+  DateTime? updatedate;
+  DateTime? createdate;
+  ImportModel();
+  factory ImportModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["createdate"] =
+        CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
+    json["updatedate"] =
+        CommonMethods.convertToDateTime(json["updatedate"])?.toIso8601String();
+ 
+    return _$ImportModelFromJson(json);
+  }
+  ImportModel clone() => ImportModel.fromJson(toJson());
+
+  Map<String, dynamic> toJson() => _$ImportModelToJson(this);
+  
+}
+
+@JsonSerializable()
+class ExportModel extends Entity {
+  int id = 0;
+  String name = "";
+  int? promotion;
+  int? count;
+  int? total;
+  DateTime? updatedate;
+  DateTime? createdate;
+  ExportModel();
+  factory ExportModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["createdate"] =
+        CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
+    json["updatedate"] =
+        CommonMethods.convertToDateTime(json["updatedate"])?.toIso8601String();
+ 
+    return _$ExportModelFromJson(json);
+  }
+  ExportModel clone() => ExportModel.fromJson(toJson());
+
+  Map<String, dynamic> toJson() => _$ExportModelToJson(this);
+  
 }
 
 class SuggestionModel {

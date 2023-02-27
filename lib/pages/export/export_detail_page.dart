@@ -16,8 +16,7 @@ class ExportDetailPage extends StatefulWidget {
 }
 
 class _ExportDetailPageState extends State<ExportDetailPage> {
-  final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
-
+  final List<ProductModel>? listData = [];
   @override
   void initState() {
     super.initState();
@@ -60,7 +59,7 @@ class _ExportDetailPageState extends State<ExportDetailPage> {
                   floating: true,
                   centerTitle: true,
                   title: MMText(
-                    data: data!.name!,
+                    data: data!.name,
                   ),
                 ),
                 SliverToBoxAdapter(

@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
+import 'package:mymystore/core/components/mm_image.dart';
+import 'package:mymystore/core/components/mm_input.dart';
 import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/utilities/extensions.dart';
@@ -17,8 +21,6 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
-  final GlobalKey<FormState> _keyValidationForm = GlobalKey<FormState>();
-
   @override
   void initState() {
     super.initState();
@@ -61,26 +63,49 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   floating: true,
                   centerTitle: true,
                   title: MMText(
-                    data: data!.name!,
+                    data: data!.name,
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: CommonConstants.kDefaultMargin),
-                      Card(
-                          child: Padding(
-                        padding: const EdgeInsets.all(
-                            CommonConstants.kDefaultPadding),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MMText(
-                                  data: "Chi tiêt",
-                                  style: CommonConstants.kTextTitleStyle.bold),
-                            ]),
-                      )),
-                    ],
+                  child: Form(
+                    child: Column(
+                      children: <Widget>[
+                        MMListTile(
+                          title: MMText(data: "Tên sản phẩm"),
+                          leading: MMInput(
+                            data!.name,
+                            hintText: "Nhập tên sản phẩm".tr,
+                            icon: const Icon(AppIcons.phone_1),
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) => {data!.name = v},
+                          ),
+                        ),
+                        MMListTile(
+                          title: MMText(data: "Loại sản phẩm"),
+                          leading: MMInput(
+                            data!.name,
+                            hintText: "Loại sản phẩm".tr,
+                            icon: const Icon(AppIcons.phone_1),
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) => {data!.name = v},
+                          ),
+                        ),
+                        MMListTile(
+                          title: MMText(data: "Chất liệu"),
+                          leading: MMInput(
+                            data!.name,
+                            hintText: "Chất liệu".tr,
+                            icon: const Icon(AppIcons.phone_1),
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) => {data!.name = v},
+                          ),
+                        ),
+                        MMListTile(
+                          title: MMText(data: "Hình ảnh"),
+                          leading: MMImage( ""),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

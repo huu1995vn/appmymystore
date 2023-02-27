@@ -2,7 +2,6 @@
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:mymystore/core/components/mm_part.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:skeletons/skeletons.dart';
 

@@ -10,6 +10,7 @@ import 'package:mymystore/app_icons.dart';
 import 'package:mymystore/core/commons/common_methods.dart';
 import 'package:mymystore/core/commons/common_navigates.dart';
 import 'package:mymystore/core/components/index.dart';
+import 'package:mymystore/core/entities.dart';
 import 'package:mymystore/core/utilities/app_colors.dart';
 import 'package:mymystore/core/commons/common_constants.dart';
 import 'package:mymystore/core/utilities/size_config.dart';
@@ -1011,5 +1012,128 @@ class MMVerticalDivider extends StatelessWidget {
                     width: 20,
                   ),
                 );
+  }
+}
+
+
+class MMCartTile extends StatelessWidget {
+  final ProductModel data;
+  const MMCartTile({super.key, required this.data});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 80,
+      padding: const EdgeInsets.only(top: 5, left: 5, bottom: 5, right: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.grey, width: 1),
+      ),
+      child: Row(
+        children: [
+          // Image
+          Container(
+            width: 70,
+            height: 70,
+            margin: const EdgeInsets.only(right: 20),
+            decoration: BoxDecoration(
+              color: AppColors.grey,
+              borderRadius: BorderRadius.circular(16),
+              image: DecorationImage(image: MMImageProvider(data.mmimg!), fit: BoxFit.cover),
+            ),
+          ),
+          // Info
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Product Name
+                Text(
+                  '${data.name}',
+                  style: const TextStyle(fontWeight: FontWeight.w600, fontFamily: 'poppins', color: AppColors.secondary),
+                ),
+                // Product Price - Increment Decrement Button
+                Container(
+                  margin: const EdgeInsets.only(top: 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Product Price
+                      Expanded(
+                        child: Text(
+                          CommonMethods.convertNumber(data.price) ,
+                          style: const TextStyle(fontWeight: FontWeight.w700, fontFamily: 'poppins', color: AppColors.primary),
+                        ),
+                      ),
+                      // Increment Decrement Button
+                      Container(
+                        height: 26,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: AppColors.primarySoft,
+                        ),
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                print('minus');
+                              },
+                              child: Container(
+                                width: 26,
+                                height: 26,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: AppColors.primarySoft,
+                                ),
+                                child: const Text(
+                                  '-',
+                                  style: TextStyle(fontFamily: 'poppins', fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  '${data.price}',
+                                  style: const TextStyle(fontFamily: 'poppins', fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                print('plus');
+                              },
+                              child: Container(
+                                width: 26,
+                                height: 26,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: AppColors.primarySoft,
+                                ),
+                                child: const Text(
+                                  '+',
+                                  style: TextStyle(fontFamily: 'poppins', fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

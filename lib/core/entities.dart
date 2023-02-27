@@ -54,7 +54,9 @@ class UserModel extends Entity {
   String? address = "";
   int fileid = -1;
   String? get mmimg {
-    return fileid >0? CommonMethods.buildUrlImage(fileid, rewriteUrl: name): null;
+    return fileid > 0
+        ? CommonMethods.buildUrlImage(fileid, rewriteUrl: name)
+        : null;
   }
 
   Widget avatar({double size = 16}) {
@@ -133,9 +135,11 @@ class ProductModel extends Entity {
   ProductModel clone() => ProductModel.fromJson(toJson());
 
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
-  
+
   String? get mmimg {
-    return fileid >0? CommonMethods.buildUrlImage(fileid, rewriteUrl: name): null;
+    return fileid > 0
+        ? CommonMethods.buildUrlImage(fileid, rewriteUrl: name)
+        : null;
   }
 
   Widget avatar({double size = 16}) {
@@ -171,13 +175,12 @@ class ImportModel extends Entity {
         CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
     json["updatedate"] =
         CommonMethods.convertToDateTime(json["updatedate"])?.toIso8601String();
- 
+
     return _$ImportModelFromJson(json);
   }
   ImportModel clone() => ImportModel.fromJson(toJson());
 
   Map<String, dynamic> toJson() => _$ImportModelToJson(this);
-  
 }
 
 @JsonSerializable()
@@ -196,13 +199,44 @@ class ExportModel extends Entity {
         CommonMethods.convertToDateTime(json["createdate"])?.toIso8601String();
     json["updatedate"] =
         CommonMethods.convertToDateTime(json["updatedate"])?.toIso8601String();
- 
+
     return _$ExportModelFromJson(json);
   }
   ExportModel clone() => ExportModel.fromJson(toJson());
 
   Map<String, dynamic> toJson() => _$ExportModelToJson(this);
-  
+}
+
+@JsonSerializable()
+class ColorModel {
+  int id;
+  String name;
+  int code;
+
+  ColorModel({required this.id, required this.name, required this.code});
+  factory ColorModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    json["code"] = CommonMethods.convertToInt32(json["code"]);
+    return _$ColorModelFromJson(json);
+  }
+  ColorModel clone() => ColorModel.fromJson(toJson());
+
+  Map<String, dynamic> toJson() => _$ColorModelToJson(this);
+}
+
+@JsonSerializable()
+class SizeModel {
+  int id;
+  String name;
+
+  SizeModel({required this.id, required this.name});
+  factory SizeModel.fromJson(Map<String, dynamic> json) {
+    json["id"] = CommonMethods.convertToInt32(json["id"]);
+    return _$SizeModelFromJson(json);
+  }
+  SizeModel clone() => SizeModel.fromJson(toJson());
+
+  Map<String, dynamic> toJson() => _$SizeModelToJson(this);
 }
 
 class SuggestionModel {

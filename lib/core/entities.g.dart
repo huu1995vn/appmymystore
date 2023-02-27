@@ -165,3 +165,26 @@ Map<String, dynamic> _$ExportModelToJson(ExportModel instance) =>
       'updatedate': instance.updatedate?.toIso8601String(),
       'createdate': instance.createdate?.toIso8601String(),
     };
+
+ColorModel _$ColorModelFromJson(Map<String, dynamic> json) => ColorModel(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      code: json['code'] as int,
+    );
+
+Map<String, dynamic> _$ColorModelToJson(ColorModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'code': instance.code,
+    };
+
+SizeModel _$SizeModelFromJson(Map<String, dynamic> json) => SizeModel(
+      id: json['id'] as int,
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$SizeModelToJson(SizeModel instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };

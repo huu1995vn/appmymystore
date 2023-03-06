@@ -5,45 +5,78 @@ import 'package:mymystore/core/utilities/app_colors.dart';
 
 class Themes {
   static ThemeData _theme({bool isDark = false}) {
-    Color primaryColor = AppColors.primary;
-     Color primaryColorDarkMode = AppColors.blackLight;
-    Color backgroundColor =isDark?  AppColors.black: Color(0xfff3f3f3);
+    return isDark ? _dark() : _light();
+  }
+
+  static ThemeData _light() {
     return ThemeData(
       inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
       ),
-      brightness: isDark ? Brightness.dark : Brightness.light,
-      primaryColor: isDark ? AppColors.white : primaryColor,
-      scaffoldBackgroundColor: backgroundColor,
-      cardColor: isDark ? AppColors.blackLight : AppColors.white,
-      dividerColor: isDark
-          ? AppColors.white.withOpacity(0.2)
-          : AppColors.black.withOpacity(0.1),
-      shadowColor: isDark ? AppColors.text : AppColors.grayDark,
-      primarySwatch: _getMaterialColorFromColor(primaryColor),
-      textTheme: GoogleFonts.robotoTextTheme(
-          ThemeData(brightness: isDark ? Brightness.dark : Brightness.light)
-              .textTheme
-              .copyWith(
-                bodyLarge: const TextStyle(fontSize: 13.0),
-                bodyMedium: const TextStyle(fontSize: 10.0),
-                bodySmall: const TextStyle(fontSize: 8.0),
-                labelLarge: const TextStyle(fontSize: 13.0),
-              )),
-      iconTheme: const IconThemeData(size: 19, color: AppColors.white),
-      cardTheme: const CardTheme(
-        margin: EdgeInsets.zero,
-        shape: Border(),
-        shadowColor: Colors.transparent,
+      brightness: Brightness.light,
+      primaryColor: AppColors.primary,
+      scaffoldBackgroundColor: const Color(0xfafafa),
+      cardColor: AppColors.white,
+      appBarTheme: const AppBarTheme(
         elevation: 0,
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        iconTheme: IconThemeData(size: 19, color: AppColors.white),
       ),
-      appBarTheme: AppBarTheme(
-          elevation: 0,
-          iconTheme: const IconThemeData(
-            color: AppColors.white,
-          ),
-          backgroundColor: isDark ? primaryColorDarkMode : primaryColor,
-          systemOverlayStyle: SystemUiOverlayStyle.light),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: AppColors.primary, foregroundColor: AppColors.white),
+      iconTheme: const IconThemeData(size: 19, color: AppColors.white),
+      
+    );
+  }
+
+  static ThemeData _dark() {
+    return ThemeData(
+      inputDecorationTheme: const InputDecorationTheme(
+        border: InputBorder.none,
+      ),
+      brightness: Brightness.dark,
+      appBarTheme: const AppBarTheme(
+        elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        iconTheme: IconThemeData(size: 19, color: AppColors.white),
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: AppColors.primary, foregroundColor: AppColors.white),
+      iconTheme: const IconThemeData(size: 19, color: AppColors.white),
+
+      // primaryColor: AppColors.black,
+      // scaffoldBackgroundColor: Color(0x616161),
+      // cardColor: isDark ? AppColors.blackLight : AppColors.white,
+      // dividerColor: isDark
+      //     ? AppColors.white.withOpacity(0.2)
+      //     : AppColors.black.withOpacity(0.1),
+      // shadowColor: isDark ? AppColors.text : AppColors.grayDark,
+      // primarySwatch: _getMaterialColorFromColor(primaryColor),
+      // textTheme: GoogleFonts.robotoTextTheme(
+      //     ThemeData(brightness: isDark ? Brightness.dark : Brightness.light)
+      //         .textTheme
+      //         .copyWith(
+      //           bodyLarge: const TextStyle(fontSize: 13.0),
+      //           bodyMedium: const TextStyle(fontSize: 10.0),
+      //           bodySmall: const TextStyle(fontSize: 8.0),
+      //           labelLarge: const TextStyle(fontSize: 13.0),
+      //         )),
+      // iconTheme: const IconThemeData(size: 19, color: AppColors.white),
+      // cardTheme: const CardTheme(
+      //   margin: EdgeInsets.zero,
+      //   shape: Border(),
+      //   shadowColor: Colors.transparent,
+      //   elevation: 0,
+      // ),
+      // appBarTheme: AppBarTheme(
+      //     elevation: 0,
+      //     iconTheme: const IconThemeData(
+      //       color: AppColors.white,
+      //     ),
+      //     backgroundColor: isDark ? primaryColorDarkMode : primaryColor,
+      //     systemOverlayStyle: SystemUiOverlayStyle.light),
     );
   }
 
@@ -77,7 +110,6 @@ class Themes {
 
   static Color primaryColor = AppColors.primary;
   static Color primaryColorDarkMode = AppColors.blackLight;
-
   static ThemeData lightTheme = _theme();
   static ThemeData darkTheme = _theme(isDark: true);
 }
